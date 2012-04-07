@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_layout_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout 
+    	android:id="@+id/linear_layout_title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/title_height"
+        android:orientation="vertical"
+        android:background="@drawable/var_panel_top">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="6dip" >
+            
+            <ImageView 
+    			android:id="@+id/image_view_title_logo"
+    			android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:paddingRight="5dip" />
+			<TextView 
+				android:id="@+id/text_view_title_text"
+				android:layout_width="0dip"
+				android:layout_weight="1"
+        		android:layout_height="wrap_content"
+        		android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+        		style="?android:attr/textAppearanceLarge" />
+        	<ImageView style="@style/SeparatorVertical"
+        		android:id="@+id/image_view_separator2"
+        		android:visibility="gone" />
+	    	<ImageButton
+	    		android:id="@+id/image_button_title2" 
+	    		android:layout_width="@dimen/title_height"
+        		android:layout_height="@dimen/title_height"
+        		android:visibility="gone"
+        		android:background="@drawable/selector_button"/>
+        	<ImageView style="@style/SeparatorVertical"
+        		android:id="@+id/image_view_separator1"
+        		android:visibility="gone" />
+	    	<ImageButton
+	    		android:id="@+id/image_button_title1" 
+	    		android:layout_width="@dimen/title_height"
+        		android:layout_height="@dimen/title_height"
+        		android:visibility="gone" 
+        		android:background="@drawable/selector_button"/>
+        </LinearLayout>
+    </LinearLayout>
+
+	<RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+   		<LinearLayout 
+   			android:id="@+id/linear_layout_content"
+       		android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+       		android:minWidth="200dip"
+       		android:orientation="vertical"
+       		android:background="@android:color/white"/>
+       	<LinearLayout style="@style/PanelTopBelowShadow"
+       		android:id="@+id/linear_layout_content_top_shadow"
+       		android:layout_alignTop="@+id/linear_layout_content"
+       		android:layout_alignLeft="@+id/linear_layout_content"
+       		android:layout_alignRight="@+id/linear_layout_content"/>
+       	<LinearLayout style="@style/PanelBottomAboveShadow"
+       		android:id="@+id/linear_layout_content_bottom_shadow"
+       		android:layout_alignBottom="@+id/linear_layout_content"
+       		android:layout_alignLeft="@+id/linear_layout_content"
+       		android:layout_alignRight="@+id/linear_layout_content"/>        
+	</RelativeLayout>      
+
+    <include layout="@layout/include_bottom_panel" />
+</LinearLayout>

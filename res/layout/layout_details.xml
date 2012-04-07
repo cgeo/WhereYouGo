@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+	<include layout="@layout/include_bottom_panel" />
+	    
+	<ScrollView
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent"
+		android:layout_above="@+id/linear_layout_bottom"
+		android:padding="5dp">
+		<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical">
+			<TextView 
+				android:id="@+id/layoutDetailsTextViewName"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" 
+				android:textSize="24dp"
+				android:textStyle="bold"
+				android:gravity="center_horizontal"/>
+			<TextView
+				android:id="@+id/layoutDetailsTextViewState"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<ImageView
+				android:id="@+id/layoutDetailsImageViewImage"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:scaleType="fitCenter"/>
+			<TextView 
+				android:id="@+id/layoutDetailsTextViewImageText"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:id="@+id/layoutDetailsTextViewDescription"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<TextView 
+				android:id="@+id/layoutDetailsTextViewDistance"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+		</LinearLayout>
+	</ScrollView>
+</RelativeLayout>

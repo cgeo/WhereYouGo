@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="AlwaysShowAction" severity="ignore" />
+    <issue id="ButtonCase" severity="ignore" />
+    <issue id="ButtonOrder" severity="ignore" />
+    <issue id="DrawAllocation" severity="ignore" />
+    <issue id="EnforceUTF8" severity="ignore" />
+    <issue id="ExtraText" severity="ignore" />
+    <issue id="FloatMath" severity="ignore" />
+    <issue id="HardcodedDebugMode" severity="ignore" />
+    <issue id="LibraryCustomView" severity="ignore" />
+    <issue id="MissingTranslation" severity="informational" />
+    <issue id="MultipleUsesSdk" severity="ignore" />
+    <issue id="NamespaceTypo" severity="ignore" />
+    <issue id="NewApi" severity="ignore" />
+    <issue id="OnClick" severity="ignore" />
+    <issue id="PrivateResource" severity="ignore" />
+    <issue id="ProguardSplit" severity="ignore" />
+    <issue id="Registered" severity="ignore" />
+    <issue id="ResourceAsColor" severity="ignore" />
+    <issue id="SdCardPath" severity="ignore" />
+    <issue id="StringFormatCount" severity="ignore" />
+    <issue id="StringFormatInvalid" severity="ignore" />
+    <issue id="StringFormatMatches" severity="ignore" />
+    <issue id="StyleCycle" severity="ignore" />
+    <issue id="SuspiciousImport" severity="ignore" />
+    <issue id="TextViewEdits" severity="ignore" />
+    <issue id="UnknownId" severity="ignore" />
+    <issue id="UnknownIdInLayout" severity="ignore" />
+    <issue id="UnusedNamespace" severity="ignore" />
+    <issue id="UseSparseArrays" severity="ignore" />
+    <issue id="UseValueOf" severity="ignore" />
+    <issue id="UsesMinSdkAttributes" severity="ignore" />
+    <issue id="ViewConstructor" severity="ignore" />
+    <issue id="WorldWriteableFiles" severity="ignore" />
+    <issue id="WrongViewCast" severity="ignore" />
+</lint>

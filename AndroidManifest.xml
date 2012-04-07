@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="menion.android.whereyougo"
+	android:versionCode="25"
+	android:versionName="0.7.0"
+	android:installLocation="auto">
+	
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
+	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="10" />
+	<supports-screens 
+    	android:largeScreens="true"
+    	android:normalScreens="true"
+    	android:smallScreens="true"
+ 		anyDensity="true" />
+
+	<application android:icon="@drawable/icon"
+		android:label="WhereYouGo"
+		android:name="menion.android.whereyougo.gui.extension.MainApplication"
+		android:theme="@style/ThemeLight">
+		<activity android:name=".Main" android:label="WhereYouGo" android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".gui.CartridgeDetails"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.CartridgeMainMenu"
+			android:launchMode="singleTask"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.Details"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.InputScreen"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.ListActions"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.ListTargets"
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.ListTasks"
+			android:screenOrientation="portrait"
+			android:theme="@android:style/Theme.Dialog"/>
+		<activity
+			android:name=".gui.ListThings"
+			android:screenOrientation="portrait"
+			android:theme="@android:style/Theme.Dialog"/>
+		<activity
+			android:name=".gui.ListZones"
+			android:screenOrientation="portrait"
+			android:theme="@android:style/Theme.Dialog"/>
+		<activity
+			android:name=".gui.MapScreen"
+			android:screenOrientation="portrait" />
+		<activity
+			android:name=".gui.PushDialog" 
+			android:screenOrientation="portrait"/>
+		<activity
+			android:name=".gui.OnlineChooser"
+			android:screenOrientation="portrait" />
+		<activity
+			android:name=".guiding.GuidingScreen"
+			android:screenOrientation="portrait" />
+		<activity
+			android:name=".gui.location.SatelliteScreen"
+			android:screenOrientation="portrait" />
+		<activity
+			android:name=".gui.SettingScreens"
+			android:screenOrientation="portrait"
+			android:theme="@style/ThemeSettings" />
+		
+		<service android:name=".hardware.location.GpsConnectionService" />
+		<service android:name=".utils.audio.AudioPlayService" />
+		
+		<!--<activity android:name="com.paypal.android.MEP.PayPalActivity"></activity>-->
+	</application>
+</manifest> 

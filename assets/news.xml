@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<document>
+  <update name="0.6.0" id="24" time="15.9.2011">
+    <li>added translations: Arabic, Danish, German, Greek, Spanish, Finnish, French, Hungarian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Brazilian P., Russian, Slovak</li>
+    <li>added support for Locus Offline, Vector maps</li>
+    <li>updated OpenWIG code to 8.9.2011</li>
+    <li>because application is based on Locus core, it also adapt guiding, GPS and other improvements from Locus</li>
+  </update>
+  
+  <update name="0.5.0" id="23" time="5.2.2011">
+    <li>rapid graphics improvements</li>
+    <li>improved map screen by Locus style</li>
+    <li>fixed some problems with save game</li>
+    <li>some minnor fixs</li>
+  </update>
+  
+  <update name="0.4.13" id="22" time="20.1.2011">
+    <li>removed speed-up when you selected item on main cartridge menu</li>
+    <li>fixed problem with actions on items</li>
+  </update>
+  
+  <update name="0.4.12" id="21" time="28.12.2010">
+    <li>fixed white screen problem</li>
+    <li>fixed missing preferences in settings</li>
+    <li>removed support for A1.5</li>
+  </update>
+  
+  <update name="0.4.11" id="20" time="28.12.2010">
+    <li>fixed problems with MP3 sounds</li>
+    <li>fixed problem with scrolling locations</li>
+    <li>removed time limitation of application</li>
+    <li>removed support for Locus offline maps</li>
+    <li>added support for Locus online maps cache</li>
+  </update>
+  
+  <update name="0.4.10" id="19">
+    <li>fixed navigation problem on map</li>
+    <li>fixed problem with loading of some cartidges</li>
+    <li>in application info, now link to chat forum</li>
+  </update>
+  
+  <update name="0.4.9" id="18">
+    <li>fixed problems with map</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.8" id="17">
+    <li>map handling improvement (multi-touch)</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.7" id="16">
+    <li>fixed problem with enabling GPS</li>
+    <li>fixed visibility in market</li>
+    <li>added new crash log system (saving errors into WhereYouGo/logs directory)</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.6" id="15">
+    <li>added support for Bluetooth GPS (Android version 2.0 and higher)</li>
+    <li>fixed connection to Locus application</li>
+  </update>
+  
+  <update name="0.4.5" id="14">
+    <li>fixed problem with some cartridges</li>
+    <li>small improvements and fixs on maps</li>
+  </update>
+  
+  <update name="0.4.4" id="13">
+    <li>fixed problem with non-functional active tasks in Task screen</li>
+  </update>
+
+  <update name="0.4.3" id="12">
+    <li>fixed big problem with non-functional second button on some screens</li>
+    <li>fixed crashing and problems with sounds on some cartridges</li>
+    <li>fixed zone graphics on map</li>
+    <li>added new online map providers</li>
+  </update>
+  
+  <update name="0.4.2" id="11">
+    <li>possibility to switch to light theme (Settings->Global)</li>
+    <li>now creating log file for played cache (send me if any problem with played cartridge)</li>
+    <li>minnor graphics improvements</li>
+  </update>
+  
+  <update name="0.4.1" id="10">
+    <li>fixed problem with sounds</li>
+    <li>fixed problem map centering</li>
+    <li>possibility to Donate for develop</li>
+  </update>
+  
+  <update name="0.4.0" id="9">
+      <li>added support for wav and mp3 sounds</li>
+      <li>added online google maps</li>
+      <li>added support for offline maps throught 'Locus' app</li>
+      <li>fixed cartridge list (icon size, sorted by distance)</li>
+  </update>
+
+  <update name="0.3.7" id="8">
+      <li>fixed problem with map tile loading</li>
+  </update>
+  
+  <update name="0.3.6" id="7">
+    <li>fixed graphical problems on 1.5 systems</li>
+    <li>increased loading of Online maps</li>
+    <li>fixed language translations</li>
+  </update>
+
+  <update name="0.3.5" id="6">
+    <li>added support for Android 1.5</li>
+    <li>fixed problem with displaying actions of objects on Details screen</li>
+    <li>improved map and displaying of objects</li>
+    <li>added new settings into preferences</li>
+    <li>some small graphics and technical improvements</li>
+  </update>
+  
+  <update name="0.3.3" id="4">
+    <li>fixed problem with "targets" screen</li>
+    <li>removed confirmation on application exit</li>
+    <li>some small graphics improvements</li>
+  </update>
+  
+  <update name="0.3.2" id="3">
+    <li>fixed problem with not-refreshed map</li>
+    <li>added displaying 'Locations' objects on map, navigation on map and few small improvements</li>
+    <li>added refreshing of screens with enabled GPS</li>
+    <li>fixed screen switching</li>
+    <li>some small graphics improvements</li>
+  </update>
+  
+  <update name="0.3.1" id="2">
+    <li>added map provider (blank map - no internet connection required)</li>
+    <li>added basic settings</li>
+    <li>fixed language problem in non EN countries</li>
+  </update>
+
+  <update name="0.3.0" id="1">
+    <li>first release</li>
+  </update>
+</document>
