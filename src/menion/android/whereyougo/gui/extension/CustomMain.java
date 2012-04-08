@@ -28,7 +28,6 @@ import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.Loc;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
@@ -51,9 +50,11 @@ public abstract class CustomMain extends CustomActivity {
 	private static final String TAG = "CustomMain";
 
 	// application name
-	public static String APP_NAME;
+	public static String APP_NAME = "WhereYouGo";
 	// create directories during startup
-	protected static String[] DIRS;
+	protected static String[] DIRS = new String[] {
+		FileSystem.CACHE
+	};
 	
 	private static boolean callSecondInit;
 	private static boolean callRegisterOnly;
@@ -157,6 +158,7 @@ public abstract class CustomMain extends CustomActivity {
     	return true;
     }
     
+    @Override
     public void onDestroy() {
 		if (finish) {
 			// stop debug if any forgotten
@@ -294,6 +296,7 @@ public abstract class CustomMain extends CustomActivity {
 		}).start();
     }
     
+    @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
 //Logger.d(TAG, "dispatchKeyEvent(" + event.getAction() + ", " + event.getKeyCode() + ")");
     	if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {

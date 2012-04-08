@@ -76,14 +76,6 @@ public class Main extends CustomMain {
 	
 	private static Vector<CartridgeFile> cartridgeFiles;
 	
-	static {
-		// application name
-		CustomMain.APP_NAME = "WhereYouGo";
-		// create directories during startup
-		CustomMain.DIRS = new String[] {
-				FileSystem.CACHE};
-	}
-	
 	@Override
 	protected void eventFirstInit() {
     	// call after start actions here
