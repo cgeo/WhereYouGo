@@ -32,7 +32,7 @@ public class UtilsFormat {
 	private static final String TAG = "UtilsFormat";
 	
 	// degree sign
-	public static String degree = "Â°";
+	public static String degree = "°";
 	// angle mi value
     private static double angleInMi = (2 * Math.PI * 1000.0 / 360.0);
 
@@ -216,7 +216,7 @@ public class UtilsFormat {
     			angle -= 360.0f;
     		
     		if (SettingValues.FORMAT_ANGLE == Settings.VALUE_UNITS_ANGLE_DEGREE) {
-    			return formatDouble(angle, 0) + "ï¿½";
+    			return formatDouble(angle, 0) + degree;
     		} else if (SettingValues.FORMAT_ANGLE == Settings.VALUE_UNITS_ANGLE_MIL) {
     			return formatDouble(angle * angleInMi, 0);
     		}

@@ -22,13 +22,13 @@ package menion.android.whereyougo.hardware.sensors;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.location.SatellitePosition;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
 import android.content.Context;
 import android.hardware.GeomagneticField;
@@ -36,8 +36,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
 import android.os.Bundle;
+import android.view.Surface;
 
 /**
  * @author menion
@@ -157,11 +157,25 @@ Logger.i(TAG, "removeListener(" + listener + "), listeners.size():" + listeners.
                 	rollDef = roll;
                 }
                 this.mLastAziSensor = orient;
+
                 // do some orientation change by settings
-                if (Const.SCREEN_WIDTH > Const.SCREEN_HEIGHT)
-                	mLastAziSensor += SettingValues.SENSOR_ORIENT_MODIF_LANDSCAPE;
-                else
-                	mLastAziSensor += SettingValues.SENSOR_ORIENT_MODIF_PORTRAIT;
+                int rotation = A.getMain().getWindowManager().
+                		getDefaultDisplay().getRotation();
+                switch (rotation) {
+				case Surface.ROTATION_0:
+					// no need for change
+					break;
+				case Surface.ROTATION_90:
+					mLastAziSensor += 90;
+					break;
+				case Surface.ROTATION_180:
+					mLastAziSensor -= 180;
+					break;
+				case Surface.ROTATION_270:
+					mLastAziSensor -= 90;
+					break;
+				}
+                
                 sendOrientation(pitch, rollDef);
                 break;
         }

@@ -19,12 +19,13 @@
 
 package menion.android.whereyougo;
 
-import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.gui.extension.CustomMain;
+import menion.android.whereyougo.gui.extension.MainApplication;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
-import android.view.View;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 /**
  * @author menion
@@ -47,17 +48,22 @@ public class MainAfterStart {
     		if (lastVersion == 0 || actualVersion != lastVersion) {
     			String news = getNews(lastVersion, actualVersion);
     			if (news != null && news.length() > 0) {
-    				new CustomDialog.Builder(A.getMain(), false).
-    				setTitle(CustomMain.APP_NAME, R.drawable.icon).
-    				setContentView(UtilsGUI.getFilledWebView(A.getMain(), news), true).
-    				setNeutralButton(R.string.ok, new CustomDialog.OnClickListener() {
-						@Override
-						public boolean onClick(CustomDialog dialog, View v, int btn) {
+    	    		// show dialog
+    		    	AlertDialog.Builder b = new AlertDialog.Builder(A.getMain());
+    		    	b.setCancelable(false);
+    		    	b.setTitle(MainApplication.APP_NAME);
+    		    	b.setIcon(R.drawable.icon);
+    		    	b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
+    		    	b.setNeutralButton(R.string.yes, 
+    		    			new DialogInterface.OnClickListener() {
+								
+    		    		@Override
+    		    		public void onClick(DialogInterface dialog, int which) {
     						stage01Completed = true;
-    						Settings.setApplicationVersionLast(actualVersion);
-							return true;
-						}
-					}).show();
+    						Settings.setApplicationVersionLast(actualVersion);	
+    		    		}
+    		    	});	
+    				b.show(); 
     			} else {
     				stage01Completed = true;
     			}

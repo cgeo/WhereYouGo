@@ -67,10 +67,12 @@ public class IconedListAdapter extends BaseAdapter {
     private boolean textView02HideIfEmpty = false;
     /* min height for line */
     private int minHeight = Integer.MIN_VALUE;
+    // rescale image size
+    private float multiplyImageSize = 1.0f;
     
 //    public static final Drawable SEPARATOR = A.getApp().getResources().getDrawable(R.drawable.var_separator);
     
-    public IconedListAdapter(Context context, ArrayList<DataInfo> data, View view) {
+	public IconedListAdapter(Context context, ArrayList<DataInfo> data, View view) {
     	this.mData = data;
     
 		if (view instanceof ListView) {
@@ -87,11 +89,13 @@ public class IconedListAdapter extends BaseAdapter {
 
 		this.context = context;
     }
-    
+
+    @Override
     public boolean areAllItemsEnabled() {
     	return false;
     }
     
+    @Override
     public boolean isEnabled(int position) {
     	try {
     		return mData.get(position).enabled;	
@@ -99,13 +103,14 @@ public class IconedListAdapter extends BaseAdapter {
     		Logger.e(TAG, "isEnabled(" + position + ")", e);
     		return false;
     	}
-    	
     }
     
+    @Override
 	public int getCount() {
 		return mData.size();
 	}
 
+    @Override
 	public Object getItem(int position) {
 		return mData.get(position);
 	}
@@ -114,6 +119,7 @@ public class IconedListAdapter extends BaseAdapter {
 		return mData.get(position);
 	}
 
+	@Override
 	public long getItemId(int position) {
 		return position;
 	}
@@ -123,6 +129,7 @@ public class IconedListAdapter extends BaseAdapter {
 				context, R.layout.iconed_list_adapter, null);
 	}
 	
+	@Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
     	if (convertView == null) {
 			convertView = createEmptyView(context);
@@ -130,6 +137,7 @@ public class IconedListAdapter extends BaseAdapter {
     	return getViewItem(position, convertView, true);
     }
     
+	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = createEmptyView(context);
@@ -143,8 +151,9 @@ public class IconedListAdapter extends BaseAdapter {
 			
 			LinearLayout llMain = (LinearLayout) convertView.findViewById(R.id.linear_layout_main);
 			llMain.setPadding(PADDING, PADDING, PADDING, PADDING);
-			if (minHeight != Integer.MIN_VALUE)
+			if (minHeight != Integer.MIN_VALUE) {
 				llMain.setMinimumHeight(minHeight);
+			}
 	
 			TextView tv01 = (TextView) convertView.findViewById(R.id.layoutIconedListAdapterTextView01);
 			TextView tv02 = (TextView) convertView.findViewById(R.id.layoutIconedListAdapterTextView02);
@@ -199,6 +208,7 @@ public class IconedListAdapter extends BaseAdapter {
 				// for dialogs and similar things
 				multi = 1.0f;
 			}
+			multi *= multiplyImageSize;
 			
 			// set ImageView left
 			int iv01Width = (int) (multi * Images.SIZE_BIG);
@@ -257,5 +267,9 @@ public class IconedListAdapter extends BaseAdapter {
 	
 	public void setMinHeight(int i) {
 		this.minHeight = i;
+	}
+	
+    public void setMultiplyImageSize(float multiplyImageSize) {
+		this.multiplyImageSize = multiplyImageSize;
 	}
 }

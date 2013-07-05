@@ -37,20 +37,20 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.Manifest;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.StatFs;
 import android.view.KeyEvent;
-import android.view.View;
 
 public abstract class CustomMain extends CustomActivity {
 
 	private static final String TAG = "CustomMain";
 
-	// application name
-	public static String APP_NAME = "WhereYouGo";
+
 	// create directories during startup
 	protected static String[] DIRS = new String[] {
 		FileSystem.CACHE
@@ -112,16 +112,17 @@ public abstract class CustomMain extends CustomActivity {
     	if (DIRS == null || DIRS.length == 0)
     		return true;
     	
-   		if (FileSystem.createRoot(CustomMain.APP_NAME)) {
+   		if (FileSystem.createRoot(MainApplication.APP_NAME)) {
 //Logger.w(TAG, "FileSystem succesfully created!");
     	} else {
 //Logger.w(TAG, "FileSystem cannot be created!");
 			UtilsGUI.showDialogError(CustomMain.this,
 					R.string.filesystem_cannot_create_root,
-					new CustomDialog.OnClickListener() {
-				public boolean onClick(CustomDialog dialog, View v, int which) {
+					new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 					showDialogFinish(FINISH_EXIT_FORCE);
-					return true;
 				}
 			});
 			return false;
@@ -146,13 +147,13 @@ public abstract class CustomMain extends CustomActivity {
     	if (megFree > 0 && megFree < 5) {
     		UtilsGUI.showDialogError(CustomMain.this,
     				getString(R.string.not_enough_disk_space_x, FileSystem.ROOT, megFree + "MB"),
-    				new CustomDialog.OnClickListener() {
-    					public boolean onClick(CustomDialog dialog, View v, int which) {
-    						showDialogFinish(FINISH_EXIT_FORCE);
-    						return true;
-    					}
-    				}
-    		);
+    				new DialogInterface.OnClickListener() {
+
+    			@Override
+    			public void onClick(DialogInterface dialog, int which) {
+    				showDialogFinish(FINISH_EXIT_FORCE);
+    			}
+    		});
     		return false;
     	}
     	return true;
@@ -242,36 +243,42 @@ public abstract class CustomMain extends CustomActivity {
 					break;
 				}
 		    	
-		    	new CustomDialog.Builder(CustomMain.this, cancelable).
-				setTitle(title, R.drawable.ic_question_default).
-				setMessage(message).
-				setPositiveButton(R.string.ok, new CustomDialog.OnClickListener() {
-					public boolean onClick(CustomDialog dialog, View v, int which) {
-				    	if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
-				    		finish = true;
-				    		CustomMain.this.finish();
-				    	} else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE ||
-				    			finishType == FINISH_RESTART_FACTORY_RESET) {
+		    	AlertDialog.Builder b = new AlertDialog.Builder(CustomMain.this);
+		    	b.setCancelable(cancelable);
+		    	b.setTitle(title);
+		    	b.setIcon(R.drawable.ic_question_alt);
+		    	b.setMessage(message);
+		    	b.setPositiveButton(R.string.ok, 
+		    			new DialogInterface.OnClickListener() {
+					
+		    		@Override
+		    		public void onClick(DialogInterface dialog, int which) {
+		    			if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
+		    				finish = true;
+		    				CustomMain.this.finish();
+		    			} else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE ||
+		    					finishType == FINISH_RESTART_FACTORY_RESET) {
 				    		// Setup one-short alarm to restart my application in 3 seconds - TODO need use another context
 //				    		AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 //				    		Intent intent = new Intent(APP_INTENT_MAIN);
 //				    		PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 //				    		alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi); 
-				    		finish = true;
-				    		CustomMain.this.finish();
-				    	} else if (finishType == FINISH_REINSTALL) {
-				    		Intent intent = new Intent();
-				            intent.setAction(android.content.Intent.ACTION_VIEW);
-				            intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")), "application/vnd.android.package-archive");
-
-				            startActivity(intent); 
-				            showDialogFinish(FINISH_EXIT_FORCE);
-				    	}
-				    	return true;
-					}
-				}).
-				setNegativeButton(R.string.cancel, (cancelable ? CustomDialog.CLICK_CANCEL : null)).
-				show();
+		    				finish = true;
+		    				CustomMain.this.finish();
+		    			} else if (finishType == FINISH_REINSTALL) {
+		    				Intent intent = new Intent();
+		    				intent.setAction(android.content.Intent.ACTION_VIEW);
+		    				intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")), "application/vnd.android.package-archive");
+		    				
+		    				startActivity(intent); 
+		    				showDialogFinish(FINISH_EXIT_FORCE);
+		    			}
+		    		}
+		    	});
+		    	if (cancelable) {
+		    		b.setNegativeButton(R.string.cancel, null);
+		    	}
+		    	b.show();
 		    }
 		});
     }

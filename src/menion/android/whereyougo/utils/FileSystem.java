@@ -22,7 +22,7 @@ package menion.android.whereyougo.utils;
 import java.io.File;
 import java.io.FileFilter;
 
-import menion.android.whereyougo.gui.extension.CustomMain;
+import menion.android.whereyougo.gui.extension.MainApplication;
 import android.os.Environment;
 
 /**
@@ -123,7 +123,7 @@ public class FileSystem {
     
     public static String getRoot() {
     	if (ROOT == null) {
-    		createRoot(CustomMain.APP_NAME);
+    		createRoot(MainApplication.APP_NAME);
     	}
     	return ROOT;
     }

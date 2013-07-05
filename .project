@@ -32,6 +32,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>LocusAPI</name>
+			<type>2</type>
+			<location>C:/menion/Locus/LocusAPI/src</location>
+		</link>
+		<link>
 			<name>OpenWIG</name>
 			<type>2</type>
 			<location>C:/menion/projects/openwig/OpenWIGLibrary/src</location>

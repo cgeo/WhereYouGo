@@ -21,13 +21,13 @@ package menion.android.whereyougo.guiding;
 
 import java.util.ArrayList;
 
-import menion.android.whereyougo.geoData.Waypoint;
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.location.SatellitePosition;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.utils.Logger;
-import android.location.Location;
 import android.os.Bundle;
 
 /**

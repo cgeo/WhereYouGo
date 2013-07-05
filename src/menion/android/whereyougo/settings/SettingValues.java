@@ -20,11 +20,14 @@
 package menion.android.whereyougo.settings;
 
 import static menion.android.whereyougo.settings.Settings.*;
+import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import android.content.Context;
 
 public class SettingValues {
 
+	private static final String TAG = "SettingValues";
+	
 	// global things
 	/** altitude format */
 	public static int FORMAT_ALTITUDE;
@@ -61,10 +64,6 @@ public class SettingValues {
 	public static boolean SENSOR_BEARING_TRUE;
 	/** applied filter */
 	public static int SENSOR_ORIENT_FILTER;
-	/** map rotate modifier portrait */
-	public static int SENSOR_ORIENT_MODIF_PORTRAIT;
-	/** map rotate modifier landscape */
-	public static int SENSOR_ORIENT_MODIF_LANDSCAPE;
 	
     // GUIDING
     /** disable gps when screen off */
@@ -77,6 +76,7 @@ public class SettingValues {
     public static int GUIDING_WAYPOINT_SOUND_DISTANCE;
     
 	public static void init(Context c) {
+		Logger.d(TAG, "init(" + c + ")");
 		GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN,
 				DEFAULT_FULLSCREEN);
 		GLOBAL_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT,
@@ -110,10 +110,6 @@ public class SettingValues {
 				DEFAULT_SENSORS_BEARING_TRUE);
 		SENSOR_ORIENT_FILTER = Utils.parseInt(getPrefString(c, KEY_S_SENSORS_ORIENT_FILTER, 
 				DEFAULT_SENSORS_ORIENT_FILTER));
-		SENSOR_ORIENT_MODIF_PORTRAIT = Utils.parseInt(getPrefString(c, KEY_S_SENSOR_ORIENT_MODIF_PORTRAIT,
-				DEFAULT_SENSOR_ORIENT_MODIF_PORTRAIT));
-		SENSOR_ORIENT_MODIF_LANDSCAPE = Utils.parseInt(getPrefString(c, KEY_S_SENSOR_ORIENT_MODIF_LANDSCAPE,
-				DEFAULT_SENSOR_ORIENT_MODIF_LANDSCAPE));
 
     	GUIDING_GPS_REQUIRED = getPrefBoolean(c, KEY_B_GUIDING_GPS_REQUIRED,
 				DEFAULT_GUIDING_GPS_REQUIRED);

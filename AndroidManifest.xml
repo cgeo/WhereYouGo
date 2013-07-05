@@ -18,7 +18,7 @@
 	<uses-permission android:name="android.permission.WAKE_LOCK" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	
-	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="10" />
+	<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="17" />
 	<supports-screens 
     	android:largeScreens="true"
     	android:normalScreens="true"
@@ -28,7 +28,8 @@
 	<application android:icon="@drawable/icon"
 		android:label="WhereYouGo"
 		android:name="menion.android.whereyougo.gui.extension.MainApplication"
-		android:theme="@style/ThemeLight">
+		android:theme="@style/AppTheme">
+		
 		<activity android:name=".Main" android:label="WhereYouGo" android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

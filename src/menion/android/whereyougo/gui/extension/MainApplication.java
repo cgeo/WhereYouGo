@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import menion.android.whereyougo.Main;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
@@ -45,6 +44,9 @@ import android.util.Log;
 public class MainApplication extends Application {
 
 	private static final String TAG = "MainApplication";
+	
+	// application name
+	public static String APP_NAME = "WhereYouGo";
 	
     private Locale locale = null;
 	// screen ON/OFF receiver
@@ -87,7 +89,7 @@ public class MainApplication extends Application {
         }
         
         // initialize core
-        initCore(Main.APP_NAME);
+        initCore();
     }
 
     public void onLowMemory() {
@@ -119,22 +121,16 @@ public class MainApplication extends Application {
 	        }
 	    }
 	}
-	
-	/**
-	 * I appName is 'null', function is called from JNI, so do basic initialization.
-	 * Otherwise function is called from MainActivity, so set root directory
-	 * @param context
-	 * @param appName
-	 */
-	private void initCore(String appName) {
+
+	private void initCore() {
 		// register screen on/off receiver
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
 		mScreenReceiver = new ScreenReceiver();
 		registerReceiver(mScreenReceiver, filter);
 		
-    	// init root directory
-		FileSystem.createRoot(appName);
+    	// initialize root directory
+		FileSystem.createRoot(APP_NAME);
 		// set basic settings values
 		SettingValues.init(this);
 		// set location state

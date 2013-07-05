@@ -24,24 +24,23 @@ import java.util.Vector;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.WUI;
-import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import se.krka.kahlua.vm.LuaTable;
-import android.view.View;
+import android.content.DialogInterface;
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Thing;
 
 public class ListTargets extends ListVarious {
 
-	private static String title;
+//	private static String title;
 	private static Action action;
 	private static Thing thing;
 
 	private static Vector<Object> validStuff;
 	
 	public static void reset(String title, Action what, Thing actor) {
-		ListTargets.title = title;
+//		ListTargets.title = title;
 		ListTargets.action = what;
 		ListTargets.thing = actor;
 		makeValidStuff();
@@ -49,7 +48,7 @@ public class ListTargets extends ListVarious {
 	
 	private static void makeValidStuff() {
 		LuaTable current = Engine.instance.cartridge.currentThings();
-		int size = current.len() + Engine.instance.player.inventory.len();
+//		int size = current.len() + Engine.instance.player.inventory.len();
 		validStuff = new Vector<Object>();
 		Object key = null;
 		while ((key = current.next(key)) != null)
@@ -68,13 +67,13 @@ public class ListTargets extends ListVarious {
 	public void refresh() {
 		if (validStuff.isEmpty()) {
 			UtilsGUI.showDialogInfo(this, R.string.no_target,
-					new CustomDialog.OnClickListener() {
-						@Override
-						public boolean onClick(CustomDialog dialog, View v, int btn) {
-							ListTargets.this.finish();
-							return true;
-						}
-					});
+					new DialogInterface.OnClickListener() {
+			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					ListTargets.this.finish();
+				}
+			});
 		} else {
 			super.refresh();
 		}
@@ -82,7 +81,7 @@ public class ListTargets extends ListVarious {
 	
 	@Override
 	protected void callStuff(Object what) {
-		Main.wui.showScreen(WUI.DETAILSCREEN, Details.et); // XXX def null
+		Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
 		String eventName = "On" + action.getName();
 		Engine.callEvent(action.getActor(), eventName, (Thing) what);
 	}

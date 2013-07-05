@@ -20,46 +20,36 @@
 package menion.android.whereyougo;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Vector;
 
-import menion.android.whereyougo.geoData.Waypoint;
-import menion.android.whereyougo.gui.extension.CustomDialog;
+import locus.api.android.ActionDisplayPoints;
+import locus.api.android.objects.PackWaypoints;
+import locus.api.objects.extra.ExtraData;
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
+import menion.android.whereyougo.gui.dialogs.DialogChooseCartridge;
+import menion.android.whereyougo.gui.dialogs.DialogMain;
 import menion.android.whereyougo.gui.extension.CustomMain;
-import menion.android.whereyougo.gui.extension.DataInfo;
-import menion.android.whereyougo.gui.extension.IconedListAdapter;
+import menion.android.whereyougo.gui.extension.MainApplication;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
 import menion.android.whereyougo.guiding.GuidingScreen;
-import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.Loc;
-import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.settings.UtilsSettings;
-import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.Utils;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.location.Location;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.webkit.WebView;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.formats.CartridgeFile;
@@ -72,9 +62,17 @@ public class Main extends CustomMain {
 	public static WLocationService wLocationService = new WLocationService();
 	public static CartridgeFile cartridgeFile;
 
+	private static Vector<CartridgeFile> cartridgeFiles;
+
 	public static String selectedFile;
 	
-	private static Vector<CartridgeFile> cartridgeFiles;
+	public static void setSelectedFile(String filepath) {
+		Main.selectedFile = filepath;
+	}
+	
+	public static String getSelectedFile() {
+		return selectedFile;
+	}
 	
 	@Override
 	protected void eventFirstInit() {
@@ -92,120 +90,15 @@ public class Main extends CustomMain {
 		setContentView(R.layout.layout_main);
 
 		// set title
-		((TextView) findViewById(R.id.title_text)).setText(APP_NAME);
+		((TextView) findViewById(R.id.title_text)).setText(
+				MainApplication.APP_NAME);
 		
 		// define buttons
 		View.OnClickListener mOnClickListener = new View.OnClickListener() {
 			public void onClick(View v) {
 				switch (v.getId()) {
 				case R.id.button_start:
-					if (cartridgeFiles != null && cartridgeFiles.size() != 0) {
-						try {
-							// sort cartridges
-							final Location actLoc = LocationState.getLocation();
-							final Location loc1 = new Location(TAG);
-							final Location loc2 = new Location(TAG);
-							Collections.sort(cartridgeFiles, new Comparator<CartridgeFile>() {
-								public int compare(
-										CartridgeFile object1,
-										CartridgeFile object2) {
-									loc1.setLatitude(object1.latitude);
-									loc1.setLongitude(object1.longitude);
-									loc2.setLatitude(object2.latitude);
-									loc2.setLongitude(object2.longitude);
-									return (int) (actLoc.distanceTo(loc1) - actLoc.distanceTo(loc2));
-								}
-							});
-							
-							ArrayList<DataInfo> data = new ArrayList<DataInfo>();
-							for (int i = 0; i < cartridgeFiles.size(); i++) {
-								CartridgeFile file = cartridgeFiles.get(i);
-								byte[] iconData = file.getFile(file.iconId);
-								Bitmap icon;
-								try {
-									icon = BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
-								} catch (Exception e) {
-									icon = Images.getImageB(R.drawable.icon_gc_wherigo);
-								}
-								
-								DataInfo di = new DataInfo(file.name, file.type +
-										", " + file.author + ", " + file.version, icon);
-								di.value01 = file.latitude;
-								di.value02 = file.longitude;
-								di.setDistAzi(actLoc);
-								data.add(di);
-							}
-
-							IconedListAdapter adapter = new IconedListAdapter(A.getMain(), data, null);
-							adapter.setTextView02Visible(View.VISIBLE, false);
-							
-							// create listView
-							ListView lv = UtilsGUI.createListView(Main.this, false, data);
-							
-							// consturct dialog
-							final CustomDialog dialog = new CustomDialog.Builder(Main.this, true).
-									setTitle(R.string.choose_cartridge).
-									setTitleExtraCancel().
-									setContentView(lv, false).create();
-							
-							// set click listener
-							lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			    				@Override
-			    				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-									try {
-										Main.cartridgeFile = cartridgeFiles.get(position);
-										Main.selectedFile = Main.cartridgeFile.filename;
-									
-										if (Main.cartridgeFile.getSavegame().exists()) {
-											UtilsGUI.showDialogQuestion(Main.this,
-													R.string.resume_previous_cartridge,
-													new CustomDialog.OnClickListener() {
-														@Override
-														public boolean onClick(CustomDialog dialog, View v, int btn) {
-															File file = new File(selectedFile.substring(0, selectedFile.length() - 3) + "gwl");
-															FileOutputStream fos = null;
-															try {
-																if (!file.exists())
-																	file.createNewFile();
-																fos = new FileOutputStream(file);
-															} catch (Exception e) {
-																Logger.e(TAG, "onResume() - create empty saveGame file", e);
-															}
-															Main.restoreCartridge(fos);
-															return true;
-														}
-													}, new CustomDialog.OnClickListener() {
-														@Override
-														public boolean onClick(CustomDialog dialog, View v, int btn) {
-															Main.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-															try {
-																Main.getSaveFile().delete();
-															} catch (Exception e) {
-																Logger.e(TAG, "onCreate() - deleteSyncFile", e);
-															}
-															return true;
-														}
-													});
-										} else {
-											Main.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-										}
-									} catch (Exception e) {
-										Logger.e(TAG, "onCreate()", e);
-									}
-									dialog.dismiss();
-			    				}
-							});
-							
-							// show dialog
-							dialog.show();
-						} catch (Exception e) {
-							Logger.e(TAG, "button_start_click", e);
-						}
-					} else {
-						UtilsGUI.showDialogInfo(Main.this, 
-								getString(R.string.no_wherigo_cartridge_available,
-										FileSystem.ROOT, CustomMain.APP_NAME));
-					}
+					clickStart();
 					break;
 				case R.id.button_gps:
 					Intent intent02 = new Intent(Main.this, SatelliteScreen.class);
@@ -215,100 +108,91 @@ public class Main extends CustomMain {
 					UtilsSettings.showSettings(Main.this);
 					break;
 				case R.id.button_map:
-					ManagerNotify.toastLongMessage("Not implemented, simple solution is to use MapsForge library or Google Lib");
+					clickMap();
 					break;
 				case R.id.button_logo:
-					showDialog(DIALOG_ABOUT);
+					getSupportFragmentManager().
+						beginTransaction().
+						add(new DialogMain(), "DIALOG_TAG_MAIN").
+						commitAllowingStateLoss();
 					break;
 				}
-			}
-		};
-		
-		View.OnLongClickListener mOnLongClickListener = new View.OnLongClickListener() {
-			public boolean onLongClick(View v) {
-				switch (v.getId()) {
-				case R.id.button_start:
-					break;
-				case R.id.button_map:
-					break;
-				case R.id.button_gps:
-					break;
-				case R.id.button_settings:
-					break;
-				case R.id.button_logo:
-					break;
-				}
-				return true;
 			}
 		};
 		
 		UtilsGUI.setButtons(this, new int[] {
-				R.id.button_start, R.id.button_map, R.id.button_gps, R.id.button_settings,
-				R.id.button_logo}, mOnClickListener, mOnLongClickListener);
+				R.id.button_start, R.id.button_map, R.id.button_gps,
+				R.id.button_settings, R.id.button_logo},
+				mOnClickListener, null);
+	}
+	
+	private void clickStart() {
+		// check cartridges
+		if (!isAnyCartridgeAvailable()) {
+			return;
+		}
+		
+		DialogChooseCartridge dialog = new DialogChooseCartridge();
+		dialog.setParams(cartridgeFiles);
+		getSupportFragmentManager().
+			beginTransaction().
+			add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE").
+			commitAllowingStateLoss();
+	}
+	
+	private void clickMap() {
+		// check cartridges
+		if (!isAnyCartridgeAvailable()) {
+			return;
+		}
+
+		try {
+			// complete waypoints data
+			PackWaypoints pack = new PackWaypoints("WhereYouGo");
+			Bitmap b = Images.getImageB(R.drawable.ic_title_logo, (int) Utils.getDpPixels(32.0f));
+			pack.setBitmap(b);
+			for (CartridgeFile cartridge : cartridgeFiles) {
+				// do not show waypoints that are "Play anywhere" (with zero coordinates)
+				if (cartridge.latitude % 360.0 == 0 && cartridge.longitude % 360.0 == 0) {
+					continue;
+				}
+
+				// construct waypoint
+				Location loc = new Location(TAG);
+				loc.setLatitude(cartridge.latitude);
+				loc.setLongitude(cartridge.longitude);
+				Waypoint wpt = new Waypoint(cartridge.name, loc);
+				wpt.addParameter(ExtraData.PAR_DESCRIPTION, cartridge.description);
+				wpt.addUrl(cartridge.url);
+				pack.addWaypoint(wpt);
+			}
+
+			ActionDisplayPoints.sendPack(this, pack, false);
+		} catch (Exception e) {
+			Logger.e(TAG, "clickMap()", e);
+		}
+	}
+	
+	private boolean isAnyCartridgeAvailable() {
+		if (cartridgeFiles == null || cartridgeFiles.size() == 0) {
+			UtilsGUI.showDialogInfo(Main.this, 
+					getString(R.string.no_wherigo_cartridge_available,
+							FileSystem.ROOT, MainApplication.APP_NAME));
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override
 	protected void eventDestroyApp() {
 	}
 	
+	@Override
     public void onResume() {
     	super.onResume();
-    	refreshCartridge();
+    	refreshCartridges();
     }
-    
-	private static final int DIALOG_ABOUT = 0;
-	
-	protected Dialog onCreateDialog(int id) {
-	    final Dialog dialog;
-	    switch(id) {
-	    case DIALOG_ABOUT:
-			StringBuffer buffer = new StringBuffer();
-			buffer.append("<div align=\"center\"><h2><b>WhereYouGo</b></h2></div>");
-			buffer.append("<div>");
-			buffer.append("<b>Wherigo player for Android device</b><br /><br />");
-			try {
-				buffer.append(Loc.get(R.string.version) + "<br />&nbsp;&nbsp;<b>" + 
-						getPackageManager().getPackageInfo(getPackageName(), 0).versionName + "</b><br /><br />");
-			} catch (Exception e) {}
-			buffer.append(getString(R.string.author) + "<br />&nbsp;&nbsp;<b>Menion Asamm</b><br /><br />");
-			buffer.append(getString(R.string.web_page) + "<br />&nbsp;&nbsp;<b><a href=\"http://forum.asamm.cz\">http://forum.asamm.cz</a></b><br /><br />");
-			buffer.append(getString(R.string.libraries));
-			buffer.append("<br />&nbsp;&nbsp;<b>OpenWig</b>");
-			buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Matejicek");
-			buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>http://code.google.com/p/openwig</small>");
-			buffer.append("<br />&nbsp;&nbsp;<b>Kahlua</b>");
-			buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Kristofer Karlsson");
-			buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>http://code.google.com/p/kahlua/</small>");
-			buffer.append("</div>");
-			
-			// add news
-			buffer.append(MainAfterStart.getNews(1, 
-					Settings.getApplicationVersionActual()));
-			
-	    	WebView webView = new WebView(A.getMain());
-			webView.loadData(buffer.toString(), "text/html", "utf-8");
-			webView.setLayoutParams(new  ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.WRAP_CONTENT));
-			webView.setBackgroundColor(Color.WHITE);
-
-	    	dialog = new CustomDialog.Builder(this, true).
-	    	setTitle(R.string.about_application, R.drawable.ic_title_logo).
-	    	setTitleExtraCancel().
-	    	setContentView(webView, true).
-	    	setNeutralButtonCancel(R.string.close).
-	    	create();
-	        break;
-	    default:
-	        dialog = null;
-	    }
-	    
-	    if (dialog != null) {
-	    	dialog.setCanceledOnTouchOutside(true);
-	    }
-	    
-	    return dialog;
-	}
-    
     
 	public static void loadCartridge(OutputStream log) {
 		try {
@@ -348,8 +232,8 @@ Logger.w(TAG, "setBitmapToImageView(), " + i.getWidth() + " x " + i.getHeight())
 		iv.setImageBitmap(i);
 	}
 
-	private void refreshCartridge() {
-Logger.w(TAG, "refreshCartridge(), " + (Main.selectedFile == null));
+	private void refreshCartridges() {
+Logger.w(TAG, "refreshCartridges(), " + (Main.selectedFile == null));
 		if (Main.selectedFile != null)
 			return;
 		
@@ -369,11 +253,10 @@ Logger.w(TAG, "refreshCartridge(), " + (Main.selectedFile == null));
         			if (cart != null) {
         				cart.filename = file.getAbsolutePath();
         				
-        				Waypoint waypoint = new Waypoint(cart.name);
         				Location loc = new Location(TAG);
         				loc.setLatitude(cart.latitude);
         				loc.setLongitude(cart.longitude);
-        				waypoint.setLocation(loc, true);
+        				Waypoint waypoint = new Waypoint(cart.name, loc);
         				
         				cartridgeFiles.add(cart);
         				wpts.add(waypoint);

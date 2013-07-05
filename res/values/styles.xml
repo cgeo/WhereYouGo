@@ -92,36 +92,6 @@
         <item name="android:background">@drawable/selector_button</item>
     </style>
 	
-    <style name="ThemeLight" parent="android:Theme.Light">
-		<item name="android:windowTitleSize">20dip</item>
-		<item name="android:windowAnimationStyle">@style/Animation.Window</item>
-	</style>
-	
-	<style name="Animation.Window" parent="@android:style/Animation.Activity">
-		<item name="android:activityOpenEnterAnimation">@anim/screen_in</item>
-      	<item name="android:activityOpenExitAnimation">@anim/screen_out</item>
-      	<item name="android:activityCloseEnterAnimation">@anim/screen_in_r</item>
-      	<item name="android:activityCloseExitAnimation">@anim/screen_out_r</item>
-	</style>
-        
-	<style name="Dialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowNoTitle">true</item>
-        
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-        
-        <item name="android:windowBackground">@drawable/var_dialog_bg</item> 
-    </style>
-    
-	<style name="ThemeSettings" parent="android:Theme">
-    </style> 
-
-	<style name="ThemeSettingsHolo" parent="android:Theme.Holo">
-    </style> 
-            
     <style name="SeparatorHorizontal">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">1px</item>

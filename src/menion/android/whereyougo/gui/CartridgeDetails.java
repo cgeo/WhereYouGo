@@ -22,9 +22,10 @@ package menion.android.whereyougo.gui;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.geoData.Waypoint;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.hardware.location.LocationState;
@@ -34,7 +35,6 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -89,37 +89,34 @@ public class CartridgeDetails extends CustomActivity {
 		
 		CustomDialog.setBottom(this, 
 				getString(R.string.start), new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						CartridgeDetails.this.finish();
-						File file = new File(Main.selectedFile.substring(0, Main.selectedFile.length() - 3) + "gwl");
-						FileOutputStream fos = null;
-						try {
-							if (!file.exists())
-								file.createNewFile();
-							fos = new FileOutputStream(file);
-						} catch (Exception e) {
-							Logger.e(TAG, "onResume() - create empy saveGame file", e);
-						}
-						Main.loadCartridge(fos);
-						return true;
-					}
-				}, null, null,
-				getString(R.string.navigate), new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						Location loc = new Location(TAG);
-						loc.setLatitude(Main.cartridgeFile.latitude);
-						loc.setLongitude(Main.cartridgeFile.longitude);
-						Waypoint wpt = new Waypoint(Main.cartridgeFile.name);
-						wpt.setLocation(loc, false);
-						A.getGuidingContent().guideStart(wpt);
-				    	//Intent intent = new Intent(CartridgeDetails.this, GuidingScreen.class);
-				    	//startActivity(intent);
-						Main.callGudingScreen(CartridgeDetails.this);
-				    	CartridgeDetails.this.finish();
-				    	return true;
-					}
-				});
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				CartridgeDetails.this.finish();
+				File file = new File(Main.selectedFile.substring(0, Main.selectedFile.length() - 3) + "gwl");
+				FileOutputStream fos = null;
+				try {
+					if (!file.exists())
+						file.createNewFile();
+					fos = new FileOutputStream(file);
+				} catch (Exception e) {
+					Logger.e(TAG, "onResume() - create empy saveGame file", e);
+				}
+				Main.loadCartridge(fos);
+				return true;
+			}
+		}, null, null,
+		getString(R.string.navigate), new CustomDialog.OnClickListener() {
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				Location loc = new Location(TAG);
+				loc.setLatitude(Main.cartridgeFile.latitude);
+				loc.setLongitude(Main.cartridgeFile.longitude);
+				Waypoint wpt = new Waypoint(Main.cartridgeFile.name, loc);
+				A.getGuidingContent().guideStart(wpt);
+				Main.callGudingScreen(CartridgeDetails.this);
+				CartridgeDetails.this.finish();
+				return true;
+			}
+		});
 	}
 }

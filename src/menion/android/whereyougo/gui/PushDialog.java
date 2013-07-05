@@ -82,25 +82,28 @@ Logger.d(TAG, "setDialog() - finish, callBack:" + (callback != null));
 		
 		CustomDialog.setBottom(this,
 				menu01Text, new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						nextPage();
-						return true;
-					}
-				}, null, null,
-				menu02Text, new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						if (callback != null)
-							Engine.invokeCallback(callback, "Button2");
-						callback = null;
-						PushDialog.this.finish();
-						return true;
-					}
-				});
+			
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				nextPage();
+				return true;
+			}
+		}, null, null,
+		menu02Text, new CustomDialog.OnClickListener() {
 		
-		if (page == -1)
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				if (callback != null)
+					Engine.invokeCallback(callback, "Button2");
+				callback = null;
+				PushDialog.this.finish();
+				return true;
+			}
+		});
+		
+		if (page == -1) {
 			nextPage();
+		}
 	}
 	
 	private void nextPage() {

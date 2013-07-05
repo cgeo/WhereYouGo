@@ -22,15 +22,15 @@ package menion.android.whereyougo.guiding;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.geoData.Waypoint;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.audio.AudioClip;
-import android.location.Location;
 import android.net.Uri;
 
 /**

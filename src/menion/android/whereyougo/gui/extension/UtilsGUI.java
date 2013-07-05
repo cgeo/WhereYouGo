@@ -26,9 +26,12 @@ import menion.android.whereyougo.settings.Loc;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Utils;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -82,26 +85,25 @@ public class UtilsGUI {
 	/******************************/
 	
 	public static void showDialogQuestion(Activity activity, CharSequence msg,
-			CustomDialog.OnClickListener posLis) {
-		showDialogQuestion(activity, msg, posLis, CustomDialog.CLICK_CANCEL);
+			DialogInterface.OnClickListener posLis) {
+		showDialogQuestion(activity, msg, posLis, null);
 	}
 	
 	public static void showDialogQuestion(Activity activity, int msg,
-			CustomDialog.OnClickListener posLis) {
-		showDialogQuestion(activity, activity.getText(msg), posLis, CustomDialog.CLICK_CANCEL);
+			DialogInterface.OnClickListener posLis) {
+		showDialogQuestion(activity, activity.getText(msg), posLis, null);
 	}
 	
 	public static void showDialogQuestion(Activity activity, int msg,
-			CustomDialog.OnClickListener posLis, CustomDialog.OnClickListener negLis) {
+			DialogInterface.OnClickListener posLis, DialogInterface.OnClickListener negLis) {
 		showDialogQuestion(activity, activity.getText(msg), posLis, negLis);
 	}
 
 	public static void showDialogQuestion(Activity activity, CharSequence msg,
-			CustomDialog.OnClickListener posLis, CustomDialog.OnClickListener negLis) {
+			DialogInterface.OnClickListener posLis, DialogInterface.OnClickListener negLis) {
 		dialogDoItem(activity,
 				activity.getText(R.string.question),
-				R.drawable.ic_question_default,
-				msg,
+				R.drawable.var_empty, msg,
 				activity.getString(R.string.yes), posLis,
 				activity.getString(R.string.no), negLis);
 	}
@@ -116,11 +118,11 @@ public class UtilsGUI {
 	
 	public static void showDialogInfo(Activity activity, CharSequence msg) {
 		dialogDoItem(activity, activity.getText(R.string.info),  R.drawable.ic_warning_default,
-				msg, null, null, activity.getString(R.string.close), CustomDialog.CLICK_CANCEL);
+				msg, null, null, activity.getString(R.string.close), null);
 	}
 	
 	public static void showDialogInfo(Activity activity, int msg,
-			CustomDialog.OnClickListener cancelList) {
+			DialogInterface.OnClickListener cancelList) {
 		dialogDoItem(activity, activity.getText(R.string.info), R.drawable.ic_warning_default,
 				activity.getText(msg), null, null, activity.getString(R.string.close), cancelList);
 	}
@@ -130,16 +132,16 @@ public class UtilsGUI {
 	/******************************/
 	
 	public static void showDialogError(Activity activity, int msg,
-			CustomDialog.OnClickListener cancelList) {
+			DialogInterface.OnClickListener cancelList) {
 		showDialogError(activity, activity.getText(msg), cancelList);
 	}
 	
 	public static void showDialogError(Activity activity, CharSequence msg) {
-		showDialogError(activity, msg, CustomDialog.CLICK_CANCEL);
+		showDialogError(activity, msg, null);
 	}
 	
 	public static void showDialogError(Activity activity, CharSequence msg,
-			CustomDialog.OnClickListener cancelList) {
+			DialogInterface.OnClickListener cancelList) {
 		dialogDoItem(activity,
 				activity.getText(R.string.error), R.drawable.ic_info_default,
 				msg, null, null, activity.getString(R.string.close), cancelList);
@@ -150,14 +152,14 @@ public class UtilsGUI {
 	/******************************/
 	
 	public static void showDialogDeleteItem(Activity activity, String itemName,
-			CustomDialog.OnClickListener posLis) {
+			DialogInterface.OnClickListener posLis) {
 		dialogDoItem(activity,
 				Loc.get(R.string.question), R.drawable.ic_question_default,
 				(itemName != null ? activity.getString(R.string.do_you_really_want_to_delete_x, 
 						Html.fromHtml(itemName)) :
 			activity.getText(R.string.do_you_really_want_to_delete_selected_items)),
 			activity.getString(R.string.yes), posLis,
-			activity.getString(R.string.no), CustomDialog.CLICK_CANCEL);
+			activity.getString(R.string.no), null);
 	}
 	
 	/*******************************/
@@ -173,11 +175,12 @@ public class UtilsGUI {
 			final String msg) {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
-				new CustomDialog.Builder(activity, true).
-				setTitle(title).
-				setTitleExtraCancel().
-				setContentView(getFilledWebView(activity, msg), true).
-				show();
+		    	AlertDialog.Builder b = new AlertDialog.Builder(activity);
+		    	b.setCancelable(false);
+		    	b.setTitle(title);
+		    	b.setView(getFilledWebView(activity, msg));
+		    	b.setPositiveButton(R.string.close, null);	
+				b.show();
 			}
 		});
 	}
@@ -206,16 +209,22 @@ public class UtilsGUI {
 	public static void dialogDoItem(final Activity activity,
 			final CharSequence title, final int icon,
 			final CharSequence msg, 
-			final String posText, final CustomDialog.OnClickListener posLis,
-			final String negText, final CustomDialog.OnClickListener negLis) {
+			final String posText, final DialogInterface.OnClickListener posLis,
+			final String negText, final DialogInterface.OnClickListener negLis) {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
-				new CustomDialog.Builder(activity, false).
-				setTitle(title, icon).
-				setMessage(msg).
-				setPositiveButton(posText, posLis).
-				setNegativeButton(negText, negLis).
-				show();
+		    	AlertDialog.Builder b = new AlertDialog.Builder(activity);
+		    	b.setCancelable(false);
+		    	b.setTitle(title);
+		    	b.setIcon(icon);
+		    	b.setMessage(msg);
+		    	if (!TextUtils.isEmpty(posText)) {
+		    		b.setPositiveButton(posText, posLis);	
+		    	}
+		    	if (!TextUtils.isEmpty(negText)) {
+		    		b.setNegativeButton(negText, posLis);	
+		    	}
+				b.show();
 			}
 		});
 	}

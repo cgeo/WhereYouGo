@@ -21,20 +21,19 @@ package menion.android.whereyougo.settings;
 
 import java.util.Locale;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.PowerManager;
+import android.preference.PreferenceManager;
+import android.view.Window;
+import android.view.WindowManager;
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.gui.extension.CustomPreferenceActivity;
 import menion.android.whereyougo.gui.extension.MainApplication;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.location.Location;
-import android.os.PowerManager;
-import android.preference.PreferenceManager;
-import android.view.Window;
-import android.view.WindowManager;
 
 public class Settings {
 
@@ -132,11 +131,6 @@ public class Settings {
 	public static final int VALUE_SENSORS_ORIENT_FILTER_MEDIUM = 2;
 	public static final int VALUE_SENSORS_ORIENT_FILTER_HEAVY = 3;
 	public static final String DEFAULT_SENSORS_ORIENT_FILTER = String.valueOf(VALUE_SENSORS_ORIENT_FILTER_MEDIUM);
-	/** screen rotate modifiers */
-	public static final String KEY_S_SENSOR_ORIENT_MODIF_PORTRAIT = "KEY_S_SENSOR_ORIENT_MODIF_PORTRAIT";
-	public static final String DEFAULT_SENSOR_ORIENT_MODIF_PORTRAIT = Utils.isAndroid30OrMore() ? "270" : "0";
-	public static final String KEY_S_SENSOR_ORIENT_MODIF_LANDSCAPE = "KEY_S_SENSOR_ORIENT_MODIF_LANDSCAPE";
-	public static final String DEFAULT_SENSOR_ORIENT_MODIF_LANDSCAPE = Utils.isAndroid30OrMore() ? "0" : "90";
 
 	// GUIDING
 	/** is guiding sounds enabled on compass screen */

@@ -35,9 +35,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.text.Html;
 import android.text.InputType;
-import android.text.Spanned;
 
 public class SettingItems {
 	
@@ -708,18 +706,13 @@ public class SettingItems {
 				pref.isEnabled(), value, activity.getString(desc)));
 	}
 	
-	public static final String HIGHLIGHTED_COLOR = "#ff8706";//"#ffb018";
-	
-	private static Spanned getFormatedText(boolean enabled, String value, String desc) {
-//Logger.d(TAG, "getFormatedText(" + enabled + ", " + value + ", " + desc + ")");
-		StringBuffer buff = new StringBuffer("<b><font color=\"");
-		//buff.append(enabled ? "#ffb018" : "#ffb018");
-		buff.append(HIGHLIGHTED_COLOR);
-		buff.append("\">(");
+	private static String getFormatedText(boolean enabled, String value, String desc) {
+		StringBuffer buff = new StringBuffer();
+		buff.append("(");
 		buff.append(value);
-		buff.append(")</font></b> ");
+		buff.append(") ");
 		buff.append(desc);
-		return Html.fromHtml(buff.toString());
+		return buff.toString();
 	}
 	
 	private static final int REQUEST_GUIDING_WPT_SOUND = 0; 

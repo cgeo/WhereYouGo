@@ -21,8 +21,10 @@ package menion.android.whereyougo.gui.location;
 
 import java.util.ArrayList;
 
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.CustomActivity;
+import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.location.SatellitePosition;
@@ -35,7 +37,6 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
 import menion.android.whereyougo.utils.geometry.Point2D;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CompoundButton;
@@ -74,11 +75,19 @@ public class SatelliteScreen extends CustomActivity implements LocationEventList
         satelliteView = new Satellite2DView(SatelliteScreen.this);
         llSkyplot.addView(satelliteView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
+    	// change colors for 3.0+
+    	if (Utils.isAndroid30OrMore()) {
+    		findViewById(R.id.linear_layout_bottom_3).setBackgroundColor(
+    				CustomDialog.BOTTOM_COLOR_A3);
+    	}
+    	
         // and final bottom buttons
         buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
         buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
         buttonGps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			
+        	@Override
+        	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (!isChecked) {
 					LocationState.setGpsOff(SatelliteScreen.this);
 					

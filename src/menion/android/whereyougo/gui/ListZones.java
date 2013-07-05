@@ -22,12 +22,12 @@ package menion.android.whereyougo.gui;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.WUI;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.location.SatellitePosition;
-import android.location.Location;
 import android.os.Bundle;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Zone;

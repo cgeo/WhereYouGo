@@ -26,8 +26,9 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import locus.api.android.utils.LocusUtils;
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.gui.extension.MainApplication;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
 import menion.android.whereyougo.settings.SettingValues;
@@ -38,15 +39,15 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.geometry.Point2D;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -160,29 +161,35 @@ public class LocationState {
     	    		chb.setTextColor(Color.BLACK);
     	    		ll.addView(chb);
     	    		
-    	    		new CustomDialog.Builder(context, true).
-    	    		setTitle(R.string.question, R.drawable.ic_question_default).
-    	    		setTitleExtraCancel().
-    				setContentView(ll, false).
-    				setPositiveButton(R.string.yes, new CustomDialog.OnClickListener() {
-						public boolean onClick(CustomDialog dialog, View v, int which) {
+    	    		// show dialog
+    		    	AlertDialog.Builder b = new AlertDialog.Builder(context);
+    		    	b.setCancelable(true);
+    		    	b.setTitle(R.string.question);
+    		    	b.setIcon(R.drawable.ic_question_alt);
+    		    	b.setView(ll);
+    		    	b.setPositiveButton(R.string.yes, 
+    		    			new DialogInterface.OnClickListener() {
+								
+    		    		@Override
+    		    		public void onClick(DialogInterface dialog, int which) {
 							if (chb.isChecked()) {
 								Settings.setPrefBoolean(context, KEY_B_GPS_ENABLE_ASK_ON_ENABLE, false);
 							}
 							Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-							context.startActivity(intent);
-							return true;
-						}
-					}).
-    				setNegativeButton(R.string.no, new CustomDialog.OnClickListener() {
-						public boolean onClick(CustomDialog dialog, View v, int which) {
+							context.startActivity(intent);	
+    		    		}
+    		    	});	
+    		    	b.setNegativeButton(R.string.no, 
+    		    			new DialogInterface.OnClickListener() {
+						
+    		    		@Override
+    		    		public void onClick(DialogInterface dialog, int which) {
 							if (chb.isChecked()) {
 								Settings.setPrefBoolean(context, KEY_B_GPS_ENABLE_ASK_ON_ENABLE, false);
-							}
-							return true;
-						}
-					}).
-    	    		show();    		    		
+							}	
+    		    		}
+    		    	});
+    				b.show();   		    		
 		    	}
 	    		gpsNotEnabled = true;
 		    }
@@ -242,7 +249,8 @@ public class LocationState {
                 = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         Location gpsLocation = null;
         try {
-            gpsLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            gpsLocation = LocusUtils.convertToL(
+            		lm.getLastKnownLocation(LocationManager.GPS_PROVIDER));
         } catch (SecurityException e) {
             Logger.w(TAG, "Failed to retrieve location: access appears to be disabled.");
         } catch (IllegalArgumentException e) {
@@ -251,7 +259,8 @@ public class LocationState {
         
         Location networkLocation = null;
         try {
-            networkLocation = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            networkLocation = LocusUtils.convertToL(
+            		lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER));
         } catch (SecurityException e) {
         	Logger.w(TAG, "Failed to retrieve location: access appears to be disabled.");
         } catch (IllegalArgumentException e) {

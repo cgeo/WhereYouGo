@@ -32,7 +32,9 @@ import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -90,13 +92,13 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 				null, CustomDialog.NO_IMAGE, null);
 		CustomDialog.setBottom(this,
 				getString(R.string.gps), new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						Intent intent = new Intent(CartridgeMainMenu.this, SatelliteScreen.class);
-						startActivity(intent);
-						return true;
-					}
-				}, null, null, null, null);
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				Intent intent = new Intent(CartridgeMainMenu.this, SatelliteScreen.class);
+				startActivity(intent);
+				return true;
+			}
+		}, null, null, null, null);
 	}
 	
 	public void onResume() {
@@ -142,27 +144,32 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 Logger.d(TAG, "onKeyDown(" + keyCode + ", " + event + ")");
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-			new CustomDialog.Builder(CartridgeMainMenu.this, true).
-			setTitle(R.string.question, R.drawable.ic_question).
-			setTitleExtraCancel().
-			setMessage(R.string.save_game_before_exit).
-			setPositiveButton(R.string.yes, new CustomDialog.OnClickListener() {
-				public boolean onClick(CustomDialog dialog, View v, int btn) {
+	    	AlertDialog.Builder b = new AlertDialog.Builder(CartridgeMainMenu.this);
+	    	b.setCancelable(true);
+	    	b.setTitle(R.string.question);
+	    	b.setMessage(R.string.save_game_before_exit);
+	    	b.setPositiveButton(R.string.yes, 
+	    			new DialogInterface.OnClickListener() {
+						
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
 					Engine.requestSync();
 					Main.selectedFile = null;
 					new SaveGameOnExit().execute();
-					return true;
-				}
-			}).
-			setNeutralButtonCancel(R.string.cancel).
-			setNegativeButton(R.string.no, new CustomDialog.OnClickListener() {
-				public boolean onClick(CustomDialog dialog, View v, int btn) {
+	    		}
+	    	});
+	    	b.setNeutralButton(R.string.cancel, null);
+	    	b.setNegativeButton(R.string.no, 
+	    			new DialogInterface.OnClickListener() {
+				
+	    		@Override
+	    		public void onClick(DialogInterface dialog, int which) {
 					Engine.kill();
 					Main.selectedFile = null;
 					CartridgeMainMenu.this.finish();
-					return true;
-				}
-			}).show();
+	    		}
+	    	});
+			b.show();
 			return true;
 		} else if (event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
 			return true;

@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import locus.api.android.utils.LocusUtils;
+import locus.api.objects.extra.Location;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.settings.SettingValues;
@@ -32,7 +34,6 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.audio.UtilsAudio;
 import android.content.Context;
 import android.location.GpsStatus;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -183,8 +184,8 @@ public class GpsConnection {
 		
 		public MyLocationListener() {}
 		
-		public void onLocationChanged(Location location) {
-			handleOnLocationChanged(location);
+		public void onLocationChanged(android.location.Location location) {
+			handleOnLocationChanged(LocusUtils.convertToL(location));
 		}
 
 		public void onProviderDisabled(String provider) {

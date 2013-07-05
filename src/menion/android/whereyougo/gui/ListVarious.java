@@ -23,7 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.objects.extra.Location;
+import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.CustomActivity;
+import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.hardware.location.LocationState;
@@ -32,7 +35,6 @@ import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
-import android.R;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -41,16 +43,10 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Typeface;
-import android.location.Location;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -73,9 +69,9 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	abstract protected String getStuffName (Object what);
 	
 	protected Bitmap getStuffIcon (Object object) {
-		if (((EventTable) object).isLocated())
+		if (((EventTable) object).isLocated()) {
 			return getLocatedIcon((EventTable) object);
-		else {
+		} else {
 			Media media = (Media) ((EventTable) object).table.rawget("Icon");
 			if (media != null) {
 				byte[] icon;
@@ -98,7 +94,7 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	static {
 		paintText = new Paint();
 		paintText.setColor(Color.RED);
-		paintText.setTextSize(16.0f);
+		paintText.setTextSize(Utils.getDpPixels(12.0f));
 		paintText.setTypeface(Typeface.DEFAULT_BOLD);
 		paintText.setAntiAlias(true);
 		
@@ -118,7 +114,10 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 			return Images.IMAGE_EMPTY_B;
 		
 		try {
-			Bitmap bitmap = Bitmap.createBitmap(96, 48, Bitmap.Config.ARGB_8888);
+			Bitmap bitmap = Bitmap.createBitmap(
+					(int) Utils.getDpPixels(80.0f), 
+					(int) Utils.getDpPixels(40.0f),
+					Bitmap.Config.ARGB_8888);
 			Canvas c = new Canvas(bitmap);
 			c.drawColor(Color.TRANSPARENT);
 			
@@ -173,7 +172,8 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	        c.drawLine(cX + x2, cY - y2, cX + x3, cY - y3, paintArrowBorder);
 	        c.drawLine(cX + x2, cY - y2, cX + x4, cY - y4, paintArrowBorder);
 	        
-			c.drawText(UtilsFormat.formatDistance(distance, false), radius * 2 + 2, cY + paintText.getTextSize() / 2, paintText);
+			c.drawText(UtilsFormat.formatDistance(distance, false), radius * 2 + 2,
+					cY + paintText.getTextSize() / 2, paintText);
 			return bitmap;
 		} catch (Exception e) {
 			Logger.e(TAG, "getLocatedIcon(" + thing + ")", e);
@@ -184,43 +184,30 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		RelativeLayout rl = new RelativeLayout(ListVarious.this);
-		rl.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		// set layout
+		setContentView(R.layout.custom_dialog);
 
-		// top textView title
-		TextView tvTitle = new TextView(ListVarious.this);
-		if (getIntent().getStringExtra("title") != null)
+		// set title
+		if (getIntent().getStringExtra("title") != null) {
 			title = getIntent().getStringExtra("title");
-		tvTitle.setText(title);
-		tvTitle.setBackgroundResource(R.drawable.title_bar);
-		tvTitle.setGravity(Gravity.CENTER_HORIZONTAL);
-		tvTitle.setTextSize(18.0f);
-		tvTitle.setTypeface(Typeface.DEFAULT_BOLD);
-		tvTitle.setId(1);
-		RelativeLayout.LayoutParams rlLp01 = new RelativeLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-        rlLp01.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        rl.addView(tvTitle, rlLp01);
-        
-    	// main bottom panel
-        LinearLayout llBottom = new LinearLayout(ListVarious.this);
-        llBottom.setOrientation(LinearLayout.HORIZONTAL);
-        llBottom.setBackgroundResource(R.drawable.bottom_bar);
-        int space = (int) Utils.getDpPixels(3);
-        llBottom.setPadding(space, space, space, space);
-        llBottom.setId(2);
-
+		}
+		CustomDialog.setTitle(this, title, null,
+				R.drawable.ic_cancel,
+				new CustomDialog.OnClickListener() {
+					
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				ListVarious.this.finish();
+				return true;
+			}
+		});
+		
         // center linearLayout
 		lv = new ListView(ListVarious.this);
-		RelativeLayout.LayoutParams rlLp03 = new RelativeLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-		rlLp03.setMargins((int) Utils.getDpPixels(5), (int) Utils.getDpPixels(5),
-				(int) Utils.getDpPixels(5), (int) Utils.getDpPixels(5)); 
-        rlLp03.addRule(RelativeLayout.BELOW, tvTitle.getId());
-        rlLp03.addRule(RelativeLayout.ABOVE, llBottom.getId());
-		rl.addView(lv, rlLp03);
-        
-		setContentView(rl);
+		CustomDialog.setContent(this, lv, 0, false, true);
+		 
+		// set bottom
+		CustomDialog.setBottom(this, null, null, null, null, null, null);
 	}
 	
 	public void onResume() {
@@ -230,6 +217,8 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	
 	public void refresh() {
 		runOnUiThread(new Runnable() {
+			
+			@Override
 			public void run() {
 				if (!stillValid()) {
 					ListVarious.this.finish();
@@ -276,6 +265,7 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 				}
 				
 				IconedListAdapter adapter = new IconedListAdapter(ListVarious.this, data, lv);
+				adapter.setMultiplyImageSize(1.5f);
 				adapter.setTextView02Visible(View.VISIBLE, true);
 				lv.setAdapter(adapter);
 				lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -289,8 +279,9 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 								s = stuff.get(position);
 							}
 						}
-						if (s != null)
+						if (s != null) {
 							callStuff(s);
+						}
 					}
 				});
 				

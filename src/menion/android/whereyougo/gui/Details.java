@@ -22,10 +22,14 @@ package menion.android.whereyougo.gui;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.android.ActionTools;
+import locus.api.android.utils.LocusUtils;
+import locus.api.android.utils.RequiredVersionMissingException;
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.WUI;
-import menion.android.whereyougo.geoData.Waypoint;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
@@ -37,7 +41,6 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -75,7 +78,7 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 	
 	public void onResume() {
 		super.onResume();
-		
+		Logger.d(TAG, "onResume(), et:" + et);
 		if (et != null) {
 			setTitle(et.name);
 			
@@ -93,10 +96,14 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 		refresh();
 	}
 	
+	@Override
 	public void refresh() {
 		runOnUiThread(new Runnable() {
+		
+			@Override
 			public void run() {
 				if (!stillValid()) {
+					Logger.d(TAG, "refresh(), not valid anymore");
 					Details.this.finish();
 					return;
 				}
@@ -129,16 +136,18 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 
 	public boolean stillValid() {
 		if (et != null) {
-			if (et instanceof Thing)
+			if (et instanceof Thing) {
 				return ((Thing) et).visibleToPlayer();
+			}
 			return et.isVisible();
 		} else
 			return false;
 	}
 	
-	private void updateNavi () {
-		if (!(et instanceof Zone))
+	private void updateNavi() {
+		if (!(et instanceof Zone)) {
 			return;
+		}
 		
 		Zone z = (Zone) et;
 		String ss = "(nothing)";
@@ -188,6 +197,28 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 						Main.callGudingScreen(Details.this);
 					} catch (Exception e) {
 						Logger.w(TAG, "btn01.click() - unknown problem");
+					}
+					return true;
+				}
+			};
+			
+			btn02 = getString(R.string.map);
+			btn02Click = new CustomDialog.OnClickListener() {
+		
+				@Override
+				public boolean onClick(CustomDialog dialog, View v, int btn) {
+					try {
+						Waypoint wpt = getTargetWaypoint();
+						if (wpt != null) {
+							ActionTools.actionStartGuiding(Details.this, wpt);
+						} else {
+							Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
+						}
+					} catch (RequiredVersionMissingException e) {
+						Logger.e(TAG, "btn02.click() - missing locus version", e);
+						LocusUtils.callInstallLocus(Details.this);
+					} catch (Exception e) {
+						Logger.e(TAG, "btn02.click() - unknown problem", e);
 					}
 					return true;
 				}
@@ -279,24 +310,29 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 	}
 	
 	private void enableGuideOnEventTable() {
+		Waypoint wpt = getTargetWaypoint();
+		if (wpt != null) {
+			A.getGuidingContent().guideStart(wpt);
+		} else {
+			Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
+		}
+	}
+	
+	private Waypoint getTargetWaypoint() {
 		if (et == null || !et.isLocated())
-			return;
+			return null;
 		
     	if (et instanceof Zone) {
     		Zone z = ((Zone) et);
     		Location loc = new Location(TAG);
     		loc.setLatitude(z.nearestPoint.latitude);
     		loc.setLongitude(z.nearestPoint.longitude);
-			Waypoint wpt = new Waypoint(et.name);
-			wpt.setLocation(loc, false);
-			A.getGuidingContent().guideStart(wpt);
+			return new Waypoint(et.name, loc);
     	} else {
     		Location loc = new Location(TAG);
     		loc.setLatitude(et.position.latitude);
     		loc.setLongitude(et.position.longitude);
-			Waypoint wpt = new Waypoint(et.name);
-			wpt.setLocation(loc, false);
-			A.getGuidingContent().guideStart(wpt);
+			return new Waypoint(et.name, loc);
     	}
 	}
 	

@@ -28,13 +28,8 @@ import menion.android.whereyougo.utils.UtilsFormat;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.Region;
-import android.graphics.Shader.TileMode;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -46,19 +41,15 @@ import android.view.View;
  */
 public class CompassView extends View {
 
-//	private static final String TAG = "CompassView";
-
     private float mAzimuth;
-    private float mPitch;
-    private float mRoll;
     
     /* azimuth for target arrow */
     private float mAzimuthToTarget;
     /* distance to target */
     private double mDistanceToTarget;
     
-    private float cX1, cY1, cX2, cX3, cY2, cY3;
-    private float r1, r23;
+    private float cX1, cY1;
+    private float r1;
 
     private Paint mPaintBitmap;
     
@@ -66,10 +57,6 @@ public class CompassView extends View {
     private Paint paintValueDistance;
     private Paint paintValueAzimuth;
     private Paint paintValueTilt;
-    private Paint paintTiltBorder;
-    private Paint paintTiltBorder1;
-    private Paint paintTiltBorder2;
-    private Paint paintTiltBg;
 
     private Drawable bitCompassBg;
     private Drawable bitCompassArrow;
@@ -110,30 +97,6 @@ public class CompassView extends View {
         paintValueTilt.setColor(Color.parseColor("#00a2e6"));
         paintValueTilt.setTypeface(Typeface.DEFAULT_BOLD);
         paintValueTilt.setShadowLayer(Utils.getDpPixels(3), 0, 0, Color.BLACK);
-        
-        paintTiltBorder = new Paint();
-		paintTiltBorder.setAntiAlias(true);
-		paintTiltBorder.setColor(Color.DKGRAY);
-		paintTiltBorder.setStyle(Style.STROKE);
-		paintTiltBorder.setStrokeWidth(3.0f);
-		
-		paintTiltBorder1 = new Paint();
-		paintTiltBorder1.setAntiAlias(true);
-		paintTiltBorder1.setColor(Color.BLACK);
-		paintTiltBorder1.setStyle(Style.STROKE);
-		paintTiltBorder1.setStrokeWidth(Utils.getDpPixels(3.0f));
-		
-		paintTiltBorder2 = new Paint();
-		paintTiltBorder2.setAntiAlias(true);
-		paintTiltBorder2.setColor(Color.WHITE);
-		paintTiltBorder2.setStyle(Style.STROKE);
-		paintTiltBorder2.setStrokeWidth(Utils.getDpPixels(2.0f));
-		
-		paintTiltBg = new Paint();
-		paintTiltBg.setAntiAlias(true);
-		paintTiltBg.setColor(Color.RED);
-		paintTiltBg.setStyle(Style.FILL);
-		paintTiltBg.setShadowLayer(3, 3, 3, Color.BLACK);
 	}
 	
 	private int lastWidth;
@@ -151,45 +114,9 @@ public class CompassView extends View {
     	float neededHeight = Math.min(w, h);
     	r1 = neededHeight / 2 * 0.90f;
 
-    	// draw background
-       	paintTiltBg.setShader(new LinearGradient(
-       			0, 0, 0, c.getClipBounds().height(),
-       			new int[] {Color.rgb(200, 200, 200), Color.rgb(100, 100, 100), Color.BLACK},
-       			new float[] {0.0f, 0.2f, 1.0f},
-       			TileMode.CLAMP));
-       	
-       	
-		float sizeBelow = h -  neededHeight;
-    	float maxWidth = w / 2.0f;
-    	float space = 0;
-    	
-    	if (sizeBelow > maxWidth) { // enough space below main compass
-    		space = (h - neededHeight - maxWidth) / 3.0f;	
-    		cX1 = w / 2.0f;
-    		cY1 = space + neededHeight / 2.0f;
-    	} else { 
-    		cX1 = w / 2.0f;
-    		cY1 = neededHeight / 2.0f;
-    	}
+    	cX1 = w / 2.0f;
+    	cY1 = h / 2.0f;
 
-       	double val1 = cX1;
-       	double val2 = h - cY1;
-       	// distance from center to bottom corner 
-       	double val3 = Math.sqrt(val1 * val1 + val2 * val2);
-       	// center angle in RAD
-       	double ang1 = Math.atan(val1 / val2);
-       	// distance from bottom corner to center of small circle, 0.9 is reduction due to compass image border
-       	double val4 = (val3 - (r1 * 0.9)) / 2.0;
-       	// distance from small circle center to bottom and left
-       	double val5 = Math.cos(ang1) * val4;
-       	double val6 = Math.sin(ang1) * val4;
-       	
-       	r23 = (float) (Math.min(val5, val6) * 0.90f);
-       	cX2 = (float) val5;
-       	cY2 = (float) (h - val6 - space);
-       	cX3 = w - cX2;
-       	cY3 = cY2;
-       	
     	// center distance text
        	paintValueDistance.setTextSize(r1 / 5);
        	paintValueAzimuth.setTextSize(r1 / 6);
@@ -219,8 +146,6 @@ public class CompassView extends View {
 
     	// draw compass texts
         drawCompassTexts(c);
-        // draw tilt rounds
-        drawTilt(c);
     }
 	
     private void drawCompassTexts(Canvas c) {
@@ -237,77 +162,6 @@ public class CompassView extends View {
    				paintValueAzimuth.getTextSize() + space, paintValueAzimuth);
     }
     
-    private Path mPath = new Path();
-    
-    private void drawTilt(Canvas c) {
-    	if (r23 > 0) {
-    		// draw mPitch
-            c.save();
-            c.translate(cX2 - r23, cY2 - r23);
-            mPath.reset();
-            c.clipPath(mPath); // makes the clip empty
-            mPath.addCircle(r23, r23, r23, Path.Direction.CCW);
-            c.clipPath(mPath, Region.Op.REPLACE);
-
-            c.clipRect(0, 0, r23 * 2, r23 * 2);
-            if (mPitch > 90) {
-            	mPitch = 180 - mPitch;
-            } else if (mPitch < -90) {
-            	mPitch = -180 - mPitch;
-            }
-            
-        	float startY = r23 - (r23 / 90.0f) * mPitch;
-        	float endY = r23 * 2.0f;
-
-            c.drawRect(0, startY, 2 * r23, endY, paintTiltBg);
-            c.drawLine(0, startY, 2 * r23, startY, paintTiltBorder);
-            c.restore();
-            
-            // draw mRoll
-            c.save();
-            c.translate(cX3 - r23, cY3 - r23);
-            mPath.reset();
-            c.clipPath(mPath); // makes the clip empty
-            mPath.addCircle(r23, r23, r23, Path.Direction.CCW);
-            c.clipPath(mPath, Region.Op.REPLACE);
-
-            c.clipRect(0, 0, r23 * 2, r23 * 2);
-            if (mRoll > 90) {
-            	mRoll = 180 - mRoll;
-            } else if (mPitch < -90) {
-            	mRoll = -180 - mRoll;
-            }
-            
-            c.rotate(mRoll, r23, r23);
-            c.drawRect(0, r23, 2 * r23, 2 * r23, paintTiltBg);
-            c.drawLine(0, r23, 2 * r23, r23, paintTiltBorder);
-            c.restore();
-            
-    		// draw border
-    		c.drawCircle(cX2, cY2, r23, paintTiltBorder1);
-    		c.drawCircle(cX2, cY2, r23, paintTiltBorder2);
-    		c.drawCircle(cX3, cY3, r23, paintTiltBorder1);
-    		c.drawCircle(cX3, cY3, r23, paintTiltBorder2);
-    		
-    		// draw texts
-    		c.drawText(Loc.get(R.string.pitch), cX2 + r23,
-    				cY2 - r23 - Utils.getDpPixels(2.0f), paintValueLabel);
-    		c.drawText(Loc.get(R.string.roll), cX3 - r23,
-    				cY3 - r23 - Utils.getDpPixels(2.0f), paintValueLabel);
-            // draw pitch value
-            c.drawText(UtilsFormat.formatAngle(mPitch), cX2, cY2 + paintValueTilt.getTextSize() / 2, paintValueTilt);
-    		// draw roll value
-            c.drawText(UtilsFormat.formatAngle(mRoll), cX3, cY3 + paintValueTilt.getTextSize() / 2, paintValueTilt);
-    	}
-    }
-    
-//    private void drawSun(Canvas c) {
-//    	double sunAzimuthDiff = (SunPosition.getSunAzimuth() - mAzimuth) / Const.RHO;
-//    	float x1 = (float) (Math.sin(sunAzimuthDiff) * (r1 - Utils.getTextSize(Const.TEXT_SIZE_MEDIUM)));
-//        float y1 = (float) (Math.cos(sunAzimuthDiff) * (r1 - Utils.getTextSize(Const.TEXT_SIZE_MEDIUM)));
-//        c.drawBitmap(bitmapSun, cX1 + x1 - bitmapSun.getWidth() / 2, cY1 - y1 - bitmapSun.getHeight() / 2, null);
-//    }
-    
     /**
      * Function which rotate arrow and compas (angles in degrees)
      * @param azimuth new angle for compas north
@@ -316,8 +170,6 @@ public class CompassView extends View {
     public void moveAngles(float azimuthToTarget, float azimuth, float pitch, float roll) {
 		this.mAzimuthToTarget = azimuthToTarget;        
 		this.mAzimuth = azimuth;
-		this.mPitch = pitch;
-		this.mRoll = roll;
         invalidate();
     }
     

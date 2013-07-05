@@ -93,8 +93,6 @@ public class SettingScreens extends CustomPreferenceActivity {
 		preferenceSensors.setTitle(R.string.pref_sensors);
         PreferenceCategory prefCatOrient = 
         	addNewPreferenceCategory(activity, R.string.pref_orientation, preferenceSensors);
-		PreferenceCategory prefCatOrientAdvanced = 
-			addNewPreferenceCategory(activity, R.string.pref_advanced_settings, preferenceSensors);
 
         SettingItems.addPrefSensorsCompassHardware(activity, prefCatOrient);
         SettingItems.addPrefSensorsCompassAutoChange(activity, prefCatOrient);
@@ -112,8 +110,6 @@ public class SettingScreens extends CustomPreferenceActivity {
 			addNewPreferenceCategory(activity, R.string.pref_global, preferenceGuiding);
 		PreferenceCategory prefCatWptGuide = 
 			addNewPreferenceCategory(activity, R.string.waypoints, preferenceGuiding);
-		PreferenceCategory prefCatMap = 
-			addNewPreferenceCategory(activity, R.string.pref_style_on_map, preferenceGuiding);
 
 		SettingItems.addPrefGuidingCompassSounds(activity, prefCatGlobal);
 		
