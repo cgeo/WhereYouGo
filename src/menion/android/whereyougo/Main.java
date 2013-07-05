@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.android.ActionDisplay.ExtraAction;
 import locus.api.android.ActionDisplayPoints;
 import locus.api.android.objects.PackWaypoints;
 import locus.api.objects.extra.ExtraData;
@@ -167,7 +168,7 @@ public class Main extends CustomMain {
 				pack.addWaypoint(wpt);
 			}
 
-			ActionDisplayPoints.sendPack(this, pack, false);
+			ActionDisplayPoints.sendPack(this, pack, ExtraAction.NONE);
 		} catch (Exception e) {
 			Logger.e(TAG, "clickMap()", e);
 		}
