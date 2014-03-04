@@ -1,31 +1,37 @@
 /*
-  * This file is part of WhereYouGo.
-  *
-  * WhereYouGo is free software: you can redistribute it and/or modify
-  * it under the terms of the GNU General Public License as published by
-  * the Free Software Foundation, either version 3 of the License, or
-  * (at your option) any later version.
-  *
-  * WhereYouGo is distributed in the hope that it will be useful,
-  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  * GNU General Public License for more details.
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with WhereYouGo.  If not, see <http://www.gnu.org/licenses/>.
-  *
-  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
-  */ 
+ * This file is part of WhereYouGo.
+ *
+ * WhereYouGo is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * WhereYouGo is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with WhereYouGo.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
+ */
 
 package menion.android.whereyougo.gui;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.android.ActionDisplay.ExtraAction;
+import locus.api.android.ActionDisplayTracks;
 import locus.api.android.ActionTools;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.RequiredVersionMissingException;
+import locus.api.objects.extra.ExtraStyle;
+import locus.api.objects.extra.ExtraStyle.LineStyle.ColorStyle;
+import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
 import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
@@ -41,6 +47,7 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,31 +64,31 @@ import cz.matejcik.openwig.Zone;
 public class Details extends CustomActivity implements Refreshable, LocationEventListener {
 
 	private static final String TAG = "Details";
-	
+
 	public static EventTable et;
 
-	private static final String[] taskStates = {Loc.get(R.string.pending),
-		Loc.get(R.string.finished), Loc.get(R.string.failed)};
-	
+	private static final String[] taskStates = { Loc.get(R.string.pending),
+			Loc.get(R.string.finished), Loc.get(R.string.failed) };
+
 	private TextView tvName;
 	private ImageView ivImage;
 	private TextView tvImageText;
 	private TextView tvDescription;
 	private TextView tvDistance;
 	private TextView tvState;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.layout_details);
 	}
-	
+
 	public void onResume() {
 		super.onResume();
 		Logger.d(TAG, "onResume(), et:" + et);
 		if (et != null) {
 			setTitle(et.name);
-			
+
 			tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
 			tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
 			tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
@@ -92,14 +99,14 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 			Logger.i(TAG, "onCreate(), et == null, end!");
 			Details.this.finish();
 		}
-		
+
 		refresh();
 	}
-	
+
 	@Override
 	public void refresh() {
 		runOnUiThread(new Runnable() {
-		
+
 			@Override
 			public void run() {
 				if (!stillValid()) {
@@ -107,14 +114,14 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 					Details.this.finish();
 					return;
 				}
-				
+
 				tvName.setText(et.name);
 				tvDescription.setText(et.description);
-						
+
 				Media m = (Media) et.table.rawget("Media");
 				if (m != null) {
 					tvImageText.setText(m.altText);
-//Logger.w(TAG, "SET: " + et.name + ", " + m.id);
+					// Logger.w(TAG, "SET: " + et.name + ", " + m.id);
 					try {
 						byte[] is = Engine.mediaFile(m);
 						Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
@@ -127,7 +134,7 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 					ivImage.setMinimumWidth(0);
 					ivImage.setMinimumHeight(0);
 				}
-				
+
 				updateNavi();
 				setBottomMenu();
 			}
@@ -143,48 +150,54 @@ public class Details extends CustomActivity implements Refreshable, LocationEven
 		} else
 			return false;
 	}
-	
+
 	private void updateNavi() {
 		if (!(et instanceof Zone)) {
 			return;
 		}
-		
+
 		Zone z = (Zone) et;
 		String ss = "(nothing)";
 		switch (z.contain) {
-			case Zone.DISTANT: ss = "distant"; break;
-			case Zone.PROXIMITY: ss = "near"; break;
-			case Zone.INSIDE: ss = "inside"; break;
+		case Zone.DISTANT:
+			ss = "distant";
+			break;
+		case Zone.PROXIMITY:
+			ss = "near";
+			break;
+		case Zone.INSIDE:
+			ss = "inside";
+			break;
 		}
 		tvState.setText("State: " + ss);
-		
-		if (z.contain == Zone.INSIDE) { 
+
+		if (z.contain == Zone.INSIDE) {
 			tvDistance.setText("Distance: inside");
 		} else {
 			tvDistance.setText("Distance: " + UtilsFormat.formatDistance(z.distance, false));
 		}
 	}
-	
+
 	private void setBottomMenu() {
 		String btn01 = null, btn02 = null, btn03 = null;
 		CustomDialog.OnClickListener btn01Click = null, btn02Click = null, btn03Click = null;
-		
+
 		// get count of items
 		boolean location = et.isLocated();
-		
+
 		int actions = 0;
 		Vector<Object> validActions = null;
-		
+
 		if (et instanceof Thing) {
 			Thing t = (Thing) et;
 			actions = t.visibleActions() + Engine.instance.cartridge.visibleUniversalActions();
-Logger.d(TAG, "actions:" + actions);			
+			Logger.d(TAG, "actions:" + actions);
 			validActions = ListActions.getValidActions(t);
 			actions = validActions.size();
-Logger.d(TAG, "validActions:" + actions);
+			Logger.d(TAG, "validActions:" + actions);
 		}
-		
-Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:" + actions);
+
+		Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:" + actions);
 
 		// set location on first two buttons
 		if (location) {
@@ -201,14 +214,21 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 					return true;
 				}
 			};
-			
+
 			btn02 = getString(R.string.map);
 			btn02Click = new CustomDialog.OnClickListener() {
-		
+
 				@Override
 				public boolean onClick(CustomDialog dialog, View v, int btn) {
 					try {
 						Waypoint wpt = getTargetWaypoint();
+						Track track = getTargetTrack();
+						if (track != null) {
+							ArrayList<Track> tracks = new ArrayList<Track>();
+							tracks.add(track);
+							ActionDisplayTracks
+									.sendTracks(Details.this, tracks, ExtraAction.CENTER);
+						}
 						if (wpt != null) {
 							ActionTools.actionStartGuiding(Details.this, wpt);
 						} else {
@@ -224,7 +244,7 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 				}
 			};
 		}
-		
+
 		// set actions
 		if (actions > 0) {
 			if (location) {
@@ -233,10 +253,10 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 				btn03Click = new CustomDialog.OnClickListener() {
 					@Override
 					public boolean onClick(CustomDialog dialog, View v, int btn) {
-				    	ListActions.reset((Thing) et);
-				    	Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-				    	Details.this.finish();						
-				    	return true;
+						ListActions.reset((Thing) et);
+						Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+						Details.this.finish();
+						return true;
 					}
 				};
 			} else {
@@ -286,21 +306,18 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 					btn03Click = new CustomDialog.OnClickListener() {
 						@Override
 						public boolean onClick(CustomDialog dialog, View v, int btn) {
-					    	ListActions.reset((Thing) et);
-					    	Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-					    	Details.this.finish();
-					    	return true;
+							ListActions.reset((Thing) et);
+							Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+							Details.this.finish();
+							return true;
 						}
 					};
 				}
 			}
 		}
-		
+
 		// show bottom menu
-		CustomDialog.setBottom(this,
-				btn01, btn01Click,
-				btn02, btn02Click,
-				btn03, btn03Click);
+		CustomDialog.setBottom(this, btn01, btn01Click, btn02, btn02Click, btn03, btn03Click);
 
 		// set title text
 		if (et instanceof Task) {
@@ -308,7 +325,7 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 			tvState.setText(taskStates[t.state()]);
 		}
 	}
-	
+
 	private void enableGuideOnEventTable() {
 		Waypoint wpt = getTargetWaypoint();
 		if (wpt != null) {
@@ -317,31 +334,60 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 			Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
 		}
 	}
-	
+
 	private Waypoint getTargetWaypoint() {
 		if (et == null || !et.isLocated())
 			return null;
-		
-    	if (et instanceof Zone) {
-    		Zone z = ((Zone) et);
-    		Location loc = new Location(TAG);
-    		loc.setLatitude(z.nearestPoint.latitude);
-    		loc.setLongitude(z.nearestPoint.longitude);
+
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+			Location loc = new Location(TAG);
+			loc.setLatitude(z.nearestPoint.latitude);
+			loc.setLongitude(z.nearestPoint.longitude);
 			return new Waypoint(et.name, loc);
-    	} else {
-    		Location loc = new Location(TAG);
-    		loc.setLatitude(et.position.latitude);
-    		loc.setLongitude(et.position.longitude);
+		} else {
+			Location loc = new Location(TAG);
+			loc.setLatitude(et.position.latitude);
+			loc.setLongitude(et.position.longitude);
 			return new Waypoint(et.name, loc);
-    	}
+		}
 	}
-	
+
+	private Track getTargetTrack() {
+		if (et == null || !et.isLocated())
+			return null;
+
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+
+			ArrayList<Location> locs = new ArrayList<Location>();
+			for (int i = 0; i < z.points.length; i++) {
+				Location loc = new Location(TAG);
+				loc.setLatitude(z.points[i].latitude);
+				loc.setLongitude(z.points[i].longitude);
+				locs.add(loc);
+			}
+			if (locs.size() >= 3)
+				locs.add(locs.get(0));
+
+			Track track = new Track();
+			ExtraStyle style = new ExtraStyle();
+			style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f, Units.PIXELS);
+			track.styleNormal = style;
+			track.setPoints(locs);
+
+			return track;
+		} else {
+			return null;
+		}
+	}
+
 	public void onStart() {
 		super.onStart();
 		if (et instanceof Zone)
 			LocationState.addLocationChangeListener(this);
 	}
-	
+
 	public void onStop() {
 		super.onStop();
 		LocationState.removeLocationChangeListener(this);
@@ -351,7 +397,8 @@ Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:"
 		refresh();
 	}
 
-	public void onStatusChanged(String provider, int state, Bundle extras) {}
+	public void onStatusChanged(String provider, int state, Bundle extras) {
+	}
 
 	public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {
 	}

@@ -6,6 +6,8 @@
     <string name="pref_bearing_true_desc">If enabled use true bearing. Otherwise use magnetic bearing</string>
     <string name="pref_confirm_on_exit">Confirm on exiting</string>
     <string name="pref_confirm_on_exit_desc">Display confirmation dialog before exiting Locus via the Back Button</string>
+    <string name="pref_statusbar">Statusbar Icon</string>
+    <string name="pref_statusbar_desc">Show icon in statusbar</string>
     <string name="pref_fullscreen">FullScreen</string>
     <string name="pref_fullscreen_desc">Hide system panel</string>
     <string name="pref_global">Global</string>

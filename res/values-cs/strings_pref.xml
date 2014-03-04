@@ -6,6 +6,8 @@
     <string name="pref_bearing_true_desc">Pokud je zapnuto, použít pravý azimut. Jinak použít magnetický azimut</string>
     <string name="pref_confirm_on_exit">Potvrdit ukončení</string>
     <string name="pref_confirm_on_exit_desc">Zobrazit potvrzovací dialog před ukončením Locusu prostřednictvím tlačítka Zpět</string>
+    <string name="pref_statusbar">Statusbar Ikona</string>
+    <string name="pref_statusbar_desc">Zobrazovat ikonu v statusbaru</string>
     <string name="pref_fullscreen">Celá obrazovka</string>
     <string name="pref_fullscreen_desc">Skrýt systémovou lištu</string>
     <string name="pref_global">Hlavní</string>
