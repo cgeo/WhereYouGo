@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    
+  <update name="0.8.0" id="26" time="13.3.2014">
+    <li>added vector OSM support using MapsForge</li>
+    <li>added point labels in vector maps</li>
+    <li>added Zone border in both Locus and vector maps</li>
+    <li>added "Cancel" button when starting wherigo</li>
+    <li>fixed starting a new game</li>
+    <li>fixed encoding in "About application"</li>
+    <li>option to display WhereYouGo icon in the statusbar while the application is running</li>
+	<li>changed cartridge loading message</li>
+	<li>logging messages are appended to existing log file</li>
+  </update>
+    
+  <update name="0.7.0" id="25" time="7.4.2012">
+    <li>WhereYouGo released as OpenSource project</li>
+  </update>
+    
   <update name="0.6.0" id="24" time="15.9.2011">
     <li>added translations: Arabic, Danish, German, Greek, Spanish, Finnish, French, Hungarian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Brazilian P., Russian, Slovak</li>
     <li>added support for Locus Offline, Vector maps</li>

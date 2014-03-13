@@ -47,6 +47,11 @@ public class Settings {
   private static final String KEY_S_APPLICATION_VERSION_LAST = "KEY_S_APPLICATION_VERSION_LAST";
 
   // GLOBAL
+  /** map provider */
+  public static final String KEY_S_MAP_PROVIDER = "KEY_S_MAP_PROVIDER";
+  public static final int VALUE_MAP_PROVIDER_VECTOR = 0;
+  public static final int VALUE_MAP_PROVIDER_LOCUS = 1;
+  public static final String DEFAULT_MAP_PROVIDER = String.valueOf(VALUE_MAP_PROVIDER_VECTOR);
   /** enable icon in status bar */
   public static final String KEY_B_STATUSBAR = "KEY_B_STATUSBAR";
   public static final boolean DEFAULT_STATUSBAR = false;
