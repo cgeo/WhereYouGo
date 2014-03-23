@@ -125,7 +125,7 @@ public class Settings {
   public static final boolean DEFAULT_GPS_BEEP_ON_GPS_FIX = true;
   /** disable GPS when not needed */
   public static final String KEY_B_GPS_DISABLE_WHEN_HIDE = "KEY_B_GPS_DISABLE_WHEN_HIDE";
-  public static final boolean DEFAULT_GPS_DISABLE_WHEN_HIDE = true;
+  public static final boolean DEFAULT_GPS_DISABLE_WHEN_HIDE = false;
 
   // SENSORS
   /** is hardware orientation sensor enabled */

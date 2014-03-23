@@ -29,6 +29,8 @@ import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
+import menion.android.whereyougo.settings.SettingValues;
+import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import android.app.ProgressDialog;
@@ -86,14 +88,33 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
     };
 
     CustomDialog.setTitle(this, Engine.instance.cartridge.name, null, CustomDialog.NO_IMAGE, null);
-    CustomDialog.setBottom(this, getString(R.string.gps), new CustomDialog.OnClickListener() {
-      @Override
-      public boolean onClick(CustomDialog dialog, View v, int btn) {
-        Intent intent = new Intent(CartridgeMainMenu.this, SatelliteScreen.class);
-        startActivity(intent);
-        return true;
-      }
-    }, null, null, null, null);
+		CustomDialog.setBottom(
+				this,
+				getString(R.string.gps),
+				new CustomDialog.OnClickListener() {
+					@Override
+					public boolean onClick(CustomDialog dialog, View v, int btn) {
+						Intent intent = new Intent(CartridgeMainMenu.this,
+								SatelliteScreen.class);
+						startActivity(intent);
+						return true;
+					}
+				}, null, null,
+				getString(R.string.map),
+				new CustomDialog.OnClickListener() {
+					@Override
+					public boolean onClick(CustomDialog dialog, View v, int btn) {
+						switch (SettingValues.GLOBAL_MAP_PROVIDER) {
+						case Settings.VALUE_MAP_PROVIDER_VECTOR:
+							Details.vectorMap(CartridgeMainMenu.this, false);
+							break;
+						case Settings.VALUE_MAP_PROVIDER_LOCUS:
+							Details.locusMap(CartridgeMainMenu.this, false);
+							break;
+						}
+						return true;
+					}
+				});
   }
 
   public void onResume() {

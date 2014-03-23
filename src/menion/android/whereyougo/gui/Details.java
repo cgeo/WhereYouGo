@@ -66,401 +66,464 @@ import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
 
 // ADD locationListener to update UpdateNavi
-public class Details extends CustomActivity implements Refreshable, LocationEventListener {
+public class Details extends CustomActivity implements Refreshable,
+		LocationEventListener {
 
-  private static final String TAG = "Details";
+	private static final String TAG = "Details";
 
-  public static EventTable et;
+	public static EventTable et;
 
-  private static final String[] taskStates = {Loc.get(R.string.pending),
-      Loc.get(R.string.finished), Loc.get(R.string.failed)};
+	private static final String[] taskStates = { Loc.get(R.string.pending),
+			Loc.get(R.string.finished), Loc.get(R.string.failed) };
 
-  private TextView tvName;
-  private ImageView ivImage;
-  private TextView tvImageText;
-  private TextView tvDescription;
-  private TextView tvDistance;
-  private TextView tvState;
+	private TextView tvName;
+	private ImageView ivImage;
+	private TextView tvImageText;
+	private TextView tvDescription;
+	private TextView tvDistance;
+	private TextView tvState;
 
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.layout_details);
-  }
+		setContentView(R.layout.layout_details);
+	}
 
-  public void onResume() {
-    super.onResume();
-    Logger.d(TAG, "onResume(), et:" + et);
-    if (et != null) {
-      setTitle(et.name);
+	public void onResume() {
+		super.onResume();
+		Logger.d(TAG, "onResume(), et:" + et);
+		if (et != null) {
+			setTitle(et.name);
 
-      tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
-      tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
-      tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-      ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
-      tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
-      tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
-    } else {
-      Logger.i(TAG, "onCreate(), et == null, end!");
-      Details.this.finish();
-    }
+			tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
+			tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+			tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+			ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+			tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
+			tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
+		} else {
+			Logger.i(TAG, "onCreate(), et == null, end!");
+			Details.this.finish();
+		}
 
-    refresh();
-  }
+		refresh();
+	}
 
-  @Override
-  public void refresh() {
-    runOnUiThread(new Runnable() {
+	@Override
+	public void refresh() {
+		runOnUiThread(new Runnable() {
 
-      @Override
-      public void run() {
-        if (!stillValid()) {
-          Logger.d(TAG, "refresh(), not valid anymore");
-          Details.this.finish();
-          return;
-        }
+			@Override
+			public void run() {
+				if (!stillValid()) {
+					Logger.d(TAG, "refresh(), not valid anymore");
+					Details.this.finish();
+					return;
+				}
 
-        tvName.setText(et.name);
-        tvDescription.setText(et.description);
+				tvName.setText(et.name);
+				tvDescription.setText(et.description);
 
-        Media m = (Media) et.table.rawget("Media");
-        if (m != null) {
-          tvImageText.setText(m.altText);
-          // Logger.w(TAG, "SET: " + et.name + ", " + m.id);
-          try {
-            byte[] is = Engine.mediaFile(m);
-            Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-            Main.setBitmapToImageView(i, ivImage);
-          } catch (Exception e) {
-            Logger.e(TAG, "refresh()", e);
-          }
-        } else {
-          ivImage.setImageBitmap(null);
-          ivImage.setMinimumWidth(0);
-          ivImage.setMinimumHeight(0);
-        }
+				Media m = (Media) et.table.rawget("Media");
+				if (m != null) {
+					tvImageText.setText(m.altText);
+					// Logger.w(TAG, "SET: " + et.name + ", " + m.id);
+					try {
+						byte[] is = Engine.mediaFile(m);
+						Bitmap i = BitmapFactory.decodeByteArray(is, 0,
+								is.length);
+						Main.setBitmapToImageView(i, ivImage);
+					} catch (Exception e) {
+						Logger.e(TAG, "refresh()", e);
+					}
+				} else {
+					ivImage.setImageBitmap(null);
+					ivImage.setMinimumWidth(0);
+					ivImage.setMinimumHeight(0);
+				}
 
-        updateNavi();
-        setBottomMenu();
-      }
-    });
-  }
+				updateNavi();
+				setBottomMenu();
+			}
+		});
+	}
 
-  public boolean stillValid() {
-    if (et != null) {
-      if (et instanceof Thing) {
-        return ((Thing) et).visibleToPlayer();
-      }
-      return et.isVisible();
-    } else
-      return false;
-  }
+	public boolean stillValid() {
+		if (et != null) {
+			if (et instanceof Thing) {
+				return ((Thing) et).visibleToPlayer();
+			}
+			return et.isVisible();
+		} else
+			return false;
+	}
 
-  private void updateNavi() {
-    if (!(et instanceof Zone)) {
-      return;
-    }
+	private void updateNavi() {
+		if (!(et instanceof Zone)) {
+			return;
+		}
 
-    Zone z = (Zone) et;
-    String ss = "(nothing)";
-    switch (z.contain) {
-      case Zone.DISTANT:
-        ss = "distant";
-        break;
-      case Zone.PROXIMITY:
-        ss = "near";
-        break;
-      case Zone.INSIDE:
-        ss = "inside";
-        break;
-    }
-    tvState.setText("State: " + ss);
+		Zone z = (Zone) et;
+		String ss = "(nothing)";
+		switch (z.contain) {
+		case Zone.DISTANT:
+			ss = "distant";
+			break;
+		case Zone.PROXIMITY:
+			ss = "near";
+			break;
+		case Zone.INSIDE:
+			ss = "inside";
+			break;
+		}
+		tvState.setText("State: " + ss);
 
-    if (z.contain == Zone.INSIDE) {
-      tvDistance.setText("Distance: inside");
-    } else {
-      tvDistance.setText("Distance: " + UtilsFormat.formatDistance(z.distance, false));
-    }
-  }
+		if (z.contain == Zone.INSIDE) {
+			tvDistance.setText("Distance: inside");
+		} else {
+			tvDistance.setText("Distance: "
+					+ UtilsFormat.formatDistance(z.distance, false));
+		}
+	}
 
-  private void setBottomMenu() {
-    String btn01 = null, btn02 = null, btn03 = null;
-    CustomDialog.OnClickListener btn01Click = null, btn02Click = null, btn03Click = null;
+	private void setBottomMenu() {
+		String btn01 = null, btn02 = null, btn03 = null;
+		CustomDialog.OnClickListener btn01Click = null, btn02Click = null, btn03Click = null;
 
-    // get count of items
-    boolean location = et.isLocated();
+		// get count of items
+		boolean location = et.isLocated();
 
-    int actions = 0;
-    Vector<Object> validActions = null;
+		int actions = 0;
+		Vector<Object> validActions = null;
 
-    if (et instanceof Thing) {
-      Thing t = (Thing) et;
-      actions = t.visibleActions() + Engine.instance.cartridge.visibleUniversalActions();
-      Logger.d(TAG, "actions:" + actions);
-      validActions = ListActions.getValidActions(t);
-      actions = validActions.size();
-      Logger.d(TAG, "validActions:" + actions);
-    }
+		if (et instanceof Thing) {
+			Thing t = (Thing) et;
+			actions = t.visibleActions()
+					+ Engine.instance.cartridge.visibleUniversalActions();
+			Logger.d(TAG, "actions:" + actions);
+			validActions = ListActions.getValidActions(t);
+			actions = validActions.size();
+			Logger.d(TAG, "validActions:" + actions);
+		}
 
-    Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et + ", act:" + actions);
+		Logger.d(TAG, "setBottomMenu(), loc:" + et.isLocated() + ", et:" + et
+				+ ", act:" + actions);
 
-    // set location on first two buttons
-    if (location) {
-      btn01 = getString(R.string.navigate);
-      btn01Click = new CustomDialog.OnClickListener() {
-        @Override
-        public boolean onClick(CustomDialog dialog, View v, int btn) {
-          try {
-            enableGuideOnEventTable();
-            Main.callGudingScreen(Details.this);
-          } catch (Exception e) {
-            Logger.w(TAG, "btn01.click() - unknown problem");
-          }
-          return true;
-        }
-      };
+		// set location on first two buttons
+		if (location) {
+			btn01 = getString(R.string.navigate);
+			btn01Click = new CustomDialog.OnClickListener() {
+				@Override
+				public boolean onClick(CustomDialog dialog, View v, int btn) {
+					try {
+						enableGuideOnEventTable();
+						Main.callGudingScreen(Details.this);
+					} catch (Exception e) {
+						Logger.w(TAG, "btn01.click() - unknown problem");
+					}
+					return true;
+				}
+			};
 
-      btn02 = getString(R.string.map);
-      btn02Click = new CustomDialog.OnClickListener() {
+			btn02 = getString(R.string.map);
+			btn02Click = new CustomDialog.OnClickListener() {
 
-        @Override
-        public boolean onClick(CustomDialog dialog, View v, int btn) {
-          switch (SettingValues.GLOBAL_MAP_PROVIDER) {
-            case Settings.VALUE_MAP_PROVIDER_VECTOR:
-              vectorMap();
-              break;
-            case Settings.VALUE_MAP_PROVIDER_LOCUS:
-              locusMap();
-              break;
-          }
-          return true;
-        }
-      };
-    }
+				@Override
+				public boolean onClick(CustomDialog dialog, View v, int btn) {
+					switch (SettingValues.GLOBAL_MAP_PROVIDER) {
+						case Settings.VALUE_MAP_PROVIDER_VECTOR:
+							vectorMap(Details.this, true);
+							break;
+						case Settings.VALUE_MAP_PROVIDER_LOCUS:
+							locusMap(Details.this, true);
+							break;
+					}
+					return true;
+				}
+			};
+		}
 
-    // set actions
-    if (actions > 0) {
-      if (location) {
-        // only one empty button, set actions on it
-        btn03 = "Actions (" + actions + ")";
-        btn03Click = new CustomDialog.OnClickListener() {
-          @Override
-          public boolean onClick(CustomDialog dialog, View v, int btn) {
-            ListActions.reset((Thing) et);
-            Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-            Details.this.finish();
-            return true;
-          }
-        };
-      } else {
-        // all three buttons free
-        if (actions <= 3) {
-          if (actions > 0) {
-            final Action action = (Action) validActions.get(0);
-            btn01 = action.text;
-            btn01Click = new CustomDialog.OnClickListener() {
-              @Override
-              public boolean onClick(CustomDialog dialog, View v, int btn) {
-                ListActions.reset((Thing) et);
-                ListActions.callAction(action);
-                Details.this.finish();
-                return true;
-              }
-            };
-          }
-          if (actions > 1) {
-            final Action action = (Action) validActions.get(1);
-            btn02 = action.text;
-            btn02Click = new CustomDialog.OnClickListener() {
-              @Override
-              public boolean onClick(CustomDialog dialog, View v, int btn) {
-                ListActions.reset((Thing) et);
-                ListActions.callAction(action);
-                Details.this.finish();
-                return true;
-              }
-            };
-          }
-          if (actions > 2) {
-            final Action action = (Action) validActions.get(2);
-            btn03 = action.text;
-            btn03Click = new CustomDialog.OnClickListener() {
-              @Override
-              public boolean onClick(CustomDialog dialog, View v, int btn) {
-                ListActions.reset((Thing) et);
-                ListActions.callAction(action);
-                Details.this.finish();
-                return true;
-              }
-            };
-          }
-        } else {
-          btn03 = "Actions (" + actions + ")";
-          btn03Click = new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-              ListActions.reset((Thing) et);
-              Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-              Details.this.finish();
-              return true;
-            }
-          };
-        }
-      }
-    }
+		// set actions
+		if (actions > 0) {
+			if (location) {
+				// only one empty button, set actions on it
+				btn03 = "Actions (" + actions + ")";
+				btn03Click = new CustomDialog.OnClickListener() {
+					@Override
+					public boolean onClick(CustomDialog dialog, View v, int btn) {
+						ListActions.reset((Thing) et);
+						Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+						Details.this.finish();
+						return true;
+					}
+				};
+			} else {
+				// all three buttons free
+				if (actions <= 3) {
+					if (actions > 0) {
+						final Action action = (Action) validActions.get(0);
+						btn01 = action.text;
+						btn01Click = new CustomDialog.OnClickListener() {
+							@Override
+							public boolean onClick(CustomDialog dialog, View v,
+									int btn) {
+								ListActions.reset((Thing) et);
+								ListActions.callAction(action);
+								Details.this.finish();
+								return true;
+							}
+						};
+					}
+					if (actions > 1) {
+						final Action action = (Action) validActions.get(1);
+						btn02 = action.text;
+						btn02Click = new CustomDialog.OnClickListener() {
+							@Override
+							public boolean onClick(CustomDialog dialog, View v,
+									int btn) {
+								ListActions.reset((Thing) et);
+								ListActions.callAction(action);
+								Details.this.finish();
+								return true;
+							}
+						};
+					}
+					if (actions > 2) {
+						final Action action = (Action) validActions.get(2);
+						btn03 = action.text;
+						btn03Click = new CustomDialog.OnClickListener() {
+							@Override
+							public boolean onClick(CustomDialog dialog, View v,
+									int btn) {
+								ListActions.reset((Thing) et);
+								ListActions.callAction(action);
+								Details.this.finish();
+								return true;
+							}
+						};
+					}
+				} else {
+					btn03 = "Actions (" + actions + ")";
+					btn03Click = new CustomDialog.OnClickListener() {
+						@Override
+						public boolean onClick(CustomDialog dialog, View v,
+								int btn) {
+							ListActions.reset((Thing) et);
+							Main.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+							Details.this.finish();
+							return true;
+						}
+					};
+				}
+			}
+		}
 
-    // show bottom menu
-    CustomDialog.setBottom(this, btn01, btn01Click, btn02, btn02Click, btn03, btn03Click);
+		// show bottom menu
+		CustomDialog.setBottom(this, btn01, btn01Click, btn02, btn02Click,
+				btn03, btn03Click);
 
-    // set title text
-    if (et instanceof Task) {
-      Task t = (Task) et;
-      tvState.setText(taskStates[t.state()]);
-    }
-  }
+		// set title text
+		if (et instanceof Task) {
+			Task t = (Task) et;
+			tvState.setText(taskStates[t.state()]);
+		}
+	}
 
-  private void enableGuideOnEventTable() {
-    Waypoint wpt = getTargetWaypoint();
-    if (wpt != null) {
-      A.getGuidingContent().guideStart(wpt);
-    } else {
-      Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
-    }
-  }
+	private void enableGuideOnEventTable() {
+		Waypoint wpt = locusMapWaypoint(et);
+		if (wpt != null) {
+			A.getGuidingContent().guideStart(wpt);
+		} else {
+			Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
+		}
+	}
 
-  private void vectorMap() {
-    if (et == null || !et.isLocated()) {
-      Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
-      return;
-    }
-    ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
-    if (et instanceof Zone) {
-      Zone z = ((Zone) et);
-      PackMapPoints border = new PackMapPoints();
-      border.setPolygon(true);
-      for (int i = 0; i < z.points.length; i++) {
-        border.getPoints().add(new MapPoint("", z.points[i].latitude, z.points[i].longitude));
-      }
-      if (border.getPoints().size() >= 3)
-        border.getPoints().add(border.getPoints().get(0));
-      packs.add(border);
+	// show vector map
+	public static void vectorMap(android.app.Activity activity, boolean navigate) {
 
-      PackMapPoints pack = new PackMapPoints();
-      pack.getPoints().add(new MapPoint(z.name, z.nearestPoint.latitude, z.nearestPoint.longitude));
-      packs.add(pack);
-    } else {
-      PackMapPoints pack = new PackMapPoints();
-      pack.getPoints().add(new MapPoint(et.name, et.position.latitude, et.position.longitude));
-      packs.add(pack);
-    }
+		ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
+		// show zones
+		if (Engine.instance.cartridge.zones != null) {
+			for (Object o : Engine.instance.cartridge.zones) {
+				if (o instanceof EventTable) {
+					EventTable e = (EventTable) o;
+					if (e.isLocated() && e.isVisible()) {
+						packs.addAll(vectorMapItem(e));
+					}
+				}
+			}
+		}
+		// show current zone
+		//if(navigate && et != null && et.isLocated() && et.isVisible())
+			//packs.addAll(vectorMapItem(et));
 
-    Intent intent =
-        new Intent(this,
-            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-    intent.putParcelableArrayListExtra("packs", packs);
-    intent.putExtra("center", true);
-    startActivity(intent);
-  }
+		Intent intent = new Intent(
+				activity,
+				org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+		intent.putParcelableArrayListExtra("packs", packs);
+		intent.putExtra("center", true);
+		activity.startActivity(intent);
+	}
 
-  private void locusMap() {
-    Waypoint wpt = getTargetWaypoint();
-    Track track = getTargetTrack();
-    try {
-      if (track != null) {
-        ArrayList<Track> tracks = new ArrayList<Track>();
-        tracks.add(track);
-        ActionDisplayTracks.sendTracks(Details.this, tracks, ExtraAction.CENTER);
-      }
-      if (wpt != null) {
-        ActionTools.actionStartGuiding(Details.this, wpt);
-      } else {
-        Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
-      }
-    } catch (RequiredVersionMissingException e) {
-      Logger.e(TAG, "btn02.click() - missing locus version", e);
-      LocusUtils.callInstallLocus(Details.this);
-    } catch (Exception e) {
-      Logger.e(TAG, "btn02.click() - unknown problem", e);
-    }
-  }
+	// arraylist of packmappoints
+	// each packmappont represents either border or center point
+	private static ArrayList<PackMapPoints> vectorMapItem(EventTable et) {
+		ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
+		if(et == null || !et.isLocated())
+			return packs;
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+			PackMapPoints border = new PackMapPoints();
+			border.setPolygon(true);
+			for (int i = 0; i < z.points.length; i++) {
+				border.getPoints().add(
+						new MapPoint("", z.points[i].latitude,
+								z.points[i].longitude));
+			}
+			if (border.getPoints().size() >= 3)
+				border.getPoints().add(border.getPoints().get(0));
+			packs.add(border);
 
-  private Waypoint getTargetWaypoint() {
-    if (et == null || !et.isLocated())
-      return null;
+			PackMapPoints pack = new PackMapPoints();
+			pack.getPoints().add(
+					new MapPoint(z.name, z.nearestPoint.latitude,
+							z.nearestPoint.longitude));
+			if (et == Details.et)
+				pack.setResource(R.drawable.marker_green);
+			else
+				pack.setResource(R.drawable.marker_red);
+			packs.add(pack);
+		} else {
+			PackMapPoints pack = new PackMapPoints();
+			pack.getPoints().add(
+					new MapPoint(et.name, et.position.latitude,
+							et.position.longitude));
+			if (et == Details.et)
+				pack.setResource(R.drawable.marker_green);
+			else
+				pack.setResource(R.drawable.marker_red);
+			packs.add(pack);
+		}
+		return packs;
+	}
 
-    if (et instanceof Zone) {
-      Zone z = ((Zone) et);
-      Location loc = new Location(TAG);
-      loc.setLatitude(z.nearestPoint.latitude);
-      loc.setLongitude(z.nearestPoint.longitude);
-      return new Waypoint(et.name, loc);
-    } else {
-      Location loc = new Location(TAG);
-      loc.setLatitude(et.position.latitude);
-      loc.setLongitude(et.position.longitude);
-      return new Waypoint(et.name, loc);
-    }
-  }
+	public static void locusMap(android.app.Activity activity, boolean navigate) {
+		
+		ArrayList<Track> tracks = new ArrayList<Track>();
+		// show zones
+		if (Engine.instance.cartridge.zones != null) {
+			for (Object o : Engine.instance.cartridge.zones) {
+				if (o instanceof EventTable) {
+					EventTable e = (EventTable) o;
+					if (e.isLocated() && e.isVisible()) {
+						Track track = locusMapTrack(e);
+						if (track != null)
+							tracks.add(track);
+					}
+				}
+			}
+		}
+		// navigate to waypoint
+		Waypoint wpt = locusMapWaypoint(et);
+		try {
+			if (tracks.size() > 0) {
+				ActionDisplayTracks.sendTracks(activity, tracks,
+						ExtraAction.CENTER);
+				//ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
+			}
+			if (navigate && wpt != null) {
+				ActionTools.actionStartGuiding(activity, wpt);
+			} else {
+				Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
+			}
+		} catch (RequiredVersionMissingException e) {
+			Logger.e(TAG, "btn02.click() - missing locus version", e);
+			LocusUtils.callInstallLocus(activity);
+		} catch (Exception e) {
+			Logger.e(TAG, "btn02.click() - unknown problem", e);
+		}
+	}
 
-  private Track getTargetTrack() {
-    if (et == null || !et.isLocated())
-      return null;
+	private static Waypoint locusMapWaypoint(EventTable et) {
+		if (et == null || !et.isLocated())
+			return null;
 
-    if (et instanceof Zone) {
-      Zone z = ((Zone) et);
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+			Location loc = new Location(TAG);
+			loc.setLatitude(z.nearestPoint.latitude);
+			loc.setLongitude(z.nearestPoint.longitude);
+			return new Waypoint(et.name, loc);
+		} else {
+			Location loc = new Location(TAG);
+			loc.setLatitude(et.position.latitude);
+			loc.setLongitude(et.position.longitude);
+			return new Waypoint(et.name, loc);
+		}
+	}
 
-      ArrayList<Location> locs = new ArrayList<Location>();
-      for (int i = 0; i < z.points.length; i++) {
-        Location loc = new Location(TAG);
-        loc.setLatitude(z.points[i].latitude);
-        loc.setLongitude(z.points[i].longitude);
-        locs.add(loc);
-      }
-      if (locs.size() >= 3)
-        locs.add(locs.get(0));
+	private static Track locusMapTrack(EventTable et) {
+		if (et == null || !et.isLocated())
+			return null;
 
-      Track track = new Track();
-      ExtraStyle style = new ExtraStyle();
-      style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f, Units.PIXELS);
-      track.styleNormal = style;
-      track.setPoints(locs);
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
 
-      return track;
-    } else {
-      return null;
-    }
-  }
+			ArrayList<Location> locs = new ArrayList<Location>();
+			for (int i = 0; i < z.points.length; i++) {
+				Location loc = new Location(TAG);
+				loc.setLatitude(z.points[i].latitude);
+				loc.setLongitude(z.points[i].longitude);
+				locs.add(loc);
+			}
+			if (locs.size() >= 3)
+				locs.add(locs.get(0));
 
-  public void onStart() {
-    super.onStart();
-    if (et instanceof Zone)
-      LocationState.addLocationChangeListener(this);
-  }
+			Track track = new Track();
+			ExtraStyle style = new ExtraStyle();
+			style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f,
+					Units.PIXELS);
+			track.styleNormal = style;
+			track.setPoints(locs);
+			track.setName(z.name);
+			return track;
+		} else {
+			return null;
+		}
+	}
 
-  public void onStop() {
-    super.onStop();
-    LocationState.removeLocationChangeListener(this);
-  }
+	public void onStart() {
+		super.onStart();
+		if (et instanceof Zone)
+			LocationState.addLocationChangeListener(this);
+	}
 
-  public void onLocationChanged(Location location) {
-    refresh();
-  }
+	public void onStop() {
+		super.onStop();
+		LocationState.removeLocationChangeListener(this);
+	}
 
-  public void onStatusChanged(String provider, int state, Bundle extras) {}
+	public void onLocationChanged(Location location) {
+		refresh();
+	}
 
-  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {}
+	public void onStatusChanged(String provider, int state, Bundle extras) {
+	}
 
-  public int getPriority() {
-    return LocationEventListener.PRIORITY_MEDIUM;
-  }
+	public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {
+	}
 
-  @Override
-  public boolean isRequired() {
-    return false;
-  }
+	public int getPriority() {
+		return LocationEventListener.PRIORITY_MEDIUM;
+	}
 
-  @Override
-  public String getName() {
-    return TAG;
-  }
+	@Override
+	public boolean isRequired() {
+		return false;
+	}
+
+	@Override
+	public String getName() {
+		return TAG;
+	}
 }

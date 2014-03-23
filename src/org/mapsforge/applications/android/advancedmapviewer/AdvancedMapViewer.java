@@ -59,6 +59,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -109,6 +110,7 @@ public class AdvancedMapViewer extends MapActivity {
    */
   public static final int MOVE_SPEED_MAX = 30;
 
+  private static final String KEY_MAP_RENDERER = "mapRenderer"; // store map renderer
   private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
   private static final String BUNDLE_SHOW_MY_LOCATION = "showMyLocation";
   private static final String BUNDLE_SNAP_TO_LOCATION = "snapToLocation";
@@ -193,6 +195,9 @@ public class AdvancedMapViewer extends MapActivity {
 
       case R.id.menu_render_theme_osmarender:
         this.mapView.setRenderTheme(InternalRenderTheme.OSMARENDER);
+        Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		editor.remove(KEY_MAP_RENDERER);
+		editor.commit();
         return true;
 
       case R.id.menu_render_theme_select_file:
@@ -322,6 +327,9 @@ public class AdvancedMapViewer extends MapActivity {
         && intent.getStringExtra(FilePicker.SELECTED_FILE) != null) {
       try {
         this.mapView.setRenderTheme(new File(intent.getStringExtra(FilePicker.SELECTED_FILE)));
+        Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		editor.putString(KEY_MAP_RENDERER, intent.getStringExtra(FilePicker.SELECTED_FILE));
+		editor.commit();
       } catch (FileNotFoundException e) {
         showToastOnUiThread(e.getLocalizedMessage());
       }
@@ -380,7 +388,7 @@ public class AdvancedMapViewer extends MapActivity {
         }
       }
       if (bundle.getBoolean("center", false) && count > 0) {
-        GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+        GeoPoint geoPoint = new GeoPoint(latitude/count, longitude/count);
         MapPosition newMapPosition =
             new MapPosition(geoPoint, mapView.getMapViewPosition().getZoomLevel());
         mapView.getMapViewPosition().setMapPosition(newMapPosition);
@@ -652,6 +660,14 @@ public class AdvancedMapViewer extends MapActivity {
     if (this.mapView.getMapFile() == null) {
       startMapFilePicker();
     }
+    // restore renderer
+	if (sharedPreferences.contains(KEY_MAP_RENDERER)) {
+		try {
+			this.mapView.setRenderTheme((new File(sharedPreferences.getString(KEY_MAP_RENDERER, null))));
+		} catch (FileNotFoundException ex) {
+			// file not found, using internal Osmarenderer
+		}
+	}
   }
 
   @Override

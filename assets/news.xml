@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.1" id="27" time="23.3.2014">
+    <li>remember render schema in vector maps</li>
+    <li>fixed problem with displaying items after save/load</li>
+    <li>added "map" button to cartridge menu</li>
+    <li>maps display all visible zones in current cartridge</li>
+    <li>set GPS always on as default option</li>
+  </update>
+    
   <update name="0.8.0" id="26" time="13.3.2014">
     <li>added vector OSM support using MapsForge</li>
     <li>added point labels in vector maps</li>
