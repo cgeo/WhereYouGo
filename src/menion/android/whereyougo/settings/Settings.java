@@ -47,6 +47,9 @@ public class Settings {
   private static final String KEY_S_APPLICATION_VERSION_LAST = "KEY_S_APPLICATION_VERSION_LAST";
 
   // GLOBAL
+  /** root directory */
+  public static final String KEY_S_ROOT = "KEY_S_ROOT";
+  public static final String DEFAULT_ROOT = "";
   /** map provider */
   public static final String KEY_S_MAP_PROVIDER = "KEY_S_MAP_PROVIDER";
   public static final int VALUE_MAP_PROVIDER_VECTOR = 0;

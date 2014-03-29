@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.2" id="28" time="29.3.2014">
+    <li>choose WhereYouGo folder</li>
+    <li>vector maps can handle moving zones</li>
+    <li>compass can handle moving zones</li>
+    <li>compass displays target name</li>
+    <li>window titles in local language</li>
+    <li>icons modernization</li>
+  </update>
+    
   <update name="0.8.1" id="27" time="23.3.2014">
     <li>remember render schema in vector maps</li>
     <li>fixed problem with displaying items after save/load</li>

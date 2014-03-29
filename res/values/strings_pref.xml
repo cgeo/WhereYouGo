@@ -6,6 +6,8 @@
     <string name="pref_bearing_true_desc">If enabled use true bearing. Otherwise use magnetic bearing</string>
     <string name="pref_confirm_on_exit">Confirm on exiting</string>
     <string name="pref_confirm_on_exit_desc">Display confirmation dialog before exiting Locus via the Back Button</string>
+    <string name="pref_root">WhereYouGo folder</string>
+    <string name="pref_root_desc">Select any wherigo in target folder</string>
     <string name="pref_map_provider">Map provider</string>
     <string name="pref_map_provider_desc">Select map provider</string>
     <string name="pref_map_provider_vector">Vector OSM</string>

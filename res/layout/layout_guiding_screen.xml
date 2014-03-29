@@ -8,9 +8,10 @@
 	
 	<LinearLayout
 		android:id="@+id/linearLayoutCompass"
+		android:orientation="vertical"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
-		android:layout_above="@+id/linear_layout_bottom"
+		android:layout_above="@+id/linearLayoutName"
 		android:gravity="center">
 	</LinearLayout>
 	
@@ -55,6 +56,21 @@
 			android:layout_width="wrap_content"
 			android:gravity="right"
 			android:text="@string/longitude" />
+	</LinearLayout>
+	
+	<LinearLayout 
+		android:id="@+id/linearLayoutName"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content" 
+		android:padding="3dip"
+		android:layout_above="@+id/linear_layout_bottom">
+		<TextView 
+		    style="@style/CustomScreenTextValue"
+		    android:layout_width="0dp"
+			android:layout_weight="1"
+			android:gravity="center_horizontal"
+			android:id="@+id/textViewName"
+			android:text="" />
 	</LinearLayout>
 	
 	<LinearLayout 

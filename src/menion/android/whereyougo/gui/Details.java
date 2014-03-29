@@ -25,11 +25,7 @@ import locus.api.android.ActionDisplayTracks;
 import locus.api.android.ActionTools;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.RequiredVersionMissingException;
-import locus.api.objects.extra.ExtraStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.ColorStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
 import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
@@ -39,6 +35,8 @@ import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.hardware.location.LocationEventListener;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.location.SatellitePosition;
+import menion.android.whereyougo.maps.LocusMapDataProvider;
+import menion.android.whereyougo.maps.VectorMapDataProvider;
 import menion.android.whereyougo.settings.Loc;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
@@ -46,13 +44,8 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 
-import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
-import org.mapsforge.applications.android.advancedmapviewer.container.PackMapPoints;
-
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -232,10 +225,10 @@ public class Details extends CustomActivity implements Refreshable,
 				public boolean onClick(CustomDialog dialog, View v, int btn) {
 					switch (SettingValues.GLOBAL_MAP_PROVIDER) {
 						case Settings.VALUE_MAP_PROVIDER_VECTOR:
-							vectorMap(Details.this, true);
+							vectorMap();
 							break;
 						case Settings.VALUE_MAP_PROVIDER_LOCUS:
-							locusMap(Details.this, true);
+							locusMap();
 							break;
 					}
 					return true;
@@ -338,160 +331,6 @@ public class Details extends CustomActivity implements Refreshable,
 		}
 	}
 
-	// show vector map
-	public static void vectorMap(android.app.Activity activity, boolean navigate) {
-
-		ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
-		// show zones
-		if (Engine.instance.cartridge.zones != null) {
-			for (Object o : Engine.instance.cartridge.zones) {
-				if (o instanceof EventTable) {
-					EventTable e = (EventTable) o;
-					if (e.isLocated() && e.isVisible()) {
-						packs.addAll(vectorMapItem(e));
-					}
-				}
-			}
-		}
-		// show current zone
-		//if(navigate && et != null && et.isLocated() && et.isVisible())
-			//packs.addAll(vectorMapItem(et));
-
-		Intent intent = new Intent(
-				activity,
-				org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-		intent.putParcelableArrayListExtra("packs", packs);
-		intent.putExtra("center", true);
-		activity.startActivity(intent);
-	}
-
-	// arraylist of packmappoints
-	// each packmappont represents either border or center point
-	private static ArrayList<PackMapPoints> vectorMapItem(EventTable et) {
-		ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
-		if(et == null || !et.isLocated())
-			return packs;
-		if (et instanceof Zone) {
-			Zone z = ((Zone) et);
-			PackMapPoints border = new PackMapPoints();
-			border.setPolygon(true);
-			for (int i = 0; i < z.points.length; i++) {
-				border.getPoints().add(
-						new MapPoint("", z.points[i].latitude,
-								z.points[i].longitude));
-			}
-			if (border.getPoints().size() >= 3)
-				border.getPoints().add(border.getPoints().get(0));
-			packs.add(border);
-
-			PackMapPoints pack = new PackMapPoints();
-			pack.getPoints().add(
-					new MapPoint(z.name, z.nearestPoint.latitude,
-							z.nearestPoint.longitude));
-			if (et == Details.et)
-				pack.setResource(R.drawable.marker_green);
-			else
-				pack.setResource(R.drawable.marker_red);
-			packs.add(pack);
-		} else {
-			PackMapPoints pack = new PackMapPoints();
-			pack.getPoints().add(
-					new MapPoint(et.name, et.position.latitude,
-							et.position.longitude));
-			if (et == Details.et)
-				pack.setResource(R.drawable.marker_green);
-			else
-				pack.setResource(R.drawable.marker_red);
-			packs.add(pack);
-		}
-		return packs;
-	}
-
-	public static void locusMap(android.app.Activity activity, boolean navigate) {
-		
-		ArrayList<Track> tracks = new ArrayList<Track>();
-		// show zones
-		if (Engine.instance.cartridge.zones != null) {
-			for (Object o : Engine.instance.cartridge.zones) {
-				if (o instanceof EventTable) {
-					EventTable e = (EventTable) o;
-					if (e.isLocated() && e.isVisible()) {
-						Track track = locusMapTrack(e);
-						if (track != null)
-							tracks.add(track);
-					}
-				}
-			}
-		}
-		// navigate to waypoint
-		Waypoint wpt = locusMapWaypoint(et);
-		try {
-			if (tracks.size() > 0) {
-				ActionDisplayTracks.sendTracks(activity, tracks,
-						ExtraAction.CENTER);
-				//ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
-			}
-			if (navigate && wpt != null) {
-				ActionTools.actionStartGuiding(activity, wpt);
-			} else {
-				Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
-			}
-		} catch (RequiredVersionMissingException e) {
-			Logger.e(TAG, "btn02.click() - missing locus version", e);
-			LocusUtils.callInstallLocus(activity);
-		} catch (Exception e) {
-			Logger.e(TAG, "btn02.click() - unknown problem", e);
-		}
-	}
-
-	private static Waypoint locusMapWaypoint(EventTable et) {
-		if (et == null || !et.isLocated())
-			return null;
-
-		if (et instanceof Zone) {
-			Zone z = ((Zone) et);
-			Location loc = new Location(TAG);
-			loc.setLatitude(z.nearestPoint.latitude);
-			loc.setLongitude(z.nearestPoint.longitude);
-			return new Waypoint(et.name, loc);
-		} else {
-			Location loc = new Location(TAG);
-			loc.setLatitude(et.position.latitude);
-			loc.setLongitude(et.position.longitude);
-			return new Waypoint(et.name, loc);
-		}
-	}
-
-	private static Track locusMapTrack(EventTable et) {
-		if (et == null || !et.isLocated())
-			return null;
-
-		if (et instanceof Zone) {
-			Zone z = ((Zone) et);
-
-			ArrayList<Location> locs = new ArrayList<Location>();
-			for (int i = 0; i < z.points.length; i++) {
-				Location loc = new Location(TAG);
-				loc.setLatitude(z.points[i].latitude);
-				loc.setLongitude(z.points[i].longitude);
-				locs.add(loc);
-			}
-			if (locs.size() >= 3)
-				locs.add(locs.get(0));
-
-			Track track = new Track();
-			ExtraStyle style = new ExtraStyle();
-			style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f,
-					Units.PIXELS);
-			track.styleNormal = style;
-			track.setPoints(locs);
-			track.setName(z.name);
-			return track;
-		} else {
-			return null;
-		}
-	}
-
 	public void onStart() {
 		super.onStart();
 		if (et instanceof Zone)
@@ -525,5 +364,51 @@ public class Details extends CustomActivity implements Refreshable,
 	@Override
 	public String getName() {
 		return TAG;
+	}
+	
+	// show vector map
+	private void vectorMap() {
+		  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+		  mdp.clear();
+		  mdp.addZones();
+		  Main.wui.showScreen(WUI.SCREEN_MAP, null);
+	}
+
+	private void locusMap() {
+	  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
+	  mdp.clear();
+	  mdp.addZones();
+	  Waypoint wpt = locusMapWaypoint(et);
+		try {
+				ActionDisplayTracks.sendTracks(this, mdp.getTracks(),
+						ExtraAction.CENTER);
+				//ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
+			if (wpt != null) {
+				ActionTools.actionStartGuiding(this, wpt);
+			} else {
+				Logger.d(TAG, "enableGuideOnEventTable(), waypoint 'null'");
+			}
+		} catch (RequiredVersionMissingException e) {
+			Logger.e(TAG, "btn02.click() - missing locus version", e);
+			LocusUtils.callInstallLocus(this);
+		} catch (Exception e) {
+			Logger.e(TAG, "btn02.click() - unknown problem", e);
+		}
+	}
+
+	private static Waypoint locusMapWaypoint(EventTable et) {
+		if (et == null || !et.isLocated())
+			return null;
+
+		Location loc = new Location(TAG);
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+			loc.setLatitude(z.nearestPoint.latitude);
+			loc.setLongitude(z.nearestPoint.longitude);
+		} else {
+			loc.setLatitude(et.position.latitude);
+			loc.setLongitude(et.position.longitude);
+		}
+		return new Waypoint(et.name, loc);
 	}
 }

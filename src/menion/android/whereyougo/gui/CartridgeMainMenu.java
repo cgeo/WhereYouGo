@@ -20,6 +20,10 @@ package menion.android.whereyougo.gui;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import locus.api.android.ActionDisplayTracks;
+import locus.api.android.ActionDisplay.ExtraAction;
+import locus.api.android.utils.LocusUtils;
+import locus.api.android.utils.RequiredVersionMissingException;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.WUI;
@@ -29,6 +33,8 @@ import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
+import menion.android.whereyougo.maps.LocusMapDataProvider;
+import menion.android.whereyougo.maps.VectorMapDataProvider;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.Logger;
@@ -106,10 +112,10 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 					public boolean onClick(CustomDialog dialog, View v, int btn) {
 						switch (SettingValues.GLOBAL_MAP_PROVIDER) {
 						case Settings.VALUE_MAP_PROVIDER_VECTOR:
-							Details.vectorMap(CartridgeMainMenu.this, false);
+							vectorMap();
 							break;
 						case Settings.VALUE_MAP_PROVIDER_LOCUS:
-							Details.locusMap(CartridgeMainMenu.this, false);
+							locusMap();
 							break;
 						}
 						return true;
@@ -359,4 +365,32 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
     }
     return description;
   }
+  
+  private void vectorMap() {
+	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+	  mdp.clear();
+	  mdp.addZones();
+	  Main.wui.showScreen(WUI.SCREEN_MAP, null);
+	  /*Intent intent =
+		        new Intent(this,
+		            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+	intent.putExtra("center", true);
+	startActivity(intent);*/
+  }
+  
+	private void locusMap() {
+		  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
+		  mdp.clear();
+		  mdp.addZones();
+		try {
+				ActionDisplayTracks.sendTracks(this, mdp.getTracks(),
+						ExtraAction.CENTER);
+				//ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
+		} catch (RequiredVersionMissingException e) {
+			Logger.e(TAG, "btn02.click() - missing locus version", e);
+			LocusUtils.callInstallLocus(this);
+		} catch (Exception e) {
+			Logger.e(TAG, "btn02.click() - unknown problem", e);
+		}
+	}
 }

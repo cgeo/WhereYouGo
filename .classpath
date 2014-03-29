@@ -9,6 +9,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/LocusAPI"/>
 	<classpathentry exported="true" kind="lib" path="/LocusAPI_android/bin/locusapi_android.jar" sourcepath="D:/Dev/Repository/LocusAPI_android/src"/>
 	<classpathentry exported="true" kind="lib" path="C:/Program Files/Android/adt-bundle-windows-x86_64-20131030/sdk/extras/android/support/v4/android-support-v4.jar"/>
-	<classpathentry exported="true" kind="lib" path="D:/Dev/Repository/mapsforge-onTap/mapsforge-map/target/mapsforge-map-0.3.1-SNAPSHOT-jar-with-dependencies.jar" sourcepath="D:/Dev/Repository/mapsforge-onTap/mapsforge-map/target/mapsforge-map-0.3.1-SNAPSHOT-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/mapsforge-map/target/mapsforge-map-0.3.1-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

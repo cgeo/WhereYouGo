@@ -46,9 +46,16 @@ import static menion.android.whereyougo.settings.Settings.VALUE_LANGUAGE_PT_BR;
 import static menion.android.whereyougo.settings.Settings.VALUE_LANGUAGE_RU;
 import static menion.android.whereyougo.settings.Settings.VALUE_LANGUAGE_SK;
 import static menion.android.whereyougo.settings.Settings.getPrefString;
+
+import java.io.File;
+
+import org.mapsforge.applications.android.advancedmapviewer.filepicker.FilePicker;
+
+import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.CustomPreferenceActivity;
 import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
@@ -72,6 +79,16 @@ public class SettingItems {
   /*****************************/
 
   // GLOBAL
+  
+	public static void addPrefRoot(final CustomPreferenceActivity activity,
+			PreferenceCategory category) {
+		Preference pref = activity.addFilePreference(category,
+				R.string.pref_root, R.string.pref_root_desc,
+				Settings.KEY_S_ROOT, Settings.DEFAULT_ROOT, ".gwc",
+				REQUEST_ROOT);
+		setPreferenceText(activity, pref, SettingValues.GLOBAL_ROOT,
+				R.string.pref_root_desc);
+	}
 
   public static void addPrefMapProvider(final CustomPreferenceActivity activity,
       PreferenceCategory category) {
@@ -696,6 +713,7 @@ public class SettingItems {
   }
 
   private static final int REQUEST_GUIDING_WPT_SOUND = 0;
+  private static final int REQUEST_ROOT = 1;
 
   private static ListPreference lastUsedPreference;
 
@@ -716,6 +734,20 @@ public class SettingItems {
         }
       }
       lastUsedPreference = null;
+    }else if(requestCode == REQUEST_ROOT){
+    	if(resultCode == Activity.RESULT_OK && data != null){
+    		String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
+    		if(filename != null){
+    			File file = new File(filename);
+    			String dir = file.getParent();
+    			Settings.setPrefString(Settings.KEY_S_ROOT, dir);
+    			SettingValues.GLOBAL_ROOT = dir;
+    			Preference pref = activity.findPreference(Settings.KEY_S_ROOT);
+    			setPreferenceText(activity, pref, dir, R.string.pref_root_desc);
+    			FileSystem.setRootDirectory(null, dir);
+    			Main.refreshCartridges();
+    		}
+    	}
     }
   }
 }

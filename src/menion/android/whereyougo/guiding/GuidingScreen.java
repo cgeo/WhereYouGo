@@ -19,8 +19,14 @@
 
 package menion.android.whereyougo.guiding;
 
+import java.util.Vector;
+
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.Zone;
 import locus.api.objects.extra.Location;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.Details;
+import menion.android.whereyougo.gui.Refreshable;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.sensors.OrientationListener;
@@ -35,12 +41,13 @@ import android.widget.TextView;
  * @author menion
  * @since 25.1.2010 2010
  */
-public class GuidingScreen extends CustomActivity implements GuidingListener, OrientationListener {
+public class GuidingScreen extends CustomActivity implements GuidingListener, OrientationListener, Refreshable {
 
 //	private static final String TAG = "GuidingScreen";
 	
 	private CompassView viewCompass;
 	
+	private TextView viewName;
 	private TextView viewLat;
 	private TextView viewLon;
 	private TextView viewAlt;
@@ -70,6 +77,7 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
         ((LinearLayout) findViewById(R.id.linearLayoutCompass)).addView(
         		viewCompass, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
         
+        viewName = (TextView) findViewById(R.id.textViewName);
 		viewAlt = (TextView) findViewById(R.id.textViewAltitude);
         viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
         viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
@@ -95,6 +103,7 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 	@Override
 	public void receiveGuideEvent(Guide guide, String targetName, float azimuthToTarget,
 			double distanceToTarget) {
+		this.viewName.setText(targetName);
 		this.azimuthToTarget = azimuthToTarget;
        	viewCompass.setDistance(distanceToTarget);
        	if (LocationState.getLocation().getSpeed() > 1) {
@@ -138,5 +147,24 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 	@Override
 	public void trackGuideCallRecalculate() {
 		// ignore
+	}
+	
+	@Override
+	public void refresh() {
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// refresh target position
+				Location l = A.getGuidingContent().getTargetWaypoint().getLocation();
+				for (Zone z : (Vector<Zone>) Engine.instance.cartridge.zones) {
+					if(Details.et == z){
+						l.latitude = z.nearestPoint.latitude;
+						l.longitude = z.nearestPoint.longitude;
+					}
+				}
+				//A.getGuidingContent().getGuide().actualizeState(LocationState.getLocation());
+			}
+		});
 	}
 }

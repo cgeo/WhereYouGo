@@ -19,6 +19,9 @@
 
 package menion.android.whereyougo.gui.extension;
 
+import org.mapsforge.applications.android.advancedmapviewer.filepicker.FilePicker;
+import org.mapsforge.applications.android.advancedmapviewer.filefilter.*;
+
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.SettingItems;
 import menion.android.whereyougo.utils.A;
@@ -195,6 +198,26 @@ public abstract class CustomPreferenceActivity extends PreferenceActivity {
 			preference.setOnPreferenceChangeListener(preferenceChangeLis);
 		category.addPreference(preference);
 		return preference;
+	}
+	
+	public Preference addFilePreference(PreferenceCategory category,
+			int name, int desc, String key, String def, final String filter, final int code) {
+		Preference preference = new Preference(this);
+        preference.setTitle(name);
+        preference.setSummary(desc);
+        preference.setKey(key);
+        preference.setDefaultValue(def);
+        preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				FilePicker.setFileDisplayFilter(new FilterByFileExtension(filter));
+				startActivityForResult(new Intent(CustomPreferenceActivity.this, FilePicker.class),	code);
+				return false;
+			}
+		});
+        category.addPreference(preference);
+        return preference;
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

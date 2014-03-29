@@ -61,6 +61,7 @@ public class SettingScreens extends CustomPreferenceActivity {
     PreferenceCategory prefCatGlobal =
         addNewPreferenceCategory(activity, R.string.pref_global, preferenceScreen);
 
+    SettingItems.addPrefRoot(activity, prefCatGlobal);
     SettingItems.addPrefMapProvider(activity, prefCatGlobal);
     SettingItems.addPrefStatusbar(activity, prefCatGlobal);
     SettingItems.addPrefFullscreen(activity, prefCatGlobal);

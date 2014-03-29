@@ -25,8 +25,6 @@ import java.util.Vector;
 
 import locus.api.android.ActionDisplay.ExtraAction;
 import locus.api.android.ActionDisplayPoints;
-import locus.api.android.objects.PackWaypoints;
-import locus.api.objects.extra.ExtraData;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.gui.dialogs.DialogChooseCartridge;
@@ -36,19 +34,16 @@ import menion.android.whereyougo.gui.extension.MainApplication;
 import menion.android.whereyougo.gui.extension.UtilsGUI;
 import menion.android.whereyougo.gui.location.SatelliteScreen;
 import menion.android.whereyougo.guiding.GuidingScreen;
+import menion.android.whereyougo.maps.LocusMapDataProvider;
+import menion.android.whereyougo.maps.VectorMapDataProvider;
 import menion.android.whereyougo.settings.Loc;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.settings.UtilsSettings;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.Utils;
-
-import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
-import org.mapsforge.applications.android.advancedmapviewer.container.PackMapPoints;
 
 import android.app.Activity;
 import android.app.NotificationManager;
@@ -152,59 +147,24 @@ public class Main extends CustomMain {
         break;
     }
   }
-
+  
   private void vectorMap() {
-    ArrayList<MapPoint> pts = new ArrayList<MapPoint>();
-    // complete waypoints data
-    for (CartridgeFile cartridge : cartridgeFiles) {
-      // do not show waypoints that are "Play anywhere" (with zero
-      // coordinates)
-      if (cartridge.latitude % 360.0 == 0 && cartridge.longitude % 360.0 == 0) {
-        continue;
-      }
-      // construct waypoint
-      MapPoint pt = new MapPoint(cartridge.name, cartridge.latitude, cartridge.longitude);
-      pts.add(pt);
-    }
-
-    PackMapPoints pack = new PackMapPoints(pts, false, R.drawable.icon_gc_wherigo);
-    ArrayList<PackMapPoints> packs = new ArrayList<PackMapPoints>();
-    packs.add(pack);
-
-    Intent intent =
-        new Intent(this,
-            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-    intent.putParcelableArrayListExtra("packs", packs);
-    startActivity(intent);
+	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+	  mdp.clear();
+	  mdp.addCartridges(cartridgeFiles);
+	  Main.wui.showScreen(WUI.SCREEN_MAP, null);
   }
-
+  
   private void locusMap() {
-    // complete waypoints data
-    PackWaypoints pack = new PackWaypoints("WhereYouGo");
-    Bitmap b = Images.getImageB(R.drawable.ic_title_logo, (int) Utils.getDpPixels(24.0f));
-    pack.setBitmap(b);
-    for (CartridgeFile cartridge : cartridgeFiles) {
-      // do not show waypoints that are "Play anywhere" (with zero
-      // coordinates)
-      if (cartridge.latitude % 360.0 == 0 && cartridge.longitude % 360.0 == 0) {
-        continue;
-      }
+	  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
+	  mdp.clear();
+	  mdp.addCartridges(cartridgeFiles);
 
-      // construct waypoint
-      Location loc = new Location(TAG);
-      loc.setLatitude(cartridge.latitude);
-      loc.setLongitude(cartridge.longitude);
-      Waypoint wpt = new Waypoint(cartridge.name, loc);
-      wpt.addParameter(ExtraData.PAR_DESCRIPTION, cartridge.description);
-      wpt.addUrl(cartridge.url);
-      pack.addWaypoint(wpt);
-    }
-
-    try {
-      ActionDisplayPoints.sendPack(this, pack, ExtraAction.NONE);
-    } catch (Exception e) {
-      Logger.e(TAG, "clickMap() locusMap()", e);
-    }
+		try {
+		  ActionDisplayPoints.sendPack(this, mdp.getPoints(), ExtraAction.NONE);
+		} catch (Exception e) {
+		  Logger.e(TAG, "clickMap() locusMap()", e);
+		}
   }
 
   private boolean isAnyCartridgeAvailable() {
@@ -272,7 +232,7 @@ public class Main extends CustomMain {
     iv.setImageBitmap(i);
   }
 
-  private void refreshCartridges() {
+  public static void refreshCartridges() {
     Logger.w(TAG, "refreshCartridges(), " + (Main.selectedFile == null));
     if (Main.selectedFile != null)
       return;

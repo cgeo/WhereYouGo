@@ -106,7 +106,7 @@ public class FileSystem {
 		return false;
     }
     
-    private static boolean setRootDirectory(String cardRoot, String appRoot) {
+    public static boolean setRootDirectory(String cardRoot, String appRoot) {
 		if (!appRoot.endsWith("/"))
 			appRoot += "/";
 		

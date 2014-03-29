@@ -17,6 +17,7 @@
 
 package menion.android.whereyougo.settings;
 
+import static menion.android.whereyougo.settings.Settings.DEFAULT_ROOT;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_FULLSCREEN;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_GPS_BEEP_ON_GPS_FIX;
@@ -38,6 +39,7 @@ import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_ANGLE;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_COO_LATLON;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_LENGTH;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_SPEED;
+import static menion.android.whereyougo.settings.Settings.KEY_S_ROOT;
 import static menion.android.whereyougo.settings.Settings.KEY_B_FULLSCREEN;
 import static menion.android.whereyougo.settings.Settings.KEY_B_GPS_BEEP_ON_GPS_FIX;
 import static menion.android.whereyougo.settings.Settings.KEY_B_GUIDING_COMPASS_SOUNDS;
@@ -81,6 +83,8 @@ public class SettingValues {
   /** speed format */
   public static int FORMAT_SPEED;
 
+  /** root directory */
+  public static String GLOBAL_ROOT;
   /** map provider option */
   public static int GLOBAL_MAP_PROVIDER;
   /** is status icon enabled */
@@ -122,6 +126,7 @@ public class SettingValues {
 
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
+    GLOBAL_ROOT = getPrefString(c, KEY_S_ROOT, DEFAULT_ROOT);
     GLOBAL_MAP_PROVIDER =
         Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
     GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);

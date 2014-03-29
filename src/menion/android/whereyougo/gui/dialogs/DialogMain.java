@@ -32,7 +32,7 @@ public class DialogMain extends DialogFragmentEx {
     buffer
         .append(getString(R.string.web_page)
             + "<br />&nbsp;&nbsp;<b><a href=\"http://forum.asamm.cz\">http://forum.asamm.cz</a></b><br /><br />");
-    buffer.append("Úpravy:");
+    buffer.append("Vektorové mapy a další úpravy:");
     buffer.append("<br />&nbsp;&nbsp;<b>biylda</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;biylda@gmail.com<br /><br />");
     buffer.append(getString(R.string.libraries));

@@ -56,6 +56,7 @@ public class WUI implements UI {
   public static final int SCREEN_CART_DETAIL = 11;
   public static final int SCREEN_ACTIONS = 12;
   public static final int SCREEN_TARGETS = 13;
+  public static final int SCREEN_MAP = 14;
 
   public static boolean saving = false;
 
@@ -167,24 +168,24 @@ public class WUI implements UI {
         return;
       case INVENTORYSCREEN:
         Intent intent04 = new Intent(activity, ListThings.class);
-        intent04.putExtra("title", "Inventory");
+        intent04.putExtra("title", A.getApp().getResources().getString(R.string.inventory));
         intent04.putExtra("mode", ListThings.INVENTORY);
         activity.startActivity(intent04);
         return;
       case ITEMSCREEN:
         Intent intent05 = new Intent(activity, ListThings.class);
-        intent05.putExtra("title", "You see");
+        intent05.putExtra("title", A.getApp().getResources().getString(R.string.you_see));
         intent05.putExtra("mode", ListThings.SURROUNDINGS);
         activity.startActivity(intent05);
         return;
       case LOCATIONSCREEN:
         Intent intent06 = new Intent(activity, ListZones.class);
-        intent06.putExtra("title", "Locations");
+        intent06.putExtra("title", A.getApp().getResources().getString(R.string.locations));
         activity.startActivity(intent06);
         return;
       case TASKSCREEN:
         Intent intent07 = new Intent(activity, ListTasks.class);
-        intent07.putExtra("title", "Tasks");
+        intent07.putExtra("title", A.getApp().getResources().getString(R.string.tasks));
         activity.startActivity(intent07);
         return;
       case SCREEN_ACTIONS:
@@ -199,6 +200,11 @@ public class WUI implements UI {
           intent10.putExtra("title", details.name);
         activity.startActivity(intent10);
         return;
+      case SCREEN_MAP:
+    	  Intent intent11 =
+	        new Intent(activity,
+	            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+    	  activity.startActivity(intent11);
     }
 
     closeActivity(activity);
@@ -234,12 +240,12 @@ public class WUI implements UI {
   }
 
   private static CustomActivity getParentActivity() {
-    CustomActivity activity = (CustomActivity) Settings.getCurrentActivity();
+    Activity activity = Settings.getCurrentActivity();
 
-    if (activity == null)
+    if (activity == null || !(activity instanceof CustomActivity))
       activity = (CustomActivity) A.getMain();
 
-    return activity;
+    return (CustomActivity)activity;
   }
 
   private static void closeActivity(Activity activity) {

@@ -23,6 +23,10 @@ import java.util.Date;
 import java.util.List;
 
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.Refreshable;
+import menion.android.whereyougo.gui.extension.MainApplication;
+import menion.android.whereyougo.maps.VectorMapDataProvider;
+import menion.android.whereyougo.settings.Settings;
 
 import org.mapsforge.android.AndroidUtils;
 import org.mapsforge.android.maps.DebugSettings;
@@ -40,7 +44,7 @@ import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.PolygonalChain;
 import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
-import org.mapsforge.applications.android.advancedmapviewer.container.PackMapPoints;
+import org.mapsforge.applications.android.advancedmapviewer.container.MapPointPack;
 import org.mapsforge.applications.android.advancedmapviewer.extension.CaptionMarker;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.FilterByFileExtension;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.ValidMapFile;
@@ -63,6 +67,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
@@ -89,7 +94,7 @@ import android.widget.ToggleButton;
  * preferences can be adjusted via the {@link EditPreferences} activity and screenshots of the map
  * may be taken in different image formats.
  */
-public class AdvancedMapViewer extends MapActivity {
+public class AdvancedMapViewer extends MapActivity implements Refreshable{
   /**
    * The default number of tiles in the file system cache.
    */
@@ -128,6 +133,7 @@ public class AdvancedMapViewer extends MapActivity {
   private ToggleButton snapToLocationView;
   private WakeLock wakeLock;
   MapView mapView;
+  private double itemsLatitude, itemsLongitude;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -357,45 +363,23 @@ public class AdvancedMapViewer extends MapActivity {
 
 
     this.listOverlay = new ListOverlay();
-
+    
     /* add items received via Intent */
-    List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
     Bundle bundle = getIntent().getExtras();
-    if (bundle.containsKey("packs")) {
-      float longitude = 0, latitude = 0;
-      int count = 0;
-      ArrayList<PackMapPoints> packs = bundle.getParcelableArrayList("packs");
-      for (PackMapPoints pack : packs) {
-        if (pack.isPolygon()) {
-          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
-          for (MapPoint mp : pack.getPoints()) {
-            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-            geoPoints.add(geoPoint);
-          }
-          overlayItems.add(createPolyline(geoPoints));
-        } else {
-          Drawable icon =
-              getResources().getDrawable(
-                  pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
-          icon = Marker.boundCenterBottom(icon);
-          for (MapPoint mp : pack.getPoints()) {
-            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-            overlayItems.add(new CaptionMarker(geoPoint, icon, mp.getName()));
-            latitude += mp.getLatitude();
-            longitude += mp.getLongitude();
-            ++count;
-          }
-        }
-      }
-      if (bundle.getBoolean("center", false) && count > 0) {
-        GeoPoint geoPoint = new GeoPoint(latitude/count, longitude/count);
+    if (bundle != null && bundle.containsKey("items")) {
+      ArrayList<MapPointPack> items = bundle.getParcelableArrayList("items");
+      showMapPack(items);
+    }else{
+    	showMapPack(VectorMapDataProvider.getInstance().getItems());
+    }
+    if (bundle != null && bundle.getBoolean("center", false) && itemsLatitude != 0 && itemsLongitude != 0) {
+        GeoPoint geoPoint = new GeoPoint(itemsLatitude, itemsLongitude);
         MapPosition newMapPosition =
             new MapPosition(geoPoint, mapView.getMapViewPosition().getZoomLevel());
         mapView.getMapViewPosition().setMapPosition(newMapPosition);
       }
-    }
-    mapView.getOverlays().add(listOverlay);
     /* end of adding items */
+    mapView.getOverlays().add(listOverlay);
 
     Drawable drawable =
         getResources().getDrawable(R.drawable.ic_maps_indicator_current_position_anim1);
@@ -412,7 +396,44 @@ public class AdvancedMapViewer extends MapActivity {
         enableSnapToLocation(false);
       }
     }
-
+  }
+  
+  private void showMapPack(ArrayList<MapPointPack> packs){
+	  itemsLatitude = itemsLongitude = 0;
+	  int count = 0;
+	  List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+	  overlayItems.clear();
+	  for (MapPointPack pack : packs) {
+	        if (pack.isPolygon()) {
+	          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+	          for (MapPoint mp : pack.getPoints()) {
+	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+	            geoPoints.add(geoPoint);
+	          }
+	          overlayItems.add(createPolyline(geoPoints));
+	        } else {
+	          Drawable icon = null;
+	          if(pack.getIcon() == null){
+		          icon =
+		              getResources().getDrawable(
+		                  pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
+	          }else{
+	        	  icon = new BitmapDrawable(getResources(), pack.getIcon());
+	          }
+	          icon = Marker.boundCenterBottom(icon);
+	          for (MapPoint mp : pack.getPoints()) {
+	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+	            overlayItems.add(new CaptionMarker(geoPoint, icon, mp.getName()));
+	            itemsLatitude += mp.getLatitude();
+	            itemsLongitude += mp.getLongitude();
+	            ++count;
+	          }
+	        }
+	      }
+	  if(count > 0){
+		  itemsLatitude /= count;
+		  itemsLongitude /= count;
+	  }
   }
 
   private Circle createCircle(GeoPoint geoPoint) {
@@ -511,6 +532,12 @@ public class AdvancedMapViewer extends MapActivity {
     if (this.wakeLock.isHeld()) {
       this.wakeLock.release();
     }
+    
+    if (Settings.getCurrentActivity() == this) {
+        Settings.setCurrentActivity(null);
+    }
+    // disable location
+    MainApplication.onActivityPause();
   }
 
   @Deprecated
@@ -668,6 +695,8 @@ public class AdvancedMapViewer extends MapActivity {
 			// file not found, using internal Osmarenderer
 		}
 	}
+	
+	Settings.setCurrentActivity(this);
   }
 
   @Override
@@ -732,4 +761,19 @@ public class AdvancedMapViewer extends MapActivity {
       });
     }
   }
+
+	@Override
+	public void refresh() {
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+				mdp.clear();
+				mdp.addZones();
+				showMapPack(mdp.getItems());
+				mapView.redraw();
+			}
+		});
+	}
 }

@@ -87,7 +87,7 @@ public class MainApplication extends Application {
             getBaseContext().getResources().updateConfiguration(config,
             		getBaseContext().getResources().getDisplayMetrics());
         }
-        
+
         // initialize core
         initCore();
     }
@@ -128,11 +128,13 @@ public class MainApplication extends Application {
 		filter.addAction(Intent.ACTION_SCREEN_OFF);
 		mScreenReceiver = new ScreenReceiver();
 		registerReceiver(mScreenReceiver, filter);
-		
-    	// initialize root directory
-		FileSystem.createRoot(APP_NAME);
+    	
 		// set basic settings values
 		SettingValues.init(this);
+		// initialize root directory
+		if(SettingValues.GLOBAL_ROOT.equals(Settings.DEFAULT_ROOT)
+				|| !FileSystem.setRootDirectory(null, SettingValues.GLOBAL_ROOT))
+			FileSystem.createRoot(APP_NAME);
 		// set location state
 		LocationState.init(this);
     	// initialize DPI
