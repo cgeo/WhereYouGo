@@ -67,10 +67,6 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		if(Engine.instance == null){
-			finish();
-			return;
-		}
         setContentView(R.layout.layout_guiding_screen);
         
         mAzimuth = 0.0f;
