@@ -48,6 +48,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Player;
 import cz.matejcik.openwig.Task;
@@ -62,7 +63,10 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+	if(Engine.instance == null){
+		finish();
+		return;
+	}
     setContentView(R.layout.custom_dialog);
 
     listClick = new AdapterView.OnItemClickListener() {
@@ -105,7 +109,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 						startActivity(intent);
 						return true;
 					}
-				}, null, null,
+				},
 				getString(R.string.map),
 				new CustomDialog.OnClickListener() {
 					@Override
@@ -118,6 +122,15 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 							locusMap();
 							break;
 						}
+						return true;
+					}
+				},
+				getString(R.string.save_game),
+				new CustomDialog.OnClickListener() {
+					@Override
+					public boolean onClick(CustomDialog dialog, View v, int btn) {
+						Engine.requestSync();
+						Toast.makeText(CartridgeMainMenu.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
 						return true;
 					}
 				});
@@ -177,6 +190,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
             public void onClick(DialogInterface dialog, int which) {
               Engine.requestSync();
               Main.selectedFile = null;
+              Details.et = null;
               new SaveGameOnExit().execute();
             }
           }, new DialogInterface.OnClickListener() {
@@ -185,6 +199,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
             public void onClick(DialogInterface dialog, int which) {
               Engine.kill();
               Main.selectedFile = null;
+              Details.et = null;
               CartridgeMainMenu.this.finish();
             }
           }, null);
@@ -369,7 +384,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
   private void vectorMap() {
 	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
 	  mdp.clear();
-	  mdp.addZones();
+	  mdp.addAll();
 	  Main.wui.showScreen(WUI.SCREEN_MAP, null);
 	  /*Intent intent =
 		        new Intent(this,
@@ -381,7 +396,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 	private void locusMap() {
 		  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
 		  mdp.clear();
-		  mdp.addZones();
+		  mdp.addAll();
 		try {
 				ActionDisplayTracks.sendTracks(this, mdp.getTracks(),
 						ExtraAction.CENTER);

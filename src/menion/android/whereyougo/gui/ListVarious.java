@@ -183,7 +183,12 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		// kill when GC has cleaned engine instance
+		// this code must be implemented in the last onCreate method in inheritance chain
+		if(Engine.instance == null){
+			finish();
+			return;
+		}
 		// set layout
 		setContentView(R.layout.custom_dialog);
 

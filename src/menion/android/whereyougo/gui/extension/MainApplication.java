@@ -24,6 +24,11 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cz.matejcik.openwig.Engine;
+
+import menion.android.whereyougo.Main;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.CartridgeMainMenu;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
@@ -40,6 +45,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MainApplication extends Application {
 
@@ -202,4 +208,17 @@ public class MainApplication extends Application {
     	public void onAppRestored();
     	
     }
+
+	@Override
+	public void onTrimMemory(int level) {
+		// TODO Auto-generated method stub
+		super.onTrimMemory(level);
+		Logger.i(TAG, String.format("onTrimMemory(%d)", level));
+		if(SettingValues.GLOBAL_SAVEGAME_AUTO
+				&& level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
+				&& Main.selectedFile != null && Engine.instance != null){
+			Engine.requestSync();
+			Toast.makeText(this, R.string.save_game_auto, Toast.LENGTH_SHORT).show();
+		}
+	}
 }

@@ -58,7 +58,10 @@
     <string name="resume_previous_cartridge">Načíst uloženou pozici?</string>
     <string name="roll">Náklon</string>
     <string name="satellites">Satelity</string>
+    <string name="save_game">Uložit hru</string>
+    <string name="save_game_auto">Hra automaticky uložena</string>
     <string name="save_game_before_exit">Uložit hru před ukončením?</string>
+    <string name="save_game_ok">Hra uložena</string>
     <string name="settings">Nastavení</string>
     <string name="speed">Rychlost</string>
     <string name="start">Start</string>

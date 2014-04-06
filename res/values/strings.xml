@@ -58,7 +58,10 @@
     <string name="resume_previous_cartridge">Resume previous cartridge?</string>
     <string name="roll">Roll</string>
     <string name="satellites">Satellites</string>
+    <string name="save_game">Save game</string>
+    <string name="save_game_auto">Game saved automatically</string>
     <string name="save_game_before_exit">Save game before exit?</string>
+    <string name="save_game_ok">Game saved</string>
     <string name="settings">Settings</string>
     <string name="speed">Speed</string>
     <string name="start">Start</string>

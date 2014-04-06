@@ -157,7 +157,7 @@ public class CompassView extends View {
     		
    		c.drawText(Loc.get(R.string.azimuth),
    				cX1, cY1 + paintValueLabel.getTextSize() + space, paintValueLabel);
-   		c.drawText(UtilsFormat.formatAngle(mAzimuth),
+   		c.drawText(UtilsFormat.formatAngle(mAzimuthToTarget),
    				cX1, cY1 + paintValueLabel.getTextSize() + 
    				paintValueAzimuth.getTextSize() + space, paintValueAzimuth);
     }

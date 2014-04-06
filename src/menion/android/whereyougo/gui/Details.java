@@ -78,7 +78,10 @@ public class Details extends CustomActivity implements Refreshable,
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		if(Engine.instance == null){
+			finish();
+			return;
+		}
 		setContentView(R.layout.layout_details);
 	}
 
@@ -370,14 +373,14 @@ public class Details extends CustomActivity implements Refreshable,
 	private void vectorMap() {
 		  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
 		  mdp.clear();
-		  mdp.addZones();
+		  mdp.addAll();
 		  Main.wui.showScreen(WUI.SCREEN_MAP, null);
 	}
 
 	private void locusMap() {
 	  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
 	  mdp.clear();
-	  mdp.addZones();
+	  mdp.addAll();
 	  Waypoint wpt = locusMapWaypoint(et);
 		try {
 				ActionDisplayTracks.sendTracks(this, mdp.getTracks(),

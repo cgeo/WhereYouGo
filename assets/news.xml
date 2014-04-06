@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.3" id="29" time="6.4.2014">
+    <li>fixed: application was crashing when user switched back from another application</li>
+    <li>fixed: compass displays azimuth value</li>
+    <li>added: save game button</li>
+    <li>added: option to save game automatically</li>
+    <li>added: compass and maps can handle other visible things than zones</li>
+  </update>
+    
   <update name="0.8.2" id="28" time="29.3.2014">
     <li>choose WhereYouGo folder</li>
     <li>vector maps can handle moving zones</li>

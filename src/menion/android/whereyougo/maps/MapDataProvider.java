@@ -12,7 +12,7 @@ public interface MapDataProvider {
 
 	void addCartridges(Vector<CartridgeFile> cartridges);
 
-	void addZones();
+	void addAll();
 
 	void addZones(Vector<Zone> zones);
 

@@ -22,8 +22,10 @@ package menion.android.whereyougo.guiding;
 import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.Details;
 import menion.android.whereyougo.gui.Refreshable;
@@ -65,6 +67,10 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		if(Engine.instance == null){
+			finish();
+			return;
+		}
         setContentView(R.layout.layout_guiding_screen);
         
         mAzimuth = 0.0f;
@@ -156,14 +162,21 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 			@Override
 			public void run() {
 				// refresh target position
-				Location l = A.getGuidingContent().getTargetWaypoint().getLocation();
-				for (Zone z : (Vector<Zone>) Engine.instance.cartridge.zones) {
-					if(Details.et == z){
-						l.latitude = z.nearestPoint.latitude;
-						l.longitude = z.nearestPoint.longitude;
-					}
+				EventTable et = Details.et;
+				if(et == null || !et.isLocated() || !et.isVisible())
+					return;
+				Waypoint w = A.getGuidingContent().getTargetWaypoint();
+				Location l = w.getLocation();
+				w.setName(et.name);
+				if(Details.et instanceof Zone){
+					Zone z = (Zone) Details.et;
+					l.setLatitude(z.nearestPoint.latitude);
+					l.setLongitude(z.nearestPoint.longitude);
+				}else{
+					l.setLatitude(et.position.latitude);
+					l.setLongitude(et.position.longitude);
 				}
-				//A.getGuidingContent().getGuide().actualizeState(LocationState.getLocation());
+				A.getGuidingContent().onTargetChanged();
 			}
 		});
 	}

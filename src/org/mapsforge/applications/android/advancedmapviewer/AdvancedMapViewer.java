@@ -770,7 +770,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 			public void run() {
 				VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
 				mdp.clear();
-				mdp.addZones();
+				mdp.addAll();
 				showMapPack(mdp.getItems());
 				mapView.redraw();
 			}

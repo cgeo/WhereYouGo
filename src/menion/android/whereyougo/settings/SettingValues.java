@@ -31,6 +31,7 @@ import static menion.android.whereyougo.settings.Settings.DEFAULT_HARDWARE_COMPA
 import static menion.android.whereyougo.settings.Settings.DEFAULT_HARDWARE_COMPASS_SENSOR;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_HIGHLIGHT;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_MAP_PROVIDER;
+import static menion.android.whereyougo.settings.Settings.DEFAULT_SAVEGAME_AUTO;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_SENSORS_BEARING_TRUE;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_SENSORS_ORIENT_FILTER;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_STATUSBAR;
@@ -46,6 +47,7 @@ import static menion.android.whereyougo.settings.Settings.KEY_B_GUIDING_COMPASS_
 import static menion.android.whereyougo.settings.Settings.KEY_B_GUIDING_GPS_REQUIRED;
 import static menion.android.whereyougo.settings.Settings.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE;
 import static menion.android.whereyougo.settings.Settings.KEY_B_HARDWARE_COMPASS_SENSOR;
+import static menion.android.whereyougo.settings.Settings.KEY_B_SAVEGAME_AUTO;
 import static menion.android.whereyougo.settings.Settings.KEY_B_SENSORS_BEARING_TRUE;
 import static menion.android.whereyougo.settings.Settings.KEY_B_STATUSBAR;
 import static menion.android.whereyougo.settings.Settings.KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION;
@@ -87,6 +89,8 @@ public class SettingValues {
   public static String GLOBAL_ROOT;
   /** map provider option */
   public static int GLOBAL_MAP_PROVIDER;
+  /** save game automatically option */
+  public static boolean GLOBAL_SAVEGAME_AUTO;
   /** is status icon enabled */
   public static boolean GLOBAL_STATUSBAR;
   /** is fullscreen enabled */
@@ -129,6 +133,7 @@ public class SettingValues {
     GLOBAL_ROOT = getPrefString(c, KEY_S_ROOT, DEFAULT_ROOT);
     GLOBAL_MAP_PROVIDER =
         Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
+    GLOBAL_SAVEGAME_AUTO = getPrefBoolean(c, KEY_B_SAVEGAME_AUTO, DEFAULT_SAVEGAME_AUTO);
     GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
     GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
     GLOBAL_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT, DEFAULT_HIGHLIGHT));

@@ -40,6 +40,9 @@ public class GuidingContent implements LocationEventListener {
 	
 	/** actual navigator */
     private Guide mGuide;
+    
+    /** last location */
+    private Location mLocation;
 	
 	/** name of target */
 	private String mTargetName;
@@ -132,8 +135,27 @@ public class GuidingContent implements LocationEventListener {
 			mTargetName = mGuide.getTargetName();
 			mAzimuthToTarget = mGuide.getAzimuthToTaget();
 			mDistanceToTarget = mGuide.getDistanceToTarget();
+			
+			mLocation = location;
 		} else {
 			mTargetName = null;
+			mAzimuthToTarget = 0.0f;
+			mDistanceToTarget = 0.0f;
+		}
+		
+		for (GuidingListener list : listeners) {
+			list.receiveGuideEvent(mGuide, mTargetName, mAzimuthToTarget, mDistanceToTarget);
+		}
+	}
+	
+	public void onTargetChanged() {
+		//Logger.d(TAG, "onTargetChanged(" + location + ")");
+		mTargetName = mGuide == null ? null : mGuide.getTargetName();
+		if (mGuide != null && mLocation != null) {
+			mGuide.actualizeState(mLocation);
+			mAzimuthToTarget = mGuide.getAzimuthToTaget();
+			mDistanceToTarget = mGuide.getDistanceToTarget();
+		} else {
 			mAzimuthToTarget = 0.0f;
 			mDistanceToTarget = 0.0f;
 		}

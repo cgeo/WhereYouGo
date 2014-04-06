@@ -3,6 +3,7 @@ package menion.android.whereyougo.maps;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.Details;
 import menion.android.whereyougo.utils.Images;
@@ -68,8 +69,13 @@ public class VectorMapDataProvider implements MapDataProvider {
 		items.add(pack);
 	}
 
-	public void addZones() {
+	public void addAll() {
+		Vector<CartridgeFile> v = new Vector<CartridgeFile>();
+		v.add(Main.cartridgeFile);
+		addCartridges(v);
 		addZones((Vector<Zone>) Engine.instance.cartridge.zones, Details.et);
+		if(Details.et != null && !(Details.et instanceof Zone))
+			addOther(Details.et, true);
 	}
 
 	public void addZones(Vector<Zone> zones) {

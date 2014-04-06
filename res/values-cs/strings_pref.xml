@@ -64,6 +64,8 @@
     <string name="pref_language_sk">Slovenština</string>
     <string name="pref_locale">Lokalizace</string>
     <string name="pref_orientation">Orientace</string>
+    <string name="pref_save_game_auto">Automaticky ukládat hru</string>
+    <string name="pref_save_game_auto_desc">Hra bude automaticky uložena při přepnutí na jinou aplikaci.</string>
     <string name="pref_sensors">Senzory</string>
     <string name="pref_sensors_compass_auto_change">Automatická změna</string>
     <string name="pref_sensors_compass_auto_change_desc">Využití zdroje orientace definovaného "Použijte hardware kompas" pro nízké rychlosti. Pro vysoké rychlosti bude použit azimut z GPS</string>

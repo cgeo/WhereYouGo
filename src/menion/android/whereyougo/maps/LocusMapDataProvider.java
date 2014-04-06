@@ -11,6 +11,7 @@ import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
+import menion.android.whereyougo.Main;
 import menion.android.whereyougo.gui.Details;
 import android.graphics.Color;
 import cz.matejcik.openwig.Engine;
@@ -70,10 +71,13 @@ public class LocusMapDataProvider implements MapDataProvider {
 	    }
 	}
 
-	public void addZones() {
-		addZones((Vector<Zone>) Engine.instance.cartridge.zones,
-				(Zone) Details.et);
-		addOther((Zone) Details.et, true);
+	public void addAll() {
+		Vector<CartridgeFile> v = new Vector<CartridgeFile>();
+		v.add(Main.cartridgeFile);
+		addCartridges(v);
+		addZones((Vector<Zone>) Engine.instance.cartridge.zones, Details.et);
+		if(Details.et != null && !(Details.et instanceof Zone))
+			addOther(Details.et, true);
 	}
 	
 	public void addZones(Vector<Zone> zones) {

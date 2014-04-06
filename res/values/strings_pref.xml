@@ -65,6 +65,8 @@
     <string name="pref_language_sk">Slovak</string>
     <string name="pref_locale">Localization</string>
     <string name="pref_orientation">Orientation</string>
+    <string name="pref_save_game_auto">Save game automatically</string>
+    <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
     <string name="pref_sensors">Sensors</string>
     <string name="pref_sensors_compass_auto_change">Auto change</string>
     <string name="pref_sensors_compass_auto_change_desc">Use source for bearing defined by "Use hardware compass" settings for low speed. For high speed use bearing from GPS</string>

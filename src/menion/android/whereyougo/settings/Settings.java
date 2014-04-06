@@ -67,6 +67,9 @@ public class Settings {
   public static final int VALUE_HIGHLIGHT_ONLY_GPS = 1;
   public static final int VALUE_HIGHLIGHT_ALWAYS = 2;
   public static final String DEFAULT_HIGHLIGHT = String.valueOf(VALUE_HIGHLIGHT_OFF);
+  /** save game automatically when user switches to another application */
+  public static final String KEY_B_SAVEGAME_AUTO = "KEY_B_SAVEGAME_AUTO";
+  public static final boolean DEFAULT_SAVEGAME_AUTO = true;
 
   // GENERAL
   /** default language */

@@ -63,6 +63,7 @@ public class SettingScreens extends CustomPreferenceActivity {
 
     SettingItems.addPrefRoot(activity, prefCatGlobal);
     SettingItems.addPrefMapProvider(activity, prefCatGlobal);
+    SettingItems.addPrefSavegameAuto(activity, prefCatGlobal);
     SettingItems.addPrefStatusbar(activity, prefCatGlobal);
     SettingItems.addPrefFullscreen(activity, prefCatGlobal);
     SettingItems.addPrefHighlight(activity, prefCatGlobal);

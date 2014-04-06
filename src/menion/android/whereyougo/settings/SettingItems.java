@@ -108,12 +108,24 @@ public class SettingItems {
                 SettingValues.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
                 setListPreference(activity, (ListPreference) pref,
                     SettingValues.GLOBAL_MAP_PROVIDER, R.string.pref_map_provider_desc);
-                Settings.enableWakeLock();
                 return true;
               }
             });
     setListPreference(activity, (ListPreference) pref, SettingValues.GLOBAL_MAP_PROVIDER,
         R.string.pref_map_provider_desc);
+  }
+  
+  public static void addPrefSavegameAuto(CustomPreferenceActivity activity,
+	      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_save_game_auto,
+        R.string.pref_save_game_auto_desc, Settings.KEY_B_SAVEGAME_AUTO, Settings.DEFAULT_SAVEGAME_AUTO,
+        new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+        	SettingValues.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
+        	return true;
+          }
+        });
   }
 
   public static void addPrefStatusbar(CustomPreferenceActivity activity, PreferenceCategory category) {
@@ -122,17 +134,10 @@ public class SettingItems {
         new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-            setPrefStatusbar(false, Utils.parseBoolean(newValue));
+        	SettingValues.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
             return true;
           }
         });
-  }
-
-  public static void setPrefStatusbar(boolean saveToPref, boolean value) {
-    if (saveToPref) {
-      Settings.setPrefBoolean(Settings.KEY_B_STATUSBAR, value);
-    }
-    SettingValues.GLOBAL_STATUSBAR = value;
   }
 
   public static void addPrefFullscreen(CustomPreferenceActivity activity,
@@ -142,17 +147,10 @@ public class SettingItems {
         new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-            setPrefFullscreen(false, Utils.parseBoolean(newValue));
+        	SettingValues.GLOBAL_FULLSCREEN = Utils.parseBoolean(newValue);
             return true;
           }
         });
-  }
-
-  public static void setPrefFullscreen(boolean saveToPref, boolean value) {
-    if (saveToPref) {
-      Settings.setPrefBoolean(Settings.KEY_B_FULLSCREEN, value);
-    }
-    SettingValues.GLOBAL_FULLSCREEN = value;
   }
 
   public static void addPrefConfirmOnExit(CustomPreferenceActivity activity,
