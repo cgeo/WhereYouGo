@@ -37,6 +37,7 @@ import menion.android.whereyougo.maps.LocusMapDataProvider;
 import menion.android.whereyougo.maps.VectorMapDataProvider;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import android.app.ProgressDialog;
@@ -63,7 +64,7 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-	if(Engine.instance == null){
+	if(A.getMain() == null || Engine.instance == null){
 		finish();
 		return;
 	}

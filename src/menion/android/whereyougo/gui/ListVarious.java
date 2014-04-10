@@ -30,6 +30,7 @@ import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.hardware.location.LocationState;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
@@ -185,7 +186,7 @@ public abstract class ListVarious extends CustomActivity implements Refreshable 
 		super.onCreate(savedInstanceState);
 		// kill when GC has cleaned engine instance
 		// this code must be implemented in the last onCreate method in inheritance chain
-		if(Engine.instance == null){
+		if(A.getMain() == null || Engine.instance == null){
 			finish();
 			return;
 		}

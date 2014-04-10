@@ -1,0 +1,20 @@
+WhereYouGo ist ein unofficial open-source Klient für Wherigo Geocaching. Es benutzt offline vektor Mappen, oder man kann auch Locus Applikation für Mappen benutzen.
+
+Beachtung:
+- Benutze wherigo Cartridge "Pocket PC Device".
+- Spiel gespeichert im Version 0.6.0 und niedriger ist nicht kompatible mit der aktuelle Version.
+- Version 0.6.0 kann man hier herunterladen: https://android-whereyougo.googlecode.com/files/0.6.0.apk
+
+Funktionen:
+- Wherigo Klient
+- Offline vector Mappen (herunterladen z.B. hier http://download.mapsforge.org/ oder http://osm.paws.cz/)
+- Man kann auch Locus für Mappen benutzen (https://play.google.com/store/apps/details?id=menion.android.locus)
+- Es anzeight Objekte auf der Mappe, inklusive Bildunterschrifte und Zonegrenze
+- Vector Mappen anzeigen auch bewegbare Objekte (Locus nicht)
+- Kompass
+- Keine Werbungen
+
+Über das Projekt:
+Der Kern der Applikation ist auf OpenWIG gegründet, es benutzt MapsForge Bibliothek um offline vektor Mappe zu anzeigen, oder man kan auch Locus benutzen.
+https://code.google.com/p/android-whereyougo/ - original Projekt Seite (enthaltet alte Version)
+https://code.google.com/r/biylda-whereyougo/ - Project Klon (enthaltet aktuelle Version)

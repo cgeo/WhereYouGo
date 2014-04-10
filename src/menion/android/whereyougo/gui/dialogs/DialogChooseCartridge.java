@@ -45,6 +45,9 @@ public class DialogChooseCartridge extends DialogFragmentEx {
 
   @Override
   public Dialog createDialog(Bundle savedInstanceState) {
+	if(A.getMain() == null || cartridgeFiles == null){
+		return null;
+	}
     try {
       // sort cartridges
       final Location actLoc = LocationState.getLocation();

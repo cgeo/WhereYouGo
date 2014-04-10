@@ -29,9 +29,9 @@
     <string name="gps_not_enabled_show_system_settings">GPS nicht aktiviert. Wollen Sie die System-Einstellungen anzeigen?</string>
     <string name="gps_off">GPS aus</string>
     <string name="gps_on">GPS an</string>
-    <string name="choose_cartridge">Choose Cartridge</string>
+    <string name="choose_cartridge">Cartridge auswählen</string>
     <string name="info">Information</string>
-    <string name="invalid_cartridge">Invalid cartridge\n\n %s</string>
+    <string name="invalid_cartridge">Ungültige Cartridge\n\n %s</string>
     <string name="invalid_value">Ungültiger Wert</string>
     <string name="inventory">Inventory</string>
     <string name="latitude">Breitengrad</string>
@@ -46,7 +46,7 @@
     <string name="no_location_providers_available">Keine Standort-Anbieter verfügbar!</string>
     <string name="no_satellites">Keine Satelliten</string>
     <string name="no_target">Kein Ziel!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into\n %1$s directory\n and start %2$s again!</string>
+    <string name="no_wherigo_cartridge_available">Kein Wherigo Cartridge gefunden.\nFügen Sie Cartridgedatei (*.gwc) ins\n %1$s Verzeichnis\n und starten Sie %2$s wieder!</string>
     <string name="not_enough_disk_space_x">Nicht genügend freier Speicherplatz auf SDCard!\n(%1$s, frei:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pending</string>
@@ -55,10 +55,13 @@
     <string name="press_color_to_apply">Wählen Sie eine Farbe</string>
     <string name="problem_with_internet_connection">Problem mit Internet-Anschluss!</string>
     <string name="question">Frage</string>
-    <string name="resume_previous_cartridge">Resume previous cartridge?</string>
+    <string name="resume_previous_cartridge">Wollen Sie das Spiel laden?</string>
     <string name="roll">Neigung</string>
     <string name="satellites">Satelliten</string>
-    <string name="save_game_before_exit">Save game before exit?</string>
+    <string name="save_game">Das Spiel speichern</string>
+    <string name="save_game_auto">Das Spiel wurde automatisch gespeichert.</string>
+    <string name="save_game_before_exit">Wollen Sie das Spiel speichern?</string>
+    <string name="save_game_ok">Das Spiel wurde gespeichert.</string>
     <string name="settings">Einstellungen</string>
     <string name="speed">Geschwindigkeit</string>
     <string name="start">Start</string>
@@ -74,6 +77,8 @@
     <string name="you_have_to_restart_app_force">Anwendung neu starten!</string>
     <string name="you_have_to_restart_app_recommended">Es ist empfohlen, die Anwendung neu zu starten!</string>
     <string name="you_see">You see</string>
+    <string name="compass">Kompass</string>
+    <string name="navigate">Navigieren</string>
     
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">

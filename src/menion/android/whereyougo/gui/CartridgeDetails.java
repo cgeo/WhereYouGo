@@ -20,6 +20,8 @@ package menion.android.whereyougo.gui;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import cz.matejcik.openwig.Engine;
+
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
@@ -45,7 +47,10 @@ public class CartridgeDetails extends CustomActivity {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+	if(A.getMain() == null || Main.selectedFile == null || Main.cartridgeFile == null){
+		finish();
+		return;
+	}
     setContentView(R.layout.layout_details);
 
     TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);

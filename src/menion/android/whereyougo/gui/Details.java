@@ -78,7 +78,7 @@ public class Details extends CustomActivity implements Refreshable,
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if(Engine.instance == null){
+		if(A.getMain() == null || Engine.instance == null){
 			finish();
 			return;
 		}

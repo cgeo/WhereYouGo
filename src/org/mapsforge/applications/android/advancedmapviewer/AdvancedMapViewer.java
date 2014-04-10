@@ -64,6 +64,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -114,6 +115,11 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
    * The maximum move speed factor of the map.
    */
   public static final int MOVE_SPEED_MAX = 30;
+  
+  /**
+   * The maximum icon size.
+   */
+  public static final int ICON_SIZE_MAX = 32;
 
   private static final String KEY_MAP_RENDERER = "mapRenderer"; // store map renderer
   private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
@@ -418,7 +424,14 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 		              getResources().getDrawable(
 		                  pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
 	          }else{
-	        	  icon = new BitmapDrawable(getResources(), pack.getIcon());
+	        	  Bitmap b = pack.getIcon();
+	        	  if(b.getWidth() > ICON_SIZE_MAX && b.getWidth() >= b.getHeight()){
+	        		  b = Bitmap.createScaledBitmap(b, ICON_SIZE_MAX, ICON_SIZE_MAX*b.getHeight()/b.getWidth(), false);
+	        	  }
+	        	  else if(b.getHeight() > ICON_SIZE_MAX){
+	        		  b = Bitmap.createScaledBitmap(b, ICON_SIZE_MAX*b.getWidth()/b.getHeight(), ICON_SIZE_MAX, false);
+	        	  }
+	        	  icon = new BitmapDrawable(getResources(), b);
 	          }
 	          icon = Marker.boundCenterBottom(icon);
 	          for (MapPoint mp : pack.getPoints()) {

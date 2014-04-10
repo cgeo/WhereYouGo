@@ -24,6 +24,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.gui.extension.CustomDialog;
 import menion.android.whereyougo.settings.Loc;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaTable;
@@ -56,7 +57,10 @@ public class InputScreen extends CustomActivity {
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		if(A.getMain() == null || Engine.instance == null || input == null){
+			finish();
+			return;
+		}
 		setContentView(R.layout.layout_input);
 	}
 	

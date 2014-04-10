@@ -26,7 +26,9 @@ public abstract class DialogFragmentEx extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
     	Dialog dialog = createDialog(savedInstanceState);
-    	dialog.setCancelable(isCancelable());
+    	if(dialog != null){
+    		dialog.setCancelable(isCancelable());
+    	}
     	return dialog;
     }
     

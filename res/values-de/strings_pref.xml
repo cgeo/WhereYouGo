@@ -6,6 +6,8 @@
     <string name="pref_bearing_true_desc">Wenn diese Option aktiviert ist, wird die tatsächliche Ausrichtung verwendet. Ansonsten wird die magnetische Ausrichtung verwendet</string>
     <string name="pref_confirm_on_exit">Bestätigung beim Beenden</string>
     <string name="pref_confirm_on_exit_desc">Zeigt einen Dialog bevor Locus mit dem Zurück Knopf beendet wird</string>
+    <string name="pref_root">Wherigo Verzeichnis</string>
+    <string name="pref_root_desc">Wählen Sie beliebiges Wherigo im Zielverzeichnis.</string>
     <string name="pref_map_provider">Map provider</string>
     <string name="pref_map_provider_desc">Map provider wählen</string>
     <string name="pref_map_provider_vector">Vektor OSM</string>
@@ -62,6 +64,8 @@
     <string name="pref_language_sk">Slowakisch</string>
     <string name="pref_locale">Lokalisierung</string>
     <string name="pref_orientation">Ausrichtung</string>
+    <string name="pref_save_game_auto">Spiel automatisch speichern</string>
+    <string name="pref_save_game_auto_desc">Das Speil wird automatisch gespeichert, wenn Sie die Applikation minimisieren .</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch ändern</string>
     <string name="pref_sensors_compass_auto_change_desc">Die Quelle für die Ausrichtung von den "Hardware Kompass" Einstellungen bei langsamer Geschwindigkeit verwenden. Für höhere Geschwindigkeiten wird die Ausrichtung vom GPS genutzt</string>

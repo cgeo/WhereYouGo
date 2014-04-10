@@ -6,7 +6,7 @@
     <string name="pref_bearing_true_desc">Pokud je zapnuto, použít pravý azimut. Jinak použít magnetický azimut</string>
     <string name="pref_confirm_on_exit">Potvrdit ukončení</string>
     <string name="pref_confirm_on_exit_desc">Zobrazit potvrzovací dialog před ukončením Locusu prostřednictvím tlačítka Zpět</string>
-    <string name="pref_root">Složka WhereYouGo</string>
+    <string name="pref_root">Složka s wherigo</string>
     <string name="pref_root_desc">Vyberte libovolné wherigo v cílové složce</string>
     <string name="pref_map_provider">Typ mapy</string>
     <string name="pref_map_provider_desc">Vyberte typ mapy</string>

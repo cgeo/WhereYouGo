@@ -44,7 +44,7 @@ public class VectorMapDataProvider implements MapDataProvider {
 	public void addCartridges(Vector<CartridgeFile> cartridges) {
 		if (cartridges == null)
 			return;
-		MapPointPack pack = new MapPointPack(false,	R.drawable.icon_gc_wherigo);
+		MapPointPack pack = new MapPointPack(false,	R.drawable.marker_wherigo);
 		for (CartridgeFile cartridge : cartridges) {
 			// do not show waypoints that are "Play anywhere" (with zero
 			// coordinates)

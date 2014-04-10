@@ -23,6 +23,7 @@ import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.gui.extension.CustomDialog;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
 import android.graphics.BitmapFactory;
@@ -67,7 +68,10 @@ Logger.d(TAG, "setDialog() - finish, callBack:" + (callback != null));
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		if(A.getMain() == null || Engine.instance == null){
+			finish();
+			return;
+		}
 		setContentView(R.layout.layout_details);
 		findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
 		findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
