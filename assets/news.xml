@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.5" id="31" time="12.4.2014">
+    <li>added: create error log when application crashes</li>
+    <li>update: application description</li>
+  </update>
+    
   <update name="0.8.4" id="30" time="10.4.2014">
     <li>fixed: application crashing when user switches back from another application</li>
     <li>fixed: too large wherigo icons on maps</li>

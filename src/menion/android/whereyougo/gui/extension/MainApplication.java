@@ -25,13 +25,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cz.matejcik.openwig.Engine;
-
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.CartridgeMainMenu;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.settings.SettingValues;
 import menion.android.whereyougo.settings.Settings;
+import menion.android.whereyougo.utils.ExceptionHandler;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.StringToken;
@@ -74,6 +74,7 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate()");
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
         
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         Configuration config = getBaseContext().getResources().getConfiguration();
