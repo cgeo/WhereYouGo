@@ -6,10 +6,12 @@
 
     <LinearLayout
         android:id="@+id/linear_layout_skyplot"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/linear_layout_bottom"
-        android:gravity="center" >
+        android:gravity="center"
+        android:layout_marginTop="40dip" >
     </LinearLayout>
 
     <LinearLayout
@@ -24,10 +26,11 @@
             android:layout_width="wrap_content"
             android:gravity="left" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/text_view_provider"
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/text_view_longitude"
@@ -49,10 +52,11 @@
             android:gravity="left"
             android:text="@string/latitude" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <TextView
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/provider" />
 
         <TextView
             style="@style/CustomScreenTextTitle"

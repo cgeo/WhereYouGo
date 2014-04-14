@@ -27,6 +27,7 @@ import cz.matejcik.openwig.Zone;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.R.id;
 import menion.android.whereyougo.gui.Details;
 import menion.android.whereyougo.gui.Refreshable;
 import menion.android.whereyougo.gui.extension.CustomActivity;
@@ -34,6 +35,7 @@ import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.sensors.OrientationListener;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -50,6 +52,7 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 	private CompassView viewCompass;
 	
 	private TextView viewName;
+	private TextView viewProvider;
 	private TextView viewLat;
 	private TextView viewLon;
 	private TextView viewAlt;
@@ -84,6 +87,7 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
         		viewCompass, LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
         
         viewName = (TextView) findViewById(R.id.textViewName);
+        viewProvider = (TextView) findViewById(id.textViewProvider);
 		viewAlt = (TextView) findViewById(R.id.textViewAltitude);
         viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
         viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
@@ -129,6 +133,15 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 		mPitch = pitch;
 		mRoll = roll;
 		
+		String provider = loc.getProvider();
+		if(provider.equals(LocationManager.GPS_PROVIDER)){
+			provider = getString(R.string.provider_gps);
+		}else if(provider.equals(LocationManager.NETWORK_PROVIDER)){
+			provider = getString(R.string.provider_network);
+		}else{
+			provider = getString(R.string.provider_passive);
+		}
+		viewProvider.setText(provider);
         viewLat.setText(UtilsFormat.formatLatitude(loc.getLatitude()));
         viewLon.setText(UtilsFormat.formatLongitude(loc.getLongitude()));
         viewAlt.setText(UtilsFormat.formatAltitude(loc.getAltitude(), true));

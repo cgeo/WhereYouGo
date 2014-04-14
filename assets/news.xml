@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.6" id="32" time="14.4.2014">
+    <li>fixed: application crashing when receiving location</li>
+    <li>fixed: compass azimuth, Location on/off button</li>
+    <li>update: renamed GPS to Location, since location can be received via network as well as via GPS</li>
+    <li>added: location provider in Sattelite and Compass screen</li>
+  </update>
+    
   <update name="0.8.5" id="31" time="12.4.2014">
     <li>added: create error log when application crashes</li>
     <li>update: application description</li>

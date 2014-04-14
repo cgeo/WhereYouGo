@@ -37,6 +37,7 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
 import menion.android.whereyougo.utils.geometry.Point2D;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.CompoundButton;
@@ -130,6 +131,8 @@ public class SatelliteScreen extends CustomActivity implements LocationEventList
     public void onStart() {
     	super.onStart();
     	LocationState.addLocationChangeListener(this);
+    	if(buttonGps.isChecked() && !LocationState.isActuallyHardwareGpsOn())
+    		notifyGpsDisable();
     }
     
     public void onStop() {
@@ -141,6 +144,15 @@ public class SatelliteScreen extends CustomActivity implements LocationEventList
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
+				String provider = location.getProvider();
+				if(provider.equals(LocationManager.GPS_PROVIDER)){
+					provider = getString(R.string.provider_gps);
+				}else if(provider.equals(LocationManager.NETWORK_PROVIDER)){
+					provider = getString(R.string.provider_network);
+				}else{
+					provider = getString(R.string.provider_passive);
+				}
+				((TextView) findViewById(R.id.text_view_provider)).setText(provider);
 				((TextView) findViewById(R.id.text_view_latitude))
 						.setText(UtilsFormat.formatLatitude(location.getLatitude()));
 				((TextView) findViewById(R.id.text_view_longitude))

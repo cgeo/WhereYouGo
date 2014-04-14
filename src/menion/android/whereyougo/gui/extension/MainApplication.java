@@ -182,6 +182,7 @@ public class MainApplication extends Application {
 	}
     
     private static void onAppMinimized() {
+    	Logger.w(TAG, "onAppMinimized()");
     	if (onAppVisibilityChange != null)
     		onAppVisibilityChange.onAppMinimized();
     }

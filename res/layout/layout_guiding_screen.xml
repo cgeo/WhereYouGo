@@ -12,7 +12,8 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_above="@+id/linearLayoutName"
-		android:gravity="center">
+		android:gravity="center"
+		android:layout_marginTop="40dip">
 	</LinearLayout>
 	
 	<LinearLayout 
@@ -25,10 +26,11 @@
 			android:id="@+id/textViewLatitude"
 			android:layout_width="wrap_content"
 			android:gravity="left" />
-		<View 
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:layout_weight="1" />
+		<TextView
+            style="@style/CustomScreenTextTitle"
+            android:id="@+id/textViewProvider"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal" />
 		<TextView
 			style="@style/CustomScreenTextValue"
 			android:id="@+id/textViewLongitude"
@@ -47,10 +49,11 @@
 			android:layout_width="wrap_content"
 			android:gravity="left"
 			android:text="@string/latitude" />
-		<View 
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:layout_weight="1" />
+		<TextView
+            style="@style/CustomScreenTextTitle"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/provider" />
 		<TextView
 			style="@style/CustomScreenTextTitle"
 			android:layout_width="wrap_content"

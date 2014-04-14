@@ -134,13 +134,28 @@ public class GpsConnection {
 			ManagerNotify.toastShortMessage(R.string.gps_disabled);
 		}
 	}
-    	    
+    
+    public boolean isProviderEnabled(String provider){
+    	return locationManager == null ? false : locationManager.isProviderEnabled(provider);
+    }
 
 	private void disableNetwork() {
 //Logger.w(TAG, "disableNetwork() - " + networkProviderEnabled);
 		if (networkProviderEnabled) {
 			locationManager.removeUpdates(llNetwork);
 			networkProviderEnabled = false;
+		}
+	}
+	
+	private void enableNetwork() {
+//Logger.w(TAG, "enableNetwork() - " + networkProviderEnabled);
+		if (!networkProviderEnabled) {
+			try {
+				locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+						SettingValues.GPS_MIN_TIME * 1000, 0, llNetwork);
+				networkProviderEnabled = true;
+			} catch (Exception e) {
+			}
 		}
 	}
 	
@@ -196,6 +211,9 @@ public class GpsConnection {
 					!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 				LocationState.setGpsOff(Settings.getCurrentActivity());
 				destroy();
+			}
+			else if(provider.equals(LocationManager.GPS_PROVIDER)){
+				enableNetwork();
 			}
 		}
 
