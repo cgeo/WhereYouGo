@@ -26,7 +26,7 @@
     <string name="gps_disabled">Poloha vypnutá</string>
     <string name="gps_enabled">Poloha zapnutá</string>
     <string name="gps_fix">Poslední GPS fix</string>
-    <string name="gps_not_enabled_show_system_settings">Služba určování polohy není zapnutá. Chcete ukázat systémové nastavení?</string>
+    <string name="gps_not_enabled_show_system_settings">Služba určování polohy není zapnutá. Chcete zobrazit systémové nastavení?</string>
     <string name="gps_off">Poloha</string>
     <string name="gps_on">Poloha</string>
     <string name="choose_cartridge">Zvolte Cartridge</string>
@@ -43,10 +43,10 @@
     <string name="new_version_will_be_installed">Nová verze bude nainstalována!</string>
     <string name="no">Ne</string>
     <string name="no_description">Žádný popis</string>
-    <string name="no_location_providers_available">Poskytovatelé Pozice, nejsou dostupní!</string>
+    <string name="no_location_providers_available">Není dostupný žádný poskytovatel pozice!</string>
     <string name="no_satellites">Žádné satelity</string>
     <string name="no_target">Žádný cíl!</string>
-    <string name="no_wherigo_cartridge_available">Žádné Wherigo cartridge není k dispozici.\nPřidejte cartridge (*.gwc) do\n %1$s adresáře\n a spusťte %2$s znovu!</string>
+    <string name="no_wherigo_cartridge_available">Žádné Wherigo cartridge není k dispozici.\nPřidejte cartridge (*.gwc) do\n %1$s adresáře\n a spusťte %2$s znovu.</string>
     <string name="not_enough_disk_space_x">Nedostatek volného místa na SD kartě!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čeká na vyřízení</string>
@@ -59,10 +59,10 @@
     <string name="provider_gps">GPS</string>
     <string name="provider_passive">-</string>
     <string name="question">Otázka</string>
-    <string name="resume_previous_cartridge">Načíst uloženou pozici?</string>
+    <string name="resume_previous_cartridge">Načíst uloženou hru?\n(Pokud zvolíte Ne, bude uložená hra smazána.)</string>
     <string name="roll">Náklon</string>
     <string name="satellites">Satelity</string>
-    <string name="save_game">Uložit hru</string>
+    <string name="save_game">Uložit</string>
     <string name="save_game_auto">Hra automaticky uložena</string>
     <string name="save_game_before_exit">Uložit hru před ukončením?</string>
     <string name="save_game_ok">Hra uložena</string>

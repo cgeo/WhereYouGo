@@ -42,6 +42,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -146,6 +148,18 @@ public class MainApplication extends Application {
 		LocationState.init(this);
     	// initialize DPI
     	Utils.getDpPixels(this, 1.0f);
+    	
+    	// set DeviceID for OpenWig
+    	try{
+        	PackageManager pm = getPackageManager();
+        	PackageInfo pi = pm.getPackageInfo(getPackageName(), 0);
+        	String name = String.format("%s, app:%s", pm.getApplicationLabel(pi.applicationInfo), pi.versionName);
+        	String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
+        	cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
+        	cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);
+    	}catch(Exception e){
+    		// not really important
+    	}
 	}
 	
     private static Timer mTimer;

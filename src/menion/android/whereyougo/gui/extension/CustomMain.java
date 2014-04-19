@@ -266,11 +266,11 @@ public abstract class CustomMain extends CustomActivity {
 		    				finish = true;
 		    				CustomMain.this.finish();
 		    			} else if (finishType == FINISH_REINSTALL) {
-		    				Intent intent = new Intent();
-		    				intent.setAction(android.content.Intent.ACTION_VIEW);
-		    				intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")), "application/vnd.android.package-archive");
-		    				
-		    				startActivity(intent); 
+//		    				Intent intent = new Intent();
+//		    				intent.setAction(android.content.Intent.ACTION_VIEW);
+//		    				intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")), "application/vnd.android.package-archive");
+//		    				
+//		    				startActivity(intent); 
 		    				showDialogFinish(FINISH_EXIT_FORCE);
 		    			}
 		    		}

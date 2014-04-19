@@ -99,42 +99,42 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
     };
 
     CustomDialog.setTitle(this, Engine.instance.cartridge.name, null, CustomDialog.NO_IMAGE, null);
-		CustomDialog.setBottom(
-				this,
-				getString(R.string.gps),
-				new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						Intent intent = new Intent(CartridgeMainMenu.this,
-								SatelliteScreen.class);
-						startActivity(intent);
-						return true;
-					}
-				},
-				getString(R.string.map),
-				new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						switch (SettingValues.GLOBAL_MAP_PROVIDER) {
-						case Settings.VALUE_MAP_PROVIDER_VECTOR:
-							vectorMap();
-							break;
-						case Settings.VALUE_MAP_PROVIDER_LOCUS:
-							locusMap();
-							break;
-						}
-						return true;
-					}
-				},
-				getString(R.string.save_game),
-				new CustomDialog.OnClickListener() {
-					@Override
-					public boolean onClick(CustomDialog dialog, View v, int btn) {
-						Engine.requestSync();
-						Toast.makeText(CartridgeMainMenu.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
-						return true;
-					}
-				});
+	CustomDialog.setBottom(
+		this,
+		getString(R.string.gps),
+		new CustomDialog.OnClickListener() {
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				Intent intent = new Intent(CartridgeMainMenu.this,
+						SatelliteScreen.class);
+				startActivity(intent);
+				return true;
+			}
+		},
+		getString(R.string.map),
+		new CustomDialog.OnClickListener() {
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				switch (SettingValues.GLOBAL_MAP_PROVIDER) {
+				case Settings.VALUE_MAP_PROVIDER_VECTOR:
+					vectorMap();
+					break;
+				case Settings.VALUE_MAP_PROVIDER_LOCUS:
+					locusMap();
+					break;
+				}
+				return true;
+			}
+		},
+		getString(R.string.save_game),
+		new CustomDialog.OnClickListener() {
+			@Override
+			public boolean onClick(CustomDialog dialog, View v, int btn) {
+				Engine.requestSync();
+				Toast.makeText(CartridgeMainMenu.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
+				return true;
+			}
+		});
   }
 
   public void onResume() {

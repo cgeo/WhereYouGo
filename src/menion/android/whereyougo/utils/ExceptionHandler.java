@@ -8,7 +8,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 	
 	@Override
 	public void uncaughtException(Thread thread, Throwable ex) {
-		LogWriter.log("errorlog.txt", ex);
+		LogWriter.log("error.log", ex);
 		defaultHandler.uncaughtException(thread, ex);
 	}
 

@@ -212,6 +212,7 @@ public abstract class CustomPreferenceActivity extends PreferenceActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				FilePicker.setFileDisplayFilter(new FilterByFileExtension(filter));
+				FilePicker.setFileSelectFilter(null);
 				startActivityForResult(new Intent(CustomPreferenceActivity.this, FilePicker.class),	code);
 				return false;
 			}

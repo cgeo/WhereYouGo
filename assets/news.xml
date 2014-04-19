@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+
+  <update name="0.8.7" id="33" time="19.4.2014">
+    <li>fixed: choose wherigo folder</li>
+    <li>update: correct debug information for openwig (device and platform)</li>
+    <li>update: load game question</li>
+    <li>update: error log placed in file error.log</li>
+  </update>
     
   <update name="0.8.6" id="32" time="14.4.2014">
     <li>fixed: application crashing when receiving location</li>

@@ -59,7 +59,7 @@
     <string name="provider_gps">GPS</string>
     <string name="provider_passive">-</string>
     <string name="question">Frage</string>
-    <string name="resume_previous_cartridge">Wollen Sie das Spiel laden?</string>
+    <string name="resume_previous_cartridge">Wollen Sie das Spiel laden?\n(Falls Sie Nein wählen, die Speicherdatei wird gelöscht werden.)</string>
     <string name="roll">Neigung</string>
     <string name="satellites">Satelliten</string>
     <string name="save_game">Speichern</string>

@@ -1,4 +1,4 @@
-WhereYouGo ist ein unofficial open-source Klient für Wherigo Geocaching. Es benutzt offline vektor Mappen, oder man kann auch Locus Applikation für Mappen benutzen.
+WhereYouGo ist ein unofficial Klient für Wherigo Geocaching. Es benutzt offline vektor Mappen, oder man kann auch Locus Applikation für Mappen benutzen.
 
 Beachtung:
 - Benutze wherigo Cartridge "Pocket PC Device".
