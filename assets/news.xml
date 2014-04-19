@@ -6,6 +6,7 @@
     <li>update: correct debug information for openwig (device and platform)</li>
     <li>update: load game question</li>
     <li>update: error log placed in file error.log</li>
+    <li>update: smaller pin icons</li>
   </update>
     
   <update name="0.8.6" id="32" time="14.4.2014">
