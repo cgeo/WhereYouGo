@@ -32,7 +32,8 @@
         android:name="menion.android.whereyougo.gui.extension.MainApplication"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:debuggable="false" >
         <activity
             android:name=".Main"
             android:label="WhereYouGo"
