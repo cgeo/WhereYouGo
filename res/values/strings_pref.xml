@@ -36,6 +36,10 @@
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Beep on distance</string>
     <string name="pref_guiding_waypoint_sound_increasing">Increase frequency when go closer</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Custom sound on distance</string>
+    <string name="pref_guiding_zone_point">Zone navigation point</string>
+    <string name="pref_guiding_zone_point_desc">Select which zone point should be used for navigation</string>
+    <string name="pref_guiding_zone_point_center">Zone center defined by cartridge author</string>
+    <string name="pref_guiding_zone_point_nearest">Nearest border point</string>
     <string name="pref_highlight">Always screen on</string>
     <string name="pref_highlight_always_text">Always screen on</string>
     <string name="pref_highlight_desc">Enable/disable permanent screen on</string>

@@ -7,14 +7,14 @@ Notice:
 
 Functions:
 - Wherigo client
+- Automatic game saving when user switches to another application
 - Offline vector maps (downloadable e.g. here http://download.mapsforge.org/ or http://osm.paws.cz/)
 - Alternatively Locus can be used to display maps (https://play.google.com/store/apps/details?id=menion.android.locus)
 - Displays objects on map, including labels and zone borders
 - Vector maps display moving objects (Locus does not)
 - Compass
-- No ads
 
 About:
 The core of the application is based on OpenWIG, it uses MapsForge library to display offline vector maps, alternatively Locus can be used.
-https://code.google.com/p/android-whereyougo/ - original project page (contains old version)
+https://code.google.com/p/android-whereyougo/ - original project page (contains version 0.7.0)
 https://code.google.com/r/biylda-whereyougo/ - project clone (contains current version)

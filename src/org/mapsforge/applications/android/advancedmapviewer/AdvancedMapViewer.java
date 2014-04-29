@@ -39,13 +39,12 @@ import org.mapsforge.android.maps.mapgenerator.TileCache;
 import org.mapsforge.android.maps.overlay.Circle;
 import org.mapsforge.android.maps.overlay.ListOverlay;
 import org.mapsforge.android.maps.overlay.Marker;
-import org.mapsforge.android.maps.overlay.MyLocationOverlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.PolygonalChain;
 import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPointPack;
-import org.mapsforge.applications.android.advancedmapviewer.extension.CaptionMarker;
+import org.mapsforge.applications.android.advancedmapviewer.extension.*;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.FilterByFileExtension;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.ValidMapFile;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.ValidRenderTheme;
@@ -121,10 +120,10 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
    */
   public static final int ICON_SIZE_MAX = 32;
 
-  private static final String KEY_MAP_RENDERER = "mapRenderer"; // store map renderer
-  private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
-  private static final String BUNDLE_SHOW_MY_LOCATION = "showMyLocation";
-  private static final String BUNDLE_SNAP_TO_LOCATION = "snapToLocation";
+  private static final String KEY_MAP_RENDERER = "MAPSFORGE_mapRenderer"; // store map renderer
+  private static final String BUNDLE_CENTER_AT_FIRST_FIX = "MAPSFORGE_centerAtFirstFix";
+  private static final String BUNDLE_SHOW_MY_LOCATION = "MAPSFORGE_showMyLocation";
+  private static final String BUNDLE_SNAP_TO_LOCATION = "MAPSFORGE_snapToLocation";
   private static final int DIALOG_ENTER_COORDINATES = 0;
   private static final int DIALOG_INFO_MAP_FILE = 1;
   private static final int DIALOG_LOCATION_PROVIDER_DISABLED = 2;
@@ -135,15 +134,18 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 
   private ListOverlay listOverlay;
   private MyLocationOverlay myLocationOverlay;
+  private NavigationOverlay navigationOverlay;
   private ScreenshotCapturer screenshotCapturer;
   private ToggleButton snapToLocationView;
+  private Menu menu;
   private WakeLock wakeLock;
-  MapView mapView;
+  MyMapView mapView;
   private double itemsLatitude, itemsLongitude;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.options_menu, menu);
+    this.menu = menu;
     return true;
   }
 
@@ -166,10 +168,12 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 
       case R.id.menu_position_my_location_enable:
         enableShowMyLocation(true);
+        onPrepareOptionsMenu(this.menu);
         return true;
 
       case R.id.menu_position_my_location_disable:
         disableShowMyLocation();
+        onPrepareOptionsMenu(this.menu);
         return true;
 
       case R.id.menu_position_last_known:
@@ -188,6 +192,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         return true;
 
       case R.id.menu_screenshot:
+    	  this.mapView.setMapGenerator(new org.mapsforge.android.maps.mapgenerator.tiledownloader.OpenCycleMapTileDownloader());
         return true;
 
       case R.id.menu_screenshot_jpeg:
@@ -261,6 +266,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   private void disableShowMyLocation() {
     if (this.myLocationOverlay.isMyLocationEnabled()) {
       this.myLocationOverlay.disableMyLocation();
+      disableSnapToLocation(false);
+      this.snapToLocationView.setVisibility(View.GONE);
     }
   }
 
@@ -276,6 +283,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         return;
       }
 
+      this.mapView.getOverlays().add(this.navigationOverlay);
       this.mapView.getOverlays().add(this.myLocationOverlay);
       this.snapToLocationView.setVisibility(View.VISIBLE);
     }
@@ -356,7 +364,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     this.screenshotCapturer.start();
 
     setContentView(R.layout.activity_advanced_map_viewer);
-    this.mapView = (MapView) findViewById(R.id.mapView);
+    this.mapView = (MyMapView) findViewById(R.id.mapView);
     configureMapView();
 
     this.snapToLocationView = (ToggleButton) findViewById(R.id.snapToLocationView);
@@ -367,7 +375,11 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
       }
     });
 
-
+    Drawable drawable =
+            getResources().getDrawable(R.drawable.my_location_chevron);
+        drawable = Marker.boundCenter(drawable);
+    this.myLocationOverlay = new SensorMyLocationOverlay(this, this.mapView, new RotationMarker(null, drawable));
+    this.navigationOverlay = new NavigationOverlay(this.myLocationOverlay);
     this.listOverlay = new ListOverlay();
     
     /* add items received via Intent */
@@ -387,24 +399,31 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     /* end of adding items */
     mapView.getOverlays().add(listOverlay);
 
-    Drawable drawable =
-        getResources().getDrawable(R.drawable.ic_maps_indicator_current_position_anim1);
-    drawable = Marker.boundCenter(drawable);
-    this.myLocationOverlay = new MyLocationOverlay(this, this.mapView, drawable);
-
     PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
     this.wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "AMV");
 
-    enableShowMyLocation(false);
-    if (savedInstanceState != null && savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION)) {
-      enableShowMyLocation(savedInstanceState.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX));
-      if (savedInstanceState.getBoolean(BUNDLE_SNAP_TO_LOCATION)) {
-        enableSnapToLocation(false);
-      }
+    if (savedInstanceState != null){
+	    if (savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+			enableShowMyLocation(savedInstanceState.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
+			if (savedInstanceState.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
+				enableSnapToLocation(false);
+				//this.snapToLocationView.setChecked(true);
+			}
+	    }
+    }else{
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+    	    enableShowMyLocation(sharedPreferences.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
+    	    if (sharedPreferences.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
+    	    	enableSnapToLocation(false);
+    	    	//this.snapToLocationView.setChecked(true);
+    	    }
+        }
     }
   }
   
   private void showMapPack(ArrayList<MapPointPack> packs){
+      this.navigationOverlay.setTarget(null);
 	  itemsLatitude = itemsLongitude = 0;
 	  int count = 0;
 	  List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
@@ -437,6 +456,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 	          for (MapPoint mp : pack.getPoints()) {
 	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
 	            overlayItems.add(new CaptionMarker(geoPoint, icon, mp.getName()));
+	            if(mp.isTarget())
+	            	this.navigationOverlay.setTarget(geoPoint);
 	            itemsLatitude += mp.getLatitude();
 	            itemsLongitude += mp.getLongitude();
 	            ++count;
@@ -536,6 +557,11 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   protected void onDestroy() {
     super.onDestroy();
     this.screenshotCapturer.interrupt();
+    Editor preferences = PreferenceManager.getDefaultSharedPreferences(this).edit();
+    preferences.putBoolean(BUNDLE_SHOW_MY_LOCATION, this.myLocationOverlay.isMyLocationEnabled());
+    preferences.putBoolean(BUNDLE_CENTER_AT_FIRST_FIX, this.myLocationOverlay.isCenterAtNextFix());
+    preferences.putBoolean(BUNDLE_SNAP_TO_LOCATION, this.myLocationOverlay.isSnapToLocationEnabled());
+    preferences.commit();
     disableShowMyLocation();
   }
 
@@ -740,6 +766,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   void enableSnapToLocation(boolean showToast) {
     if (!this.myLocationOverlay.isSnapToLocationEnabled()) {
       this.myLocationOverlay.setSnapToLocationEnabled(true);
+      this.snapToLocationView.setChecked(true);
       this.mapView.setClickable(false);
       if (showToast) {
         showToastOnUiThread(getString(R.string.snap_to_location_enabled));

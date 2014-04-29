@@ -114,7 +114,7 @@ public class SettingScreens extends CustomPreferenceActivity {
         addNewPreferenceCategory(activity, R.string.waypoints, preferenceGuiding);
 
     SettingItems.addPrefGuidingCompassSounds(activity, prefCatGlobal);
-
+    SettingItems.addPrefGuidingZonePoint(activity, prefCatWptGuide);
     SettingItems.addPrefGuidingWptSound(activity, prefCatWptGuide);
     SettingItems.addPrefGuidingWptSoundDistance(activity, prefCatWptGuide);
     return init(preferenceGuiding);

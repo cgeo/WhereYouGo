@@ -65,7 +65,7 @@
     <string name="pref_locale">Lokalisierung</string>
     <string name="pref_orientation">Ausrichtung</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
-    <string name="pref_save_game_auto_desc">Das Speil wird automatisch gespeichert, wenn Sie die Applikation minimisieren .</string>
+    <string name="pref_save_game_auto_desc">Das Speil wird automatisch gespeichert werden, wenn Sie die Applikation minimisieren.</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch ändern</string>
     <string name="pref_sensors_compass_auto_change_desc">Die Quelle für die Ausrichtung von den "Hardware Kompass" Einstellungen bei langsamer Geschwindigkeit verwenden. Für höhere Geschwindigkeiten wird die Ausrichtung vom GPS genutzt</string>

@@ -96,6 +96,7 @@ public class InputScreen extends CustomActivity {
 			// set answer LinearLayout
 			String type = (String) input.table.rawget("InputType");
 			final LinearLayout ll = (LinearLayout) findViewById(R.id.layoutInputLinearLayout01);
+			ll.removeAllViews();
 			mode = -1;
 
 			if ("Text".equals(type)) {

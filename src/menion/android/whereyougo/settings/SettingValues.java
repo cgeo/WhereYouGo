@@ -40,6 +40,7 @@ import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_ANGLE;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_COO_LATLON;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_LENGTH;
 import static menion.android.whereyougo.settings.Settings.DEFAULT_UNITS_SPEED;
+import static menion.android.whereyougo.settings.Settings.DEFAULT_GUIDING_ZONE_POINT;
 import static menion.android.whereyougo.settings.Settings.KEY_S_ROOT;
 import static menion.android.whereyougo.settings.Settings.KEY_B_FULLSCREEN;
 import static menion.android.whereyougo.settings.Settings.KEY_B_GPS_BEEP_ON_GPS_FIX;
@@ -63,6 +64,7 @@ import static menion.android.whereyougo.settings.Settings.KEY_S_UNITS_ANGLE;
 import static menion.android.whereyougo.settings.Settings.KEY_S_UNITS_COO_LATLON;
 import static menion.android.whereyougo.settings.Settings.KEY_S_UNITS_LENGTH;
 import static menion.android.whereyougo.settings.Settings.KEY_S_UNITS_SPEED;
+import static menion.android.whereyougo.settings.Settings.KEY_S_GUIDING_ZONE_POINT;
 import static menion.android.whereyougo.settings.Settings.getPrefBoolean;
 import static menion.android.whereyougo.settings.Settings.getPrefString;
 import menion.android.whereyougo.utils.Logger;
@@ -127,12 +129,13 @@ public class SettingValues {
   public static int GUIDING_WAYPOINT_SOUND;
   /** waypoint sound distance */
   public static int GUIDING_WAYPOINT_SOUND_DISTANCE;
+  /** zone navigation point */
+  public static int GUIDING_ZONE_NAVIGATION_POINT;
 
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
     GLOBAL_ROOT = getPrefString(c, KEY_S_ROOT, DEFAULT_ROOT);
-    GLOBAL_MAP_PROVIDER =
-        Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
+    GLOBAL_MAP_PROVIDER = Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
     GLOBAL_SAVEGAME_AUTO = getPrefBoolean(c, KEY_B_SAVEGAME_AUTO, DEFAULT_SAVEGAME_AUTO);
     GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
     GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
@@ -177,5 +180,6 @@ public class SettingValues {
     GUIDING_WAYPOINT_SOUND_DISTANCE =
         Utils.parseInt(getPrefString(c, KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE,
             DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE));
+    GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(getPrefString(c, KEY_S_GUIDING_ZONE_POINT, DEFAULT_GUIDING_ZONE_POINT));
   }
 }

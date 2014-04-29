@@ -59,6 +59,9 @@ public class AudioPlayService extends Service {
     private int originalVolumeMedia = Integer.MIN_VALUE;
     
     public void onStart(Intent intent, int value) {
+    	if(intent == null)
+    		return;
+    	
     	String filePath = intent.getStringExtra(EXTRA_FILEPATHS);
     	playAsNotification = intent.getBooleanExtra(EXTRA_PLAY_AS_NOTIFICATION, true);
     	deleteFile = intent.getBooleanExtra(EXTRA_DELETE_FILE, false);

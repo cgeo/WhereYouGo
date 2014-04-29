@@ -33,6 +33,8 @@ import menion.android.whereyougo.gui.Refreshable;
 import menion.android.whereyougo.gui.extension.CustomActivity;
 import menion.android.whereyougo.hardware.location.LocationState;
 import menion.android.whereyougo.hardware.sensors.OrientationListener;
+import menion.android.whereyougo.settings.SettingValues;
+import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
 import android.location.LocationManager;
@@ -179,9 +181,9 @@ public class GuidingScreen extends CustomActivity implements GuidingListener, Or
 				if(et == null || !et.isLocated() || !et.isVisible())
 					return;
 				Waypoint w = A.getGuidingContent().getTargetWaypoint();
-				Location l = w.getLocation();
 				w.setName(et.name);
-				if(Details.et instanceof Zone){
+				Location l = w.getLocation();
+				if(Details.et instanceof Zone && SettingValues.GUIDING_ZONE_NAVIGATION_POINT == Settings.VALUE_GUIDING_ZONE_POINT_NEAREST){
 					Zone z = (Zone) Details.et;
 					l.setLatitude(z.nearestPoint.latitude);
 					l.setLongitude(z.nearestPoint.longitude);

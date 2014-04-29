@@ -104,7 +104,9 @@ public class WUI implements UI {
     Activity activity = getParentActivity();
     PushDialog.setDialog(texts, media, button1, button2, callback);
     Intent intent = new Intent(activity, PushDialog.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     activity.startActivity(intent);
+    activity.overridePendingTransition(0, 0);
     closeActivity(activity);
 
     Vibrator v = (Vibrator) A.getMain().getSystemService(Context.VIBRATOR_SERVICE);
@@ -116,7 +118,9 @@ public class WUI implements UI {
     Activity activity = getParentActivity();
     InputScreen.setInput(input);
     Intent intent = new Intent(activity, InputScreen.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     activity.startActivity(intent);
+    activity.overridePendingTransition(0, 0);
     closeActivity(activity);
   }
 
@@ -225,7 +229,7 @@ public class WUI implements UI {
   public void start() {
     ((CustomActivity) A.getMain()).runOnUiThread(new Runnable() {
       public void run() {
-        if (progressDialog != null)
+        if (progressDialog != null && progressDialog.isShowing())
           progressDialog.dismiss();
       }
     });
@@ -233,7 +237,7 @@ public class WUI implements UI {
   }
 
   public void end() {
-    if (progressDialog != null)
+    if (progressDialog != null && progressDialog.isShowing())
       progressDialog.dismiss();
     Engine.kill();
     showScreen(SCREEN_MAIN, null);

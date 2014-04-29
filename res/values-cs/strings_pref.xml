@@ -35,6 +35,10 @@
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Zvukový signál při vzdálenosti</string>
     <string name="pref_guiding_waypoint_sound_increasing">Zvyšující se frekvence při přibližování</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Vlastní zvuk při vzdálenosti</string>
+    <string name="pref_guiding_zone_point">Navigační bod zóny</string>
+    <string name="pref_guiding_zone_point_desc">Který bod zóny má být použit pro navigaci?</string>
+    <string name="pref_guiding_zone_point_center">Střed zóny definovaný autorem cartridge</string>
+    <string name="pref_guiding_zone_point_nearest">Nejbližší hraniční bod</string>
     <string name="pref_highlight">Stálé podsvícení</string>
     <string name="pref_highlight_always_text">Podsvícení vždy</string>
     <string name="pref_highlight_desc">Zapne/vypne permanentní podsvícení</string>

@@ -6,6 +6,8 @@ import java.util.Vector;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.Details;
+import menion.android.whereyougo.settings.SettingValues;
+import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.Images;
 
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
@@ -92,7 +94,7 @@ public class VectorMapDataProvider implements MapDataProvider {
 	}
 
 	public void addZone(Zone z, boolean mark) {
-		if (z == null || !z.isLocated() || !z.isVisible())
+		if (z == null || !z.isLocated()/* || !z.isVisible()*/)
 			return;
 
 		MapPointPack border = new MapPointPack();
@@ -107,9 +109,11 @@ public class VectorMapDataProvider implements MapDataProvider {
 		items.add(border);
 
 		MapPointPack pack = new MapPointPack();
-		pack.getPoints().add(
-				new MapPoint(z.name, z.nearestPoint.latitude,
-						z.nearestPoint.longitude));
+		if(SettingValues.GUIDING_ZONE_NAVIGATION_POINT == Settings.VALUE_GUIDING_ZONE_POINT_NEAREST){
+			pack.getPoints().add(new MapPoint(z.name, z.nearestPoint.latitude, z.nearestPoint.longitude, mark));
+		}else{
+			pack.getPoints().add(new MapPoint(z.name, z.position.latitude, z.position.longitude, mark));
+		}
 		if (mark)
 			pack.setResource(R.drawable.marker_green);
 		else
@@ -118,13 +122,12 @@ public class VectorMapDataProvider implements MapDataProvider {
 	}
 
 	public void addOther(EventTable et, boolean mark) {
-		if (et == null || !et.isLocated() || !et.isVisible())
+		if (et == null || !et.isLocated()/* || !et.isVisible()*/)
 			return;
 
 		MapPointPack pack = new MapPointPack();
 		pack.getPoints().add(
-				new MapPoint(et.name, et.position.latitude,
-						et.position.longitude));
+				new MapPoint(et.name, et.position.latitude,	et.position.longitude, mark));
 		if (mark)
 			pack.setResource(R.drawable.marker_green);
 		else

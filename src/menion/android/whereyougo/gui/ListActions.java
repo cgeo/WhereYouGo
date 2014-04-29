@@ -50,11 +50,11 @@ public class ListActions extends ListVarious {
 				ListTargets.reset(thing.name + ": " + z.text, z, thing);
 				Main.wui.showScreen(WUI.SCREEN_TARGETS, null);
 			} else {
-				Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
+				//Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
 				Engine.callEvent(z.getActor(), eventName, thing);
 			}
 		} else {
-			Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
+			//Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
 			Engine.callEvent(thing, eventName, null);
 		}
 	}

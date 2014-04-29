@@ -13,6 +13,8 @@ import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.Main;
 import menion.android.whereyougo.gui.Details;
+import menion.android.whereyougo.settings.SettingValues;
+import menion.android.whereyougo.settings.Settings;
 import android.graphics.Color;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -123,7 +125,7 @@ public class LocusMapDataProvider implements MapDataProvider {
 			return;
 
 		Location loc = new Location("");
-		if (et instanceof Zone) {
+		if (et instanceof Zone && SettingValues.GUIDING_ZONE_NAVIGATION_POINT == Settings.VALUE_GUIDING_ZONE_POINT_NEAREST) {
 			Zone z = ((Zone) et);
 			loc.setLatitude(z.nearestPoint.latitude);
 			loc.setLongitude(z.nearestPoint.longitude);

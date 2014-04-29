@@ -176,6 +176,11 @@ public class Settings {
   public static final String KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE =
       "KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE";
   public static final String DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE = "100";
+  /** navigation point */
+  public static final String KEY_S_GUIDING_ZONE_POINT = "KEY_S_GUIDING_ZONE_POINT";
+  public static final int VALUE_GUIDING_ZONE_POINT_CENTER = 0;
+  public static final int VALUE_GUIDING_ZONE_POINT_NEAREST = 1;
+  public static final String DEFAULT_GUIDING_ZONE_POINT = String.valueOf(VALUE_GUIDING_ZONE_POINT_CENTER);
 
   // UNITS PARAMETRES
   /** default latitude/longitude format */

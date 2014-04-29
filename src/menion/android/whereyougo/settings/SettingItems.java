@@ -469,6 +469,31 @@ public class SettingItems {
     setEditTextPreference(activity, pref, SettingValues.GUIDING_WAYPOINT_SOUND_DISTANCE + "m",
         R.string.pref_guiding_sound_distance_waypoint_desc);
   }
+  
+  public static void addPrefGuidingZonePoint(final CustomPreferenceActivity activity,
+	      PreferenceCategory category) {
+	    CharSequence[] entries =
+	        new CharSequence[] {Loc.get(R.string.pref_guiding_zone_point_center),
+	            Loc.get(R.string.pref_guiding_zone_point_nearest)};
+	    CharSequence[] entryValues =
+	        new CharSequence[] {String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_CENTER),
+	            String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_NEAREST)};
+	    ListPreference pref =
+	        activity.addListPreference(category, R.string.pref_guiding_zone_point,
+	            R.string.pref_guiding_zone_point_desc, Settings.KEY_S_GUIDING_ZONE_POINT,
+	            Settings.DEFAULT_GUIDING_ZONE_POINT, entries, entryValues,
+	            new Preference.OnPreferenceChangeListener() {
+	              @Override
+	              public boolean onPreferenceChange(Preference pref, Object newValue) {
+	                SettingValues.GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(newValue);
+	                setListPreference(activity, (ListPreference) pref,
+	                    SettingValues.GUIDING_ZONE_NAVIGATION_POINT, R.string.pref_guiding_zone_point_desc);
+	                return true;
+	              }
+	            });
+	    setListPreference(activity, (ListPreference) pref, SettingValues.GUIDING_ZONE_NAVIGATION_POINT,
+            R.string.pref_guiding_zone_point_desc);
+  }
 
   /********************************/
   /* UNITS */

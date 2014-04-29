@@ -135,9 +135,9 @@ public class Main extends CustomMain {
 
   private void clickMap() {
     // check cartridges
-    if (!isAnyCartridgeAvailable()) {
-      return;
-    }
+//    if (!isAnyCartridgeAvailable()) {
+//      return;
+//    }
     switch (SettingValues.GLOBAL_MAP_PROVIDER) {
       case Settings.VALUE_MAP_PROVIDER_VECTOR:
         vectorMap();
