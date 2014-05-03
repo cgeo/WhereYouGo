@@ -374,7 +374,8 @@ public class Details extends CustomActivity implements Refreshable,
 		  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
 		  mdp.clear();
 		  mdp.addAll();
-		  Main.wui.showScreen(WUI.SCREEN_MAP, null);
+		  //Main.wui.showScreen(WUI.SCREEN_MAP, null);
+		  Main.wui.showMap(true, true);
 	}
 
 	private void locusMap() {

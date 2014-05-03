@@ -35,6 +35,8 @@ import org.mapsforge.android.maps.MapScaleBar;
 import org.mapsforge.android.maps.MapScaleBar.TextField;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.MapViewPosition;
+import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
+import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
 import org.mapsforge.android.maps.mapgenerator.TileCache;
 import org.mapsforge.android.maps.overlay.Circle;
 import org.mapsforge.android.maps.overlay.ListOverlay;
@@ -120,10 +122,13 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
    */
   public static final int ICON_SIZE_MAX = 32;
 
-  private static final String KEY_MAP_RENDERER = "MAPSFORGE_mapRenderer"; // store map renderer
-  private static final String BUNDLE_CENTER_AT_FIRST_FIX = "MAPSFORGE_centerAtFirstFix";
-  private static final String BUNDLE_SHOW_MY_LOCATION = "MAPSFORGE_showMyLocation";
-  private static final String BUNDLE_SNAP_TO_LOCATION = "MAPSFORGE_snapToLocation";
+  //private static final String KEY_MAP_RENDERER = "MAPSFORGE_mapRenderer"; // store map renderer
+  private static final String KEY_MAP_GENERATOR = "mapGenerator"; // store map generator
+  private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
+  private static final String BUNDLE_SHOW_MY_LOCATION = "showMyLocation";
+  private static final String BUNDLE_SNAP_TO_LOCATION = "snapToLocation";
+  private static final String BUNDLE_SHOW_PINS = "showPins";
+  private static final String BUNDLE_SHOW_LABELS = "showLabels";
   private static final int DIALOG_ENTER_COORDINATES = 0;
   private static final int DIALOG_INFO_MAP_FILE = 1;
   private static final int DIALOG_LOCATION_PROVIDER_DISABLED = 2;
@@ -132,6 +137,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   private static final int SELECT_MAP_FILE = 0;
   private static final int SELECT_RENDER_THEME_FILE = 1;
 
+  private MapGeneratorInternal mapGeneratorInternal = MapGeneratorInternal.DATABASE_RENDERER;
   private ListOverlay listOverlay;
   private MyLocationOverlay myLocationOverlay;
   private NavigationOverlay navigationOverlay;
@@ -141,6 +147,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   private WakeLock wakeLock;
   MyMapView mapView;
   private double itemsLatitude, itemsLongitude;
+  private boolean showPins = true;
+  private boolean showLabels = true;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -192,7 +200,6 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         return true;
 
       case R.id.menu_screenshot:
-    	  this.mapView.setMapGenerator(new org.mapsforge.android.maps.mapgenerator.tiledownloader.OpenCycleMapTileDownloader());
         return true;
 
       case R.id.menu_screenshot_jpeg:
@@ -212,9 +219,9 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 
       case R.id.menu_render_theme_osmarender:
         this.mapView.setRenderTheme(InternalRenderTheme.OSMARENDER);
-        Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		editor.remove(KEY_MAP_RENDERER);
-		editor.commit();
+        //Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		//editor.remove(KEY_MAP_RENDERER);
+		//editor.commit();
         return true;
 
       case R.id.menu_render_theme_select_file:
@@ -225,6 +232,36 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         startMapFilePicker();
         return true;
 
+      case R.id.menu_mapgenerator:
+          return true;
+      case R.id.menu_mapgenerator_blank:
+    	  setMapGenerator(MapGeneratorInternal.BLANK);
+          return true;
+      case R.id.menu_mapgenerator_database:
+    	  setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
+          return true;
+      case R.id.menu_mapgenerator_mapnik:
+    	  setMapGenerator(MapGeneratorInternal.MAPNIK);
+          return true;
+      case R.id.menu_mapgenerator_opencyclemap:
+    	  setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
+          return true;
+      case R.id.menu_mapgenerator_opentransportmap:
+    	  setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
+          return true;
+	  case R.id.menu_mapgenerator_mapquest:
+		  setMapGenerator(MapGeneratorInternal.MAPQUEST);
+	      return true;
+      case R.id.menu_mapgenerator_mapbox:
+    	  setMapGenerator(MapGeneratorInternal.MAPBOX);
+          return true;
+      case R.id.menu_mapgenerator_komoot:
+    	  setMapGenerator(MapGeneratorInternal.KOMOOT);
+          return true;
+      case R.id.menu_mapgenerator_skobbler:
+    	  setMapGenerator(MapGeneratorInternal.SKOBBLER);
+          return true;
+          
       default:
         return false;
     }
@@ -243,6 +280,18 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
       menu.findItem(R.id.menu_position_my_location_disable).setVisible(false);
       menu.findItem(R.id.menu_position_my_location_disable).setEnabled(false);
     }
+    
+    if (mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER) {
+        menu.findItem(R.id.menu_info_map_file).setEnabled(true);
+        menu.findItem(R.id.menu_position_map_center).setEnabled(true);
+        menu.findItem(R.id.menu_render_theme).setEnabled(true);
+        menu.findItem(R.id.menu_mapfile).setEnabled(true);
+	} else {
+	    menu.findItem(R.id.menu_info_map_file).setEnabled(false);
+	    menu.findItem(R.id.menu_position_map_center).setEnabled(false);
+        menu.findItem(R.id.menu_render_theme).setEnabled(false);
+        menu.findItem(R.id.menu_mapfile).setEnabled(false);
+	}
 
     return true;
   }
@@ -261,6 +310,13 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     MapScaleBar mapScaleBar = this.mapView.getMapScaleBar();
     mapScaleBar.setText(TextField.KILOMETER, getString(R.string.unit_symbol_kilometer));
     mapScaleBar.setText(TextField.METER, getString(R.string.unit_symbol_meter));
+  }
+  
+  private void setMapGenerator(MapGeneratorInternal type){
+	  if(this.mapGeneratorInternal != type){
+		  this.mapGeneratorInternal = type;
+		  this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
+	  }
   }
 
   private void disableShowMyLocation() {
@@ -347,9 +403,9 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         && intent.getStringExtra(FilePicker.SELECTED_FILE) != null) {
       try {
         this.mapView.setRenderTheme(new File(intent.getStringExtra(FilePicker.SELECTED_FILE)));
-        Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		editor.putString(KEY_MAP_RENDERER, intent.getStringExtra(FilePicker.SELECTED_FILE));
-		editor.commit();
+        //Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
+		//editor.putString(KEY_MAP_RENDERER, intent.getStringExtra(FilePicker.SELECTED_FILE));
+		//editor.commit();
       } catch (FileNotFoundException e) {
         showToastOnUiThread(e.getLocalizedMessage());
       }
@@ -359,7 +415,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    
     this.screenshotCapturer = new ScreenshotCapturer(this);
     this.screenshotCapturer.start();
 
@@ -382,20 +439,34 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     this.navigationOverlay = new NavigationOverlay(this.myLocationOverlay);
     this.listOverlay = new ListOverlay();
     
+    /* what is shown */
+    if (savedInstanceState != null){
+    	this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
+    	this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);
+    }else{
+        this.showPins = sharedPreferences.getBoolean(BUNDLE_SHOW_PINS, true);
+        this.showLabels = sharedPreferences.getBoolean(BUNDLE_SHOW_LABELS, true);
+    }
     /* add items received via Intent */
     Bundle bundle = getIntent().getExtras();
+    boolean center = bundle != null && bundle.getBoolean("center", false);
+    boolean navigate = bundle != null && bundle.getBoolean("navigate", false);
     if (bundle != null && bundle.containsKey("items")) {
       ArrayList<MapPointPack> items = bundle.getParcelableArrayList("items");
       showMapPack(items);
     }else{
     	showMapPack(VectorMapDataProvider.getInstance().getItems());
     }
-    if (bundle != null && bundle.getBoolean("center", false) && itemsLatitude != 0 && itemsLongitude != 0) {
-        GeoPoint geoPoint = new GeoPoint(itemsLatitude, itemsLongitude);
+    if (center && itemsLatitude != 0 && itemsLongitude != 0) {
+    	GeoPoint geoPoint = null;
+    	if(navigate && this.navigationOverlay.getTarget() != null)
+    		geoPoint = this.navigationOverlay.getTarget();
+    	else
+    		geoPoint = new GeoPoint(itemsLatitude, itemsLongitude);
         MapPosition newMapPosition =
             new MapPosition(geoPoint, mapView.getMapViewPosition().getZoomLevel());
         mapView.getMapViewPosition().setMapPosition(newMapPosition);
-      }
+    }
     /* end of adding items */
     mapView.getOverlays().add(listOverlay);
 
@@ -411,7 +482,6 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 			}
 	    }
     }else{
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
     	    enableShowMyLocation(sharedPreferences.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
     	    if (sharedPreferences.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
@@ -420,10 +490,42 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     	    }
         }
     }
+    
+    ToggleButton showPinsButton = ((ToggleButton) findViewById(R.id.showPinsView));
+    showPinsButton.setChecked(this.showPins);
+    showPinsButton.setOnClickListener(new OnClickListener() {
+      
+      @Override
+      public void onClick(View v) {
+        showPins = ((ToggleButton) v).isChecked();
+        visibilityChanged();
+      }
+    });
+    ToggleButton showLabelsButton = ((ToggleButton) findViewById(R.id.showLabelsView));
+    showLabelsButton.setChecked(this.showLabels);
+    showLabelsButton.setOnClickListener(new OnClickListener() {
+    
+      @Override
+      public void onClick(View v) {
+        showLabels = ((ToggleButton) v).isChecked();
+        visibilityChanged();
+      }
+    });
+    
+    // restore map generator
+    if (sharedPreferences.contains(KEY_MAP_GENERATOR)) {
+        try{
+            MapGeneratorInternal type = MapGeneratorInternal.valueOf(sharedPreferences.getString(KEY_MAP_GENERATOR, null));
+            setMapGenerator(type);
+        }catch(Exception e){
+            // discard
+        }
+    }
   }
   
   private void showMapPack(ArrayList<MapPointPack> packs){
-      this.navigationOverlay.setTarget(null);
+      synchronized(this.listOverlay){
+	  this.navigationOverlay.setTarget(null);
 	  itemsLatitude = itemsLongitude = 0;
 	  int count = 0;
 	  List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
@@ -455,7 +557,10 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 	          icon = Marker.boundCenterBottom(icon);
 	          for (MapPoint mp : pack.getPoints()) {
 	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-	            overlayItems.add(new CaptionMarker(geoPoint, icon, mp.getName()));
+	            CaptionMarker captionMarker = new CaptionMarker(geoPoint, icon, mp.getName());
+	            captionMarker.setMarkerVisible(showPins);
+	            captionMarker.setCaptionVisible(showLabels);
+	            overlayItems.add(captionMarker);
 	            if(mp.isTarget())
 	            	this.navigationOverlay.setTarget(geoPoint);
 	            itemsLatitude += mp.getLatitude();
@@ -468,6 +573,22 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 		  itemsLatitude /= count;
 		  itemsLongitude /= count;
 	  }
+      }
+  }
+  
+  private void visibilityChanged(){
+      synchronized(this.listOverlay){
+          List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+          for(int i=0; i<overlayItems.size(); i++){
+    	  	OverlayItem item = overlayItems.get(i);
+    	  	if(item instanceof CaptionMarker){
+    	  	    CaptionMarker captionMarker = (CaptionMarker) item;
+    	  	    captionMarker.setMarkerVisible(this.showPins);
+    	  	    captionMarker.setCaptionVisible(this.showLabels);
+    	  	}
+          }
+      }
+      this.mapView.getOverlayController().redrawOverlays();
   }
 
   private Circle createCircle(GeoPoint geoPoint) {
@@ -561,6 +682,9 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     preferences.putBoolean(BUNDLE_SHOW_MY_LOCATION, this.myLocationOverlay.isMyLocationEnabled());
     preferences.putBoolean(BUNDLE_CENTER_AT_FIRST_FIX, this.myLocationOverlay.isCenterAtNextFix());
     preferences.putBoolean(BUNDLE_SNAP_TO_LOCATION, this.myLocationOverlay.isSnapToLocationEnabled());
+    preferences.putBoolean(BUNDLE_SHOW_PINS, this.showPins);
+    preferences.putBoolean(BUNDLE_SHOW_LABELS, this.showLabels);
+    preferences.putString(KEY_MAP_GENERATOR, this.mapGeneratorInternal.name());
     preferences.commit();
     disableShowMyLocation();
   }
@@ -723,17 +847,17 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         new DebugSettings(drawTileCoordinates, drawTileFrames, highlightWaterTiles);
     this.mapView.setDebugSettings(debugSettings);
 
-    if (this.mapView.getMapFile() == null) {
-      startMapFilePicker();
-    }
+//    if (this.mapView.getMapFile() == null) {
+//      //startMapFilePicker();
+//    }
     // restore renderer
-	if (sharedPreferences.contains(KEY_MAP_RENDERER)) {
-		try {
-			this.mapView.setRenderTheme((new File(sharedPreferences.getString(KEY_MAP_RENDERER, null))));
-		} catch (FileNotFoundException ex) {
-			// file not found, using internal Osmarenderer
-		}
-	}
+//	if (sharedPreferences.contains(KEY_MAP_RENDERER)) {
+//		try {
+//			this.mapView.setRenderTheme((new File(sharedPreferences.getString(KEY_MAP_RENDERER, null))));
+//		} catch (FileNotFoundException ex) {
+//			// file not found, using internal Osmarenderer
+//		}
+//	}
 	
 	Settings.setCurrentActivity(this);
   }
@@ -744,6 +868,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     outState.putBoolean(BUNDLE_SHOW_MY_LOCATION, this.myLocationOverlay.isMyLocationEnabled());
     outState.putBoolean(BUNDLE_CENTER_AT_FIRST_FIX, this.myLocationOverlay.isCenterAtNextFix());
     outState.putBoolean(BUNDLE_SNAP_TO_LOCATION, this.myLocationOverlay.isSnapToLocationEnabled());
+    outState.putBoolean(BUNDLE_SHOW_PINS, this.showPins);
+    outState.putBoolean(BUNDLE_SHOW_LABELS, this.showLabels);
   }
 
   /**
@@ -812,7 +938,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 				mdp.clear();
 				mdp.addAll();
 				showMapPack(mdp.getItems());
-				mapView.redraw();
+				mapView.getOverlayController().redrawOverlays();
 			}
 		});
 	}

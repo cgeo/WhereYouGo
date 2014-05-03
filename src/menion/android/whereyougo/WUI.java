@@ -209,9 +209,24 @@ public class WUI implements UI {
 	        new Intent(activity,
 	            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
     	  activity.startActivity(intent11);
+    	  return;
     }
 
     closeActivity(activity);
+  }
+  
+  public void showMap(boolean center, boolean navigate) {
+	    Activity activity = getParentActivity();
+	    Logger.w(TAG, "showMap(), parent:" + activity + ", center:" + center + ", navigate:" + navigate);
+
+	    // disable currentActivity
+	    Settings.setCurrentActivity(null);
+	    Intent intent =
+		        new Intent(activity,
+		            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+	    intent.putExtra("center", center);
+	    intent.putExtra("navigate", navigate);
+	    activity.startActivity(intent);
   }
 
   private static ProgressDialog progressDialog;

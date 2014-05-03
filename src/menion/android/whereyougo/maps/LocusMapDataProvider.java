@@ -135,4 +135,20 @@ public class LocusMapDataProvider implements MapDataProvider {
 		}
 		pack.addWaypoint(new Waypoint(et.name, loc));
 	}
+	
+	public static Waypoint locusMapWaypoint(EventTable et) {
+		if (et == null || !et.isLocated() || !et.isVisible())
+			return null;
+
+		Location loc = new Location();
+		if (et instanceof Zone) {
+			Zone z = ((Zone) et);
+			loc.setLatitude(z.nearestPoint.latitude);
+			loc.setLongitude(z.nearestPoint.longitude);
+		} else {
+			loc.setLatitude(et.position.latitude);
+			loc.setLongitude(et.position.longitude);
+		}
+		return new Waypoint(et.name, loc);
+	}
 }

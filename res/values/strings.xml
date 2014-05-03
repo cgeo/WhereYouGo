@@ -129,6 +129,16 @@
 	<string name="menu_info_map_file">Map file properties</string>
 	<string name="menu_info_about">About this software</string>
 	<string name="menu_mapfile">Map file</string>
+	<string name="menu_mapgenerator">Map source</string>
+	<string name="menu_mapgenerator_blank">blank</string>
+	<string name="menu_mapgenerator_database">OSM (offline vector)</string>
+	<string name="menu_mapgenerator_mapnik">Mapnik (online)</string>
+	<string name="menu_mapgenerator_opencyclemap">OpenCycleMap (online)</string>
+	<string name="menu_mapgenerator_opentransportmap">OpenTransportMap (online)</string>
+	<string name="menu_mapgenerator_mapquest">Mapquest (online)</string>
+	<string name="menu_mapgenerator_mapbox">MapBox (online)</string>
+	<string name="menu_mapgenerator_komoot">Komoot (online)</string>
+	<string name="menu_mapgenerator_skobbler">Skobbler (online)</string>
 	<string name="menu_position">Position</string>
 	<string name="menu_position_enter_coordinates">Enter coordinates</string>
 	<string name="menu_position_last_known">Last known location</string>

@@ -129,6 +129,16 @@
 	<string name="menu_info_map_file">Vlastnosti mapy</string>
 	<string name="menu_info_about">O programu</string>
 	<string name="menu_mapfile">Soubor mapy</string>
+	<string name="menu_mapgenerator">Typ mapy</string>
+	<string name="menu_mapgenerator_blank">prázdná</string>
+	<string name="menu_mapgenerator_database">OSM (offline vektor)</string>
+	<string name="menu_mapgenerator_mapnik">Mapnik (online)</string>
+	<string name="menu_mapgenerator_opencyclemap">OpenCycleMap (online)</string>
+	<string name="menu_mapgenerator_opentransportmap">OpenTransportMap (online)</string>
+	<string name="menu_mapgenerator_mapquest">Mapquest (online)</string>
+	<string name="menu_mapgenerator_mapbox">MapBox (online)</string>
+	<string name="menu_mapgenerator_komoot">Komoot (online)</string>
+	<string name="menu_mapgenerator_skobbler">Skobbler (online)</string>
 	<string name="menu_position">Pozice</string>
 	<string name="menu_position_enter_coordinates">Vložte souřadnice</string>
 	<string name="menu_position_last_known">Poslední známá pozice</string>

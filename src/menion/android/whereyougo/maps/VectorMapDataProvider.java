@@ -94,7 +94,7 @@ public class VectorMapDataProvider implements MapDataProvider {
 	}
 
 	public void addZone(Zone z, boolean mark) {
-		if (z == null || !z.isLocated()/* || !z.isVisible()*/)
+		if (z == null || !z.isLocated() || !z.isVisible())
 			return;
 
 		MapPointPack border = new MapPointPack();
@@ -122,7 +122,7 @@ public class VectorMapDataProvider implements MapDataProvider {
 	}
 
 	public void addOther(EventTable et, boolean mark) {
-		if (et == null || !et.isLocated()/* || !et.isVisible()*/)
+		if (et == null || !et.isLocated() || !et.isVisible())
 			return;
 
 		MapPointPack pack = new MapPointPack();

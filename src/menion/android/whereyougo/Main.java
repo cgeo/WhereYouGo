@@ -152,7 +152,7 @@ public class Main extends CustomMain {
 	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
 	  mdp.clear();
 	  mdp.addCartridges(cartridgeFiles);
-	  Main.wui.showScreen(WUI.SCREEN_MAP, null);
+	  Main.wui.showMap(false, false);
   }
   
   private void locusMap() {

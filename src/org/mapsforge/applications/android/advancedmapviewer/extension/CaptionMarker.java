@@ -29,7 +29,9 @@ public class CaptionMarker extends Marker {
     // labelBgPaint.setTextAlign(Align.CENTER);
   }
 
-  String caption;
+  protected String caption;
+  protected boolean markerVisible = true;
+  protected boolean captionVisible = true;
 
   /**
    * @param geoPoint the initial geographical coordinates of this marker (may be null).
@@ -44,9 +46,11 @@ public class CaptionMarker extends Marker {
   @Override
   public synchronized boolean draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas,
       Point canvasPosition) {
-    if (!super.draw(boundingBox, zoomLevel, canvas, canvasPosition))
+    if (markerVisible && !super.draw(boundingBox, zoomLevel, canvas, canvasPosition))
       return false;
-    if (caption == null)
+    if (captionVisible && caption == null)
+      return false;
+    if(!captionVisible)
       return true;
 
     GeoPoint geoPoint = getGeoPoint();
@@ -92,5 +96,23 @@ public class CaptionMarker extends Marker {
   public synchronized void setCaption(String caption) {
     this.caption = caption;
   }
+
+    public boolean isMarkerVisible() {
+        return markerVisible;
+    }
+    
+    public void setMarkerVisible(boolean markerVisible) {
+        this.markerVisible = markerVisible;
+    }
+    
+    public boolean isCaptionVisible() {
+        return captionVisible;
+    }
+    
+    public void setCaptionVisible(boolean captionVisible) {
+        this.captionVisible = captionVisible;
+    }
+  
+  
 
 }
