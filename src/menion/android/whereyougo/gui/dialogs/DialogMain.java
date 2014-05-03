@@ -2,6 +2,7 @@ package menion.android.whereyougo.gui.dialogs;
 
 import menion.android.whereyougo.MainAfterStart;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.extension.CustomMain;
 import menion.android.whereyougo.settings.Loc;
 import menion.android.whereyougo.settings.Settings;
 import menion.android.whereyougo.utils.A;
@@ -32,7 +33,7 @@ public class DialogMain extends DialogFragmentEx {
     buffer
         .append(getString(R.string.web_page)
             + "<br />&nbsp;&nbsp;<b><a href=\"http://forum.asamm.cz\">http://forum.asamm.cz</a></b><br /><br />");
-    buffer.append("Vektorové mapy a další úpravy:");
+    buffer.append(getString(R.string.coauthor));
     buffer.append("<br />&nbsp;&nbsp;<b>biylda</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;biylda@gmail.com<br /><br />");
     buffer.append(getString(R.string.libraries));
@@ -47,7 +48,11 @@ public class DialogMain extends DialogFragmentEx {
         .append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>https://code.google.com/p/mapsforge/</small>");
     buffer.append("</div>");
 
+    // add info
+    buffer.append("<br />");
+    buffer.append(CustomMain.loadAssetString(Settings.getLanguageCode() + "_first.html"));
     // add news
+    buffer.append("<br />");
     buffer.append(MainAfterStart.getNews(1, Settings.getApplicationVersionActual()));
 
     WebView webView = new WebView(A.getMain());

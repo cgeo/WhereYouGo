@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    
+  <update name="0.8.8" id="34" time="3.5.2014">
+	<li>fixed: some bugs</li>
+	<li>fixed: no animations in dialogs</li>
+	<li>fixed: no cartridges in folder required when starting maps</li>
+	<li>added: option to guide to the nearest zone point or to defined center</li>
+	<li>added: arrow on map displays player's bearing</li>
+	<li>added: line from my location to target</li>
+	<li>added: turn on/off pins, labels on map</li>
+	<li>added: center map when displaying specific object</li>
+	<li>added: online maps support, remember map provider</li>
+  </update>
 
   <update name="0.8.7" id="33" time="19.4.2014">
     <li>fixed: choose wherigo folder</li>
