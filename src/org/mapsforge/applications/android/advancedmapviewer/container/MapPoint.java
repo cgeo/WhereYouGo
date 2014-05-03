@@ -20,12 +20,12 @@ public class MapPoint implements Parcelable {
   public MapPoint(String name, double latitude, double longitude) {
     this(name, latitude, longitude, false);
   }
-  
+
   public MapPoint(String name, double latitude, double longitude, boolean target) {
-	  this.name = name;
-	  this.latitude = latitude;
-	  this.longitude = longitude;
-	  this.target = target;
+    this.name = name;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.target = target;
   }
 
   public String getName() {
@@ -51,13 +51,13 @@ public class MapPoint implements Parcelable {
   public void setLongitude(double longitude) {
     this.longitude = longitude;
   }
-  
+
   public boolean isTarget() {
-	return target;
+    return target;
   }
 
   public void setTarget(boolean target) {
-	this.target = target;
+    this.target = target;
   }
 
   @Override
@@ -72,7 +72,7 @@ public class MapPoint implements Parcelable {
     p.writeString(name);
     p.writeDouble(latitude);
     p.writeDouble(longitude);
-    p.writeByte((byte)(target ? 1 : 0));
+    p.writeByte((byte) (target ? 1 : 0));
   }
 
   public static final Parcelable.Creator<MapPoint> CREATOR = new Parcelable.Creator<MapPoint>() {

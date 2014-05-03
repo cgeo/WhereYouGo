@@ -205,28 +205,29 @@ public class WUI implements UI {
         activity.startActivity(intent10);
         return;
       case SCREEN_MAP:
-    	  Intent intent11 =
-	        new Intent(activity,
-	            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-    	  activity.startActivity(intent11);
-    	  return;
+        Intent intent11 =
+            new Intent(activity,
+                org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+        activity.startActivity(intent11);
+        return;
     }
 
     closeActivity(activity);
   }
-  
-  public void showMap(boolean center, boolean navigate) {
-	    Activity activity = getParentActivity();
-	    Logger.w(TAG, "showMap(), parent:" + activity + ", center:" + center + ", navigate:" + navigate);
 
-	    // disable currentActivity
-	    Settings.setCurrentActivity(null);
-	    Intent intent =
-		        new Intent(activity,
-		            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-	    intent.putExtra("center", center);
-	    intent.putExtra("navigate", navigate);
-	    activity.startActivity(intent);
+  public void showMap(boolean center, boolean navigate) {
+    Activity activity = getParentActivity();
+    Logger
+        .w(TAG, "showMap(), parent:" + activity + ", center:" + center + ", navigate:" + navigate);
+
+    // disable currentActivity
+    Settings.setCurrentActivity(null);
+    Intent intent =
+        new Intent(activity,
+            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+    intent.putExtra("center", center);
+    intent.putExtra("navigate", navigate);
+    activity.startActivity(intent);
   }
 
   private static ProgressDialog progressDialog;
@@ -264,7 +265,7 @@ public class WUI implements UI {
     if (activity == null || !(activity instanceof CustomActivity))
       activity = (CustomActivity) A.getMain();
 
-    return (CustomActivity)activity;
+    return (CustomActivity) activity;
   }
 
   private static void closeActivity(Activity activity) {

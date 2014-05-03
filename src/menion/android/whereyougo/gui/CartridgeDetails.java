@@ -47,10 +47,10 @@ public class CartridgeDetails extends CustomActivity {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-	if(A.getMain() == null || Main.selectedFile == null || Main.cartridgeFile == null){
-		finish();
-		return;
-	}
+    if (A.getMain() == null || Main.selectedFile == null || Main.cartridgeFile == null) {
+      finish();
+      return;
+    }
     setContentView(R.layout.layout_details);
 
     TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);

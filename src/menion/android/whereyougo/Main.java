@@ -135,9 +135,9 @@ public class Main extends CustomMain {
 
   private void clickMap() {
     // check cartridges
-//    if (!isAnyCartridgeAvailable()) {
-//      return;
-//    }
+    // if (!isAnyCartridgeAvailable()) {
+    // return;
+    // }
     switch (SettingValues.GLOBAL_MAP_PROVIDER) {
       case Settings.VALUE_MAP_PROVIDER_VECTOR:
         vectorMap();
@@ -147,24 +147,24 @@ public class Main extends CustomMain {
         break;
     }
   }
-  
-  private void vectorMap() {
-	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-	  mdp.clear();
-	  mdp.addCartridges(cartridgeFiles);
-	  Main.wui.showMap(false, false);
-  }
-  
-  private void locusMap() {
-	  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
-	  mdp.clear();
-	  mdp.addCartridges(cartridgeFiles);
 
-		try {
-		  ActionDisplayPoints.sendPack(this, mdp.getPoints(), ExtraAction.NONE);
-		} catch (Exception e) {
-		  Logger.e(TAG, "clickMap() locusMap()", e);
-		}
+  private void vectorMap() {
+    VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+    mdp.clear();
+    mdp.addCartridges(cartridgeFiles);
+    Main.wui.showMap(false, false);
+  }
+
+  private void locusMap() {
+    LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
+    mdp.clear();
+    mdp.addCartridges(cartridgeFiles);
+
+    try {
+      ActionDisplayPoints.sendPack(this, mdp.getPoints(), ExtraAction.NONE);
+    } catch (Exception e) {
+      Logger.e(TAG, "clickMap() locusMap()", e);
+    }
   }
 
   private boolean isAnyCartridgeAvailable() {

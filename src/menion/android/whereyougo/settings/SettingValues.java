@@ -135,7 +135,8 @@ public class SettingValues {
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
     GLOBAL_ROOT = getPrefString(c, KEY_S_ROOT, DEFAULT_ROOT);
-    GLOBAL_MAP_PROVIDER = Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
+    GLOBAL_MAP_PROVIDER =
+        Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
     GLOBAL_SAVEGAME_AUTO = getPrefBoolean(c, KEY_B_SAVEGAME_AUTO, DEFAULT_SAVEGAME_AUTO);
     GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
     GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
@@ -180,6 +181,7 @@ public class SettingValues {
     GUIDING_WAYPOINT_SOUND_DISTANCE =
         Utils.parseInt(getPrefString(c, KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE,
             DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE));
-    GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(getPrefString(c, KEY_S_GUIDING_ZONE_POINT, DEFAULT_GUIDING_ZONE_POINT));
+    GUIDING_ZONE_NAVIGATION_POINT =
+        Utils.parseInt(getPrefString(c, KEY_S_GUIDING_ZONE_POINT, DEFAULT_GUIDING_ZONE_POINT));
   }
 }

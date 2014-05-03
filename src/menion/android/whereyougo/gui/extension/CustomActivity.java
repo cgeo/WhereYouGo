@@ -154,10 +154,10 @@ public class CustomActivity extends FragmentActivity {
   public int getParentViewId() {
     return -1;
   }
-  
+
   @Override
-	public void finish() {
-		super.finish();
-		overridePendingTransition(0, 0);
-	}
+  public void finish() {
+    super.finish();
+    overridePendingTransition(0, 0);
+  }
 }

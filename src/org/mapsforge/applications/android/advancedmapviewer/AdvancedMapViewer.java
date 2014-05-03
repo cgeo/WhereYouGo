@@ -96,7 +96,7 @@ import android.widget.ToggleButton;
  * preferences can be adjusted via the {@link EditPreferences} activity and screenshots of the map
  * may be taken in different image formats.
  */
-public class AdvancedMapViewer extends MapActivity implements Refreshable{
+public class AdvancedMapViewer extends MapActivity implements Refreshable {
   /**
    * The default number of tiles in the file system cache.
    */
@@ -116,13 +116,12 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
    * The maximum move speed factor of the map.
    */
   public static final int MOVE_SPEED_MAX = 30;
-  
+
   /**
    * The maximum icon size.
    */
   public static final int ICON_SIZE_MAX = 32;
 
-  //private static final String KEY_MAP_RENDERER = "MAPSFORGE_mapRenderer"; // store map renderer
   private static final String KEY_MAP_GENERATOR = "mapGenerator"; // store map generator
   private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
   private static final String BUNDLE_SHOW_MY_LOCATION = "showMyLocation";
@@ -219,9 +218,6 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
 
       case R.id.menu_render_theme_osmarender:
         this.mapView.setRenderTheme(InternalRenderTheme.OSMARENDER);
-        //Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		//editor.remove(KEY_MAP_RENDERER);
-		//editor.commit();
         return true;
 
       case R.id.menu_render_theme_select_file:
@@ -233,35 +229,35 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         return true;
 
       case R.id.menu_mapgenerator:
-          return true;
+        return true;
       case R.id.menu_mapgenerator_blank:
-    	  setMapGenerator(MapGeneratorInternal.BLANK);
-          return true;
+        setMapGenerator(MapGeneratorInternal.BLANK);
+        return true;
       case R.id.menu_mapgenerator_database:
-    	  setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
-          return true;
+        setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
+        return true;
       case R.id.menu_mapgenerator_mapnik:
-    	  setMapGenerator(MapGeneratorInternal.MAPNIK);
-          return true;
+        setMapGenerator(MapGeneratorInternal.MAPNIK);
+        return true;
       case R.id.menu_mapgenerator_opencyclemap:
-    	  setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
-          return true;
+        setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
+        return true;
       case R.id.menu_mapgenerator_opentransportmap:
-    	  setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
-          return true;
-	  case R.id.menu_mapgenerator_mapquest:
-		  setMapGenerator(MapGeneratorInternal.MAPQUEST);
-	      return true;
+        setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
+        return true;
+      case R.id.menu_mapgenerator_mapquest:
+        setMapGenerator(MapGeneratorInternal.MAPQUEST);
+        return true;
       case R.id.menu_mapgenerator_mapbox:
-    	  setMapGenerator(MapGeneratorInternal.MAPBOX);
-          return true;
+        setMapGenerator(MapGeneratorInternal.MAPBOX);
+        return true;
       case R.id.menu_mapgenerator_komoot:
-    	  setMapGenerator(MapGeneratorInternal.KOMOOT);
-          return true;
+        setMapGenerator(MapGeneratorInternal.KOMOOT);
+        return true;
       case R.id.menu_mapgenerator_skobbler:
-    	  setMapGenerator(MapGeneratorInternal.SKOBBLER);
-          return true;
-          
+        setMapGenerator(MapGeneratorInternal.SKOBBLER);
+        return true;
+
       default:
         return false;
     }
@@ -280,18 +276,18 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
       menu.findItem(R.id.menu_position_my_location_disable).setVisible(false);
       menu.findItem(R.id.menu_position_my_location_disable).setEnabled(false);
     }
-    
+
     if (mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER) {
-        menu.findItem(R.id.menu_info_map_file).setEnabled(true);
-        menu.findItem(R.id.menu_position_map_center).setEnabled(true);
-        menu.findItem(R.id.menu_render_theme).setEnabled(true);
-        menu.findItem(R.id.menu_mapfile).setEnabled(true);
-	} else {
-	    menu.findItem(R.id.menu_info_map_file).setEnabled(false);
-	    menu.findItem(R.id.menu_position_map_center).setEnabled(false);
-        menu.findItem(R.id.menu_render_theme).setEnabled(false);
-        menu.findItem(R.id.menu_mapfile).setEnabled(false);
-	}
+      menu.findItem(R.id.menu_info_map_file).setEnabled(true);
+      menu.findItem(R.id.menu_position_map_center).setEnabled(true);
+      menu.findItem(R.id.menu_render_theme).setEnabled(true);
+      menu.findItem(R.id.menu_mapfile).setEnabled(true);
+    } else {
+      menu.findItem(R.id.menu_info_map_file).setEnabled(false);
+      menu.findItem(R.id.menu_position_map_center).setEnabled(false);
+      menu.findItem(R.id.menu_render_theme).setEnabled(false);
+      menu.findItem(R.id.menu_mapfile).setEnabled(false);
+    }
 
     return true;
   }
@@ -311,12 +307,12 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     mapScaleBar.setText(TextField.KILOMETER, getString(R.string.unit_symbol_kilometer));
     mapScaleBar.setText(TextField.METER, getString(R.string.unit_symbol_meter));
   }
-  
-  private void setMapGenerator(MapGeneratorInternal type){
-	  if(this.mapGeneratorInternal != type){
-		  this.mapGeneratorInternal = type;
-		  this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
-	  }
+
+  private void setMapGenerator(MapGeneratorInternal type) {
+    if (this.mapGeneratorInternal != type) {
+      this.mapGeneratorInternal = type;
+      this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
+    }
   }
 
   private void disableShowMyLocation() {
@@ -403,9 +399,6 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         && intent.getStringExtra(FilePicker.SELECTED_FILE) != null) {
       try {
         this.mapView.setRenderTheme(new File(intent.getStringExtra(FilePicker.SELECTED_FILE)));
-        //Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-		//editor.putString(KEY_MAP_RENDERER, intent.getStringExtra(FilePicker.SELECTED_FILE));
-		//editor.commit();
       } catch (FileNotFoundException e) {
         showToastOnUiThread(e.getLocalizedMessage());
       }
@@ -416,7 +409,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    
+
     this.screenshotCapturer = new ScreenshotCapturer(this);
     this.screenshotCapturer.start();
 
@@ -432,20 +425,20 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
       }
     });
 
-    Drawable drawable =
-            getResources().getDrawable(R.drawable.my_location_chevron);
-        drawable = Marker.boundCenter(drawable);
-    this.myLocationOverlay = new SensorMyLocationOverlay(this, this.mapView, new RotationMarker(null, drawable));
+    Drawable drawable = getResources().getDrawable(R.drawable.my_location_chevron);
+    drawable = Marker.boundCenter(drawable);
+    this.myLocationOverlay =
+        new SensorMyLocationOverlay(this, this.mapView, new RotationMarker(null, drawable));
     this.navigationOverlay = new NavigationOverlay(this.myLocationOverlay);
     this.listOverlay = new ListOverlay();
-    
+
     /* what is shown */
-    if (savedInstanceState != null){
-    	this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
-    	this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);
-    }else{
-        this.showPins = sharedPreferences.getBoolean(BUNDLE_SHOW_PINS, true);
-        this.showLabels = sharedPreferences.getBoolean(BUNDLE_SHOW_LABELS, true);
+    if (savedInstanceState != null) {
+      this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
+      this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);
+    } else {
+      this.showPins = sharedPreferences.getBoolean(BUNDLE_SHOW_PINS, true);
+      this.showLabels = sharedPreferences.getBoolean(BUNDLE_SHOW_LABELS, true);
     }
     /* add items received via Intent */
     Bundle bundle = getIntent().getExtras();
@@ -454,18 +447,18 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     if (bundle != null && bundle.containsKey("items")) {
       ArrayList<MapPointPack> items = bundle.getParcelableArrayList("items");
       showMapPack(items);
-    }else{
-    	showMapPack(VectorMapDataProvider.getInstance().getItems());
+    } else {
+      showMapPack(VectorMapDataProvider.getInstance().getItems());
     }
     if (center && itemsLatitude != 0 && itemsLongitude != 0) {
-    	GeoPoint geoPoint = null;
-    	if(navigate && this.navigationOverlay.getTarget() != null)
-    		geoPoint = this.navigationOverlay.getTarget();
-    	else
-    		geoPoint = new GeoPoint(itemsLatitude, itemsLongitude);
-        MapPosition newMapPosition =
-            new MapPosition(geoPoint, mapView.getMapViewPosition().getZoomLevel());
-        mapView.getMapViewPosition().setMapPosition(newMapPosition);
+      GeoPoint geoPoint = null;
+      if (navigate && this.navigationOverlay.getTarget() != null)
+        geoPoint = this.navigationOverlay.getTarget();
+      else
+        geoPoint = new GeoPoint(itemsLatitude, itemsLongitude);
+      MapPosition newMapPosition =
+          new MapPosition(geoPoint, mapView.getMapViewPosition().getZoomLevel());
+      mapView.getMapViewPosition().setMapPosition(newMapPosition);
     }
     /* end of adding items */
     mapView.getOverlays().add(listOverlay);
@@ -473,28 +466,28 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
     this.wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "AMV");
 
-    if (savedInstanceState != null){
-	    if (savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
-			enableShowMyLocation(savedInstanceState.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
-			if (savedInstanceState.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
-				enableSnapToLocation(false);
-				//this.snapToLocationView.setChecked(true);
-			}
-	    }
-    }else{
-        if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
-    	    enableShowMyLocation(sharedPreferences.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
-    	    if (sharedPreferences.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
-    	    	enableSnapToLocation(false);
-    	    	//this.snapToLocationView.setChecked(true);
-    	    }
+    if (savedInstanceState != null) {
+      if (savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+        enableShowMyLocation(savedInstanceState.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
+        if (savedInstanceState.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
+          enableSnapToLocation(false);
+          // this.snapToLocationView.setChecked(true);
         }
+      }
+    } else {
+      if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+        enableShowMyLocation(sharedPreferences.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
+        if (sharedPreferences.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
+          enableSnapToLocation(false);
+          // this.snapToLocationView.setChecked(true);
+        }
+      }
     }
-    
+
     ToggleButton showPinsButton = ((ToggleButton) findViewById(R.id.showPinsView));
     showPinsButton.setChecked(this.showPins);
     showPinsButton.setOnClickListener(new OnClickListener() {
-      
+
       @Override
       public void onClick(View v) {
         showPins = ((ToggleButton) v).isChecked();
@@ -504,91 +497,95 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     ToggleButton showLabelsButton = ((ToggleButton) findViewById(R.id.showLabelsView));
     showLabelsButton.setChecked(this.showLabels);
     showLabelsButton.setOnClickListener(new OnClickListener() {
-    
+
       @Override
       public void onClick(View v) {
         showLabels = ((ToggleButton) v).isChecked();
         visibilityChanged();
       }
     });
-    
+
     // restore map generator
     if (sharedPreferences.contains(KEY_MAP_GENERATOR)) {
-        try{
-            MapGeneratorInternal type = MapGeneratorInternal.valueOf(sharedPreferences.getString(KEY_MAP_GENERATOR, null));
-            setMapGenerator(type);
-        }catch(Exception e){
-            // discard
-        }
+      try {
+        MapGeneratorInternal type =
+            MapGeneratorInternal.valueOf(sharedPreferences.getString(KEY_MAP_GENERATOR, null));
+        setMapGenerator(type);
+      } catch (Exception e) {
+        // discard
+      }
     }
   }
-  
-  private void showMapPack(ArrayList<MapPointPack> packs){
-      synchronized(this.listOverlay){
-	  this.navigationOverlay.setTarget(null);
-	  itemsLatitude = itemsLongitude = 0;
-	  int count = 0;
-	  List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
-	  overlayItems.clear();
-	  for (MapPointPack pack : packs) {
-	        if (pack.isPolygon()) {
-	          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
-	          for (MapPoint mp : pack.getPoints()) {
-	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-	            geoPoints.add(geoPoint);
-	          }
-	          overlayItems.add(createPolyline(geoPoints));
-	        } else {
-	          Drawable icon = null;
-	          if(pack.getIcon() == null){
-		          icon =
-		              getResources().getDrawable(
-		                  pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
-	          }else{
-	        	  Bitmap b = pack.getIcon();
-	        	  if(b.getWidth() > ICON_SIZE_MAX && b.getWidth() >= b.getHeight()){
-	        		  b = Bitmap.createScaledBitmap(b, ICON_SIZE_MAX, ICON_SIZE_MAX*b.getHeight()/b.getWidth(), false);
-	        	  }
-	        	  else if(b.getHeight() > ICON_SIZE_MAX){
-	        		  b = Bitmap.createScaledBitmap(b, ICON_SIZE_MAX*b.getWidth()/b.getHeight(), ICON_SIZE_MAX, false);
-	        	  }
-	        	  icon = new BitmapDrawable(getResources(), b);
-	          }
-	          icon = Marker.boundCenterBottom(icon);
-	          for (MapPoint mp : pack.getPoints()) {
-	            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-	            CaptionMarker captionMarker = new CaptionMarker(geoPoint, icon, mp.getName());
-	            captionMarker.setMarkerVisible(showPins);
-	            captionMarker.setCaptionVisible(showLabels);
-	            overlayItems.add(captionMarker);
-	            if(mp.isTarget())
-	            	this.navigationOverlay.setTarget(geoPoint);
-	            itemsLatitude += mp.getLatitude();
-	            itemsLongitude += mp.getLongitude();
-	            ++count;
-	          }
-	        }
-	      }
-	  if(count > 0){
-		  itemsLatitude /= count;
-		  itemsLongitude /= count;
-	  }
-      }
-  }
-  
-  private void visibilityChanged(){
-      synchronized(this.listOverlay){
-          List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
-          for(int i=0; i<overlayItems.size(); i++){
-    	  	OverlayItem item = overlayItems.get(i);
-    	  	if(item instanceof CaptionMarker){
-    	  	    CaptionMarker captionMarker = (CaptionMarker) item;
-    	  	    captionMarker.setMarkerVisible(this.showPins);
-    	  	    captionMarker.setCaptionVisible(this.showLabels);
-    	  	}
+
+  private void showMapPack(ArrayList<MapPointPack> packs) {
+    synchronized (this.listOverlay) {
+      this.navigationOverlay.setTarget(null);
+      itemsLatitude = itemsLongitude = 0;
+      int count = 0;
+      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+      overlayItems.clear();
+      for (MapPointPack pack : packs) {
+        if (pack.isPolygon()) {
+          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+          for (MapPoint mp : pack.getPoints()) {
+            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+            geoPoints.add(geoPoint);
           }
+          overlayItems.add(createPolyline(geoPoints));
+        } else {
+          Drawable icon = null;
+          if (pack.getIcon() == null) {
+            icon =
+                getResources().getDrawable(
+                    pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
+          } else {
+            Bitmap b = pack.getIcon();
+            if (b.getWidth() > ICON_SIZE_MAX && b.getWidth() >= b.getHeight()) {
+              b =
+                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX,
+                      ICON_SIZE_MAX * b.getHeight() / b.getWidth(), false);
+            } else if (b.getHeight() > ICON_SIZE_MAX) {
+              b =
+                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX * b.getWidth() / b.getHeight(),
+                      ICON_SIZE_MAX, false);
+            }
+            icon = new BitmapDrawable(getResources(), b);
+          }
+          icon = Marker.boundCenterBottom(icon);
+          for (MapPoint mp : pack.getPoints()) {
+            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+            CaptionMarker captionMarker = new CaptionMarker(geoPoint, icon, mp.getName());
+            captionMarker.setMarkerVisible(showPins);
+            captionMarker.setCaptionVisible(showLabels);
+            overlayItems.add(captionMarker);
+            if (mp.isTarget())
+              this.navigationOverlay.setTarget(geoPoint);
+            itemsLatitude += mp.getLatitude();
+            itemsLongitude += mp.getLongitude();
+            ++count;
+          }
+        }
       }
-      this.mapView.getOverlayController().redrawOverlays();
+      if (count > 0) {
+        itemsLatitude /= count;
+        itemsLongitude /= count;
+      }
+    }
+  }
+
+  private void visibilityChanged() {
+    synchronized (this.listOverlay) {
+      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+      for (int i = 0; i < overlayItems.size(); i++) {
+        OverlayItem item = overlayItems.get(i);
+        if (item instanceof CaptionMarker) {
+          CaptionMarker captionMarker = (CaptionMarker) item;
+          captionMarker.setMarkerVisible(this.showPins);
+          captionMarker.setCaptionVisible(this.showLabels);
+        }
+      }
+    }
+    this.mapView.getOverlayController().redrawOverlays();
   }
 
   private Circle createCircle(GeoPoint geoPoint) {
@@ -681,7 +678,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     Editor preferences = PreferenceManager.getDefaultSharedPreferences(this).edit();
     preferences.putBoolean(BUNDLE_SHOW_MY_LOCATION, this.myLocationOverlay.isMyLocationEnabled());
     preferences.putBoolean(BUNDLE_CENTER_AT_FIRST_FIX, this.myLocationOverlay.isCenterAtNextFix());
-    preferences.putBoolean(BUNDLE_SNAP_TO_LOCATION, this.myLocationOverlay.isSnapToLocationEnabled());
+    preferences.putBoolean(BUNDLE_SNAP_TO_LOCATION,
+        this.myLocationOverlay.isSnapToLocationEnabled());
     preferences.putBoolean(BUNDLE_SHOW_PINS, this.showPins);
     preferences.putBoolean(BUNDLE_SHOW_LABELS, this.showLabels);
     preferences.putString(KEY_MAP_GENERATOR, this.mapGeneratorInternal.name());
@@ -695,9 +693,9 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     if (this.wakeLock.isHeld()) {
       this.wakeLock.release();
     }
-    
+
     if (Settings.getCurrentActivity() == this) {
-        Settings.setCurrentActivity(null);
+      Settings.setCurrentActivity(null);
     }
     // disable location
     MainApplication.onActivityPause();
@@ -847,19 +845,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
         new DebugSettings(drawTileCoordinates, drawTileFrames, highlightWaterTiles);
     this.mapView.setDebugSettings(debugSettings);
 
-//    if (this.mapView.getMapFile() == null) {
-//      //startMapFilePicker();
-//    }
-    // restore renderer
-//	if (sharedPreferences.contains(KEY_MAP_RENDERER)) {
-//		try {
-//			this.mapView.setRenderTheme((new File(sharedPreferences.getString(KEY_MAP_RENDERER, null))));
-//		} catch (FileNotFoundException ex) {
-//			// file not found, using internal Osmarenderer
-//		}
-//	}
-	
-	Settings.setCurrentActivity(this);
+    Settings.setCurrentActivity(this);
   }
 
   @Override
@@ -928,18 +914,18 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable{
     }
   }
 
-	@Override
-	public void refresh() {
-		runOnUiThread(new Runnable() {
+  @Override
+  public void refresh() {
+    runOnUiThread(new Runnable() {
 
-			@Override
-			public void run() {
-				VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-				mdp.clear();
-				mdp.addAll();
-				showMapPack(mdp.getItems());
-				mapView.getOverlayController().redrawOverlays();
-			}
-		});
-	}
+      @Override
+      public void run() {
+        VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+        mdp.clear();
+        mdp.addAll();
+        showMapPack(mdp.getItems());
+        mapView.getOverlayController().redrawOverlays();
+      }
+    });
+  }
 }

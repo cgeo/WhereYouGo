@@ -30,10 +30,10 @@
 
     <application
         android:name="menion.android.whereyougo.gui.extension.MainApplication"
+        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
-        android:theme="@style/AppTheme"
-        android:debuggable="true" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".Main"
             android:label="WhereYouGo"

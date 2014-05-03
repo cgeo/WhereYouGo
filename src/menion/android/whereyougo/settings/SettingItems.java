@@ -79,16 +79,14 @@ public class SettingItems {
   /*****************************/
 
   // GLOBAL
-  
-	public static void addPrefRoot(final CustomPreferenceActivity activity,
-			PreferenceCategory category) {
-		Preference pref = activity.addFilePreference(category,
-				R.string.pref_root, R.string.pref_root_desc,
-				Settings.KEY_S_ROOT, Settings.DEFAULT_ROOT, ".gwc",
-				REQUEST_ROOT);
-		setPreferenceText(activity, pref, SettingValues.GLOBAL_ROOT,
-				R.string.pref_root_desc);
-	}
+
+  public static void addPrefRoot(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    Preference pref =
+        activity.addFilePreference(category, R.string.pref_root, R.string.pref_root_desc,
+            Settings.KEY_S_ROOT, Settings.DEFAULT_ROOT, ".gwc", REQUEST_ROOT);
+    setPreferenceText(activity, pref, SettingValues.GLOBAL_ROOT, R.string.pref_root_desc);
+  }
 
   public static void addPrefMapProvider(final CustomPreferenceActivity activity,
       PreferenceCategory category) {
@@ -114,16 +112,16 @@ public class SettingItems {
     setListPreference(activity, (ListPreference) pref, SettingValues.GLOBAL_MAP_PROVIDER,
         R.string.pref_map_provider_desc);
   }
-  
+
   public static void addPrefSavegameAuto(CustomPreferenceActivity activity,
-	      PreferenceCategory category) {
+      PreferenceCategory category) {
     activity.addCheckBoxPreference(category, R.string.pref_save_game_auto,
-        R.string.pref_save_game_auto_desc, Settings.KEY_B_SAVEGAME_AUTO, Settings.DEFAULT_SAVEGAME_AUTO,
-        new Preference.OnPreferenceChangeListener() {
+        R.string.pref_save_game_auto_desc, Settings.KEY_B_SAVEGAME_AUTO,
+        Settings.DEFAULT_SAVEGAME_AUTO, new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-        	SettingValues.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
-        	return true;
+            SettingValues.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
+            return true;
           }
         });
   }
@@ -134,7 +132,7 @@ public class SettingItems {
         new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-        	SettingValues.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
+            SettingValues.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
             return true;
           }
         });
@@ -147,7 +145,7 @@ public class SettingItems {
         new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-        	SettingValues.GLOBAL_FULLSCREEN = Utils.parseBoolean(newValue);
+            SettingValues.GLOBAL_FULLSCREEN = Utils.parseBoolean(newValue);
             return true;
           }
         });
@@ -469,30 +467,31 @@ public class SettingItems {
     setEditTextPreference(activity, pref, SettingValues.GUIDING_WAYPOINT_SOUND_DISTANCE + "m",
         R.string.pref_guiding_sound_distance_waypoint_desc);
   }
-  
+
   public static void addPrefGuidingZonePoint(final CustomPreferenceActivity activity,
-	      PreferenceCategory category) {
-	    CharSequence[] entries =
-	        new CharSequence[] {Loc.get(R.string.pref_guiding_zone_point_center),
-	            Loc.get(R.string.pref_guiding_zone_point_nearest)};
-	    CharSequence[] entryValues =
-	        new CharSequence[] {String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_CENTER),
-	            String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_NEAREST)};
-	    ListPreference pref =
-	        activity.addListPreference(category, R.string.pref_guiding_zone_point,
-	            R.string.pref_guiding_zone_point_desc, Settings.KEY_S_GUIDING_ZONE_POINT,
-	            Settings.DEFAULT_GUIDING_ZONE_POINT, entries, entryValues,
-	            new Preference.OnPreferenceChangeListener() {
-	              @Override
-	              public boolean onPreferenceChange(Preference pref, Object newValue) {
-	                SettingValues.GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(newValue);
-	                setListPreference(activity, (ListPreference) pref,
-	                    SettingValues.GUIDING_ZONE_NAVIGATION_POINT, R.string.pref_guiding_zone_point_desc);
-	                return true;
-	              }
-	            });
-	    setListPreference(activity, (ListPreference) pref, SettingValues.GUIDING_ZONE_NAVIGATION_POINT,
-            R.string.pref_guiding_zone_point_desc);
+      PreferenceCategory category) {
+    CharSequence[] entries =
+        new CharSequence[] {Loc.get(R.string.pref_guiding_zone_point_center),
+            Loc.get(R.string.pref_guiding_zone_point_nearest)};
+    CharSequence[] entryValues =
+        new CharSequence[] {String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_CENTER),
+            String.valueOf(Settings.VALUE_GUIDING_ZONE_POINT_NEAREST)};
+    ListPreference pref =
+        activity.addListPreference(category, R.string.pref_guiding_zone_point,
+            R.string.pref_guiding_zone_point_desc, Settings.KEY_S_GUIDING_ZONE_POINT,
+            Settings.DEFAULT_GUIDING_ZONE_POINT, entries, entryValues,
+            new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                SettingValues.GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref,
+                    SettingValues.GUIDING_ZONE_NAVIGATION_POINT,
+                    R.string.pref_guiding_zone_point_desc);
+                return true;
+              }
+            });
+    setListPreference(activity, (ListPreference) pref, SettingValues.GUIDING_ZONE_NAVIGATION_POINT,
+        R.string.pref_guiding_zone_point_desc);
   }
 
   /********************************/
@@ -757,20 +756,20 @@ public class SettingItems {
         }
       }
       lastUsedPreference = null;
-    }else if(requestCode == REQUEST_ROOT){
-    	if(resultCode == Activity.RESULT_OK && data != null){
-    		String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
-    		if(filename != null){
-    			File file = new File(filename);
-    			String dir = file.getParent();
-    			Settings.setPrefString(Settings.KEY_S_ROOT, dir);
-    			SettingValues.GLOBAL_ROOT = dir;
-    			Preference pref = activity.findPreference(Settings.KEY_S_ROOT);
-    			setPreferenceText(activity, pref, dir, R.string.pref_root_desc);
-    			FileSystem.setRootDirectory(null, dir);
-    			Main.refreshCartridges();
-    		}
-    	}
+    } else if (requestCode == REQUEST_ROOT) {
+      if (resultCode == Activity.RESULT_OK && data != null) {
+        String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
+        if (filename != null) {
+          File file = new File(filename);
+          String dir = file.getParent();
+          Settings.setPrefString(Settings.KEY_S_ROOT, dir);
+          SettingValues.GLOBAL_ROOT = dir;
+          Preference pref = activity.findPreference(Settings.KEY_S_ROOT);
+          setPreferenceText(activity, pref, dir, R.string.pref_root_desc);
+          FileSystem.setRootDirectory(null, dir);
+          Main.refreshCartridges();
+        }
+      }
     }
   }
 }

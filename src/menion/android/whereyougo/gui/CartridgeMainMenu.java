@@ -64,10 +64,10 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
 
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-	if(A.getMain() == null || Engine.instance == null){
-		finish();
-		return;
-	}
+    if (A.getMain() == null || Engine.instance == null) {
+      finish();
+      return;
+    }
     setContentView(R.layout.custom_dialog);
 
     listClick = new AdapterView.OnItemClickListener() {
@@ -99,42 +99,34 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
     };
 
     CustomDialog.setTitle(this, Engine.instance.cartridge.name, null, CustomDialog.NO_IMAGE, null);
-	CustomDialog.setBottom(
-		this,
-		getString(R.string.gps),
-		new CustomDialog.OnClickListener() {
-			@Override
-			public boolean onClick(CustomDialog dialog, View v, int btn) {
-				Intent intent = new Intent(CartridgeMainMenu.this,
-						SatelliteScreen.class);
-				startActivity(intent);
-				return true;
-			}
-		},
-		getString(R.string.map),
-		new CustomDialog.OnClickListener() {
-			@Override
-			public boolean onClick(CustomDialog dialog, View v, int btn) {
-				switch (SettingValues.GLOBAL_MAP_PROVIDER) {
-				case Settings.VALUE_MAP_PROVIDER_VECTOR:
-					vectorMap();
-					break;
-				case Settings.VALUE_MAP_PROVIDER_LOCUS:
-					locusMap();
-					break;
-				}
-				return true;
-			}
-		},
-		getString(R.string.save_game),
-		new CustomDialog.OnClickListener() {
-			@Override
-			public boolean onClick(CustomDialog dialog, View v, int btn) {
-				Engine.requestSync();
-				Toast.makeText(CartridgeMainMenu.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
-				return true;
-			}
-		});
+    CustomDialog.setBottom(this, getString(R.string.gps), new CustomDialog.OnClickListener() {
+      @Override
+      public boolean onClick(CustomDialog dialog, View v, int btn) {
+        Intent intent = new Intent(CartridgeMainMenu.this, SatelliteScreen.class);
+        startActivity(intent);
+        return true;
+      }
+    }, getString(R.string.map), new CustomDialog.OnClickListener() {
+      @Override
+      public boolean onClick(CustomDialog dialog, View v, int btn) {
+        switch (SettingValues.GLOBAL_MAP_PROVIDER) {
+          case Settings.VALUE_MAP_PROVIDER_VECTOR:
+            vectorMap();
+            break;
+          case Settings.VALUE_MAP_PROVIDER_LOCUS:
+            locusMap();
+            break;
+        }
+        return true;
+      }
+    }, getString(R.string.save_game), new CustomDialog.OnClickListener() {
+      @Override
+      public boolean onClick(CustomDialog dialog, View v, int btn) {
+        Engine.requestSync();
+        Toast.makeText(CartridgeMainMenu.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
+        return true;
+      }
+    });
   }
 
   public void onResume() {
@@ -381,32 +373,31 @@ public class CartridgeMainMenu extends CustomActivity implements Refreshable {
     }
     return description;
   }
-  
+
   private void vectorMap() {
-	  VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-	  mdp.clear();
-	  mdp.addAll();
-	  Main.wui.showScreen(WUI.SCREEN_MAP, null);
-	  /*Intent intent =
-		        new Intent(this,
-		            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-	intent.putExtra("center", true);
-	startActivity(intent);*/
+    VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+    mdp.clear();
+    mdp.addAll();
+    Main.wui.showScreen(WUI.SCREEN_MAP, null);
+    /*
+     * Intent intent = new Intent(this,
+     * org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+     * intent.putExtra("center", true); startActivity(intent);
+     */
   }
-  
-	private void locusMap() {
-		  LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
-		  mdp.clear();
-		  mdp.addAll();
-		try {
-				ActionDisplayTracks.sendTracks(this, mdp.getTracks(),
-						ExtraAction.CENTER);
-				//ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
-		} catch (RequiredVersionMissingException e) {
-			Logger.e(TAG, "btn02.click() - missing locus version", e);
-			LocusUtils.callInstallLocus(this);
-		} catch (Exception e) {
-			Logger.e(TAG, "btn02.click() - unknown problem", e);
-		}
-	}
+
+  private void locusMap() {
+    LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
+    mdp.clear();
+    mdp.addAll();
+    try {
+      ActionDisplayTracks.sendTracks(this, mdp.getTracks(), ExtraAction.CENTER);
+      // ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
+    } catch (RequiredVersionMissingException e) {
+      Logger.e(TAG, "btn02.click() - missing locus version", e);
+      LocusUtils.callInstallLocus(this);
+    } catch (Exception e) {
+      Logger.e(TAG, "btn02.click() - unknown problem", e);
+    }
+  }
 }

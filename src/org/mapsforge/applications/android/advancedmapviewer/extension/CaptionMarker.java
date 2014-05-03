@@ -50,7 +50,7 @@ public class CaptionMarker extends Marker {
       return false;
     if (captionVisible && caption == null)
       return false;
-    if(!captionVisible)
+    if (!captionVisible)
       return true;
 
     GeoPoint geoPoint = getGeoPoint();
@@ -97,22 +97,22 @@ public class CaptionMarker extends Marker {
     this.caption = caption;
   }
 
-    public boolean isMarkerVisible() {
-        return markerVisible;
-    }
-    
-    public void setMarkerVisible(boolean markerVisible) {
-        this.markerVisible = markerVisible;
-    }
-    
-    public boolean isCaptionVisible() {
-        return captionVisible;
-    }
-    
-    public void setCaptionVisible(boolean captionVisible) {
-        this.captionVisible = captionVisible;
-    }
-  
-  
+  public boolean isMarkerVisible() {
+    return markerVisible;
+  }
+
+  public void setMarkerVisible(boolean markerVisible) {
+    this.markerVisible = markerVisible;
+  }
+
+  public boolean isCaptionVisible() {
+    return captionVisible;
+  }
+
+  public void setCaptionVisible(boolean captionVisible) {
+    this.captionVisible = captionVisible;
+  }
+
+
 
 }

@@ -182,15 +182,15 @@ public class UtilsGUI {
   public static void showDialogWebView(final Activity activity, final String title, final String msg) {
     activity.runOnUiThread(new Runnable() {
       public void run() {
-    	if(activity.isFinishing())
-      	  return;
+        if (activity.isFinishing())
+          return;
         AlertDialog.Builder b = new AlertDialog.Builder(activity);
         b.setCancelable(false);
         b.setTitle(title);
         b.setView(getFilledWebView(activity, msg));
         b.setPositiveButton(R.string.close, null);
-        if(!activity.isFinishing())
-        	b.show();
+        if (!activity.isFinishing())
+          b.show();
       }
     });
   }
@@ -222,8 +222,8 @@ public class UtilsGUI {
       final DialogInterface.OnClickListener negLis) {
     activity.runOnUiThread(new Runnable() {
       public void run() {
-    	if(activity.isFinishing())
-      	  return;
+        if (activity.isFinishing())
+          return;
         AlertDialog.Builder b = new AlertDialog.Builder(activity);
         b.setCancelable(false);
         b.setTitle(title);
@@ -235,8 +235,8 @@ public class UtilsGUI {
         if (!TextUtils.isEmpty(negText)) {
           b.setNegativeButton(negText, negLis);
         }
-        if(!activity.isFinishing())
-        	b.show();
+        if (!activity.isFinishing())
+          b.show();
       }
     });
   }
@@ -248,8 +248,8 @@ public class UtilsGUI {
       final DialogInterface.OnClickListener cancelLis) {
     activity.runOnUiThread(new Runnable() {
       public void run() {
-    	if(activity.isFinishing())
-    	  return;
+        if (activity.isFinishing())
+          return;
         AlertDialog.Builder b = new AlertDialog.Builder(activity);
         b.setCancelable(true);
         b.setTitle(title);
@@ -264,8 +264,8 @@ public class UtilsGUI {
         if (!TextUtils.isEmpty(cancelText)) {
           b.setNeutralButton(cancelText, cancelLis);
         }
-        if(!activity.isFinishing())
-        	b.show();
+        if (!activity.isFinishing())
+          b.show();
       }
     });
   }

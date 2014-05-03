@@ -20,76 +20,76 @@ import android.location.Location;
 
 
 public class NavigationOverlay implements Overlay {
-	
-	final MyLocationOverlay myLocationOverlay;
-	GeoPoint target;
-	private Polyline line;
-	
-	public NavigationOverlay(MyLocationOverlay myLocationOverlay){
-		this.myLocationOverlay = myLocationOverlay;
-		
-		Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-	    paintStroke.setStyle(Paint.Style.STROKE);
-	    paintStroke.setColor(Color.RED);
-	    paintStroke.setStrokeWidth(2);
-	    line = new Polyline(null, paintStroke);
-	}
 
-	@Override
-	public int compareTo(Overlay arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  final MyLocationOverlay myLocationOverlay;
+  GeoPoint target;
+  private Polyline line;
 
-	@Override
-	public synchronized void draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas) {
-		// TODO Auto-generated method stub
-		if(target == null || !myLocationOverlay.isMyLocationEnabled() || myLocationOverlay.getLastLocation() == null)
-			return;
-		double canvasPixelLeft = MercatorProjection.longitudeToPixelX(
-				boundingBox.minLongitude, zoomLevel);
-		double canvasPixelTop = MercatorProjection.latitudeToPixelY(
-				boundingBox.maxLatitude, zoomLevel);
-		Point canvasPosition = new Point(canvasPixelLeft, canvasPixelTop);
-		
-		Location startLocation = myLocationOverlay.getLastLocation();
-		GeoPoint start = new GeoPoint(startLocation.getLatitude(), startLocation.getLongitude());
-		
-		List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
-		geoPoints.add(start);
-		geoPoints.add(target);
-	    line.setPolygonalChain(new PolygonalChain(geoPoints));
-	    line.draw(boundingBox, zoomLevel, canvas, canvasPosition);
-		
-		/*double canvasPixelLeft = MercatorProjection.longitudeToPixelX(
-				boundingBox.minLongitude, zoomLevel);
-		double canvasPixelTop = MercatorProjection.latitudeToPixelY(
-				boundingBox.maxLatitude, zoomLevel);
-		Point canvasPosition = new Point(canvasPixelLeft, canvasPixelTop);
-		Point a = getPoint(start, canvasPosition, zoomLevel);
-		Point b = getPoint(target, canvasPosition, zoomLevel);
-		canvas.drawLine(a.x, a.y, b.x, b.y, paint);*/
-	}
-	
-	private static Point getPoint(GeoPoint geoPoint, Point canvasPosition, byte zoomLevel){
-		int pixelX = (int) (MercatorProjection.longitudeToPixelX(geoPoint.longitude, zoomLevel) - canvasPosition.x);
-		int pixelY = (int) (MercatorProjection.latitudeToPixelY(geoPoint.latitude, zoomLevel) - canvasPosition.y);
-		return new Point(pixelX, pixelY);
-	}
-	
-	public synchronized boolean checkItemHit(GeoPoint geoPoint, MapView mapView) {
-		return false;
-	}
+  public NavigationOverlay(MyLocationOverlay myLocationOverlay) {
+    this.myLocationOverlay = myLocationOverlay;
 
-	public void onTap(GeoPoint p) {
-	}
+    Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+    paintStroke.setStyle(Paint.Style.STROKE);
+    paintStroke.setColor(Color.RED);
+    paintStroke.setStrokeWidth(2);
+    line = new Polyline(null, paintStroke);
+  }
 
-	public synchronized GeoPoint getTarget() {
-		return target;
-	}
+  @Override
+  public int compareTo(Overlay arg0) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-	public synchronized void setTarget(GeoPoint target) {
-		this.target = target;
-	}
+  @Override
+  public synchronized void draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas) {
+    // TODO Auto-generated method stub
+    if (target == null || !myLocationOverlay.isMyLocationEnabled()
+        || myLocationOverlay.getLastLocation() == null)
+      return;
+    double canvasPixelLeft =
+        MercatorProjection.longitudeToPixelX(boundingBox.minLongitude, zoomLevel);
+    double canvasPixelTop = MercatorProjection.latitudeToPixelY(boundingBox.maxLatitude, zoomLevel);
+    Point canvasPosition = new Point(canvasPixelLeft, canvasPixelTop);
+
+    Location startLocation = myLocationOverlay.getLastLocation();
+    GeoPoint start = new GeoPoint(startLocation.getLatitude(), startLocation.getLongitude());
+
+    List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+    geoPoints.add(start);
+    geoPoints.add(target);
+    line.setPolygonalChain(new PolygonalChain(geoPoints));
+    line.draw(boundingBox, zoomLevel, canvas, canvasPosition);
+
+    /*
+     * double canvasPixelLeft = MercatorProjection.longitudeToPixelX( boundingBox.minLongitude,
+     * zoomLevel); double canvasPixelTop = MercatorProjection.latitudeToPixelY(
+     * boundingBox.maxLatitude, zoomLevel); Point canvasPosition = new Point(canvasPixelLeft,
+     * canvasPixelTop); Point a = getPoint(start, canvasPosition, zoomLevel); Point b =
+     * getPoint(target, canvasPosition, zoomLevel); canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+     */
+  }
+
+  private static Point getPoint(GeoPoint geoPoint, Point canvasPosition, byte zoomLevel) {
+    int pixelX =
+        (int) (MercatorProjection.longitudeToPixelX(geoPoint.longitude, zoomLevel) - canvasPosition.x);
+    int pixelY =
+        (int) (MercatorProjection.latitudeToPixelY(geoPoint.latitude, zoomLevel) - canvasPosition.y);
+    return new Point(pixelX, pixelY);
+  }
+
+  public synchronized boolean checkItemHit(GeoPoint geoPoint, MapView mapView) {
+    return false;
+  }
+
+  public void onTap(GeoPoint p) {}
+
+  public synchronized GeoPoint getTarget() {
+    return target;
+  }
+
+  public synchronized void setTarget(GeoPoint target) {
+    this.target = target;
+  }
 
 }
