@@ -181,7 +181,7 @@ public class PreferenceValues {
   public static final int VALUE_GUIDING_ZONE_POINT_CENTER = 0;
   public static final int VALUE_GUIDING_ZONE_POINT_NEAREST = 1;
   public static final String DEFAULT_GUIDING_ZONE_POINT = String
-      .valueOf(VALUE_GUIDING_ZONE_POINT_CENTER);
+      .valueOf(VALUE_GUIDING_ZONE_POINT_NEAREST);
 
   // UNITS PARAMETRES
   /** default latitude/longitude format */

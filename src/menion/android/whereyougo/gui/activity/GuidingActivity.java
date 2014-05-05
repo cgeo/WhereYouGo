@@ -165,10 +165,12 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
       public void run() {
         // refresh target position
         EventTable et = DetailsActivity.et;
-        if (et == null || !et.isLocated() || !et.isVisible())
+        if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
           return;
-        Location l = new Location(A.getGuidingContent().getTargetLocation());
-        if (DetailsActivity.et instanceof Zone
+        Location l =
+            A.getGuidingContent().getTargetLocation() == null ? new Location() : new Location(A
+                .getGuidingContent().getTargetLocation());
+        if (et instanceof Zone
             && Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
           Zone z = (Zone) DetailsActivity.et;
           l.setLatitude(z.nearestPoint.latitude);
