@@ -11,11 +11,28 @@ public class MapPoint implements Parcelable {
   double longitude;
   boolean target;
 
+  public static final Parcelable.Creator<MapPoint> CREATOR = new Parcelable.Creator<MapPoint>() {
+    public MapPoint createFromParcel(Parcel p) {
+      return new MapPoint(p);
+    }
+
+    public MapPoint[] newArray(int size) {
+      return new MapPoint[size];
+    }
+  };
+
   /**
    * Empty constructor used for {@link Serializable} <br />
    * Do not use directly!
    */
   public MapPoint() {}
+
+  public MapPoint(Parcel p) {
+    name = p.readString();
+    latitude = p.readDouble();
+    longitude = p.readDouble();
+    target = p.readByte() > 0;
+  }
 
   public MapPoint(String name, double latitude, double longitude) {
     this(name, latitude, longitude, false);
@@ -28,42 +45,42 @@ public class MapPoint implements Parcelable {
     this.target = target;
   }
 
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+  @Override
+  public int describeContents() {
+    // TODO Auto-generated method stub
+    return 0;
   }
 
   public double getLatitude() {
     return latitude;
   }
 
-  public void setLatitude(double latitude) {
-    this.latitude = latitude;
-  }
-
   public double getLongitude() {
     return longitude;
   }
 
-  public void setLongitude(double longitude) {
-    this.longitude = longitude;
+  public String getName() {
+    return name;
   }
 
   public boolean isTarget() {
     return target;
   }
 
-  public void setTarget(boolean target) {
-    this.target = target;
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
   }
 
-  @Override
-  public int describeContents() {
-    // TODO Auto-generated method stub
-    return 0;
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setTarget(boolean target) {
+    this.target = target;
   }
 
   @Override
@@ -73,23 +90,6 @@ public class MapPoint implements Parcelable {
     p.writeDouble(latitude);
     p.writeDouble(longitude);
     p.writeByte((byte) (target ? 1 : 0));
-  }
-
-  public static final Parcelable.Creator<MapPoint> CREATOR = new Parcelable.Creator<MapPoint>() {
-    public MapPoint createFromParcel(Parcel p) {
-      return new MapPoint(p);
-    }
-
-    public MapPoint[] newArray(int size) {
-      return new MapPoint[size];
-    }
-  };
-
-  public MapPoint(Parcel p) {
-    name = p.readString();
-    latitude = p.readDouble();
-    longitude = p.readDouble();
-    target = p.readByte() > 0;
   }
 
 }

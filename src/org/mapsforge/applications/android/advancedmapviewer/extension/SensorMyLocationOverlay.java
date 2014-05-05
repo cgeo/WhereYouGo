@@ -1,22 +1,13 @@
 package org.mapsforge.applications.android.advancedmapviewer.extension;
 
-import locus.api.utils.Logger;
-
 import org.mapsforge.android.maps.MapView;
-import org.mapsforge.core.model.BoundingBox;
-import org.mapsforge.core.model.GeoPoint;
-import org.mapsforge.core.model.Point;
-import org.mapsforge.core.util.MercatorProjection;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
 import android.view.Surface;
 import android.view.WindowManager;
 
@@ -86,16 +77,6 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
    * this.marker.draw(boundingBox, zoomLevel, canvas, canvasPosition); }
    */
 
-  private void setSensor(boolean state) {
-    if (state) {
-      setSensor(false);
-      this.sensorManager.registerListener(this,
-          sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_UI);
-    } else {
-      this.sensorManager.unregisterListener(this);
-    }
-  }
-
   /**
    * Stops the receiving of location updates. Has no effect if location updates are already
    * disabled.
@@ -115,19 +96,25 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
     return false;
   }
 
-  @Override
-  public void onProviderDisabled(String provider) {
-    super.onProviderDisabled(provider);
-    if (!super.isMyLocationEnabled()) {
-      setSensor(false);
+  private float filterValue(float current, float last) {
+    if (current < last - 180.0f) {
+      last -= 360.0f;
+    } else if (current > last + 180.0f) {
+      last += 360.0f;
     }
+    return filter * current + (1 - filter) * last;
   }
 
-  @Override
-  public void onProviderEnabled(String provider) {
-    super.onProviderEnabled(provider);
-    if (!super.isMyLocationEnabled()) {
-      setSensor(false);
+  protected int getRotationOffset() {
+    switch (windowManager.getDefaultDisplay().getRotation()) {
+      case Surface.ROTATION_90:
+        return 90;
+      case Surface.ROTATION_180:
+        return 180;
+      case Surface.ROTATION_270:
+        return 270;
+      default:
+        return 0;
     }
   }
 
@@ -135,6 +122,14 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
   public void onAccuracyChanged(Sensor arg0, int arg1) {
     // TODO Auto-generated method stub
 
+  }
+
+  @Override
+  public void onProviderDisabled(String provider) {
+    super.onProviderDisabled(provider);
+    if (!super.isMyLocationEnabled()) {
+      setSensor(false);
+    }
   }
 
   /*
@@ -147,6 +142,14 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
    * this.lastGPSAzimuth = azimuth; redraw = true; } } } super.onLocationChanged(location);
    * if(redraw) this.mapView.getOverlayController().redrawOverlays(); }
    */
+
+  @Override
+  public void onProviderEnabled(String provider) {
+    super.onProviderEnabled(provider);
+    if (!super.isMyLocationEnabled()) {
+      setSensor(false);
+    }
+  }
 
   @Override
   public void onSensorChanged(SensorEvent event) {
@@ -170,26 +173,14 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
     }
   }
 
-  protected int getRotationOffset() {
-    switch (windowManager.getDefaultDisplay().getRotation()) {
-      case Surface.ROTATION_90:
-        return 90;
-      case Surface.ROTATION_180:
-        return 180;
-      case Surface.ROTATION_270:
-        return 270;
-      default:
-        return 0;
+  private void setSensor(boolean state) {
+    if (state) {
+      setSensor(false);
+      this.sensorManager.registerListener(this,
+          sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_UI);
+    } else {
+      this.sensorManager.unregisterListener(this);
     }
-  }
-
-  private float filterValue(float current, float last) {
-    if (current < last - 180.0f) {
-      last -= 360.0f;
-    } else if (current > last + 180.0f) {
-      last += 360.0f;
-    }
-    return filter * current + (1 - filter) * last;
   }
 
 }

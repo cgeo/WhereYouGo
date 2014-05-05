@@ -29,14 +29,6 @@ public class MyLocationOverlay implements LocationListener, Overlay {
   private static final int UPDATE_DISTANCE = 0;
   private static final int UPDATE_INTERVAL = 1000;
 
-  /**
-   * @param location the location whose geographical coordinates should be converted.
-   * @return a new GeoPoint with the geographical coordinates taken from the given location.
-   */
-  public static GeoPoint locationToGeoPoint(Location location) {
-    return new GeoPoint(location.getLatitude(), location.getLongitude());
-  }
-
   private static Paint getDefaultCircleFill() {
     return getPaint(Style.FILL, Color.BLUE, 48);
   }
@@ -53,6 +45,14 @@ public class MyLocationOverlay implements LocationListener, Overlay {
     paint.setColor(color);
     paint.setAlpha(alpha);
     return paint;
+  }
+
+  /**
+   * @param location the location whose geographical coordinates should be converted.
+   * @return a new GeoPoint with the geographical coordinates taken from the given location.
+   */
+  public static GeoPoint locationToGeoPoint(Location location) {
+    return new GeoPoint(location.getLatitude(), location.getLongitude());
   }
 
 
@@ -96,6 +96,12 @@ public class MyLocationOverlay implements LocationListener, Overlay {
     this.circle = new Circle(null, 0, circleFill, circleStroke);
   }
 
+  @Override
+  public int compareTo(Overlay o) {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
   /**
    * Stops the receiving of location updates. Has no effect if location updates are already
    * disabled.
@@ -122,6 +128,22 @@ public class MyLocationOverlay implements LocationListener, Overlay {
     this.marker.draw(boundingBox, zoomLevel, canvas, canvasPosition);
   }
 
+  private synchronized boolean enableBestAvailableProvider() {
+    disableMyLocation();
+
+    Criteria criteria = new Criteria();
+    criteria.setAccuracy(Criteria.ACCURACY_FINE);
+    String bestAvailableProvider = this.locationManager.getBestProvider(criteria, true);
+    if (bestAvailableProvider == null) {
+      return false;
+    }
+    this.lastLocation = this.locationManager.getLastKnownLocation(bestAvailableProvider);
+    this.locationManager.requestLocationUpdates(bestAvailableProvider, UPDATE_INTERVAL,
+        UPDATE_DISTANCE, this);
+    this.myLocationEnabled = true;
+    return true;
+  }
+
   /**
    * Enables the receiving of location updates from the most accurate {@link LocationProvider}
    * available.
@@ -143,6 +165,10 @@ public class MyLocationOverlay implements LocationListener, Overlay {
    */
   public synchronized Location getLastLocation() {
     return this.lastLocation;
+  }
+
+  public synchronized boolean checkItemHit(GeoPoint geoPoint, MapView mapView) {
+    return false;
   }
 
   /**
@@ -200,38 +226,12 @@ public class MyLocationOverlay implements LocationListener, Overlay {
     // do nothing
   }
 
+  public void onTap(GeoPoint p) {}
+
   /**
    * @param snapToLocationEnabled whether the map should be centered at each received location fix.
    */
   public synchronized void setSnapToLocationEnabled(boolean snapToLocationEnabled) {
     this.snapToLocationEnabled = snapToLocationEnabled;
   }
-
-  private synchronized boolean enableBestAvailableProvider() {
-    disableMyLocation();
-
-    Criteria criteria = new Criteria();
-    criteria.setAccuracy(Criteria.ACCURACY_FINE);
-    String bestAvailableProvider = this.locationManager.getBestProvider(criteria, true);
-    if (bestAvailableProvider == null) {
-      return false;
-    }
-    this.lastLocation = this.locationManager.getLastKnownLocation(bestAvailableProvider);
-    this.locationManager.requestLocationUpdates(bestAvailableProvider, UPDATE_INTERVAL,
-        UPDATE_DISTANCE, this);
-    this.myLocationEnabled = true;
-    return true;
-  }
-
-  @Override
-  public int compareTo(Overlay o) {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public synchronized boolean checkItemHit(GeoPoint geoPoint, MapView mapView) {
-    return false;
-  }
-
-  public void onTap(GeoPoint p) {}
 }

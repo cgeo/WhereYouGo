@@ -17,7 +17,8 @@
 
 package menion.android.whereyougo.gui.extension;
 
-import locus.api.objects.extra.Location;
+
+import menion.android.whereyougo.geo.location.Location;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
@@ -51,58 +52,6 @@ public class DataInfo implements Comparable<DataInfo> {
 
   public boolean enabled = true;
 
-  public DataInfo(String name) {
-    this(-1, name, "", -1);
-  }
-
-  public DataInfo(String name, String description) {
-    this(-1, name, description, -1);
-  }
-
-  public DataInfo(int id, String name, Bitmap image) {
-    this(id, name, "", image);
-  }
-
-  public DataInfo(int id, String name, String desc) {
-    this(id, name, desc, -1);
-  }
-
-  public DataInfo(String name, String description, int image) {
-    this(-1, name, description, image);
-  }
-
-  public DataInfo(String name, String description, Drawable image) {
-    this(-1, name, description, image);
-  }
-
-  public DataInfo(String name, String description, Bitmap image) {
-    this(-1, name, description, image);
-  }
-
-  public DataInfo(String name, String description, Object addData01) {
-    this(-1, name, description, -1);
-    this.addData01 = addData01;
-  }
-
-  public DataInfo(int id, String name) {
-    this(id, name, "", -1);
-  }
-
-  public DataInfo(int id, String name, String description, int image) {
-    setBasics(id, name, description);
-    this.image = image;
-  }
-
-  public DataInfo(int id, String name, String description, Drawable imageD) {
-    setBasics(id, name, description);
-    this.imageD = imageD;
-  }
-
-  public DataInfo(int id, String name, String description, Bitmap imageB) {
-    setBasics(id, name, description);
-    this.imageB = imageB;
-  }
-
   public DataInfo(DataInfo con) {
     this.id = con.id;
     this.name = con.name;
@@ -115,6 +64,117 @@ public class DataInfo implements Comparable<DataInfo> {
     this.value02 = con.value02;
     this.distance = con.distance;
     this.addData01 = con.addData01;
+  }
+
+  public DataInfo(int id, String name) {
+    this(id, name, "", -1);
+  }
+
+  public DataInfo(int id, String name, Bitmap image) {
+    this(id, name, "", image);
+  }
+
+  public DataInfo(int id, String name, String desc) {
+    this(id, name, desc, -1);
+  }
+
+  public DataInfo(int id, String name, String description, Bitmap imageB) {
+    setBasics(id, name, description);
+    this.imageB = imageB;
+  }
+
+  public DataInfo(int id, String name, String description, Drawable imageD) {
+    setBasics(id, name, description);
+    this.imageD = imageD;
+  }
+
+  public DataInfo(int id, String name, String description, int image) {
+    setBasics(id, name, description);
+    this.image = image;
+  }
+
+  public DataInfo(String name) {
+    this(-1, name, "", -1);
+  }
+
+  public DataInfo(String name, String description) {
+    this(-1, name, description, -1);
+  }
+
+  public DataInfo(String name, String description, Bitmap image) {
+    this(-1, name, description, image);
+  }
+
+  public DataInfo(String name, String description, Drawable image) {
+    this(-1, name, description, image);
+  }
+
+  public DataInfo(String name, String description, int image) {
+    this(-1, name, description, image);
+  }
+
+  public DataInfo(String name, String description, Object addData01) {
+    this(-1, name, description, -1);
+    this.addData01 = addData01;
+  }
+
+  public void addDescription(String desc) {
+    if (description == null || description.length() == 0)
+      description = desc;
+    else
+      description += ", " + desc;
+  }
+
+  public void clearDistAzi() {
+    distance = -1;
+  }
+
+  public int compareTo(DataInfo another) {
+    return name.compareTo(another.getName());
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public int getImage() {
+    return image;
+  }
+
+  public Bitmap getImageB() {
+    return imageB;
+  }
+
+  public Drawable getImageD() {
+    return imageD;
+  }
+
+  public Bitmap getImageRight() {
+    return imageRight;
+  }
+
+  public Location getLocation() {
+    Location loc = new Location(TAG);
+    loc.setLatitude(value01);
+    loc.setLongitude(value02);
+    return loc;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public boolean isDistAziSet() {
+    return distance != -1;
+  }
+
+  public DataInfo setAddData01(Object data) {
+    this.addData01 = data;
+    return this;
   }
 
   private void setBasics(int id, String name, String description) {
@@ -132,92 +192,13 @@ public class DataInfo implements Comparable<DataInfo> {
     this.value02 = lon;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
   public void setDescription(String description) {
     this.description = description;
   }
 
-  public void addDescription(String desc) {
-    if (description == null || description.length() == 0)
-      description = desc;
-    else
-      description += ", " + desc;
-  }
-
-  public int getImage() {
-    return image;
-  }
-
-  public Drawable getImageD() {
-    return imageD;
-  }
-
-  public Bitmap getImageB() {
-    return imageB;
-  }
-
-  public void setImage(int image) {
-    this.image = image;
-  }
-
-  public void setImage(Bitmap imageB) {
-    this.imageB = imageB;
-  }
-
-  public Bitmap getImageRight() {
-    return imageRight;
-  }
-
-  public DataInfo setImageRight(Bitmap image) {
-    this.imageRight = image;
-    return this;
-  }
-
-  public String toString() {
-    return getName();
-  }
-
-  public int compareTo(DataInfo another) {
-    return name.compareTo(another.getName());
-  }
-
-  public Location getLocation() {
-    Location loc = new Location(TAG);
-    loc.setLatitude(value01);
-    loc.setLongitude(value02);
-    return loc;
-  }
-
-  public DataInfo setAddData01(Object data) {
-    this.addData01 = data;
-    return this;
-  }
-
-  public void clearDistAzi() {
-    distance = -1;
-  }
-
-  public boolean isDistAziSet() {
-    return distance != -1;
+  public void setDistAzi(float dist, float azi) {
+    distance = dist;
+    azimuth = azi;
   }
 
   public void setDistAzi(Location refLocation) {
@@ -226,8 +207,28 @@ public class DataInfo implements Comparable<DataInfo> {
     azimuth = refLocation.bearingTo(loc);
   }
 
-  public void setDistAzi(float dist, float azi) {
-    distance = dist;
-    azimuth = azi;
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setImage(Bitmap imageB) {
+    this.imageB = imageB;
+  }
+
+  public void setImage(int image) {
+    this.image = image;
+  }
+
+  public DataInfo setImageRight(Bitmap image) {
+    this.imageRight = image;
+    return this;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String toString() {
+    return getName();
   }
 }

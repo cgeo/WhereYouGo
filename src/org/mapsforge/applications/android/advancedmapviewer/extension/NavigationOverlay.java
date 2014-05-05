@@ -1,7 +1,6 @@
 package org.mapsforge.applications.android.advancedmapviewer.extension;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.mapsforge.android.maps.MapView;
@@ -21,8 +20,17 @@ import android.location.Location;
 
 public class NavigationOverlay implements Overlay {
 
+  private static Point getPoint(GeoPoint geoPoint, Point canvasPosition, byte zoomLevel) {
+    int pixelX =
+        (int) (MercatorProjection.longitudeToPixelX(geoPoint.longitude, zoomLevel) - canvasPosition.x);
+    int pixelY =
+        (int) (MercatorProjection.latitudeToPixelY(geoPoint.latitude, zoomLevel) - canvasPosition.y);
+    return new Point(pixelX, pixelY);
+  }
+
   final MyLocationOverlay myLocationOverlay;
   GeoPoint target;
+
   private Polyline line;
 
   public NavigationOverlay(MyLocationOverlay myLocationOverlay) {
@@ -70,12 +78,8 @@ public class NavigationOverlay implements Overlay {
      */
   }
 
-  private static Point getPoint(GeoPoint geoPoint, Point canvasPosition, byte zoomLevel) {
-    int pixelX =
-        (int) (MercatorProjection.longitudeToPixelX(geoPoint.longitude, zoomLevel) - canvasPosition.x);
-    int pixelY =
-        (int) (MercatorProjection.latitudeToPixelY(geoPoint.latitude, zoomLevel) - canvasPosition.y);
-    return new Point(pixelX, pixelY);
+  public synchronized GeoPoint getTarget() {
+    return target;
   }
 
   public synchronized boolean checkItemHit(GeoPoint geoPoint, MapView mapView) {
@@ -83,10 +87,6 @@ public class NavigationOverlay implements Overlay {
   }
 
   public void onTap(GeoPoint p) {}
-
-  public synchronized GeoPoint getTarget() {
-    return target;
-  }
 
   public synchronized void setTarget(GeoPoint target) {
     this.target = target;

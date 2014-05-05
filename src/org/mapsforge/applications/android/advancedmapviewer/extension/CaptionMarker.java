@@ -90,6 +90,14 @@ public class CaptionMarker extends Marker {
     return this.caption;
   }
 
+  public boolean isCaptionVisible() {
+    return captionVisible;
+  }
+
+  public boolean isMarkerVisible() {
+    return markerVisible;
+  }
+
   /**
    * @param caption the new caption of this marker (may be null).
    */
@@ -97,20 +105,12 @@ public class CaptionMarker extends Marker {
     this.caption = caption;
   }
 
-  public boolean isMarkerVisible() {
-    return markerVisible;
+  public void setCaptionVisible(boolean captionVisible) {
+    this.captionVisible = captionVisible;
   }
 
   public void setMarkerVisible(boolean markerVisible) {
     this.markerVisible = markerVisible;
-  }
-
-  public boolean isCaptionVisible() {
-    return captionVisible;
-  }
-
-  public void setCaptionVisible(boolean captionVisible) {
-    this.captionVisible = captionVisible;
   }
 
 

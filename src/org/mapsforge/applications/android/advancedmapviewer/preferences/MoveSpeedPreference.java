@@ -14,10 +14,9 @@
  */
 package org.mapsforge.applications.android.advancedmapviewer.preferences;
 
-import menion.android.whereyougo.R;
-
 import org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer;
 
+import menion.android.whereyougo.R;
 import android.content.Context;
 import android.util.AttributeSet;
 

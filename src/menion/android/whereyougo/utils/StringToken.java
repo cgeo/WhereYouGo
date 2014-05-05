@@ -23,11 +23,9 @@ import java.util.NoSuchElementException;
 
 public class StringToken implements Enumeration<Object> {
 
-  private String string;
-
-  private String delimiters;
-
-  private int position;
+  public static ArrayList<String> parse(String data, String delimiters) {
+    return parse(data, delimiters, new ArrayList<String>());
+  }
 
   public static ArrayList<String> parse(String data, String delimiters, ArrayList<String> tokens) {
     // replace delimiters in token to receive correct item count
@@ -39,9 +37,11 @@ public class StringToken implements Enumeration<Object> {
     return tokens;
   }
 
-  public static ArrayList<String> parse(String data, String delimiters) {
-    return parse(data, delimiters, new ArrayList<String>());
-  }
+  private String string;
+
+  private String delimiters;
+
+  private int position;
 
   /**
    * Constructs a new {@code StringTokenizer} for the parameter string using the specified
@@ -84,6 +84,11 @@ public class StringToken implements Enumeration<Object> {
     if (inToken)
       count++;
     return count;
+  }
+
+  @Override
+  public boolean hasMoreElements() {
+    return hasMoreTokens();
   }
 
   /**
@@ -140,10 +145,5 @@ public class StringToken implements Enumeration<Object> {
       }
     }
     throw new NoSuchElementException();
-  }
-
-  @Override
-  public boolean hasMoreElements() {
-    return hasMoreTokens();
   }
 }

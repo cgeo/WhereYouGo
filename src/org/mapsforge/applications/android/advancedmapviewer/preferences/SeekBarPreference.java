@@ -74,6 +74,14 @@ abstract class SeekBarPreference extends DialogPreference implements OnSeekBarCh
     this.preferencesDefault = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
+  /**
+   * Get the current value text.
+   * 
+   * @param progress the current progress level of the seek bar.
+   * @return the new current value text
+   */
+  abstract String getCurrentValueText(int progress);
+
   @Override
   public void onClick(DialogInterface dialog, int which) {
     // check if the "OK" button was pressed and the seek bar value has changed
@@ -85,23 +93,6 @@ abstract class SeekBarPreference extends DialogPreference implements OnSeekBarCh
       this.editor.putInt(this.getKey(), this.seekBarCurrentValue);
       this.editor.commit();
     }
-  }
-
-  @Override
-  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-    if (this.currentValueTextView != null) {
-      this.currentValueTextView.setText(getCurrentValueText(progress));
-    }
-  }
-
-  @Override
-  public void onStartTrackingTouch(SeekBar seekBar) {
-    // do nothing
-  }
-
-  @Override
-  public void onStopTrackingTouch(SeekBar seekBar) {
-    // do nothing
   }
 
   @Override
@@ -141,11 +132,20 @@ abstract class SeekBarPreference extends DialogPreference implements OnSeekBarCh
     return linearLayout;
   }
 
-  /**
-   * Get the current value text.
-   * 
-   * @param progress the current progress level of the seek bar.
-   * @return the new current value text
-   */
-  abstract String getCurrentValueText(int progress);
+  @Override
+  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    if (this.currentValueTextView != null) {
+      this.currentValueTextView.setText(getCurrentValueText(progress));
+    }
+  }
+
+  @Override
+  public void onStartTrackingTouch(SeekBar seekBar) {
+    // do nothing
+  }
+
+  @Override
+  public void onStopTrackingTouch(SeekBar seekBar) {
+    // do nothing
+  }
 }

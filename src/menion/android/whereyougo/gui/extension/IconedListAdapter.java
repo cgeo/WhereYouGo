@@ -59,17 +59,22 @@ public class IconedListAdapter extends BaseAdapter {
 
   private static final int PADDING = (int) Utils.getDpPixels(4.0f);
 
+  public static LinearLayout createEmptyView(Context context) {
+    return (LinearLayout) LinearLayout.inflate(context, R.layout.iconed_list_adapter, null);
+  }
+
   /** visibility of bottom view */
   private int textView02Visibility = View.VISIBLE;
   /** hide bottom view if no text is available */
   private boolean textView02HideIfEmpty = false;
   /* min height for line */
   private int minHeight = Integer.MIN_VALUE;
-  // rescale image size
-  private float multiplyImageSize = 1.0f;
 
   // public static final Drawable SEPARATOR =
   // A.getApp().getResources().getDrawable(R.drawable.var_separator);
+
+  // rescale image size
+  private float multiplyImageSize = 1.0f;
 
   public IconedListAdapter(Context context, ArrayList<DataInfo> data, View view) {
     this.mData = data;
@@ -95,36 +100,12 @@ public class IconedListAdapter extends BaseAdapter {
   }
 
   @Override
-  public boolean isEnabled(int position) {
-    try {
-      return mData.get(position).enabled;
-    } catch (Exception e) {
-      Logger.e(TAG, "isEnabled(" + position + ")", e);
-      return false;
-    }
-  }
-
-  @Override
   public int getCount() {
     return mData.size();
   }
 
-  @Override
-  public Object getItem(int position) {
-    return mData.get(position);
-  }
-
   public DataInfo getDataInfo(int position) {
     return mData.get(position);
-  }
-
-  @Override
-  public long getItemId(int position) {
-    return position;
-  }
-
-  public static LinearLayout createEmptyView(Context context) {
-    return (LinearLayout) LinearLayout.inflate(context, R.layout.iconed_list_adapter, null);
   }
 
   @Override
@@ -133,6 +114,16 @@ public class IconedListAdapter extends BaseAdapter {
       convertView = createEmptyView(context);
     }
     return getViewItem(position, convertView, true);
+  }
+
+  @Override
+  public Object getItem(int position) {
+    return mData.get(position);
+  }
+
+  @Override
+  public long getItemId(int position) {
+    return position;
   }
 
   @Override
@@ -260,9 +251,14 @@ public class IconedListAdapter extends BaseAdapter {
     return convertView;
   }
 
-  public void setTextView02Visible(int visibility, boolean hideIfEmpty) {
-    this.textView02Visibility = visibility;
-    this.textView02HideIfEmpty = hideIfEmpty;
+  @Override
+  public boolean isEnabled(int position) {
+    try {
+      return mData.get(position).enabled;
+    } catch (Exception e) {
+      Logger.e(TAG, "isEnabled(" + position + ")", e);
+      return false;
+    }
   }
 
   public void setMinHeight(int i) {
@@ -271,5 +267,10 @@ public class IconedListAdapter extends BaseAdapter {
 
   public void setMultiplyImageSize(float multiplyImageSize) {
     this.multiplyImageSize = multiplyImageSize;
+  }
+
+  public void setTextView02Visible(int visibility, boolean hideIfEmpty) {
+    this.textView02Visibility = visibility;
+    this.textView02HideIfEmpty = hideIfEmpty;
   }
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.9" id="35" time="5.5.2014">
+	<li>fixed: online maps were not shown until vector map file was provided</li>
+	<li>fixed: map information was accessible even though vector map file was not provided</li>
+	<li>update: improved german translation</li>
+	<li>added: active zones in zone list are marked with tag (INSIDE)</li>
+  </update>
+    
   <update name="0.8.8" id="34" time="3.5.2014">
 	<li>fixed: some bugs</li>
 	<li>fixed: no animations in dialogs</li>

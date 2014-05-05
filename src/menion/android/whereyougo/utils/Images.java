@@ -38,6 +38,28 @@ public class Images {
 
   public static final Bitmap IMAGE_EMPTY_B = getImageB(R.drawable.var_empty);
 
+  public static Bitmap getImageB(int id) {
+    try {
+      if (id <= 0)
+        return IMAGE_EMPTY_B;
+      return BitmapFactory.decodeResource(A.getApp().getResources(), id);
+    } catch (Exception e) {
+      Logger.w(TAG, "getImageB(" + id + "), e:" + e.toString());
+      return IMAGE_EMPTY_B;
+    }
+  }
+
+  public static Bitmap getImageB(int id, int width) {
+    Bitmap bitmap = getImageB(id);
+    return resizeBitmap(bitmap, width);
+  }
+
+  public static Drawable getImageD(Bitmap bitmap) {
+    Drawable draw = new BitmapDrawable(bitmap);
+    draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
+    return draw;
+  }
+
   public static Drawable getImageD(int id) {
     try {
       Drawable draw = A.getApp().getResources().getDrawable(id);
@@ -55,28 +77,6 @@ public class Images {
 
     Drawable draw = A.getApp().getResources().getDrawable(id);
     return getSizeOptimizedIcon(draw, size);
-  }
-
-  public static Drawable getImageD(Bitmap bitmap) {
-    Drawable draw = new BitmapDrawable(bitmap);
-    draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
-    return draw;
-  }
-
-  public static Bitmap getImageB(int id) {
-    try {
-      if (id <= 0)
-        return IMAGE_EMPTY_B;
-      return BitmapFactory.decodeResource(A.getApp().getResources(), id);
-    } catch (Exception e) {
-      Logger.w(TAG, "getImageB(" + id + "), e:" + e.toString());
-      return IMAGE_EMPTY_B;
-    }
-  }
-
-  public static Bitmap getImageB(int id, int width) {
-    Bitmap bitmap = getImageB(id);
-    return resizeBitmap(bitmap, width);
   }
 
   public static Drawable getSizeOptimizedIcon(Drawable draw, int newSize) {

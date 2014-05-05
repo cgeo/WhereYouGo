@@ -18,8 +18,8 @@
 package menion.android.whereyougo.utils;
 
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.settings.Loc;
-import menion.android.whereyougo.settings.Settings;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
@@ -33,35 +33,19 @@ public class ManagerNotify {
   private static final String TAG = "ManagerNotify";
 
   public static void toastInternetProblem() {
-    toastLongMessage(Loc.get(R.string.problem_with_internet_connection));
-  }
-
-  public static void toastUnexpectedProblem() {
-    toastLongMessage(Loc.get(R.string.unexpected_problem));
-  }
-
-  public static void toastShortMessage(final int msg) {
-    toastShortMessage(Loc.get(msg));
-  }
-
-  public static void toastShortMessage(final String msg) {
-    toastShortMessage(Settings.getCurrentActivity(), msg);
-  }
-
-  public static void toastShortMessage(final Context context, final String msg) {
-    toastMessage(context, msg, Toast.LENGTH_SHORT);
-  }
-
-  public static void toastLongMessage(final int msg) {
-    toastLongMessage(Loc.get(msg));
-  }
-
-  public static void toastLongMessage(final String msg) {
-    toastLongMessage(Settings.getCurrentActivity(), msg);
+    toastLongMessage(Locale.get(R.string.problem_with_internet_connection));
   }
 
   public static void toastLongMessage(final Context context, final String msg) {
     toastMessage(context, msg, Toast.LENGTH_LONG);
+  }
+
+  public static void toastLongMessage(final int msg) {
+    toastLongMessage(Locale.get(msg));
+  }
+
+  public static void toastLongMessage(final String msg) {
+    toastLongMessage(PreferenceValues.getCurrentActivity(), msg);
   }
 
   private static void toastMessage(final Context context, final String msg, final int time) {
@@ -82,5 +66,21 @@ public class ManagerNotify {
     } catch (Exception e) {
       Logger.e(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")", e);
     }
+  }
+
+  public static void toastShortMessage(final Context context, final String msg) {
+    toastMessage(context, msg, Toast.LENGTH_SHORT);
+  }
+
+  public static void toastShortMessage(final int msg) {
+    toastShortMessage(Locale.get(msg));
+  }
+
+  public static void toastShortMessage(final String msg) {
+    toastShortMessage(PreferenceValues.getCurrentActivity(), msg);
+  }
+
+  public static void toastUnexpectedProblem() {
+    toastLongMessage(Locale.get(R.string.unexpected_problem));
   }
 }

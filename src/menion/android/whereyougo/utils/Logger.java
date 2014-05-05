@@ -29,8 +29,10 @@ public class Logger {
 
   private static final String TAG = "Logger";
 
-  public static void e(String tag, String msg, Throwable t) {
-    Log.e(tag, msg, new Exception(t.toString()));
+  public static void d(String tag, String msg) {
+    if (Const.STATE_DEBUG_LOGS) {
+      Log.d(tag, msg != null ? msg : "null");
+    }
   }
 
   public static void e(String tag, String msg) {
@@ -41,15 +43,23 @@ public class Logger {
     Log.e(tag, msg != null ? msg : "", e);
   }
 
+  public static void e(String tag, String msg, Throwable t) {
+    Log.e(tag, msg, new Exception(t.toString()));
+  }
+
   public static void i(String tag, String msg) {
     if (Const.STATE_DEBUG_LOGS) {
       Log.i(tag, msg != null ? msg : "null");
     }
   }
 
-  public static void d(String tag, String msg) {
-    if (Const.STATE_DEBUG_LOGS) {
-      Log.d(tag, msg != null ? msg : "null");
+  public static void printParserState(XmlPullParser parser) {
+    try {
+      Logger.d(TAG, "event:" + parser.getEventType() + ", attCount:" + parser.getAttributeCount()
+          + ", columnNum:" + parser.getColumnNumber() + ", depth:" + parser.getDepth() + ", ln:"
+          + parser.getLineNumber() + ", " + parser.getPositionDescription());
+    } catch (Exception e) {
+      Logger.e(TAG, "printParserState()");
     }
   }
 
@@ -62,16 +72,6 @@ public class Logger {
   public static void w(String tag, String msg) {
     if (Const.STATE_DEBUG_LOGS) {
       Log.w(tag, msg != null ? msg : "null");
-    }
-  }
-
-  public static void printParserState(XmlPullParser parser) {
-    try {
-      Logger.d(TAG, "event:" + parser.getEventType() + ", attCount:" + parser.getAttributeCount()
-          + ", columnNum:" + parser.getColumnNumber() + ", depth:" + parser.getDepth() + ", ln:"
-          + parser.getLineNumber() + ", " + parser.getPositionDescription());
-    } catch (Exception e) {
-      Logger.e(TAG, "printParserState()");
     }
   }
 }

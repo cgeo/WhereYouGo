@@ -20,7 +20,7 @@ package menion.android.whereyougo.utils;
 import java.io.File;
 import java.io.FileFilter;
 
-import menion.android.whereyougo.gui.extension.MainApplication;
+import menion.android.whereyougo.MainApplication;
 import android.os.Environment;
 
 /**
@@ -43,16 +43,6 @@ public class FileSystem {
       "/mnt/emms", // CM7 + SGS2
       "/mnt/external1" // Xoom
   };
-
-  public static String getExternalStorageDir() {
-    String cardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
-    if (cardRoot == null)
-      return null;
-
-    if (!cardRoot.endsWith("/"))
-      cardRoot += "/";
-    return cardRoot;
-  }
 
   public static boolean createRoot(String appDirName) {
     if (ROOT != null && new File(ROOT).exists())
@@ -100,19 +90,39 @@ public class FileSystem {
     return false;
   }
 
-  public static boolean setRootDirectory(String cardRoot, String appRoot) {
-    if (!appRoot.endsWith("/"))
-      appRoot += "/";
+  public static String getExternalStorageDir() {
+    String cardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
+    if (cardRoot == null)
+      return null;
 
-    FileSystem.ROOT = appRoot;
+    if (!cardRoot.endsWith("/"))
+      cardRoot += "/";
+    return cardRoot;
+  }
 
-    // create root directory
-    File rootAppDir = new File(ROOT);
-    if (!rootAppDir.exists()) {
-      if (!rootAppDir.mkdir())
+  public static File[] getFiles(String folder, final String filter) {
+    FileFilter fileFilter = new FileFilter() {
+      public boolean accept(File pathname) {
+        if (pathname.getName().toLowerCase().endsWith(filter))
+          return true;
         return false;
+      }
+    };
+    return getFiles2(folder, fileFilter);
+  }
+
+  public static File[] getFiles2(String folder, FileFilter filter) {
+    try {
+      File file = new File(folder);
+      if (!file.exists()) {
+        return new File[0];
+      }
+
+      return file.listFiles(filter);
+    } catch (Exception e) {
+      Logger.e(TAG, "getFiles2(), folder: " + folder);
+      return null;
     }
-    return true;
   }
 
   public static String getRoot() {
@@ -151,28 +161,18 @@ public class FileSystem {
     }
   }
 
-  public static File[] getFiles(String folder, final String filter) {
-    FileFilter fileFilter = new FileFilter() {
-      public boolean accept(File pathname) {
-        if (pathname.getName().toLowerCase().endsWith(filter))
-          return true;
+  public static boolean setRootDirectory(String cardRoot, String appRoot) {
+    if (!appRoot.endsWith("/"))
+      appRoot += "/";
+
+    FileSystem.ROOT = appRoot;
+
+    // create root directory
+    File rootAppDir = new File(ROOT);
+    if (!rootAppDir.exists()) {
+      if (!rootAppDir.mkdir())
         return false;
-      }
-    };
-    return getFiles2(folder, fileFilter);
-  }
-
-  public static File[] getFiles2(String folder, FileFilter filter) {
-    try {
-      File file = new File(folder);
-      if (!file.exists()) {
-        return new File[0];
-      }
-
-      return file.listFiles(filter);
-    } catch (Exception e) {
-      Logger.e(TAG, "getFiles2(), folder: " + folder);
-      return null;
     }
+    return true;
   }
 }

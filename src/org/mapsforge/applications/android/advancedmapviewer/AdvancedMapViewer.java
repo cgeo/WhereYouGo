@@ -22,18 +22,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.Refreshable;
-import menion.android.whereyougo.gui.extension.MainApplication;
-import menion.android.whereyougo.maps.VectorMapDataProvider;
-import menion.android.whereyougo.settings.Settings;
+import menion.android.whereyougo.gui.IRefreshable;
+import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
+import menion.android.whereyougo.preferences.PreferenceValues;
 
 import org.mapsforge.android.AndroidUtils;
 import org.mapsforge.android.maps.DebugSettings;
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapScaleBar;
 import org.mapsforge.android.maps.MapScaleBar.TextField;
-import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.MapViewPosition;
 import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
 import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
@@ -46,7 +45,12 @@ import org.mapsforge.android.maps.overlay.PolygonalChain;
 import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
 import org.mapsforge.applications.android.advancedmapviewer.container.MapPointPack;
-import org.mapsforge.applications.android.advancedmapviewer.extension.*;
+import org.mapsforge.applications.android.advancedmapviewer.extension.CaptionMarker;
+import org.mapsforge.applications.android.advancedmapviewer.extension.MyLocationOverlay;
+import org.mapsforge.applications.android.advancedmapviewer.extension.MyMapView;
+import org.mapsforge.applications.android.advancedmapviewer.extension.NavigationOverlay;
+import org.mapsforge.applications.android.advancedmapviewer.extension.RotationMarker;
+import org.mapsforge.applications.android.advancedmapviewer.extension.SensorMyLocationOverlay;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.FilterByFileExtension;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.ValidMapFile;
 import org.mapsforge.applications.android.advancedmapviewer.filefilter.ValidRenderTheme;
@@ -96,7 +100,7 @@ import android.widget.ToggleButton;
  * preferences can be adjusted via the {@link EditPreferences} activity and screenshots of the map
  * may be taken in different image formats.
  */
-public class AdvancedMapViewer extends MapActivity implements Refreshable {
+public class AdvancedMapViewer extends MapActivity implements IRefreshable {
   /**
    * The default number of tiles in the file system cache.
    */
@@ -136,7 +140,21 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
   private static final int SELECT_MAP_FILE = 0;
   private static final int SELECT_RENDER_THEME_FILE = 1;
 
-  private MapGeneratorInternal mapGeneratorInternal = MapGeneratorInternal.DATABASE_RENDERER;
+  private static Marker createMarker(GeoPoint geoPoint, Drawable icon) {
+    return new Marker(geoPoint, icon);
+  }
+
+  private static Polyline createPolyline(List<GeoPoint> geoPoints) {
+    PolygonalChain polygonalChain = new PolygonalChain(geoPoints);
+    Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+    paintStroke.setStyle(Paint.Style.STROKE);
+    paintStroke.setColor(Color.MAGENTA);
+    paintStroke.setStrokeWidth(4);
+
+    return new Polyline(polygonalChain, paintStroke);
+  }
+
+  private MapGeneratorInternal mapGeneratorInternal = MapGeneratorInternal.BLANK;
   private ListOverlay listOverlay;
   private MyLocationOverlay myLocationOverlay;
   private NavigationOverlay navigationOverlay;
@@ -146,157 +164,10 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
   private WakeLock wakeLock;
   MyMapView mapView;
   private double itemsLatitude, itemsLongitude;
+
   private boolean showPins = true;
+
   private boolean showLabels = true;
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.options_menu, menu);
-    this.menu = menu;
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.menu_info:
-        return true;
-
-      case R.id.menu_info_map_file:
-        showDialog(DIALOG_INFO_MAP_FILE);
-        return true;
-
-      case R.id.menu_info_about:
-        startActivity(new Intent(this, InfoView.class));
-        return true;
-
-      case R.id.menu_position:
-        return true;
-
-      case R.id.menu_position_my_location_enable:
-        enableShowMyLocation(true);
-        onPrepareOptionsMenu(this.menu);
-        return true;
-
-      case R.id.menu_position_my_location_disable:
-        disableShowMyLocation();
-        onPrepareOptionsMenu(this.menu);
-        return true;
-
-      case R.id.menu_position_last_known:
-        gotoLastKnownPosition();
-        return true;
-
-      case R.id.menu_position_enter_coordinates:
-        showDialog(DIALOG_ENTER_COORDINATES);
-        return true;
-
-      case R.id.menu_position_map_center:
-        // disable GPS follow mode if it is enabled
-        disableSnapToLocation(true);
-        MapFileInfo mapFileInfo = this.mapView.getMapDatabase().getMapFileInfo();
-        this.mapView.getMapViewPosition().setCenter(mapFileInfo.boundingBox.getCenterPoint());
-        return true;
-
-      case R.id.menu_screenshot:
-        return true;
-
-      case R.id.menu_screenshot_jpeg:
-        this.screenshotCapturer.captureScreenshot(CompressFormat.JPEG);
-        return true;
-
-      case R.id.menu_screenshot_png:
-        this.screenshotCapturer.captureScreenshot(CompressFormat.PNG);
-        return true;
-
-      case R.id.menu_preferences:
-        startActivity(new Intent(this, EditPreferences.class));
-        return true;
-
-      case R.id.menu_render_theme:
-        return true;
-
-      case R.id.menu_render_theme_osmarender:
-        this.mapView.setRenderTheme(InternalRenderTheme.OSMARENDER);
-        return true;
-
-      case R.id.menu_render_theme_select_file:
-        startRenderThemePicker();
-        return true;
-
-      case R.id.menu_mapfile:
-        startMapFilePicker();
-        return true;
-
-      case R.id.menu_mapgenerator:
-        return true;
-      case R.id.menu_mapgenerator_blank:
-        setMapGenerator(MapGeneratorInternal.BLANK);
-        return true;
-      case R.id.menu_mapgenerator_database:
-        setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
-        return true;
-      case R.id.menu_mapgenerator_mapnik:
-        setMapGenerator(MapGeneratorInternal.MAPNIK);
-        return true;
-      case R.id.menu_mapgenerator_opencyclemap:
-        setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
-        return true;
-      case R.id.menu_mapgenerator_opentransportmap:
-        setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
-        return true;
-      case R.id.menu_mapgenerator_mapquest:
-        setMapGenerator(MapGeneratorInternal.MAPQUEST);
-        return true;
-      case R.id.menu_mapgenerator_mapbox:
-        setMapGenerator(MapGeneratorInternal.MAPBOX);
-        return true;
-      case R.id.menu_mapgenerator_komoot:
-        setMapGenerator(MapGeneratorInternal.KOMOOT);
-        return true;
-      case R.id.menu_mapgenerator_skobbler:
-        setMapGenerator(MapGeneratorInternal.SKOBBLER);
-        return true;
-
-      default:
-        return false;
-    }
-  }
-
-  @Override
-  public boolean onPrepareOptionsMenu(Menu menu) {
-    if (this.myLocationOverlay.isMyLocationEnabled()) {
-      menu.findItem(R.id.menu_position_my_location_enable).setVisible(false);
-      menu.findItem(R.id.menu_position_my_location_enable).setEnabled(false);
-      menu.findItem(R.id.menu_position_my_location_disable).setVisible(true);
-      menu.findItem(R.id.menu_position_my_location_disable).setEnabled(true);
-    } else {
-      menu.findItem(R.id.menu_position_my_location_enable).setVisible(true);
-      menu.findItem(R.id.menu_position_my_location_enable).setEnabled(true);
-      menu.findItem(R.id.menu_position_my_location_disable).setVisible(false);
-      menu.findItem(R.id.menu_position_my_location_disable).setEnabled(false);
-    }
-
-    if (mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER) {
-      menu.findItem(R.id.menu_info_map_file).setEnabled(true);
-      menu.findItem(R.id.menu_position_map_center).setEnabled(true);
-      menu.findItem(R.id.menu_render_theme).setEnabled(true);
-      menu.findItem(R.id.menu_mapfile).setEnabled(true);
-    } else {
-      menu.findItem(R.id.menu_info_map_file).setEnabled(false);
-      menu.findItem(R.id.menu_position_map_center).setEnabled(false);
-      menu.findItem(R.id.menu_render_theme).setEnabled(false);
-      menu.findItem(R.id.menu_mapfile).setEnabled(false);
-    }
-
-    return true;
-  }
-
-  @Override
-  public boolean onTrackballEvent(MotionEvent event) {
-    // forward the event to the MapView
-    return this.mapView.onTrackballEvent(event);
-  }
 
   private void configureMapView() {
     this.mapView.setBuiltInZoomControls(true);
@@ -308,11 +179,24 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
     mapScaleBar.setText(TextField.METER, getString(R.string.unit_symbol_meter));
   }
 
-  private void setMapGenerator(MapGeneratorInternal type) {
-    if (this.mapGeneratorInternal != type) {
-      this.mapGeneratorInternal = type;
-      this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
-    }
+  private Circle createCircle(GeoPoint geoPoint) {
+    Paint paintFill = new Paint(Paint.ANTI_ALIAS_FLAG);
+    paintFill.setStyle(Paint.Style.FILL);
+    paintFill.setColor(Color.BLUE);
+    // paintFill.setAlpha(64);
+
+    Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
+    paintStroke.setStyle(Paint.Style.STROKE);
+    paintStroke.setColor(Color.DKGRAY);
+    // paintStroke.setAlpha(128);
+    paintStroke.setStrokeWidth(3);
+
+    return new Circle(geoPoint, 0, paintFill, paintStroke);
+  }
+
+  private Marker createMarker(GeoPoint geoPoint, int resourceIdentifier) {
+    Drawable drawable = getResources().getDrawable(resourceIdentifier);
+    return new Marker(geoPoint, Marker.boundCenterBottom(drawable));
   }
 
   private void disableShowMyLocation() {
@@ -320,6 +204,20 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
       this.myLocationOverlay.disableMyLocation();
       disableSnapToLocation(false);
       this.snapToLocationView.setVisibility(View.GONE);
+    }
+  }
+
+  /**
+   * @param showToast defines whether a toast message is displayed or not.
+   */
+  void disableSnapToLocation(boolean showToast) {
+    if (this.myLocationOverlay.isSnapToLocationEnabled()) {
+      this.myLocationOverlay.setSnapToLocationEnabled(false);
+      this.snapToLocationView.setChecked(false);
+      this.mapView.setClickable(true);
+      if (showToast) {
+        showToastOnUiThread(getString(R.string.snap_to_location_disabled));
+      }
     }
   }
 
@@ -338,6 +236,20 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
       this.mapView.getOverlays().add(this.navigationOverlay);
       this.mapView.getOverlays().add(this.myLocationOverlay);
       this.snapToLocationView.setVisibility(View.VISIBLE);
+    }
+  }
+
+  /**
+   * @param showToast defines whether a toast message is displayed or not.
+   */
+  void enableSnapToLocation(boolean showToast) {
+    if (!this.myLocationOverlay.isSnapToLocationEnabled()) {
+      this.myLocationOverlay.setSnapToLocationEnabled(true);
+      this.snapToLocationView.setChecked(true);
+      this.mapView.setClickable(false);
+      if (showToast) {
+        showToastOnUiThread(getString(R.string.snap_to_location_enabled));
+      }
     }
   }
 
@@ -366,22 +278,12 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
     }
   }
 
-  /**
-   * Sets all file filters and starts the FilePicker to select a map file.
-   */
-  private void startMapFilePicker() {
-    FilePicker.setFileDisplayFilter(FILE_FILTER_EXTENSION_MAP);
-    FilePicker.setFileSelectFilter(new ValidMapFile());
-    startActivityForResult(new Intent(this, FilePicker.class), SELECT_MAP_FILE);
-  }
-
-  /**
-   * Sets all file filters and starts the FilePicker to select an XML file.
-   */
-  private void startRenderThemePicker() {
-    FilePicker.setFileDisplayFilter(FILE_FILTER_EXTENSION_XML);
-    FilePicker.setFileSelectFilter(new ValidRenderTheme());
-    startActivityForResult(new Intent(this, FilePicker.class), SELECT_RENDER_THEME_FILE);
+  void invertSnapToLocation() {
+    if (this.myLocationOverlay.isSnapToLocationEnabled()) {
+      disableSnapToLocation(true);
+    } else {
+      enableSnapToLocation(true);
+    }
   }
 
   @Override
@@ -391,9 +293,10 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
         disableSnapToLocation(true);
         if (intent != null && intent.getStringExtra(FilePicker.SELECTED_FILE) != null) {
           this.mapView.setMapFile(new File(intent.getStringExtra(FilePicker.SELECTED_FILE)));
+          setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
         }
       } else if (resultCode == RESULT_CANCELED && this.mapView.getMapFile() == null) {
-        finish();
+        //finish();
       }
     } else if (requestCode == SELECT_RENDER_THEME_FILE && resultCode == RESULT_OK && intent != null
         && intent.getStringExtra(FilePicker.SELECTED_FILE) != null) {
@@ -517,111 +420,6 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
     }
   }
 
-  private void showMapPack(ArrayList<MapPointPack> packs) {
-    synchronized (this.listOverlay) {
-      this.navigationOverlay.setTarget(null);
-      itemsLatitude = itemsLongitude = 0;
-      int count = 0;
-      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
-      overlayItems.clear();
-      for (MapPointPack pack : packs) {
-        if (pack.isPolygon()) {
-          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
-          for (MapPoint mp : pack.getPoints()) {
-            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-            geoPoints.add(geoPoint);
-          }
-          overlayItems.add(createPolyline(geoPoints));
-        } else {
-          Drawable icon = null;
-          if (pack.getIcon() == null) {
-            icon =
-                getResources().getDrawable(
-                    pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
-          } else {
-            Bitmap b = pack.getIcon();
-            if (b.getWidth() > ICON_SIZE_MAX && b.getWidth() >= b.getHeight()) {
-              b =
-                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX,
-                      ICON_SIZE_MAX * b.getHeight() / b.getWidth(), false);
-            } else if (b.getHeight() > ICON_SIZE_MAX) {
-              b =
-                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX * b.getWidth() / b.getHeight(),
-                      ICON_SIZE_MAX, false);
-            }
-            icon = new BitmapDrawable(getResources(), b);
-          }
-          icon = Marker.boundCenterBottom(icon);
-          for (MapPoint mp : pack.getPoints()) {
-            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-            CaptionMarker captionMarker = new CaptionMarker(geoPoint, icon, mp.getName());
-            captionMarker.setMarkerVisible(showPins);
-            captionMarker.setCaptionVisible(showLabels);
-            overlayItems.add(captionMarker);
-            if (mp.isTarget())
-              this.navigationOverlay.setTarget(geoPoint);
-            itemsLatitude += mp.getLatitude();
-            itemsLongitude += mp.getLongitude();
-            ++count;
-          }
-        }
-      }
-      if (count > 0) {
-        itemsLatitude /= count;
-        itemsLongitude /= count;
-      }
-    }
-  }
-
-  private void visibilityChanged() {
-    synchronized (this.listOverlay) {
-      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
-      for (int i = 0; i < overlayItems.size(); i++) {
-        OverlayItem item = overlayItems.get(i);
-        if (item instanceof CaptionMarker) {
-          CaptionMarker captionMarker = (CaptionMarker) item;
-          captionMarker.setMarkerVisible(this.showPins);
-          captionMarker.setCaptionVisible(this.showLabels);
-        }
-      }
-    }
-    this.mapView.getOverlayController().redrawOverlays();
-  }
-
-  private Circle createCircle(GeoPoint geoPoint) {
-    Paint paintFill = new Paint(Paint.ANTI_ALIAS_FLAG);
-    paintFill.setStyle(Paint.Style.FILL);
-    paintFill.setColor(Color.BLUE);
-    // paintFill.setAlpha(64);
-
-    Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-    paintStroke.setStyle(Paint.Style.STROKE);
-    paintStroke.setColor(Color.DKGRAY);
-    // paintStroke.setAlpha(128);
-    paintStroke.setStrokeWidth(3);
-
-    return new Circle(geoPoint, 0, paintFill, paintStroke);
-  }
-
-  private static Polyline createPolyline(List<GeoPoint> geoPoints) {
-    PolygonalChain polygonalChain = new PolygonalChain(geoPoints);
-    Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
-    paintStroke.setStyle(Paint.Style.STROKE);
-    paintStroke.setColor(Color.MAGENTA);
-    paintStroke.setStrokeWidth(4);
-
-    return new Polyline(polygonalChain, paintStroke);
-  }
-
-  private Marker createMarker(GeoPoint geoPoint, int resourceIdentifier) {
-    Drawable drawable = getResources().getDrawable(resourceIdentifier);
-    return new Marker(geoPoint, Marker.boundCenterBottom(drawable));
-  }
-
-  private static Marker createMarker(GeoPoint geoPoint, Drawable icon) {
-    return new Marker(geoPoint, icon);
-  }
-
   @Deprecated
   @Override
   protected Dialog onCreateDialog(int id) {
@@ -672,6 +470,13 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
   }
 
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.options_menu, menu);
+    this.menu = menu;
+    return true;
+  }
+
+  @Override
   protected void onDestroy() {
     super.onDestroy();
     this.screenshotCapturer.interrupt();
@@ -688,14 +493,127 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
   }
 
   @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_info:
+        return true;
+
+      case R.id.menu_info_map_file:
+        if (this.mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER && this.mapView.getMapFile() != null)
+          showDialog(DIALOG_INFO_MAP_FILE);
+        return true;
+
+      case R.id.menu_info_about:
+        startActivity(new Intent(this, InfoView.class));
+        return true;
+
+      case R.id.menu_position:
+        return true;
+
+      case R.id.menu_position_my_location_enable:
+        enableShowMyLocation(true);
+        onPrepareOptionsMenu(this.menu);
+        return true;
+
+      case R.id.menu_position_my_location_disable:
+        disableShowMyLocation();
+        onPrepareOptionsMenu(this.menu);
+        return true;
+
+      case R.id.menu_position_last_known:
+        gotoLastKnownPosition();
+        return true;
+
+      case R.id.menu_position_enter_coordinates:
+        showDialog(DIALOG_ENTER_COORDINATES);
+        return true;
+
+      case R.id.menu_position_map_center:
+        if (this.mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER) {
+          // disable GPS follow mode if it is enabled
+          disableSnapToLocation(true);
+          MapFileInfo mapFileInfo = this.mapView.getMapDatabase().getMapFileInfo();
+          this.mapView.getMapViewPosition().setCenter(mapFileInfo.boundingBox.getCenterPoint());
+        }
+        return true;
+
+      case R.id.menu_screenshot:
+        return true;
+
+      case R.id.menu_screenshot_jpeg:
+        this.screenshotCapturer.captureScreenshot(CompressFormat.JPEG);
+        return true;
+
+      case R.id.menu_screenshot_png:
+        this.screenshotCapturer.captureScreenshot(CompressFormat.PNG);
+        return true;
+
+      case R.id.menu_preferences:
+        startActivity(new Intent(this, EditPreferences.class));
+        return true;
+
+      case R.id.menu_render_theme:
+        return true;
+
+      case R.id.menu_render_theme_osmarender:
+        this.mapView.setRenderTheme(InternalRenderTheme.OSMARENDER);
+        return true;
+
+      case R.id.menu_render_theme_select_file:
+        startRenderThemePicker();
+        return true;
+
+      case R.id.menu_mapfile:
+        startMapFilePicker();
+        return true;
+
+      case R.id.menu_mapgenerator:
+        return true;
+      case R.id.menu_mapgenerator_blank:
+        setMapGenerator(MapGeneratorInternal.BLANK);
+        return true;
+      case R.id.menu_mapgenerator_database:
+        if(this.mapView.getMapFile() != null)
+          setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
+        else
+          startMapFilePicker();
+        return true;
+      case R.id.menu_mapgenerator_mapnik:
+        setMapGenerator(MapGeneratorInternal.MAPNIK);
+        return true;
+      case R.id.menu_mapgenerator_opencyclemap:
+        setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
+        return true;
+      case R.id.menu_mapgenerator_opentransportmap:
+        setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
+        return true;
+      case R.id.menu_mapgenerator_mapquest:
+        setMapGenerator(MapGeneratorInternal.MAPQUEST);
+        return true;
+      case R.id.menu_mapgenerator_mapbox:
+        setMapGenerator(MapGeneratorInternal.MAPBOX);
+        return true;
+      case R.id.menu_mapgenerator_komoot:
+        setMapGenerator(MapGeneratorInternal.KOMOOT);
+        return true;
+      case R.id.menu_mapgenerator_skobbler:
+        setMapGenerator(MapGeneratorInternal.SKOBBLER);
+        return true;
+
+      default:
+        return false;
+    }
+  }
+
+  @Override
   protected void onPause() {
     super.onPause();
     if (this.wakeLock.isHeld()) {
       this.wakeLock.release();
     }
 
-    if (Settings.getCurrentActivity() == this) {
-      Settings.setCurrentActivity(null);
+    if (PreferenceValues.getCurrentActivity() == this) {
+      PreferenceValues.setCurrentActivity(null);
     }
     // disable location
     MainApplication.onActivityPause();
@@ -724,7 +642,8 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
       final TextView textView = (TextView) dialog.findViewById(R.id.zoomlevelValue);
       textView.setText(String.valueOf(zoomlevel.getProgress()));
       zoomlevel.setOnSeekBarChangeListener(new SeekBarChangeListener(textView));
-    } else if (id == DIALOG_INFO_MAP_FILE) {
+    } else if (id == DIALOG_INFO_MAP_FILE
+        && this.mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER) {
       MapFileInfo mapFileInfo = this.mapView.getMapDatabase().getMapFileInfo();
 
       // map file name
@@ -793,6 +712,35 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
   }
 
   @Override
+  public boolean onPrepareOptionsMenu(Menu menu) {
+    if (this.myLocationOverlay.isMyLocationEnabled()) {
+      menu.findItem(R.id.menu_position_my_location_enable).setVisible(false);
+      menu.findItem(R.id.menu_position_my_location_enable).setEnabled(false);
+      menu.findItem(R.id.menu_position_my_location_disable).setVisible(true);
+      menu.findItem(R.id.menu_position_my_location_disable).setEnabled(true);
+    } else {
+      menu.findItem(R.id.menu_position_my_location_enable).setVisible(true);
+      menu.findItem(R.id.menu_position_my_location_enable).setEnabled(true);
+      menu.findItem(R.id.menu_position_my_location_disable).setVisible(false);
+      menu.findItem(R.id.menu_position_my_location_disable).setEnabled(false);
+    }
+
+    if (mapGeneratorInternal == MapGeneratorInternal.DATABASE_RENDERER && this.mapView.getMapFile() != null) {
+      menu.findItem(R.id.menu_info_map_file).setEnabled(true);
+      menu.findItem(R.id.menu_position_map_center).setEnabled(true);
+      menu.findItem(R.id.menu_render_theme).setEnabled(true);
+      menu.findItem(R.id.menu_mapfile).setEnabled(true);
+    } else {
+      menu.findItem(R.id.menu_info_map_file).setEnabled(false);
+      menu.findItem(R.id.menu_position_map_center).setEnabled(false);
+      menu.findItem(R.id.menu_render_theme).setEnabled(false);
+      menu.findItem(R.id.menu_mapfile).setEnabled(false);
+    }
+
+    return true;
+  }
+
+  @Override
   protected void onResume() {
     super.onResume();
 
@@ -845,7 +793,7 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
         new DebugSettings(drawTileCoordinates, drawTileFrames, highlightWaterTiles);
     this.mapView.setDebugSettings(debugSettings);
 
-    Settings.setCurrentActivity(this);
+    PreferenceValues.setCurrentActivity(this);
   }
 
   @Override
@@ -858,39 +806,87 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
     outState.putBoolean(BUNDLE_SHOW_LABELS, this.showLabels);
   }
 
-  /**
-   * @param showToast defines whether a toast message is displayed or not.
-   */
-  void disableSnapToLocation(boolean showToast) {
-    if (this.myLocationOverlay.isSnapToLocationEnabled()) {
-      this.myLocationOverlay.setSnapToLocationEnabled(false);
-      this.snapToLocationView.setChecked(false);
-      this.mapView.setClickable(true);
-      if (showToast) {
-        showToastOnUiThread(getString(R.string.snap_to_location_disabled));
+  @Override
+  public boolean onTrackballEvent(MotionEvent event) {
+    // forward the event to the MapView
+    return this.mapView.onTrackballEvent(event);
+  }
+
+  @Override
+  public void refresh() {
+    runOnUiThread(new Runnable() {
+
+      @Override
+      public void run() {
+        VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+        mdp.clear();
+        mdp.addAll();
+        showMapPack(mdp.getItems());
+        mapView.getOverlayController().redrawOverlays();
       }
+    });
+  }
+
+  private void setMapGenerator(MapGeneratorInternal type) {
+    if (this.mapGeneratorInternal != type) {
+      this.mapGeneratorInternal = type;
+      this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
     }
   }
 
-  /**
-   * @param showToast defines whether a toast message is displayed or not.
-   */
-  void enableSnapToLocation(boolean showToast) {
-    if (!this.myLocationOverlay.isSnapToLocationEnabled()) {
-      this.myLocationOverlay.setSnapToLocationEnabled(true);
-      this.snapToLocationView.setChecked(true);
-      this.mapView.setClickable(false);
-      if (showToast) {
-        showToastOnUiThread(getString(R.string.snap_to_location_enabled));
+  private void showMapPack(ArrayList<MapPointPack> packs) {
+    synchronized (this.listOverlay) {
+      this.navigationOverlay.setTarget(null);
+      itemsLatitude = itemsLongitude = 0;
+      int count = 0;
+      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+      overlayItems.clear();
+      for (MapPointPack pack : packs) {
+        if (pack.isPolygon()) {
+          List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+          for (MapPoint mp : pack.getPoints()) {
+            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+            geoPoints.add(geoPoint);
+          }
+          overlayItems.add(createPolyline(geoPoints));
+        } else {
+          Drawable icon = null;
+          if (pack.getIcon() == null) {
+            icon =
+                getResources().getDrawable(
+                    pack.getResource() != 0 ? pack.getResource() : R.drawable.marker_red);
+          } else {
+            Bitmap b = pack.getIcon();
+            if (b.getWidth() > ICON_SIZE_MAX && b.getWidth() >= b.getHeight()) {
+              b =
+                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX,
+                      ICON_SIZE_MAX * b.getHeight() / b.getWidth(), false);
+            } else if (b.getHeight() > ICON_SIZE_MAX) {
+              b =
+                  Bitmap.createScaledBitmap(b, ICON_SIZE_MAX * b.getWidth() / b.getHeight(),
+                      ICON_SIZE_MAX, false);
+            }
+            icon = new BitmapDrawable(getResources(), b);
+          }
+          icon = Marker.boundCenterBottom(icon);
+          for (MapPoint mp : pack.getPoints()) {
+            GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
+            CaptionMarker captionMarker = new CaptionMarker(geoPoint, icon, mp.getName());
+            captionMarker.setMarkerVisible(showPins);
+            captionMarker.setCaptionVisible(showLabels);
+            overlayItems.add(captionMarker);
+            if (mp.isTarget())
+              this.navigationOverlay.setTarget(geoPoint);
+            itemsLatitude += mp.getLatitude();
+            itemsLongitude += mp.getLongitude();
+            ++count;
+          }
+        }
       }
-    }
-  }
-
-  void invertSnapToLocation() {
-    if (this.myLocationOverlay.isSnapToLocationEnabled()) {
-      disableSnapToLocation(true);
-    } else {
-      enableSnapToLocation(true);
+      if (count > 0) {
+        itemsLatitude /= count;
+        itemsLongitude /= count;
+      }
     }
   }
 
@@ -914,18 +910,36 @@ public class AdvancedMapViewer extends MapActivity implements Refreshable {
     }
   }
 
-  @Override
-  public void refresh() {
-    runOnUiThread(new Runnable() {
+  /**
+   * Sets all file filters and starts the FilePicker to select a map file.
+   */
+  private void startMapFilePicker() {
+    FilePicker.setFileDisplayFilter(FILE_FILTER_EXTENSION_MAP);
+    FilePicker.setFileSelectFilter(new ValidMapFile());
+    startActivityForResult(new Intent(this, FilePicker.class), SELECT_MAP_FILE);
+  }
 
-      @Override
-      public void run() {
-        VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-        mdp.clear();
-        mdp.addAll();
-        showMapPack(mdp.getItems());
-        mapView.getOverlayController().redrawOverlays();
+  /**
+   * Sets all file filters and starts the FilePicker to select an XML file.
+   */
+  private void startRenderThemePicker() {
+    FilePicker.setFileDisplayFilter(FILE_FILTER_EXTENSION_XML);
+    FilePicker.setFileSelectFilter(new ValidRenderTheme());
+    startActivityForResult(new Intent(this, FilePicker.class), SELECT_RENDER_THEME_FILE);
+  }
+
+  private void visibilityChanged() {
+    synchronized (this.listOverlay) {
+      List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+      for (int i = 0; i < overlayItems.size(); i++) {
+        OverlayItem item = overlayItems.get(i);
+        if (item instanceof CaptionMarker) {
+          CaptionMarker captionMarker = (CaptionMarker) item;
+          captionMarker.setMarkerVisible(this.showPins);
+          captionMarker.setCaptionVisible(this.showLabels);
+        }
       }
-    });
+    }
+    this.mapView.getOverlayController().redrawOverlays();
   }
 }

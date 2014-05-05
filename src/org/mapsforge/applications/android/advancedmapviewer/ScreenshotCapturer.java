@@ -43,6 +43,11 @@ class ScreenshotCapturer extends PausableThread {
     return new File(directory, stringBuilder.toString());
   }
 
+  synchronized void captureScreenshot(CompressFormat screenhotFormat) {
+    this.compressFormat = screenhotFormat;
+    notify();
+  }
+
   @Override
   protected synchronized void doWork() {
     try {
@@ -80,10 +85,5 @@ class ScreenshotCapturer extends PausableThread {
   @Override
   protected synchronized boolean hasWork() {
     return this.compressFormat != null;
-  }
-
-  synchronized void captureScreenshot(CompressFormat screenhotFormat) {
-    this.compressFormat = screenhotFormat;
-    notify();
   }
 }

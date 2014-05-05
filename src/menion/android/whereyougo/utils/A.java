@@ -17,11 +17,11 @@
 
 package menion.android.whereyougo.utils;
 
-import menion.android.whereyougo.gui.extension.CustomMain;
-import menion.android.whereyougo.gui.extension.MainApplication;
-import menion.android.whereyougo.guiding.GuidingContent;
-import menion.android.whereyougo.hardware.sensors.Orientation;
-import menion.android.whereyougo.utils.audio.ManagerAudio;
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.audio.ManagerAudio;
+import menion.android.whereyougo.geo.orientation.Orientation;
+import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
+import menion.android.whereyougo.guide.GuideContent;
 import android.app.Application;
 
 /**
@@ -33,19 +33,10 @@ public class A {
   private static String TAG = "A";
 
   private static MainApplication app;
-  protected static CustomMain main;
-  private static GuidingContent guidingContent;
+  protected static CustomMainActivity main;
+  private static GuideContent guidingContent;
   private static ManagerAudio managerAudio;
   private static Orientation rotator;
-
-  public static void printState() {
-    Logger.i(TAG, "printState() - STATIC VARIABLES");
-    Logger.i(TAG, "app:" + app);
-    Logger.i(TAG, "managerAudio:" + managerAudio);
-    Logger.i(TAG, "main:" + main);
-    Logger.i(TAG, "guidingContent:" + guidingContent);
-    Logger.i(TAG, "rotator:" + rotator);
-  }
 
   public static void destroy() {
     guidingContent = null;
@@ -61,19 +52,18 @@ public class A {
     app = null;
   }
 
-  public static void registerApp(MainApplication app) {
-    A.app = app;
-  }
-
-  public static void registerMain(CustomMain main) {
-    A.main = main;
-  }
-
   public static Application getApp() {
     return app;
   }
 
-  public static CustomMain getMain() {
+  public static GuideContent getGuidingContent() {
+    if (guidingContent == null) {
+      guidingContent = new GuideContent();
+    }
+    return guidingContent;
+  }
+
+  public static CustomMainActivity getMain() {
     return main;
   }
 
@@ -84,17 +74,27 @@ public class A {
     return managerAudio;
   }
 
-  public static GuidingContent getGuidingContent() {
-    if (guidingContent == null) {
-      guidingContent = new GuidingContent();
-    }
-    return guidingContent;
-  }
-
   public static Orientation getRotator() {
     if (rotator == null) {
       rotator = new Orientation();
     }
     return rotator;
+  }
+
+  public static void printState() {
+    Logger.i(TAG, "printState() - STATIC VARIABLES");
+    Logger.i(TAG, "app:" + app);
+    Logger.i(TAG, "managerAudio:" + managerAudio);
+    Logger.i(TAG, "main:" + main);
+    Logger.i(TAG, "guidingContent:" + guidingContent);
+    Logger.i(TAG, "rotator:" + rotator);
+  }
+
+  public static void registerApp(MainApplication app) {
+    A.app = app;
+  }
+
+  public static void registerMain(CustomMainActivity main) {
+    A.main = main;
   }
 }
