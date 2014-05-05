@@ -167,17 +167,17 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
     } else {
       Media media = (Media) ((EventTable) object).table.rawget("Icon");
       if (media != null) {
-        byte[] icon;
         try {
-          icon = Engine.mediaFile(media);
+          byte[] icon = Engine.mediaFile(media);
+          if(icon != null)
+            return BitmapFactory.decodeByteArray(icon, 0, icon.length);
         } catch (IOException e) {
           Logger.e(TAG, "getStuffIcon()", e);
-          return Images.IMAGE_EMPTY_B;
+        } catch(Exception e){
+          Logger.e(TAG, "getStuffIcon()", e);
         }
-        return BitmapFactory.decodeByteArray(icon, 0, icon.length);
-      } else {
-        return Images.IMAGE_EMPTY_B;
       }
+      return Images.IMAGE_EMPTY_B;
     }
   }
 
