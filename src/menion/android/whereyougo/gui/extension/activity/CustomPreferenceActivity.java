@@ -18,13 +18,11 @@
 package menion.android.whereyougo.gui.extension.activity;
 
 import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
+import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
 import menion.android.whereyougo.preferences.PreferenceItems;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-
-import org.mapsforge.applications.android.advancedmapviewer.filefilter.FilterByFileExtension;
-import org.mapsforge.applications.android.advancedmapviewer.filepicker.FilePicker;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;

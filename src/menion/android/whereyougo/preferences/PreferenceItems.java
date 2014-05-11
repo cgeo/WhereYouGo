@@ -52,16 +52,13 @@ import java.io.File;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomPreferenceActivity;
-import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
-
-import org.mapsforge.applications.android.advancedmapviewer.filepicker.FilePicker;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.RingtoneManager;

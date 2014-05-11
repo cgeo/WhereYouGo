@@ -1,11 +1,11 @@
 package menion.android.whereyougo.gui.dialog;
 
-import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialogFragment;
-import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import android.app.AlertDialog;
 import android.app.Dialog;

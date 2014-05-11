@@ -18,7 +18,6 @@
 package menion.android.whereyougo.openwig;
 
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.R.string;
 import menion.android.whereyougo.audio.UtilsAudio;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.CartridgeDetailsActivity;
@@ -185,8 +184,8 @@ public class WUI implements UI {
     // disable currentActivity
     PreferenceValues.setCurrentActivity(null);
     Intent intent =
-        new Intent(activity,
-            org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+        new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     intent.putExtra("center", center);
     intent.putExtra("navigate", navigate);
     activity.startActivity(intent);
@@ -249,8 +248,7 @@ public class WUI implements UI {
         return;
       case SCREEN_MAP:
         Intent intent11 =
-            new Intent(activity,
-                org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
+            new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
         activity.startActivity(intent11);
         return;
     }

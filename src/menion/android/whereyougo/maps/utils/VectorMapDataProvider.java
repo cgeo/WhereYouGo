@@ -6,12 +6,10 @@ import java.util.Vector;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
+import menion.android.whereyougo.maps.container.MapPoint;
+import menion.android.whereyougo.maps.container.MapPointPack;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-
-import org.mapsforge.applications.android.advancedmapviewer.container.MapPoint;
-import org.mapsforge.applications.android.advancedmapviewer.container.MapPointPack;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import cz.matejcik.openwig.Engine;
@@ -35,6 +33,10 @@ public class VectorMapDataProvider implements MapDataProvider {
   }
 
   public void addAll() {
+    if (MainActivity.cartridgeFile == null || Engine.instance == null
+        || Engine.instance.cartridge == null || Engine.instance.cartridge.zones == null)
+      return;
+    clear();
     Vector<CartridgeFile> v = new Vector<CartridgeFile>();
     v.add(MainActivity.cartridgeFile);
     addCartridges(v);

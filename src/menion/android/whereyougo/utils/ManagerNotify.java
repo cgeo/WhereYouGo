@@ -18,8 +18,8 @@
 package menion.android.whereyougo.utils;
 
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.PreferenceValues;
 import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;

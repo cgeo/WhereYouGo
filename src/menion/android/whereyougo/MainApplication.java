@@ -22,15 +22,10 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.mapsforge.android.AndroidUtils;
-import org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer;
-
-import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.ExceptionHandler;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;

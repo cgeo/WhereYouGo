@@ -29,7 +29,6 @@ import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
-import menion.android.whereyougo.gui.extension.dialog.CustomDialog.OnClickListener;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Images;
@@ -169,11 +168,11 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
       if (media != null) {
         try {
           byte[] icon = Engine.mediaFile(media);
-          if(icon != null)
+          if (icon != null)
             return BitmapFactory.decodeByteArray(icon, 0, icon.length);
         } catch (IOException e) {
           Logger.e(TAG, "getStuffIcon()", e);
-        } catch(Exception e){
+        } catch (Exception e) {
           Logger.e(TAG, "getStuffIcon()", e);
         }
       }

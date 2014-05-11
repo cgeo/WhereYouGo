@@ -28,7 +28,7 @@
 
     <application
         android:name="menion.android.whereyougo.MainApplication"
-        android:debuggable="false"
+        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
         android:theme="@style/AppTheme" >
@@ -43,13 +43,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer"
+            android:name="menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"
             android:theme="@style/Mapsforge" >
         </activity>
-        <activity android:name="org.mapsforge.applications.android.advancedmapviewer.preferences.EditPreferences" />
-        <activity android:name="org.mapsforge.applications.android.advancedmapviewer.filepicker.FilePicker" />
+        <activity android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
+        <activity android:name="menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker" />
         <activity
-            android:name="org.mapsforge.applications.android.advancedmapviewer.InfoView"
+            android:name="menion.android.whereyougo.maps.mapsforge.InfoView"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.CartridgeDetailsActivity"

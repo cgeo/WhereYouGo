@@ -38,9 +38,9 @@ import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.maps.utils.LocusMapDataProvider;
 import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
 import menion.android.whereyougo.openwig.WUI;
+import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
@@ -259,6 +259,7 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           try {
             enableGuideOnEventTable();
             MainActivity.callGudingScreen(DetailsActivity.this);
+            DetailsActivity.this.finish();
           } catch (Exception e) {
             Logger.w(TAG, "btn01.click() - unknown problem");
           }
@@ -274,9 +275,11 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           switch (Preferences.GLOBAL_MAP_PROVIDER) {
             case PreferenceValues.VALUE_MAP_PROVIDER_VECTOR:
               vectorMap();
+              DetailsActivity.this.finish();
               break;
             case PreferenceValues.VALUE_MAP_PROVIDER_LOCUS:
               locusMap();
+              DetailsActivity.this.finish();
               break;
           }
           return true;

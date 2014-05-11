@@ -213,7 +213,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
           description += ", ";
 
         description += z.name;
-        if(z.contains(Engine.instance.player))
+        if (z.contains(Engine.instance.player))
           description += " (INSIDE)";
       }
     }

@@ -153,8 +153,7 @@ public class GuideContent implements ILocationEventListener {
     }
   }
 
-  public void onStatusChanged(String provider, int state, Bundle extra) {
-  }
+  public void onStatusChanged(String provider, int state, Bundle extra) {}
 
   public void removeGuidingListener(IGuideEventListener listener) {
     this.listeners.remove(listener);
