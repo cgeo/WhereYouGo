@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.10" id="36" time="19.5.2014">
+	<li>fixed: some bugs</li>
+	<li>fixed: close object detail after clicking on button to avoid piling up</li>
+	<li>fixed: only one instance of maps</li>
+	<li>update: some map providers removed, some added, added attribution on the bottom of the map</li>
+	<li>added: current map provider is selected from list with radio buttons</li>
+	<li>added: clickable objects on map</li>
+	<li>added: links in main menu: geocaching.com, wherigo.com</li>
+	<li>added: download cartridges (user needs to fill login credentials in Settings, navigate to desired wherigo via Web Browser and select open in WhereYouGo)</li>
+	<li>added: long click on cartridge to show dialog for cartridge deletion</li>
+	<li>added: SD card is no longer required (altough recommended), users with no SD card have to download cartridges via the newly added downloading function</li>
+  </update>
+   
   <update name="0.8.9" id="35" time="5.5.2014">
 	<li>fixed: online maps were not shown until vector map file was provided</li>
 	<li>fixed: map information was accessible even though vector map file was not provided</li>
