@@ -22,6 +22,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.Date;
 import java.util.Locale;
 
+import org.mapsforge.core.model.GeoPoint;
+
+import android.location.Location;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 
@@ -266,6 +269,16 @@ public class UtilsFormat {
         return dist;
       }
     }
+  }
+  
+  public static String formatGeoPoint(GeoPoint geoPoint) {
+    return formatCooByType(geoPoint.latitude, geoPoint.longitude, false);
+  }
+  
+  public static String formatGeoPointDefault(GeoPoint geoPoint) {
+    String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', '°');
+    String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', '°');
+    return String.format("N %s E %s", strLatitude, strLongitude);
   }
 
   /*****************************/

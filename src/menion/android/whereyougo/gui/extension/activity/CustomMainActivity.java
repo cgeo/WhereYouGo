@@ -414,7 +414,7 @@ public abstract class CustomMainActivity extends CustomActivity {
 
     // fileSystem created successfully
     for (int i = 0; i < DIRS.length; i++) {
-      (new File(FileSystem.ROOT + DIRS[i])).mkdirs();
+      (new File(DIRS[i])).mkdirs();
     }
     return true;
   }

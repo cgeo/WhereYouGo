@@ -13,8 +13,26 @@
 		<item>large</item>
 		<item>huge</item>
 	</string-array>
+	
+	<string-array name="mapgenerator_values">
+        <item>blank</item>
+        <item>map file [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>OpenCycleMap (online)</item>
+        <item>OpenTransportMap (online)</item>
+        <item>OpenMapSurfer (online)</item>
+        <item>MapQuest OSM (online)</item>
+        <item>MapQuest Aerial (online)</item>
+        <item>TF OpenCycleMap (online)</item>
+        <item>TF Transport (online)</item>
+        <item>TF Landscape (online)</item>
+        <item>TF Outdoors (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
 
-	<string name="application_name">AdvancedMapViewer</string>
+	<string name="application_name">Mapsforge</string>
 <!-- 	<string name="cancel">Cancel</string> -->
 <!-- 	<string name="error">Error</string> -->
 	<string name="error_last_location_unknown">The last location is unknown</string>
@@ -46,15 +64,6 @@
 	<string name="menu_info_about">About this software</string>
 	<string name="menu_mapfile">Map file</string>
 	<string name="menu_mapgenerator">Map source</string>
-	<string name="menu_mapgenerator_blank">blank</string>
-	<string name="menu_mapgenerator_database">OSM (offline vector)</string>
-	<string name="menu_mapgenerator_mapnik">Mapnik (online)</string>
-	<string name="menu_mapgenerator_opencyclemap">OpenCycleMap (online)</string>
-	<string name="menu_mapgenerator_opentransportmap">OpenTransportMap (online)</string>
-	<string name="menu_mapgenerator_mapquest">Mapquest (online)</string>
-	<string name="menu_mapgenerator_mapbox">MapBox (online)</string>
-	<string name="menu_mapgenerator_komoot">Komoot (online)</string>
-	<string name="menu_mapgenerator_skobbler">Skobbler (online)</string>
 	<string name="menu_position">Position</string>
 	<string name="menu_position_enter_coordinates">Enter coordinates</string>
 	<string name="menu_position_last_known">Last known location</string>

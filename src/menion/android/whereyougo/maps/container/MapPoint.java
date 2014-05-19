@@ -7,6 +7,7 @@ import android.os.Parcelable;
 
 public class MapPoint implements Parcelable {
   String name;
+  String description;
   double latitude;
   double longitude;
   boolean target;
@@ -29,17 +30,27 @@ public class MapPoint implements Parcelable {
 
   public MapPoint(Parcel p) {
     name = p.readString();
+    description = p.readString();
     latitude = p.readDouble();
     longitude = p.readDouble();
     target = p.readByte() > 0;
   }
 
   public MapPoint(String name, double latitude, double longitude) {
-    this(name, latitude, longitude, false);
+    this(name, null, latitude, longitude, false);
+  }
+  
+  public MapPoint(String name, double latitude, double longitude, boolean target) {
+    this(name, null, latitude, longitude, target);
+  }
+  
+  public MapPoint(String name, String description, double latitude, double longitude) {
+    this(name, description, latitude, longitude, false);
   }
 
-  public MapPoint(String name, double latitude, double longitude, boolean target) {
+  public MapPoint(String name, String description, double latitude, double longitude, boolean target) {
     this.name = name;
+    this.description = description;
     this.latitude = latitude;
     this.longitude = longitude;
     this.target = target;
@@ -58,6 +69,10 @@ public class MapPoint implements Parcelable {
   public double getLongitude() {
     return longitude;
   }
+  
+  public String getDescription() {
+    return description;
+  }
 
   public String getName() {
     return name;
@@ -74,6 +89,10 @@ public class MapPoint implements Parcelable {
   public void setLongitude(double longitude) {
     this.longitude = longitude;
   }
+  
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
   public void setName(String name) {
     this.name = name;
@@ -85,8 +104,8 @@ public class MapPoint implements Parcelable {
 
   @Override
   public void writeToParcel(Parcel p, int arg1) {
-    // TODO Auto-generated method stub
     p.writeString(name);
+    p.writeString(description);
     p.writeDouble(latitude);
     p.writeDouble(longitude);
     p.writeByte((byte) (target ? 1 : 0));

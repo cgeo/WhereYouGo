@@ -33,15 +33,6 @@
 	<item android:id="@+id/menu_mapgenerator" android:title="@string/menu_mapgenerator" android:icon="@drawable/ic_menu_mapmode" android:showAsAction="ifRoom">
 		<menu>
 		    <group android:id="@+id/menu_mapgenerator_group" android:checkableBehavior="single">
-				<item android:id="@+id/menu_mapgenerator_blank" android:title="@string/menu_mapgenerator_blank" />
-				<item android:id="@+id/menu_mapgenerator_database" android:title="@string/menu_mapgenerator_database" />
-				<item android:id="@+id/menu_mapgenerator_mapnik" android:title="@string/menu_mapgenerator_mapnik" />
-				<item android:id="@+id/menu_mapgenerator_opencyclemap" android:title="@string/menu_mapgenerator_opencyclemap"/>
-				<item android:id="@+id/menu_mapgenerator_opentransportmap" android:title="@string/menu_mapgenerator_opentransportmap"/>
-				<item android:id="@+id/menu_mapgenerator_mapquest" android:title="@string/menu_mapgenerator_mapquest"/>
-				<item android:id="@+id/menu_mapgenerator_mapbox" android:title="@string/menu_mapgenerator_mapbox"/>
-				<item android:id="@+id/menu_mapgenerator_komoot" android:title="@string/menu_mapgenerator_komoot"/>
-				<item android:id="@+id/menu_mapgenerator_skobbler" android:title="@string/menu_mapgenerator_skobbler"/>
 			</group>
 		</menu>
 	</item>

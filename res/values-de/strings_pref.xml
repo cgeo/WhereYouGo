@@ -10,7 +10,7 @@
     <string name="pref_root_desc">Wählen Sie beliebiges Wherigo im Zielverzeichnis.</string>
     <string name="pref_map_provider">Kartengrundlage</string>
     <string name="pref_map_provider_desc">Map provider wählen</string>
-    <string name="pref_map_provider_vector">Vektor OSM</string>
+    <string name="pref_map_provider_vector">Mapsforge (offline und online Karten)</string>
     <string name="pref_map_provider_locus">Locus (Locus notwendig)</string>
     <string name="pref_statusbar">Statusbar Symbol</string>
     <string name="pref_statusbar_desc">Symbol in der Statusbar anzeigen</string>

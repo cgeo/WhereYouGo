@@ -53,6 +53,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -136,7 +139,8 @@ public class MainActivity extends CustomMainActivity {
           }
         } catch (Exception e) {
           Logger.w(TAG, "refreshCartridge(), file:" + actualFile + ", e:" + e.toString());
-          ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
+          // ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
+          file.delete();
         }
       }
     }
@@ -292,6 +296,27 @@ public class MainActivity extends CustomMainActivity {
   public void onResume() {
     super.onResume();
     refreshCartridges();
+  }
+  
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    return true;
+  }
+  
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_geocaching:
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://geocaching.com/")));
+        return true;
+      case R.id.menu_wherigo:
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wherigo.com/")));
+        return true;
+      default:
+//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wherigo.com/cartridge/details.aspx?CGUID=2320bd5c-9787-4de8-aec3-e4ac7a6abe71")));
+        return false;
+    }
   }
 
   private void vectorMap() {

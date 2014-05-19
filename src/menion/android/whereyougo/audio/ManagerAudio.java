@@ -63,7 +63,7 @@ public class ManagerAudio {
       Utils.closeStream(is);
 
       // write data
-      File fileMp3 = new File(FileSystem.ROOT + FileSystem.CACHE_AUDIO + fileName + fileEnd);
+      File fileMp3 = new File(FileSystem.CACHE_AUDIO + fileName + fileEnd);
       if (fileMp3.exists())
         fileMp3.delete();
       fileMp3.getParentFile().mkdirs();
@@ -116,7 +116,7 @@ public class ManagerAudio {
       is.read(data);
       Utils.closeStream(is);
       String filePath =
-          FileSystem.ROOT + FileSystem.CACHE_AUDIO + Utils.hashString(fileName) + "." + fileEnd;
+          FileSystem.CACHE_AUDIO + Utils.hashString(fileName) + "." + fileEnd;
       FileSystem.saveBytes(filePath, data);
       soundPoolMap.put(audioId, soundPool.load(filePath, 1));
     } catch (Exception e) {

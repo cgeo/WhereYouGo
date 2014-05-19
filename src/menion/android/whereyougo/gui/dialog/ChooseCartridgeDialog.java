@@ -95,7 +95,15 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
           itemClicked(position);
         }
       });
+      // set on long click listener for file deletion
+      lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
+        @Override
+        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+          itemLongClicked(position);
+          return true;
+        }
+      });
       // construct dialog
       return new AlertDialog.Builder(getActivity()).setTitle(R.string.choose_cartridge)
           .setIcon(R.drawable.ic_title_logo).setView(lv).setNeutralButton(R.string.close, null)
@@ -146,6 +154,29 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
       } else {
         MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
       }
+    } catch (Exception e) {
+      Logger.e(TAG, "onCreate()", e);
+    }
+    dismiss();
+  }
+  
+  private void itemLongClicked(int position) {
+    try {
+      CartridgeFile cartridgeFile = cartridgeFiles.get(position);
+      final String filename = cartridgeFile.filename.substring(0,
+          cartridgeFile.filename.length() - 3);
+
+        UtilsGUI.showDialogQuestion(getActivity(), R.string.delete_cartridge,
+            new DialogInterface.OnClickListener() {
+
+              @Override
+              public void onClick(DialogInterface dialog, int btn) {
+                new File(filename+"gwc").delete();
+                new File(filename+"gwl").delete();
+                new File(filename+"ows").delete();
+                MainActivity.refreshCartridges();
+              }
+            }, null);
     } catch (Exception e) {
       Logger.e(TAG, "onCreate()", e);
     }

@@ -11,6 +11,7 @@
     <string name="cancel">Zrušit</string>
     <string name="close">Zavřít</string>
     <string name="declination">Deklinace</string>
+    <string name="delete_cartridge">Smazat cartridge?</string>
     <string name="disable_location">Vypnout lokalizování</string>
     <string name="distance">Vzdálenost</string>
     <string name="do_you_really_want_to_delete_selected_items">Opravdu chcete smazat vybrané objekty?</string>

@@ -33,8 +33,8 @@ public class FileSystem {
 
   public static String ROOT = null;
 
-  public static final String CACHE = "cache/";
-  public static final String CACHE_AUDIO = CACHE + "audio/";
+  public static String CACHE = "cache/";
+  public static String CACHE_AUDIO = CACHE + "audio/";
 
   public static final String CARD_ROOT = "{CARD_ROOT}";
   public static final String[] EXTERNAL_DIRECTORIES = new String[] {CARD_ROOT + "external_sd",

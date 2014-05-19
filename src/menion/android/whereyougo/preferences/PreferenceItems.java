@@ -68,6 +68,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 
 public class PreferenceItems {
 
@@ -413,6 +414,20 @@ public class PreferenceItems {
             return true;
           }
         });
+  }
+
+  public static void addPrefUsername(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity.addEditTextPreference(category, R.string.pref_gc_username,
+        R.string.pref_gc_username_desc, PreferenceValues.KEY_S_GC_USERNAME,
+        PreferenceValues.DEFAULT_GC_USERNAME, InputType.TYPE_TEXT_VARIATION_PERSON_NAME, null);
+  }
+
+  public static void addPrefPassword(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity
+        .addEditTextPreference(category, R.string.pref_gc_password, R.string.pref_gc_password_desc,
+            PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD,
+            InputType.TYPE_TEXT_VARIATION_PASSWORD, null).getEditText()
+        .setTransformationMethod(new PasswordTransformationMethod());
   }
 
   public static void addPrefSensorsBearingTrue(CustomPreferenceActivity activity,

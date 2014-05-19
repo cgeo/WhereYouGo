@@ -97,8 +97,13 @@ public class WUI implements UI {
   }
 
   public void end() {
-    if (progressDialog != null && progressDialog.isShowing())
-      progressDialog.dismiss();
+    if (progressDialog != null && progressDialog.isShowing()) {
+      try {
+        progressDialog.dismiss();
+      } catch (Exception e) {
+        Logger.e(TAG, "end(): dismiss progressDialog", e);
+      }
+    }
     Engine.kill();
     showScreen(SCREEN_MAIN, null);
   }
@@ -210,6 +215,7 @@ public class WUI implements UI {
       case DETAILSCREEN:
         DetailsActivity.et = details;
         Intent intent03 = new Intent(activity, DetailsActivity.class);
+        intent03.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         activity.startActivity(intent03);
         return;
       case INVENTORYSCREEN:
@@ -247,9 +253,10 @@ public class WUI implements UI {
         activity.startActivity(intent10);
         return;
       case SCREEN_MAP:
-        Intent intent11 =
-            new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
-        activity.startActivity(intent11);
+        // Intent intent11 =
+        // new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
+        // activity.startActivity(intent11);
+        showMap(true, true);
         return;
     }
 
@@ -259,8 +266,13 @@ public class WUI implements UI {
   public void start() {
     ((CustomActivity) A.getMain()).runOnUiThread(new Runnable() {
       public void run() {
-        if (progressDialog != null && progressDialog.isShowing())
-          progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+          try {
+            progressDialog.dismiss();
+          } catch (Exception e) {
+            Logger.e(TAG, "start(): dismiss progressDialog", e);
+          }
+        }
       }
     });
     showScreen(MAINSCREEN, null);

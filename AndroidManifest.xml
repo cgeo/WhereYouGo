@@ -44,6 +44,7 @@
         </activity>
         <activity
             android:name="menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"
+            android:launchMode="singleTask"
             android:theme="@style/Mapsforge" >
         </activity>
         <activity android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
@@ -95,6 +96,20 @@
             android:name="menion.android.whereyougo.gui.activity.SettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSettings" />
+        
+        <activity
+            android:name="menion.android.whereyougo.network.DownloadActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" android:host="wherigo.com" android:pathPrefix="/cartridge/download.aspx" />
+                <data android:scheme="http" android:host="www.wherigo.com" android:pathPrefix="/cartridge/download.aspx" />
+                <data android:scheme="http" android:host="wherigo.com" android:pathPrefix="/cartridge/details.aspx" />
+                <data android:scheme="http" android:host="www.wherigo.com" android:pathPrefix="/cartridge/details.aspx" />
+            </intent-filter>
+            </activity>
 
         <service android:name="menion.android.whereyougo.geo.GpsConnectionService" />
         <service android:name="menion.android.whereyougo.audio.AudioPlayService" />

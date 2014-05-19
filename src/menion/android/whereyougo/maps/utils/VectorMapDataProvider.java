@@ -55,7 +55,9 @@ public class VectorMapDataProvider implements MapDataProvider {
       if (cartridge.latitude % 360.0 == 0 && cartridge.longitude % 360.0 == 0) {
         continue;
       }
-      MapPoint pt = new MapPoint(cartridge.name, cartridge.latitude, cartridge.longitude);
+      MapPoint pt =
+          new MapPoint(cartridge.name, cartridge.description, cartridge.latitude,
+              cartridge.longitude);
 
       try {
         byte[] iconData = cartridge.getFile(cartridge.iconId);
@@ -98,11 +100,14 @@ public class VectorMapDataProvider implements MapDataProvider {
     items.add(border);
 
     MapPointPack pack = new MapPointPack();
-    if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
+    if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST
+        || z.position == null) {
       pack.getPoints().add(
-          new MapPoint(z.name, z.nearestPoint.latitude, z.nearestPoint.longitude, mark));
+          new MapPoint(z.name, z.description, z.nearestPoint.latitude, z.nearestPoint.longitude,
+              mark));
     } else {
-      pack.getPoints().add(new MapPoint(z.name, z.position.latitude, z.position.longitude, mark));
+      pack.getPoints().add(
+          new MapPoint(z.name, z.description, z.position.latitude, z.position.longitude, mark));
     }
     if (mark)
       pack.setResource(R.drawable.marker_green);

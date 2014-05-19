@@ -144,10 +144,47 @@ public class MainApplication extends Application {
 
     // set basic settings values
     Preferences.init(this);
+    // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
+    // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
+    // "-");}
+    // try{Log.i("FS", getFilesDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
+    // try{Log.i("FS", getExternalFilesDir(null).getAbsolutePath());}catch(Exception e){Log.i("FS",
+    // "-");}
+    // try{Log.i("FS", Environment.getDataDirectory().getAbsolutePath());}catch(Exception
+    // e){Log.i("FS", "-");}
+    // try{Log.i("FS", Environment.getDownloadCacheDirectory().getAbsolutePath());}catch(Exception
+    // e){Log.i("FS", "-");}
+    // try{Log.i("FS", Environment.getExternalStorageDirectory().getAbsolutePath());}catch(Exception
+    // e){Log.i("FS", "-");}
+    // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
+    // e){Log.i("FS", "-");}
     // initialize root directory
     if (Preferences.GLOBAL_ROOT.equals(PreferenceValues.DEFAULT_ROOT)
-        || !FileSystem.setRootDirectory(null, Preferences.GLOBAL_ROOT))
-      FileSystem.createRoot(APP_NAME);
+        || !FileSystem.setRootDirectory(null, Preferences.GLOBAL_ROOT)) {
+      if (!FileSystem.createRoot(APP_NAME)) {
+        try {
+          FileSystem.setRootDirectory(null, getExternalFilesDir(null).getAbsolutePath());
+        } catch (Exception e1) {
+          try {
+            FileSystem.setRootDirectory(null, getFilesDir().getAbsolutePath());
+          } catch (Exception e2) {
+          }
+        }
+      }
+    }
+    try {
+      FileSystem.CACHE = getExternalCacheDir().getAbsolutePath();
+    } catch (Exception e1) {
+      try {
+        FileSystem.CACHE = getCacheDir().getAbsolutePath();
+      } catch (Exception e2) {
+        FileSystem.CACHE = FileSystem.ROOT + "cache/";
+      }
+    }
+    if (!FileSystem.CACHE.endsWith("/"))
+      FileSystem.CACHE += "/";
+    FileSystem.CACHE_AUDIO = FileSystem.CACHE + "audio/";
+
     // set location state
     LocationState.init(this);
     // initialize DPI

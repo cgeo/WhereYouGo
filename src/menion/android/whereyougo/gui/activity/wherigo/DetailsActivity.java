@@ -410,7 +410,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
     VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
     mdp.clear();
     mdp.addAll();
-    // Main.wui.showScreen(WUI.SCREEN_MAP, null);
-    MainActivity.wui.showMap(true, true);
+    MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
+    //MainActivity.wui.showMap(true, true);
   }
+  
 }

@@ -51,6 +51,8 @@ public class SettingsActivity extends CustomPreferenceActivity {
     PreferenceItems.addPrefRoot(activity, prefCatGlobal);
     PreferenceItems.addPrefMapProvider(activity, prefCatGlobal);
     PreferenceItems.addPrefSavegameAuto(activity, prefCatGlobal);
+    PreferenceItems.addPrefUsername(activity, prefCatGlobal);
+    PreferenceItems.addPrefPassword(activity, prefCatGlobal);
     PreferenceItems.addPrefStatusbar(activity, prefCatGlobal);
     PreferenceItems.addPrefFullscreen(activity, prefCatGlobal);
     PreferenceItems.addPrefHighlight(activity, prefCatGlobal);

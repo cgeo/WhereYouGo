@@ -13,8 +13,26 @@
 		<item>groß</item>
 		<item>riesig</item>
 	</string-array>
+	
+	<string-array name="mapgenerator_values">
+        <item>leer</item>
+        <item>Mapdatei [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>OpenCycleMap (online)</item>
+        <item>OpenTransportMap (online)</item>
+        <item>OpenMapSurfer (online)</item>
+        <item>MapQuest OSM (online)</item>
+        <item>MapQuest Aerial (online)</item>
+        <item>TF OpenCycleMap (online)</item>
+        <item>TF Transport (online)</item>
+        <item>TF Landscape (online)</item>
+        <item>TF Outdoors (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
 
-	<string name="application_name">AdvancedMapViewer</string>
+	<string name="application_name">Mapsforge</string>
 <!-- 	<string name="cancel">Abbrechen</string> -->
 <!-- 	<string name="error">Fehler</string> -->
 	<string name="error_last_location_unknown">Die letzte Position ist unbekannt</string>
@@ -46,15 +64,6 @@
 	<string name="menu_info_about">Über diese Software</string>
 	<string name="menu_mapfile">Kartendatei</string>
 	<string name="menu_mapgenerator">Kartentyp</string>
-	<string name="menu_mapgenerator_blank">leer</string>
-	<string name="menu_mapgenerator_database">OSM (offline vektor)</string>
-	<string name="menu_mapgenerator_mapnik">Mapnik (online)</string>
-	<string name="menu_mapgenerator_opencyclemap">OpenCycleMap (online)</string>
-	<string name="menu_mapgenerator_opentransportmap">OpenTransportMap (online)</string>
-	<string name="menu_mapgenerator_mapquest">Mapquest (online)</string>
-	<string name="menu_mapgenerator_mapbox">MapBox (online)</string>
-	<string name="menu_mapgenerator_komoot">Komoot (online)</string>
-	<string name="menu_mapgenerator_skobbler">Skobbler (online)</string>
 	<string name="menu_position">Position</string>
 	<string name="menu_position_enter_coordinates">Koordinaten eingeben</string>
 	<string name="menu_position_last_known">Letzte bekannte Position</string>

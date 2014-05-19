@@ -10,6 +10,7 @@
     <string name="cancel">Abbrechen</string>
     <string name="close">Schließen</string>
     <string name="declination">Deklination</string>
+    <string name="delete_cartridge">Cartridge löschen?</string>
     <string name="disable_location">Lage deaktivieren</string>
     <string name="distance">Distanz</string>
     <string name="do_you_really_want_to_delete_selected_items">Wollen Sie die ausgewählten Elemente wirklich löschen?</string>

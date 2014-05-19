@@ -11,6 +11,7 @@
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="declination">Declination</string>
+    <string name="delete_cartridge">Delete cartridge?</string>
     <string name="disable_location">Disable location</string>
     <string name="distance">Distance</string>
     <string name="do_you_really_want_to_delete_selected_items">Do you really want to delete selected items?</string>

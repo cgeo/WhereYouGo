@@ -13,8 +13,26 @@
 		<item>velký</item>
 		<item>největší</item>
 	</string-array>
+	
+	<string-array name="mapgenerator_values">
+        <item>prázdná</item>
+        <item>soubor [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>OpenCycleMap (online)</item>
+        <item>OpenTransportMap (online)</item>
+        <item>OpenMapSurfer (online)</item>
+        <item>MapQuest OSM (online)</item>
+        <item>MapQuest Aerial (online)</item>
+        <item>TF OpenCycleMap (online)</item>
+        <item>TF Transport (online)</item>
+        <item>TF Landscape (online)</item>
+        <item>TF Outdoors (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
 
-	<string name="application_name">AdvancedMapViewer</string>
+	<string name="application_name">Mapsforge</string>
 <!-- 	<string name="cancel">Zrušit</string> -->
 <!-- 	<string name="error">Chyba</string> -->
 	<string name="error_last_location_unknown">Poslední pozice je neznámá</string>
@@ -46,15 +64,6 @@
 	<string name="menu_info_about">O programu</string>
 	<string name="menu_mapfile">Soubor mapy</string>
 	<string name="menu_mapgenerator">Typ mapy</string>
-	<string name="menu_mapgenerator_blank">prázdná</string>
-	<string name="menu_mapgenerator_database">OSM (offline vektor)</string>
-	<string name="menu_mapgenerator_mapnik">Mapnik (online)</string>
-	<string name="menu_mapgenerator_opencyclemap">OpenCycleMap (online)</string>
-	<string name="menu_mapgenerator_opentransportmap">OpenTransportMap (online)</string>
-	<string name="menu_mapgenerator_mapquest">Mapquest (online)</string>
-	<string name="menu_mapgenerator_mapbox">MapBox (online)</string>
-	<string name="menu_mapgenerator_komoot">Komoot (online)</string>
-	<string name="menu_mapgenerator_skobbler">Skobbler (online)</string>
 	<string name="menu_position">Pozice</string>
 	<string name="menu_position_enter_coordinates">Vložte souřadnice</string>
 	<string name="menu_position_last_known">Poslední známá pozice</string>

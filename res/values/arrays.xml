@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<string-array name="preferences_scale_bar_unit_keys">
-		<item>imperial</item>
-		<item>metric</item>
-	</string-array>
-	<string name="preferences_scale_bar_unit_default">metric</string>
+    <string-array name="preferences_scale_bar_unit_keys">
+        <item>imperial</item>
+        <item>metric</item>
+    </string-array>
+    <string name="preferences_scale_bar_unit_default">metric</string>
 
-	<string-array name="preferences_text_scale_keys">
-		<item>0.7</item>
-		<item>0.85</item>
-		<item>1.0</item>
-		<item>1.3</item>
-		<item>1.6</item>
-	</string-array>
-	<string name="preferences_text_scale_default">1.0</string>
+    <string-array name="preferences_text_scale_keys">
+        <item>0.7</item>
+        <item>0.85</item>
+        <item>1.0</item>
+        <item>1.3</item>
+        <item>1.6</item>
+    </string-array>
+    <string name="preferences_text_scale_default">1.0</string>
+
+    <string-array name="mapgenerator_keys">
+        <item>BLANK</item>
+        <item>DATABASE_RENDERER</item>
+        <item>OPENSTREETMAP</item>
+        <item>OPENSTREETMAP_DE</item>
+        <item>OPENCYCLEMAP_CYCLE</item>
+        <item>OPENCYCLEMAP_TRANSPORT</item>
+        <item>OPENMAPSURFER_ROADS</item>
+        <item>MAPQUEST</item>
+        <item>MAPQUEST_AERIAL</item>
+        <item>THUNDERFOREST_OPENCYCLEMAP</item>
+        <item>THUNDERFOREST_TRANSPORT</item>
+        <item>THUNDERFOREST_LANDSCAPE</item>
+        <item>THUNDERFOREST_OUTDOORS</item>
+        <item>ESRI_WORLD_STREET_MAP</item>
+        <item>ESRI_WORLD_IMAGERY</item>
+    </string-array>
+    <string name="mapgenerator_default">BLANK</string>
+
 </resources>

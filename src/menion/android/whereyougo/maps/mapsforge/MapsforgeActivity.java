@@ -31,14 +31,19 @@ import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension
 import menion.android.whereyougo.maps.mapsforge.filefilter.ValidMapFile;
 import menion.android.whereyougo.maps.mapsforge.filefilter.ValidRenderTheme;
 import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
+import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorFactory;
+import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorInternal;
 import menion.android.whereyougo.maps.mapsforge.overlay.LabelMarker;
 import menion.android.whereyougo.maps.mapsforge.overlay.MyLocationOverlay;
 import menion.android.whereyougo.maps.mapsforge.overlay.NavigationOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.PointListOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.PointOverlay;
 import menion.android.whereyougo.maps.mapsforge.overlay.RotationMarker;
 import menion.android.whereyougo.maps.mapsforge.overlay.SensorMyLocationOverlay;
 import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
 import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
 import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.utils.UtilsFormat;
 
 import org.mapsforge.android.AndroidUtils;
 import org.mapsforge.android.maps.DebugSettings;
@@ -46,11 +51,10 @@ import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapScaleBar;
 import org.mapsforge.android.maps.MapScaleBar.TextField;
 import org.mapsforge.android.maps.MapViewPosition;
-import org.mapsforge.android.maps.mapgenerator.MapGeneratorFactory;
-import org.mapsforge.android.maps.mapgenerator.MapGeneratorInternal;
+import org.mapsforge.android.maps.mapgenerator.MapGenerator;
 import org.mapsforge.android.maps.mapgenerator.TileCache;
+import org.mapsforge.android.maps.mapgenerator.tiledownloader.TileDownloader;
 import org.mapsforge.android.maps.overlay.Circle;
-import org.mapsforge.android.maps.overlay.ListOverlay;
 import org.mapsforge.android.maps.overlay.Marker;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.android.maps.overlay.PolygonalChain;
@@ -80,10 +84,12 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -139,10 +145,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
   private static final int SELECT_MAP_FILE = 0;
   private static final int SELECT_RENDER_THEME_FILE = 1;
 
-  private static Marker createMarker(GeoPoint geoPoint, Drawable icon) {
-    return new Marker(geoPoint, icon);
-  }
-
   private static Polyline createPolyline(List<GeoPoint> geoPoints) {
     PolygonalChain polygonalChain = new PolygonalChain(geoPoints);
     Paint paintStroke = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -154,7 +156,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
   }
 
   private MapGeneratorInternal mapGeneratorInternal = MapGeneratorInternal.BLANK;
-  private ListOverlay listOverlay;
+  private PointListOverlay listOverlay;
   private MyLocationOverlay myLocationOverlay;
   private NavigationOverlay navigationOverlay;
   private ScreenshotCapturer screenshotCapturer;
@@ -163,10 +165,30 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
   private WakeLock wakeLock;
   MyMapView mapView;
   private double itemsLatitude, itemsLongitude;
-
   private boolean showPins = true;
-
   private boolean showLabels = true;
+
+  private TapEventListener tapListener = new TapEventListener() {
+    @Override
+    public void onTap(final PointOverlay pointOverlay) {
+      if (pointOverlay.getPoint() == null)
+        return;
+
+      // final MapPoint p = pointOverlay.getPoint();
+      //MapsforgeActivity.this.navigationOverlay.setTarget(pointOverlay.getGeoPoint());
+      new AlertDialog.Builder(MapsforgeActivity.this)
+          .setTitle(pointOverlay.getLabel())
+          .setMessage(
+              UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
+                  + Html.fromHtml(pointOverlay.getDescription(), null, null))
+          .setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+              dialog.dismiss();
+            }
+          }).show();
+    }
+  };
 
   private void configureMapView() {
     this.mapView.setBuiltInZoomControls(true);
@@ -191,11 +213,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     paintStroke.setStrokeWidth(3);
 
     return new Circle(geoPoint, 0, paintFill, paintStroke);
-  }
-
-  private Marker createMarker(GeoPoint geoPoint, int resourceIdentifier) {
-    Drawable drawable = getResources().getDrawable(resourceIdentifier);
-    return new Marker(geoPoint, Marker.boundCenterBottom(drawable));
   }
 
   private void disableShowMyLocation() {
@@ -332,7 +349,8 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     this.myLocationOverlay =
         new SensorMyLocationOverlay(this, this.mapView, new RotationMarker(null, drawable));
     this.navigationOverlay = new NavigationOverlay(this.myLocationOverlay);
-    this.listOverlay = new ListOverlay();
+    this.listOverlay = new PointListOverlay();
+    this.listOverlay.registerOnTapEvent(tapListener);
 
     /* what is shown */
     if (savedInstanceState != null) {
@@ -452,6 +470,29 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.mapsforge_menu, menu);
     this.menu = menu;
+    SubMenu mapgeneratorMenu = (SubMenu) menu.findItem(R.id.menu_mapgenerator).getSubMenu();
+    String[] keys = getResources().getStringArray(R.array.mapgenerator_keys);
+    String[] values = getResources().getStringArray(R.array.mapgenerator_values);
+    for (int i = 0; i < keys.length; i++) {
+      final MapGeneratorInternal generator = MapGeneratorInternal.valueOf(keys[i]);
+      MenuItem item =
+          mapgeneratorMenu.add(R.id.menu_mapgenerator_group, Menu.NONE, Menu.NONE, values[i]);
+      item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+          if (generator == MapGeneratorInternal.DATABASE_RENDERER
+              && MapsforgeActivity.this.mapView.getMapFile() == null) {
+            startMapFilePicker();
+          } else {
+            setMapGenerator(generator);
+            item.setChecked(true);
+          }
+          return true;
+        }
+      });
+    }
+    mapgeneratorMenu.setGroupCheckable(R.id.menu_mapgenerator_group, true, true);
     return true;
   }
 
@@ -557,37 +598,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         return true;
 
       case R.id.menu_mapgenerator:
-        return true;
-      case R.id.menu_mapgenerator_blank:
-        setMapGenerator(MapGeneratorInternal.BLANK);
-        return true;
-      case R.id.menu_mapgenerator_database:
-        if (this.mapView.getMapFile() != null) {
-          setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
-        } else {
-          startMapFilePicker();
-        }
-        return true;
-      case R.id.menu_mapgenerator_mapnik:
-        setMapGenerator(MapGeneratorInternal.MAPNIK);
-        return true;
-      case R.id.menu_mapgenerator_opencyclemap:
-        setMapGenerator(MapGeneratorInternal.OPENCYCLEMAP);
-        return true;
-      case R.id.menu_mapgenerator_opentransportmap:
-        setMapGenerator(MapGeneratorInternal.OPENTRANSPORTMAP);
-        return true;
-      case R.id.menu_mapgenerator_mapquest:
-        setMapGenerator(MapGeneratorInternal.MAPQUEST);
-        return true;
-      case R.id.menu_mapgenerator_mapbox:
-        setMapGenerator(MapGeneratorInternal.MAPBOX);
-        return true;
-      case R.id.menu_mapgenerator_komoot:
-        setMapGenerator(MapGeneratorInternal.KOMOOT);
-        return true;
-      case R.id.menu_mapgenerator_skobbler:
-        setMapGenerator(MapGeneratorInternal.SKOBBLER);
         return true;
 
       default:
@@ -728,39 +738,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
       menu.findItem(R.id.menu_mapfile).setEnabled(false);
     }
 
-    MenuItem item = null;
-    switch (this.mapGeneratorInternal) {
-      case BLANK:
-        item = menu.findItem(R.id.menu_mapgenerator_blank);
-        break;
-      case DATABASE_RENDERER:
-        item = menu.findItem(R.id.menu_mapgenerator_database);
-        break;
-      case KOMOOT:
-        item = menu.findItem(R.id.menu_mapgenerator_komoot);
-        break;
-      case MAPBOX:
-        item = menu.findItem(R.id.menu_mapgenerator_mapbox);
-        break;
-      case MAPNIK:
-        item = menu.findItem(R.id.menu_mapgenerator_mapnik);
-        break;
-      case MAPQUEST:
-        item = menu.findItem(R.id.menu_mapgenerator_mapquest);
-        break;
-      case OPENCYCLEMAP:
-        item = menu.findItem(R.id.menu_mapgenerator_opencyclemap);
-        break;
-      case OPENTRANSPORTMAP:
-        item = menu.findItem(R.id.menu_mapgenerator_opentransportmap);
-        break;
-      case SKOBBLER:
-        item = menu.findItem(R.id.menu_mapgenerator_skobbler);
-        break;
-    }
-    if (item != null)
-      item.setChecked(true);
-    
     return true;
   }
 
@@ -875,7 +852,15 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
   private void setMapGenerator(MapGeneratorInternal type) {
     if (this.mapGeneratorInternal != type) {
       this.mapGeneratorInternal = type;
-      this.mapView.setMapGenerator(MapGeneratorFactory.createMapGenerator(type));
+      MapGenerator generator = MapGeneratorFactory.createMapGenerator(type);
+      this.mapView.setMapGenerator(generator, type.ordinal());
+      TextView attributionView = (TextView) findViewById(R.id.attribution);
+      if (generator instanceof TileDownloader) {
+        String attribution = ((TileDownloader) generator).getAttribution();
+        attributionView.setText(attribution == null ? "" : Html.fromHtml(attribution, null, null));
+      } else {
+        attributionView.setText("");
+      }
     }
   }
 
@@ -884,8 +869,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
       this.navigationOverlay.setTarget(null);
       itemsLatitude = itemsLongitude = 0;
       int count = 0;
+      listOverlay.clear();
       List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
-      overlayItems.clear();
+      // overlayItems.clear();
       for (MapPointPack pack : packs) {
         if (pack.isPolygon()) {
           List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
@@ -916,10 +902,10 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
           icon = Marker.boundCenterBottom(icon);
           for (MapPoint mp : pack.getPoints()) {
             GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
-            LabelMarker labelMarker = new LabelMarker(geoPoint, icon, mp.getName());
-            labelMarker.setMarkerVisible(showPins);
-            labelMarker.setLabelVisible(showLabels);
-            overlayItems.add(labelMarker);
+            PointOverlay pointOverlay = new PointOverlay(geoPoint, icon, mp);
+            pointOverlay.setMarkerVisible(showPins);
+            pointOverlay.setLabelVisible(showLabels);
+            overlayItems.add(pointOverlay);
             if (mp.isTarget())
               this.navigationOverlay.setTarget(geoPoint);
             itemsLatitude += mp.getLatitude();
