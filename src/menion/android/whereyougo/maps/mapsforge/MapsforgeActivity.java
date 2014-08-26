@@ -871,6 +871,8 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
       int count = 0;
       listOverlay.clear();
       List<OverlayItem> overlayItems = listOverlay.getOverlayItems();
+      List<OverlayItem> overlayLines = new ArrayList<OverlayItem>();
+      List<OverlayItem> overlayPoints = new ArrayList<OverlayItem>();
       // overlayItems.clear();
       for (MapPointPack pack : packs) {
         if (pack.isPolygon()) {
@@ -879,7 +881,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             GeoPoint geoPoint = new GeoPoint(mp.getLatitude(), mp.getLongitude());
             geoPoints.add(geoPoint);
           }
-          overlayItems.add(createPolyline(geoPoints));
+          overlayLines.add(createPolyline(geoPoints));
         } else {
           Drawable icon = null;
           if (pack.getIcon() == null) {
@@ -905,7 +907,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             PointOverlay pointOverlay = new PointOverlay(geoPoint, icon, mp);
             pointOverlay.setMarkerVisible(showPins);
             pointOverlay.setLabelVisible(showLabels);
-            overlayItems.add(pointOverlay);
+            overlayPoints.add(pointOverlay);
             if (mp.isTarget())
               this.navigationOverlay.setTarget(geoPoint);
             itemsLatitude += mp.getLatitude();
@@ -914,6 +916,8 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
           }
         }
       }
+      overlayItems.addAll(overlayLines);
+      overlayItems.addAll(overlayPoints);
       if (count > 0) {
         itemsLatitude /= count;
         itemsLongitude /= count;
