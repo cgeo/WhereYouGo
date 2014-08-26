@@ -59,4 +59,8 @@ public class UtilsAudio {
       Logger.e(TAG, "playSound() failed", e);
     }
   }
+
+  public static void stopSound() {
+    A.getManagerAudio().stopSound();
+  }
 }

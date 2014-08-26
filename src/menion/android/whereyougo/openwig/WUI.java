@@ -122,6 +122,14 @@ public class WUI implements UI {
   public void playSound(byte[] data, String mime) {
     UtilsAudio.playSound(data, mime);
   }
+  
+  public void command(String cmd) {
+    if("StopSound".equals(cmd)){
+      UtilsAudio.stopSound();
+    } else if("Alert".equals(cmd)){
+      UtilsAudio.playBeep(1);
+    }
+  }
 
   public void pushDialog(String[] texts, Media[] media, String button1, String button2,
       LuaClosure callback) {

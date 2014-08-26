@@ -132,4 +132,9 @@ public class ManagerAudio {
       Logger.e(TAG, "removeAudio(" + audioId + ")", e);
     }
   }
+
+  public void stopSound() {
+    Intent intent = new Intent(A.getMain(), AudioPlayService.class);
+    A.getMain().stopService(intent);
+  }
 }
