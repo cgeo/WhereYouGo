@@ -293,33 +293,6 @@ public class PreferenceItems {
         R.string.pref_guiding_zone_point_desc);
   }
 
-  public static void addPrefHighlight(final CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    CharSequence[] entries =
-        new CharSequence[] {Locale.get(R.string.pref_highlight_off_text),
-            Locale.get(R.string.pref_highlight_only_gps_text),
-            Locale.get(R.string.pref_highlight_always_text)};
-    CharSequence[] entryValues =
-        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_OFF),
-            String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_ONLY_GPS),
-            String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_ALWAYS)};
-    ListPreference pref =
-        activity.addListPreference(category, R.string.pref_highlight, R.string.pref_highlight_desc,
-            PreferenceValues.KEY_S_HIGHLIGHT, PreferenceValues.DEFAULT_HIGHLIGHT, entries,
-            entryValues, new Preference.OnPreferenceChangeListener() {
-              @Override
-              public boolean onPreferenceChange(Preference pref, Object newValue) {
-                Preferences.GLOBAL_HIGHLIGHT = Utils.parseInt(newValue);
-                setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
-                    R.string.pref_highlight_desc);
-                PreferenceValues.enableWakeLock();
-                return true;
-              }
-            });
-    setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
-        R.string.pref_highlight_desc);
-  }
-
   /********************************/
   /* UNITS */
   /********************************/
@@ -362,195 +335,6 @@ public class PreferenceItems {
         pref,
         getLanguageText(getPrefString(PreferenceValues.KEY_S_LANGUAGE,
             PreferenceValues.DEFAULT_LANGUAGE)), R.string.pref_language_desc);
-  }
-
-  public static void addPrefMapProvider(final CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    CharSequence[] entries =
-        new CharSequence[] {Locale.get(R.string.pref_map_provider_vector),
-            Locale.get(R.string.pref_map_provider_locus)};
-    CharSequence[] entryValues =
-        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_MAP_PROVIDER_VECTOR),
-            String.valueOf(PreferenceValues.VALUE_MAP_PROVIDER_LOCUS)};
-    ListPreference pref =
-        activity.addListPreference(category, R.string.pref_map_provider,
-            R.string.pref_map_provider_desc, PreferenceValues.KEY_S_MAP_PROVIDER,
-            PreferenceValues.DEFAULT_MAP_PROVIDER, entries, entryValues,
-            new Preference.OnPreferenceChangeListener() {
-              @Override
-              public boolean onPreferenceChange(Preference pref, Object newValue) {
-                Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
-                setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_MAP_PROVIDER,
-                    R.string.pref_map_provider_desc);
-                return true;
-              }
-            });
-    setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_MAP_PROVIDER,
-        R.string.pref_map_provider_desc);
-  }
-
-  /*****************************/
-  /* GLOBAL */
-  /*****************************/
-
-  // GLOBAL
-
-  public static void addPrefRoot(final CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    Preference pref =
-        activity.addFilePreference(category, R.string.pref_root, R.string.pref_root_desc,
-            PreferenceValues.KEY_S_ROOT, PreferenceValues.DEFAULT_ROOT, ".gwc", REQUEST_ROOT);
-    setPreferenceText(activity, pref, Preferences.GLOBAL_ROOT, R.string.pref_root_desc);
-  }
-
-  public static void addPrefSavegameAuto(CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_save_game_auto,
-        R.string.pref_save_game_auto_desc, PreferenceValues.KEY_B_SAVEGAME_AUTO,
-        PreferenceValues.DEFAULT_SAVEGAME_AUTO, new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
-            return true;
-          }
-        });
-  }
-
-  public static void addPrefSensorsBearingTrue(CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_bearing_true,
-        R.string.pref_bearing_true_desc, PreferenceValues.KEY_B_SENSORS_BEARING_TRUE,
-        PreferenceValues.DEFAULT_SENSORS_BEARING_TRUE, new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.SENSOR_BEARING_TRUE = Utils.parseBoolean(newValue);
-            return true;
-          }
-        });
-  }
-
-  public static void addPrefSensorsCompassAutoChange(CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_sensors_compass_auto_change,
-        R.string.pref_sensors_compass_auto_change_desc,
-        PreferenceValues.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE,
-        PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE,
-        new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = Utils.parseBoolean(newValue);
-            A.getRotator().manageSensors();
-            return true;
-          }
-        });
-  }
-
-  public static void addPrefSensorsCompassAutoChangeValue(final CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    EditTextPreference pref =
-        activity.addEditTextPreference(category, R.string.pref_sensors_compass_auto_change_value,
-            R.string.pref_sensors_compass_auto_change_value_desc,
-            PreferenceValues.KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE,
-            PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE,
-            InputType.TYPE_CLASS_NUMBER, new Preference.OnPreferenceChangeListener() {
-              @Override
-              public boolean onPreferenceChange(Preference pref, Object newValue) {
-                int value = Utils.parseInt(newValue);
-                if (value > 0) {
-                  Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = value;
-                  setEditTextPreference(activity, (EditTextPreference) pref,
-                      Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE + "m/s",
-                      R.string.pref_sensors_compass_auto_change_value_desc);
-                  return true;
-                } else {
-                  ManagerNotify.toastShortMessage(R.string.invalid_value);
-                  return false;
-                }
-              }
-            });
-    setEditTextPreference(activity, pref, Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE
-        + "m/s", R.string.pref_sensors_compass_auto_change_value_desc);
-  }
-  
-  /***************************/
-  /* LOGIN */
-  /***************************/
-  
-  public static void addPrefUsername(CustomPreferenceActivity activity, PreferenceCategory category) {
-    activity.addEditTextPreference(category, R.string.pref_gc_username,
-        R.string.pref_gc_username_desc, PreferenceValues.KEY_S_GC_USERNAME,
-        PreferenceValues.DEFAULT_GC_USERNAME, InputType.TYPE_TEXT_VARIATION_PERSON_NAME, null);
-  }
-
-  public static void addPrefPassword(CustomPreferenceActivity activity, PreferenceCategory category) {
-    activity
-        .addEditTextPreference(category, R.string.pref_gc_password, R.string.pref_gc_password_desc,
-            PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD,
-            InputType.TYPE_TEXT_VARIATION_PASSWORD, null).getEditText()
-        .setTransformationMethod(new PasswordTransformationMethod());
-  }
-
-  /***************************/
-  /* SENSORS */
-  /***************************/
-
-  public static void addPrefSensorsCompassHardware(CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_sensors_compass_hardware,
-        R.string.pref_sensors_compass_hardware_desc,
-        PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR,
-        PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR,
-        new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(newValue);
-            A.getRotator().manageSensors();
-            return true;
-          }
-        });
-  }
-
-  public static void addPrefSensorsOrienFilter(final CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    if (!Utils.isAndroid201OrMore())
-      return;
-    CharSequence[] entries =
-        new CharSequence[] {Locale.get(R.string.pref_sensors_orient_filter_no_filter),
-            Locale.get(R.string.pref_sensors_orient_filter_ligth),
-            Locale.get(R.string.pref_sensors_orient_filter_medium),
-            Locale.get(R.string.pref_sensors_orient_filter_heavy)};
-    CharSequence[] entryValues =
-        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_NO),
-            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_LIGHT),
-            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_MEDIUM),
-            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_HEAVY)};
-    ListPreference pref =
-        activity.addListPreference(category, R.string.pref_sensors_orient_filter,
-            R.string.pref_sensors_orient_filter_desc, PreferenceValues.KEY_S_SENSORS_ORIENT_FILTER,
-            PreferenceValues.DEFAULT_SENSORS_ORIENT_FILTER, entries, entryValues,
-            new Preference.OnPreferenceChangeListener() {
-              @Override
-              public boolean onPreferenceChange(Preference pref, Object newValue) {
-                Preferences.SENSOR_ORIENT_FILTER = Utils.parseInt(newValue);
-                setListPreference(activity, (ListPreference) pref,
-                    Preferences.SENSOR_ORIENT_FILTER, R.string.pref_sensors_orient_filter_desc);
-                return true;
-              }
-            });
-    setListPreference(activity, (ListPreference) pref, Preferences.SENSOR_ORIENT_FILTER,
-        R.string.pref_sensors_orient_filter_desc);
-  }
-
-  public static void addPrefStatusbar(CustomPreferenceActivity activity, PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_statusbar, R.string.pref_statusbar_desc,
-        PreferenceValues.KEY_B_STATUSBAR, PreferenceValues.DEFAULT_STATUSBAR,
-        new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
-            return true;
-          }
-        });
   }
 
   public static void addPrefUnitsAltitude(final CustomPreferenceActivity activity,
@@ -677,6 +461,234 @@ public class PreferenceItems {
             });
     setListPreference(activity, (ListPreference) pref, Preferences.FORMAT_SPEED,
         R.string.pref_units_speed_desc);
+  }
+
+  /*****************************/
+  /* GLOBAL */
+  /*****************************/
+
+  public static void addPrefRoot(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    Preference pref =
+        activity.addFilePreference(category, R.string.pref_root, R.string.pref_root_desc,
+            PreferenceValues.KEY_S_ROOT, PreferenceValues.DEFAULT_ROOT, ".gwc", REQUEST_ROOT);
+    setPreferenceText(activity, pref, Preferences.GLOBAL_ROOT, R.string.pref_root_desc);
+  }
+
+  public static void addPrefSavegameAuto(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_save_game_auto,
+        R.string.pref_save_game_auto_desc, PreferenceValues.KEY_B_SAVEGAME_AUTO,
+        PreferenceValues.DEFAULT_SAVEGAME_AUTO, new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefMapProvider(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    CharSequence[] entries =
+        new CharSequence[] {Locale.get(R.string.pref_map_provider_vector),
+            Locale.get(R.string.pref_map_provider_locus)};
+    CharSequence[] entryValues =
+        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_MAP_PROVIDER_VECTOR),
+            String.valueOf(PreferenceValues.VALUE_MAP_PROVIDER_LOCUS)};
+    ListPreference pref =
+        activity.addListPreference(category, R.string.pref_map_provider,
+            R.string.pref_map_provider_desc, PreferenceValues.KEY_S_MAP_PROVIDER,
+            PreferenceValues.DEFAULT_MAP_PROVIDER, entries, entryValues,
+            new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_MAP_PROVIDER,
+                    R.string.pref_map_provider_desc);
+                return true;
+              }
+            });
+    setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_MAP_PROVIDER,
+        R.string.pref_map_provider_desc);
+  }
+
+  public static void addPrefStatusbar(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_statusbar, R.string.pref_statusbar_desc,
+        PreferenceValues.KEY_B_STATUSBAR, PreferenceValues.DEFAULT_STATUSBAR,
+        new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefHighlight(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    CharSequence[] entries =
+        new CharSequence[] {Locale.get(R.string.pref_highlight_off_text),
+            Locale.get(R.string.pref_highlight_only_gps_text),
+            Locale.get(R.string.pref_highlight_always_text)};
+    CharSequence[] entryValues =
+        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_OFF),
+            String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_ONLY_GPS),
+            String.valueOf(PreferenceValues.VALUE_HIGHLIGHT_ALWAYS)};
+    ListPreference pref =
+        activity.addListPreference(category, R.string.pref_highlight, R.string.pref_highlight_desc,
+            PreferenceValues.KEY_S_HIGHLIGHT, PreferenceValues.DEFAULT_HIGHLIGHT, entries,
+            entryValues, new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                Preferences.GLOBAL_HIGHLIGHT = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
+                    R.string.pref_highlight_desc);
+                PreferenceValues.enableWakeLock();
+                return true;
+              }
+            });
+    setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
+        R.string.pref_highlight_desc);
+  }
+  
+  public static void addPrefImageStretch(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_image_stretch,
+        R.string.pref_image_stretch_desc, PreferenceValues.KEY_B_IMAGE_STRETCH,
+        PreferenceValues.DEFAULT_IMAGE_STRETCH, new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.GLOBAL_IMAGE_STRETCH = Utils.parseBoolean(newValue);
+            return true;
+          }
+        });
+  }
+
+  /***************************/
+  /* LOGIN */
+  /***************************/
+
+  public static void addPrefUsername(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity.addEditTextPreference(category, R.string.pref_gc_username,
+        R.string.pref_gc_username_desc, PreferenceValues.KEY_S_GC_USERNAME,
+        PreferenceValues.DEFAULT_GC_USERNAME, InputType.TYPE_TEXT_VARIATION_PERSON_NAME, null);
+  }
+
+  public static void addPrefPassword(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity
+        .addEditTextPreference(category, R.string.pref_gc_password, R.string.pref_gc_password_desc,
+            PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD,
+            InputType.TYPE_TEXT_VARIATION_PASSWORD, null).getEditText()
+        .setTransformationMethod(new PasswordTransformationMethod());
+  }
+
+  /***************************/
+  /* SENSORS */
+  /***************************/
+
+  public static void addPrefSensorsCompassHardware(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_sensors_compass_hardware,
+        R.string.pref_sensors_compass_hardware_desc,
+        PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR,
+        PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR,
+        new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(newValue);
+            A.getRotator().manageSensors();
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefSensorsOrienFilter(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    if (!Utils.isAndroid201OrMore())
+      return;
+    CharSequence[] entries =
+        new CharSequence[] {Locale.get(R.string.pref_sensors_orient_filter_no_filter),
+            Locale.get(R.string.pref_sensors_orient_filter_ligth),
+            Locale.get(R.string.pref_sensors_orient_filter_medium),
+            Locale.get(R.string.pref_sensors_orient_filter_heavy)};
+    CharSequence[] entryValues =
+        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_NO),
+            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_LIGHT),
+            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_MEDIUM),
+            String.valueOf(PreferenceValues.VALUE_SENSORS_ORIENT_FILTER_HEAVY)};
+    ListPreference pref =
+        activity.addListPreference(category, R.string.pref_sensors_orient_filter,
+            R.string.pref_sensors_orient_filter_desc, PreferenceValues.KEY_S_SENSORS_ORIENT_FILTER,
+            PreferenceValues.DEFAULT_SENSORS_ORIENT_FILTER, entries, entryValues,
+            new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                Preferences.SENSOR_ORIENT_FILTER = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref,
+                    Preferences.SENSOR_ORIENT_FILTER, R.string.pref_sensors_orient_filter_desc);
+                return true;
+              }
+            });
+    setListPreference(activity, (ListPreference) pref, Preferences.SENSOR_ORIENT_FILTER,
+        R.string.pref_sensors_orient_filter_desc);
+  }
+
+
+  public static void addPrefSensorsBearingTrue(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_bearing_true,
+        R.string.pref_bearing_true_desc, PreferenceValues.KEY_B_SENSORS_BEARING_TRUE,
+        PreferenceValues.DEFAULT_SENSORS_BEARING_TRUE, new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.SENSOR_BEARING_TRUE = Utils.parseBoolean(newValue);
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefSensorsCompassAutoChange(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_sensors_compass_auto_change,
+        R.string.pref_sensors_compass_auto_change_desc,
+        PreferenceValues.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE,
+        PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE,
+        new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = Utils.parseBoolean(newValue);
+            A.getRotator().manageSensors();
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefSensorsCompassAutoChangeValue(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    EditTextPreference pref =
+        activity.addEditTextPreference(category, R.string.pref_sensors_compass_auto_change_value,
+            R.string.pref_sensors_compass_auto_change_value_desc,
+            PreferenceValues.KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE,
+            PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE,
+            InputType.TYPE_CLASS_NUMBER, new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                int value = Utils.parseInt(newValue);
+                if (value > 0) {
+                  Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = value;
+                  setEditTextPreference(activity, (EditTextPreference) pref,
+                      Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE + "m/s",
+                      R.string.pref_sensors_compass_auto_change_value_desc);
+                  return true;
+                } else {
+                  ManagerNotify.toastShortMessage(R.string.invalid_value);
+                  return false;
+                }
+              }
+            });
+    setEditTextPreference(activity, pref, Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE
+        + "m/s", R.string.pref_sensors_compass_auto_change_value_desc);
   }
 
   private static String getFormatedText(boolean enabled, String value, String desc) {

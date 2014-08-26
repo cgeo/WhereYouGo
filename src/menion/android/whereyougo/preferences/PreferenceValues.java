@@ -70,6 +70,12 @@ public class PreferenceValues {
   /** save game automatically when user switches to another application */
   public static final String KEY_B_SAVEGAME_AUTO = "KEY_B_SAVEGAME_AUTO";
   public static final boolean DEFAULT_SAVEGAME_AUTO = true;
+  /** stretch images */
+  public static final String KEY_B_IMAGE_STRETCH = "KEY_B_IMAGE_STRETCH";
+  public static final boolean DEFAULT_IMAGE_STRETCH = false;
+  
+  
+  // LOGIN
   /** GC credentials */
   public static final String KEY_S_GC_USERNAME = "KEY_S_GC_USERNAME";
   public static final String DEFAULT_GC_USERNAME = "";

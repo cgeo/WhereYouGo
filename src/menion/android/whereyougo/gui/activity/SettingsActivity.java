@@ -34,11 +34,12 @@ public class SettingsActivity extends CustomPreferenceActivity {
   public static PreferenceScreen createPreferences(CustomPreferenceActivity activity) {
     PreferenceScreen root = activity.getPreferenceManager().createPreferenceScreen(activity);
     root.addPreference(createPrefGlobal(activity, activity.getPreferenceManager()));
+    root.addPreference(createPrefLogin(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefGps(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefSensors(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefGuiding(activity, activity.getPreferenceManager()));
+    root.addPreference(createPrefAppearance(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefLocale(activity, activity.getPreferenceManager()));
-    root.addPreference(createPrefLogin(activity, activity.getPreferenceManager()));
     return root;
   }
 
@@ -52,9 +53,21 @@ public class SettingsActivity extends CustomPreferenceActivity {
     PreferenceItems.addPrefRoot(activity, prefCatGlobal);
     PreferenceItems.addPrefMapProvider(activity, prefCatGlobal);
     PreferenceItems.addPrefSavegameAuto(activity, prefCatGlobal);
-    PreferenceItems.addPrefStatusbar(activity, prefCatGlobal);
-    PreferenceItems.addPrefFullscreen(activity, prefCatGlobal);
-    PreferenceItems.addPrefHighlight(activity, prefCatGlobal);
+
+    return init(preferenceScreen);
+  }
+  
+  public static PreferenceScreen createPrefAppearance(final CustomPreferenceActivity activity,
+      PreferenceManager prefManager) {
+    PreferenceScreen preferenceScreen = prefManager.createPreferenceScreen(activity);
+    preferenceScreen.setTitle(R.string.pref_appearance);
+    PreferenceCategory prefCatAppearance =
+        addNewPreferenceCategory(activity, R.string.pref_appearance, preferenceScreen);
+
+    PreferenceItems.addPrefStatusbar(activity, prefCatAppearance);
+    PreferenceItems.addPrefFullscreen(activity, prefCatAppearance);
+    PreferenceItems.addPrefHighlight(activity, prefCatAppearance);
+    PreferenceItems.addPrefImageStretch(activity, prefCatAppearance);
 
     return init(preferenceScreen);
   }
@@ -131,11 +144,11 @@ public class SettingsActivity extends CustomPreferenceActivity {
       PreferenceManager prefManager) {
     PreferenceScreen preferenceScreen = prefManager.createPreferenceScreen(activity);
     preferenceScreen.setTitle(R.string.pref_login);
-    PreferenceCategory prefCatGlobal =
+    PreferenceCategory prefCatLogin =
         addNewPreferenceCategory(activity, R.string.pref_login_desc, preferenceScreen);
 
-    PreferenceItems.addPrefUsername(activity, prefCatGlobal);
-    PreferenceItems.addPrefPassword(activity, prefCatGlobal);
+    PreferenceItems.addPrefUsername(activity, prefCatLogin);
+    PreferenceItems.addPrefPassword(activity, prefCatLogin);
 
     return init(preferenceScreen);
   }

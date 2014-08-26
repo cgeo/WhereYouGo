@@ -21,6 +21,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
@@ -28,6 +29,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cz.matejcik.openwig.Engine;
@@ -105,6 +107,9 @@ public class PushDialogActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_details);
+    if(Preferences.GLOBAL_IMAGE_STRETCH){
+      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.FILL_PARENT;
+    }
     findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
     findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
     findViewById(R.id.layoutDetailsTextViewDescription).setVisibility(View.GONE);

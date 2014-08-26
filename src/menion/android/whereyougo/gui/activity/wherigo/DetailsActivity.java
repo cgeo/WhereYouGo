@@ -48,6 +48,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cz.matejcik.openwig.Action;
@@ -150,6 +151,9 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
       return;
     }
     setContentView(R.layout.layout_details);
+    if(Preferences.GLOBAL_IMAGE_STRETCH){
+      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.FILL_PARENT;
+    }
   }
 
   public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {}

@@ -30,6 +30,7 @@ import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HAR
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HIGHLIGHT;
+import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_IMAGE_STRETCH;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_MAP_PROVIDER;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_ROOT;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_SAVEGAME_AUTO;
@@ -49,6 +50,7 @@ import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GUIDI
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GUIDING_GPS_REQUIRED;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR;
+import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_IMAGE_STRETCH;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_SAVEGAME_AUTO;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_USERNAME;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_PASSWORD;
@@ -106,6 +108,8 @@ public class Preferences {
   public static boolean GLOBAL_FULLSCREEN;
   /** highlight option */
   public static int GLOBAL_HIGHLIGHT;
+  /** stretch images option */
+  public static boolean GLOBAL_IMAGE_STRETCH;
 
   // GPS
   /** gps min time */
@@ -150,6 +154,7 @@ public class Preferences {
     GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
     GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
     GLOBAL_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT, DEFAULT_HIGHLIGHT));
+    GLOBAL_IMAGE_STRETCH = getPrefBoolean(c, KEY_B_IMAGE_STRETCH, DEFAULT_IMAGE_STRETCH);
 
     FORMAT_ALTITUDE =
         Utils.parseInt(getPrefString(c, KEY_S_UNITS_ALTITUDE, DEFAULT_UNITS_ALTITUDE));
