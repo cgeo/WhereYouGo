@@ -416,20 +416,6 @@ public class PreferenceItems {
         });
   }
 
-  public static void addPrefUsername(CustomPreferenceActivity activity, PreferenceCategory category) {
-    activity.addEditTextPreference(category, R.string.pref_gc_username,
-        R.string.pref_gc_username_desc, PreferenceValues.KEY_S_GC_USERNAME,
-        PreferenceValues.DEFAULT_GC_USERNAME, InputType.TYPE_TEXT_VARIATION_PERSON_NAME, null);
-  }
-
-  public static void addPrefPassword(CustomPreferenceActivity activity, PreferenceCategory category) {
-    activity
-        .addEditTextPreference(category, R.string.pref_gc_password, R.string.pref_gc_password_desc,
-            PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD,
-            InputType.TYPE_TEXT_VARIATION_PASSWORD, null).getEditText()
-        .setTransformationMethod(new PasswordTransformationMethod());
-  }
-
   public static void addPrefSensorsBearingTrue(CustomPreferenceActivity activity,
       PreferenceCategory category) {
     activity.addCheckBoxPreference(category, R.string.pref_bearing_true,
@@ -484,6 +470,24 @@ public class PreferenceItems {
             });
     setEditTextPreference(activity, pref, Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE
         + "m/s", R.string.pref_sensors_compass_auto_change_value_desc);
+  }
+  
+  /***************************/
+  /* LOGIN */
+  /***************************/
+  
+  public static void addPrefUsername(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity.addEditTextPreference(category, R.string.pref_gc_username,
+        R.string.pref_gc_username_desc, PreferenceValues.KEY_S_GC_USERNAME,
+        PreferenceValues.DEFAULT_GC_USERNAME, InputType.TYPE_TEXT_VARIATION_PERSON_NAME, null);
+  }
+
+  public static void addPrefPassword(CustomPreferenceActivity activity, PreferenceCategory category) {
+    activity
+        .addEditTextPreference(category, R.string.pref_gc_password, R.string.pref_gc_password_desc,
+            PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD,
+            InputType.TYPE_TEXT_VARIATION_PASSWORD, null).getEditText()
+        .setTransformationMethod(new PasswordTransformationMethod());
   }
 
   /***************************/

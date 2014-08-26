@@ -71,6 +71,8 @@
     <string name="pref_language_ru">Ruština</string>
     <string name="pref_language_sk">Slovenština</string>
     <string name="pref_locale">Lokalizace</string>
+    <string name="pref_login">Přihlašovací údaje</string>
+    <string name="pref_login_desc">Pro stahování cartridge z wherigo.com</string>
     <string name="pref_orientation">Orientace</string>
     <string name="pref_save_game_auto">Automaticky ukládat hru</string>
     <string name="pref_save_game_auto_desc">Hra bude automaticky uložena při přepnutí na jinou aplikaci.</string>

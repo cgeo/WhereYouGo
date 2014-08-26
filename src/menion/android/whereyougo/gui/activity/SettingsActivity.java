@@ -38,6 +38,7 @@ public class SettingsActivity extends CustomPreferenceActivity {
     root.addPreference(createPrefSensors(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefGuiding(activity, activity.getPreferenceManager()));
     root.addPreference(createPrefLocale(activity, activity.getPreferenceManager()));
+    root.addPreference(createPrefLogin(activity, activity.getPreferenceManager()));
     return root;
   }
 
@@ -51,8 +52,6 @@ public class SettingsActivity extends CustomPreferenceActivity {
     PreferenceItems.addPrefRoot(activity, prefCatGlobal);
     PreferenceItems.addPrefMapProvider(activity, prefCatGlobal);
     PreferenceItems.addPrefSavegameAuto(activity, prefCatGlobal);
-    PreferenceItems.addPrefUsername(activity, prefCatGlobal);
-    PreferenceItems.addPrefPassword(activity, prefCatGlobal);
     PreferenceItems.addPrefStatusbar(activity, prefCatGlobal);
     PreferenceItems.addPrefFullscreen(activity, prefCatGlobal);
     PreferenceItems.addPrefHighlight(activity, prefCatGlobal);
@@ -126,6 +125,19 @@ public class SettingsActivity extends CustomPreferenceActivity {
     PreferenceItems.addPrefSensorsBearingTrue(activity, prefCatOrient);
     PreferenceItems.addPrefSensorsOrienFilter(activity, prefCatOrient);
     return init(preferenceSensors);
+  }
+  
+  public static PreferenceScreen createPrefLogin(final CustomPreferenceActivity activity,
+      PreferenceManager prefManager) {
+    PreferenceScreen preferenceScreen = prefManager.createPreferenceScreen(activity);
+    preferenceScreen.setTitle(R.string.pref_login);
+    PreferenceCategory prefCatGlobal =
+        addNewPreferenceCategory(activity, R.string.pref_login_desc, preferenceScreen);
+
+    PreferenceItems.addPrefUsername(activity, prefCatGlobal);
+    PreferenceItems.addPrefPassword(activity, prefCatGlobal);
+
+    return init(preferenceScreen);
   }
 
   @Override

@@ -72,6 +72,8 @@
     <string name="pref_language_ru">Russian</string>
     <string name="pref_language_sk">Slovak</string>
     <string name="pref_locale">Localization</string>
+    <string name="pref_login">Login credentials</string>
+    <string name="pref_login_desc">For cartridge downloading from wherigo.com</string>
     <string name="pref_orientation">Orientation</string>
     <string name="pref_save_game_auto">Save game automatically</string>
     <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
