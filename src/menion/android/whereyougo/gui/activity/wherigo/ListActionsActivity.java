@@ -37,11 +37,13 @@ public class ListActionsActivity extends ListVariousActivity {
         ListTargetsActivity.reset(thing.name + ": " + z.text, z, thing);
         MainActivity.wui.showScreen(WUI.SCREEN_TARGETS, null);
       } else {
-        // Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
+        // TODO necessary?
+        // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
         Engine.callEvent(z.getActor(), eventName, thing);
       }
     } else {
-      // Main.wui.showScreen(WUI.DETAILSCREEN, Details.et);
+      // TODO necessary?
+      // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
       Engine.callEvent(thing, eventName, null);
     }
   }

@@ -67,6 +67,7 @@ public class ListTargetsActivity extends ListVariousActivity {
     MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
     String eventName = "On" + action.getName();
     Engine.callEvent(action.getActor(), eventName, (Thing) what);
+    ListTargetsActivity.this.finish();
   }
 
   @Override

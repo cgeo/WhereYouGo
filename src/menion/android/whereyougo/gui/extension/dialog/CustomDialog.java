@@ -77,6 +77,7 @@ public class CustomDialog {
           click.onClick(null, v, btnType);
         }
       });
+      btn.setVisibility(View.VISIBLE);
       return true;
     } else {
       // if no confirm button just set the visibility to GONE
@@ -127,8 +128,13 @@ public class CustomDialog {
     if (btnCount == 0) {
       view.findViewById(R.id.linear_layout_bottom).setVisibility(View.GONE);
     } else if (btnCount == 1) {
+      view.findViewById(R.id.linear_layout_bottom).setVisibility(View.VISIBLE);
       view.findViewById(R.id.linear_layout_left_spacer).setVisibility(View.VISIBLE);
       view.findViewById(R.id.linear_layout_right_spacer).setVisibility(View.VISIBLE);
+    }else{
+      view.findViewById(R.id.linear_layout_bottom).setVisibility(View.VISIBLE);
+      view.findViewById(R.id.linear_layout_left_spacer).setVisibility(View.GONE);
+      view.findViewById(R.id.linear_layout_right_spacer).setVisibility(View.GONE);
     }
   }
 

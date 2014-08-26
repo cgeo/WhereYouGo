@@ -259,7 +259,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           try {
             enableGuideOnEventTable();
             MainActivity.callGudingScreen(DetailsActivity.this);
-            DetailsActivity.this.finish();
+            // this was causing closing of another DetailsActivity, that was called in action
+            //DetailsActivity.this.finish();
           } catch (Exception e) {
             Logger.w(TAG, "btn01.click() - unknown problem");
           }
@@ -275,11 +276,13 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           switch (Preferences.GLOBAL_MAP_PROVIDER) {
             case PreferenceValues.VALUE_MAP_PROVIDER_VECTOR:
               vectorMap();
-              DetailsActivity.this.finish();
+              // this was causing closing of another DetailsActivity, that was called in action
+              //DetailsActivity.this.finish();
               break;
             case PreferenceValues.VALUE_MAP_PROVIDER_LOCUS:
               locusMap();
-              DetailsActivity.this.finish();
+              // this was causing closing of another DetailsActivity, that was called in action
+              //DetailsActivity.this.finish();
               break;
           }
           return true;
@@ -297,7 +300,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           public boolean onClick(CustomDialog dialog, View v, int btn) {
             ListActionsActivity.reset((Thing) et);
             MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-            DetailsActivity.this.finish();
+            // this was causing closing of another DetailsActivity, that was called in action
+            //DetailsActivity.this.finish();
             return true;
           }
         };
@@ -312,7 +316,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
               public boolean onClick(CustomDialog dialog, View v, int btn) {
                 ListActionsActivity.reset((Thing) et);
                 ListActionsActivity.callAction(action);
-                DetailsActivity.this.finish();
+                // this was causing closing of another DetailsActivity, that was called in action
+                //DetailsActivity.this.finish();
                 return true;
               }
             };
@@ -325,7 +330,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
               public boolean onClick(CustomDialog dialog, View v, int btn) {
                 ListActionsActivity.reset((Thing) et);
                 ListActionsActivity.callAction(action);
-                DetailsActivity.this.finish();
+                // this was causing closing of another DetailsActivity, that was called in action
+                //DetailsActivity.this.finish();
                 return true;
               }
             };
@@ -338,7 +344,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
               public boolean onClick(CustomDialog dialog, View v, int btn) {
                 ListActionsActivity.reset((Thing) et);
                 ListActionsActivity.callAction(action);
-                DetailsActivity.this.finish();
+                // this was causing closing of another DetailsActivity, that was called in action
+                //DetailsActivity.this.finish();
                 return true;
               }
             };
@@ -350,7 +357,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
             public boolean onClick(CustomDialog dialog, View v, int btn) {
               ListActionsActivity.reset((Thing) et);
               MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-              DetailsActivity.this.finish();
+              // this was causing closing of another DetailsActivity, that was called in action
+              //DetailsActivity.this.finish();
               return true;
             }
           };
