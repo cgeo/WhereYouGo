@@ -50,6 +50,9 @@ public class ListTasksActivity extends ListVariousActivity {
   }
 
   protected Bitmap getStuffIcon(Object what) {
+    Bitmap bmp = super.getStuffIcon(what);
+    if(bmp != Images.IMAGE_EMPTY_B)
+      return bmp;
     return stateIcons[((Task) what).state()];
   }
 
