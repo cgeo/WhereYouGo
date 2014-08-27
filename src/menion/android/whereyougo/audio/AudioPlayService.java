@@ -56,8 +56,9 @@ public class AudioPlayService extends Service {
       mediaPlayer = null;
     }
 
+    // STREAM_NOTIFICATION causes the sound to be played in speakers even if headphones are present
     mediaPlayer = new MediaPlayer();
-    mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
     mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
       public void onCompletion(MediaPlayer mp) {
         mediaPlayer.release();
