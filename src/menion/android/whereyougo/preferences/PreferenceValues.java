@@ -73,8 +73,15 @@ public class PreferenceValues {
   /** stretch images */
   public static final String KEY_B_IMAGE_STRETCH = "KEY_B_IMAGE_STRETCH";
   public static final boolean DEFAULT_IMAGE_STRETCH = true;
-  
-  
+  /** font size */
+  public static final String KEY_S_FONT_SIZE = "KEY_S_FONT_SIZE";
+  public static final int VALUE_FONT_SIZE_DEFAULT = 0;
+  public static final int VALUE_FONT_SIZE_SMALL = 1;
+  public static final int VALUE_FONT_SIZE_MEDIUM = 2;
+  public static final int VALUE_FONT_SIZE_LARGE = 3;
+  public static final String DEFAULT_FONT_SIZE = String.valueOf(VALUE_FONT_SIZE_DEFAULT);
+
+
   // LOGIN
   /** GC credentials */
   public static final String KEY_S_GC_USERNAME = "KEY_S_GC_USERNAME";
@@ -247,9 +254,9 @@ public class PreferenceValues {
   public static void enableWakeLock() {
     try {
       boolean disable = false;
-      if (Preferences.GLOBAL_HIGHLIGHT == VALUE_HIGHLIGHT_OFF) {
+      if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_OFF) {
         disable = true;
-      } else if (Preferences.GLOBAL_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS) {
+      } else if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS) {
         if (!LocationState.isActuallyHardwareGpsOn()) {
           disable = true;
         }
@@ -473,7 +480,7 @@ public class PreferenceValues {
     try {
       if (!(activity instanceof CustomPreferenceActivity)) {
         // set fullScreen
-        if (Preferences.GLOBAL_FULLSCREEN) {
+        if (Preferences.APPEARANCE_FULLSCREEN) {
           activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
               WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
@@ -491,7 +498,7 @@ public class PreferenceValues {
         NotificationManager mNotificationManager =
             (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
         // set statusbar
-        if (Preferences.GLOBAL_STATUSBAR) {
+        if (Preferences.APPEARANCE_STATUSBAR) {
           Context context = activity.getApplicationContext();
           Intent intent =
               new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);

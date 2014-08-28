@@ -151,7 +151,7 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
       return;
     }
     setContentView(R.layout.layout_details);
-    if(!Preferences.GLOBAL_IMAGE_STRETCH){
+    if(!Preferences.APPEARANCE_IMAGE_STRETCH){
       findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
     }
   }

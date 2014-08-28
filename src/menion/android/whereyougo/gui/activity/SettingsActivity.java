@@ -67,6 +67,7 @@ public class SettingsActivity extends CustomPreferenceActivity {
     PreferenceItems.addPrefStatusbar(activity, prefCatAppearance);
     PreferenceItems.addPrefFullscreen(activity, prefCatAppearance);
     PreferenceItems.addPrefHighlight(activity, prefCatAppearance);
+    PreferenceItems.addPrefFontLarge(activity, prefCatAppearance);
     PreferenceItems.addPrefImageStretch(activity, prefCatAppearance);
 
     return init(preferenceScreen);

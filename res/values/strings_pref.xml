@@ -15,6 +15,12 @@
     <string name="pref_map_provider_locus">Locus (Locus required)</string>
     <string name="pref_statusbar">Statusbar Icon</string>
     <string name="pref_statusbar_desc">Show icon in statusbar</string>
+    <string name="pref_font_size">Font size</string>
+    <string name="pref_font_size_desc">Size of the text</string>
+    <string name="pref_font_size_default">Default</string>
+    <string name="pref_font_size_small">Small</string>
+    <string name="pref_font_size_medium">Medium</string>
+    <string name="pref_font_size_large">Large</string>
     <string name="pref_fullscreen">FullScreen</string>
     <string name="pref_fullscreen_desc">Hide system panel</string>
     <string name="pref_global">Global</string>

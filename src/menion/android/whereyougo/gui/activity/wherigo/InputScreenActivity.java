@@ -69,7 +69,7 @@ public class InputScreenActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_input);
-    if(!Preferences.GLOBAL_IMAGE_STRETCH){
+    if(!Preferences.APPEARANCE_IMAGE_STRETCH){
       findViewById(R.id.layoutInputImageView01).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
     }
   }

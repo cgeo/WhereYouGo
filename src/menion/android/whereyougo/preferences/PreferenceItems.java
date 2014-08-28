@@ -87,19 +87,6 @@ public class PreferenceItems {
         PreferenceValues.DEFAULT_CONFIRM_ON_EXIT);
   }
 
-  public static void addPrefFullscreen(CustomPreferenceActivity activity,
-      PreferenceCategory category) {
-    activity.addCheckBoxPreference(category, R.string.pref_fullscreen,
-        R.string.pref_fullscreen_desc, PreferenceValues.KEY_B_FULLSCREEN,
-        PreferenceValues.DEFAULT_FULLSCREEN, new Preference.OnPreferenceChangeListener() {
-          @Override
-          public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.GLOBAL_FULLSCREEN = Utils.parseBoolean(newValue);
-            return true;
-          }
-        });
-  }
-
   /**************************/
   /* GPS */
   /**************************/
@@ -291,6 +278,19 @@ public class PreferenceItems {
             });
     setListPreference(activity, (ListPreference) pref, Preferences.GUIDING_ZONE_NAVIGATION_POINT,
         R.string.pref_guiding_zone_point_desc);
+  }
+
+  public static void setPrefGuidingCompassSounds(boolean saveToPref, boolean value) {
+    if (saveToPref) {
+      PreferenceValues.setPrefBoolean(PreferenceValues.KEY_B_GUIDING_COMPASS_SOUNDS, value);
+    }
+    Preferences.GUIDING_SOUNDS = value;
+  }
+
+  private static void setPrefGuidingWptSound(CustomPreferenceActivity activity,
+      ListPreference pref, int value) {
+    Preferences.GUIDING_WAYPOINT_SOUND = value;
+    setListPreference(activity, pref, value, R.string.pref_guiding_sound_type_waypoint_desc);
   }
 
   /********************************/
@@ -513,13 +513,30 @@ public class PreferenceItems {
         R.string.pref_map_provider_desc);
   }
 
+  /*****************************/
+  /* APPEARANCE */
+  /*****************************/
+
   public static void addPrefStatusbar(CustomPreferenceActivity activity, PreferenceCategory category) {
     activity.addCheckBoxPreference(category, R.string.pref_statusbar, R.string.pref_statusbar_desc,
         PreferenceValues.KEY_B_STATUSBAR, PreferenceValues.DEFAULT_STATUSBAR,
         new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.GLOBAL_STATUSBAR = Utils.parseBoolean(newValue);
+            Preferences.APPEARANCE_STATUSBAR = Utils.parseBoolean(newValue);
+            return true;
+          }
+        });
+  }
+
+  public static void addPrefFullscreen(CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    activity.addCheckBoxPreference(category, R.string.pref_fullscreen,
+        R.string.pref_fullscreen_desc, PreferenceValues.KEY_B_FULLSCREEN,
+        PreferenceValues.DEFAULT_FULLSCREEN, new Preference.OnPreferenceChangeListener() {
+          @Override
+          public boolean onPreferenceChange(Preference preference, Object newValue) {
+            Preferences.APPEARANCE_FULLSCREEN = Utils.parseBoolean(newValue);
             return true;
           }
         });
@@ -541,17 +558,17 @@ public class PreferenceItems {
             entryValues, new Preference.OnPreferenceChangeListener() {
               @Override
               public boolean onPreferenceChange(Preference pref, Object newValue) {
-                Preferences.GLOBAL_HIGHLIGHT = Utils.parseInt(newValue);
-                setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
-                    R.string.pref_highlight_desc);
+                Preferences.APPEARANCE_HIGHLIGHT = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref,
+                    Preferences.APPEARANCE_HIGHLIGHT, R.string.pref_highlight_desc);
                 PreferenceValues.enableWakeLock();
                 return true;
               }
             });
-    setListPreference(activity, (ListPreference) pref, Preferences.GLOBAL_HIGHLIGHT,
+    setListPreference(activity, (ListPreference) pref, Preferences.APPEARANCE_HIGHLIGHT,
         R.string.pref_highlight_desc);
   }
-  
+
   public static void addPrefImageStretch(CustomPreferenceActivity activity,
       PreferenceCategory category) {
     activity.addCheckBoxPreference(category, R.string.pref_image_stretch,
@@ -559,10 +576,37 @@ public class PreferenceItems {
         PreferenceValues.DEFAULT_IMAGE_STRETCH, new Preference.OnPreferenceChangeListener() {
           @Override
           public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Preferences.GLOBAL_IMAGE_STRETCH = Utils.parseBoolean(newValue);
+            Preferences.APPEARANCE_IMAGE_STRETCH = Utils.parseBoolean(newValue);
             return true;
           }
         });
+  }
+
+  public static void addPrefFontLarge(final CustomPreferenceActivity activity,
+      PreferenceCategory category) {
+    CharSequence[] entries =
+        new CharSequence[] {Locale.get(R.string.pref_font_size_default),
+            Locale.get(R.string.pref_font_size_small), Locale.get(R.string.pref_font_size_medium),
+            Locale.get(R.string.pref_font_size_large)};
+    CharSequence[] entryValues =
+        new CharSequence[] {String.valueOf(PreferenceValues.VALUE_FONT_SIZE_DEFAULT),
+            String.valueOf(PreferenceValues.VALUE_FONT_SIZE_SMALL),
+            String.valueOf(PreferenceValues.VALUE_FONT_SIZE_MEDIUM),
+            String.valueOf(PreferenceValues.VALUE_FONT_SIZE_LARGE)};
+    ListPreference pref =
+        activity.addListPreference(category, R.string.pref_font_size, R.string.pref_font_size_desc,
+            PreferenceValues.KEY_S_FONT_SIZE, PreferenceValues.DEFAULT_FONT_SIZE, entries,
+            entryValues, new Preference.OnPreferenceChangeListener() {
+              @Override
+              public boolean onPreferenceChange(Preference pref, Object newValue) {
+                Preferences.APPEARANCE_FONT_SIZE = Utils.parseInt(newValue);
+                setListPreference(activity, (ListPreference) pref,
+                    Preferences.APPEARANCE_FONT_SIZE, R.string.pref_font_size_desc);
+                return true;
+              }
+            });
+    setListPreference(activity, (ListPreference) pref, Preferences.APPEARANCE_FONT_SIZE,
+        R.string.pref_font_size_desc);
   }
 
   /***************************/
@@ -797,18 +841,5 @@ public class PreferenceItems {
 
   private static void setPreferenceText(Activity activity, Preference pref, String value, int desc) {
     pref.setSummary(getFormatedText(pref.isEnabled(), value, activity.getString(desc)));
-  }
-
-  public static void setPrefGuidingCompassSounds(boolean saveToPref, boolean value) {
-    if (saveToPref) {
-      PreferenceValues.setPrefBoolean(PreferenceValues.KEY_B_GUIDING_COMPASS_SOUNDS, value);
-    }
-    Preferences.GUIDING_SOUNDS = value;
-  }
-
-  private static void setPrefGuidingWptSound(CustomPreferenceActivity activity,
-      ListPreference pref, int value) {
-    Preferences.GUIDING_WAYPOINT_SOUND = value;
-    setListPreference(activity, pref, value, R.string.pref_guiding_sound_type_waypoint_desc);
   }
 }

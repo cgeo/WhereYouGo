@@ -31,6 +31,7 @@ import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HAR
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HIGHLIGHT;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_IMAGE_STRETCH;
+import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_FONT_SIZE;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_MAP_PROVIDER;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_ROOT;
 import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_SAVEGAME_AUTO;
@@ -51,6 +52,7 @@ import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GUIDI
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_IMAGE_STRETCH;
+import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_FONT_SIZE;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_SAVEGAME_AUTO;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_USERNAME;
 import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_PASSWORD;
@@ -100,16 +102,18 @@ public class Preferences {
   /** save game automatically option */
   public static boolean GLOBAL_SAVEGAME_AUTO;
   /** GC credentials */
-//  public static String GLOBAL_GC_USERNAME;
-//  public static String GLOBAL_GC_PASSWORD;
+  // public static String GLOBAL_GC_USERNAME;
+  // public static String GLOBAL_GC_PASSWORD;
   /** is status icon enabled */
-  public static boolean GLOBAL_STATUSBAR;
+  public static boolean APPEARANCE_STATUSBAR;
   /** is fullscreen enabled */
-  public static boolean GLOBAL_FULLSCREEN;
+  public static boolean APPEARANCE_FULLSCREEN;
   /** highlight option */
-  public static int GLOBAL_HIGHLIGHT;
+  public static int APPEARANCE_HIGHLIGHT;
   /** stretch images option */
-  public static boolean GLOBAL_IMAGE_STRETCH;
+  public static boolean APPEARANCE_IMAGE_STRETCH;
+  /** large font */
+  public static int APPEARANCE_FONT_SIZE;
 
   // GPS
   /** gps min time */
@@ -149,12 +153,13 @@ public class Preferences {
     GLOBAL_MAP_PROVIDER =
         Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
     GLOBAL_SAVEGAME_AUTO = getPrefBoolean(c, KEY_B_SAVEGAME_AUTO, DEFAULT_SAVEGAME_AUTO);
-//    GLOBAL_GC_USERNAME = getPrefString(c, KEY_S_GC_USERNAME, DEFAULT_GC_USERNAME);
-//    GLOBAL_GC_PASSWORD = getPrefString(c, KEY_S_GC_PASSWORD, DEFAULT_GC_PASSWORD);
-    GLOBAL_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
-    GLOBAL_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
-    GLOBAL_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT, DEFAULT_HIGHLIGHT));
-    GLOBAL_IMAGE_STRETCH = getPrefBoolean(c, KEY_B_IMAGE_STRETCH, DEFAULT_IMAGE_STRETCH);
+    // GLOBAL_GC_USERNAME = getPrefString(c, KEY_S_GC_USERNAME, DEFAULT_GC_USERNAME);
+    // GLOBAL_GC_PASSWORD = getPrefString(c, KEY_S_GC_PASSWORD, DEFAULT_GC_PASSWORD);
+    APPEARANCE_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
+    APPEARANCE_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
+    APPEARANCE_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT, DEFAULT_HIGHLIGHT));
+    APPEARANCE_IMAGE_STRETCH = getPrefBoolean(c, KEY_B_IMAGE_STRETCH, DEFAULT_IMAGE_STRETCH);
+    APPEARANCE_FONT_SIZE = Utils.parseInt(getPrefString(c, KEY_S_FONT_SIZE, DEFAULT_FONT_SIZE));
 
     FORMAT_ALTITUDE =
         Utils.parseInt(getPrefString(c, KEY_S_UNITS_ALTITUDE, DEFAULT_UNITS_ALTITUDE));

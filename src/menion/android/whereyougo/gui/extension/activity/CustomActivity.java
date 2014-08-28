@@ -18,7 +18,9 @@
 package menion.android.whereyougo.gui.extension.activity;
 
 import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
 import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
 import android.app.Activity;
@@ -42,6 +44,18 @@ public class CustomActivity extends FragmentActivity {
     // set screen size
     Const.SCREEN_WIDTH = activity.getWindowManager().getDefaultDisplay().getWidth();
     Const.SCREEN_HEIGHT = activity.getWindowManager().getDefaultDisplay().getHeight();
+
+    switch (Preferences.APPEARANCE_FONT_SIZE) {
+      case PreferenceValues.VALUE_FONT_SIZE_SMALL:
+        activity.setTheme(R.style.FontSizeSmall);
+        break;
+      case PreferenceValues.VALUE_FONT_SIZE_MEDIUM:
+        activity.setTheme(R.style.FontSizeMedium);
+        break;
+      case PreferenceValues.VALUE_FONT_SIZE_LARGE:
+        activity.setTheme(R.style.FontSizeLarge);
+        break;
+    }
   }
 
   protected static void customOnPause(Activity activity) {
