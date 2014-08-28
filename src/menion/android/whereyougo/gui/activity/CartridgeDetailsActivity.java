@@ -52,8 +52,8 @@ public class CartridgeDetailsActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_details);
-    if(Preferences.GLOBAL_IMAGE_STRETCH){
-      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.FILL_PARENT;
+    if(!Preferences.GLOBAL_IMAGE_STRETCH){
+      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
     }
 
     TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);

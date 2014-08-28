@@ -72,7 +72,7 @@ public class PreferenceValues {
   public static final boolean DEFAULT_SAVEGAME_AUTO = true;
   /** stretch images */
   public static final String KEY_B_IMAGE_STRETCH = "KEY_B_IMAGE_STRETCH";
-  public static final boolean DEFAULT_IMAGE_STRETCH = false;
+  public static final boolean DEFAULT_IMAGE_STRETCH = true;
   
   
   // LOGIN

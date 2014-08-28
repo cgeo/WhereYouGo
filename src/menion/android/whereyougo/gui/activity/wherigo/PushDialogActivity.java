@@ -107,8 +107,8 @@ public class PushDialogActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_details);
-    if(Preferences.GLOBAL_IMAGE_STRETCH){
-      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.FILL_PARENT;
+    if(!Preferences.GLOBAL_IMAGE_STRETCH){
+      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
     }
     findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
     findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);

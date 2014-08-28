@@ -22,6 +22,7 @@ import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
@@ -68,6 +69,9 @@ public class InputScreenActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_input);
+    if(!Preferences.GLOBAL_IMAGE_STRETCH){
+      findViewById(R.id.layoutInputImageView01).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+    }
   }
 
   public boolean onKeyDown(int keyCode, KeyEvent event) {
