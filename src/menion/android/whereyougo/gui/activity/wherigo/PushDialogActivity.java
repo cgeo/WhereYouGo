@@ -27,6 +27,7 @@ import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -89,7 +90,7 @@ public class PushDialogActivity extends CustomActivity {
         MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
             ivImage);
       } catch (Exception e) {
-        tvImageText.setText(m.altText);
+        tvImageText.setText(Html.fromHtml(m.altText));
       }
     } else {
       ivImage.setImageBitmap(null);
@@ -97,7 +98,7 @@ public class PushDialogActivity extends CustomActivity {
       ivImage.setMinimumHeight(0);
     }
 
-    tvImageText.setText(tvImageText.getText().toString() + "\n" + texts[page]);
+    tvImageText.setText(Html.fromHtml(tvImageText.getText().toString() + "\n" + texts[page]));
   }
 
   public void onCreate(Bundle savedInstanceState) {

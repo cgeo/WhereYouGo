@@ -47,6 +47,7 @@ import menion.android.whereyougo.utils.UtilsFormat;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -207,12 +208,12 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
           return;
         }
 
-        tvName.setText(et.name);
-        tvDescription.setText(et.description);
+        tvName.setText(Html.fromHtml(et.name));
+        tvDescription.setText(Html.fromHtml(et.description));
 
         Media m = (Media) et.table.rawget("Media");
         if (m != null) {
-          tvImageText.setText(m.altText);
+          tvImageText.setText(Html.fromHtml(m.altText));
           // Logger.w(TAG, "SET: " + et.name + ", " + m.id);
           try {
             byte[] is = Engine.mediaFile(m);
