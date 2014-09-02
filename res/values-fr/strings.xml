@@ -10,9 +10,7 @@
     <string name="azimuth">Azimut</string>
     <string name="cancel">Annuler</string>
     <string name="close">Fermer</string>
-    <!-- TODO BEGIN -->
-    <string name="coauthor">Vector maps and other improvements</string>
-    <!-- TODO END -->
+    <string name="coauthor">Cartes vectorielles et autres améliorations</string>
     <string name="declination">Déclinaison</string>
     <string name="disable_location">Désactiver le GPS</string>
     <string name="distance">Distance</string>
@@ -68,9 +66,7 @@
     <string name="start">Démarrer</string>
     <string name="tasks">Tâches</string>
     <string name="time_to_target">Temps jusqu’à destination</string>
-    <!-- TODO BEGIN -->
-    <string name="translation">Translation</string>
-    <!-- TODO END -->
+    <string name="translation">Traduction</string>
     <string name="unexpected_problem">Erreur inattendue !\n\nVeuillez me contacter avec la description du problème rencontré.</string>
     <string name="version">Version</string>
     <string name="waypoints">Points de guidage</string>

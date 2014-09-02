@@ -8,22 +8,18 @@
     <string name="pref_bearing_true_desc">Si activé utiliser l\'azimut réel. Sinon, utiliser l\'azimut magnétique</string>
     <string name="pref_confirm_on_exit">Confirmer la fermeture de l\'application</string>
     <string name="pref_confirm_on_exit_desc">Demander une confirmation avant de quitter Locus avec le bouton Retour</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_desc">Size of the text</string>
-    <string name="pref_font_size_default">Default</string>
-    <string name="pref_font_size_small">Small</string>
-    <string name="pref_font_size_medium">Medium</string>
-    <string name="pref_font_size_large">Large</string>
-    <!-- TODO END -->
+    <string name="pref_font_size">Taille de la police</string>
+    <string name="pref_font_size_desc">Taille du texte</string>
+    <string name="pref_font_size_default">Par défaut</string>
+    <string name="pref_font_size_small">Petite</string>
+    <string name="pref_font_size_medium">Moyenne</string>
+    <string name="pref_font_size_large">Grande</string>
     <string name="pref_fullscreen">Plein écran</string>
     <string name="pref_fullscreen_desc">Masquer le menu système</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_gc_username">Username</string>
-    <string name="pref_gc_username_desc">Geocaching.com username</string>
-    <string name="pref_gc_password">Password</string>
-    <string name="pref_gc_password_desc">Geocaching.com password</string>
-    <!-- TODO END -->
+    <string name="pref_gc_username">Utilisateur</string>
+    <string name="pref_gc_username_desc">Utilisateur Geocaching.com</string>
+    <string name="pref_gc_password">Mot de passe</string>
+    <string name="pref_gc_password_desc">Mot de passe Geocaching.com</string>
     <string name="pref_global">Global</string>
     <string name="pref_gps_altitude_manual_correction">Ajuster l\'altitude</string>
     <string name="pref_gps_altitude_manual_correction_desc">Correction manuelle de l\'altitude</string>
@@ -43,21 +39,17 @@
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Bip sur la distance</string>
     <string name="pref_guiding_waypoint_sound_increasing">Bipper plus fréquemment lorsque vous approchez</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Sons personnalisés sur la distance</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_guiding_zone_point">Zone navigation point</string>
-    <string name="pref_guiding_zone_point_desc">Select which zone point should be used for navigation</string>
-    <string name="pref_guiding_zone_point_center">Zone center defined by cartridge author</string>
-    <string name="pref_guiding_zone_point_nearest">Nearest border point</string>
-    <!-- TODO END -->
+    <string name="pref_guiding_zone_point">Centre de la zone de navigation</string>
+    <string name="pref_guiding_zone_point_desc">Sélectionnez quel point utiliser comme centre de la zone de navigation</string>
+    <string name="pref_guiding_zone_point_center">Centre de la zone définie par l\'auteur de la cartouche</string>
+    <string name="pref_guiding_zone_point_nearest">Bordure la plus proche</string>
     <string name="pref_highlight">Écran toujours allumé</string>
     <string name="pref_highlight_always_text">Écran toujours allumé</string>
     <string name="pref_highlight_desc">Activer / désactiver l\'écran toujours allumé</string>
     <string name="pref_highlight_off_text">Paramètres système</string>
     <string name="pref_highlight_only_gps_text">Seulement lorsque le GPS est actif</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_image_stretch">Stretch images</string>
-    <string name="pref_image_stretch_desc">Stretch (check) or show original size (uncheck)</string>
-    <!-- TODO END -->
+    <string name="pref_image_stretch">Étirer les images</string>
+    <string name="pref_image_stretch_desc">Étirer (si coché) ou conserver la taille originale (si non coché)</string>
     <string name="pref_language">Langue</string>
     <string name="pref_language_desc">Permettre de définir la langue de la sélection</string>
     <string name="pref_language_default">système par défaut</string>
@@ -81,21 +73,17 @@
     <string name="pref_language_ru">Russe</string>
     <string name="pref_language_sk">Slovaque</string>
     <string name="pref_locale">Paramètres Régionaux</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_login">Login credentials</string>
-    <string name="pref_login_desc">For cartridge downloading from wherigo.com</string>
-    <string name="pref_map_provider">Map provider</string>
-    <string name="pref_map_provider_desc">Select map provider</string>
-    <string name="pref_map_provider_vector">Mapsforge (offline and online maps)</string>
-    <string name="pref_map_provider_locus">Locus (Locus required)</string>
-    <!-- TODO END -->
+    <string name="pref_login">Identifiant</string>
+    <string name="pref_login_desc">Pour télécharger les cartouches depuis le site wherigo.com</string>
+    <string name="pref_map_provider">Fournisseur de carte</string>
+    <string name="pref_map_provider_desc">Sélectionnez le fournisseur de carte</string>
+    <string name="pref_map_provider_vector">Mapsforge (carte en ligne et hors-ligne)</string>
+    <string name="pref_map_provider_locus">Locus (Locus doit être installé)</string>
     <string name="pref_orientation">Orientation</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_root">Wherigo folder</string>
-    <string name="pref_root_desc">Select any wherigo in target folder</string>
-    <string name="pref_save_game_auto">Save game automatically</string>
-    <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
-    <!-- TODO END -->
+    <string name="pref_root">Dossier Wherigo</string>
+    <string name="pref_root_desc">Recherche les cartouches Wehereigo dans ce dossier</string>
+    <string name="pref_save_game_auto">Enregistrer automatiquement le jeu</string>
+    <string name="pref_save_game_auto_desc">Le jeu sera enregistré automatiquement lorsque vous basculez sur une autre application.</string>
     <string name="pref_sensors">Capteurs</string>
     <string name="pref_sensors_compass_auto_change">Changement automatique</string>
     <string name="pref_sensors_compass_auto_change_desc">Utiliser la boussole interne à faible vitesse et le GPS à haute vitesse</string>
@@ -109,10 +97,8 @@
     <string name="pref_sensors_orient_filter_medium">Filtre moyen</string>
     <string name="pref_sensors_orient_filter_no_filter">Aucun filtre</string>
     <string name="pref_sensors_orient_filter_desc">Filtre appliqué à l\'orientation. Un filtre fort cause des réactions plus lentes, mais également plus fluides</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_statusbar">Statusbar Icon</string>
-    <string name="pref_statusbar_desc">Show icon in statusbar</string>
-    <!-- TODO END -->
+    <string name="pref_statusbar">Icône dans la barre d\'état</string>
+    <string name="pref_statusbar_desc">Affiche l\'icône de l\'application dans la barre d\'état</string>
     <string name="pref_style_on_map">Style sur la carte</string>
     <string name="pref_units">Unités</string>
     <string name="pref_units_altitude">Unités d\'altitude</string>
