@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.11" id="37" time="3.9.2014">
+	<li>fixed: unexpected dialog closing in some versions of Android</li>
+	<li>fixed: close things after clicking on a button to avoid piling up</li>
+	<li>fixed: draw points and labels on top of lines</li>
+	<li>fixed: allow playing sounds in headphones only</li>
+	<li>update: translation (French, German)</li>
+	<li>update: login credentials moved to its own category in Settings</li>
+	<li>added: font size in Settings</li>
+	<li>added: option to allow or disallow image stretching (Settings->Appearance)</li>
+	<li>added: full support for unicode characters</li>
+	<li>added: display custom icons for tasks</li>
+	<li>added: support for wherigo functions Command(text), specifically StopSound, Alert</li>
+  </update>
+    
   <update name="0.8.10" id="36" time="19.5.2014">
 	<li>fixed: some bugs</li>
 	<li>fixed: close object detail after clicking on button to avoid piling up</li>
