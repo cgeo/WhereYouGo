@@ -68,6 +68,9 @@
     <string name="start">Démarrer</string>
     <string name="tasks">Tâches</string>
     <string name="time_to_target">Temps jusqu’à destination</string>
+    <!-- TODO BEGIN -->
+    <string name="translation">Translation</string>
+    <!-- TODO END -->
     <string name="unexpected_problem">Erreur inattendue !\n\nVeuillez me contacter avec la description du problème rencontré.</string>
     <string name="version">Version</string>
     <string name="waypoints">Points de guidage</string>

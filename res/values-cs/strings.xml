@@ -76,6 +76,7 @@
     <string name="start">Start</string>
     <string name="tasks">Úkoly</string>
     <string name="time_to_target">Čas k cíli</string>
+    <string name="translation">Překlad</string>
     <string name="unexpected_problem">Neočekávaný problém!\n\Kontaktujte mě prosím s popisem vašeho problému.</string>
     <string name="version">Verze</string>
     <string name="waypoints">Waypointy</string>

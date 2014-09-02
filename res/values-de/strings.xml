@@ -76,6 +76,7 @@
     <string name="start">Start</string>
     <string name="tasks">Tasks</string>
     <string name="time_to_target">Zeit zum Ziel</string>
+    <string name="translation">Übersetzung</string>
     <string name="unexpected_problem">Unerwartetes Problem!\n\n\Bitte nehmen Sie mit mir Kontakt auf und schildern das Problem.</string>
     <string name="version">Version</string>
     <string name="waypoints">Wegpunkte</string>

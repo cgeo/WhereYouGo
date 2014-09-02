@@ -36,7 +36,12 @@ public class AboutDialog extends CustomDialogFragment {
             + "<br />&nbsp;&nbsp;<b><a href=\"http://forum.asamm.cz\">http://forum.asamm.cz</a></b><br /><br />");
     buffer.append(getString(R.string.coauthor));
     buffer.append("<br />&nbsp;&nbsp;<b>biylda</b>");
-    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;biylda@gmail.com<br /><br />");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;biylda@gmail.com");
+    buffer.append("<br /><br />");
+    buffer.append(getString(R.string.translation));
+    buffer.append("<br />&nbsp;&nbsp;<b>Deutsch</b> - Stefan Amstart, Kilian Högy, Carsten Pietzsch");
+    buffer.append("<br />&nbsp;&nbsp;<b>Français</b> - Nam");
+    buffer.append("<br /><br />");
     buffer.append(getString(R.string.libraries));
     buffer.append("<br />&nbsp;&nbsp;<b>OpenWig</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Matejicek");
