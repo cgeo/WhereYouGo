@@ -205,7 +205,7 @@ public class DownloadActivity extends CustomActivity {
             "ctl00$ContentPlaceHolder1$Login1$Login1$Password", password));
         postParameters.add(new BasicNameValuePair(
             "ctl00$ContentPlaceHolder1$Login1$Login1$LoginButton", "Sign In"));
-        httpPost.setEntity(new UrlEncodedFormEntity(postParameters));
+        httpPost.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
         publishProgress(new Progress(Task.LOGIN, State.WORKING));
         if (status(httpClient.execute(httpPost, localContext)) != HttpStatus.SC_OK
             || cookieStore.getCookies().size() <= 1) {
