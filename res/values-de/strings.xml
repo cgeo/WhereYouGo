@@ -43,6 +43,7 @@
     <string name="locations">Locations</string>
     <string name="longitude">Längengrad</string>
     <string name="map">Karte</string>
+    <string name="msg_exit_game">BACK zweimal drücken, um das Spiel zu verlassen.</string>    
     <string name="metres">Meter</string>
     <string name="navigate">Navigieren</string>
     <string name="new_version_will_be_installed">Neue Version wird installiert!</string>
@@ -87,5 +88,4 @@
     <string name="you_have_to_restart_app_force">Anwendung neu starten!</string>
     <string name="you_have_to_restart_app_recommended">Es ist empfohlen, die Anwendung neu zu starten!</string>
     <string name="you_see">You see</string>
-
 </resources>

@@ -40,6 +40,7 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -302,50 +303,46 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     });
   }
 
+  private long lastPressedTime = 0;
+  private static int DOUBLE_PRESS_HK_BACK_PERIOD = 666;
+  
+  @Override
   public boolean onKeyDown(int keyCode, KeyEvent event) {
     Logger.d(TAG, "onKeyDown(" + keyCode + ", " + event + ")");
-    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-      UtilsGUI.showDialogQuestion(this, R.string.save_game_before_exit,
+    if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK ) {
+      if ( event.getDownTime() - lastPressedTime < DOUBLE_PRESS_HK_BACK_PERIOD) {
+        /* exit game */
+        UtilsGUI.showDialogQuestion(this, R.string.save_game_before_exit,
           new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
-              Engine.requestSync();
-              MainActivity.selectedFile = null;
-              DetailsActivity.et = null;
-              new SaveGameOnExit().execute();
+                Engine.requestSync();
+                MainActivity.selectedFile = null;
+                DetailsActivity.et = null;
+                new SaveGameOnExit().execute();
             }
-          }, new DialogInterface.OnClickListener() {
-
+    	  }, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-              Engine.kill();
-              MainActivity.selectedFile = null;
-              DetailsActivity.et = null;
-              MainMenuActivity.this.finish();
-            }
+              public void onClick(DialogInterface dialog, int which) {
+                Engine.kill();
+                MainActivity.selectedFile = null;
+                DetailsActivity.et = null;
+                MainMenuActivity.this.finish();
+              }
           }, null);
 
-      /*
-       * AlertDialog.Builder b = new AlertDialog.Builder(CartridgeMainMenu.this);
-       * b.setCancelable(true); b.setTitle(R.string.question);
-       * b.setMessage(R.string.save_game_before_exit); b.setPositiveButton(R.string.yes, new
-       * DialogInterface.OnClickListener() {
-       * 
-       * @Override public void onClick(DialogInterface dialog, int which) { Engine.requestSync();
-       * Main.selectedFile = null; new SaveGameOnExit().execute(); } });
-       * b.setNeutralButton(R.string.cancel, null); b.setNegativeButton(R.string.no, new
-       * DialogInterface.OnClickListener() {
-       * 
-       * @Override public void onClick(DialogInterface dialog, int which) { Engine.kill();
-       * Main.selectedFile = null; CartridgeMainMenu.this.finish(); } }); b.show();
-       */
-      return true;
+          return true;    		
+      } else {
+        /* back is tapped once */
+        lastPressedTime = event.getDownTime();
+        ManagerNotify.toastShortMessage(R.string.msg_exit_game);
+        return true;
+      }
     } else if (event.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
-      return true;
+        return true;
     } else {
-      return super.onKeyDown(keyCode, event);
-    }
+        return super.onKeyDown(keyCode, event);
+    }    
   }
 
   public void onResume() {
