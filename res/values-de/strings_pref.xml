@@ -8,14 +8,12 @@
     <string name="pref_bearing_true_desc">Wenn diese Option aktiviert ist, wird die tatsächliche Ausrichtung verwendet. Ansonsten wird die magnetische Ausrichtung verwendet</string>
     <string name="pref_confirm_on_exit">Bestätigung beim Beenden</string>
     <string name="pref_confirm_on_exit_desc">Zeigt einen Dialog bevor Locus mit dem Zurück Knopf beendet wird</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_desc">Size of the text</string>
-    <string name="pref_font_size_default">Default</string>
-    <string name="pref_font_size_small">Small</string>
+    <string name="pref_font_size">Schriftgröße</string>
+    <string name="pref_font_size_desc">Schriftgröße für Texte</string>
+    <string name="pref_font_size_default">Standard</string>
+    <string name="pref_font_size_small">Klein</string>
     <string name="pref_font_size_medium">Medium</string>
-    <string name="pref_font_size_large">Large</string>
-    <!-- TODO END -->
+    <string name="pref_font_size_large">Groß</string>
     <string name="pref_fullscreen">Vollbild</string>
     <string name="pref_fullscreen_desc">Verstecke die Benachrichtigungsleiste</string>
     <string name="pref_gc_username">Benutzername</string>
@@ -53,10 +51,8 @@
     <string name="pref_highlight_desc">Aktivieren oder Deaktivieren Sie, ob der Bildschirm immer an bleiben soll</string>
     <string name="pref_highlight_off_text">Systemeinstellungen</string>
     <string name="pref_highlight_only_gps_text">Nur wenn GPS eingeschaltet ist</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_image_stretch">Stretch images</string>
-    <string name="pref_image_stretch_desc">Stretch (check) or show original size (uncheck)</string>
-    <!-- TODO END -->
+    <string name="pref_image_stretch">Bilder skalieren</string>
+    <string name="pref_image_stretch_desc">Skaliert (aktiv) oder in Originalgröße (deaktiv) anzeigen</string>
     <string name="pref_language">Sprache</string>
     <string name="pref_language_desc">Sprache durch Auswahl festlegen</string>
     <string name="pref_language_default">System Standard</string>
@@ -76,14 +72,12 @@
     <string name="pref_language_nl">Holländisch</string>
     <string name="pref_language_pl">Polnisch</string>
     <string name="pref_language_pt">Portugiesisch</string>
-    <string name="pref_language_pt_br">Brasilianische P.</string>
+    <string name="pref_language_pt_br">Brasilianisches P.</string>
     <string name="pref_language_ru">Russisch</string>
     <string name="pref_language_sk">Slowakisch</string>
     <string name="pref_locale">Lokalisierung</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_login">Login credentials</string>
-    <string name="pref_login_desc">For cartridge downloading from wherigo.com</string>
-    <!-- TODO END -->
+    <string name="pref_login">Zugangsdaten</string>
+    <string name="pref_login_desc">Für den Zugriff auf wherigo.com zum Herunterladen von Cartridges</string>
     <string name="pref_map_provider">Kartengrundlage</string>
     <string name="pref_map_provider_desc">Map provider wählen</string>
     <string name="pref_map_provider_vector">Mapsforge (offline und online Karten)</string>
