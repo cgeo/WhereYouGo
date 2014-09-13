@@ -59,13 +59,13 @@
     <string name="pitch">Neigung</string>
     <string name="point">Punkt</string>
     <string name="press_color_to_apply">Wählen Sie eine Farbe</string>
-    <string name="problem_with_internet_connection">Problem mit Internet-Anschluss!</string>
+    <string name="problem_with_internet_connection">Problem mit Internetverbindung</string>
     <string name="provider">Standortversorger</string>
     <string name="provider_network">Netzwerk</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_passive">-</string>
     <string name="question">Frage</string>
-    <string name="resume_previous_cartridge">Wollen Sie das Spiel laden?\n(Falls Sie Nein wählen, die Speicherdatei wird gelöscht werden.)</string>
+    <string name="resume_previous_cartridge">Wollen Sie den alten Spielstand laden?\n\n(Falls Sie Nein wählen, wird der alte Spielstand gelöscht)</string>
     <string name="roll">Neigung</string>
     <string name="satellites">Satelliten</string>
     <string name="save_game">Speichern</string>
@@ -78,7 +78,7 @@
     <string name="tasks">Tasks</string>
     <string name="time_to_target">Zeit zum Ziel</string>
     <string name="translation">Übersetzung</string>
-    <string name="unexpected_problem">Unerwartetes Problem!\n\n\Bitte nehmen Sie mit mir Kontakt auf und schildern das Problem.</string>
+    <string name="unexpected_problem">Unerwartetes Problem!\n\n\Bitte nehmen Sie mit den Entwicklern Kontakt auf und schildern Sie das Problem.</string>
     <string name="version">Version</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="web_page">Webseite</string>
@@ -86,6 +86,6 @@
     <string name="yes">Ja</string>
     <string name="you_have_to_exit_app_force">Anwendung beenden!</string>
     <string name="you_have_to_restart_app_force">Anwendung neu starten!</string>
-    <string name="you_have_to_restart_app_recommended">Es ist empfohlen, die Anwendung neu zu starten!</string>
+    <string name="you_have_to_restart_app_recommended">Es wird empfohlen, die Anwendung neu zu starten!</string>
     <string name="you_see">You see</string>
 </resources>
