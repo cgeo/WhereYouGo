@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<resources>
+    <string name="pref_language_ar">العربية</string> <!--  Arabic -->
+    <string name="pref_language_cs">Čeština</string> <!-- Czech -->
+    <string name="pref_language_da">Dansk</string> <!--  Danish -->
+    <string name="pref_language_de">Deutsch</string> <!--  German -->
+    <string name="pref_language_el">Ελληνικά</string> <!--  Greek -->
+    <string name="pref_language_en">English</string> <!-- English -->
+    <string name="pref_language_en_gb">English (GB)</string> <!-- English GB (not supported) -->
+    <string name="pref_language_en_us">English (US)</string> <!-- English US (not supported) -->
+    <string name="pref_language_es">Español</string> <!-- Spanish -->
+    <string name="pref_language_fi">Suomi</string> <!-- Finnish -->
+    <string name="pref_language_fr">Française</string> <!-- French  -->
+    <string name="pref_language_hu">Magyar</string> <!-- Hungarian -->
+    <string name="pref_language_it">Italiano</string> <!-- Italian -->
+    <string name="pref_language_ja">日本語</string> <!-- Japanese -->
+    <string name="pref_language_ko">한국어</string> <!-- Korean -->
+    <string name="pref_language_nl">Nederlands</string> <!-- Dutch -->
+    <string name="pref_language_pl">Polski</string> <!-- Polish -->
+    <string name="pref_language_pt">Português</string> <!-- Portuguese  -->
+    <string name="pref_language_pt_br">Português (BR)</string> <!-- Brazilian P. -->
+    <string name="pref_language_ru">Русский</string> <!-- Russian -->
+    <string name="pref_language_sk">Slovenčina</string> <!-- Slovak -->
+</resources>    
