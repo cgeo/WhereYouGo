@@ -11,9 +11,9 @@
     <string name="pref_font_size">Schriftgröße</string>
     <string name="pref_font_size_desc">Schriftgröße für Texte</string>
     <string name="pref_font_size_default">Standard</string>
-    <string name="pref_font_size_small">Klein</string>
-    <string name="pref_font_size_medium">Medium</string>
     <string name="pref_font_size_large">Groß</string>
+    <string name="pref_font_size_medium">Medium</string>
+    <string name="pref_font_size_small">Klein</string>
     <string name="pref_fullscreen">Vollbild</string>
     <string name="pref_fullscreen_desc">Verstecke die Benachrichtigungsleiste</string>
     <string name="pref_gc_username">Benutzername</string>

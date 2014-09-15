@@ -11,9 +11,9 @@
     <string name="pref_font_size">Velikost písma</string>
     <string name="pref_font_size_desc">Velikost písma</string>
     <string name="pref_font_size_default">Výchozí</string>
-    <string name="pref_font_size_small">Malé</string>
-    <string name="pref_font_size_medium">Střední</string>
     <string name="pref_font_size_large">Velké</string>
+    <string name="pref_font_size_medium">Střední</string>
+    <string name="pref_font_size_small">Malé</string>
     <string name="pref_fullscreen">Celá obrazovka</string>
     <string name="pref_fullscreen_desc">Skrýt systémovou lištu</string>
     <string name="pref_gc_username">Přihlašovací jméno</string>

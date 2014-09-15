@@ -51,6 +51,9 @@
     <string name="longitude">Longitude</string>
     <string name="map">Carte</string>
     <string name="metres">Mètres</string>
+    <!-- TODO BEGIN: insert string in other languages and translate -->
+    <string name="msg_exit_game">Push BACK twice to exit the game.</string>
+    <!-- TODO END -->
     <string name="new_version_will_be_installed">La nouvelle version sera installée !</string>
     <string name="no">Non</string>
     <string name="no_description">Aucune description</string>

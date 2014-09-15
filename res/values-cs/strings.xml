@@ -51,6 +51,7 @@
     <string name="longitude">Zem. délka</string>
     <string name="map">Mapa</string>
     <string name="metres">Metry</string>
+    <string name="msg_exit_game">Stiskněte ZPĚT dvakrát pro ukončení hry.</string>
     <string name="navigate">Navigovat</string>
     <string name="new_version_will_be_installed">Nová verze bude nainstalována!</string>
     <string name="no">Ne</string>

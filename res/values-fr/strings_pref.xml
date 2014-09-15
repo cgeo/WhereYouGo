@@ -11,9 +11,9 @@
     <string name="pref_font_size">Taille de la police</string>
     <string name="pref_font_size_desc">Taille du texte</string>
     <string name="pref_font_size_default">Par défaut</string>
-    <string name="pref_font_size_small">Petite</string>
-    <string name="pref_font_size_medium">Moyenne</string>
     <string name="pref_font_size_large">Grande</string>
+    <string name="pref_font_size_medium">Moyenne</string>
+    <string name="pref_font_size_small">Petite</string>
     <string name="pref_fullscreen">Plein écran</string>
     <string name="pref_fullscreen_desc">Masquer le menu système</string>
     <string name="pref_gc_username">Utilisateur</string>

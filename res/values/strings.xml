@@ -50,10 +50,10 @@
     <string name="locations">Locations</string>
     <string name="longitude">Longitude</string>
     <string name="map">Map</string>
+    <string name="metres">Metres</string>
     <!-- TODO BEGIN: insert string in other languages and translate -->
     <string name="msg_exit_game">Push BACK twice to exit the game.</string>
-    <!-- TODO END -->        
-    <string name="metres">Metres</string>
+    <!-- TODO END -->
     <string name="navigate">Navigate</string>
     <string name="new_version_will_be_installed">New version will be installed!</string>
     <string name="no">No</string>
@@ -97,4 +97,5 @@
     <string name="you_have_to_restart_app_force">You have to restart application!</string>
     <string name="you_have_to_restart_app_recommended">It\'s recommended to restart application!</string>
     <string name="you_see">You see</string>
+
 </resources>
