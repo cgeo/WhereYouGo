@@ -18,6 +18,7 @@
 package menion.android.whereyougo.gui.activity;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -296,6 +298,15 @@ public class MainActivity extends CustomMainActivity {
   public void onResume() {
     super.onResume();
     refreshCartridges();
+    
+    String cguid = getIntent() == null ? null : getIntent().getStringExtra("cguid");
+    if(cguid != null){
+      getIntent().removeExtra("cguid");
+      File file = FileSystem.findFile(cguid);
+      if(file != null){
+        startCartridge(file);
+      }
+    }
   }
   
   @Override
@@ -324,5 +335,61 @@ public class MainActivity extends CustomMainActivity {
     mdp.clear();
     mdp.addCartridges(cartridgeFiles);
     MainActivity.wui.showMap(false, false);
+  }
+  
+  private void startCartridge(File file) {
+    try {
+      CartridgeFile cart = null;
+      try {
+        cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
+        if (cart != null) {
+          cart.filename = file.getAbsolutePath();
+        } else {
+          return;
+        }
+      } catch (Exception e) {
+        file.delete();
+      }
+      MainActivity.cartridgeFile = cart;
+      MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
+
+      if (MainActivity.cartridgeFile.getSavegame().exists()) {
+        UtilsGUI.showDialogQuestion(this, R.string.resume_previous_cartridge,
+            new DialogInterface.OnClickListener() {
+
+              @Override
+              public void onClick(DialogInterface dialog, int btn) {
+                File file =
+                    new File(MainActivity.getSelectedFile().substring(0,
+                        MainActivity.getSelectedFile().length() - 3)
+                        + "gwl");
+                FileOutputStream fos = null;
+                try {
+                  if (!file.exists())
+                    file.createNewFile();
+                  fos = new FileOutputStream(file, true);
+                } catch (Exception e) {
+                  Logger.e(TAG, "onResume() - create empty saveGame file", e);
+                }
+                MainActivity.restoreCartridge(fos);
+              }
+            }, new DialogInterface.OnClickListener() {
+
+              @Override
+              public void onClick(DialogInterface dialog, int btn) {
+                MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
+                try {
+                  MainActivity.getSaveFile().delete();
+                } catch (Exception e) {
+                  Logger.e(TAG, "onCreate() - deleteSyncFile", e);
+                }
+              }
+            }, null);
+      } else {
+        MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
+      }
+    } catch (Exception e) {
+      Logger.e(TAG, "onCreate()", e);
+    }
   }
 }

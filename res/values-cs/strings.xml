@@ -20,6 +20,13 @@
     <string name="do_you_really_want_to_delete_x">Opravdu chcete smazat \'%1$s\'?</string>
     <string name="do_you_really_want_to_exit">Opravdu UKONČIT program?</string>
     <string name="dont_ask">Neptat</string>
+    <string name="download">Stáhnout</string>
+    <string name="download_cartridge">Stáhnout cartridge</string>
+    <string name="download_state_connect">Připojování</string>
+    <string name="download_state_download">Stahování</string>
+    <string name="download_state_login">Přihlašování</string>
+    <string name="download_state_logout">Odhlašování</string>
+    <string name="download_successful">Úspěšně staženo</string>
     <string name="error">Chyba</string>
     <string name="failed">Neúspěšný</string>
     <string name="feet">Stopy</string>

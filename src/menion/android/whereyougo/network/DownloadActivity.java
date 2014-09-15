@@ -20,22 +20,33 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.CartridgeDetailsActivity;
 import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.activity.wherigo.MainMenuActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
+import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
+import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.AsyncTask;
@@ -43,19 +54,23 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.*;
 
-public class DownloadActivity extends CustomActivity {
+public class DownloadActivity extends CustomMainActivity {
   private static final String TAG = "DownloadActivity";
-  TextView urlTextView;
+  TextView tvDescription;
+  TextView tvState;
   Button buttonDownload;
-  // Button buttonStart;
+  Button buttonStart;
   DownloadTask downloadTask;
   String cguid;
+  File cartridgeFile;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -69,20 +84,34 @@ public class DownloadActivity extends CustomActivity {
       finish();
       return;
     }
+    cartridgeFile = FileSystem.findFile(cguid);
 
-    setContentView(R.layout.activity_download);
-    urlTextView = (TextView) findViewById(R.id.urlTextView);
-    urlTextView.setText(cguid);
-    File file = null;
-    if ((file = findFile(cguid)) != null) {
-      urlTextView.setText(urlTextView.getText() + "\n\n" + file.getName().replace(cguid + "_", "")
-          + " already downloaded");
+    setContentView(R.layout.layout_details);
+
+    TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
+    tvName.setText(Html.fromHtml(getString(R.string.download_cartridge)));
+
+    tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+    tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+
+    if (cartridgeFile != null) {
+      tvDescription.setText(Html.fromHtml("CGUID " + cguid + "\n" + cartridgeFile.getName().replace(cguid + "_", "")));
+      tvState.setText(Html.fromHtml(getString(R.string.download_successful)));
+    }else{
+      tvDescription.setText(Html.fromHtml("CGUID " + cguid));
     }
-    buttonDownload = (Button) findViewById(R.id.downloadButton);
-    buttonDownload.setOnClickListener(new View.OnClickListener() {
 
+    ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+    ivImage.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+    try {
+      Bitmap icon = Images.getImageB(R.drawable.icon_gc_wherigo);
+      ivImage.setImageBitmap(icon);
+    } catch (Exception e) {
+    }
+
+    CustomDialog.setBottom(this, getString(R.string.download), new CustomDialog.OnClickListener() {
       @Override
-      public void onClick(View arg0) {
+      public boolean onClick(CustomDialog dialog, View v, int btn) {
         if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
           downloadTask.cancel(true);
           downloadTask = null;
@@ -90,22 +119,23 @@ public class DownloadActivity extends CustomActivity {
           downloadTask = new DownloadTask(DownloadActivity.this);
           downloadTask.execute(cguid);
         }
+        return true;
+
+      }
+    }, null, null, getString(R.string.start), new CustomDialog.OnClickListener() {
+      @Override
+      public boolean onClick(CustomDialog dialog, View v, int btn) {
+        PreferenceValues.setCurrentActivity(null);
+        Intent intent = new Intent(DownloadActivity.this, MainActivity.class);
+        intent.putExtra("cguid", cguid);
+        startActivity(intent);
+        DownloadActivity.this.finish();
+        return true;
       }
     });
-    // buttonStart = (Button) findViewById(R.id.startButton);
-    // buttonStart.setOnClickListener(new View.OnClickListener() {
-    //
-    // @Override
-    // public void onClick(View arg0) {
-    // File file = null;
-    // if((file = findFile(cguid)) != null){
-    // startCartridge(file);
-    // }
-    // }
-    // });
-    // if(findFile(cguid) == null){
-    // buttonStart.setEnabled(false);
-    // }
+    buttonDownload = (Button) findViewById(R.id.button_positive);
+    buttonStart = (Button) findViewById(R.id.button_negative);
+    buttonStart.setEnabled(cartridgeFile != null);
   }
 
   enum Task {
@@ -277,7 +307,15 @@ public class DownloadActivity extends CustomActivity {
       if (result) {
         progressDialog.dismiss();
         MainActivity.refreshCartridges();
-        // buttonStart.setEnabled(true);
+        cartridgeFile = FileSystem.findFile(cguid);
+        if (cartridgeFile != null) {
+          tvDescription.setText(Html.fromHtml("CGUID " + cguid + "\n" + cartridgeFile.getName().replace(cguid + "_", "")));
+          tvState.setText(Html.fromHtml(getString(R.string.download_successful)));
+        }else{
+          tvDescription.setText(Html.fromHtml("CGUID " + cguid));
+          tvState.setText(Html.fromHtml(""));
+        }
+        buttonStart.setEnabled(cartridgeFile != null);
       } else {
         progressDialog.setIndeterminate(false);
       }
@@ -292,41 +330,41 @@ public class DownloadActivity extends CustomActivity {
         case PING:
           progressDialog.setIndeterminate(true);
           if (progress.state == State.WORKING) {
-            progressDialog.setMessage("connecting");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect)));
           } else if (progress.state == State.SUCCESS) {
-            progressDialog.setMessage("connecting succesful");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect)+": " + getString(R.string.ok)));
           } else if (progress.state == State.FAIL) {
-            progressDialog.setMessage("connecting failed");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect)+": " + getString(R.string.error)));
           }
           break;
         case LOGIN:
           progressDialog.setIndeterminate(true);
           if (progress.state == State.WORKING) {
-            progressDialog.setMessage("logging in");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login)));
           } else if (progress.state == State.SUCCESS) {
-            progressDialog.setMessage("logging in succesful");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login)+": " + getString(R.string.ok)));
           } else if (progress.state == State.FAIL) {
-            progressDialog.setMessage("logging in failed");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login)+": " + getString(R.string.error)));
           }
           break;
         case LOGOUT:
           progressDialog.setIndeterminate(true);
           if (progress.state == State.WORKING) {
-            progressDialog.setMessage("logging out");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout)));
           } else if (progress.state == State.SUCCESS) {
-            progressDialog.setMessage("logging out succesful");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout)+": " + getString(R.string.ok)));
           } else if (progress.state == State.FAIL) {
-            progressDialog.setMessage("logging out failed");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout)+": " + getString(R.string.error)));
           }
           break;
         case DOWNLOAD:
           progressDialog.setIndeterminate(true);
           if (progress.state == State.WORKING) {
-            progressDialog.setMessage("downloading");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)));
           } else if (progress.state == State.SUCCESS) {
-            progressDialog.setMessage("downloading succesful");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)+": " + getString(R.string.ok)));
           } else if (progress.state == State.FAIL) {
-            progressDialog.setMessage("downloading failed");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)+": " + getString(R.string.error)));
           }
           break;
         case DOWNLOAD_SINGLE:
@@ -334,11 +372,11 @@ public class DownloadActivity extends CustomActivity {
           progressDialog.setMax((int) progress.total);
           progressDialog.setProgress((int) progress.completed);
           if (progress.state == State.WORKING) {
-            progressDialog.setMessage("downloading");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)));
           } else if (progress.state == State.SUCCESS) {
-            progressDialog.setMessage("downloading succesful");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)+": " + getString(R.string.ok)));
           } else if (progress.state == State.FAIL) {
-            progressDialog.setMessage("downloading failed");
+            progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)+": " + getString(R.string.error)));
           }
           break;
       }
@@ -433,71 +471,54 @@ public class DownloadActivity extends CustomActivity {
     }
   }
 
-  private File findFile(String cguid) {
-    File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");
-    for (File file : files) {
-      // check whether cartridge is already present
-      if (file.getName().startsWith(cguid)) {
-        return file;
-      }
-    }
+  protected void startCartridge(String cguid) {
+    PreferenceValues.setCurrentActivity(null);
+    Intent intent = new Intent(this, MainActivity.class);
+    intent.putExtra("cguid", cguid);
+    startActivity(intent);
+  }
+
+  @Override
+  protected void eventCreateLayout() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  protected void eventDestroyApp() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  protected void eventFirstInit() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  protected void eventRegisterOnly() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  protected void eventSecondInit() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  protected String getCloseAdditionalText() {
+    // TODO Auto-generated method stub
     return null;
   }
 
-  // private void startCartridge(File file) {
-  // try {
-  // CartridgeFile cart = null;
-  // try {
-  // cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
-  // if (cart != null) {
-  // cart.filename = file.getAbsolutePath();
-  // } else {
-  // return;
-  // }
-  // } catch (Exception e) {
-  // file.delete();
-  // }
-  // MainActivity.cartridgeFile = cart;
-  // MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
-  //
-  // if (MainActivity.cartridgeFile.getSavegame().exists()) {
-  // UtilsGUI.showDialogQuestion(this, R.string.resume_previous_cartridge,
-  // new DialogInterface.OnClickListener() {
-  //
-  // @Override
-  // public void onClick(DialogInterface dialog, int btn) {
-  // File file =
-  // new File(MainActivity.getSelectedFile().substring(0,
-  // MainActivity.getSelectedFile().length() - 3)
-  // + "gwl");
-  // FileOutputStream fos = null;
-  // try {
-  // if (!file.exists())
-  // file.createNewFile();
-  // fos = new FileOutputStream(file, true);
-  // } catch (Exception e) {
-  // Logger.e(TAG, "onResume() - create empty saveGame file", e);
-  // }
-  // MainActivity.restoreCartridge(fos);
-  // }
-  // }, new DialogInterface.OnClickListener() {
-  //
-  // @Override
-  // public void onClick(DialogInterface dialog, int btn) {
-  // MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-  // try {
-  // MainActivity.getSaveFile().delete();
-  // } catch (Exception e) {
-  // Logger.e(TAG, "onCreate() - deleteSyncFile", e);
-  // }
-  // }
-  // }, null);
-  // } else {
-  // MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-  // }
-  // } catch (Exception e) {
-  // Logger.e(TAG, "onCreate()", e);
-  // }
-  // }
+  @Override
+  protected int getCloseValue() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
+  
 }

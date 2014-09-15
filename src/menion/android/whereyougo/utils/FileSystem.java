@@ -175,4 +175,18 @@ public class FileSystem {
     }
     return true;
   }
+  
+  public static File findFile(String prefix, String extension) {
+    File[] files = FileSystem.getFiles(FileSystem.ROOT, extension);
+    for (File file : files) {
+      if (file.getName().startsWith(prefix)) {
+        return file;
+      }
+    }
+    return null;
+  }
+  
+  public static File findFile(String prefix) {
+    return findFile(prefix, "gwc");
+  }
 }

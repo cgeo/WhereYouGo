@@ -18,6 +18,15 @@
     <string name="do_you_really_want_to_delete_x">Voulez vous vraiment supprimer \'%1$s\' ?</string>
     <string name="do_you_really_want_to_exit">Voulez-vous vraiment quitter ?</string>
     <string name="dont_ask">Ne pas demander</string>
+    <string name="download">Téléchargé</string>
+    <string name="download_cartridge">Téléchargér cartridge</string>
+    <!-- TODO BEGIN -->
+    <string name="download_state_connect">Connecting</string>
+    <string name="download_state_download">Downloading</string>
+    <string name="download_state_login">Logging in</string>
+    <string name="download_state_logout">Logging out</string>
+    <!-- TODO END -->
+    <string name="download_successful">Téléchargé avec succès</string>
     <string name="error">Erreur</string>
     <string name="failed">Échec</string>
     <string name="feet">Pieds</string>
