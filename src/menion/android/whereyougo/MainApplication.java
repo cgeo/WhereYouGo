@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -267,6 +269,13 @@ public class MainApplication extends Application {
     if (Preferences.GLOBAL_SAVEGAME_AUTO
         && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
         && MainActivity.selectedFile != null && Engine.instance != null) {
+      
+      // backup
+      try {
+        FileSystem.backupFile(MainActivity.getSaveFile());
+      } catch (Exception e) {
+      }
+      
       Engine.requestSync();
       Toast.makeText(this, R.string.save_game_auto, Toast.LENGTH_SHORT).show();
     }

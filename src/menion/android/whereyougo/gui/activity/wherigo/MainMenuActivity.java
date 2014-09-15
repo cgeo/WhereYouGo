@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -39,6 +41,7 @@ import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
@@ -296,6 +299,12 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     }, getString(R.string.save_game), new CustomDialog.OnClickListener() {
       @Override
       public boolean onClick(CustomDialog dialog, View v, int btn) {
+        // backup
+        try {
+          FileSystem.backupFile(MainActivity.getSaveFile());
+        } catch (Exception e) {
+        }
+        
         Engine.requestSync();
         Toast.makeText(MainMenuActivity.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
         return true;
@@ -316,6 +325,12 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
           new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // backup
+                try {
+                  FileSystem.backupFile(MainActivity.getSaveFile());
+                } catch (Exception e) {
+                }
+
                 Engine.requestSync();
                 MainActivity.selectedFile = null;
                 DetailsActivity.et = null;
