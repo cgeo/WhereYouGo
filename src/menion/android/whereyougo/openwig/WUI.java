@@ -160,10 +160,10 @@ public class WUI implements UI {
   }
 
   public void refresh() {
-    Logger.w(TAG, "refresh(), currentActivity:" + PreferenceValues.getCurrentActivity());
-    if (PreferenceValues.getCurrentActivity() != null
-        && PreferenceValues.getCurrentActivity() instanceof IRefreshable) {
-      ((IRefreshable) PreferenceValues.getCurrentActivity()).refresh();
+    Activity activity = PreferenceValues.getCurrentActivity();
+    Logger.w(TAG, "refresh(), currentActivity:" + activity);
+    if (activity != null && activity instanceof IRefreshable) {
+      ((IRefreshable) activity).refresh();
     }
   }
 

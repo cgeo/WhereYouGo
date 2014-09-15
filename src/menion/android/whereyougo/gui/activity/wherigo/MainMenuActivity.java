@@ -356,6 +356,10 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
   public void refresh() {
     runOnUiThread(new Runnable() {
       public void run() {
+        if (A.getMain() == null || Engine.instance == null || Engine.instance.cartridge == null) {
+          return;
+        }
+        
         ArrayList<DataInfo> data = new ArrayList<DataInfo>();
         DataInfo diLocations =
             new DataInfo(getString(R.string.locations) + " ("

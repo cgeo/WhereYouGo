@@ -51,54 +51,58 @@ public class PushDialogActivity extends CustomActivity {
 
   public static void setDialog(String[] texts, Media[] media, String button1, String button2,
       LuaClosure callback) {
-    PushDialogActivity.texts = texts;
-    PushDialogActivity.media = media;
-    PushDialogActivity.callback = callback;
-    PushDialogActivity.page = -1;
+    synchronized (PushDialogActivity.class) {
+      PushDialogActivity.texts = texts;
+      PushDialogActivity.media = media;
+      PushDialogActivity.callback = callback;
+      PushDialogActivity.page = -1;
 
-    if (button1 == null)
-      button1 = "OK";
+      if (button1 == null)
+        button1 = "OK";
 
-    menu01Text = button1;
-    menu02Text = button2;
-    Logger.d(TAG, "setDialog() - finish, callBack:" + (callback != null));
+      menu01Text = button1;
+      menu02Text = button2;
+      Logger.d(TAG, "setDialog() - finish, callBack:" + (callback != null));
+    }
   }
 
   private ImageView ivImage;
   private TextView tvImageText;
 
   private void nextPage() {
-    Logger.d(TAG, "nextpage() - page:" + page + ", texts:" + texts.length + ", callback:"
-        + (callback != null));
-    page++;
-    if (page >= texts.length) {
-      if (callback != null) {
-        LuaClosure call = callback;
-        callback = null;
-        Engine.invokeCallback(call, "Button1");
+    synchronized (PushDialogActivity.class) {
+      Logger.d(TAG, "nextpage() - page:" + page + ", texts:" + texts.length + ", callback:"
+          + (callback != null));
+      page++;
+      if (page >= texts.length) {
+        if (callback != null) {
+          LuaClosure call = callback;
+          callback = null;
+          Engine.invokeCallback(call, "Button1");
+        }
+        PushDialogActivity.this.finish();
+        return;
       }
-      PushDialogActivity.this.finish();
-      return;
-    }
 
-    tvImageText.setText("");
+      tvImageText.setText("");
 
-    Media m = media[page];
-    if (m != null) {
-      try {
-        byte[] img = Engine.mediaFile(m);
-        MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
-            ivImage);
-      } catch (Exception e) {
-        tvImageText.setText(Html.fromHtml(m.altText));
+      Media m = media[page];
+      if (m != null) {
+        try {
+          byte[] img = Engine.mediaFile(m);
+          MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
+              ivImage);
+        } catch (Exception e) {
+          tvImageText.setText(Html.fromHtml(m.altText));
+        }
+      } else {
+        ivImage.setImageBitmap(null);
+        ivImage.setMinimumWidth(0);
+        ivImage.setMinimumHeight(0);
       }
-    } else {
-      ivImage.setImageBitmap(null);
-      ivImage.setMinimumWidth(0);
-      ivImage.setMinimumHeight(0);
-    }
 
-    tvImageText.setText(Html.fromHtml(tvImageText.getText().toString() + "\n" + texts[page]));
+      tvImageText.setText(Html.fromHtml(tvImageText.getText().toString() + "\n" + texts[page]));
+    }
   }
 
   public void onCreate(Bundle savedInstanceState) {
@@ -108,8 +112,9 @@ public class PushDialogActivity extends CustomActivity {
       return;
     }
     setContentView(R.layout.layout_details);
-    if(!Preferences.APPEARANCE_IMAGE_STRETCH){
-      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+    if (!Preferences.APPEARANCE_IMAGE_STRETCH) {
+      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width =
+          LayoutParams.WRAP_CONTENT;
     }
     findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
     findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
