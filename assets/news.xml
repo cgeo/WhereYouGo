@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     
+  <update name="0.8.12" id="38" time="16.9.2014">
+	<li>fixed: unicode characters in login</li>
+	<li>fixed: some bugs reported on Google Play</li>
+	<li>update: translation</li>
+	<li>added: start cartridge after downloading</li>
+	<li>added: press BACK twice to exit the game</li>
+	<li>added: backup previous savefile before saving (*.bak extension)</li>
+  </update>
+    
   <update name="0.8.11" id="37" time="3.9.2014">
 	<li>fixed: unexpected dialog closing in some versions of Android</li>
 	<li>fixed: close things after clicking on a button to avoid piling up</li>
