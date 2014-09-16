@@ -3,19 +3,17 @@
 <resources>
 
     <string name="pref_advanced_settings">Erweiterte Einstellungen</string>
-    <string name="pref_appearance">Look</string>
+    <string name="pref_appearance">Anzeige</string>
     <string name="pref_bearing_true">Tatsächliche Ausrichtung verwenden</string>
     <string name="pref_bearing_true_desc">Wenn diese Option aktiviert ist, wird die tatsächliche Ausrichtung verwendet. Ansonsten wird die magnetische Ausrichtung verwendet</string>
     <string name="pref_confirm_on_exit">Bestätigung beim Beenden</string>
     <string name="pref_confirm_on_exit_desc">Zeigt einen Dialog bevor Locus mit dem Zurück Knopf beendet wird</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_desc">Size of the text</string>
-    <string name="pref_font_size_default">Default</string>
-    <string name="pref_font_size_small">Small</string>
+    <string name="pref_font_size">Schriftgröße</string>
+    <string name="pref_font_size_desc">Schriftgröße für Texte</string>
+    <string name="pref_font_size_default">Standard</string>
+    <string name="pref_font_size_small">Klein</string>
     <string name="pref_font_size_medium">Medium</string>
-    <string name="pref_font_size_large">Large</string>
-    <!-- TODO END -->
+    <string name="pref_font_size_large">Groß</string>
     <string name="pref_fullscreen">Vollbild</string>
     <string name="pref_fullscreen_desc">Verstecke die Benachrichtigungsleiste</string>
     <string name="pref_gc_username">Benutzername</string>
@@ -31,7 +29,7 @@
     <string name="pref_gps_disable_desc">GPS deaktivieren, wenn der Bildschirm abgeschaltet wird oder die Anwendung minimiert wird und GPS von keiner Funktion benutzt wird</string>
     <string name="pref_gps_min_time">Zeit zwischen GPS-Standorten</string>
     <string name="pref_gps_min_time_desc">Time (in sec) between GPS try to get new location. To conserve battery, suggest values more then 60s</string>
-    <string name="pref_guiding">Routenführung // Guide</string>
+    <string name="pref_guiding">Routenführung</string>
     <string name="pref_guiding_compass_sounds">Klänge während der Führung</string>
     <string name="pref_guiding_compass_sounds_desc">Aktivieren / Deaktivieren von Sounds während der Führung</string>
     <string name="pref_guiding_gps_required_desc">GPS angeschaltet lassen, wenn die Anwendung während der Routenführung minimiert ist</string>
@@ -48,42 +46,19 @@
     <string name="pref_guiding_zone_point_center">Zone center defined by cartridge author</string>
     <string name="pref_guiding_zone_point_nearest">Nearest border point</string>
     <!-- TODO END -->
-    <string name="pref_highlight">Bildschirm immer an</string>
+    <string name="pref_highlight">Bildschirm abschalten</string>
     <string name="pref_highlight_always_text">Bildschirm immer an</string>
     <string name="pref_highlight_desc">Aktivieren oder Deaktivieren Sie, ob der Bildschirm immer an bleiben soll</string>
     <string name="pref_highlight_off_text">Systemeinstellungen</string>
     <string name="pref_highlight_only_gps_text">Nur wenn GPS eingeschaltet ist</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_image_stretch">Stretch images</string>
-    <string name="pref_image_stretch_desc">Stretch (check) or show original size (uncheck)</string>
-    <!-- TODO END -->
+    <string name="pref_image_stretch">Bilder skalieren</string>
+    <string name="pref_image_stretch_desc">Skaliert (aktiv) oder in Originalgröße (deaktiv) anzeigen</string>
     <string name="pref_language">Sprache</string>
     <string name="pref_language_desc">Sprache durch Auswahl festlegen</string>
-    <string name="pref_language_default">System Standard</string>
-    <string name="pref_language_ar">Arabisch</string>
-    <string name="pref_language_cs">Tschechisch</string>
-    <string name="pref_language_da">Dänisch</string>
-    <string name="pref_language_de">Deutsch</string>
-    <string name="pref_language_el">Griechisch</string>
-    <string name="pref_language_en">Englisch</string>
-    <string name="pref_language_es">Spanisch</string>
-    <string name="pref_language_fi">Finnish</string>
-    <string name="pref_language_fr">Französisch</string>
-    <string name="pref_language_hu">Ungarisch</string>
-    <string name="pref_language_it">Italienisch</string>
-    <string name="pref_language_ja">Japanese</string>
-    <string name="pref_language_ko">Koreanisch</string>
-    <string name="pref_language_nl">Holländisch</string>
-    <string name="pref_language_pl">Polnisch</string>
-    <string name="pref_language_pt">Portugiesisch</string>
-    <string name="pref_language_pt_br">Brasilianische P.</string>
-    <string name="pref_language_ru">Russisch</string>
-    <string name="pref_language_sk">Slowakisch</string>
+    <string name="pref_language_default">Systemsprache</string>
     <string name="pref_locale">Lokalisierung</string>
-    <!-- TODO BEGIN -->
-    <string name="pref_login">Login credentials</string>
-    <string name="pref_login_desc">For cartridge downloading from wherigo.com</string>
-    <!-- TODO END -->
+    <string name="pref_login">Zugangsdaten</string>
+    <string name="pref_login_desc">Für den Zugriff auf wherigo.com zum Herunterladen von Cartridges</string>
     <string name="pref_map_provider">Kartengrundlage</string>
     <string name="pref_map_provider_desc">Map provider wählen</string>
     <string name="pref_map_provider_vector">Mapsforge (offline und online Karten)</string>
@@ -110,23 +85,23 @@
     <string name="pref_statusbar_desc">Symbol in der Statusbar anzeigen</string>
     <string name="pref_style_on_map">Style auf der Karte</string>
     <string name="pref_units">Formate</string>
-    <string name="pref_units_altitude">Höheneinheiten</string>
-    <string name="pref_units_altitude_desc">Einheiten für die Höhe über dem Meeresspiegel</string>
-    <string name="pref_units_angle">Winkeleinheiten</string>
+    <string name="pref_units_altitude">Höheneinheit</string>
+    <string name="pref_units_altitude_desc">Wählen Sie die Einheit für Höhenangaben</string>
+    <string name="pref_units_angle">Winkeleinheit</string>
     <string name="pref_units_angle_degree">Grad</string>
-    <string name="pref_units_angle_desc">Winkeleinheiten für die Anzeige</string>
+    <string name="pref_units_angle_desc">Wählen Sie die Einheit für Winkelangaben</string>
     <string name="pref_units_angle_mil">Winkel</string>
-    <string name="pref_units_coo_latlon">Lat / Lon-Format</string>
+    <string name="pref_units_coo_latlon">Koordinaten-Format</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
-    <string name="pref_units_coo_latlon_min">14 ° 52.123\'</string>
-    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
-    <string name="pref_units_coo_latlon_desc">Koordinaten-Format(Latitude/Longitude) fürs Display</string>
-    <string name="pref_units_length">Längeneinheiten</string>
-    <string name="pref_units_length_desc">Wählen Sie die standardmäßig angezeigten Einheiten</string>
-    <string name="pref_units_length_im">Empirisch</string>
+    <string name="pref_units_coo_latlon_min">14 ° 52,123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12,34\'\'</string>
+    <string name="pref_units_coo_latlon_desc">Wählen Sie das Koordinaten-Format (Latitude/Longitude)</string>
+    <string name="pref_units_length">Längeneinheit</string>
+    <string name="pref_units_length_desc">Wählen Sie die Einheit für Längenangaben</string>
+    <string name="pref_units_length_im">Imperial</string>
     <string name="pref_units_length_me">Metrisch</string>
     <string name="pref_units_length_na">Nautisch</string>
-    <string name="pref_units_speed">Geschwindigkeitseinheiten</string>
-    <string name="pref_units_speed_desc">Wählen Sie den Standard für die Geschwindigkeitseinheiten</string>
+    <string name="pref_units_speed">Geschwindigkeitseinheit</string>
+    <string name="pref_units_speed_desc">Wählen Sie die Einheit für die Geschwindigkeit</string>
 
 </resources>
