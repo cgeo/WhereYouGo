@@ -2,3 +2,4 @@ syntax: glob
 _release
 bin
 gen
+.settings
