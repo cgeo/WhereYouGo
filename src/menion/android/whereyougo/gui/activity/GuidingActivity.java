@@ -171,11 +171,18 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
         Location l =
             A.getGuidingContent().getTargetLocation() == null ? new Location() : new Location(A
                 .getGuidingContent().getTargetLocation());
-        if (et instanceof Zone
-            && Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
+        if (et instanceof Zone) {
           Zone z = (Zone) DetailsActivity.et;
-          l.setLatitude(z.nearestPoint.latitude);
-          l.setLongitude(z.nearestPoint.longitude);
+          if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
+            l.setLatitude(z.nearestPoint.latitude);
+            l.setLongitude(z.nearestPoint.longitude);
+          } else if (z.position != null) {
+            l.setLatitude(z.position.latitude);
+            l.setLongitude(z.position.longitude);
+          } else {
+            l.setLatitude(z.bbCenter.latitude);
+            l.setLongitude(z.bbCenter.longitude);
+          }
         } else {
           l.setLatitude(et.position.latitude);
           l.setLongitude(et.position.longitude);
