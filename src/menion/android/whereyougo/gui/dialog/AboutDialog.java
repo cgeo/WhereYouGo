@@ -30,13 +30,23 @@ public class AboutDialog extends CustomDialogFragment {
           + pm.getPackageInfo(getActivity().getPackageName(), 0).versionName + "</b><br /><br />");
     } catch (Exception e) {
     }
-    buffer.append(getString(R.string.author) + "<br />&nbsp;&nbsp;<b>Menion Asamm</b><br /><br />");
+    buffer.append(getString(R.string.web_page));
     buffer
-        .append(getString(R.string.web_page)
-            + "<br />&nbsp;&nbsp;<b><a href=\"http://forum.asamm.cz\">http://forum.asamm.cz</a></b><br /><br />");
+        .append("<br />&nbsp;&nbsp;<a href=\"https://code.google.com/r/biylda-whereyougo/\">https://code.google.com/r/biylda-whereyougo</a>");
+    buffer.append("<br />&nbsp;&nbsp;<a href=\"mailto:biylda@gmail.com/\">biylda@gmail.com</a>");
+    buffer.append("<br /><br />");
+    buffer.append(getString(R.string.author));
+    buffer.append("<br />&nbsp;&nbsp;<b>Menion Asamm</b>");
+    buffer
+        .append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/p/android-whereyougo/\">https://code.google.com/r/android-whereyougo</a></small>");
+    buffer
+        .append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"http://forum.locusmap.eu/\">http://forum.locusmap.eu</a></small>");
+    buffer.append("<br /><br />");
     buffer.append(getString(R.string.coauthor));
     buffer.append("<br />&nbsp;&nbsp;<b>biylda</b>");
-    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;biylda@gmail.com");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/r/biylda-whereyougo/\">https://code.google.com/r/biylda-whereyougo</a></small>");
+    buffer.append("<br />&nbsp;&nbsp;<b>CachingFoX</b>");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/r/cachingfox-whereyougo/\">https://code.google.com/r/cachingfox-whereyougo</a></small>");
     buffer.append("<br /><br />");
     buffer.append(getString(R.string.translation));
     buffer.append("<br />&nbsp;&nbsp;<b>Deutsch</b> - Stefan Amstart, Kilian Högy, Carsten Pietzsch");
@@ -45,13 +55,13 @@ public class AboutDialog extends CustomDialogFragment {
     buffer.append(getString(R.string.libraries));
     buffer.append("<br />&nbsp;&nbsp;<b>OpenWig</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Matejicek");
-    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>http://code.google.com/p/openwig</small>");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/p/openwig/\">https://code.google.com/p/openwig</a></small>");
     buffer.append("<br />&nbsp;&nbsp;<b>Kahlua</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Kristofer Karlsson");
-    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>http://code.google.com/p/kahlua/</small>");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/p/kahlua/\">https://code.google.com/p/kahlua</a></small>");
     buffer.append("<br />&nbsp;&nbsp;<b>MapsForge</b>");
     buffer
-        .append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small>https://code.google.com/p/mapsforge/</small>");
+        .append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/p/mapsforge/\">https://code.google.com/p/mapsforge</a></small>");
     buffer.append("</div>");
 
     // add info
