@@ -35,8 +35,6 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 	
 	public boolean needRestart;
 	
-	private static ListPreference lastUsedPreference; // TODO
-	
 	private static final int REQUEST_GUIDING_WPT_SOUND = 0;
 	private static final int REQUEST_ROOT = 1;
 	
@@ -130,7 +128,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 		} 
 		else if ( key.equals( PreferenceValues.KEY_B_GUIDING_COMPASS_SOUNDS ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
-			Preferences.GUIDING_SOUNDS = Utils.parseBoolean(newValue); // TODO WHY? sollte nicht persitiert werden
+			Preferences.GUIDING_SOUNDS = Utils.parseBoolean(newValue);
 		} 
 		else if ( key.equals( PreferenceValues.KEY_B_GUIDING_GPS_REQUIRED ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
@@ -140,9 +138,8 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
   			String newValue = sharedPreferences.getString( key, null );
   			int result = Utils.parseInt(newValue);
             if (result != PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND) {
-            	Preferences.GUIDING_WAYPOINT_SOUND = result; // todo why only store the value if not custom_sound 
+            	Preferences.GUIDING_WAYPOINT_SOUND = result; 
             } else {
-              // TODO lastUsedPreference = (ListPreference) pref;
               Intent intent = new Intent(Intent.ACTION_PICK);
               intent.setType("audio/*");
               if (!Utils.isIntentAvailable(intent)) {
@@ -244,18 +241,15 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
         if (requestCode == REQUEST_GUIDING_WPT_SOUND) {
             if (resultCode == Activity.RESULT_OK && data != null) {
               Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-              // Uri uri =
-              // data.getData();//getStringExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI));
               if (uri != null) {
                 Logger.d(TAG, "uri:" + uri.toString());
                 PreferenceValues.setPrefString( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND,
                     String.valueOf( PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND));
                 PreferenceValues.setPrefString( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI,
                     uri.toString());
-                // TODO setPrefGuidingWptSound(activity, lastUsedPreference, VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND);
+                Preferences.GUIDING_WAYPOINT_SOUND = Utils.parseInt( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
               }
             }
-            lastUsedPreference = null;
           } else if (requestCode == REQUEST_ROOT) {
             if (resultCode == Activity.RESULT_OK && data != null) {
               String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
