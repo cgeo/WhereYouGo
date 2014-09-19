@@ -41,14 +41,11 @@ import menion.android.whereyougo.openwig.WLocationService;
 import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.preferences.UtilsSettings;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.ManagerNotify;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -224,7 +221,7 @@ public class MainActivity extends CustomMainActivity {
             startActivity(intent02);
             break;
           case R.id.button_settings:
-            UtilsSettings.showSettings(MainActivity.this);
+        	  MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));
             break;
           case R.id.button_map:
             clickMap();

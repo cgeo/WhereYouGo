@@ -46,6 +46,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import cz.matejcik.openwig.Engine;
+import menion.android.whereyougo.R;
 
 public class MainApplication extends Application {
 
@@ -142,10 +143,8 @@ public class MainApplication extends Application {
     IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
     filter.addAction(Intent.ACTION_SCREEN_OFF);
     mScreenReceiver = new ScreenReceiver();
-    registerReceiver(mScreenReceiver, filter);
-
-    // set basic settings values
-    Preferences.init(this);
+    registerReceiver(mScreenReceiver, filter);   
+    
     // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
     // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
     // "-");}
@@ -227,13 +226,24 @@ public class MainApplication extends Application {
     Log.d(TAG, "onCreate()");
     Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
-    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+    // set basic settings values
+    PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
+    Preferences.init(this);    
+
+    // set language 
     Configuration config = getBaseContext().getResources().getConfiguration();
-    String lang =
-        settings
-            .getString(PreferenceValues.KEY_S_LANGUAGE, PreferenceValues.VALUE_LANGUAGE_DEFAULT);
-    // Logger.d(TAG, "lang:" + lang + ", system:" + config.locale.getLanguage());
-    if (!lang.equals(PreferenceValues.VALUE_LANGUAGE_DEFAULT)
+    String lang = PreferenceValues.getPrefString( this, R.string.pref_KEY_S_LANGUAGE, R.string.pref_DEFAULT_LANGUAGE );
+    
+    /* 
+     * This block is a workaround to switch from 'cs' to 'cz' 
+     * remove this block after one year (2014-09)
+     */
+    if ( lang.equals( "cs" ) ) {
+    	lang = this.getString( R.string.pref_language_id_cz );
+    	PreferenceValues.setPrefString( R.string.pref_KEY_S_LANGUAGE, lang );
+    }
+    
+    if (!lang.equals( getString( R.string.pref_language_id_default ) )
         && !config.locale.getLanguage().equals(lang)) {
       ArrayList<String> loc = StringToken.parse(lang, "_");
       if (loc.size() == 1) {

@@ -23,7 +23,6 @@ import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
-import menion.android.whereyougo.gui.extension.activity.CustomPreferenceActivity;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import android.app.Activity;
@@ -92,27 +91,9 @@ public class PreferenceValues {
   // GENERAL
   /** default language */
   public static final String KEY_S_LANGUAGE = "KEY_S_LANGUAGE";
-  public static final String VALUE_LANGUAGE_DEFAULT = "default";
-  public static final String VALUE_LANGUAGE_AR = "ar";
-  public static final String VALUE_LANGUAGE_CZ = "cs";
-  public static final String VALUE_LANGUAGE_DA = "da";
-  public static final String VALUE_LANGUAGE_DE = "de";
-  public static final String VALUE_LANGUAGE_EL = "el";
+  public static final String VALUE_LANGUAGE_CZ = "cz";
   public static final String VALUE_LANGUAGE_EN = "en";
-  public static final String VALUE_LANGUAGE_ES = "es";
-  public static final String VALUE_LANGUAGE_FI = "fi";
-  public static final String VALUE_LANGUAGE_FR = "fr";
-  public static final String VALUE_LANGUAGE_HU = "hu";
-  public static final String VALUE_LANGUAGE_IT = "it";
-  public static final String VALUE_LANGUAGE_JA = "ja";
-  public static final String VALUE_LANGUAGE_KO = "ko";
-  public static final String VALUE_LANGUAGE_NL = "nl";
-  public static final String VALUE_LANGUAGE_PL = "pl";
-  public static final String VALUE_LANGUAGE_PT = "pt";
-  public static final String VALUE_LANGUAGE_PT_BR = "pt_BR";
-  public static final String VALUE_LANGUAGE_RU = "ru";
-  public static final String VALUE_LANGUAGE_SK = "sk";
-  public static final String DEFAULT_LANGUAGE = VALUE_LANGUAGE_DEFAULT;
+//  public static final String DEFAULT_LANGUAGE = VALUE_LANGUAGE_DEFAULT;
 
   /** confirmation on exit */
   public static final String KEY_B_CONFIRM_ON_EXIT = "KEY_B_CONFIRM_ON_EXIT";
@@ -373,17 +354,46 @@ public class PreferenceValues {
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getInt(key, def);
   }
 
+  @Deprecated  
   public static String getPrefString(Context context, String key, String def) {
     // Logger.v(TAG, "getPrefString(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
   }
 
+  @Deprecated  
   public static String getPrefString(String key, String def) {
     if (A.getApp() == null) {
       return def;
     }
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
   }
+  
+  public static String getPrefString( Context context, final int keyId, final int defaultId ) {
+	if (context == null) {
+	  return "";
+	}
+	String key = context.getString( keyId );
+	String def = context.getString( defaultId );
+	return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
+  } 
+  
+  public static String getPrefString( final int keyId, final int defaultId ) {
+	if (A.getApp() == null) {
+	  return "";
+	}
+	String key = A.getApp().getString( keyId );
+	String def = A.getApp().getString( defaultId );
+	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
+  }  
+  
+  @Deprecated
+  public static String getPrefString( final int keyId, String def) {
+	if (A.getApp() == null) {
+	  return def;
+	}
+	String key = A.getApp().getString( keyId );
+	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
+  }  
 
   public static void setApplicationVersionLast(int lastVersion) {
     PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit()
@@ -442,6 +452,7 @@ public class PreferenceValues {
     PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(key, value).commit();
   }
 
+
   public static void setPrefInt(String key, int value) {
     if (A.getApp() == null) {
       return;
@@ -454,21 +465,35 @@ public class PreferenceValues {
     PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
   }
 
+  /**
+   * Does some thing in old style.
+   *
+   * @deprecated use {@link #new()} instead.  
+   */
+  @Deprecated  
   public static void setPrefString(String key, String value) {
     if (A.getApp() == null) {
       return;
     }
     PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
   }
+  
+  public static void setPrefString( int keyId, String value) {
+	if (A.getApp() == null) {
+	  return;
+	}
+	String key = A.getApp().getString( keyId );
+	PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
+  }  
 
   public static boolean setScreenBasic(Activity activity) {
     try {
       // Logger.w(TAG, "setFullscreen(" + activity.getLocalClassName() +
       // ")");
       // hide title
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      }
+      // }
       return true;
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
@@ -478,7 +503,7 @@ public class PreferenceValues {
 
   public static void setScreenFullscreen(Activity activity) {
     try {
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         // set fullScreen
         if (Preferences.APPEARANCE_FULLSCREEN) {
           activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -486,7 +511,7 @@ public class PreferenceValues {
         } else {
           activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-      }
+      // }
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
     }
@@ -494,7 +519,7 @@ public class PreferenceValues {
 
   public static void setStatusbar(Activity activity) {
     try {
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         NotificationManager mNotificationManager =
             (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
         // set statusbar
@@ -523,7 +548,7 @@ public class PreferenceValues {
         } else {
           mNotificationManager.cancel(0);
         }
-      }
+      // }
     } catch (Exception e) {
       Logger.e(TAG, "setStatusbar(" + activity + ")", e);
     }
