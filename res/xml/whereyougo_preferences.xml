@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:whereyougo="http://whereyougo">
 	
-	<!-- TODO: verify default value for all preferences --> 
-	<!-- DONE - TODO: verify dependenies for all preferences --> 
-	<!-- TODO: orientation filter only for Android201 -->
-	
 	<PreferenceScreen
         android:key=""
         android:title="@string/pref_global"
@@ -67,7 +63,6 @@
 	
     <PreferenceScreen
         android:key=""
-        android:icon="@android:drawable/ic_menu_mylocation"
         android:title="@string/gps_and_location"
         android:persistent="false">
 		
@@ -108,7 +103,6 @@
 	
     <PreferenceScreen
         android:key=""
-        android:icon="@android:drawable/ic_menu_compass"
         android:title="@string/pref_sensors"
         android:persistent="false">
 
@@ -151,7 +145,6 @@
 	    
     <PreferenceScreen
         android:key=""
-        android:icon="@android:drawable/ic_menu_directions"
         android:title="@string/pref_guiding"
         android:persistent="false">
 		
@@ -199,39 +192,44 @@
 	
     <PreferenceScreen
         android:key=""
-        android:icon="@android:drawable/ic_menu_gallery"
         android:title="@string/pref_appearance"
         android:persistent="false">
-		
-		<CheckBoxPreference
-			android:key="@string/pref_KEY_B_STATUSBAR"
-			android:defaultValue="@string/pref_DEFAULT_STATUSBAR"
-			android:title="@string/pref_statusbar"
-			android:summary="@string/pref_statusbar_desc" />
-		<CheckBoxPreference
-			android:key="@string/pref_KEY_B_FULLSCREEN"
-			android:defaultValue="@string/pref_DEFAULT_FULLSCREEN"
-			android:title="@string/pref_fullscreen"
-			android:summary="@string/pref_fullscreen_desc" />
-		<menion.android.whereyougo.preferences.MyListPreference 
-		    android:key="@string/pref_KEY_S_HIGHLIGHT"
-		    android:defaultValue="@string/pref_DEFAULT_HIGHLIGHT" 
-		    android:title="@string/pref_highlight"
-		    android:summary="@string/pref_highlight_desc"
-		    android:entries="@array/pref_highlight_entries"
-		    android:entryValues="@array/pref_highlight_entry_values" />  		
-		<menion.android.whereyougo.preferences.MyListPreference 
-		    android:key="@string/pref_KEY_S_FONT_SIZE"
-		    android:defaultValue="@string/pref_DEFAULT_FONT_SIZE" 
-		    android:title="@string/pref_font_size"
-		    android:summary="@string/pref_font_size_desc"
-		    android:entries="@array/pref_font_size_entries"
-		    android:entryValues="@array/pref_font_size_entry_values" />  			
-		<CheckBoxPreference
-			android:key="@string/pref_KEY_B_IMAGE_STRETCH"
-			android:defaultValue="@string/pref_DEFAULT_IMAGE_STRETCH"
-			android:title="@string/pref_image_stretch"
-			android:summary="@string/pref_image_stretch_desc" />
+
+		<PreferenceCategory 
+			android:title="@string/pref_global"
+			android:key=""
+			android:persistent="false">	   
+			     		
+			<CheckBoxPreference
+				android:key="@string/pref_KEY_B_STATUSBAR"
+				android:defaultValue="@string/pref_DEFAULT_STATUSBAR"
+				android:title="@string/pref_statusbar"
+				android:summary="@string/pref_statusbar_desc" />
+			<CheckBoxPreference
+				android:key="@string/pref_KEY_B_FULLSCREEN"
+				android:defaultValue="@string/pref_DEFAULT_FULLSCREEN"
+				android:title="@string/pref_fullscreen"
+				android:summary="@string/pref_fullscreen_desc" />
+			<menion.android.whereyougo.preferences.MyListPreference 
+			    android:key="@string/pref_KEY_S_HIGHLIGHT"
+			    android:defaultValue="@string/pref_DEFAULT_HIGHLIGHT" 
+			    android:title="@string/pref_highlight"
+			    android:summary="@string/pref_highlight_desc"
+			    android:entries="@array/pref_highlight_entries"
+			    android:entryValues="@array/pref_highlight_entry_values" />  		
+			<menion.android.whereyougo.preferences.MyListPreference 
+			    android:key="@string/pref_KEY_S_FONT_SIZE"
+			    android:defaultValue="@string/pref_DEFAULT_FONT_SIZE" 
+			    android:title="@string/pref_font_size"
+			    android:summary="@string/pref_font_size_desc"
+			    android:entries="@array/pref_font_size_entries"
+			    android:entryValues="@array/pref_font_size_entry_values" />  			
+			<CheckBoxPreference
+				android:key="@string/pref_KEY_B_IMAGE_STRETCH"
+				android:defaultValue="@string/pref_DEFAULT_IMAGE_STRETCH"
+				android:title="@string/pref_image_stretch"
+				android:summary="@string/pref_image_stretch_desc" />
+		</PreferenceCategory> 
 	</PreferenceScreen>	
 	    
     <PreferenceScreen
@@ -243,7 +241,7 @@
 			android:key=""
 			android:title="@string/pref_language"
 			android:persistent="false">
-
+			
 			<menion.android.whereyougo.preferences.MyListPreference 
 			    android:key="@string/pref_KEY_S_LANGUAGE"
 			    android:defaultValue="@string/pref_DEFAULT_LANGUAGE" 
@@ -269,7 +267,7 @@
 			
 		<PreferenceCategory 
 			android:key=""
-			android:icon="@android:drawable/ic_menu_preferences"
+			android:icon="@android:drawable/ic_menu_mapmode"
 			android:title="@string/pref_units"
 			android:persistent="false">
 			
