@@ -55,7 +55,7 @@
     <string name="pref_KEY_S_GC_PASSWORD">KEY_S_GC_PASSWORD</string>
     <string name="pref_DEFAULT_GC_PASSWORD"></string>
     <string name="pref_KEY_S_LANGUAGE">KEY_S_LANGUAGE</string>
-	<string name="pref_DEFAULT_LANGUAGE">default</string> <!-- TODO check it: link to default  -->
+	<string name="pref_DEFAULT_LANGUAGE">@string/pref_language_id_default</string>
     <string name="pref_KEY_B_CONFIRM_ON_EXIT">KEY_B_CONFIRM_ON_EXIT</string>
     <string name="pref_DEFAULT_CONFIRM_ON_EXIT">true</string>
     <string name="pref_KEY_I_GET_COORDINATES_LAST_INDEX">KEY_I_GET_COORDINATES_LAST_INDEX</string>
