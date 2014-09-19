@@ -4,35 +4,40 @@ import android.content.Context;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 
-public class MyListPreference extends ListPreference {
+public class PreviewListPreference extends ListPreference {
 
 	protected CharSequence summaryTemplate = "";
+	protected CharSequence previewTemplate = ""; 	
 	
-	public MyListPreference(Context context, AttributeSet attrs) {
+	public PreviewListPreference(Context context, AttributeSet attrs) {
 	    super(context, attrs);
 	    summaryTemplate = super.getSummary();
-	    /*
-	     * for (int i=0;i<attrs.getAttributeCount();i++) {
+	    
+	    for (int i=0;i<attrs.getAttributeCount();i++) {
 	
 	        String attr = attrs.getAttributeName(i);
 	        String val  = attrs.getAttributeValue(i);
-	        if (attr.equalsIgnoreCase("summary")) {
-	        	summaryTemplate = val;
+	        if (attr.equalsIgnoreCase("previewTemplate")) {
+	        	previewTemplate = val;
 	        }
-	    }*/
+	    }
 	}	
-	
+
+	@Override	
 	public CharSequence getSummary () {
-		return "("+ getEntry() + ") " + summaryTemplate;
+		String preview = previewTemplate.toString();
+		if ( preview.isEmpty() ) {
+			preview = "("+ getEntry() + ")";
+		} else {
+			preview = preview.replace( "%1$", getEntry() );
+		}
+		
+		return preview + " " + summaryTemplate;
 	}
 	
 	@Override
 	protected void onDialogClosed(boolean positiveResult) {
 	    super.onDialogClosed(positiveResult);
-	  /*  if(positiveResult) {
-	        persistBoolean(!getPersistedBoolean(true));
-	    }*/
-	 //   Log.d(MainActivity.TAG, "# onDialogClosed: " + positiveResult);
 	    setSummary(getSummary());
 	}
 	
