@@ -34,12 +34,12 @@
 		<link>
 			<name>LocusAPI</name>
 			<type>2</type>
-			<location>/Applications/eclipse/Eclipse.app/Contents/MacOS/D::/Dev/Repository/android-locus-map.locus-api/src</location>
+			<location>/Users/andreas/projects/_locus-api/src</location>
 		</link>
 		<link>
 			<name>OpenWIG</name>
 			<type>2</type>
-			<location>/Applications/eclipse/Eclipse.app/Contents/MacOS/D::/Dev/Repository/biylda-openwig/OpenWIGLibrary/src</location>
+			<location>/Users/andreas/projects/_biylda-openwig/OpenWIGLibrary/src</location>
 		</link>
 	</linkedResources>
 </projectDescription>

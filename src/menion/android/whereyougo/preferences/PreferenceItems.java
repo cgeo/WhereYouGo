@@ -750,7 +750,7 @@ public class PreferenceItems {
     } else if (value.equals(VALUE_LANGUAGE_AR)) {
       return Locale.get(R.string.pref_language_ar);
     } else if (value.equals(VALUE_LANGUAGE_CZ)) {
-      return Locale.get(R.string.pref_language_cs);
+      return Locale.get(R.string.pref_language_cz);
     } else if (value.equals(VALUE_LANGUAGE_DA)) {
       return Locale.get(R.string.pref_language_da);
     } else if (value.equals(VALUE_LANGUAGE_DE)) {

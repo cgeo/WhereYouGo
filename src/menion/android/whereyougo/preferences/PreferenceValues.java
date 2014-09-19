@@ -94,7 +94,7 @@ public class PreferenceValues {
   public static final String KEY_S_LANGUAGE = "KEY_S_LANGUAGE";
   public static final String VALUE_LANGUAGE_DEFAULT = "default";
   public static final String VALUE_LANGUAGE_AR = "ar";
-  public static final String VALUE_LANGUAGE_CZ = "cs";
+  public static final String VALUE_LANGUAGE_CZ = "cz";
   public static final String VALUE_LANGUAGE_DA = "da";
   public static final String VALUE_LANGUAGE_DE = "de";
   public static final String VALUE_LANGUAGE_EL = "el";
@@ -373,17 +373,37 @@ public class PreferenceValues {
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getInt(key, def);
   }
 
+  @Deprecated  
   public static String getPrefString(Context context, String key, String def) {
     // Logger.v(TAG, "getPrefString(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
   }
 
+  @Deprecated  
   public static String getPrefString(String key, String def) {
     if (A.getApp() == null) {
       return def;
     }
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
   }
+  
+  public static String getPrefString( final int keyId, final int defaultId ) {
+	if (A.getApp() == null) {
+	  return "";
+	}
+	String key = A.getApp().getString( keyId );
+	String def = A.getApp().getString( defaultId );
+	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
+  } 
+  
+  @Deprecated
+  public static String getPrefString( final int keyId, String def) {
+	if (A.getApp() == null) {
+	  return def;
+	}
+	String key = A.getApp().getString( keyId );
+	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
+  }  
 
   public static void setApplicationVersionLast(int lastVersion) {
     PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit()
@@ -442,6 +462,7 @@ public class PreferenceValues {
     PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(key, value).commit();
   }
 
+
   public static void setPrefInt(String key, int value) {
     if (A.getApp() == null) {
       return;
@@ -454,12 +475,26 @@ public class PreferenceValues {
     PreferenceManager.getDefaultSharedPreferences(context).edit().putString(key, value).commit();
   }
 
+  /**
+   * Does some thing in old style.
+   *
+   * @deprecated use {@link #new()} instead.  
+   */
+  @Deprecated  
   public static void setPrefString(String key, String value) {
     if (A.getApp() == null) {
       return;
     }
     PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
   }
+  
+  public static void setPrefString( int keyId, String value) {
+	if (A.getApp() == null) {
+	  return;
+	}
+	String key = A.getApp().getString( keyId );
+	PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
+  }  
 
   public static boolean setScreenBasic(Activity activity) {
     try {

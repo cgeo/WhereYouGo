@@ -46,6 +46,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import cz.matejcik.openwig.Engine;
+import menion.android.whereyougo.R;
 
 public class MainApplication extends Application {
 
@@ -145,6 +146,7 @@ public class MainApplication extends Application {
     registerReceiver(mScreenReceiver, filter);
 
     // set basic settings values
+    PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
     Preferences.init(this);
     // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
     // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",

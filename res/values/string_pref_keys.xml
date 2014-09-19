@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!-- TODO whereyougo_preferences.xml: use reference for attribute android:key (android:key="@string/pref_KEY_...") -->
+<!-- TODO whereyougo_preferences.xml: use reference for attribute android:defaultValue (android:key="@string/pref_DEFAULT_...") -->
+
+<!-- 
+
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		DO NOT TRANSLATE THIS STRINGS 
+		
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+-->
+
+<!--
+<string name="pref_KEY_S_xxx">KEY_S_xxx</string>
+
+<string name="pref_DEFAULT_xxx">value</string> or typically for boolean or values
+<string name="pref_DEFAULT_xxx">@string/pref_VALUE_xxx_zzz</string> or
+
+<string name="pref_VALUE_xxx_yyy">value</string>
+<string name="pref_VALUE_xxx_zzz">value</string>
+...
+-->
+<resources>
+    <string name="pref_KEY_S_APPLICATION_VERSION_LAST">KEY_S_APPLICATION_VERSION_LAST</string>
+    <string name="pref_KEY_S_ROOT">KEY_S_ROOT</string>
+    <string name="pref_KEY_S_MAP_PROVIDER">KEY_S_MAP_PROVIDER</string>
+    <string name="pref_KEY_B_STATUSBAR">KEY_B_STATUSBAR</string>
+    <string name="pref_KEY_B_FULLSCREEN">KEY_B_FULLSCREEN</string>
+    <string name="pref_KEY_S_HIGHLIGHT">KEY_S_HIGHLIGHT</string>
+    <string name="pref_DEFAULT_ROOT"></string>
+    <string name="pref_DEFAULT_MAP_PROVIDER">@string/pref_VALUE_MAP_PROVIDER_VECTOR</string>
+    <string name="pref_DEFAULT_STATUSBAR">false</string>
+    <string name="pref_DEFAULT_FULLSCREEN">false</string>
+    <string name="pref_DEFAULT_HIGHLIGHT">@string/pref_VALUE_HIGHLIGHT_OFF</string>
+    <string name="pref_VALUE_MAP_PROVIDER_VECTOR">0</string>
+    <string name="pref_VALUE_MAP_PROVIDER_LOCUS">1</string>
+    <string name="pref_VALUE_HIGHLIGHT_OFF">0</string>
+    <string name="pref_VALUE_HIGHLIGHT_ONLY_GPS">1</string>
+    <string name="pref_VALUE_HIGHLIGHT_ALWAYS">2</string>
+    <string name="pref_KEY_B_SAVEGAME_AUTO">KEY_B_SAVEGAME_AUTO</string>
+    <string name="pref_DEFAULT_SAVEGAME_AUTO">false</string>
+    <string name="pref_KEY_B_IMAGE_STRETCH">KEY_B_IMAGE_STRETCH</string>
+    <string name="pref_DEFAULT_IMAGE_STRETCH">true</string>
+    <string name="pref_KEY_S_FONT_SIZE">KEY_S_FONT_SIZE</string>
+    <string name="pref_VALUE_FONT_SIZE_DEFAULT">0</string>
+    <string name="pref_VALUE_FONT_SIZE_SMALL">1</string>
+	<string name="pref_VALUE_FONT_SIZE_MEDIUM">2</string>
+    <string name="pref_VALUE_FONT_SIZE_LARGE">3</string>
+    <string name="pref_DEFAULT_FONT_SIZE">@string/pref_VALUE_FONT_SIZE_DEFAULT</string>
+    <string name="pref_KEY_S_GC_USERNAME">KEY_S_GC_USERNAME</string>
+    <string name="pref_DEFAULT_GC_USERNAME"></string>
+    <string name="pref_KEY_S_GC_PASSWORD">KEY_S_GC_PASSWORD</string>
+    <string name="pref_DEFAULT_GC_PASSWORD"></string>
+    <string name="pref_KEY_S_LANGUAGE">KEY_S_LANGUAGE</string>
+	<string name="pref_DEFAULT_LANGUAGE">default</string> <!-- TODO check it: link to default  -->
+    <string name="pref_KEY_B_CONFIRM_ON_EXIT">KEY_B_CONFIRM_ON_EXIT</string>
+    <string name="pref_DEFAULT_CONFIRM_ON_EXIT">true</string>
+    <string name="pref_KEY_I_GET_COORDINATES_LAST_INDEX">KEY_I_GET_COORDINATES_LAST_INDEX</string>
+    <string name="pref_DEFAULT_GET_COORDINATES_LAST_INDEX">0</string>
+    <string name="pref_KEY_B_START_GPS_AUTOMATICALLY">KEY_B_START_GPS_AUTOMATICALLY</string>
+	<string name="pref_DEFAULT_START_GPS_AUTOMATICALLY">true</string>
+    <string name="pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE">KEY_F_LAST_KNOWN_LOCATION_LATITUDE</string>
+	<string name="pref_DEFAULT_LAST_KNOWN_LOCATION_LATITUDE">50.07967f</string> <!-- nice place? -->
+    <string name="pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE">KEY_F_LAST_KNOWN_LOCATION_LONGITUDE</string>
+    <string name="pref_DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE">14.42980f</string> <!-- nice place? -->
+    <string name="pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE">KEY_F_LAST_KNOWN_LOCATION_ALTITUDE</string>
+	<string name="pref_DEFAULT_LAST_KNOWN_LOCATION_ALTITUDE">0.0f</string>
+    <string name="pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION">KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION</string>
+    <string name="pref_DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION">0.0f</string>
+    <string name="pref_KEY_S_GPS_MIN_TIME_NOTIFICATION">KEY_S_GPS_MIN_TIME_NOTIFICATION</string>
+	<string name="pref_DEFAULT_GPS_MIN_TIME_NOTIFICATION">0</string>
+    <string name="pref_KEY_B_GPS_BEEP_ON_GPS_FIX">KEY_B_GPS_BEEP_ON_GPS_FIX</string>	
+    <string name="pref_DEFAULT_GPS_BEEP_ON_GPS_FIX">true</string>
+	<string name="pref_KEY_B_GPS_DISABLE_WHEN_HIDE">KEY_B_GPS_DISABLE_WHEN_HIDE</string>
+    <string name="pref_DEFAULT_GPS_DISABLE_WHEN_HIDE">false</string>
+    <string name="pref_KEY_B_HARDWARE_COMPASS_SENSOR">KEY_B_HARDWARE_COMPASS_SENSOR</string>
+	<string name="pref_DEFAULT_HARDWARE_COMPASS_SENSOR">true</string>
+    <string name="pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE">KEY_B_HARDWARE_COMPASS_AUTO_CHANGE</string>
+	<string name="pref_DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE">false</string>
+    <string name="pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE">KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE</string>
+    <string name="pref_DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE">1</string>
+    <string name="pref_KEY_B_SENSORS_BEARING_TRUE">KEY_B_SENSORS_BEARING_TRUE</string>
+	<string name="pref_DEFAULT_SENSORS_BEARING_TRUE">true</string>
+    <string name="pref_KEY_S_SENSORS_ORIENT_FILTER">KEY_S_SENSORS_ORIENT_FILTER</string>
+    <string name="pref_VALUE_SENSORS_ORIENT_FILTER_NO">0</string>
+    <string name="pref_VALUE_SENSORS_ORIENT_FILTER_LIGHT">1</string>
+	<string name="pref_VALUE_SENSORS_ORIENT_FILTER_MEDIUM">2</string>
+    <string name="pref_VALUE_SENSORS_ORIENT_FILTER_HEAVY">3</string>	
+	<string name="pref_DEFAULT_SENSORS_ORIENT_FILTER">@string/pref_VALUE_SENSORS_ORIENT_FILTER_MEDIUM</string>
+    <string name="pref_KEY_B_GUIDING_COMPASS_SOUNDS">KEY_B_GUIDING_COMPASS_SOUNDS</string>
+	<string name="pref_DEFAULT_GUIDING_COMPASS_SOUNDS">false</string>
+    <string name="pref_KEY_B_GUIDING_GPS_REQUIRED">KEY_B_GUIDING_GPS_REQUIRED</string>
+    <string name="pref_DEFAULT_GUIDING_GPS_REQUIRED">true</string>
+    <string name="pref_KEY_S_GUIDING_WAYPOINT_SOUND">KEY_S_GUIDING_WAYPOINT_SOUND</string>
+	<string name="pref_VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER">0</string>
+    <string name="pref_VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE">1</string>
+    <string name="pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND">2</string>
+    <string name="pref_DEFAULT_GUIDING_WAYPOINT_SOUND">@string/pref_VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE</string>
+	<string name="pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI"></string>
+    <string name="pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE">KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE</string>	
+	<string name="pref_DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE">100</string>
+    <string name="pref_KEY_S_GUIDING_ZONE_POINT">KEY_S_GUIDING_ZONE_POINT</string>
+	<string name="pref_VALUE_GUIDING_ZONE_POINT_CENTER">0</string>
+    <string name="pref_VALUE_GUIDING_ZONE_POINT_NEAREST">1</string>
+    <string name="pref_DEFAULT_GUIDING_ZONE_POINT">@string/pref_VALUE_GUIDING_ZONE_POINT_NEAREST</string>
+    <string name="pref_KEY_S_UNITS_COO_LATLON">KEY_S_UNITS_COO_LATLON</string>
+	<string name="pref_VALUE_UNITS_COO_LATLON_DEC">0</string>
+    <string name="pref_VALUE_UNITS_COO_LATLON_MIN">1</string>
+	<string name="pref_VALUE_UNITS_COO_LATLON_SEC">2</string>
+    <string name="pref_DEFAULT_UNITS_COO_LATLON">@string/pref_VALUE_UNITS_COO_LATLON_MIN</string>
+    <string name="pref_KEY_S_UNITS_LENGTH">KEY_S_UNITS_LENGTH</string>
+    <string name="pref_VALUE_UNITS_LENGTH_ME">0</string>
+	<string name="pref_VALUE_UNITS_LENGTH_IM">1</string>
+    <string name="pref_VALUE_UNITS_LENGTH_NA">2</string>
+    <string name="pref_DEFAULT_UNITS_LENGTH">@string/pref_VALUE_UNITS_LENGTH_ME</string>
+    <string name="pref_KEY_S_UNITS_ALTITUDE">KEY_S_UNITS_ALTITUDE</string>
+	<string name="pref_VALUE_UNITS_ALTITUDE_METRES">0</string>
+    <string name="pref_VALUE_UNITS_ALTITUDE_FEET">1</string>
+    <string name="pref_DEFAULT_UNITS_ALTITUDE">@string/pref_VALUE_UNITS_ALTITUDE_METRES</string>
+	<string name="pref_KEY_S_UNITS_SPEED">KEY_S_UNITS_SPEED</string>
+    <string name="pref_VALUE_UNITS_SPEED_KMH">0</string>
+	<string name="pref_VALUE_UNITS_SPEED_MILH">1</string>
+    <string name="pref_VALUE_UNITS_SPEED_KNOTS">2</string>
+    <string name="pref_DEFAULT_UNITS_SPEED">@string/pref_VALUE_UNITS_SPEED_KMH</string>
+    <string name="pref_KEY_S_UNITS_ANGLE">KEY_S_UNITS_ANGLE</string>
+	<string name="pref_VALUE_UNITS_ANGLE_DEGREE">0</string>
+    <string name="pref_VALUE_UNITS_ANGLE_MIL">1</string>
+    <string name="pref_DEFAULT_UNITS_ANGLE">@string/pref_VALUE_UNITS_ANGLE_DEGREE</string>
+</resources>	
+	  
