@@ -23,7 +23,6 @@ import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
-import menion.android.whereyougo.gui.extension.activity.CustomPreferenceActivity;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import android.app.Activity;
@@ -92,27 +91,9 @@ public class PreferenceValues {
   // GENERAL
   /** default language */
   public static final String KEY_S_LANGUAGE = "KEY_S_LANGUAGE";
-  public static final String VALUE_LANGUAGE_DEFAULT = "default";
-  public static final String VALUE_LANGUAGE_AR = "ar";
   public static final String VALUE_LANGUAGE_CZ = "cz";
-  public static final String VALUE_LANGUAGE_DA = "da";
-  public static final String VALUE_LANGUAGE_DE = "de";
-  public static final String VALUE_LANGUAGE_EL = "el";
   public static final String VALUE_LANGUAGE_EN = "en";
-  public static final String VALUE_LANGUAGE_ES = "es";
-  public static final String VALUE_LANGUAGE_FI = "fi";
-  public static final String VALUE_LANGUAGE_FR = "fr";
-  public static final String VALUE_LANGUAGE_HU = "hu";
-  public static final String VALUE_LANGUAGE_IT = "it";
-  public static final String VALUE_LANGUAGE_JA = "ja";
-  public static final String VALUE_LANGUAGE_KO = "ko";
-  public static final String VALUE_LANGUAGE_NL = "nl";
-  public static final String VALUE_LANGUAGE_PL = "pl";
-  public static final String VALUE_LANGUAGE_PT = "pt";
-  public static final String VALUE_LANGUAGE_PT_BR = "pt_BR";
-  public static final String VALUE_LANGUAGE_RU = "ru";
-  public static final String VALUE_LANGUAGE_SK = "sk";
-  public static final String DEFAULT_LANGUAGE = VALUE_LANGUAGE_DEFAULT;
+//  public static final String DEFAULT_LANGUAGE = VALUE_LANGUAGE_DEFAULT;
 
   /** confirmation on exit */
   public static final String KEY_B_CONFIRM_ON_EXIT = "KEY_B_CONFIRM_ON_EXIT";
@@ -510,9 +491,9 @@ public class PreferenceValues {
       // Logger.w(TAG, "setFullscreen(" + activity.getLocalClassName() +
       // ")");
       // hide title
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      }
+      // }
       return true;
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
@@ -522,7 +503,7 @@ public class PreferenceValues {
 
   public static void setScreenFullscreen(Activity activity) {
     try {
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         // set fullScreen
         if (Preferences.APPEARANCE_FULLSCREEN) {
           activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -530,7 +511,7 @@ public class PreferenceValues {
         } else {
           activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-      }
+      // }
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
     }
@@ -538,7 +519,7 @@ public class PreferenceValues {
 
   public static void setStatusbar(Activity activity) {
     try {
-      if (!(activity instanceof CustomPreferenceActivity)) {
+      // if (!(activity instanceof CustomPreferenceActivity)) {
         NotificationManager mNotificationManager =
             (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
         // set statusbar
@@ -567,7 +548,7 @@ public class PreferenceValues {
         } else {
           mNotificationManager.cancel(0);
         }
-      }
+      // }
     } catch (Exception e) {
       Logger.e(TAG, "setStatusbar(" + activity + ")", e);
     }
