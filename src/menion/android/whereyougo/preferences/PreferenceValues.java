@@ -387,6 +387,15 @@ public class PreferenceValues {
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
   }
   
+  public static String getPrefString( Context context, final int keyId, final int defaultId ) {
+	if (context == null) {
+	  return "";
+	}
+	String key = context.getString( keyId );
+	String def = context.getString( defaultId );
+	return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
+  } 
+  
   public static String getPrefString( final int keyId, final int defaultId ) {
 	if (A.getApp() == null) {
 	  return "";
@@ -394,7 +403,7 @@ public class PreferenceValues {
 	String key = A.getApp().getString( keyId );
 	String def = A.getApp().getString( defaultId );
 	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
-  } 
+  }  
   
   @Deprecated
   public static String getPrefString( final int keyId, String def) {

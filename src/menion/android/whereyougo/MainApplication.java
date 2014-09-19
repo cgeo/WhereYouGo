@@ -230,10 +230,10 @@ public class MainApplication extends Application {
     PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
     Preferences.init(this);    
 
-    // set language
+    // set language 
     Configuration config = getBaseContext().getResources().getConfiguration();
-    String lang = PreferenceValues.getPrefString( R.string.pref_KEY_S_LANGUAGE, R.string.pref_DEFAULT_LANGUAGE );
-     
+    String lang = PreferenceValues.getPrefString( this, R.string.pref_KEY_S_LANGUAGE, R.string.pref_DEFAULT_LANGUAGE );
+    
     /* 
      * This block is a workaround to switch from 'cs' to 'cz' 
      * remove this block after one year (2014-09)
