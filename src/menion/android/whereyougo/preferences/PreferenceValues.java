@@ -53,33 +53,31 @@ public class PreferenceValues {
   public static final String KEY_S_MAP_PROVIDER = "KEY_S_MAP_PROVIDER";
   public static final int VALUE_MAP_PROVIDER_VECTOR = 0;
   public static final int VALUE_MAP_PROVIDER_LOCUS = 1;
-  public static final String DEFAULT_MAP_PROVIDER = String.valueOf(VALUE_MAP_PROVIDER_VECTOR);
+
   /** enable icon in status bar */
   public static final String KEY_B_STATUSBAR = "KEY_B_STATUSBAR";
-  public static final boolean DEFAULT_STATUSBAR = false;
+
   /** enable fullscreen mode on newly created activities */
   public static final String KEY_B_FULLSCREEN = "KEY_B_FULLSCREEN";
-  public static final boolean DEFAULT_FULLSCREEN = false;
+
   /** screen highlight mode */
   public static final String KEY_S_HIGHLIGHT = "KEY_S_HIGHLIGHT";
   public static final int VALUE_HIGHLIGHT_OFF = 0;
   public static final int VALUE_HIGHLIGHT_ONLY_GPS = 1;
   public static final int VALUE_HIGHLIGHT_ALWAYS = 2;
-  public static final String DEFAULT_HIGHLIGHT = String.valueOf(VALUE_HIGHLIGHT_OFF);
+
   /** save game automatically when user switches to another application */
   public static final String KEY_B_SAVEGAME_AUTO = "KEY_B_SAVEGAME_AUTO";
-  public static final boolean DEFAULT_SAVEGAME_AUTO = true;
+
   /** stretch images */
   public static final String KEY_B_IMAGE_STRETCH = "KEY_B_IMAGE_STRETCH";
-  public static final boolean DEFAULT_IMAGE_STRETCH = true;
+
   /** font size */
   public static final String KEY_S_FONT_SIZE = "KEY_S_FONT_SIZE";
   public static final int VALUE_FONT_SIZE_DEFAULT = 0;
   public static final int VALUE_FONT_SIZE_SMALL = 1;
   public static final int VALUE_FONT_SIZE_MEDIUM = 2;
   public static final int VALUE_FONT_SIZE_LARGE = 3;
-  public static final String DEFAULT_FONT_SIZE = String.valueOf(VALUE_FONT_SIZE_DEFAULT);
-
 
   // LOGIN
   /** GC credentials */
@@ -93,14 +91,12 @@ public class PreferenceValues {
   public static final String KEY_S_LANGUAGE = "KEY_S_LANGUAGE";
   public static final String VALUE_LANGUAGE_CZ = "cz";
   public static final String VALUE_LANGUAGE_EN = "en";
-//  public static final String DEFAULT_LANGUAGE = VALUE_LANGUAGE_DEFAULT;
 
   /** confirmation on exit */
   public static final String KEY_B_CONFIRM_ON_EXIT = "KEY_B_CONFIRM_ON_EXIT";
-  public static final boolean DEFAULT_CONFIRM_ON_EXIT = true;
+
   /** last used index of coordinates format */
   public static final String KEY_I_GET_COORDINATES_LAST_INDEX = "KEY_I_GET_COORDINATES_LAST_INDEX";
-  public static final int DEFAULT_GET_COORDINATES_LAST_INDEX = 0;
 
   // GPS & LOCATION
   /** if GPS should start automatically after application start */
@@ -121,13 +117,13 @@ public class PreferenceValues {
   /** add manual correction to altitude */
   public static final String KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION =
       "KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION";
-  public static final String DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION = String.valueOf(0.0);
+
   /** minimum time for notification */
   public static final String KEY_S_GPS_MIN_TIME_NOTIFICATION = "KEY_S_GPS_MIN_TIME_NOTIFICATION";
-  public static final String DEFAULT_GPS_MIN_TIME_NOTIFICATION = "0";
+
   /** beep on first gps fix */
   public static final String KEY_B_GPS_BEEP_ON_GPS_FIX = "KEY_B_GPS_BEEP_ON_GPS_FIX";
-  public static final boolean DEFAULT_GPS_BEEP_ON_GPS_FIX = true;
+
   /** disable GPS when not needed */
   public static final String KEY_B_GPS_DISABLE_WHEN_HIDE = "KEY_B_GPS_DISABLE_WHEN_HIDE";
   public static final boolean DEFAULT_GPS_DISABLE_WHEN_HIDE = false;
@@ -139,79 +135,63 @@ public class PreferenceValues {
   /** is hardware orientation sensor enabled */
   public static final String KEY_B_HARDWARE_COMPASS_AUTO_CHANGE =
       "KEY_B_HARDWARE_COMPASS_AUTO_CHANGE";
-  public static final boolean DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE = false;
+
   /** is hardware orientation sensor enabled */
   public static final String KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE =
       "KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE";
-  public static final String DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = "1";
   /** use true or magnetic bearing */
   public static final String KEY_B_SENSORS_BEARING_TRUE = "KEY_B_SENSORS_BEARING_TRUE";
-  public static final boolean DEFAULT_SENSORS_BEARING_TRUE = true;
   /** orientation filter */
   public static final String KEY_S_SENSORS_ORIENT_FILTER = "KEY_S_SENSORS_ORIENT_FILTER";
   public static final int VALUE_SENSORS_ORIENT_FILTER_NO = 0;
   public static final int VALUE_SENSORS_ORIENT_FILTER_LIGHT = 1;
   public static final int VALUE_SENSORS_ORIENT_FILTER_MEDIUM = 2;
   public static final int VALUE_SENSORS_ORIENT_FILTER_HEAVY = 3;
-  public static final String DEFAULT_SENSORS_ORIENT_FILTER = String
-      .valueOf(VALUE_SENSORS_ORIENT_FILTER_MEDIUM);
 
   // GUIDING
   /** is guiding sounds enabled on compass screen */
   public static final String KEY_B_GUIDING_COMPASS_SOUNDS = "KEY_B_GUIDING_COMPASS_SOUNDS";
-  public static final boolean DEFAULT_GUIDING_COMPASS_SOUNDS = false;
   /** disable gps when screen off during guiding */
   public static final String KEY_B_GUIDING_GPS_REQUIRED = "KEY_B_GUIDING_GPS_REQUIRED";
-  public static final boolean DEFAULT_GUIDING_GPS_REQUIRED = true;
   /** waypoint sounds */
   public static final String KEY_S_GUIDING_WAYPOINT_SOUND = "KEY_S_GUIDING_WAYPOINT_SOUND";
   public static final int VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER = 0;
   public static final int VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE = 1;
   public static final int VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND = 2;
-  public static final String DEFAULT_GUIDING_WAYPOINT_SOUND = String
-      .valueOf(VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE);
   public static final String VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI = "";
   /** waypoint sounds beep distance */
   public static final String KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE =
       "KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE";
-  public static final String DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE = "100";
   /** navigation point */
   public static final String KEY_S_GUIDING_ZONE_POINT = "KEY_S_GUIDING_ZONE_POINT";
   public static final int VALUE_GUIDING_ZONE_POINT_CENTER = 0;
   public static final int VALUE_GUIDING_ZONE_POINT_NEAREST = 1;
-  public static final String DEFAULT_GUIDING_ZONE_POINT = String
-      .valueOf(VALUE_GUIDING_ZONE_POINT_NEAREST);
-
+  
   // UNITS PARAMETRES
   /** default latitude/longitude format */
   public static final String KEY_S_UNITS_COO_LATLON = "KEY_S_UNITS_COO_LATLON";
   public static final int VALUE_UNITS_COO_LATLON_DEC = 0;
   public static final int VALUE_UNITS_COO_LATLON_MIN = 1;
   public static final int VALUE_UNITS_COO_LATLON_SEC = 2;
-  public static final String DEFAULT_UNITS_COO_LATLON = String.valueOf(VALUE_UNITS_COO_LATLON_MIN);
   /** default length format */
   public static final String KEY_S_UNITS_LENGTH = "KEY_S_UNITS_LENGTH";
   public static final int VALUE_UNITS_LENGTH_ME = 0;
   public static final int VALUE_UNITS_LENGTH_IM = 1;
   public static final int VALUE_UNITS_LENGTH_NA = 2;
-  public static final String DEFAULT_UNITS_LENGTH = String.valueOf(VALUE_UNITS_LENGTH_ME);
   /** default height format */
   public static final String KEY_S_UNITS_ALTITUDE = "KEY_S_UNITS_ALTITUDE";
   public static final int VALUE_UNITS_ALTITUDE_METRES = 0;
   public static final int VALUE_UNITS_ALTITUDE_FEET = 1;
-  public static final String DEFAULT_UNITS_ALTITUDE = String.valueOf(VALUE_UNITS_ALTITUDE_METRES);
   /** default angle format */
   public static final String KEY_S_UNITS_SPEED = "KEY_S_UNITS_SPEED";
   public static final int VALUE_UNITS_SPEED_KMH = 0;
   public static final int VALUE_UNITS_SPEED_MILH = 1;
   public static final int VALUE_UNITS_SPEED_KNOTS = 2;
-  public static final String DEFAULT_UNITS_SPEED = String.valueOf(VALUE_UNITS_SPEED_KMH);
   /** default angle format */
   public static final String KEY_S_UNITS_ANGLE = "KEY_S_UNITS_ANGLE";
   public static final int VALUE_UNITS_ANGLE_DEGREE = 0;
   public static final int VALUE_UNITS_ANGLE_MIL = 1;
-  public static final String DEFAULT_UNITS_ANGLE = String.valueOf(VALUE_UNITS_ANGLE_DEGREE);
-
+  
   /* LANGUAGE */
   private static String loca = null;
 
@@ -305,24 +285,24 @@ public class PreferenceValues {
     return loca;
   }
 
-  public static Location getLastKnownLocation(Context c) {
+  public static Location getLastKnownLocation(Context c) {  
     if (lastKnownLocation == null) {
       lastKnownLocation = new Location(TAG);
       lastKnownLocation.setLatitude(getPrefFloat(c, KEY_F_LAST_KNOWN_LOCATION_LATITUDE,
-          DEFAULT_LAST_KNOWN_LOCATION_LATITUDE));
+    	  DEFAULT_LAST_KNOWN_LOCATION_LATITUDE));
       lastKnownLocation.setLongitude(getPrefFloat(c, KEY_F_LAST_KNOWN_LOCATION_LONGITUDE,
-          DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE));
+    	  DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE));
       lastKnownLocation.setAltitude(getPrefFloat(c, KEY_F_LAST_KNOWN_LOCATION_ALTITUDE,
           DEFAULT_LAST_KNOWN_LOCATION_ALTITUDE));
     }
     return lastKnownLocation;
   }
-
+ 
   public static boolean getPrefBoolean(Context context, String key, boolean def) {
     // Logger.v(TAG, "getPrefBoolean(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, def);
   }
-
+  
   public static boolean getPrefBoolean(String key, boolean def) {
     if (A.getApp() == null) {
       return def;
@@ -334,26 +314,7 @@ public class PreferenceValues {
     // Logger.v(TAG, "getPrefFloat(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getFloat(key, def);
   }
-
-  public static float getPrefFloat(String key, float def) {
-    if (A.getApp() == null) {
-      return def;
-    }
-    return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getFloat(key, def);
-  }
-
-  public static int getPrefInt(Context context, String key, int def) {
-    // Logger.v(TAG, "getPrefInt(" + key + ", " + def + ")");
-    return PreferenceManager.getDefaultSharedPreferences(context).getInt(key, def);
-  }
-
-  public static int getPrefInt(String key, int def) {
-    if (A.getApp() == null) {
-      return def;
-    }
-    return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getInt(key, def);
-  }
-
+  
   @Deprecated  
   public static String getPrefString(Context context, String key, String def) {
     // Logger.v(TAG, "getPrefString(" + key + ", " + def + ")");
@@ -367,25 +328,7 @@ public class PreferenceValues {
     }
     return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
   }
-  
-  public static String getPrefString( Context context, final int keyId, final int defaultId ) {
-	if (context == null) {
-	  return "";
-	}
-	String key = context.getString( keyId );
-	String def = context.getString( defaultId );
-	return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
-  } 
-  
-  public static String getPrefString( final int keyId, final int defaultId ) {
-	if (A.getApp() == null) {
-	  return "";
-	}
-	String key = A.getApp().getString( keyId );
-	String def = A.getApp().getString( defaultId );
-	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
-  }  
-  
+    
   @Deprecated
   public static String getPrefString( final int keyId, String def) {
 	if (A.getApp() == null) {
@@ -394,7 +337,7 @@ public class PreferenceValues {
 	String key = A.getApp().getString( keyId );
 	return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
   }  
-
+  
   public static void setApplicationVersionLast(int lastVersion) {
     PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit()
         .putInt(KEY_S_APPLICATION_VERSION_LAST, lastVersion).commit();
@@ -470,13 +413,7 @@ public class PreferenceValues {
    *
    * @deprecated use {@link #new()} instead.  
    */
-  @Deprecated  
-  public static void setPrefString(String key, String value) {
-    if (A.getApp() == null) {
-      return;
-    }
-    PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
-  }
+
   
   public static void setPrefString( int keyId, String value) {
 	if (A.getApp() == null) {
@@ -488,12 +425,7 @@ public class PreferenceValues {
 
   public static boolean setScreenBasic(Activity activity) {
     try {
-      // Logger.w(TAG, "setFullscreen(" + activity.getLocalClassName() +
-      // ")");
-      // hide title
-      // if (!(activity instanceof CustomPreferenceActivity)) {
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      // }
+      activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
       return true;
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
@@ -503,15 +435,12 @@ public class PreferenceValues {
 
   public static void setScreenFullscreen(Activity activity) {
     try {
-      // if (!(activity instanceof CustomPreferenceActivity)) {
-        // set fullScreen
         if (Preferences.APPEARANCE_FULLSCREEN) {
           activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
               WindowManager.LayoutParams.FLAG_FULLSCREEN);
         } else {
           activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-      // }
     } catch (Exception e) {
       Logger.e(TAG, "setFullScreen(" + activity + ")", e);
     }
@@ -519,8 +448,7 @@ public class PreferenceValues {
 
   public static void setStatusbar(Activity activity) {
     try {
-      // if (!(activity instanceof CustomPreferenceActivity)) {
-        NotificationManager mNotificationManager =
+         NotificationManager mNotificationManager =
             (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
         // set statusbar
         if (Preferences.APPEARANCE_STATUSBAR) {
@@ -548,7 +476,6 @@ public class PreferenceValues {
         } else {
           mNotificationManager.cancel(0);
         }
-      // }
     } catch (Exception e) {
       Logger.e(TAG, "setStatusbar(" + activity + ")", e);
     }

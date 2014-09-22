@@ -230,9 +230,9 @@ public class MainApplication extends Application {
     PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
     Preferences.init(this);    
 
-    // set language 
+    // get language 
     Configuration config = getBaseContext().getResources().getConfiguration();
-    String lang = PreferenceValues.getPrefString( this, R.string.pref_KEY_S_LANGUAGE, R.string.pref_DEFAULT_LANGUAGE );
+    String lang = Preferences.getStringPreference( this, R.string.pref_KEY_S_LANGUAGE );
     
     /* 
      * This block is a workaround to switch from 'cs' to 'cz' 
@@ -243,6 +243,7 @@ public class MainApplication extends Application {
     	PreferenceValues.setPrefString( R.string.pref_KEY_S_LANGUAGE, lang );
     }
     
+    // set language
     if (!lang.equals( getString( R.string.pref_language_default_value ) )
         && !config.locale.getLanguage().equals(lang)) {
       ArrayList<String> loc = StringToken.parse(lang, "_");

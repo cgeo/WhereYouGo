@@ -17,67 +17,11 @@
 
 package menion.android.whereyougo.preferences;
 
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_FULLSCREEN;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GPS_BEEP_ON_GPS_FIX;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GPS_MIN_TIME_NOTIFICATION;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GUIDING_COMPASS_SOUNDS;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GUIDING_GPS_REQUIRED;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GUIDING_WAYPOINT_SOUND;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GUIDING_ZONE_POINT;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_HIGHLIGHT;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_IMAGE_STRETCH;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_FONT_SIZE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_MAP_PROVIDER;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_ROOT;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_SAVEGAME_AUTO;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GC_USERNAME;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_GC_PASSWORD;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_SENSORS_BEARING_TRUE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_SENSORS_ORIENT_FILTER;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_STATUSBAR;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_UNITS_ALTITUDE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_UNITS_ANGLE;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_UNITS_COO_LATLON;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_UNITS_LENGTH;
-import static menion.android.whereyougo.preferences.PreferenceValues.DEFAULT_UNITS_SPEED;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_FULLSCREEN;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GPS_BEEP_ON_GPS_FIX;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GUIDING_COMPASS_SOUNDS;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_GUIDING_GPS_REQUIRED;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_AUTO_CHANGE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_IMAGE_STRETCH;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_FONT_SIZE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_SAVEGAME_AUTO;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_USERNAME;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GC_PASSWORD;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_SENSORS_BEARING_TRUE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_B_STATUSBAR;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GPS_MIN_TIME_NOTIFICATION;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GUIDING_WAYPOINT_SOUND;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_GUIDING_ZONE_POINT;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_HIGHLIGHT;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_MAP_PROVIDER;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_ROOT;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_SENSORS_ORIENT_FILTER;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_UNITS_ALTITUDE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_UNITS_ANGLE;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_UNITS_COO_LATLON;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_UNITS_LENGTH;
-import static menion.android.whereyougo.preferences.PreferenceValues.KEY_S_UNITS_SPEED;
-import static menion.android.whereyougo.preferences.PreferenceValues.getPrefBoolean;
-import static menion.android.whereyougo.preferences.PreferenceValues.getPrefString;
+import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import android.content.Context;
+import android.preference.PreferenceManager;
 
 public class Preferences {
 
@@ -146,61 +90,65 @@ public class Preferences {
   public static int GUIDING_WAYPOINT_SOUND_DISTANCE;
   /** zone navigation point */
   public static int GUIDING_ZONE_NAVIGATION_POINT;
+ 
+  public static boolean comparePreferenceKey( Context c, final String prefString, final int prefId ) {
+  	return prefString.equals( c.getString( prefId ) );
+  } 
+  
+  public static String getStringPreference( Context c, final int PreferenceId ) {
+	String key = c.getString( PreferenceId );
+	return PreferenceManager.getDefaultSharedPreferences(c).getString(key, "false" );	  
+  } 
 
+  public static double getDecimalPreference( Context c, final int PreferenceId ) {
+	String key = c.getString( PreferenceId );
+	return Utils.parseDouble( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "0.0" ) );	  
+  }   
+  
+  public static int getNumericalPreference( Context c, final int PreferenceId ) {
+	String key = c.getString( PreferenceId );
+	return Utils.parseInt( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "0" ) );	  
+  }  
+  
+  public static boolean getBooleanPreference( Context c, final int PreferenceId ) {
+	String key = c.getString( PreferenceId );
+	return Utils.parseBoolean( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "" ) );	  
+  }  
+  
+  /* Note: Default values are defined in xml/<preferences>.xml and loaded at programm start */
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
-    GLOBAL_ROOT = getPrefString(c, KEY_S_ROOT, DEFAULT_ROOT);
-    GLOBAL_MAP_PROVIDER =
-        Utils.parseInt(getPrefString(c, KEY_S_MAP_PROVIDER, DEFAULT_MAP_PROVIDER));
-    GLOBAL_SAVEGAME_AUTO = getPrefBoolean(c, KEY_B_SAVEGAME_AUTO, DEFAULT_SAVEGAME_AUTO);
-    // GLOBAL_GC_USERNAME = getPrefString(c, KEY_S_GC_USERNAME, DEFAULT_GC_USERNAME);
-    // GLOBAL_GC_PASSWORD = getPrefString(c, KEY_S_GC_PASSWORD, DEFAULT_GC_PASSWORD);
-    APPEARANCE_STATUSBAR = getPrefBoolean(c, KEY_B_STATUSBAR, DEFAULT_STATUSBAR);
-    APPEARANCE_FULLSCREEN = getPrefBoolean(c, KEY_B_FULLSCREEN, DEFAULT_FULLSCREEN);
-    APPEARANCE_HIGHLIGHT = Utils.parseInt(getPrefString(c, KEY_S_HIGHLIGHT, DEFAULT_HIGHLIGHT));
-    APPEARANCE_IMAGE_STRETCH = getPrefBoolean(c, KEY_B_IMAGE_STRETCH, DEFAULT_IMAGE_STRETCH);
-    APPEARANCE_FONT_SIZE = Utils.parseInt(getPrefString(c, KEY_S_FONT_SIZE, DEFAULT_FONT_SIZE));
+    
+    GLOBAL_ROOT = getStringPreference( c, R.string.pref_KEY_S_ROOT );
+    GLOBAL_MAP_PROVIDER = getNumericalPreference( c, R.string.pref_KEY_S_MAP_PROVIDER );
+    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( c, R.string.pref_KEY_B_SAVEGAME_AUTO );
+    
+    APPEARANCE_STATUSBAR = getBooleanPreference( c, R.string.pref_KEY_B_STATUSBAR );
+    APPEARANCE_FULLSCREEN = getBooleanPreference( c, R.string.pref_KEY_B_FULLSCREEN );
+    APPEARANCE_HIGHLIGHT = getNumericalPreference(c, R.string.pref_KEY_S_HIGHLIGHT );
+    APPEARANCE_IMAGE_STRETCH = getBooleanPreference(c, R.string.pref_KEY_B_IMAGE_STRETCH );
+    APPEARANCE_FONT_SIZE = getNumericalPreference(c, R.string.pref_KEY_S_FONT_SIZE );
 
-    FORMAT_ALTITUDE =
-        Utils.parseInt(getPrefString(c, KEY_S_UNITS_ALTITUDE, DEFAULT_UNITS_ALTITUDE));
-    FORMAT_ANGLE = Utils.parseInt(getPrefString(c, KEY_S_UNITS_ANGLE, DEFAULT_UNITS_ANGLE));
-    FORMAT_COO_LATLON =
-        Utils.parseInt(getPrefString(c, KEY_S_UNITS_COO_LATLON, DEFAULT_UNITS_COO_LATLON));
-    FORMAT_LENGTH = Utils.parseInt(getPrefString(c, KEY_S_UNITS_LENGTH, DEFAULT_UNITS_LENGTH));
-    FORMAT_SPEED = Utils.parseInt(getPrefString(c, KEY_S_UNITS_SPEED, DEFAULT_UNITS_SPEED));
+    FORMAT_ALTITUDE = getNumericalPreference( c, R.string.pref_KEY_S_UNITS_ALTITUDE );
+    FORMAT_ANGLE = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_ANGLE );
+    FORMAT_COO_LATLON =getNumericalPreference( c, R.string.pref_KEY_S_UNITS_COO_LATLON );
+    FORMAT_LENGTH = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_LENGTH );
+    FORMAT_SPEED = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_SPEED );
 
-    GPS_MIN_TIME =
-        Utils.parseInt(getPrefString(c, KEY_S_GPS_MIN_TIME_NOTIFICATION,
-            DEFAULT_GPS_MIN_TIME_NOTIFICATION));
-    GPS_BEEP_ON_GPS_FIX = getPrefBoolean(c, KEY_B_GPS_BEEP_ON_GPS_FIX, DEFAULT_GPS_BEEP_ON_GPS_FIX);
-    GPS_ALTITUDE_CORRECTION =
-        Utils.parseDouble(getPrefString(c, KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION,
-            DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION));
+    GPS_MIN_TIME = getNumericalPreference(c, R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); // TODO default value not defined in preferences.xml
+    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( c, R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
+    GPS_ALTITUDE_CORRECTION = getDecimalPreference( c, R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
 
-    SENSOR_HARDWARE_COMPASS =
-        getPrefBoolean(c, KEY_B_HARDWARE_COMPASS_SENSOR, DEFAULT_HARDWARE_COMPASS_SENSOR);
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE =
-        getPrefBoolean(c, KEY_B_HARDWARE_COMPASS_AUTO_CHANGE, DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE);
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE =
-        Utils.parseInt(getPrefString(c, KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE,
-            DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE));
-    SENSOR_BEARING_TRUE =
-        getPrefBoolean(c, KEY_B_SENSORS_BEARING_TRUE, DEFAULT_SENSORS_BEARING_TRUE);
-    SENSOR_ORIENT_FILTER =
-        Utils
-            .parseInt(getPrefString(c, KEY_S_SENSORS_ORIENT_FILTER, DEFAULT_SENSORS_ORIENT_FILTER));
+    SENSOR_HARDWARE_COMPASS = getBooleanPreference( c, R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
+    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( c, R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
+    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference( c, R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE );
+    SENSOR_BEARING_TRUE = getBooleanPreference( c, R.string.pref_KEY_B_SENSORS_BEARING_TRUE );
+    SENSOR_ORIENT_FILTER = getNumericalPreference( c, R.string.pref_KEY_S_SENSORS_ORIENT_FILTER );
 
-    GUIDING_GPS_REQUIRED =
-        getPrefBoolean(c, KEY_B_GUIDING_GPS_REQUIRED, DEFAULT_GUIDING_GPS_REQUIRED);
-    GUIDING_SOUNDS =
-        getPrefBoolean(c, KEY_B_GUIDING_COMPASS_SOUNDS, DEFAULT_GUIDING_COMPASS_SOUNDS);
-    GUIDING_WAYPOINT_SOUND =
-        Utils.parseInt(getPrefString(c, KEY_S_GUIDING_WAYPOINT_SOUND,
-            DEFAULT_GUIDING_WAYPOINT_SOUND));
-    GUIDING_WAYPOINT_SOUND_DISTANCE =
-        Utils.parseInt(getPrefString(c, KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE,
-            DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE));
-    GUIDING_ZONE_NAVIGATION_POINT =
-        Utils.parseInt(getPrefString(c, KEY_S_GUIDING_ZONE_POINT, DEFAULT_GUIDING_ZONE_POINT));
+    GUIDING_GPS_REQUIRED = getBooleanPreference(c, R.string.pref_KEY_B_GUIDING_GPS_REQUIRED );
+    GUIDING_SOUNDS = getBooleanPreference(c, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
+    GUIDING_WAYPOINT_SOUND = getNumericalPreference (c, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
+    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference(c, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
+    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference (c, R.string.pref_KEY_S_GUIDING_ZONE_POINT );
   }
 }
