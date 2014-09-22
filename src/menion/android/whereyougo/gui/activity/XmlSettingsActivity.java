@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.ListPreference;
 import android.preference.PreferenceManager;
@@ -59,6 +60,10 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
         addPreferencesFromResource(R.xml.whereyougo_preferences);
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 		
+		Preference somePreference = findPreference( R.string.pref_KEY_X_HIDDEN_PREFERENCES );
+		PreferenceScreen preferenceScreen = getPreferenceScreen();
+		preferenceScreen.removePreference(somePreference);		
+		
 		needRestart = false; // TODO where it handle?
 		
 	
@@ -74,7 +79,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 			}		
         }); 
         
-        String dir = Preferences.getStringPreference( this, R.string.pref_KEY_S_ROOT );
+        String dir = Preferences.getStringPreference( R.string.pref_KEY_S_ROOT );
         x.setSummary( "(" + dir + ") " + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(        
         
 		/* TODO - check this code */ 
@@ -110,31 +115,31 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 		if ( key.equals("X") ) {
 			// DO NOTHING
 		} 
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_FONT_SIZE ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_FONT_SIZE ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.APPEARANCE_FONT_SIZE = Utils.parseInt(newValue);
   		}		
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_FULLSCREEN ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_FULLSCREEN ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.APPEARANCE_FULLSCREEN = Utils.parseBoolean(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION ) ) {
 			String newValue = sharedPreferences.getString( key, null );
 			Preferences.GPS_ALTITUDE_CORRECTION = Utils.parseDouble(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GPS_BEEP_ON_GPS_FIX = Utils.parseBoolean(newValue);
 		} 
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GUIDING_SOUNDS = Utils.parseBoolean(newValue);
 		} 
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_GUIDING_GPS_REQUIRED ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_GUIDING_GPS_REQUIRED ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GUIDING_GPS_REQUIRED = Utils.parseBoolean(newValue);
 		}
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			int result = Utils.parseInt(newValue);
             if (result != PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND) {
@@ -148,7 +153,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
               this.startActivityForResult(intent, REQUEST_GUIDING_WPT_SOUND);
             }
   		}
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE ) ) {
   			String newValue = sharedPreferences.getString( key, null );
             int value = Utils.parseInt(newValue);
             if (value > 0) {
@@ -157,16 +162,16 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
               ManagerNotify.toastShortMessage(R.string.invalid_value);
             }				
   		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_GUIDING_ZONE_POINT ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_ZONE_POINT ) ) {
 			String newValue = sharedPreferences.getString( key, null );
 			Preferences.GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(newValue);
 		} 		
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 	        Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = Utils.parseBoolean(newValue);
 	        A.getRotator().manageSensors();
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE ) ) {
 			String newValue = sharedPreferences.getString( key, null );
 	        int value = Utils.parseInt(newValue);
 	        if (value > 0) {
@@ -175,64 +180,64 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 	          ManagerNotify.toastShortMessage(R.string.invalid_value);
 	        }			
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 	        Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(newValue);
 	        A.getRotator().manageSensors();
 		}
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_HIGHLIGHT ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_HIGHLIGHT ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.APPEARANCE_HIGHLIGHT = Utils.parseInt(newValue);
   			PreferenceValues.enableWakeLock();
   		}			
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_IMAGE_STRETCH ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_IMAGE_STRETCH ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.APPEARANCE_IMAGE_STRETCH = Utils.parseBoolean(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_LANGUAGE ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_LANGUAGE ) ) {
 			needRestart = true;
 		} 			
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_MAP_PROVIDER ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_MAP_PROVIDER ) ) {
 			String newValue = sharedPreferences.getString( key, null );
 			Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);		
 		} 
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_SAVEGAME_AUTO ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_SAVEGAME_AUTO ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_SENSORS_BEARING_TRUE ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_SENSORS_BEARING_TRUE ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 	        Preferences.SENSOR_BEARING_TRUE = Utils.parseBoolean(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_SENSORS_ORIENT_FILTER ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_SENSORS_ORIENT_FILTER ) ) {
 			String newValue = sharedPreferences.getString( key, null );
 			Preferences.SENSOR_ORIENT_FILTER = Utils.parseInt(newValue);
 		}
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_B_STATUSBAR ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_STATUSBAR ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.APPEARANCE_STATUSBAR = Utils.parseBoolean(newValue);
 		}
 		/* TODO - Preferences.GPS_MIN_TIME is used but there is no settings option - default value?
-		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ) ) {
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ) ) {
 			Preferences.GPS_MIN_TIME = 
 		} */
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_UNITS_ALTITUDE ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_UNITS_ALTITUDE ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.FORMAT_ALTITUDE = Utils.parseInt(newValue);
   		}	
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_UNITS_ANGLE ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_UNITS_ANGLE ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.FORMAT_ANGLE = Utils.parseInt(newValue);
   		}
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_UNITS_COO_LATLON ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_UNITS_COO_LATLON ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.FORMAT_COO_LATLON = Utils.parseInt(newValue);
   		}
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_UNITS_LENGTH ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_UNITS_LENGTH ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.FORMAT_LENGTH = Utils.parseInt(newValue);
   		}	
-  		else if ( Preferences.comparePreferenceKey( this, key, R.string.pref_KEY_S_UNITS_SPEED ) ) {
+  		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_UNITS_SPEED ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			Preferences.FORMAT_SPEED = Utils.parseInt(newValue);
   		}			
@@ -244,9 +249,9 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
               Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
               if (uri != null) {
                 Logger.d(TAG, "uri:" + uri.toString());
-                PreferenceValues.setPrefString( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND,
-                    String.valueOf( PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND));
-                PreferenceValues.setPrefString( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI,
+                Preferences.setStringPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND,
+                		PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
+                Preferences.setStringPreference( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI,
                     uri.toString());
                 Preferences.GUIDING_WAYPOINT_SOUND = Utils.parseInt( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
               }
@@ -257,7 +262,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
               if (filename != null) {
                 File file = new File(filename);
                 String dir = file.getParent();
-                PreferenceValues.setPrefString( R.string.pref_KEY_S_ROOT, dir);
+                Preferences.setStringPreference( R.string.pref_KEY_S_ROOT, dir);
                 Preferences.GLOBAL_ROOT = dir;
                 Preference pref = findPreference( R.string.pref_KEY_S_ROOT );
                 pref.setSummary( "(" + dir + ")" + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(

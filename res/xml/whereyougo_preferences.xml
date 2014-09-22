@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:whereyougo="http://whereyougo">
 	
+    <!--
+         *********************************************************************************
+           This is a special section. Preferences defined in this section don't shown in
+           the SettingsView. Here you can set the default values for internal used pref-
+           erences.
+         *********************************************************************************  
+     -->
+    <PreferenceScreen 
+      android:key="@string/pref_KEY_X_HIDDEN_PREFERENCES"
+      android:title="">
+      
+      <EditTextPreference
+          android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE"
+          android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LATITUDE" />
+      <EditTextPreference
+          android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE"
+          android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE" />          
+      <EditTextPreference
+          android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE"
+          android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_ALTITUDE" /> 
+      <EditTextPreference
+          android:key="@string/pref_KEY_S_APPLICATION_VERSION_LAST"
+          android:defaultValue="0" /> 
+      <EditTextPreference
+          android:key="@string/pref_KEY_S_GPS_MIN_TIME_NOTIFICATION"
+          android:defaultValue="@string/pref_DEFAULT_GPS_MIN_TIME_NOTIFICATION" />                          
+      <!-- 
+      <EditTextPreference
+          android:key="@string/pref_"
+          android:defaultValue="@string/pref_" />                     
+      --> 
+    </PreferenceScreen>
+    
 	<PreferenceScreen
         android:key=""
         android:title="@string/pref_global"
@@ -268,7 +301,7 @@
 			    android:entries="@array/pref_units_coo_latlon_entries"
 			    android:entryValues="@array/pref_units_coo_latlon_entry_values" />  			
 		</PreferenceCategory>
-			
+		 			
 		<PreferenceCategory 
 			android:key=""
 			android:icon="@android:drawable/ic_menu_mapmode"

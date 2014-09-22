@@ -17,8 +17,6 @@
 
 package menion.android.whereyougo;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -38,7 +36,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -228,11 +225,12 @@ public class MainApplication extends Application {
 
     // set basic settings values
     PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
+    Preferences.setContext( this );
     Preferences.init(this);    
 
     // get language 
     Configuration config = getBaseContext().getResources().getConfiguration();
-    String lang = Preferences.getStringPreference( this, R.string.pref_KEY_S_LANGUAGE );
+    String lang = Preferences.getStringPreference( R.string.pref_KEY_S_LANGUAGE );
     
     /* 
      * This block is a workaround to switch from 'cs' to 'cz' 
@@ -240,7 +238,7 @@ public class MainApplication extends Application {
      */
     if ( lang.equals( "cs" ) ) {
     	lang = this.getString( R.string.pref_language_cz_shortcut );
-    	PreferenceValues.setPrefString( R.string.pref_KEY_S_LANGUAGE, lang );
+    	Preferences.setStringPreference( R.string.pref_KEY_S_LANGUAGE, lang );
     }
     
     // set language

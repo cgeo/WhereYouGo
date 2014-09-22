@@ -26,6 +26,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
@@ -245,8 +246,7 @@ public abstract class CustomMainActivity extends CustomActivity {
       if (testFileSystem() && testFreeSpace()) {
         // set last known location
         if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
-            && PreferenceValues.getPrefBoolean(PreferenceValues.KEY_B_START_GPS_AUTOMATICALLY,
-                PreferenceValues.DEFAULT_START_GPS_AUTOMATICALLY)) {
+            && Preferences.getBooleanPreference( R.string.pref_KEY_B_START_GPS_AUTOMATICALLY ) ) {
           LocationState.setGpsOn(CustomMainActivity.this);
         } else {
           LocationState.setGpsOff(CustomMainActivity.this);

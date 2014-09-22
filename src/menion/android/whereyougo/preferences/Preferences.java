@@ -91,64 +91,91 @@ public class Preferences {
   /** zone navigation point */
   public static int GUIDING_ZONE_NAVIGATION_POINT;
  
-  public static boolean comparePreferenceKey( Context c, final String prefString, final int prefId ) {
-  	return prefString.equals( c.getString( prefId ) );
+  /* ------------ */
+  
+  private static Context prefContext;
+  
+  public static void setContext( Context c ) {
+	  prefContext = c;
+  }
+  
+  /* ------------ */
+  
+  public static boolean comparePreferenceKey( final String prefString, final int prefId ) {
+  	return prefString.equals( prefContext.getString( prefId ) );
   } 
   
-  public static String getStringPreference( Context c, final int PreferenceId ) {
-	String key = c.getString( PreferenceId );
-	return PreferenceManager.getDefaultSharedPreferences(c).getString(key, "false" );	  
+  public static String getStringPreference( final int PreferenceId ) {
+	String key = prefContext.getString( PreferenceId );
+	return PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "false" );	  
   } 
 
-  public static double getDecimalPreference( Context c, final int PreferenceId ) {
-	String key = c.getString( PreferenceId );
-	return Utils.parseDouble( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "0.0" ) );	  
+  public static double getDecimalPreference( final int PreferenceId ) {
+	String key = prefContext.getString( PreferenceId );
+	return Utils.parseDouble( PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "0.0" ) );	  
   }   
   
-  public static int getNumericalPreference( Context c, final int PreferenceId ) {
-	String key = c.getString( PreferenceId );
-	return Utils.parseInt( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "0" ) );	  
+  public static int getNumericalPreference( final int PreferenceId ) {
+	String key = prefContext.getString( PreferenceId );
+	return Utils.parseInt( PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "0" ) );	  
   }  
   
-  public static boolean getBooleanPreference( Context c, final int PreferenceId ) {
-	String key = c.getString( PreferenceId );
-	return Utils.parseBoolean( PreferenceManager.getDefaultSharedPreferences(c).getString(key, "" ) );	  
+  public static boolean getBooleanPreference( final int PreferenceId ) {
+	String key = prefContext.getString( PreferenceId );
+	return /*Utils.parseBoolean(*/ PreferenceManager.getDefaultSharedPreferences(prefContext).getBoolean(key, false ) /* ) */;	  
   }  
+  
+  /* ------------ */
+ 
+  public static void setStringPreference( final int PreferenceId, final String value ) {
+	String key = prefContext.getString( PreferenceId );
+	PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, value).commit();   
+  }   
+  
+  public static void setStringPreference( final int PreferenceId, final int value ) {
+    String key = prefContext.getString( PreferenceId );
+    PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();   
+  } 
+  
+  public static void setStringPreference( final int PreferenceId, final double value ) {
+    String key = prefContext.getString( PreferenceId );
+    PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();   
+  } 
   
   /* Note: Default values are defined in xml/<preferences>.xml and loaded at programm start */
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
     
-    GLOBAL_ROOT = getStringPreference( c, R.string.pref_KEY_S_ROOT );
-    GLOBAL_MAP_PROVIDER = getNumericalPreference( c, R.string.pref_KEY_S_MAP_PROVIDER );
-    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( c, R.string.pref_KEY_B_SAVEGAME_AUTO );
+    GLOBAL_ROOT = getStringPreference( R.string.pref_KEY_S_ROOT );
+    GLOBAL_MAP_PROVIDER = getNumericalPreference( R.string.pref_KEY_S_MAP_PROVIDER );
+    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( R.string.pref_KEY_B_SAVEGAME_AUTO );
     
-    APPEARANCE_STATUSBAR = getBooleanPreference( c, R.string.pref_KEY_B_STATUSBAR );
-    APPEARANCE_FULLSCREEN = getBooleanPreference( c, R.string.pref_KEY_B_FULLSCREEN );
-    APPEARANCE_HIGHLIGHT = getNumericalPreference(c, R.string.pref_KEY_S_HIGHLIGHT );
-    APPEARANCE_IMAGE_STRETCH = getBooleanPreference(c, R.string.pref_KEY_B_IMAGE_STRETCH );
-    APPEARANCE_FONT_SIZE = getNumericalPreference(c, R.string.pref_KEY_S_FONT_SIZE );
+    APPEARANCE_STATUSBAR = getBooleanPreference( R.string.pref_KEY_B_STATUSBAR );
+    APPEARANCE_FULLSCREEN = getBooleanPreference( R.string.pref_KEY_B_FULLSCREEN );
+    APPEARANCE_HIGHLIGHT = getNumericalPreference( R.string.pref_KEY_S_HIGHLIGHT );
+    APPEARANCE_IMAGE_STRETCH = getBooleanPreference( R.string.pref_KEY_B_IMAGE_STRETCH );
+    APPEARANCE_FONT_SIZE = getNumericalPreference( R.string.pref_KEY_S_FONT_SIZE );
 
-    FORMAT_ALTITUDE = getNumericalPreference( c, R.string.pref_KEY_S_UNITS_ALTITUDE );
-    FORMAT_ANGLE = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_ANGLE );
-    FORMAT_COO_LATLON =getNumericalPreference( c, R.string.pref_KEY_S_UNITS_COO_LATLON );
-    FORMAT_LENGTH = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_LENGTH );
-    FORMAT_SPEED = getNumericalPreference(c, R.string.pref_KEY_S_UNITS_SPEED );
+    FORMAT_ALTITUDE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ALTITUDE );
+    FORMAT_ANGLE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ANGLE );
+    FORMAT_COO_LATLON =getNumericalPreference( R.string.pref_KEY_S_UNITS_COO_LATLON );
+    FORMAT_LENGTH = getNumericalPreference( R.string.pref_KEY_S_UNITS_LENGTH );
+    FORMAT_SPEED = getNumericalPreference( R.string.pref_KEY_S_UNITS_SPEED );
 
-    GPS_MIN_TIME = getNumericalPreference(c, R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); // TODO default value not defined in preferences.xml
-    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( c, R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
-    GPS_ALTITUDE_CORRECTION = getDecimalPreference( c, R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
+    GPS_MIN_TIME = getNumericalPreference( R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); 
+    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
+    GPS_ALTITUDE_CORRECTION = getDecimalPreference( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
 
-    SENSOR_HARDWARE_COMPASS = getBooleanPreference( c, R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( c, R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference( c, R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE );
-    SENSOR_BEARING_TRUE = getBooleanPreference( c, R.string.pref_KEY_B_SENSORS_BEARING_TRUE );
-    SENSOR_ORIENT_FILTER = getNumericalPreference( c, R.string.pref_KEY_S_SENSORS_ORIENT_FILTER );
+    SENSOR_HARDWARE_COMPASS = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
+    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
+    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference( R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE );
+    SENSOR_BEARING_TRUE = getBooleanPreference( R.string.pref_KEY_B_SENSORS_BEARING_TRUE );
+    SENSOR_ORIENT_FILTER = getNumericalPreference( R.string.pref_KEY_S_SENSORS_ORIENT_FILTER );
 
-    GUIDING_GPS_REQUIRED = getBooleanPreference(c, R.string.pref_KEY_B_GUIDING_GPS_REQUIRED );
-    GUIDING_SOUNDS = getBooleanPreference(c, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
-    GUIDING_WAYPOINT_SOUND = getNumericalPreference (c, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
-    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference(c, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
-    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference (c, R.string.pref_KEY_S_GUIDING_ZONE_POINT );
+    GUIDING_GPS_REQUIRED = getBooleanPreference( R.string.pref_KEY_B_GUIDING_GPS_REQUIRED );
+    GUIDING_SOUNDS = getBooleanPreference( R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
+    GUIDING_WAYPOINT_SOUND = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
+    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
+    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_ZONE_POINT );
   }
 }
