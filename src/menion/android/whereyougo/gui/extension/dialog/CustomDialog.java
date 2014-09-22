@@ -23,7 +23,6 @@ import menion.android.whereyougo.utils.Utils;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -72,7 +71,7 @@ public class CustomDialog {
     if (text != null && click != null) {
       // set button
       Button btn = (Button) layout.findViewById(btnId);
-      btn.setText(Html.fromHtml(text));
+      btn.setText(text);
       btn.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
           click.onClick(null, v, btnType);

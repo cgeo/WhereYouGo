@@ -34,7 +34,6 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.text.Html;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
@@ -146,7 +145,7 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
   @Override
   public void receiveGuideEvent(IGuide guide, String targetName, float azimuthToTarget,
       double distanceToTarget) {
-    this.viewName.setText(Html.fromHtml(targetName));
+    this.viewName.setText(targetName);
     this.azimuthToTarget = azimuthToTarget;
     viewCompass.setDistance(distanceToTarget);
     if (LocationState.getLocation().getSpeed() > 1) {

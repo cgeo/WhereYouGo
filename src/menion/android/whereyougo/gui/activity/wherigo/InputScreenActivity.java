@@ -30,7 +30,6 @@ import se.krka.kahlua.vm.LuaTable;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -95,7 +94,7 @@ public class InputScreenActivity extends CustomActivity {
 
       Media m = (Media) input.table.rawget("Media");
       if (m != null) {
-        tvImageDesc.setText(Html.fromHtml(m.altText));
+        tvImageDesc.setText(m.altText);
         try {
           byte[] is = Engine.mediaFile(m);
           Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
@@ -109,7 +108,7 @@ public class InputScreenActivity extends CustomActivity {
       // set question TextView
       TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
       String text = Engine.removeHtml((String) input.table.rawget("Text"));
-      tvQuestion.setText(Html.fromHtml(text));
+      tvQuestion.setText(text);
 
       // set answer LinearLayout
       String type = (String) input.table.rawget("InputType");
