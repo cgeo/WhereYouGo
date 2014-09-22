@@ -160,7 +160,7 @@
 				android:key="@string/pref_KEY_B_GUIDING_COMPASS_SOUNDS"
 				android:title="@string/pref_guiding_compass_sounds"
 				android:summary="@string/pref_guiding_compass_sounds_desc"
-				android:defaultValue="true" /> 
+				android:defaultValue="pref_DEFAULT_GUIDING_COMPASS_SOUNDS" /> 
 			<menion.android.whereyougo.preferences.PreviewListPreference 
 			    android:key="@string/pref_KEY_S_GUIDING_WAYPOINT_SOUND"
 			    android:defaultValue="@string/pref_DEFAULT_GUIDING_WAYPOINT_SOUND" 
