@@ -253,7 +253,7 @@ public abstract class CustomMainActivity extends CustomActivity {
         }
 
         eventFirstInit();
-        PreferenceValues.setScreenBasic(this);
+        setScreenBasic(this);
         eventCreateLayout();
         callSecondInit = true;
       } else {
@@ -261,7 +261,7 @@ public abstract class CustomMainActivity extends CustomActivity {
       }
     } else {
       // Logger.w(TAG, "onCreate() - only register");
-      PreferenceValues.setScreenBasic(this);
+      setScreenBasic(this);
       eventCreateLayout();
       callRegisterOnly = true;
     }

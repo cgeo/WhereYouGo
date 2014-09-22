@@ -423,61 +423,7 @@ public class PreferenceValues {
 	PreferenceManager.getDefaultSharedPreferences(A.getApp()).edit().putString(key, value).commit();
   }  
 
-  public static boolean setScreenBasic(Activity activity) {
-    try {
-      activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      return true;
-    } catch (Exception e) {
-      Logger.e(TAG, "setFullScreen(" + activity + ")", e);
-    }
-    return false;
-  }
 
-  public static void setScreenFullscreen(Activity activity) {
-    try {
-        if (Preferences.APPEARANCE_FULLSCREEN) {
-          activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-              WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        } else {
-          activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-    } catch (Exception e) {
-      Logger.e(TAG, "setFullScreen(" + activity + ")", e);
-    }
-  }
 
-  public static void setStatusbar(Activity activity) {
-    try {
-         NotificationManager mNotificationManager =
-            (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-        // set statusbar
-        if (Preferences.APPEARANCE_STATUSBAR) {
-          Context context = activity.getApplicationContext();
-          Intent intent =
-              new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
-          // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-          intent.addCategory(Intent.CATEGORY_LAUNCHER);
-          intent.setAction(Intent.ACTION_MAIN);
-          PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
-          final int sdkVersion = Integer.parseInt(android.os.Build.VERSION.SDK);
-          Notification notif = null;
-          if (sdkVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            notif =
-                new Notification(R.drawable.ic_title_logo, "WhereYouGo", System.currentTimeMillis());
-            notif.setLatestEventInfo(activity, "WhereYouGo", "", pIntent);
-          } else {
-            NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(activity).setContentTitle("WhereYouGo")
-                    .setSmallIcon(R.drawable.ic_title_logo).setContentIntent(pIntent);
-            notif = builder.build();
-          }
-          notif.flags = Notification.FLAG_ONGOING_EVENT;
-          mNotificationManager.notify(0, notif);
-        } else {
-          mNotificationManager.cancel(0);
-        }
-    } catch (Exception e) {
-      Logger.e(TAG, "setStatusbar(" + activity + ")", e);
-    }
-  }
+
 }
