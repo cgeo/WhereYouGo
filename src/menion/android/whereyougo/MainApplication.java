@@ -239,11 +239,11 @@ public class MainApplication extends Application {
      * remove this block after one year (2014-09)
      */
     if ( lang.equals( "cs" ) ) {
-    	lang = this.getString( R.string.pref_language_id_cz );
+    	lang = this.getString( R.string.pref_language_cz_shortcut );
     	PreferenceValues.setPrefString( R.string.pref_KEY_S_LANGUAGE, lang );
     }
     
-    if (!lang.equals( getString( R.string.pref_language_id_default ) )
+    if (!lang.equals( getString( R.string.pref_language_default_value ) )
         && !config.locale.getLanguage().equals(lang)) {
       ArrayList<String> loc = StringToken.parse(lang, "_");
       if (loc.size() == 1) {

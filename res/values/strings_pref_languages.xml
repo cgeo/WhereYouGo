@@ -1,73 +1,60 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 
-<!-- DO NOT TRANSLATE THIS STRINGS -->
+<!-- 
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	                   
+	                   DO NOT TRANSLATE THIS STRINGS 
+	                   
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!	
+-->
 
 <resources>
-    <string name="pref_language_ar">العربية</string> <!--  Arabic -->
-    <string name="pref_language_cz">Čeština</string> <!-- Czech -->
-    <string name="pref_language_da">Dansk</string> <!--  Danish -->
-    <string name="pref_language_de">Deutsch</string> <!--  German -->
-    <string name="pref_language_el">Ελληνικά</string> <!--  Greek -->
-    <string name="pref_language_en">English</string> <!-- English -->
-    <string name="pref_language_en_gb">English (GB)</string> <!-- English GB (not supported) -->
-    <string name="pref_language_en_us">English (US)</string> <!-- English US (not supported) -->
-    <string name="pref_language_es">Español</string> <!-- Spanish -->
-    <string name="pref_language_fi">Suomi</string> <!-- Finnish -->
-    <string name="pref_language_fr">Française</string> <!-- French  -->
-    <string name="pref_language_hu">Magyar</string> <!-- Hungarian -->
-    <string name="pref_language_it">Italiano</string> <!-- Italian -->
-    <string name="pref_language_ja">日本語</string> <!-- Japanese -->
-    <string name="pref_language_ko">한국어</string> <!-- Korean -->
-    <string name="pref_language_nl">Nederlands</string> <!-- Dutch -->
-    <string name="pref_language_pl">Polski</string> <!-- Polish -->
-    <string name="pref_language_pt">Português</string> <!-- Portuguese  -->
-    <string name="pref_language_pt_br">Português (BR)</string> <!-- Brazilian P. -->
-    <string name="pref_language_ru">Русский</string> <!-- Russian -->
-    <string name="pref_language_sk">Slovenčina</string> <!-- Slovak -->
+    <!--  Names -->
+    <string name="pref_language_ar_name">العربية</string> <!--  Arabic -->
+    <string name="pref_language_cz_name">Čeština</string> <!-- Czech -->
+    <string name="pref_language_da_name">Dansk</string> <!--  Danish -->
+    <string name="pref_language_de_name">Deutsch</string> <!--  German -->
+    <string name="pref_language_el_name">Ελληνικά</string> <!--  Greek -->
+    <string name="pref_language_en_name">English</string> <!-- English -->
+    <string name="pref_language_engb_name">English (GB)</string> <!-- English GB (not supported) -->
+    <string name="pref_language_enus_name">English (US)</string> <!-- English US (not supported) -->
+    <string name="pref_language_es_name">Español</string> <!-- Spanish -->
+    <string name="pref_language_fi_name">Suomi</string> <!-- Finnish -->
+    <string name="pref_language_fr_name">Française</string> <!-- French  -->
+    <string name="pref_language_hu_name">Magyar</string> <!-- Hungarian -->
+    <string name="pref_language_it_name">Italiano</string> <!-- Italian -->
+    <string name="pref_language_ja_name">日本語</string> <!-- Japanese -->
+    <string name="pref_language_ko_name">한국어</string> <!-- Korean -->
+    <string name="pref_language_nl_name">Nederlands</string> <!-- Dutch -->
+    <string name="pref_language_pl_name">Polski</string> <!-- Polish -->
+    <string name="pref_language_pt_name">Português</string> <!-- Portuguese  -->
+    <string name="pref_language_ptbr_name">Português (BR)</string> <!-- Brazilian P. -->
+    <string name="pref_language_ru_name">Русский</string> <!-- Russian -->
+    <string name="pref_language_sk_name">Slovenčina</string> <!-- Slovak -->
 
-    <string name="pref_language_name_ar">العربية</string> <!--  Arabic -->
-    <string name="pref_language_name_cz">Čeština</string> <!-- Czech -->
-    <string name="pref_language_name_da">Dansk</string> <!--  Danish -->
-    <string name="pref_language_name_de">Deutsch</string> <!--  German -->
-    <string name="pref_language_name_el">Ελληνικά</string> <!--  Greek -->
-    <string name="pref_language_name_en">English</string> <!-- English -->
-    <string name="pref_language_name_en_gb">English (GB)</string> <!-- English GB (not supported) -->
-    <string name="pref_language_name_en_us">English (US)</string> <!-- English US (not supported) -->
-    <string name="pref_language_name_es">Español</string> <!-- Spanish -->
-    <string name="pref_language_name_fi">Suomi</string> <!-- Finnish -->
-    <string name="pref_language_name_fr">Française</string> <!-- French  -->
-    <string name="pref_language_name_hu">Magyar</string> <!-- Hungarian -->
-    <string name="pref_language_name_it">Italiano</string> <!-- Italian -->
-    <string name="pref_language_name_ja">日本語</string> <!-- Japanese -->
-    <string name="pref_language_name_ko">한국어</string> <!-- Korean -->
-    <string name="pref_language_name_nl">Nederlands</string> <!-- Dutch -->
-    <string name="pref_language_name_pl">Polski</string> <!-- Polish -->
-    <string name="pref_language_name_pt">Português</string> <!-- Portuguese  -->
-    <string name="pref_language_name_pt_br">Português (BR)</string> <!-- Brazilian P. -->
-    <string name="pref_language_name_ru">Русский</string> <!-- Russian -->
-    <string name="pref_language_name_sk">Slovenčina</string> <!-- Slovak -->
+	<!--  Shortcuts -->
+    <string name="pref_language_ar_shortcut">ar</string> <!--  Arabic -->
+    <string name="pref_language_cz_shortcut">cz</string> <!-- Czech -->
+    <string name="pref_language_da_shortcut">da</string> <!--  Danish -->
+    <string name="pref_language_de_shortcut">de</string> <!--  German -->
+    <string name="pref_language_el_shortcut">el</string> <!--  Greek -->
+    <string name="pref_language_en_shortcut">en</string> <!-- English -->
+    <string name="pref_language_engb_shortcut">en_gb</string> <!-- English GB (not supported) -->
+    <string name="pref_language_enus_shortcut">en_us</string> <!-- English US (not supported) -->
+    <string name="pref_language_es_shortcut">es</string> <!-- Spanish -->
+    <string name="pref_language_fi_shortcut">fi</string> <!-- Finnish -->
+    <string name="pref_language_fr_shortcut">fr</string> <!-- French  -->
+    <string name="pref_language_hu_shortcut">hu</string> <!-- Hungarian -->
+    <string name="pref_language_it_shortcut">it</string> <!-- Italian -->
+    <string name="pref_language_ja_shortcut">ja</string> <!-- Japanese -->
+    <string name="pref_language_ko_shortcut">ko</string> <!-- Korean -->
+    <string name="pref_language_nl_shortcut">nl</string> <!-- Dutch -->
+    <string name="pref_language_pl_shortcut">pl</string> <!-- Polish -->
+    <string name="pref_language_pt_shortcut">pt</string> <!-- Portuguese  -->
+    <string name="pref_language_ptbr_shortcut">pt_br</string> <!-- Brazilian P. -->
+    <string name="pref_language_ru_shortcut">ru</string> <!-- Russian -->
+    <string name="pref_language_sk_shortcut">sk</string> <!-- Slovak --> 
 
-    <string name="pref_language_id_default">default</string> <!-- system language -->
-    <string name="pref_language_id_ar">ar</string> <!--  Arabic -->
-    <string name="pref_language_id_cz">cz</string> <!-- Czech -->
-    <string name="pref_language_id_da">da</string> <!--  Danish -->
-    <string name="pref_language_id_de">de</string> <!--  German -->
-    <string name="pref_language_id_el">el</string> <!--  Greek -->
-    <string name="pref_language_id_en">en</string> <!-- English -->
-    <string name="pref_language_id_en_gb">en_gb</string> <!-- English GB (not supported) -->
-    <string name="pref_language_id_en_us">en_us</string> <!-- English US (not supported) -->
-    <string name="pref_language_id_es">es</string> <!-- Spanish -->
-    <string name="pref_language_id_fi">fi</string> <!-- Finnish -->
-    <string name="pref_language_id_fr">fr</string> <!-- French  -->
-    <string name="pref_language_id_hu">hu</string> <!-- Hungarian -->
-    <string name="pref_language_id_it">it</string> <!-- Italian -->
-    <string name="pref_language_id_ja">ja</string> <!-- Japanese -->
-    <string name="pref_language_id_ko">ko</string> <!-- Korean -->
-    <string name="pref_language_id_nl">nl</string> <!-- Dutch -->
-    <string name="pref_language_id_pl">pl</string> <!-- Polish -->
-    <string name="pref_language_id_pt">pt</string> <!-- Portuguese  -->
-    <string name="pref_language_id_pt_br">pt_br</string> <!-- Brazilian P. -->
-    <string name="pref_language_id_ru">ru</string> <!-- Russian -->
-    <string name="pref_language_id_sk">sk</string> <!-- Slovak -->    
+    <string name="pref_language_default_value">default</string> <!-- system language -->  
 </resources>    
 
