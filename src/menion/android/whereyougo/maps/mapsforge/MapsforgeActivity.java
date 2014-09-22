@@ -366,14 +366,14 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     this.wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "AMV");
 
     if (savedInstanceState != null) {
-      if (savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+      if (savedInstanceState.getBoolean(BUNDLE_SHOW_MY_LOCATION, true)) {
         enableShowMyLocation(savedInstanceState.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
         if (savedInstanceState.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
           enableSnapToLocation(false);
         }
       }
     } else {
-      if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, false)) {
+      if (sharedPreferences.getBoolean(BUNDLE_SHOW_MY_LOCATION, true)) {
         enableShowMyLocation(sharedPreferences.getBoolean(BUNDLE_CENTER_AT_FIRST_FIX, false));
         if (sharedPreferences.getBoolean(BUNDLE_SNAP_TO_LOCATION, false)) {
           enableSnapToLocation(false);
