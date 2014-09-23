@@ -98,7 +98,7 @@
             android:theme="@style/ThemeSettings" />
         
         <activity
-            android:name="menion.android.whereyougo.network.DownloadActivity"
+            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
