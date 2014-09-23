@@ -141,8 +141,8 @@ public class MainActivity extends CustomMainActivity {
           }
         } catch (Exception e) {
           Logger.w(TAG, "refreshCartridge(), file:" + actualFile + ", e:" + e.toString());
-          // ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
-          file.delete();
+          ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, actualFile.getName()));
+          // file.delete();
         }
       }
     }
@@ -348,7 +348,9 @@ public class MainActivity extends CustomMainActivity {
           return;
         }
       } catch (Exception e) {
-        file.delete();
+        Logger.w(TAG, "startCartridge(), file:" + file + ", e:" + e.toString());
+        ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
+        // file.delete();
       }
       MainActivity.cartridgeFile = cart;
       MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
