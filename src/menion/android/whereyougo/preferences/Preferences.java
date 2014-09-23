@@ -146,36 +146,41 @@ public class Preferences {
   public static void init(Context c) {
     Logger.d(TAG, "init(" + c + ")");
     
-    GLOBAL_ROOT = getStringPreference( R.string.pref_KEY_S_ROOT );
-    GLOBAL_MAP_PROVIDER = getNumericalPreference( R.string.pref_KEY_S_MAP_PROVIDER );
-    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( R.string.pref_KEY_B_SAVEGAME_AUTO );
-    
-    APPEARANCE_STATUSBAR = getBooleanPreference( R.string.pref_KEY_B_STATUSBAR );
-    APPEARANCE_FULLSCREEN = getBooleanPreference( R.string.pref_KEY_B_FULLSCREEN );
-    APPEARANCE_HIGHLIGHT = getNumericalPreference( R.string.pref_KEY_S_HIGHLIGHT );
-    APPEARANCE_IMAGE_STRETCH = getBooleanPreference( R.string.pref_KEY_B_IMAGE_STRETCH );
-    APPEARANCE_FONT_SIZE = getNumericalPreference( R.string.pref_KEY_S_FONT_SIZE );
-
-    FORMAT_ALTITUDE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ALTITUDE );
-    FORMAT_ANGLE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ANGLE );
-    FORMAT_COO_LATLON =getNumericalPreference( R.string.pref_KEY_S_UNITS_COO_LATLON );
-    FORMAT_LENGTH = getNumericalPreference( R.string.pref_KEY_S_UNITS_LENGTH );
-    FORMAT_SPEED = getNumericalPreference( R.string.pref_KEY_S_UNITS_SPEED );
-
-    GPS_MIN_TIME = getNumericalPreference( R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); 
-    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
-    GPS_ALTITUDE_CORRECTION = getDecimalPreference( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
-
-    SENSOR_HARDWARE_COMPASS = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
-    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference( R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE );
-    SENSOR_BEARING_TRUE = getBooleanPreference( R.string.pref_KEY_B_SENSORS_BEARING_TRUE );
-    SENSOR_ORIENT_FILTER = getNumericalPreference( R.string.pref_KEY_S_SENSORS_ORIENT_FILTER );
-
-    GUIDING_GPS_REQUIRED = getBooleanPreference( R.string.pref_KEY_B_GUIDING_GPS_REQUIRED );
-    GUIDING_SOUNDS = getBooleanPreference( R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
-    GUIDING_WAYPOINT_SOUND = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
-    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
-    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_ZONE_POINT );
+    try {
+	    GLOBAL_ROOT = getStringPreference( R.string.pref_KEY_S_ROOT );
+	    GLOBAL_MAP_PROVIDER = getNumericalPreference( R.string.pref_KEY_S_MAP_PROVIDER );
+	    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( R.string.pref_KEY_B_SAVEGAME_AUTO );
+	    
+	    APPEARANCE_STATUSBAR = getBooleanPreference( R.string.pref_KEY_B_STATUSBAR );
+	    APPEARANCE_FULLSCREEN = getBooleanPreference( R.string.pref_KEY_B_FULLSCREEN );
+	    APPEARANCE_HIGHLIGHT = getNumericalPreference( R.string.pref_KEY_S_HIGHLIGHT );
+	    APPEARANCE_IMAGE_STRETCH = getBooleanPreference( R.string.pref_KEY_B_IMAGE_STRETCH );
+	    APPEARANCE_FONT_SIZE = getNumericalPreference( R.string.pref_KEY_S_FONT_SIZE );
+	
+	    FORMAT_ALTITUDE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ALTITUDE );
+	    FORMAT_ANGLE = getNumericalPreference( R.string.pref_KEY_S_UNITS_ANGLE );
+	    FORMAT_COO_LATLON =getNumericalPreference( R.string.pref_KEY_S_UNITS_COO_LATLON );
+	    FORMAT_LENGTH = getNumericalPreference( R.string.pref_KEY_S_UNITS_LENGTH );
+	    FORMAT_SPEED = getNumericalPreference( R.string.pref_KEY_S_UNITS_SPEED );
+	
+	    GPS_MIN_TIME = getNumericalPreference( R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); 
+	    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
+	    GPS_ALTITUDE_CORRECTION = getDecimalPreference( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
+	
+	    SENSOR_HARDWARE_COMPASS = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
+	    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
+	    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference( R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE );
+	    SENSOR_BEARING_TRUE = getBooleanPreference( R.string.pref_KEY_B_SENSORS_BEARING_TRUE );
+	    SENSOR_ORIENT_FILTER = getNumericalPreference( R.string.pref_KEY_S_SENSORS_ORIENT_FILTER );
+	
+	    GUIDING_GPS_REQUIRED = getBooleanPreference( R.string.pref_KEY_B_GUIDING_GPS_REQUIRED );
+	    GUIDING_SOUNDS = getBooleanPreference( R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
+	    GUIDING_WAYPOINT_SOUND = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
+	    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
+	    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_ZONE_POINT );
+    } catch (Exception e) {
+        Logger.e(TAG, "init() - ", e);
+        // TODO factory reset
+    }
   }
 }
