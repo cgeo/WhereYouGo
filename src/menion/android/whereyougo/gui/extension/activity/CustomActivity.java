@@ -24,11 +24,19 @@ import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class CustomActivity extends FragmentActivity {
 
@@ -38,7 +46,7 @@ public class CustomActivity extends FragmentActivity {
     // set main activity parameters
     if (!(activity instanceof CustomMainActivity)) {
       // Settings.setLanguage(this);
-      PreferenceValues.setScreenBasic(activity);
+      setScreenBasic(activity);
     }
 
     // set screen size
@@ -58,6 +66,16 @@ public class CustomActivity extends FragmentActivity {
     }
   }
 
+  protected static boolean setScreenBasic(Activity activity) {
+	    try {
+	      activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	      return true;
+	    } catch (Exception e) {
+	      // TODO Logger.e(TAG, "setFullScreen(" + activity + ")", e);
+	    }
+	    return false;
+	  }  
+  
   protected static void customOnPause(Activity activity) {
     // Logger.v(activity.getLocalClassName(), "customOnPause(), id:" +
     // activity.hashCode());
@@ -81,10 +99,58 @@ public class CustomActivity extends FragmentActivity {
   protected static void customOnStart(Activity activity) {
     // Logger.v(activity.getLocalClassName(), "customOnStart(), id:" +
     // activity.hashCode());
-    PreferenceValues.setStatusbar(activity);
-    PreferenceValues.setScreenFullscreen(activity);
+    setStatusbar(activity);
+    setScreenFullscreen(activity);
   }
 
+  public static void setStatusbar(Activity activity) {
+	    try {
+	         NotificationManager mNotificationManager =
+	            (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+	        // set statusbar
+	        if (Preferences.APPEARANCE_STATUSBAR) {
+	          Context context = activity.getApplicationContext();
+	          Intent intent =
+	              new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
+	          // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+	          intent.addCategory(Intent.CATEGORY_LAUNCHER);
+	          intent.setAction(Intent.ACTION_MAIN);
+	          PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
+	          final int sdkVersion = Integer.parseInt(android.os.Build.VERSION.SDK);
+	          Notification notif = null;
+	          if (sdkVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
+	            notif =
+	                new Notification(R.drawable.ic_title_logo, "WhereYouGo", System.currentTimeMillis());
+	            notif.setLatestEventInfo(activity, "WhereYouGo", "", pIntent);
+	          } else {
+	            NotificationCompat.Builder builder =
+	                new NotificationCompat.Builder(activity).setContentTitle("WhereYouGo")
+	                    .setSmallIcon(R.drawable.ic_title_logo).setContentIntent(pIntent);
+	            notif = builder.build();
+	          }
+	          notif.flags = Notification.FLAG_ONGOING_EVENT;
+	          mNotificationManager.notify(0, notif);
+	        } else {
+	          mNotificationManager.cancel(0);
+	        }
+	    } catch (Exception e) {
+	      // Logger.e(TAG, "setStatusbar(" + activity + ")", e);
+	    }
+  }  
+ 
+  public static void setScreenFullscreen(Activity activity) {
+	    try {
+	        if (Preferences.APPEARANCE_FULLSCREEN) {
+	          activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+	              WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	        } else {
+	          activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	        }
+	    } catch (Exception e) {
+	     // Logger.e(TAG, "setFullScreen(" + activity + ")", e);
+	    }
+  }  
+  
   protected Handler handler;
 
   @Override

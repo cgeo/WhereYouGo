@@ -56,7 +56,7 @@
     <string name="pref_language_default">Default system</string>
     <string name="pref_locale">Localization</string>
     <string name="pref_login">Login credentials</string>
-    <string name="pref_login_desc">For cartridge downloading from wherigo.com</string>
+    <string name="pref_login_desc" changed="2014-09-23">You need the login credentials to download Wherigo cartridges from wherigo.com.</string>
     <string name="pref_map_provider">Map provider</string>
     <string name="pref_map_provider_desc">Select map provider</string>
     <string name="pref_map_provider_vector">Mapsforge (offline and online maps)</string>
@@ -82,14 +82,14 @@
     <string name="pref_statusbar">Statusbar Icon</string>
     <string name="pref_statusbar_desc">Show icon in statusbar</string>
     <string name="pref_style_on_map">Style on map</string>
-    <string name="pref_units">Formats</string>
+    <string name="pref_units" changed="2014-09-17">Units</string>
     <string name="pref_units_altitude">Altitude units</string>
     <string name="pref_units_altitude_desc">Distance units for height</string>
     <string name="pref_units_angle">Angle units</string>
     <string name="pref_units_angle_degree">Degree</string>
     <string name="pref_units_angle_desc">Angle units for display</string>
     <string name="pref_units_angle_mil">Angular mil</string>
-    <string name="pref_units_coo_latlon">Lat/Lon format</string>
+    <string name="pref_units_coo_latlon" changed="2014-09-17">Coordinates format</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>

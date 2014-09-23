@@ -115,6 +115,9 @@
         <service android:name="menion.android.whereyougo.audio.AudioPlayService" />
 
         <!-- <activity android:name="com.paypal.android.MEP.PayPalActivity"></activity> -->
+        <activity android:name="menion.android.whereyougo.gui.activity.XmlSettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSettings" />
     </application>
 
 </manifest>

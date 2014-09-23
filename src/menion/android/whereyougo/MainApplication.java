@@ -17,8 +17,6 @@
 
 package menion.android.whereyougo;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -38,7 +36,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -46,6 +43,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import cz.matejcik.openwig.Engine;
+import menion.android.whereyougo.R;
 
 public class MainApplication extends Application {
 
@@ -142,10 +140,8 @@ public class MainApplication extends Application {
     IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
     filter.addAction(Intent.ACTION_SCREEN_OFF);
     mScreenReceiver = new ScreenReceiver();
-    registerReceiver(mScreenReceiver, filter);
-
-    // set basic settings values
-    Preferences.init(this);
+    registerReceiver(mScreenReceiver, filter);   
+    
     // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
     // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
     // "-");}
@@ -227,13 +223,26 @@ public class MainApplication extends Application {
     Log.d(TAG, "onCreate()");
     Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
-    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+    // set basic settings values
+    PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
+    Preferences.setContext( this );
+    Preferences.init(this);    
+
+    // get language 
     Configuration config = getBaseContext().getResources().getConfiguration();
-    String lang =
-        settings
-            .getString(PreferenceValues.KEY_S_LANGUAGE, PreferenceValues.VALUE_LANGUAGE_DEFAULT);
-    // Logger.d(TAG, "lang:" + lang + ", system:" + config.locale.getLanguage());
-    if (!lang.equals(PreferenceValues.VALUE_LANGUAGE_DEFAULT)
+    String lang = Preferences.getStringPreference( R.string.pref_KEY_S_LANGUAGE );
+    
+    /* 
+     * This block is a workaround to switch from 'cs' to 'cz' 
+     * remove this block after one year (2014-09)
+     */
+    if ( lang.equals( "cs" ) ) {
+    	lang = this.getString( R.string.pref_language_cz_shortcut );
+    	Preferences.setStringPreference( R.string.pref_KEY_S_LANGUAGE, lang );
+    }
+    
+    // set language
+    if (!lang.equals( getString( R.string.pref_language_default_value ) )
         && !config.locale.getLanguage().equals(lang)) {
       ArrayList<String> loc = StringToken.parse(lang, "_");
       if (loc.size() == 1) {
