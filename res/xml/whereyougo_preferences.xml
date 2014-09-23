@@ -34,6 +34,14 @@
       --> 
     </PreferenceScreen>
     
+    
+    
+    
+    <!--
+         *********************************************************************************
+         *********************************************************************************  
+    -->        
+    
 	<PreferenceScreen
         android:key=""
         android:title="@string/pref_global"
@@ -76,6 +84,7 @@
 
 			<Preference 
 			    android:summary="@string/pref_login_desc"
+			    android:icon="@android:drawable/ic_dialog_info"
 			    android:persistent="false"
 			    android:selectable="false" />
 			<menion.android.whereyougo.preferences.PreviewEditTextPreference
@@ -340,4 +349,17 @@
 
 	</PreferenceScreen>	
 
+    <!--
+    	Login credentials
+    		Button "Test login"
+    		
+    	Clean up
+    		Checkbox "Clean Cache on exit"
+    		Button "Clean Cache"
+    		Button "Remove log files"
+    		Button "Factory Reseting" (restart needed) 
+    	
+    	Info
+    		Button "Info" 
+     -->    
 </PreferenceScreen>

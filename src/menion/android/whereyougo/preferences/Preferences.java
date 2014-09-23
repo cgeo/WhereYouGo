@@ -107,7 +107,7 @@ public class Preferences {
   
   public static String getStringPreference( final int PreferenceId ) {
 	String key = prefContext.getString( PreferenceId );
-	return PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "false" );	  
+	return PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "" );	  
   } 
 
   public static double getDecimalPreference( final int PreferenceId ) {
