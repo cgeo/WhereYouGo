@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="menion.android.whereyougo"
     android:installLocation="auto"
-    android:versionCode="38"
-    android:versionName="0.8.12" >
+    android:versionCode="39"
+    android:versionName="0.8.13" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

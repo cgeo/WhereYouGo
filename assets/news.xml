@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+  
+  <update name="0.8.13" id="39" time="23.9.2014">
+	<li>fixed: whitespaces</li>
+	<li>fixed: StopSound function</li>
+	<li>update: show message about invalid cartridge files</li>
+	<li>update: contact</li>
+  </update>
     
   <update name="0.8.12" id="38" time="16.9.2014">
 	<li>fixed: unicode characters in login</li>
