@@ -32,8 +32,9 @@ public class AboutDialog extends CustomDialogFragment {
     }
     buffer.append(getString(R.string.web_page));
     buffer
-        .append("<br />&nbsp;&nbsp;<a href=\"https://code.google.com/r/biylda-whereyougo/\">https://code.google.com/r/biylda-whereyougo</a>");
-    buffer.append("<br />&nbsp;&nbsp;<a href=\"mailto:biylda@gmail.com/\">biylda@gmail.com</a>");
+        .append("<br />&nbsp;&nbsp;<a href=\"https://groups.google.com/d/forum/whereyougo\">https://groups.google.com/d/forum/whereyougo</a>");
+    buffer
+        .append("<br />&nbsp;&nbsp;<a href=\"mailto:whereyougo@googlegroups.com/\">whereyougo@googlegroups.com</a>");
     buffer.append("<br /><br />");
     buffer.append(getString(R.string.author));
     buffer.append("<br />&nbsp;&nbsp;<b>Menion Asamm</b>");
