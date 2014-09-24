@@ -54,8 +54,8 @@ public class AboutDialog extends CustomDialogFragment {
     buffer.append("<br />&nbsp;&nbsp;<b>Français</b> - Nam");
     buffer.append("<br /><br />");
     buffer.append(getString(R.string.libraries));
-    buffer.append("<br />&nbsp;&nbsp;<b>OpenWig</b>");
-    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Matejicek");
+    buffer.append("<br />&nbsp;&nbsp;<b>OpenWIG</b>");
+    buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;matejcik");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;<small><a href=\"https://code.google.com/p/openwig/\">https://code.google.com/p/openwig</a></small>");
     buffer.append("<br />&nbsp;&nbsp;<b>Kahlua</b>");
     buffer.append("<br />&nbsp;&nbsp;&nbsp;&nbsp;Kristofer Karlsson");
