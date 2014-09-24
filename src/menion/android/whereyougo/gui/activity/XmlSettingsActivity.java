@@ -30,21 +30,23 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 
 
-public class XmlSettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class XmlSettingsActivity extends PreferenceActivity 
+	implements SharedPreferences.OnSharedPreferenceChangeListener,
+	Preference.OnPreferenceClickListener	{
     
 	private static final String TAG = "XmlSettingsActivity";
 	
 	public boolean needRestart;
 	
-	private static final int REQUEST_GUIDING_WPT_SOUND = 0;
-	private static final int REQUEST_ROOT = 1;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.settings);
         
-        /* I don't really know why I cannot call CustomActivity.customOnCreate(this); */
+		needRestart = false; 
+		
+		/* workaround: I don't really know why I cannot call CustomActivity.customOnCreate(this); - OMG! */
         switch (Preferences.APPEARANCE_FONT_SIZE) {
 	        case PreferenceValues.VALUE_FONT_SIZE_SMALL:
 	          this.setTheme(R.style.FontSizeSmall);
@@ -57,30 +59,33 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 	          break;
         }        
         
+		/*
+		 * 
+		 */		
         addPreferencesFromResource(R.xml.whereyougo_preferences);
 		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 		
+		/*
+		 * Remove internal preferences
+		 */
 		Preference somePreference = findPreference( R.string.pref_KEY_X_HIDDEN_PREFERENCES );
 		PreferenceScreen preferenceScreen = getPreferenceScreen();
 		preferenceScreen.removePreference(somePreference);		
 		
-		needRestart = false; // TODO where it handle?
+		/*
+		 * Register OnClick handler
+		 */		
+        Preference preferenceRoot = findPreference( R.string.pref_KEY_S_ROOT );
+        preferenceRoot.setOnPreferenceClickListener( this ); 
 		
-	
-        Preference x = findPreference( R.string.pref_KEY_S_ROOT );
-        x.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				FilePicker.setFileDisplayFilter(new FilterByFileExtension(".gwc"));
-				FilePicker.setFileSelectFilter(null);
-				
-				startActivityForResult(new Intent(XmlSettingsActivity.this, FilePicker.class), REQUEST_ROOT );
-				return false;
-			}		
-        }); 
-        
-        String dir = Preferences.getStringPreference( R.string.pref_KEY_S_ROOT );
-        x.setSummary( "(" + dir + ") " + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(        
+        Preference preferenceAbout = findPreference( R.string.pref_KEY_X_ABOUT );
+        preferenceAbout.setOnPreferenceClickListener( this ); 
+		
+		/*
+		 * Workaround: Update/set value preview 
+		 */
+        // String dir = Preferences.getStringPreference( R.string.pref_KEY_S_ROOT );
+        // x.setSummary( "(" + dir + ") " + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(        
         
 		/* TODO - check this code */ 
 	    if (!Utils.isAndroid201OrMore()) {
@@ -89,10 +94,6 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 	    		prefSensorFilter.setEnabled(false);
 	    	}
 	    }
-
-	    /* 
-	     * TODO workaround to fix old value for cz (until version 0.8.12, remove this block after one year!)
-	     */
 	    
 	    
     }
@@ -107,6 +108,27 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
 		} catch (Exception e) {
 			Logger.e(getLocalClassName(), "onDestroy()", e);
 		}		
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		boolean status = false;
+		String key = preference.getKey();
+		
+		if ( key.equals( "" ) ) {
+			// DO NOTHING
+		} else if ( key.equals( getString( R.string.pref_KEY_S_ROOT ) ) ) {
+			// call file picker
+			FilePicker.setFileDisplayFilter(new FilterByFileExtension(".gwc"));
+			FilePicker.setFileSelectFilter(null);
+			startActivityForResult(new Intent(XmlSettingsActivity.this, FilePicker.class), R.string.pref_KEY_S_ROOT );
+			return false;		
+		} else if ( key.equals( getString( R.string.pref_KEY_X_ABOUT ) ) ) {
+			// open about dialog
+		} else {
+			return status;
+		}
+		return status;
 	}
 	
     @Override
@@ -150,7 +172,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
               if (!Utils.isIntentAvailable(intent)) {
                 intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
               }
-              this.startActivityForResult(intent, REQUEST_GUIDING_WPT_SOUND);
+              this.startActivityForResult(intent, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND);
             }
   		}
   		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE ) ) {
@@ -244,7 +266,7 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
     }	
         
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_GUIDING_WPT_SOUND) {
+        if (requestCode == R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND) {
             if (resultCode == Activity.RESULT_OK && data != null) {
               Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
               if (uri != null) {
@@ -256,16 +278,18 @@ public class XmlSettingsActivity extends PreferenceActivity implements SharedPre
                 Preferences.GUIDING_WAYPOINT_SOUND = Utils.parseInt( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
               }
             }
-          } else if (requestCode == REQUEST_ROOT) {
+          } else if (requestCode == R.string.pref_KEY_S_ROOT) {
             if (resultCode == Activity.RESULT_OK && data != null) {
               String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
               if (filename != null) {
                 File file = new File(filename);
                 String dir = file.getParent();
-                Preferences.setStringPreference( R.string.pref_KEY_S_ROOT, dir);
+				
+				Preference preferenceRoot = findPreference( R.string.pref_KEY_S_ROOT );
+				preferenceRoot.persistString( dir );
+				preferenceRoot.notifyChanged();
+				
                 Preferences.GLOBAL_ROOT = dir;
-                Preference pref = findPreference( R.string.pref_KEY_S_ROOT );
-                pref.setSummary( "(" + dir + ")" + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(
                 FileSystem.setRootDirectory(null, dir);
                 MainActivity.refreshCartridges();
               }
