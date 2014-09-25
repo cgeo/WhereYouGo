@@ -75,7 +75,10 @@ public class XmlSettingsActivity extends PreferenceActivity
         preferenceRoot.setOnPreferenceClickListener( this ); 
 		
         Preference preferenceAbout = findPreference( R.string.pref_KEY_X_ABOUT );
-        preferenceAbout.setOnPreferenceClickListener( this ); 
+        if ( preferenceAbout != null ) {
+        	preferenceAbout.setOnPreferenceClickListener( this ); 
+        	
+        }
 		
 		/*
 		 * Workaround: Update/set value preview 

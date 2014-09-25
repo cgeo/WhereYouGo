@@ -40,6 +40,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 import android.widget.Toast;
 import cz.matejcik.openwig.Engine;
@@ -217,12 +219,61 @@ public class MainApplication extends Application {
     }
   }
 
+  /* LEGECY SUPPORT - less v0.8.14
+   * Converts preference - comes from a former version (less 0.8.14) 
+   * which are not stored as string into string.
+   */
+  private void legecySupport4PreferencesFloat( int prefId ) {
+    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+	String key = getString( prefId );
+	
+	try {  
+  	  Float value = sharedPref.getFloat( key, 0.0f );
+  	  sharedPref.edit().remove( key ).commit();
+  	  sharedPref.edit().putString(key, String.valueOf( value ) ).commit();  
+	} catch( Exception e ) {
+    	Log.e( TAG, "legecySupportFloat2Float() - panic remove", e );
+    	sharedPref.edit().remove( key ).commit();
+    }		 
+  }
+  
+  private void legecySupport4PreferencesInt( int prefId ) {
+    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    String key = getString( prefId );
+
+    try {  
+      int value = sharedPref.getInt( key, 0 );
+      sharedPref.edit().remove( key ).commit();
+      sharedPref.edit().putString(key, String.valueOf(value) ).commit();  
+    } catch( Exception e ) {
+      Log.e( TAG, "legecySupportFloat2Int() - panic remove", e );
+      sharedPref.edit().remove( key ).commit();
+    }		 
+  }  
+  /* LEGECY SUPPORT -- END */
+  
   @Override
   public void onCreate() {
     super.onCreate();
     Log.d(TAG, "onCreate()");
     Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
+    /* LEGECY SUPPORT - less v0.8.14
+     * Converts preference - comes from a former version (less 0.8.14) 
+     * which are not stored as string into string.
+     */
+    try {
+	   	// legecySupport4PreferencesFloat( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
+	   	legecySupport4PreferencesFloat( R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE );
+	   	legecySupport4PreferencesFloat( R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE );
+	   	legecySupport4PreferencesFloat( R.string.pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE );
+	   	legecySupport4PreferencesInt( R.string.pref_KEY_S_APPLICATION_VERSION_LAST );
+    } catch( Exception e ) {
+    	Log.e( TAG, "onCreate() - PANIC! Wipe out preferences", e );
+    	PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
+    }
+    /* LEGECY SUPPORT -- END */
+    
     // set basic settings values
     PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
     Preferences.setContext( this );
@@ -232,7 +283,7 @@ public class MainApplication extends Application {
     Configuration config = getBaseContext().getResources().getConfiguration();
     String lang = Preferences.getStringPreference( R.string.pref_KEY_S_LANGUAGE );
     
-    /* 
+    /* LEGECY SUPPORT - less v0.8.14
      * This block is a workaround to switch from 'cs' to 'cz' 
      * remove this block after one year (2014-09)
      */
@@ -240,6 +291,7 @@ public class MainApplication extends Application {
     	lang = this.getString( R.string.pref_language_cz_shortcut );
     	Preferences.setStringPreference( R.string.pref_KEY_S_LANGUAGE, lang );
     }
+    /* LEGECY SUPPORT -- END */
     
     // set language
     if (!lang.equals( getString( R.string.pref_language_default_value ) )
