@@ -227,28 +227,38 @@ public class MainApplication extends Application {
     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 	String key = getString( prefId );
 	
-	try {  
-  	  Float value = sharedPref.getFloat( key, 0.0f );
-  	  sharedPref.edit().remove( key ).commit();
-  	  sharedPref.edit().putString(key, String.valueOf( value ) ).commit();  
-	} catch( Exception e ) {
-    	Log.e( TAG, "legecySupportFloat2Float() - panic remove", e );
-    	sharedPref.edit().remove( key ).commit();
-    }		 
+	try {
+		  String vlaue = sharedPref.getString( key, "" );
+		} catch( Exception e ) {
+			try { 
+				  Log.d( TAG, "legecySupport4PreferencesFloat() - LEGECY SUPPORT: convert float to string" );
+			  	  Float value = sharedPref.getFloat( key, 0.0f );
+			  	  sharedPref.edit().remove( key ).commit();
+			  	  sharedPref.edit().putString(key, String.valueOf( value ) ).commit();  
+				} catch( Exception ee ) {
+			    	Log.e( TAG, "legecySupport4PreferencesFloat() - panic remove", ee );
+			    	sharedPref.edit().remove( key ).commit();
+			    }			
+		}
   }
   
   private void legecySupport4PreferencesInt( int prefId ) {
     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     String key = getString( prefId );
 
-    try {  
-      int value = sharedPref.getInt( key, 0 );
-      sharedPref.edit().remove( key ).commit();
-      sharedPref.edit().putString(key, String.valueOf(value) ).commit();  
+    try {
+    	  String value = sharedPref.getString( key, "" );
     } catch( Exception e ) {
-      Log.e( TAG, "legecySupportFloat2Int() - panic remove", e );
-      sharedPref.edit().remove( key ).commit();
-    }		 
+	    try {  
+	    	Log.d( TAG, "legecySupport4PreferencesInt() - LEGECY SUPPORT: convert int to string" );	
+	      int value = sharedPref.getInt( key, 0 );
+	      sharedPref.edit().remove( key ).commit();
+	      sharedPref.edit().putString(key, String.valueOf(value) ).commit();  
+	    } catch( Exception ee ) {
+	      Log.e( TAG, "legecySupportFloat2Int() - panic remove", ee );
+	      sharedPref.edit().remove( key ).commit();
+	    }	
+    }
   }  
   /* LEGECY SUPPORT -- END */
   

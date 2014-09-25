@@ -58,7 +58,7 @@
     <string name="pref_language_default">Systemsprache</string>
     <string name="pref_locale">Lokalisierung</string>
     <string name="pref_login">Zugangsdaten</string>
-    <string name="pref_login_desc">Sie benötigen die Zugangsdaten für den Download von Wherigo Cartridge von wherigo.com.</string>
+    <string name="pref_login_desc">Sie benötigen die Zugangsdaten für den Download von Wherigo Cartridge von wherigo.com. Haben Sie keine Zugangsdaten für www.wherigo.com können Sie auch ihre Zugangsdaten von www.geocaching.com nutzen.</string>
     <string name="pref_map_provider">Kartengrundlage</string>
     <string name="pref_map_provider_desc">Map provider wählen</string>
     <string name="pref_map_provider_vector">Mapsforge (offline und online Karten)</string>
