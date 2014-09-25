@@ -56,7 +56,7 @@
       android:title="@string/pref_global"
       android:key=""
       android:persistent="false">    
-      <Preference
+      <menion.android.whereyougo.preferences.PreviewPreference
         android:key="@string/pref_KEY_S_ROOT"
         android:defaultValue="@string/pref_DEFAULT_ROOT" 
         android:title="@string/pref_root"

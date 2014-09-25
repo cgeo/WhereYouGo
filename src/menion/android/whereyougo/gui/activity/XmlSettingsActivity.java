@@ -3,9 +3,6 @@ package menion.android.whereyougo.gui.activity;
 import java.io.File;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
@@ -13,23 +10,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity;
-import android.text.InputType;
-import android.text.method.PasswordTransformationMethod;
-import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
-import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
 import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
-import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.preferences.PreviewPreference;
 import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -308,8 +297,8 @@ public class XmlSettingsActivity extends PreferenceActivity
                 File file = new File(filename);
                 String dir = file.getParent();
 				
-				// PreviewPreference preferenceRoot = (PreviewPreference)findPreference( R.string.pref_KEY_S_ROOT );
-				// preferenceRoot.setValue(dir);
+				PreviewPreference preferenceRoot = (PreviewPreference)findPreference( R.string.pref_KEY_S_ROOT );
+				preferenceRoot.setValue(dir);
 				
                 Preferences.GLOBAL_ROOT = dir;
                 FileSystem.setRootDirectory(null, dir);

@@ -24,6 +24,7 @@
 ...
 -->
 <resources>
+    <string name="pref_KEY_X_ABOUT">KEY_X_ABOUT</string>
     <string name="pref_KEY_X_HIDDEN_PREFERENCES">KEY_X_HIDDEN_PREFERENCES</string>
     <string name="pref_KEY_S_APPLICATION_VERSION_LAST">KEY_S_APPLICATION_VERSION_LAST</string>
     <string name="pref_KEY_S_ROOT">KEY_S_ROOT</string>
