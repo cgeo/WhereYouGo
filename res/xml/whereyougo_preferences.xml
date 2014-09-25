@@ -46,7 +46,7 @@
      ********************************************************************************* 
   -->    
   
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
 	android:icon="@drawable/ic_action_settings"
     android:title="@string/pref_global"
@@ -75,9 +75,9 @@
         android:title="@string/pref_save_game_auto"
         android:summary="@string/pref_save_game_auto_desc" />
     </PreferenceCategory>
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>
+  </PreferenceScreen>
   
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
     android:icon="@drawable/ic_action_accounts"
 	android:title="@string/pref_login"
@@ -108,9 +108,9 @@
         android:inputType="textPassword" 
         whereyougo:previewTemplate="(%1$) "/>
     </PreferenceCategory>     
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>
+  </PreferenceScreen>
   
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
     android:icon="@drawable/ic_action_location_found"
 	android:title="@string/gps_and_location"
@@ -150,11 +150,11 @@
         android:title="@string/pref_guiding"
         android:summary="@string/pref_guiding_gps_required_desc" />  
     </PreferenceCategory>    
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>
+  </PreferenceScreen>
   
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
-    android:icon="@drawable/ic_action_location_found"
+    android:icon="@android:drawable/ic_menu_compass"
 	android:title="@string/pref_sensors"
     android:persistent="false">
 
@@ -194,9 +194,9 @@
         android:entries="@array/pref_sensors_orient_filter_entries"
         android:entryValues="@array/pref_sensors_orient_filter_entry_values" /> 
     </PreferenceCategory>            
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>
+  </PreferenceScreen>
     
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
     android:icon="@drawable/ic_action_directions"
 	android:title="@string/pref_guiding"
@@ -243,9 +243,9 @@
         android:entries="@array/pref_guiding_zone_point_entries"
         android:entryValues="@array/pref_guiding_zone_point_entry_values" />                  
     </PreferenceCategory>    
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>
+  </PreferenceScreen>
   
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
     android:icon="@drawable/ic_action_picture"
 	android:title="@string/pref_appearance"
@@ -286,9 +286,9 @@
         android:title="@string/pref_image_stretch"
         android:summary="@string/pref_image_stretch_desc" />
     </PreferenceCategory> 
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>  
+  </PreferenceScreen>  
     
-  <menion.android.whereyougo.preferences.IconPreferenceScreen
+  <PreferenceScreen
     android:key=""
     android:icon="@drawable/ic_action_web_site"
 	android:title="@string/pref_locale"
@@ -357,14 +357,15 @@
         android:entryValues="@array/pref_units_angle_entry_values" /> 
     </PreferenceCategory>
 
-  </menion.android.whereyougo.preferences.IconPreferenceScreen>  
+  </PreferenceScreen>  
  
-  <Preference
-    android:key=""
-    android:icon="@android:drawable/ic_dialog_info"
+  <!--
+  Preference
+    android:key="@string/pref_KEY_X_ABOUT"
+    android:icon="@android:drawable/ic_menu_info_details"
     android:persistent="false"	
-    android:title="@string/pref_about" />
-
+    android:title="@string/about_application" />
+  -->
   <!--
     Login credentials
       Button "Test login"
