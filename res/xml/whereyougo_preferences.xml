@@ -75,6 +75,24 @@
         android:title="@string/pref_save_game_auto"
         android:summary="@string/pref_save_game_auto_desc" />
     </PreferenceCategory>
+  
+    <!-- 
+    <PreferenceCategory 
+      android:title="Clean up"
+      android:key=""
+      android:persistent="false">  
+      <CheckBoxPreference
+        android:key=""
+        android:defaultValue="true" 
+        android:title="Clean cache on exit"
+        android:summary="Removes all files from cache on exit" />  
+      <Preference 
+        android:key="to-be-define"
+        android:summary="Sets all settings to default and cleans caches"
+        android:persistent="false"
+        android:title="Factory reset" />          
+    </PreferenceCategory>
+    -->       
   </PreferenceScreen>
   
   <PreferenceScreen
@@ -107,6 +125,13 @@
         android:summary="@string/pref_gc_password_desc"  
         android:inputType="textPassword" 
         whereyougo:previewTemplate="(%1$) "/>
+      <!-- 
+      <Preference 
+        android:key="to-be-define"
+        android:summary=""
+        android:persistent="false"
+        android:title="Verify login credentials" /> 
+      -->         
     </PreferenceCategory>     
   </PreferenceScreen>
   
@@ -366,17 +391,5 @@
     android:persistent="false"	
     android:title="@string/about_application" />
   -->
-  <!--
-    Login credentials
-      Button "Test login"
-      
-    Clean up
-      Checkbox "Clean Cache on exit"
-      Button "Clean Cache"
-      Button "Remove log files"
-      Button "Factory Reseting" (restart needed) 
-    
-    Info
-      Button "Info" 
-   -->  
+
 </PreferenceScreen>
