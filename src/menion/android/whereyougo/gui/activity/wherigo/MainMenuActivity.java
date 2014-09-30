@@ -17,15 +17,9 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import locus.api.android.ActionDisplay.ExtraAction;
-import locus.api.android.ActionDisplayTracks;
-import locus.api.android.utils.LocusUtils;
-import locus.api.android.utils.RequiredVersionMissingException;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.MainActivity;
@@ -35,11 +29,9 @@ import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.maps.utils.LocusMapDataProvider;
-import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
+import menion.android.whereyougo.maps.utils.MapDataProvider;
+import menion.android.whereyougo.maps.utils.MapHelper;
 import menion.android.whereyougo.openwig.WUI;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -224,21 +216,6 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     return description;
   }
 
-  private void locusMap() {
-    LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addAll();
-    try {
-      ActionDisplayTracks.sendTracks(this, mdp.getTracks(), ExtraAction.CENTER);
-      // ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
-    } catch (RequiredVersionMissingException e) {
-      Logger.e(TAG, "btn02.click() - missing locus version", e);
-      LocusUtils.callInstallLocus(this);
-    } catch (Exception e) {
-      Logger.e(TAG, "btn02.click() - unknown problem", e);
-    }
-  }
-
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (A.getMain() == null || Engine.instance == null) {
@@ -286,14 +263,10 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     }, getString(R.string.map), new CustomDialog.OnClickListener() {
       @Override
       public boolean onClick(CustomDialog dialog, View v, int btn) {
-        switch (Preferences.GLOBAL_MAP_PROVIDER) {
-          case PreferenceValues.VALUE_MAP_PROVIDER_VECTOR:
-            vectorMap();
-            break;
-          case PreferenceValues.VALUE_MAP_PROVIDER_LOCUS:
-            locusMap();
-            break;
-        }
+        MapDataProvider mdp = MapHelper.getMapDataProvider();
+        mdp.clear();
+        mdp.addAll();
+        MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
         return true;
       }
     }, getString(R.string.save_game), new CustomDialog.OnClickListener() {
@@ -406,17 +379,5 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         CustomDialog.setContent(MainMenuActivity.this, lv, 0, true, false);
       }
     });
-  }
-
-  private void vectorMap() {
-    VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addAll();
-    MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-    /*
-     * Intent intent = new Intent(this,
-     * org.mapsforge.applications.android.advancedmapviewer.AdvancedMapViewer.class);
-     * intent.putExtra("center", true); startActivity(intent);
-     */
   }
 }

@@ -20,11 +20,6 @@ package menion.android.whereyougo.gui.activity.wherigo;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import locus.api.android.ActionDisplay.ExtraAction;
-import locus.api.android.ActionDisplayTracks;
-import locus.api.android.ActionTools;
-import locus.api.android.utils.LocusUtils;
-import locus.api.android.utils.RequiredVersionMissingException;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
@@ -35,11 +30,10 @@ import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.guide.Guide;
-import menion.android.whereyougo.maps.utils.LocusMapDataProvider;
-import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
+import menion.android.whereyougo.maps.utils.MapDataProvider;
+import menion.android.whereyougo.maps.utils.MapHelper;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
-import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
@@ -114,34 +108,6 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
   @Override
   public boolean isRequired() {
     return false;
-  }
-
-  private void locusMap() {
-    if (et == null || !et.isLocated())
-      return;
-    LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addAll();
-    try {
-      locus.api.objects.extra.Location loc = new locus.api.objects.extra.Location(TAG);
-      if (et instanceof Zone) {
-        Zone z = ((Zone) et);
-        loc.setLatitude(z.nearestPoint.latitude);
-        loc.setLongitude(z.nearestPoint.longitude);
-      } else {
-        loc.setLatitude(et.position.latitude);
-        loc.setLongitude(et.position.longitude);
-      }
-      locus.api.objects.extra.Waypoint wpt = new locus.api.objects.extra.Waypoint(et.name, loc);
-      ActionDisplayTracks.sendTracks(this, mdp.getTracks(), ExtraAction.CENTER);
-      // ActionDisplayTracks.sendTracksSilent(activity, tracks, true);
-      ActionTools.actionStartGuiding(this, wpt);
-    } catch (RequiredVersionMissingException e) {
-      Logger.e(TAG, "btn02.click() - missing locus version", e);
-      LocusUtils.callInstallLocus(this);
-    } catch (Exception e) {
-      Logger.e(TAG, "btn02.click() - unknown problem", e);
-    }
   }
 
   public void onCreate(Bundle savedInstanceState) {
@@ -277,18 +243,10 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
 
         @Override
         public boolean onClick(CustomDialog dialog, View v, int btn) {
-          switch (Preferences.GLOBAL_MAP_PROVIDER) {
-            case PreferenceValues.VALUE_MAP_PROVIDER_VECTOR:
-              vectorMap();
-              // this was causing closing of another DetailsActivity, that was called in action
-              //DetailsActivity.this.finish();
-              break;
-            case PreferenceValues.VALUE_MAP_PROVIDER_LOCUS:
-              locusMap();
-              // this was causing closing of another DetailsActivity, that was called in action
-              //DetailsActivity.this.finish();
-              break;
-          }
+          MapDataProvider mdp = MapHelper.getMapDataProvider();
+          mdp.clear();
+          mdp.addAll();
+          MainActivity.wui.showScreen(WUI.SCREEN_MAP, et);
           return true;
         }
       };
@@ -415,15 +373,5 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
     } else {
       tvDistance.setText("Distance: " + UtilsFormat.formatDistance(z.distance, false));
     }
-  }
-
-  // show vector map
-  private void vectorMap() {
-    VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addAll();
-    MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-    //MainActivity.wui.showMap(true, true);
-  }
-  
+  }  
 }

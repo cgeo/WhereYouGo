@@ -33,6 +33,7 @@ import menion.android.whereyougo.gui.activity.wherigo.MainMenuActivity;
 import menion.android.whereyougo.gui.activity.wherigo.PushDialogActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.maps.utils.MapHelper;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
@@ -189,21 +190,6 @@ public class WUI implements UI {
     UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
   }
 
-  public void showMap(boolean center, boolean navigate) {
-    Activity activity = getParentActivity();
-    Logger
-        .w(TAG, "showMap(), parent:" + activity + ", center:" + center + ", navigate:" + navigate);
-
-    // disable currentActivity
-    PreferenceValues.setCurrentActivity(null);
-    Intent intent =
-        new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
-    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-    intent.putExtra("center", center);
-    intent.putExtra("navigate", navigate);
-    activity.startActivity(intent);
-  }
-
   public void showScreen(int screenId, EventTable details) {
     Activity activity = getParentActivity();
     Logger.w(TAG, "showScreen(" + screenId + "), parent:" + activity + ", param:" + details);
@@ -261,10 +247,7 @@ public class WUI implements UI {
         activity.startActivity(intent10);
         return;
       case SCREEN_MAP:
-        // Intent intent11 =
-        // new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
-        // activity.startActivity(intent11);
-        showMap(true, true);
+        MapHelper.showMap(activity, details);
         return;
     }
 

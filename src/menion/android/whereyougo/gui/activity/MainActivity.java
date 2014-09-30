@@ -24,8 +24,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import locus.api.android.ActionDisplay.ExtraAction;
-import locus.api.android.ActionDisplayPoints;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.MainApplication;
@@ -35,15 +33,13 @@ import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.dialog.ChooseCartridgeDialog;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.maps.utils.LocusMapDataProvider;
-import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
+import menion.android.whereyougo.maps.utils.MapDataProvider;
+import menion.android.whereyougo.maps.utils.MapHelper;
 import menion.android.whereyougo.openwig.WLocationService;
 import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -178,18 +174,10 @@ public class MainActivity extends CustomMainActivity {
   }
 
   private void clickMap() {
-    // check cartridges
-    // if (!isAnyCartridgeAvailable()) {
-    // return;
-    // }
-    switch (Preferences.GLOBAL_MAP_PROVIDER) {
-      case PreferenceValues.VALUE_MAP_PROVIDER_VECTOR:
-        vectorMap();
-        break;
-      case PreferenceValues.VALUE_MAP_PROVIDER_LOCUS:
-        locusMap();
-        break;
-    }
+    MapDataProvider mdp = MapHelper.getMapDataProvider();
+    mdp.clear();
+    mdp.addCartridges(cartridgeFiles);
+    MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
   }
 
   private void clickStart() {
@@ -281,18 +269,6 @@ public class MainActivity extends CustomMainActivity {
     }
   }
 
-  private void locusMap() {
-    LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addCartridges(cartridgeFiles);
-
-    try {
-      ActionDisplayPoints.sendPack(this, mdp.getPoints(), ExtraAction.NONE);
-    } catch (Exception e) {
-      Logger.e(TAG, "clickMap() locusMap()", e);
-    }
-  }
-
   @Override
   public void onResume() {
     super.onResume();
@@ -327,13 +303,6 @@ public class MainActivity extends CustomMainActivity {
 //        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wherigo.com/cartridge/details.aspx?CGUID=2320bd5c-9787-4de8-aec3-e4ac7a6abe71")));
         return false;
     }
-  }
-
-  private void vectorMap() {
-    VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-    mdp.clear();
-    mdp.addCartridges(cartridgeFiles);
-    MainActivity.wui.showMap(false, false);
   }
   
   private void startCartridge(File file) {
