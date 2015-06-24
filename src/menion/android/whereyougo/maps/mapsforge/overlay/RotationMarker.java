@@ -1,7 +1,6 @@
-package menion.android.whereyougo.maps.mapsforge.overlay;
-
 /*
  * Copyright 2010, 2011, 2012 mapsforge.org
+ * Copyright 2013, 2014 biylda <biylda@gmail.com>
  * 
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
@@ -14,6 +13,8 @@ package menion.android.whereyougo.maps.mapsforge.overlay;
  * You should have received a copy of the GNU Lesser General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
+package menion.android.whereyougo.maps.mapsforge.overlay;
 
 import org.mapsforge.android.maps.overlay.Marker;
 import org.mapsforge.core.model.BoundingBox;
