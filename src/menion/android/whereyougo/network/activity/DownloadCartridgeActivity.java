@@ -23,6 +23,7 @@ import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
 import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
 import android.app.ProgressDialog;
@@ -44,13 +45,13 @@ import android.widget.Toast;
 
   public class DownloadCartridgeActivity extends CustomMainActivity {
     private static final String TAG = "DownloadCartridgeActivity";
-    TextView tvDescription;
-    TextView tvState;
-    Button buttonDownload;
-    Button buttonStart;
-    DownloadCartridgeTask downloadTask;
-    String cguid;
-    File cartridgeFile;
+    private TextView tvDescription;
+    private TextView tvState;
+    private Button buttonDownload;
+    private Button buttonStart;
+    private DownloadCartridgeTask downloadTask;
+    private String cguid;
+    private File cartridgeFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,12 +97,8 @@ import android.widget.Toast;
             downloadTask.cancel(true);
             downloadTask = null;
           } else {
-            String username =
-                PreferenceValues.getPrefString(DownloadCartridgeActivity.this,
-                    PreferenceValues.KEY_S_GC_USERNAME, PreferenceValues.DEFAULT_GC_USERNAME);
-            String password =
-                PreferenceValues.getPrefString(DownloadCartridgeActivity.this,
-                    PreferenceValues.KEY_S_GC_PASSWORD, PreferenceValues.DEFAULT_GC_PASSWORD);
+            String username = Preferences.GC_USERNAME;
+            String password = Preferences.GC_PASSWORD;
             downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
             downloadTask.execute(cguid);
           }

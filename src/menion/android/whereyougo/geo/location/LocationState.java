@@ -202,9 +202,7 @@ public class LocationState {
     try {
       boolean screenOff = (A.getApp() != null && ((MainApplication) A.getApp()).isScreenOff());
       boolean disableWhenHide =
-          context == null ? false : PreferenceValues.getPrefBoolean(context,
-              PreferenceValues.KEY_B_GPS_DISABLE_WHEN_HIDE,
-              PreferenceValues.DEFAULT_GPS_DISABLE_WHEN_HIDE);
+          context == null ? false : Preferences.GPS_DISABLE_WHEN_HIDE;
 
       // also disable wake-lock here
       if (!PreferenceValues.existCurrentActivity() || screenOff) {

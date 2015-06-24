@@ -17,6 +17,7 @@ package menion.android.whereyougo.maps.mapsforge.model;
 
 import org.mapsforge.core.model.GeoPoint;
 
+@SuppressWarnings("serial")
 public class MyGeoPoint extends GeoPoint {
   int id;
 

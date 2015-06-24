@@ -144,10 +144,8 @@ public class Guide implements IGuide {
   }
 
   protected void playCustomSound() {
-    String uri =
-        PreferenceValues.getPrefString(
-            PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI, "");
-    if (uri.length() > 0) {
+    String uri = Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
+    if (uri != null && uri.length() > 0) {
       final AudioClip audioClip = new AudioClip(A.getApp(), Uri.parse(uri));
       audioClip.play();
       new Timer().schedule(new TimerTask() {

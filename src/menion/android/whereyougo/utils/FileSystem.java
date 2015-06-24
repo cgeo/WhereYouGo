@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Locale;
 
 import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.MainApplication;
@@ -41,8 +42,8 @@ public class FileSystem {
   public static String CACHE = "cache/";
   public static String CACHE_AUDIO = CACHE + "audio/";
 
-  public static final String CARD_ROOT = "{CARD_ROOT}";
-  public static final String[] EXTERNAL_DIRECTORIES = new String[] {CARD_ROOT + "external_sd",
+  private static final String CARD_ROOT = "{CARD_ROOT}";
+  private static final String[] EXTERNAL_DIRECTORIES = new String[] {CARD_ROOT + "external_sd",
       CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
       CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
       "/mnt/emms", // CM7 + SGS2
@@ -108,7 +109,7 @@ public class FileSystem {
   public static File[] getFiles(String folder, final String filter) {
     FileFilter fileFilter = new FileFilter() {
       public boolean accept(File pathname) {
-        if (pathname.getName().toLowerCase().endsWith(filter))
+        if (pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter))
           return true;
         return false;
       }
@@ -138,7 +139,7 @@ public class FileSystem {
   }
 
   /**
-   * Checks folders in given filePath and creates them if neccessary
+   * Checks folders in given filePath and creates them if necessary
    * 
    * @param filePath file name
    */

@@ -32,7 +32,6 @@ import cz.matejcik.openwig.Zone;
 
 public class ListZonesActivity extends ListVariousActivity implements ILocationEventListener {
 
-  @SuppressWarnings("unused")
   private static final String TAG = "ListZones";
 
   @Override

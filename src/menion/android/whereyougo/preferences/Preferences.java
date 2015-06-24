@@ -46,8 +46,8 @@ public class Preferences {
   /** save game automatically option */
   public static boolean GLOBAL_SAVEGAME_AUTO;
   /** GC credentials */
-  // public static String GLOBAL_GC_USERNAME;
-  // public static String GLOBAL_GC_PASSWORD;
+  public static String GC_USERNAME;
+  public static String GC_PASSWORD;
   /** is status icon enabled */
   public static boolean APPEARANCE_STATUSBAR;
   /** is fullscreen enabled */
@@ -66,6 +66,8 @@ public class Preferences {
   public static boolean GPS_BEEP_ON_GPS_FIX;
   /** altitude correction */
   public static double GPS_ALTITUDE_CORRECTION;
+  /** disable GPS when not needed */
+  public static boolean GPS_DISABLE_WHEN_HIDE;
 
   // SENSORS
   /** use hardware compass */
@@ -88,6 +90,8 @@ public class Preferences {
   public static int GUIDING_WAYPOINT_SOUND;
   /** waypoint sound distance */
   public static int GUIDING_WAYPOINT_SOUND_DISTANCE;
+  /** waypoint sound file */
+  public static String GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
   /** zone navigation point */
   public static int GUIDING_ZONE_NAVIGATION_POINT;
  
@@ -150,6 +154,8 @@ public class Preferences {
 	    GLOBAL_ROOT = getStringPreference( R.string.pref_KEY_S_ROOT );
 	    GLOBAL_MAP_PROVIDER = getNumericalPreference( R.string.pref_KEY_S_MAP_PROVIDER );
 	    GLOBAL_SAVEGAME_AUTO = getBooleanPreference( R.string.pref_KEY_B_SAVEGAME_AUTO );
+	    GC_USERNAME = getStringPreference( R.string.pref_KEY_S_GC_USERNAME );
+	    GC_PASSWORD = getStringPreference( R.string.pref_KEY_S_GC_PASSWORD );
 	    
 	    APPEARANCE_STATUSBAR = getBooleanPreference( R.string.pref_KEY_B_STATUSBAR );
 	    APPEARANCE_FULLSCREEN = getBooleanPreference( R.string.pref_KEY_B_FULLSCREEN );
@@ -166,6 +172,7 @@ public class Preferences {
 	    GPS_MIN_TIME = getNumericalPreference( R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION ); 
 	    GPS_BEEP_ON_GPS_FIX = getBooleanPreference( R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX );
 	    GPS_ALTITUDE_CORRECTION = getDecimalPreference( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
+	    GPS_DISABLE_WHEN_HIDE = getBooleanPreference( R.string.pref_KEY_B_GPS_DISABLE_WHEN_HIDE );
 	
 	    SENSOR_HARDWARE_COMPASS = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR );
 	    SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference( R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE );
@@ -177,6 +184,7 @@ public class Preferences {
 	    GUIDING_SOUNDS = getBooleanPreference( R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS );
 	    GUIDING_WAYPOINT_SOUND = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND );
 	    GUIDING_WAYPOINT_SOUND_DISTANCE = getNumericalPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE );
+	    GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI = getStringPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI);
 	    GUIDING_ZONE_NAVIGATION_POINT = getNumericalPreference ( R.string.pref_KEY_S_GUIDING_ZONE_POINT );
     } catch (Exception e) {
         Logger.e(TAG, "init() - ", e);

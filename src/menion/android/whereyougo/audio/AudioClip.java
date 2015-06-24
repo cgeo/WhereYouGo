@@ -112,7 +112,7 @@ public class AudioClip {
     }
   }
 
-  public void registeListener(AudioListener listener) {
+  public void registerListener(AudioListener listener) {
     this.listener = listener;
   }
 

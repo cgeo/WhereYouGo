@@ -49,32 +49,25 @@ public class MapPointPack implements Parcelable {
   }
 
   public MapPointPack(ArrayList<MapPoint> points, boolean isPolygon, Bitmap icon) {
-    this.points = points;
-    this.isPolygon = isPolygon;
+    this(points, isPolygon);
     this.icon = icon;
   }
 
   public MapPointPack(ArrayList<MapPoint> points, boolean isPolygon, int resource) {
-    this.points = points;
-    this.isPolygon = isPolygon;
+	this(points, isPolygon);
     this.resource = resource;
   }
 
   public MapPointPack(boolean isPolygon) {
-    this();
-    this.isPolygon = isPolygon;
+    this(new ArrayList<MapPoint>(), isPolygon);
   }
 
   public MapPointPack(boolean isPolygon, Bitmap icon) {
-    this();
-    this.isPolygon = isPolygon;
-    this.icon = icon;
+    this(new ArrayList<MapPoint>(), isPolygon, icon);
   }
 
   public MapPointPack(boolean isPolygon, int resource) {
-    this();
-    this.isPolygon = isPolygon;
-    this.resource = resource;
+    this(new ArrayList<MapPoint>(), isPolygon, resource);
   }
 
   public MapPointPack(Parcel p) {

@@ -209,21 +209,19 @@ public class PreferenceValues {
       return lastKnownLocation;
   }
  
-  /* still used in SatelliteActivity.java, LocationState.java (2x) */
+  /* still used in SatelliteActivity.java, LocationState.java */
   @Deprecated 
   public static boolean getPrefBoolean(Context context, String key, boolean def) {
     // Logger.v(TAG, "getPrefBoolean(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, def);
   } 
  
-  /* still used in Guide.java */
   @Deprecated  
   public static String getPrefString(Context context, String key, String def) {
     // Logger.v(TAG, "getPrefString(" + key + ", " + def + ")");
     return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
   }
 
-  /* still used in DownloadActivity.java (2x) */
   @Deprecated  
   public static String getPrefString(String key, String def) {
     if (A.getApp() == null) {

@@ -21,11 +21,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class LogWriter {
-  static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+class LogWriter {
+  private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
 
-  public static void log(String fname, String msg) {
+  static void log(String fname, String msg) {
     String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
     try {
       FileWriter fstream = new FileWriter(loc, true);
@@ -36,7 +37,7 @@ public class LogWriter {
     }
   }
 
-  public static void log(String fname, Throwable ex) {
+  static void log(String fname, Throwable ex) {
     String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
     try {
       FileWriter fstream = new FileWriter(loc, true);

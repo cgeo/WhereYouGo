@@ -41,8 +41,8 @@ public class DataInfo implements Comparable<DataInfo> {
   public double value01;
   public double value02;
 
-  public double distance = -1;
-  public double azimuth = -1;
+  private double distance = -1;
+  private double azimuth = -1;
 
   /*
    * USAGE: - DbWaypoints to store GeocachingSimpleData object in DataInfo list

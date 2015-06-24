@@ -32,7 +32,7 @@ public class XmlSettingsActivity extends PreferenceActivity
     
 	private static final String TAG = "XmlSettingsActivity";
 	
-	public boolean needRestart;
+	private boolean needRestart;
 	
 	
 	@Override
@@ -168,6 +168,10 @@ public class XmlSettingsActivity extends PreferenceActivity
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GPS_BEEP_ON_GPS_FIX = Utils.parseBoolean(newValue);
 		} 
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_GPS_DISABLE_WHEN_HIDE ) ) {
+			boolean newValue = sharedPreferences.getBoolean( key, false );
+			Preferences.GPS_DISABLE_WHEN_HIDE = Utils.parseBoolean(newValue);
+		} 
 		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GUIDING_SOUNDS = Utils.parseBoolean(newValue);
@@ -179,15 +183,15 @@ public class XmlSettingsActivity extends PreferenceActivity
   		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND ) ) {
   			String newValue = sharedPreferences.getString( key, null );
   			int result = Utils.parseInt(newValue);
-            if (result != PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND) {
-            	Preferences.GUIDING_WAYPOINT_SOUND = result; 
+            if (result == PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND) {
+            	Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("audio/*");
+                if (!Utils.isIntentAvailable(intent)) {
+                  intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                }
+                this.startActivityForResult(intent, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND);
             } else {
-              Intent intent = new Intent(Intent.ACTION_PICK);
-              intent.setType("audio/*");
-              if (!Utils.isIntentAvailable(intent)) {
-                intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-              }
-              this.startActivityForResult(intent, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND);
+            	Preferences.GUIDING_WAYPOINT_SOUND = result; 
             }
   		}
   		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE ) ) {
@@ -242,6 +246,12 @@ public class XmlSettingsActivity extends PreferenceActivity
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 			Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
 		}
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GC_USERNAME ) ) {
+			Preferences.GC_USERNAME = sharedPreferences.getString( key, null );
+		}
+		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_S_GC_PASSWORD ) ) {
+			Preferences.GC_PASSWORD = sharedPreferences.getString( key, null );
+		}
 		else if ( Preferences.comparePreferenceKey( key, R.string.pref_KEY_B_SENSORS_BEARING_TRUE ) ) {
 			boolean newValue = sharedPreferences.getBoolean( key, false );
 	        Preferences.SENSOR_BEARING_TRUE = Utils.parseBoolean(newValue);
@@ -288,9 +298,10 @@ public class XmlSettingsActivity extends PreferenceActivity
                 Logger.d(TAG, "uri:" + uri.toString());
                 Preferences.setStringPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND,
                 		PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
-                Preferences.setStringPreference( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI,
+                Preferences.setStringPreference( R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI,
                     uri.toString());
                 Preferences.GUIDING_WAYPOINT_SOUND = Utils.parseInt( R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND );
+                Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI = uri.toString();
               }
             }
           } else if (requestCode == R.string.pref_KEY_S_ROOT) {
