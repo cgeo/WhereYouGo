@@ -1,0 +1,7 @@
+syntax: glob
+bin
+gen
+.settings
+.classpath
+.project
+.hgignore
