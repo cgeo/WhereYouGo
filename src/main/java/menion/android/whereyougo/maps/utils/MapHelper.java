@@ -72,10 +72,8 @@ public class MapHelper {
     public static void locusMap(Activity activity, EventTable et) {
         LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
         try {
-            if (!mdp.getPoints().getWaypoints().isEmpty())
-                ActionDisplayPoints.sendPack(activity, mdp.getPoints(), ExtraAction.NONE);
-            if (!mdp.getTracks().isEmpty())
-                ActionDisplayTracks.sendTracks(activity, mdp.getTracks(), ExtraAction.CENTER);
+            ActionDisplayPoints.sendPack(activity, mdp.getPoints(), ExtraAction.NONE);
+            ActionDisplayTracks.sendTracks(activity, mdp.getTracks(), ExtraAction.CENTER);
             if (et != null && et.isLocated()) {
                 locus.api.objects.extra.Location loc =
                         new locus.api.objects.extra.Location(activity.toString());
