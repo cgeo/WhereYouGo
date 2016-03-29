@@ -90,7 +90,7 @@
     <string-array name="pref_language_entries">
         <item>@string/pref_language_default</item> <!-- should be changed to pref_language_name_default -->
         <item>@string/pref_language_ar_name</item>
-        <item>@string/pref_language_cz_name</item>
+        <item>@string/pref_language_cs_name</item>
         <item>@string/pref_language_da_name</item>
         <item>@string/pref_language_de_name</item>                        
         <item>@string/pref_language_el_name</item>
@@ -113,7 +113,7 @@
     <string-array name="pref_language_entry_values">
         <item>@string/pref_language_default_value</item>
         <item>@string/pref_language_ar_shortcut</item>
-        <item>@string/pref_language_cz_shortcut</item>
+        <item>@string/pref_language_cs_shortcut</item>
         <item>@string/pref_language_da_shortcut</item>
         <item>@string/pref_language_de_shortcut</item>                        
         <item>@string/pref_language_el_shortcut</item>

@@ -64,7 +64,7 @@ public class PreferenceValues {
 
   // GENERAL
   /** default language */
-  public static final String VALUE_LANGUAGE_CZ = "cz";
+  public static final String VALUE_LANGUAGE_CZ = "cs";
   public static final String VALUE_LANGUAGE_EN = "en";
 
   // GPS & LOCATION

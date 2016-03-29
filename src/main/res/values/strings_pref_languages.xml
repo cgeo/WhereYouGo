@@ -11,7 +11,7 @@
 <resources>
     <!--  Names -->
     <string name="pref_language_ar_name">العربية</string> <!--  Arabic -->
-    <string name="pref_language_cz_name">Čeština</string> <!-- Czech -->
+    <string name="pref_language_cs_name">Čeština</string> <!-- Czech -->
     <string name="pref_language_da_name">Dansk</string> <!--  Danish -->
     <string name="pref_language_de_name">Deutsch</string> <!--  German -->
     <string name="pref_language_el_name">Ελληνικά</string> <!--  Greek -->
@@ -34,7 +34,7 @@
 
 	<!--  Shortcuts -->
     <string name="pref_language_ar_shortcut">ar</string> <!--  Arabic -->
-    <string name="pref_language_cz_shortcut">cz</string> <!-- Czech -->
+    <string name="pref_language_cs_shortcut">cs</string> <!-- Czech -->
     <string name="pref_language_da_shortcut">da</string> <!--  Danish -->
     <string name="pref_language_de_shortcut">de</string> <!--  German -->
     <string name="pref_language_el_shortcut">el</string> <!--  Greek -->

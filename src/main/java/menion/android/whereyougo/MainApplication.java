@@ -292,16 +292,6 @@ public class MainApplication extends Application {
     Configuration config = getBaseContext().getResources().getConfiguration();
     String lang = Preferences.getStringPreference( R.string.pref_KEY_S_LANGUAGE );
     
-    /* LEGACY SUPPORT - less v0.8.14
-     * This block is a workaround to switch from 'cs' to 'cz' 
-     * remove this block after one year (2014-09)
-     */
-    if ( lang.equals( "cs" ) ) {
-    	lang = this.getString( R.string.pref_language_cz_shortcut );
-    	Preferences.setStringPreference( R.string.pref_KEY_S_LANGUAGE, lang );
-    }
-    /* LEGACY SUPPORT -- END */
-    
     // set language
     if (!lang.equals( getString( R.string.pref_language_default_value ) )
         && !config.locale.getLanguage().equals(lang)) {
