@@ -4,35 +4,43 @@ WhereYouGo
 WhereYouGo project has moved to GitHub.
 
 original project https://code.google.com/p/android-whereyougo/
-<br>
 my project on Google Code https://code.google.com/r/biylda-whereyougo/
-<br>
 this project on GitHub https://github.com/biylda/WhereYouGo/
 
-<h2>
-	<a name="About"></a>
-	About
-	<a href="#About" class="section_anchor"></a>
-</h2>
-<p>
-	Clone of <a href="https://code.google.com/p/android-whereyougo/" rel="nofollow">WhereYouGo</a>. Main goal is to add vector maps support and general improvements.
-</p>
-<p>
-  Uses the following projects:
-  <ul>
-    <li><a href="https://code.google.com/r/biylda-openwig/" rel="nofollow">biylda-openwig</a></li>
-    <li><a href="https://github.com/raku/mapsforge-0.3.1-with-tile-downloader-support" rel="nofollow">mapsforge-0.3.1-with-tile-downloader-support</a></li>
-    <li><a href="https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap" rel="nofollow">mapsforge-map-0.3.1-with-onTap</a></li>
-  </ul>
-</p>
-<p>
+##About
+
+Clone of [WhereYouGo](https://code.google.com/p/android-whereyougo). Main goal is to add vector maps support and general improvements.
+
+Uses the following projects:
+* [openwig](https://github.com/biylda/openwig/tree/whereyougo)
+* [mapsforge-0.3.1-with-tile-downloader-support](https://github.com/raku/mapsforge-0.3.1-with-tile-downloader-support)
+* [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
+* [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
+
   Contact: biylda{at}gmail.com
-</p>
-<h2>
-	<a name="#Whats_new"></a>
-	What's new
-	<a href="#Whats_new" class="section_anchor"></a>
-</h2>
+
+	
+##Development
+###Prerequisites
+* [Android Studio and SDK](https://developer.android.com/sdk/index.html)
+* Mercurial
+* Git
+###Installation
+* follow the guidelines [here](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api:installation) to setup project and acquire Locus API
+* execute
+```
+git clone https://github.com/biylda/WhereYouGo.git whereyougo
+git clone --depth 1 --single-branch https://github.com/biylda/openwig.git -b whereyougo openwig
+cd openwig
+git filter-branch --prune-empty --subdirectory-filter OpenWIGLibrary HEAD
+cd ..
+```
+* add the following lines to your `settings.gradle`
+```
+include ':openwig'
+include ':whereyougo'
+```
+##What's new
 <h4>
 	<a name="#0.8.13"></a>
 	0.8.13 (23. 9. 2014)
@@ -247,18 +255,12 @@ this project on GitHub https://github.com/biylda/WhereYouGo/
 		<li>logging messages are appended to existing log file</li>
 	</ul>
 </p>
+
 <h2>
-	<a name="#TODO"></a>
-	TODO
-	<a href="#TODO" class="section_anchor"></a>
-</h2>
-<p>
- <ol>
-  <li><ul>
-  </ul></li>
-  <li><ul>
-    <li>sorting objects in inventary</li>
-    <li>saving to and loading from custom files</li>
-  </ul></li>
- </ol>
-</p>
+	
+##TODO
+* sorting objects in inventary
+* saving to and loading from custom files (or saving slots)
+* change cartridge folder
+* fix downloading from http://wherigo.com
+* add downloading from http://wherigofoundation.com

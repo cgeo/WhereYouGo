@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "menion.android.whereyougo"
+        minSdkVersion 8
+        targetSdkVersion 17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile project(':locusAPI')
+    compile project(':locusAPI_android')
+    compile project(':openwig')
+    compile 'com.android.support:support-v4:18.0.0'
+    compile files('libs/mapsforge-map-0.3.1-SNAPSHOT-jar-with-dependencies.jar')
+}

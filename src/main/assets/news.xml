@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<document>
+  
+  <update name="0.8.13" id="39" time="23.9.2014">
+	<li>fixed: whitespaces</li>
+	<li>fixed: StopSound function</li>
+	<li>update: show message about invalid cartridge files</li>
+	<li>update: contact</li>
+  </update>
+  
+  <update name="0.8.12" id="38" time="16.9.2014">
+	<li>fixed: unicode characters in login</li>
+	<li>fixed: some bugs reported on Google Play</li>
+	<li>update: translation</li>
+	<li>added: start cartridge after downloading</li>
+	<li>added: press BACK twice to exit the game</li>
+	<li>added: backup previous savefile before saving (*.bak extension)</li>
+  </update>
+    
+  <update name="0.8.11" id="37" time="3.9.2014">
+	<li>fixed: unexpected dialog closing in some versions of Android</li>
+	<li>fixed: close things after clicking on a button to avoid piling up</li>
+	<li>fixed: draw points and labels on top of lines</li>
+	<li>fixed: allow playing sounds in headphones only</li>
+	<li>update: translation (French, German)</li>
+	<li>update: login credentials moved to its own category in Settings</li>
+	<li>added: font size in Settings</li>
+	<li>added: option to allow or disallow image stretching (Settings->Appearance)</li>
+	<li>added: full support for unicode characters</li>
+	<li>added: display custom icons for tasks</li>
+	<li>added: support for wherigo functions Command(text), specifically StopSound, Alert</li>
+  </update>
+    
+  <update name="0.8.10" id="36" time="19.5.2014">
+	<li>fixed: some bugs</li>
+	<li>fixed: close object detail after clicking on button to avoid piling up</li>
+	<li>fixed: only one instance of maps</li>
+	<li>update: some map providers removed, some added, added attribution on the bottom of the map</li>
+	<li>added: current map provider is selected from list with radio buttons</li>
+	<li>added: clickable objects on map</li>
+	<li>added: links in main menu: geocaching.com, wherigo.com</li>
+	<li>added: download cartridges (user needs to fill login credentials in Settings, navigate to desired wherigo via Web Browser and select open in WhereYouGo)</li>
+	<li>added: long click on cartridge to show dialog for cartridge deletion</li>
+	<li>added: SD card is no longer required (altough recommended), users with no SD card have to download cartridges via the newly added downloading function</li>
+  </update>
+   
+  <update name="0.8.9" id="35" time="5.5.2014">
+	<li>fixed: online maps were not shown until vector map file was provided</li>
+	<li>fixed: map information was accessible even though vector map file was not provided</li>
+	<li>update: improved german translation</li>
+	<li>added: active zones in zone list are marked with tag (INSIDE)</li>
+  </update>
+    
+  <update name="0.8.8" id="34" time="3.5.2014">
+	<li>fixed: some bugs</li>
+	<li>fixed: no animations in dialogs</li>
+	<li>fixed: no cartridges in folder required when starting maps</li>
+	<li>added: option to guide to the nearest zone point or to defined center</li>
+	<li>added: arrow on map displays player's bearing</li>
+	<li>added: line from my location to target</li>
+	<li>added: turn on/off pins, labels on map</li>
+	<li>added: center map when displaying specific object</li>
+	<li>added: online maps support, remember map provider</li>
+  </update>
+
+  <update name="0.8.7" id="33" time="19.4.2014">
+    <li>fixed: choose wherigo folder</li>
+    <li>update: correct debug information for openwig (device and platform)</li>
+    <li>update: load game question</li>
+    <li>update: error log placed in file error.log</li>
+    <li>update: smaller pin icons</li>
+  </update>
+    
+  <update name="0.8.6" id="32" time="14.4.2014">
+    <li>fixed: application crashing when receiving location</li>
+    <li>fixed: compass azimuth, Location on/off button</li>
+    <li>update: renamed GPS to Location, since location can be received via network as well as via GPS</li>
+    <li>added: location provider in Sattelite and Compass screen</li>
+  </update>
+    
+  <update name="0.8.5" id="31" time="12.4.2014">
+    <li>added: create error log when application crashes</li>
+    <li>update: application description</li>
+  </update>
+    
+  <update name="0.8.4" id="30" time="10.4.2014">
+    <li>fixed: application crashing when user switches back from another application</li>
+    <li>fixed: too large wherigo icons on maps</li>
+    <li>added: german translation of new features</li>
+  </update>
+    
+  <update name="0.8.3" id="29" time="6.4.2014">
+    <li>fixed: application was crashing when user switched back from another application</li>
+    <li>fixed: compass displays azimuth value</li>
+    <li>added: save game button</li>
+    <li>added: option to save game automatically</li>
+    <li>added: compass and maps can handle other visible things than zones</li>
+  </update>
+    
+  <update name="0.8.2" id="28" time="29.3.2014">
+    <li>choose WhereYouGo folder</li>
+    <li>vector maps can handle moving zones</li>
+    <li>compass can handle moving zones</li>
+    <li>compass displays target name</li>
+    <li>window titles in local language</li>
+    <li>icons modernization</li>
+  </update>
+    
+  <update name="0.8.1" id="27" time="23.3.2014">
+    <li>remember render schema in vector maps</li>
+    <li>fixed problem with displaying items after save/load</li>
+    <li>added "map" button to cartridge menu</li>
+    <li>maps display all visible zones in current cartridge</li>
+    <li>set GPS always on as default option</li>
+  </update>
+    
+  <update name="0.8.0" id="26" time="13.3.2014">
+    <li>added vector OSM support using MapsForge</li>
+    <li>added point labels in vector maps</li>
+    <li>added Zone border in both Locus and vector maps</li>
+    <li>added "Cancel" button when starting wherigo</li>
+    <li>fixed starting a new game</li>
+    <li>fixed encoding in "About application"</li>
+    <li>option to display WhereYouGo icon in the statusbar while the application is running</li>
+	<li>changed cartridge loading message</li>
+	<li>logging messages are appended to existing log file</li>
+  </update>
+    
+  <update name="0.7.0" id="25" time="7.4.2012">
+    <li>WhereYouGo released as OpenSource project</li>
+  </update>
+    
+  <update name="0.6.0" id="24" time="15.9.2011">
+    <li>added translations: Arabic, Danish, German, Greek, Spanish, Finnish, French, Hungarian, Italian, Japanese, Korean, Dutch, Polish, Portuguese, Brazilian P., Russian, Slovak</li>
+    <li>added support for Locus Offline, Vector maps</li>
+    <li>updated OpenWIG code to 8.9.2011</li>
+    <li>because application is based on Locus core, it also adapt guiding, GPS and other improvements from Locus</li>
+  </update>
+  
+  <update name="0.5.0" id="23" time="5.2.2011">
+    <li>rapid graphics improvements</li>
+    <li>improved map screen by Locus style</li>
+    <li>fixed some problems with save game</li>
+    <li>some minnor fixs</li>
+  </update>
+  
+  <update name="0.4.13" id="22" time="20.1.2011">
+    <li>removed speed-up when you selected item on main cartridge menu</li>
+    <li>fixed problem with actions on items</li>
+  </update>
+  
+  <update name="0.4.12" id="21" time="28.12.2010">
+    <li>fixed white screen problem</li>
+    <li>fixed missing preferences in settings</li>
+    <li>removed support for A1.5</li>
+  </update>
+  
+  <update name="0.4.11" id="20" time="28.12.2010">
+    <li>fixed problems with MP3 sounds</li>
+    <li>fixed problem with scrolling locations</li>
+    <li>removed time limitation of application</li>
+    <li>removed support for Locus offline maps</li>
+    <li>added support for Locus online maps cache</li>
+  </update>
+  
+  <update name="0.4.10" id="19">
+    <li>fixed navigation problem on map</li>
+    <li>fixed problem with loading of some cartidges</li>
+    <li>in application info, now link to chat forum</li>
+  </update>
+  
+  <update name="0.4.9" id="18">
+    <li>fixed problems with map</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.8" id="17">
+    <li>map handling improvement (multi-touch)</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.7" id="16">
+    <li>fixed problem with enabling GPS</li>
+    <li>fixed visibility in market</li>
+    <li>added new crash log system (saving errors into WhereYouGo/logs directory)</li>
+    <li>fixed some minnor technical problems</li>
+  </update>
+  
+  <update name="0.4.6" id="15">
+    <li>added support for Bluetooth GPS (Android version 2.0 and higher)</li>
+    <li>fixed connection to Locus application</li>
+  </update>
+  
+  <update name="0.4.5" id="14">
+    <li>fixed problem with some cartridges</li>
+    <li>small improvements and fixs on maps</li>
+  </update>
+  
+  <update name="0.4.4" id="13">
+    <li>fixed problem with non-functional active tasks in Task screen</li>
+  </update>
+
+  <update name="0.4.3" id="12">
+    <li>fixed big problem with non-functional second button on some screens</li>
+    <li>fixed crashing and problems with sounds on some cartridges</li>
+    <li>fixed zone graphics on map</li>
+    <li>added new online map providers</li>
+  </update>
+  
+  <update name="0.4.2" id="11">
+    <li>possibility to switch to light theme (Settings->Global)</li>
+    <li>now creating log file for played cache (send me if any problem with played cartridge)</li>
+    <li>minnor graphics improvements</li>
+  </update>
+  
+  <update name="0.4.1" id="10">
+    <li>fixed problem with sounds</li>
+    <li>fixed problem map centering</li>
+    <li>possibility to Donate for develop</li>
+  </update>
+  
+  <update name="0.4.0" id="9">
+      <li>added support for wav and mp3 sounds</li>
+      <li>added online google maps</li>
+      <li>added support for offline maps throught 'Locus' app</li>
+      <li>fixed cartridge list (icon size, sorted by distance)</li>
+  </update>
+
+  <update name="0.3.7" id="8">
+      <li>fixed problem with map tile loading</li>
+  </update>
+  
+  <update name="0.3.6" id="7">
+    <li>fixed graphical problems on 1.5 systems</li>
+    <li>increased loading of Online maps</li>
+    <li>fixed language translations</li>
+  </update>
+
+  <update name="0.3.5" id="6">
+    <li>added support for Android 1.5</li>
+    <li>fixed problem with displaying actions of objects on Details screen</li>
+    <li>improved map and displaying of objects</li>
+    <li>added new settings into preferences</li>
+    <li>some small graphics and technical improvements</li>
+  </update>
+  
+  <update name="0.3.3" id="4">
+    <li>fixed problem with "targets" screen</li>
+    <li>removed confirmation on application exit</li>
+    <li>some small graphics improvements</li>
+  </update>
+  
+  <update name="0.3.2" id="3">
+    <li>fixed problem with not-refreshed map</li>
+    <li>added displaying 'Locations' objects on map, navigation on map and few small improvements</li>
+    <li>added refreshing of screens with enabled GPS</li>
+    <li>fixed screen switching</li>
+    <li>some small graphics improvements</li>
+  </update>
+  
+  <update name="0.3.1" id="2">
+    <li>added map provider (blank map - no internet connection required)</li>
+    <li>added basic settings</li>
+    <li>fixed language problem in non EN countries</li>
+  </update>
+
+  <update name="0.3.0" id="1">
+    <li>first release</li>
+  </update>
+</document>
