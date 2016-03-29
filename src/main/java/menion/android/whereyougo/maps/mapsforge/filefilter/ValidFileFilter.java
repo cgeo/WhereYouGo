@@ -14,16 +14,16 @@
  */
 package menion.android.whereyougo.maps.mapsforge.filefilter;
 
-import java.io.FileFilter;
-
 import org.mapsforge.map.reader.header.FileOpenResult;
+
+import java.io.FileFilter;
 
 /**
  * An extension of the {@link FileFilter} interface.
  */
 public interface ValidFileFilter extends FileFilter {
-  /**
-   * @return the result of the last {@link #accept} call (might be null).
-   */
-  FileOpenResult getFileOpenResult();
+    /**
+     * @return the result of the last {@link #accept} call (might be null).
+     */
+    FileOpenResult getFileOpenResult();
 }

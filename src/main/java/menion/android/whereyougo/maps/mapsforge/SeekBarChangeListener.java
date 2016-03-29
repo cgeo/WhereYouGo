@@ -18,24 +18,24 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 class SeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
-  private final TextView textView;
+    private final TextView textView;
 
-  SeekBarChangeListener(TextView textView) {
-    this.textView = textView;
-  }
+    SeekBarChangeListener(TextView textView) {
+        this.textView = textView;
+    }
 
-  @Override
-  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-    this.textView.setText(String.valueOf(progress));
-  }
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        this.textView.setText(String.valueOf(progress));
+    }
 
-  @Override
-  public void onStartTrackingTouch(SeekBar seekBar) {
-    // do nothing
-  }
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+        // do nothing
+    }
 
-  @Override
-  public void onStopTrackingTouch(SeekBar seekBar) {
-    // do nothing
-  }
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+        // do nothing
+    }
 }

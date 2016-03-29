@@ -16,75 +16,75 @@
 
 package menion.android.whereyougo.maps.mapsforge.overlay;
 
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+
 import org.mapsforge.android.maps.overlay.Marker;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.MercatorProjection;
 
-import android.graphics.Canvas;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-
 /**
  * A {@code Marker} draws a {@link Drawable} at a given geographical position.
  */
 public class RotationMarker extends Marker {
-  private static boolean intersect(Canvas canvas, float left, float top, float right, float bottom) {
-    return right >= 0 && left <= canvas.getWidth() && bottom >= 0 && top <= canvas.getHeight();
-  }
+    float rotation;
 
-  float rotation;
-
-  /**
-   * @param geoPoint the initial geographical coordinates of this marker (may be null).
-   * @param drawable the initial {@code Drawable} of this marker (may be null).
-   */
-  public RotationMarker(GeoPoint geoPoint, Drawable drawable) {
-    super(geoPoint, drawable);
-  }
-
-  @Override
-  public synchronized boolean draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas,
-      Point canvasPosition) {
-    GeoPoint geoPoint = this.getGeoPoint();
-    Drawable drawable = this.getDrawable();
-    if (geoPoint == null || drawable == null) {
-      return false;
+    /**
+     * @param geoPoint the initial geographical coordinates of this marker (may be null).
+     * @param drawable the initial {@code Drawable} of this marker (may be null).
+     */
+    public RotationMarker(GeoPoint geoPoint, Drawable drawable) {
+        super(geoPoint, drawable);
     }
 
-    double latitude = geoPoint.latitude;
-    double longitude = geoPoint.longitude;
-    int pixelX =
-        (int) (MercatorProjection.longitudeToPixelX(longitude, zoomLevel) - canvasPosition.x);
-    int pixelY =
-        (int) (MercatorProjection.latitudeToPixelY(latitude, zoomLevel) - canvasPosition.y);
-
-    Rect drawableBounds = drawable.copyBounds();
-    int left = pixelX + drawableBounds.left;
-    int top = pixelY + drawableBounds.top;
-    int right = pixelX + drawableBounds.right;
-    int bottom = pixelY + drawableBounds.bottom;
-
-    if (!intersect(canvas, left, top, right, bottom)) {
-      return false;
+    private static boolean intersect(Canvas canvas, float left, float top, float right, float bottom) {
+        return right >= 0 && left <= canvas.getWidth() && bottom >= 0 && top <= canvas.getHeight();
     }
 
-    int saveCount = canvas.save();
-    canvas.rotate(rotation, (float) pixelX, (float) pixelY);
-    drawable.setBounds(left, top, right, bottom);
-    drawable.draw(canvas);
-    drawable.setBounds(drawableBounds);
-    canvas.restoreToCount(saveCount);
-    return true;
-  }
+    @Override
+    public synchronized boolean draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas,
+                                     Point canvasPosition) {
+        GeoPoint geoPoint = this.getGeoPoint();
+        Drawable drawable = this.getDrawable();
+        if (geoPoint == null || drawable == null) {
+            return false;
+        }
 
-  public float getRotation() {
-    return rotation;
-  }
+        double latitude = geoPoint.latitude;
+        double longitude = geoPoint.longitude;
+        int pixelX =
+                (int) (MercatorProjection.longitudeToPixelX(longitude, zoomLevel) - canvasPosition.x);
+        int pixelY =
+                (int) (MercatorProjection.latitudeToPixelY(latitude, zoomLevel) - canvasPosition.y);
 
-  public void setRotation(float rotation) {
-    this.rotation = rotation;
-  }
+        Rect drawableBounds = drawable.copyBounds();
+        int left = pixelX + drawableBounds.left;
+        int top = pixelY + drawableBounds.top;
+        int right = pixelX + drawableBounds.right;
+        int bottom = pixelY + drawableBounds.bottom;
+
+        if (!intersect(canvas, left, top, right, bottom)) {
+            return false;
+        }
+
+        int saveCount = canvas.save();
+        canvas.rotate(rotation, (float) pixelX, (float) pixelY);
+        drawable.setBounds(left, top, right, bottom);
+        drawable.draw(canvas);
+        drawable.setBounds(drawableBounds);
+        canvas.restoreToCount(saveCount);
+        return true;
+    }
+
+    public float getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
 
 }

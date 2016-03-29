@@ -17,16 +17,6 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
-import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
-import menion.android.whereyougo.preferences.Locale;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Images;
-import menion.android.whereyougo.utils.Logger;
-import se.krka.kahlua.vm.LuaTable;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -39,129 +29,137 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.Logger;
+import se.krka.kahlua.vm.LuaTable;
 
 public class InputScreenActivity extends CustomActivity {
 
-  private static final String TAG = "InputScreen";
+    private static final String TAG = "InputScreen";
+    private static final int TEXT = 0;
+    private static final int MULTI = 1;
+    private static EventTable input;
+    private int mode = TEXT;
 
-  private static EventTable input;
-
-  private static final int TEXT = 0;
-  private static final int MULTI = 1;
-
-  public static void reset(EventTable input) {
-    InputScreenActivity.input = input;
-  }
-
-  public static void setInput(EventTable input) {
-    InputScreenActivity.input = input;
-  }
-
-  private int mode = TEXT;
-
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (A.getMain() == null || Engine.instance == null || input == null) {
-      finish();
-      return;
+    public static void reset(EventTable input) {
+        InputScreenActivity.input = input;
     }
-    setContentView(R.layout.layout_input);
-    if(!Preferences.APPEARANCE_IMAGE_STRETCH){
-      findViewById(R.id.layoutInputImageView01).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+
+    public static void setInput(EventTable input) {
+        InputScreenActivity.input = input;
     }
-  }
 
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-      Engine.callEvent(input, "OnGetInput", null);
-      InputScreenActivity.this.finish();
-      return true;
-    } else {
-      return super.onKeyDown(keyCode, event);
-    }
-  }
-
-  public void onResume() {
-    super.onResume();
-
-    try {
-      // set image and it's label
-      ImageView ivImage = (ImageView) findViewById(R.id.layoutInputImageView01);
-      TextView tvImageDesc = (TextView) findViewById(R.id.layoutInputTextView01);
-
-      Media m = (Media) input.table.rawget("Media");
-      if (m != null) {
-        tvImageDesc.setText(m.altText);
-        try {
-          byte[] is = Engine.mediaFile(m);
-          Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-          MainActivity.setBitmapToImageView(i, ivImage);
-        } catch (Exception e) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (A.getMain() == null || Engine.instance == null || input == null) {
+            finish();
+            return;
         }
-      } else {
-        ivImage.setImageBitmap(Images.IMAGE_EMPTY_B);
-      }
-
-      // set question TextView
-      TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
-      String text = Engine.removeHtml((String) input.table.rawget("Text"));
-      tvQuestion.setText(text);
-
-      // set answer LinearLayout
-      String type = (String) input.table.rawget("InputType");
-      final LinearLayout ll = (LinearLayout) findViewById(R.id.layoutInputLinearLayout01);
-      ll.removeAllViews();
-      mode = -1;
-
-      if ("Text".equals(type)) {
-        EditText editText = new EditText(this);
-        editText.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-            LayoutParams.WRAP_CONTENT));
-        ll.addView(editText);
-        mode = TEXT;
-      } else if ("MultipleChoice".equals(type)) {
-        LuaTable choices = (LuaTable) input.table.rawget("Choices");
-        String[] data = new String[choices.len()];
-        for (int i = 0; i < choices.len(); i++) {
-          data[i] = (String) choices.rawget(new Double(i + 1));
-          if (data[i] == null)
-            data[i] = "-";
+        setContentView(R.layout.layout_input);
+        if (!Preferences.APPEARANCE_IMAGE_STRETCH) {
+            findViewById(R.id.layoutInputImageView01).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
         }
+    }
 
-        ArrayAdapter<String> adapter =
-            new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinner = new Spinner(this);
-        spinner.setAdapter(adapter);
-        spinner.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-            LayoutParams.WRAP_CONTENT));
-        ll.addView(spinner);
-
-        mode = MULTI;
-      }
-
-      CustomDialog.setBottom(this, Locale.get(R.string.answer), new CustomDialog.OnClickListener() {
-
-        @Override
-        public boolean onClick(CustomDialog dialog, View v, int btn) {
-          if (mode == TEXT) {
-            Engine.callEvent(input, "OnGetInput", ((EditText) ll.getChildAt(0)).getText()
-                .toString());
-          } else if (mode == MULTI) {
-            String item = String.valueOf(((Spinner) ll.getChildAt(0)).getSelectedItem());
-            Engine.callEvent(input, "OnGetInput", item);
-          } else {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             Engine.callEvent(input, "OnGetInput", null);
-          }
-          InputScreenActivity.this.finish();
-          return true;
+            InputScreenActivity.this.finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
         }
-      }, null, null, null, null);
-    } catch (Exception e) {
-      Logger.e(TAG, "onResume()", e);
     }
-  }
+
+    public void onResume() {
+        super.onResume();
+
+        try {
+            // set image and it's label
+            ImageView ivImage = (ImageView) findViewById(R.id.layoutInputImageView01);
+            TextView tvImageDesc = (TextView) findViewById(R.id.layoutInputTextView01);
+
+            Media m = (Media) input.table.rawget("Media");
+            if (m != null) {
+                tvImageDesc.setText(m.altText);
+                try {
+                    byte[] is = Engine.mediaFile(m);
+                    Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
+                    MainActivity.setBitmapToImageView(i, ivImage);
+                } catch (Exception e) {
+                }
+            } else {
+                ivImage.setImageBitmap(Images.IMAGE_EMPTY_B);
+            }
+
+            // set question TextView
+            TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
+            String text = Engine.removeHtml((String) input.table.rawget("Text"));
+            tvQuestion.setText(text);
+
+            // set answer LinearLayout
+            String type = (String) input.table.rawget("InputType");
+            final LinearLayout ll = (LinearLayout) findViewById(R.id.layoutInputLinearLayout01);
+            ll.removeAllViews();
+            mode = -1;
+
+            if ("Text".equals(type)) {
+                EditText editText = new EditText(this);
+                editText.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                        LayoutParams.WRAP_CONTENT));
+                ll.addView(editText);
+                mode = TEXT;
+            } else if ("MultipleChoice".equals(type)) {
+                LuaTable choices = (LuaTable) input.table.rawget("Choices");
+                String[] data = new String[choices.len()];
+                for (int i = 0; i < choices.len(); i++) {
+                    data[i] = (String) choices.rawget((double) (i + 1));
+                    if (data[i] == null)
+                        data[i] = "-";
+                }
+
+                ArrayAdapter<String> adapter =
+                        new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                Spinner spinner = new Spinner(this);
+                spinner.setAdapter(adapter);
+                spinner.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                        LayoutParams.WRAP_CONTENT));
+                ll.addView(spinner);
+
+                mode = MULTI;
+            }
+
+            CustomDialog.setBottom(this, Locale.get(R.string.answer), new CustomDialog.OnClickListener() {
+
+                @Override
+                public boolean onClick(CustomDialog dialog, View v, int btn) {
+                    if (mode == TEXT) {
+                        Engine.callEvent(input, "OnGetInput", ((EditText) ll.getChildAt(0)).getText()
+                                .toString());
+                    } else if (mode == MULTI) {
+                        String item = String.valueOf(((Spinner) ll.getChildAt(0)).getSelectedItem());
+                        Engine.callEvent(input, "OnGetInput", item);
+                    } else {
+                        Engine.callEvent(input, "OnGetInput", null);
+                    }
+                    InputScreenActivity.this.finish();
+                    return true;
+                }
+            }, null, null, null, null);
+        } catch (Exception e) {
+            Logger.e(TAG, "onResume()", e);
+        }
+    }
 }

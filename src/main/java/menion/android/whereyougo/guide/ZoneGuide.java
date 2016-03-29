@@ -1,22 +1,22 @@
 package menion.android.whereyougo.guide;
 
-import menion.android.whereyougo.geo.location.Location;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.geo.location.Location;
 
 public class ZoneGuide extends Guide {
 
-  // private static final String TAG = "ZoneGuide";
+    // private static final String TAG = "ZoneGuide";
 
-  private Zone mZone;
+    private Zone mZone;
 
-  private boolean mAlreadyEntered = false;
+    private boolean mAlreadyEntered = false;
 
-  public ZoneGuide(Zone zone) {
-    super(zone.name, new Location("Guidance: " + zone.name, zone.bbCenter.latitude,
-        zone.bbCenter.longitude));
-    mZone = zone;
-    mAlreadyEntered = false;
-  }
+    public ZoneGuide(Zone zone) {
+        super(zone.name, new Location("Guidance: " + zone.name, zone.bbCenter.latitude,
+                zone.bbCenter.longitude));
+        mZone = zone;
+        mAlreadyEntered = false;
+    }
 
   /*
    * public void actualizeState(Location location) { super.actualizeState(location); if

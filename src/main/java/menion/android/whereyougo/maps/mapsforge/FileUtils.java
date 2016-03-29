@@ -14,50 +14,51 @@
  */
 package menion.android.whereyougo.maps.mapsforge;
 
+import android.content.res.Resources;
+
 import java.text.DecimalFormat;
 
 import menion.android.whereyougo.R;
-import android.content.res.Resources;
 
 final class FileUtils {
-  private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.00 ");
-  private static final double ONE_GIGABYTE = 1000000000;
-  private static final double ONE_KILOBYTE = 1000;
-  private static final double ONE_MEGABYTE = 1000000;
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.00 ");
+    private static final double ONE_GIGABYTE = 1000000000;
+    private static final double ONE_KILOBYTE = 1000;
+    private static final double ONE_MEGABYTE = 1000000;
 
-  /**
-   * Formats the given file size as a human readable string, using SI prefixes.
-   * 
-   * @param fileSize the file size to be formatted.
-   * @param resources a reference to the application resources.
-   * @return a human readable file size.
-   * @throws IllegalArgumentException if the given file size is negative.
-   */
-  static String formatFileSize(long fileSize, Resources resources) {
-    if (fileSize < 0) {
-      throw new IllegalArgumentException("invalid file size: " + fileSize);
-    } else if (fileSize < 1000) {
-      if (fileSize == 1) {
-        // singular
-        return "1 " + resources.getString(R.string.file_size_byte);
-      }
-
-      // plural, including zero
-      return fileSize + " " + resources.getString(R.string.file_size_bytes);
-    } else {
-      if (fileSize < ONE_MEGABYTE) {
-        return DECIMAL_FORMAT.format(fileSize / ONE_KILOBYTE)
-            + resources.getString(R.string.file_size_kb);
-      } else if (fileSize < ONE_GIGABYTE) {
-        return DECIMAL_FORMAT.format(fileSize / ONE_MEGABYTE)
-            + resources.getString(R.string.file_size_mb);
-      }
-      return DECIMAL_FORMAT.format(fileSize / ONE_GIGABYTE)
-          + resources.getString(R.string.file_size_gb);
+    private FileUtils() {
+        throw new IllegalStateException();
     }
-  }
 
-  private FileUtils() {
-    throw new IllegalStateException();
-  }
+    /**
+     * Formats the given file size as a human readable string, using SI prefixes.
+     *
+     * @param fileSize  the file size to be formatted.
+     * @param resources a reference to the application resources.
+     * @return a human readable file size.
+     * @throws IllegalArgumentException if the given file size is negative.
+     */
+    static String formatFileSize(long fileSize, Resources resources) {
+        if (fileSize < 0) {
+            throw new IllegalArgumentException("invalid file size: " + fileSize);
+        } else if (fileSize < 1000) {
+            if (fileSize == 1) {
+                // singular
+                return "1 " + resources.getString(R.string.file_size_byte);
+            }
+
+            // plural, including zero
+            return fileSize + " " + resources.getString(R.string.file_size_bytes);
+        } else {
+            if (fileSize < ONE_MEGABYTE) {
+                return DECIMAL_FORMAT.format(fileSize / ONE_KILOBYTE)
+                        + resources.getString(R.string.file_size_kb);
+            } else if (fileSize < ONE_GIGABYTE) {
+                return DECIMAL_FORMAT.format(fileSize / ONE_MEGABYTE)
+                        + resources.getString(R.string.file_size_mb);
+            }
+            return DECIMAL_FORMAT.format(fileSize / ONE_GIGABYTE)
+                    + resources.getString(R.string.file_size_gb);
+        }
+    }
 }

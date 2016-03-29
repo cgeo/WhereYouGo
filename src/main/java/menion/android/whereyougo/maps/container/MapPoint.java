@@ -15,115 +15,115 @@
 
 package menion.android.whereyougo.maps.container;
 
-import java.io.Serializable;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 public class MapPoint implements Parcelable {
-  String name;
-  String description;
-  double latitude;
-  double longitude;
-  boolean target;
+    public static final Parcelable.Creator<MapPoint> CREATOR = new Parcelable.Creator<MapPoint>() {
+        public MapPoint createFromParcel(Parcel p) {
+            return new MapPoint(p);
+        }
 
-  public static final Parcelable.Creator<MapPoint> CREATOR = new Parcelable.Creator<MapPoint>() {
-    public MapPoint createFromParcel(Parcel p) {
-      return new MapPoint(p);
+        public MapPoint[] newArray(int size) {
+            return new MapPoint[size];
+        }
+    };
+    String name;
+    String description;
+    double latitude;
+    double longitude;
+    boolean target;
+
+    /**
+     * Empty constructor used for {@link Serializable} <br />
+     * Do not use directly!
+     */
+    public MapPoint() {
     }
 
-    public MapPoint[] newArray(int size) {
-      return new MapPoint[size];
+    public MapPoint(Parcel p) {
+        name = p.readString();
+        description = p.readString();
+        latitude = p.readDouble();
+        longitude = p.readDouble();
+        target = p.readByte() > 0;
     }
-  };
 
-  /**
-   * Empty constructor used for {@link Serializable} <br />
-   * Do not use directly!
-   */
-  public MapPoint() {}
+    public MapPoint(String name, double latitude, double longitude) {
+        this(name, null, latitude, longitude, false);
+    }
 
-  public MapPoint(Parcel p) {
-    name = p.readString();
-    description = p.readString();
-    latitude = p.readDouble();
-    longitude = p.readDouble();
-    target = p.readByte() > 0;
-  }
+    public MapPoint(String name, double latitude, double longitude, boolean target) {
+        this(name, null, latitude, longitude, target);
+    }
 
-  public MapPoint(String name, double latitude, double longitude) {
-    this(name, null, latitude, longitude, false);
-  }
-  
-  public MapPoint(String name, double latitude, double longitude, boolean target) {
-    this(name, null, latitude, longitude, target);
-  }
-  
-  public MapPoint(String name, String description, double latitude, double longitude) {
-    this(name, description, latitude, longitude, false);
-  }
+    public MapPoint(String name, String description, double latitude, double longitude) {
+        this(name, description, latitude, longitude, false);
+    }
 
-  public MapPoint(String name, String description, double latitude, double longitude, boolean target) {
-    this.name = name;
-    this.description = description;
-    this.latitude = latitude;
-    this.longitude = longitude;
-    this.target = target;
-  }
+    public MapPoint(String name, String description, double latitude, double longitude, boolean target) {
+        this.name = name;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.target = target;
+    }
 
-  @Override
-  public int describeContents() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
+    @Override
+    public int describeContents() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-  public double getLatitude() {
-    return latitude;
-  }
+    public double getLatitude() {
+        return latitude;
+    }
 
-  public double getLongitude() {
-    return longitude;
-  }
-  
-  public String getDescription() {
-    return description;
-  }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public double getLongitude() {
+        return longitude;
+    }
 
-  public boolean isTarget() {
-    return target;
-  }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
 
-  public void setLatitude(double latitude) {
-    this.latitude = latitude;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public void setLongitude(double longitude) {
-    this.longitude = longitude;
-  }
-  
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setTarget(boolean target) {
-    this.target = target;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @Override
-  public void writeToParcel(Parcel p, int arg1) {
-    p.writeString(name);
-    p.writeString(description);
-    p.writeDouble(latitude);
-    p.writeDouble(longitude);
-    p.writeByte((byte) (target ? 1 : 0));
-  }
+    public boolean isTarget() {
+        return target;
+    }
+
+    public void setTarget(boolean target) {
+        this.target = target;
+    }
+
+    @Override
+    public void writeToParcel(Parcel p, int arg1) {
+        p.writeString(name);
+        p.writeString(description);
+        p.writeDouble(latitude);
+        p.writeDouble(longitude);
+        p.writeByte((byte) (target ? 1 : 0));
+    }
 
 }

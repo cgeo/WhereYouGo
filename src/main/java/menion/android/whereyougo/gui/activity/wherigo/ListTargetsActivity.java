@@ -17,86 +17,87 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import android.content.DialogInterface;
+
 import java.util.Vector;
 
+import cz.matejcik.openwig.Action;
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.Thing;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.openwig.WUI;
 import se.krka.kahlua.vm.LuaTable;
-import android.content.DialogInterface;
-import cz.matejcik.openwig.Action;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Thing;
 
 public class ListTargetsActivity extends ListVariousActivity {
 
-  // private static String title;
-  private static Action action;
-  private static Thing thing;
+    // private static String title;
+    private static Action action;
+    private static Thing thing;
 
-  private static Vector<Object> validStuff;
+    private static Vector<Object> validStuff;
 
-  private static void makeValidStuff() {
-    LuaTable current = Engine.instance.cartridge.currentThings();
-    // int size = current.len() + Engine.instance.player.inventory.len();
-    validStuff = new Vector<Object>();
-    Object key = null;
-    while ((key = current.next(key)) != null)
-      validStuff.addElement(current.rawget(key));
-    while ((key = Engine.instance.player.inventory.next(key)) != null)
-      validStuff.addElement(Engine.instance.player.inventory.rawget(key));
+    private static void makeValidStuff() {
+        LuaTable current = Engine.instance.cartridge.currentThings();
+        // int size = current.len() + Engine.instance.player.inventory.len();
+        validStuff = new Vector<Object>();
+        Object key = null;
+        while ((key = current.next(key)) != null)
+            validStuff.addElement(current.rawget(key));
+        while ((key = Engine.instance.player.inventory.next(key)) != null)
+            validStuff.addElement(Engine.instance.player.inventory.rawget(key));
 
-    for (int i = 0; i < validStuff.size(); i++) {
-      Thing t = (Thing) validStuff.elementAt(i);
-      if (!t.isVisible() || !action.isTarget(t)) {
-        validStuff.removeElementAt(i--);
-      }
-    }
-  }
-
-  public static void reset(String title, Action what, Thing actor) {
-    // ListTargets.title = title;
-    ListTargetsActivity.action = what;
-    ListTargetsActivity.thing = actor;
-    makeValidStuff();
-  }
-
-  @Override
-  protected void callStuff(Object what) {
-    MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
-    String eventName = "On" + action.getName();
-    Engine.callEvent(action.getActor(), eventName, (Thing) what);
-    ListTargetsActivity.this.finish();
-  }
-
-  @Override
-  protected String getStuffName(Object what) {
-    return ((Thing) what).name;
-  }
-
-  @Override
-  protected Vector<Object> getValidStuff() {
-    return validStuff;
-  }
-
-  public void refresh() {
-    if (validStuff.isEmpty()) {
-      UtilsGUI.showDialogInfo(this, R.string.no_target, new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-          ListTargetsActivity.this.finish();
+        for (int i = 0; i < validStuff.size(); i++) {
+            Thing t = (Thing) validStuff.elementAt(i);
+            if (!t.isVisible() || !action.isTarget(t)) {
+                validStuff.removeElementAt(i--);
+            }
         }
-      });
-    } else {
-      super.refresh();
     }
-  }
 
-  @Override
-  protected boolean stillValid() {
-    return thing.visibleToPlayer();
-  }
+    public static void reset(String title, Action what, Thing actor) {
+        // ListTargets.title = title;
+        ListTargetsActivity.action = what;
+        ListTargetsActivity.thing = actor;
+        makeValidStuff();
+    }
+
+    @Override
+    protected void callStuff(Object what) {
+        MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
+        String eventName = "On" + action.getName();
+        Engine.callEvent(action.getActor(), eventName, what);
+        ListTargetsActivity.this.finish();
+    }
+
+    @Override
+    protected String getStuffName(Object what) {
+        return ((Thing) what).name;
+    }
+
+    @Override
+    protected Vector<Object> getValidStuff() {
+        return validStuff;
+    }
+
+    public void refresh() {
+        if (validStuff.isEmpty()) {
+            UtilsGUI.showDialogInfo(this, R.string.no_target, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ListTargetsActivity.this.finish();
+                }
+            });
+        } else {
+            super.refresh();
+        }
+    }
+
+    @Override
+    protected boolean stillValid() {
+        return thing.visibleToPlayer();
+    }
 
 }

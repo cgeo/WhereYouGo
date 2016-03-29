@@ -24,44 +24,44 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import menion.android.whereyougo.utils.Logger;
 import cz.matejcik.openwig.platform.FileHandle;
+import menion.android.whereyougo.utils.Logger;
 
 public class WSaveFile implements FileHandle {
 
-  private static final String TAG = "WSaveFile";
+    private static final String TAG = "WSaveFile";
 
-  private File file;
+    private File file;
 
-  public WSaveFile(File cartridgeFile) {
-    file =
-        new File(cartridgeFile.getAbsolutePath().substring(0,
-            cartridgeFile.getAbsolutePath().lastIndexOf("."))
-            + ".ows");
-  }
+    public WSaveFile(File cartridgeFile) {
+        file =
+                new File(cartridgeFile.getAbsolutePath().substring(0,
+                        cartridgeFile.getAbsolutePath().lastIndexOf("."))
+                        + ".ows");
+    }
 
-  public void create() throws IOException {
-    file.createNewFile();
-  }
+    public void create() throws IOException {
+        file.createNewFile();
+    }
 
-  public void delete() throws IOException {
-    file.delete();
-  }
+    public void delete() throws IOException {
+        file.delete();
+    }
 
-  public boolean exists() throws IOException {
-    return file.exists();
-  }
+    public boolean exists() throws IOException {
+        return file.exists();
+    }
 
-  public DataInputStream openDataInputStream() throws IOException {
-    return new DataInputStream(new FileInputStream(file));
-  }
+    public DataInputStream openDataInputStream() throws IOException {
+        return new DataInputStream(new FileInputStream(file));
+    }
 
-  public DataOutputStream openDataOutputStream() throws IOException {
-    return new DataOutputStream(new FileOutputStream(file));
-  }
+    public DataOutputStream openDataOutputStream() throws IOException {
+        return new DataOutputStream(new FileOutputStream(file));
+    }
 
-  public void truncate(long len) throws IOException {
-    Logger.d(TAG, "truncate()");
-  }
+    public void truncate(long len) throws IOException {
+        Logger.d(TAG, "truncate()");
+    }
 
 }

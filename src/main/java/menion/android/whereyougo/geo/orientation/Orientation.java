@@ -17,6 +17,15 @@
 
 package menion.android.whereyougo.geo.orientation;
 
+import android.content.Context;
+import android.hardware.GeomagneticField;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.view.Surface;
+
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -28,14 +37,6 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-import android.content.Context;
-import android.hardware.GeomagneticField;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.os.Bundle;
-import android.view.Surface;
 
 /**
  * @author menion
@@ -44,26 +45,22 @@ import android.view.Surface;
 public class Orientation implements SensorEventListener, ILocationEventListener {
 
   private static final String TAG = "Orientation";
-
-  private Vector<IOrientationEventListener> listeners;
-
-  private SensorManager sensorManager;
-
-  private float mLastAziGps;
-  private float mLastAziSensor;
-
-  private float mLastPitch;
-  private float mLastRoll;
-
   private static float orient;
   private static float pitch;
   private static float roll;
-
   private static float aboveOrBelow = 0.0f;
-
   private static GeomagneticField gmf;
-
   private static long lastCompute;
+  private Vector<IOrientationEventListener> listeners;
+  private SensorManager sensorManager;
+  private float mLastAziGps;
+  private float mLastAziSensor;
+  private float mLastPitch;
+  private float mLastRoll;
+
+  public Orientation() {
+    this.listeners = new Vector<IOrientationEventListener>();
+  }
 
   public static float getDeclination() {
     long actualTime = System.currentTimeMillis();
@@ -72,17 +69,13 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       Location loc = LocationState.getLocation();
       // compute this only if needed
       gmf =
-          new GeomagneticField((float) loc.getLatitude(), (float) loc.getLongitude(),
-              (float) loc.getAltitude(), actualTime);
+              new GeomagneticField((float) loc.getLatitude(), (float) loc.getLongitude(),
+                      (float) loc.getAltitude(), actualTime);
       lastCompute = actualTime;
       Logger.w(TAG, "getDeclination() - dec:" + gmf.getDeclination());
     }
 
     return gmf.getDeclination();
-  }
-
-  public Orientation() {
-    this.listeners = new Vector<IOrientationEventListener>();
   }
 
   public void addListener(IOrientationEventListener listener) {
@@ -124,7 +117,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
 
   public int getPriority() {
     return ILocationEventListener.PRIORITY_MEDIUM;
-  }
+    }
 
   @Override
   public boolean isRequired() {
@@ -148,11 +141,11 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       if (sensorManager == null) {
         sensorManager = (SensorManager) A.getMain().getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(this,
-            sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-            SensorManager.SENSOR_DELAY_GAME);
+                sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+                SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(this,
-            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-            SensorManager.SENSOR_DELAY_GAME);
+                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_GAME);
       }
 
       // get azimuth from GPS when enabled in settings or by auto-change
@@ -163,11 +156,13 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         mLastAziGps = 0.0f;
       }
     }
+    }
+
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {
   }
-
-  public void onAccuracyChanged(Sensor sensor, int accuracy) {}
-
-  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {}
 
   public void onLocationChanged(Location location) {
     // Logger.d(TAG, "onLocationChanged(), bear:" + location.hasBearing() + ", " +
@@ -176,7 +171,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       this.mLastAziGps = location.getBearing();
       sendOrientation(mLastPitch, mLastRoll);
     }
-  }
+    }
 
   public void onSensorChanged(SensorEvent event) {
     switch (event.sensor.getType()) {
@@ -185,7 +180,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       case Sensor.TYPE_ACCELEROMETER:
         float filter = getFilter();
         aboveOrBelow =
-            (float) ((event.values[SensorManager.DATA_Z] * filter) + (aboveOrBelow * (1.0 - filter)));
+                (float) ((event.values[SensorManager.DATA_Z] * filter) + (aboveOrBelow * (1.0 - filter)));
         break;
       case Sensor.TYPE_ORIENTATION:
         float valueOr = event.values[SensorManager.DATA_X];
@@ -231,34 +226,35 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         sendOrientation(pitch, rollDef);
         break;
     }
-  }
+    }
 
-  public void onStatusChanged(String provider, int state, Bundle extras) {}
+  public void onStatusChanged(String provider, int state, Bundle extras) {
+    }
 
   public void removeAllListeners() {
     listeners.clear();
     manageSensors();
-  }
+    }
 
   public void removeListener(IOrientationEventListener listener) {
     if (listeners.contains(listener)) {
       this.listeners.remove(listener);
       Logger.i(TAG, "removeListener(" + listener + "), listeners.size():" + listeners.size());
       manageSensors();
-    }
+        }
   }
 
   private void sendOrientation(float pitch, float roll) {
     float usedOrient;
     if (!Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE
-        || LocationState.getLocation().getSpeed() < Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE) {
+            || LocationState.getLocation().getSpeed() < Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE) {
       if (!Preferences.SENSOR_HARDWARE_COMPASS)
         usedOrient = mLastAziGps;
       else
         usedOrient = mLastAziSensor;
-    } else {
+        } else {
       usedOrient = mLastAziGps;
-    }
+        }
 
     this.mLastPitch = pitch;
     this.mLastRoll = roll;
@@ -266,5 +262,5 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
     for (IOrientationEventListener listener : listeners) {
       listener.onOrientationChanged(usedOrient, mLastPitch, mLastRoll);
     }
-  }
+    }
 }

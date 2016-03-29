@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.utils;
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -25,9 +27,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Locale;
 
-import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.MainApplication;
-import android.os.Environment;
 
 /**
  * @author menion
@@ -35,191 +35,186 @@ import android.os.Environment;
  */
 public class FileSystem {
 
-  private static final String TAG = "FileSystem";
-
-  public static String ROOT = null;
-
-  public static String CACHE = "cache/";
-  public static String CACHE_AUDIO = CACHE + "audio/";
-
-  private static final String CARD_ROOT = "{CARD_ROOT}";
-  private static final String[] EXTERNAL_DIRECTORIES = new String[] {CARD_ROOT + "external_sd",
-      CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
-      CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
-      "/mnt/emms", // CM7 + SGS2
-      "/mnt/external1" // Xoom
-  };
-
-  public static boolean createRoot(String appDirName) {
-    if (ROOT != null && new File(ROOT).exists())
-      return true;
-
-    try {
-      // Android native
-      // Logger.i(TAG, "createRoot(), " + android.os.Environment.getExternalStorageState() + ", " +
-      // Environment.getExternalStorageDirectory());
-
-      String cardRoot = getExternalStorageDir();
-      if (cardRoot == null)
-        return false;
-
-      // test if exist external mounted sdcard
-      String externalCardRoot = null;
-      for (int i = 0; i < EXTERNAL_DIRECTORIES.length; i++) {
-        String cardTestDir = EXTERNAL_DIRECTORIES[i];
-        if (cardTestDir.contains(CARD_ROOT))
-          cardTestDir = cardTestDir.replace(CARD_ROOT, cardRoot);
-
-        if (new File(cardTestDir).exists()) {
-          externalCardRoot = cardTestDir + "/";
-          break;
-        }
-      }
-
-      File appOnCard = new File(cardRoot + appDirName);
-      if (externalCardRoot == null) {
-        return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
-      } else {
-        File appOnExternalCard = new File(externalCardRoot + appDirName);
-        // test whether root already exist
-        if (appOnExternalCard.exists()) {
-          return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
-        } else if (appOnCard.exists()) {
-          return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
-        } else {
-          return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
-        }
-      }
-    } catch (Exception ex) {
-      Logger.e(TAG, "createRoot(), ex: " + ex.toString());
-    }
-    return false;
-  }
-
-  public static String getExternalStorageDir() {
-    String cardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
-    if (cardRoot == null)
-      return null;
-
-    if (!cardRoot.endsWith("/"))
-      cardRoot += "/";
-    return cardRoot;
-  }
-
-  public static File[] getFiles(String folder, final String filter) {
-    FileFilter fileFilter = new FileFilter() {
-      public boolean accept(File pathname) {
-        if (pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter))
-          return true;
-        return false;
-      }
+    private static final String TAG = "FileSystem";
+    private static final String CARD_ROOT = "{CARD_ROOT}";
+    private static final String[] EXTERNAL_DIRECTORIES = new String[]{CARD_ROOT + "external_sd",
+            CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
+            CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
+            "/mnt/emms", // CM7 + SGS2
+            "/mnt/external1" // Xoom
     };
-    return getFiles2(folder, fileFilter);
-  }
+    public static String ROOT = null;
+    public static String CACHE = "cache/";
+    public static String CACHE_AUDIO = CACHE + "audio/";
 
-  public static File[] getFiles2(String folder, FileFilter filter) {
-    try {
-      File file = new File(folder);
-      if (!file.exists()) {
-        return new File[0];
-      }
+    public static boolean createRoot(String appDirName) {
+        if (ROOT != null && new File(ROOT).exists())
+            return true;
 
-      return file.listFiles(filter);
-    } catch (Exception e) {
-      Logger.e(TAG, "getFiles2(), folder: " + folder);
-      return null;
-    }
-  }
+        try {
+            // Android native
+            // Logger.i(TAG, "createRoot(), " + android.os.Environment.getExternalStorageState() + ", " +
+            // Environment.getExternalStorageDirectory());
 
-  public static String getRoot() {
-    if (ROOT == null) {
-      createRoot(MainApplication.APP_NAME);
-    }
-    return ROOT;
-  }
+            String cardRoot = getExternalStorageDir();
+            if (cardRoot == null)
+                return false;
 
-  /**
-   * Checks folders in given filePath and creates them if necessary
-   * 
-   * @param filePath file name
-   */
-  public static void checkFolders(String fileName) {
-    try {
-      (new File(fileName)).getParentFile().mkdirs();
-    } catch (Exception e) {
-      Logger.e(TAG, "checkFolders(" + fileName + "), ex: " + e.toString());
-    }
-  }
+            // test if exist external mounted sdcard
+            String externalCardRoot = null;
+            for (int i = 0; i < EXTERNAL_DIRECTORIES.length; i++) {
+                String cardTestDir = EXTERNAL_DIRECTORIES[i];
+                if (cardTestDir.contains(CARD_ROOT))
+                    cardTestDir = cardTestDir.replace(CARD_ROOT, cardRoot);
 
-  /**
-   * Writes binary data into file
-   * 
-   * @param filePath file name (absolute)
-   * @param data binary data
-   */
-  public static synchronized void saveBytes(String fileName, byte[] data) {
-    try {
-      if (data.length == 0)
-        return;
-      new FileSystemDataWritter(fileName, data, -1);
-    } catch (Exception e) {
-      Logger.e(TAG, "saveBytes(" + fileName + "), e: " + e.toString());
-    }
-  }
+                if (new File(cardTestDir).exists()) {
+                    externalCardRoot = cardTestDir + "/";
+                    break;
+                }
+            }
 
-  public static boolean setRootDirectory(String cardRoot, String appRoot) {
-    if (!appRoot.endsWith("/"))
-      appRoot += "/";
-
-    FileSystem.ROOT = appRoot;
-
-    // create root directory
-    File rootAppDir = new File(ROOT);
-    if (!rootAppDir.exists()) {
-      if (!rootAppDir.mkdir())
+            File appOnCard = new File(cardRoot + appDirName);
+            if (externalCardRoot == null) {
+                return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
+            } else {
+                File appOnExternalCard = new File(externalCardRoot + appDirName);
+                // test whether root already exist
+                if (appOnExternalCard.exists()) {
+                    return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
+                } else if (appOnCard.exists()) {
+                    return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
+                } else {
+                    return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
+                }
+            }
+        } catch (Exception ex) {
+            Logger.e(TAG, "createRoot(), ex: " + ex.toString());
+        }
         return false;
     }
-    return true;
-  }
-  
-  public static File findFile(String prefix, String extension) {
-    File[] files = FileSystem.getFiles(FileSystem.ROOT, extension);
-    for (File file : files) {
-      if (file.getName().startsWith(prefix)) {
-        return file;
-      }
+
+    public static String getExternalStorageDir() {
+        String cardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
+        if (cardRoot == null)
+            return null;
+
+        if (!cardRoot.endsWith("/"))
+            cardRoot += "/";
+        return cardRoot;
     }
-    return null;
-  }
-  
-  public static File findFile(String prefix) {
-    return findFile(prefix, "gwc");
-  }
-  
-  public static boolean backupFile(File file){
-    try {
-      if (file.length() > 0) {
-        FileSystem.copyFile(file, new File(file.getAbsolutePath() + ".bak"));
-      }
-    } catch (IOException e) {
-      return false;
+
+    public static File[] getFiles(String folder, final String filter) {
+        FileFilter fileFilter = new FileFilter() {
+            public boolean accept(File pathname) {
+                return pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter);
+            }
+        };
+        return getFiles2(folder, fileFilter);
     }
-    return true;
-  }
-  
-  public static void copyFile(File source, File dest) throws IOException {
-    if (!dest.exists()) {
-      dest.createNewFile();
+
+    public static File[] getFiles2(String folder, FileFilter filter) {
+        try {
+            File file = new File(folder);
+            if (!file.exists()) {
+                return new File[0];
+            }
+
+            return file.listFiles(filter);
+        } catch (Exception e) {
+            Logger.e(TAG, "getFiles2(), folder: " + folder);
+            return null;
+        }
     }
-    FileChannel sourceChannel = null;
-    FileChannel destChannel = null;
-    try {
-      sourceChannel = new FileInputStream(source).getChannel();
-      destChannel = new FileOutputStream(dest).getChannel();
-      destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-    } finally {
-      sourceChannel.close();
-      destChannel.close();
+
+    public static String getRoot() {
+        if (ROOT == null) {
+            createRoot(MainApplication.APP_NAME);
+        }
+        return ROOT;
     }
-  }
+
+    /**
+     * Checks folders in given filePath and creates them if necessary
+     *
+     * @param filePath file name
+     */
+    public static void checkFolders(String fileName) {
+        try {
+            (new File(fileName)).getParentFile().mkdirs();
+        } catch (Exception e) {
+            Logger.e(TAG, "checkFolders(" + fileName + "), ex: " + e.toString());
+        }
+    }
+
+    /**
+     * Writes binary data into file
+     *
+     * @param filePath file name (absolute)
+     * @param data     binary data
+     */
+    public static synchronized void saveBytes(String fileName, byte[] data) {
+        try {
+            if (data.length == 0)
+                return;
+            new FileSystemDataWritter(fileName, data, -1);
+        } catch (Exception e) {
+            Logger.e(TAG, "saveBytes(" + fileName + "), e: " + e.toString());
+        }
+    }
+
+    public static boolean setRootDirectory(String cardRoot, String appRoot) {
+        if (!appRoot.endsWith("/"))
+            appRoot += "/";
+
+        FileSystem.ROOT = appRoot;
+
+        // create root directory
+        File rootAppDir = new File(ROOT);
+        if (!rootAppDir.exists()) {
+            if (!rootAppDir.mkdir())
+                return false;
+        }
+        return true;
+    }
+
+    public static File findFile(String prefix, String extension) {
+        File[] files = FileSystem.getFiles(FileSystem.ROOT, extension);
+        for (File file : files) {
+            if (file.getName().startsWith(prefix)) {
+                return file;
+            }
+        }
+        return null;
+    }
+
+    public static File findFile(String prefix) {
+        return findFile(prefix, "gwc");
+    }
+
+    public static boolean backupFile(File file) {
+        try {
+            if (file.length() > 0) {
+                FileSystem.copyFile(file, new File(file.getAbsolutePath() + ".bak"));
+            }
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static void copyFile(File source, File dest) throws IOException {
+        if (!dest.exists()) {
+            dest.createNewFile();
+        }
+        FileChannel sourceChannel = null;
+        FileChannel destChannel = null;
+        try {
+            sourceChannel = new FileInputStream(source).getChannel();
+            destChannel = new FileOutputStream(dest).getChannel();
+            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+        } finally {
+            sourceChannel.close();
+            destChannel.close();
+        }
+    }
 }

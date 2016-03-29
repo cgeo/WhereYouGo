@@ -19,43 +19,47 @@ package menion.android.whereyougo.geo.location;
 
 /**
  * Representing one satellite
- * 
+ *
  * @author menion
  */
 public class SatellitePosition {
 
-  protected Integer prn;
-  protected float azimuth;
-  protected float elevation;
-  /** signal to noise ratio */
-  protected int snr;
-  /** is satellite fixed */
-  protected boolean fixed;
+    protected Integer prn;
+    protected float azimuth;
+    protected float elevation;
+    /**
+     * signal to noise ratio
+     */
+    protected int snr;
+    /**
+     * is satellite fixed
+     */
+    protected boolean fixed;
 
-  public SatellitePosition() {
-    this.prn = new Integer(0);
-    this.azimuth = 0.0f;
-    this.elevation = 0.0f;
-    this.snr = 0;
-  }
+    public SatellitePosition() {
+        this.prn = 0;
+        this.azimuth = 0.0f;
+        this.elevation = 0.0f;
+        this.snr = 0;
+    }
 
-  public float getAzimuth() {
-    return azimuth;
-  }
+    public float getAzimuth() {
+        return azimuth;
+    }
 
-  public float getElevation() {
-    return elevation;
-  }
+    public float getElevation() {
+        return elevation;
+    }
 
-  public Integer getPrn() {
-    return prn;
-  }
+    public Integer getPrn() {
+        return prn;
+    }
 
-  public int getSnr() {
-    return snr;
-  }
+    public int getSnr() {
+        return snr;
+    }
 
-  public boolean isFixed() {
-    return fixed;
-  }
+    public boolean isFixed() {
+        return fixed;
+    }
 }

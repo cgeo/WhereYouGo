@@ -17,12 +17,13 @@
 
 package menion.android.whereyougo.utils;
 
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.preferences.Locale;
-import menion.android.whereyougo.preferences.PreferenceValues;
 import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
+
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.PreferenceValues;
 
 /**
  * @author menion
@@ -30,57 +31,57 @@ import android.widget.Toast;
  */
 public class ManagerNotify {
 
-  private static final String TAG = "ManagerNotify";
+    private static final String TAG = "ManagerNotify";
 
-  public static void toastInternetProblem() {
-    toastLongMessage(Locale.get(R.string.problem_with_internet_connection));
-  }
-
-  public static void toastLongMessage(final Context context, final String msg) {
-    toastMessage(context, msg, Toast.LENGTH_LONG);
-  }
-
-  public static void toastLongMessage(final int msg) {
-    toastLongMessage(Locale.get(msg));
-  }
-
-  public static void toastLongMessage(final String msg) {
-    toastLongMessage(PreferenceValues.getCurrentActivity(), msg);
-  }
-
-  private static void toastMessage(final Context context, final String msg, final int time) {
-    Logger.d(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")");
-    if (context == null || msg == null || msg.length() == 0)
-      return;
-
-    try {
-      if (context instanceof Activity) {
-        ((Activity) context).runOnUiThread(new Runnable() {
-          public void run() {
-            Toast.makeText(context, msg, time).show();
-          }
-        });
-      } else {
-        Toast.makeText(context, msg, time).show();
-      }
-    } catch (Exception e) {
-      Logger.e(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")", e);
+    public static void toastInternetProblem() {
+        toastLongMessage(Locale.get(R.string.problem_with_internet_connection));
     }
-  }
 
-  public static void toastShortMessage(final Context context, final String msg) {
-    toastMessage(context, msg, Toast.LENGTH_SHORT);
-  }
+    public static void toastLongMessage(final Context context, final String msg) {
+        toastMessage(context, msg, Toast.LENGTH_LONG);
+    }
 
-  public static void toastShortMessage(final int msg) {
-    toastShortMessage(Locale.get(msg));
-  }
+    public static void toastLongMessage(final int msg) {
+        toastLongMessage(Locale.get(msg));
+    }
 
-  public static void toastShortMessage(final String msg) {
-    toastShortMessage(PreferenceValues.getCurrentActivity(), msg);
-  }
+    public static void toastLongMessage(final String msg) {
+        toastLongMessage(PreferenceValues.getCurrentActivity(), msg);
+    }
 
-  public static void toastUnexpectedProblem() {
-    toastLongMessage(Locale.get(R.string.unexpected_problem));
-  }
+    private static void toastMessage(final Context context, final String msg, final int time) {
+        Logger.d(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")");
+        if (context == null || msg == null || msg.length() == 0)
+            return;
+
+        try {
+            if (context instanceof Activity) {
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(context, msg, time).show();
+                    }
+                });
+            } else {
+                Toast.makeText(context, msg, time).show();
+            }
+        } catch (Exception e) {
+            Logger.e(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")", e);
+        }
+    }
+
+    public static void toastShortMessage(final Context context, final String msg) {
+        toastMessage(context, msg, Toast.LENGTH_SHORT);
+    }
+
+    public static void toastShortMessage(final int msg) {
+        toastShortMessage(Locale.get(msg));
+    }
+
+    public static void toastShortMessage(final String msg) {
+        toastShortMessage(PreferenceValues.getCurrentActivity(), msg);
+    }
+
+    public static void toastUnexpectedProblem() {
+        toastLongMessage(Locale.get(R.string.unexpected_problem));
+    }
 }

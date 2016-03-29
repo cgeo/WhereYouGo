@@ -6,47 +6,47 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TextStyleB" parent="@TextStyle">
+    <style name="TextStyleB" parent="TextStyle">
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextStyle12" parent="@TextStyle">
+    <style name="TextStyle12" parent="TextStyle">
         <item name="android:textSize">12dip</item>
     </style>
 
-    <style name="TextStyle14" parent="@TextStyle">
+    <style name="TextStyle14" parent="TextStyle">
         <item name="android:textSize">14dip</item>
     </style>
 
-    <style name="TextStyle14B" parent="@TextStyleB">
+    <style name="TextStyle14B" parent="TextStyleB">
         <item name="android:textSize">14dip</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextStyle16" parent="@TextStyle">
+    <style name="TextStyle16" parent="TextStyle">
         <item name="android:textSize">16dip</item>
     </style>
 
-    <style name="TextStyle16B" parent="@TextStyleB">
+    <style name="TextStyle16B" parent="TextStyleB">
         <item name="android:textSize">16dip</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextStyle18" parent="@TextStyle">
+    <style name="TextStyle18" parent="TextStyle">
         <item name="android:textSize">18dip</item>
     </style>
 
-    <style name="TextStyle18B" parent="@TextStyleB">
+    <style name="TextStyle18B" parent="TextStyleB">
         <item name="android:textSize">18dip</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextStyle20B" parent="@TextStyleB">
+    <style name="TextStyle20B" parent="TextStyleB">
         <item name="android:textSize">20dip</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextStyle20BRed" parent="@TextStyle20B">
+    <style name="TextStyle20BRed" parent="TextStyle20B">
         <item name="android:textColor">#FFFF0000</item>
     </style>
 

@@ -22,56 +22,56 @@ import java.io.FileOutputStream;
 
 public class FileSystemDataWritter extends Thread {
 
-  private static final String TAG = "FileSystemDataWritter";
+    private static final String TAG = "FileSystemDataWritter";
 
-  private String fileToWrite;
-  private byte[] dataToWrite;
-  private long bytePos;
+    private String fileToWrite;
+    private byte[] dataToWrite;
+    private long bytePos;
 
-  /**
-   * Save bytes to file.
-   * 
-   * @param fileToWrite
-   * @param dataToWrite
-   * @param bytePos position at write data or <br>
-   *        -1 if write as whole new file<br>
-   *        -2 if write at the end of file
-   */
-  public FileSystemDataWritter(String fileToWrite, byte[] dataToWrite, long bytePos) {
-    this.fileToWrite = fileToWrite;
-    this.dataToWrite = dataToWrite;
-    this.bytePos = bytePos;
-    this.start();
-  }
-
-  public void run() {
-    try {
-      FileSystem.checkFolders(fileToWrite);
-
-      // create if not exist
-      // Log.w(TAG, "write to file: " + fileToWrite);
-      File file = new File(fileToWrite);
-      if (!file.exists()) {
-        file.createNewFile();
-      }
-
-      if (dataToWrite != null) {
-        FileOutputStream os;
-        if (bytePos == -1) {
-          os = new FileOutputStream(file, false);
-        } else if (bytePos == -2) {
-          os = new FileOutputStream(file, true);
-        } else {
-          os = new FileOutputStream(file, true);
-          os.getChannel().position(bytePos);
-        }
-
-        os.write(dataToWrite);
-        os.close();
-      }
-
-    } catch (Exception e) {
-      Logger.e(TAG, "run(" + fileToWrite + ")", e);
+    /**
+     * Save bytes to file.
+     *
+     * @param fileToWrite
+     * @param dataToWrite
+     * @param bytePos     position at write data or <br>
+     *                    -1 if write as whole new file<br>
+     *                    -2 if write at the end of file
+     */
+    public FileSystemDataWritter(String fileToWrite, byte[] dataToWrite, long bytePos) {
+        this.fileToWrite = fileToWrite;
+        this.dataToWrite = dataToWrite;
+        this.bytePos = bytePos;
+        this.start();
     }
-  }
+
+    public void run() {
+        try {
+            FileSystem.checkFolders(fileToWrite);
+
+            // create if not exist
+            // Log.w(TAG, "write to file: " + fileToWrite);
+            File file = new File(fileToWrite);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            if (dataToWrite != null) {
+                FileOutputStream os;
+                if (bytePos == -1) {
+                    os = new FileOutputStream(file, false);
+                } else if (bytePos == -2) {
+                    os = new FileOutputStream(file, true);
+                } else {
+                    os = new FileOutputStream(file, true);
+                    os.getChannel().position(bytePos);
+                }
+
+                os.write(dataToWrite);
+                os.close();
+            }
+
+        } catch (Exception e) {
+            Logger.e(TAG, "run(" + fileToWrite + ")", e);
+        }
+    }
 }

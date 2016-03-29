@@ -19,12 +19,12 @@ package menion.android.whereyougo.guide;
 
 public interface IGuideEventListener {
 
-  public void guideStart();
+    void guideStart();
 
-  public void guideStop();
+    void guideStop();
 
-  public void receiveGuideEvent(IGuide guide, String targetName, float azimuthToTarget,
-      double distanceToTarget);
+    void receiveGuideEvent(IGuide guide, String targetName, float azimuthToTarget,
+                           double distanceToTarget);
 
-  public void trackGuideCallRecalculate();
+    void trackGuideCallRecalculate();
 }

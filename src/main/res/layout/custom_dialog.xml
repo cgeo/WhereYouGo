@@ -3,21 +3,21 @@
     android:id="@+id/linear_layout_main"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linear_layout_title"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/title_height"
         android:background="@drawable/var_panel_top"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="6dip"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/image_view_title_logo"
@@ -67,7 +67,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="0dip"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/linear_layout_content"
@@ -82,7 +82,8 @@
             style="@style/PanelTopBelowShadow"
             android:layout_alignLeft="@+id/linear_layout_content"
             android:layout_alignRight="@+id/linear_layout_content"
-            android:layout_alignTop="@+id/linear_layout_content" />
+            android:layout_alignTop="@+id/linear_layout_content"
+            android:orientation="horizontal" />
     </RelativeLayout>
 
     <include layout="@layout/include_bottom_panel" />

@@ -14,35 +14,36 @@
  */
 package menion.android.whereyougo.maps.mapsforge.preferences;
 
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
 import android.content.Context;
 import android.util.AttributeSet;
+
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
 
 /**
  * Preferences class for adjusting the move speed.
  */
 public class MoveSpeedPreference extends SeekBarPreference {
-  /**
-   * Construct a new move speed preference seek bar.
-   * 
-   * @param context the context activity.
-   * @param attrs A set of attributes (currently ignored).
-   */
-  public MoveSpeedPreference(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    // define the text message
-    this.messageText = getContext().getString(R.string.preferences_move_speed_desc);
+    /**
+     * Construct a new move speed preference seek bar.
+     *
+     * @param context the context activity.
+     * @param attrs   A set of attributes (currently ignored).
+     */
+    public MoveSpeedPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // define the text message
+        this.messageText = getContext().getString(R.string.preferences_move_speed_desc);
 
-    // define the current and maximum value of the seek bar
-    this.seekBarCurrentValue =
-        this.preferencesDefault.getInt(this.getKey(), MapsforgeActivity.MOVE_SPEED_DEFAULT);
-    this.max = MapsforgeActivity.MOVE_SPEED_MAX;
-  }
+        // define the current and maximum value of the seek bar
+        this.seekBarCurrentValue =
+                this.preferencesDefault.getInt(this.getKey(), MapsforgeActivity.MOVE_SPEED_DEFAULT);
+        this.max = MapsforgeActivity.MOVE_SPEED_MAX;
+    }
 
-  @Override
-  String getCurrentValueText(int progress) {
-    return String.format(getContext().getString(R.string.preferences_move_speed_value),
-        Integer.valueOf(progress * 10));
-  }
+    @Override
+    String getCurrentValueText(int progress) {
+        return String.format(getContext().getString(R.string.preferences_move_speed_value),
+                progress * 10);
+    }
 }

@@ -21,27 +21,27 @@ import menion.android.whereyougo.utils.A;
 
 public class Locale {
 
-  public static final String get(int string) {
-    if (A.getApp() != null) {
-      return A.getApp().getString(string);
-    } else {
-      return "";
+    public static String get(int string) {
+        if (A.getApp() != null) {
+            return A.getApp().getString(string);
+        } else {
+            return "";
+        }
     }
-  }
 
-  public static final String get(int string, String replace) {
-    if (A.getApp() != null) {
-      return A.getApp().getString(string, replace);
-    } else {
-      return "";
+    public static String get(int string, String replace) {
+        if (A.getApp() != null) {
+            return A.getApp().getString(string, replace);
+        } else {
+            return "";
+        }
     }
-  }
 
-  public static final String get(int string, String replace01, String replace02) {
-    if (A.getApp() != null) {
-      return A.getApp().getString(string, replace01, replace02);
-    } else {
-      return "";
+    public static String get(int string, String replace01, String replace02) {
+        if (A.getApp() != null) {
+            return A.getApp().getString(string, replace01, replace02);
+        } else {
+            return "";
+        }
     }
-  }
 }

@@ -25,17 +25,17 @@ import menion.android.whereyougo.geo.location.Location;
  */
 public interface IGuide {
 
-  public void actualizeState(Location actualLocation);
+    void actualizeState(Location actualLocation);
 
-  public float getAzimuthToTaget();
+    float getAzimuthToTaget();
 
-  public float getDistanceToTarget();
+    float getDistanceToTarget();
 
-  public Location getTargetLocation();
+    Location getTargetLocation();
 
-  public String getTargetName();
+    String getTargetName();
 
-  public long getTimeToTarget();
+    long getTimeToTarget();
 
-  public void manageDistanceSoundsBeeping(double distance);
+    void manageDistanceSoundsBeeping(double distance);
 }

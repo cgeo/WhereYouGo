@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.guide;
 
+import android.net.Uri;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,7 +30,6 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-import android.net.Uri;
 
 /**
  * @author menion
@@ -36,128 +37,132 @@ import android.net.Uri;
  */
 public class Guide implements IGuide {
 
-  private static final String TAG = "WaypointGuide";
+    private static final String TAG = "WaypointGuide";
 
-  private Location location;
-  private int id;
-  private String name;
+    private Location location;
+    private int id;
+    private String name;
 
-  private float azimuth;
-  private float distance;
+    private float azimuth;
+    private float distance;
 
-  /** last sound sonar call */
-  private long lastSonarCall;
-  /** audio sound for beeping */
-  private AudioClip audioBeep;
+    /**
+     * last sound sonar call
+     */
+    private long lastSonarCall;
+    /**
+     * audio sound for beeping
+     */
+    private AudioClip audioBeep;
 
-  private boolean alreadyBeeped;
+    private boolean alreadyBeeped;
 
-  /**
-   * Creates new waypoint navigator
-   * 
-   * @param target
-   * @param name
-   */
-  public Guide(String name, Location location) {
-    this.name = name;
-    this.location = location;
-    alreadyBeeped = false;
-    lastSonarCall = 0;
-    audioBeep = new AudioClip(A.getApp(), R.raw.sound_beep_01);
-  }
-
-  public void actualizeState(Location actualLocation) {
-    azimuth = actualLocation.bearingTo(location);
-    distance = actualLocation.distanceTo(location);
-  }
-
-  @Override
-  public float getAzimuthToTaget() {
-    return azimuth;
-  }
-
-  @Override
-  public float getDistanceToTarget() {
-    return distance;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  private long getSonarTimeout(double distance) {
-    if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE) {
-      return (long) (distance * 1000 / 33);
-    } else {
-      return Long.MAX_VALUE;
+    /**
+     * Creates new waypoint navigator
+     *
+     * @param target
+     * @param name
+     */
+    public Guide(String name, Location location) {
+        this.name = name;
+        this.location = location;
+        alreadyBeeped = false;
+        lastSonarCall = 0;
+        audioBeep = new AudioClip(A.getApp(), R.raw.sound_beep_01);
     }
-  }
 
-  @Override
-  public Location getTargetLocation() {
-    return location;
-  }
-
-  @Override
-  public String getTargetName() {
-    return name;
-  }
-
-  @Override
-  public long getTimeToTarget() {
-    if (LocationState.getLocation().getSpeed() > 1.0) {
-      return (long) ((getDistanceToTarget() / LocationState.getLocation().getSpeed()) * 1000);
-    } else {
-      return 0;
+    public void actualizeState(Location actualLocation) {
+        azimuth = actualLocation.bearingTo(location);
+        distance = actualLocation.distanceTo(location);
     }
-  }
 
-  @Override
-  public void manageDistanceSoundsBeeping(double distance) {
-    try {
-      switch (Preferences.GUIDING_WAYPOINT_SOUND) {
-        case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE:
-          if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE && !alreadyBeeped) {
-            audioBeep.play();
-            alreadyBeeped = true;
-          }
-          break;
-        case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER:
-          long currentTime = System.currentTimeMillis();
-          float sonarTimeout = getSonarTimeout(distance);
-          if ((currentTime - lastSonarCall) > sonarTimeout) { // (currentTime - lastSonarCall) >
-                                                              // soundSonarDuration &&
-            lastSonarCall = currentTime;
-            playSingleBeep();
-          }
-          break;
-        case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND:
-          if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE && !alreadyBeeped) {
-            playCustomSound();
-            alreadyBeeped = true;
-          }
-          break;
-      }
-    } catch (Exception e) {
-      Logger.e(TAG, "manageDistanceSounds(" + distance + "), e:" + e.toString());
+    @Override
+    public float getAzimuthToTaget() {
+        return azimuth;
     }
-  }
 
-  protected void playCustomSound() {
-    String uri = Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
-    if (uri != null && uri.length() > 0) {
-      final AudioClip audioClip = new AudioClip(A.getApp(), Uri.parse(uri));
-      audioClip.play();
-      new Timer().schedule(new TimerTask() {
-        @Override
-        public void run() {
-          AudioClip.destroyAudio(audioClip);
+    @Override
+    public float getDistanceToTarget() {
+        return distance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private long getSonarTimeout(double distance) {
+        if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE) {
+            return (long) (distance * 1000 / 33);
+        } else {
+            return Long.MAX_VALUE;
         }
-      }, 5000);
     }
-  }
 
-  protected void playSingleBeep() {
-    audioBeep.play();
-  }
+    @Override
+    public Location getTargetLocation() {
+        return location;
+    }
+
+    @Override
+    public String getTargetName() {
+        return name;
+    }
+
+    @Override
+    public long getTimeToTarget() {
+        if (LocationState.getLocation().getSpeed() > 1.0) {
+            return (long) ((getDistanceToTarget() / LocationState.getLocation().getSpeed()) * 1000);
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public void manageDistanceSoundsBeeping(double distance) {
+        try {
+            switch (Preferences.GUIDING_WAYPOINT_SOUND) {
+                case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE:
+                    if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE && !alreadyBeeped) {
+                        audioBeep.play();
+                        alreadyBeeped = true;
+                    }
+                    break;
+                case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER:
+                    long currentTime = System.currentTimeMillis();
+                    float sonarTimeout = getSonarTimeout(distance);
+                    if ((currentTime - lastSonarCall) > sonarTimeout) { // (currentTime - lastSonarCall) >
+                        // soundSonarDuration &&
+                        lastSonarCall = currentTime;
+                        playSingleBeep();
+                    }
+                    break;
+                case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND:
+                    if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE && !alreadyBeeped) {
+                        playCustomSound();
+                        alreadyBeeped = true;
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            Logger.e(TAG, "manageDistanceSounds(" + distance + "), e:" + e.toString());
+        }
+    }
+
+    protected void playCustomSound() {
+        String uri = Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
+        if (uri != null && uri.length() > 0) {
+            final AudioClip audioClip = new AudioClip(A.getApp(), Uri.parse(uri));
+            audioClip.play();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    AudioClip.destroyAudio(audioClip);
+                }
+            }, 5000);
+        }
+    }
+
+    protected void playSingleBeep() {
+        audioBeep.play();
+    }
 }

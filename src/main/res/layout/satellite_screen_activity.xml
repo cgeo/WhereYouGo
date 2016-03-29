@@ -2,23 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/var_custom_screen_bg" >
+    android:background="@drawable/var_custom_screen_bg">
 
     <LinearLayout
         android:id="@+id/linear_layout_skyplot"
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/linear_layout_bottom"
+        android:layout_marginTop="40dip"
         android:gravity="center"
-        android:layout_marginTop="40dip" >
-    </LinearLayout>
+        android:orientation="vertical" />
 
     <LinearLayout
         android:id="@+id/linear_layout_top_coordinates"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="3dip" >
+        android:padding="3dip">
 
         <TextView
             android:id="@+id/text_view_latitude"
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linear_layout_top_coordinates"
         android:paddingLeft="3dip"
-        android:paddingRight="3dip" >
+        android:paddingRight="3dip">
 
         <TextView
             style="@style/CustomScreenTextTitle"
@@ -69,9 +68,9 @@
         android:id="@+id/linear_layout_bottom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linear_layout_bottom_2" >
+        android:layout_above="@+id/linear_layout_bottom_2">
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -82,7 +81,7 @@
                 style="@style/CustomScreenTextValue" />
         </LinearLayout>
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -93,7 +92,7 @@
                 style="@style/CustomScreenTextValue" />
         </LinearLayout>
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -109,9 +108,9 @@
         android:id="@+id/linear_layout_bottom_2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linear_layout_bottom_3" >
+        android:layout_above="@+id/linear_layout_bottom_3">
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -122,7 +121,7 @@
                 style="@style/CustomScreenTextValue" />
         </LinearLayout>
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -133,7 +132,7 @@
                 style="@style/CustomScreenTextValue" />
         </LinearLayout>
 
-        <LinearLayout style="@style/CustomScreenBottomInfo" >
+        <LinearLayout style="@style/CustomScreenBottomInfo">
 
             <TextView
                 style="@style/CustomScreenTextTitle"
@@ -151,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/var_panel_bottom"
-        android:padding="3dip" >
+        android:padding="3dip">
 
         <ToggleButton
             android:id="@+id/btn_gps_on_off"

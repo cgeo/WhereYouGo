@@ -9,7 +9,7 @@
     android:paddingBottom="4dip"
     android:paddingLeft="4dip"
     android:paddingRight="4dip"
-    android:paddingTop="6dip" >
+    android:paddingTop="6dip">
 
     <LinearLayout
         android:id="@+id/linear_layout_left_spacer"

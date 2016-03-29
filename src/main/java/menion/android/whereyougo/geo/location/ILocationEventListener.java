@@ -17,32 +17,34 @@
 
 package menion.android.whereyougo.geo.location;
 
-import java.util.ArrayList;
-
 import android.os.Bundle;
+
+import java.util.ArrayList;
 
 /**
  * Interface for location changes
- * 
+ *
  * @author menion
  * @since 25.1.2010 2010
  */
 public interface ILocationEventListener {
 
-  public static final int PRIORITY_LOW = 1;
-  public static final int PRIORITY_MEDIUM = 2;
-  public static final int PRIORITY_HIGH = 3;
+    int PRIORITY_LOW = 1;
+    int PRIORITY_MEDIUM = 2;
+    int PRIORITY_HIGH = 3;
 
-  public String getName();
+    String getName();
 
-  public int getPriority();
+    int getPriority();
 
-  /** Is required when screen turn off */
-  public boolean isRequired();
+    /**
+     * Is required when screen turn off
+     */
+    boolean isRequired();
 
-  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats);
+    void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats);
 
-  public void onLocationChanged(Location location);
+    void onLocationChanged(Location location);
 
-  public void onStatusChanged(String provider, int state, Bundle extras);
+    void onStatusChanged(String provider, int state, Bundle extras);
 }

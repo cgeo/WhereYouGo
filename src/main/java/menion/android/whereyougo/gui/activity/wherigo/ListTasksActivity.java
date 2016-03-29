@@ -17,63 +17,64 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import android.graphics.Bitmap;
+
 import java.util.Vector;
 
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.Task;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.utils.Images;
-import android.graphics.Bitmap;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Task;
 
 public class ListTasksActivity extends ListVariousActivity {
 
-  private static Bitmap[] stateIcons;
+    private static Bitmap[] stateIcons;
 
-  static {
-    stateIcons = new Bitmap[3];
-    stateIcons[Task.PENDING] = Images.getImageB(R.drawable.task_pending);
-    stateIcons[Task.DONE] = Images.getImageB(R.drawable.task_done);
-    stateIcons[Task.FAILED] = Images.getImageB(R.drawable.task_failed);
-  }
-
-  @Override
-  protected void callStuff(Object what) {
-    Task z = (Task) what;
-    if (z.hasEvent("OnClick")) {
-      Engine.callEvent(z, "OnClick", null);
-    } else {
-      MainActivity.wui.showScreen(WUI.DETAILSCREEN, z);
+    static {
+        stateIcons = new Bitmap[3];
+        stateIcons[Task.PENDING] = Images.getImageB(R.drawable.task_pending);
+        stateIcons[Task.DONE] = Images.getImageB(R.drawable.task_done);
+        stateIcons[Task.FAILED] = Images.getImageB(R.drawable.task_failed);
     }
-    ListTasksActivity.this.finish();
-  }
 
-  protected Bitmap getStuffIcon(Object what) {
-    Bitmap bmp = super.getStuffIcon(what);
-    if(bmp != Images.IMAGE_EMPTY_B)
-      return bmp;
-    return stateIcons[((Task) what).state()];
-  }
-
-  @Override
-  protected String getStuffName(Object what) {
-    return ((Task) what).name;
-  }
-
-  @Override
-  protected Vector<Object> getValidStuff() {
-    Vector<Object> newtasks = new Vector<Object>();
-    for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
-      Task t = (Task) Engine.instance.cartridge.tasks.get(i);
-      if (t.isVisible())
-        newtasks.add(t);
+    @Override
+    protected void callStuff(Object what) {
+        Task z = (Task) what;
+        if (z.hasEvent("OnClick")) {
+            Engine.callEvent(z, "OnClick", null);
+        } else {
+            MainActivity.wui.showScreen(WUI.DETAILSCREEN, z);
+        }
+        ListTasksActivity.this.finish();
     }
-    return newtasks;
-  }
 
-  @Override
-  protected boolean stillValid() {
-    return true;
-  }
+    protected Bitmap getStuffIcon(Object what) {
+        Bitmap bmp = super.getStuffIcon(what);
+        if (bmp != Images.IMAGE_EMPTY_B)
+            return bmp;
+        return stateIcons[((Task) what).state()];
+    }
+
+    @Override
+    protected String getStuffName(Object what) {
+        return ((Task) what).name;
+    }
+
+    @Override
+    protected Vector<Object> getValidStuff() {
+        Vector<Object> newtasks = new Vector<Object>();
+        for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
+            Task t = (Task) Engine.instance.cartridge.tasks.get(i);
+            if (t.isVisible())
+                newtasks.add(t);
+        }
+        return newtasks;
+    }
+
+    @Override
+    protected boolean stillValid() {
+        return true;
+    }
 }

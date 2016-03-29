@@ -24,28 +24,28 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 class LogWriter {
-  private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
 
-  static void log(String fname, String msg) {
-    String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
-    try {
-      FileWriter fstream = new FileWriter(loc, true);
-      PrintWriter out = new PrintWriter(fstream);
-      out.println("" + dateFormat.format(new java.util.Date()) + " - " + msg);
-      out.close();
-    } catch (IOException e) {
+    static void log(String fname, String msg) {
+        String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+        try {
+            FileWriter fstream = new FileWriter(loc, true);
+            PrintWriter out = new PrintWriter(fstream);
+            out.println("" + dateFormat.format(new java.util.Date()) + " - " + msg);
+            out.close();
+        } catch (IOException e) {
+        }
     }
-  }
 
-  static void log(String fname, Throwable ex) {
-    String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
-    try {
-      FileWriter fstream = new FileWriter(loc, true);
-      PrintWriter out = new PrintWriter(fstream);
-      out.println("" + dateFormat.format(new java.util.Date()) + ":");
-      ex.printStackTrace(out);
-      out.close();
-    } catch (IOException e) {
+    static void log(String fname, Throwable ex) {
+        String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+        try {
+            FileWriter fstream = new FileWriter(loc, true);
+            PrintWriter out = new PrintWriter(fstream);
+            out.println("" + dateFormat.format(new java.util.Date()) + ":");
+            ex.printStackTrace(out);
+            out.close();
+        } catch (IOException e) {
+        }
     }
-  }
 }

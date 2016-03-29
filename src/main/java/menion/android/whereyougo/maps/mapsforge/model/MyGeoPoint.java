@@ -19,14 +19,14 @@ import org.mapsforge.core.model.GeoPoint;
 
 @SuppressWarnings("serial")
 public class MyGeoPoint extends GeoPoint {
-  int id;
+    int id;
 
-  public MyGeoPoint(double latitude, double longitude, int id) {
-    super(latitude, longitude);
-    this.id = id;
-  }
+    public MyGeoPoint(double latitude, double longitude, int id) {
+        super(latitude, longitude);
+        this.id = id;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public int getId() {
+        return id;
+    }
 }

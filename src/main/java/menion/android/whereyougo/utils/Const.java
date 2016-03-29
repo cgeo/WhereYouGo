@@ -24,55 +24,62 @@ package menion.android.whereyougo.utils;
  */
 public class Const {
 
-  /** state variable - disable some un-publicable tweaks */
-  public static boolean STATE_RELEASE;
-  /** state variable - show all logs in LogCat (if false, show only 'e' */
-  public static boolean STATE_DEBUG_LOGS;
+    /**
+     * 180 / PI
+     */
+    public static final float RHO = (float) (180 / Math.PI);
+    /**
+     * precission value for some rounding functions
+     */
+    public static final int PRECISION = 5;
 
-  /***********************************/
+    /***********************************/
   /* QUICK SWITCH FOR VERSIONS */
-  /***********************************/
+    public static final int SCREEN_SIZE_SMALL = 0;
+    public static final int SCREEN_SIZE_MEDIUM = 1;
+    public static final int SCREEN_SIZE_LARGE = 2;
 
-  private static final int PUBLISH_RELEASE = 0;
-  private static final int PUBLISH_PRIVATE = 2;
-
-  private static final int RELEASE = PUBLISH_PRIVATE;
-
-  /***********************************/
+    /***********************************/
   /* BUILDS VERSION TYPES */
-  /***********************************/
+    public static final int SCREEN_SIZE_XLARGE = 3;
+    public static final int TEXT_SIZE_SMALL = 0;
+    public static final int TEXT_SIZE_MEDIUM = 1;
+    public static final int TEXT_SIZE_BIG = 2;
+    public static final int TEXT_SIZE_HUGE = 3;
+    /***********************************/
 
-  static {
-    switch (RELEASE) {
-      case PUBLISH_RELEASE:
-        STATE_RELEASE = true;
-        STATE_DEBUG_LOGS = false;
-        break;
-      case PUBLISH_PRIVATE:
-        STATE_RELEASE = false;
-        STATE_DEBUG_LOGS = true;
-        break;
+    private static final int PUBLISH_RELEASE = 0;
+    private static final int PUBLISH_PRIVATE = 2;
+    private static final int RELEASE = PUBLISH_PRIVATE;
+    /**
+     * state variable - disable some un-publicable tweaks
+     */
+    public static boolean STATE_RELEASE;
+    /**
+     * state variable - show all logs in LogCat (if false, show only 'e'
+     */
+    public static boolean STATE_DEBUG_LOGS;
+    /**
+     * screen width from various sources
+     */
+    public static int SCREEN_WIDTH = 0;
+    /**
+     * screen height from various sources
+     */
+    public static int SCREEN_HEIGHT = 0;
+
+    /***********************************/
+
+    static {
+        switch (RELEASE) {
+            case PUBLISH_RELEASE:
+                STATE_RELEASE = true;
+                STATE_DEBUG_LOGS = false;
+                break;
+            case PUBLISH_PRIVATE:
+                STATE_RELEASE = false;
+                STATE_DEBUG_LOGS = true;
+                break;
+        }
     }
-  }
-
-  /** screen width from various sources */
-  public static int SCREEN_WIDTH = 0;
-  /** screen height from various sources */
-  public static int SCREEN_HEIGHT = 0;
-
-  /** 180 / PI */
-  public static final float RHO = (float) (180 / Math.PI);
-
-  /** precission value for some rounding functions */
-  public static final int PRECISION = 5;
-
-  public static final int SCREEN_SIZE_SMALL = 0;
-  public static final int SCREEN_SIZE_MEDIUM = 1;
-  public static final int SCREEN_SIZE_LARGE = 2;
-  public static final int SCREEN_SIZE_XLARGE = 3;
-
-  public static final int TEXT_SIZE_SMALL = 0;
-  public static final int TEXT_SIZE_MEDIUM = 1;
-  public static final int TEXT_SIZE_BIG = 2;
-  public static final int TEXT_SIZE_HUGE = 3;
 }

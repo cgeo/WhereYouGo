@@ -17,6 +17,14 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import java.util.ArrayList;
 
 import menion.android.whereyougo.R;
@@ -36,13 +44,6 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 /**
  * @author menion
@@ -50,174 +51,174 @@ import android.widget.ToggleButton;
  */
 public class SatelliteActivity extends CustomActivity implements ILocationEventListener {
 
-  private static final String TAG = "SatelliteScreen";
+    private static final String TAG = "SatelliteScreen";
+    private final ArrayList<SatellitePosition> satellites = new ArrayList<SatellitePosition>();
+    private Satellite2DView satelliteView;
+    private ToggleButton buttonGps;
 
-  private Satellite2DView satelliteView;
+    private void createLayout() {
+        LinearLayout llSkyplot = (LinearLayout) findViewById(R.id.linear_layout_skyplot);
+        llSkyplot.removeAllViews();
 
-  private ToggleButton buttonGps;
+        // return and add view to first linearLayout
+        satelliteView = new Satellite2DView(SatelliteActivity.this, satellites);
+        llSkyplot.addView(satelliteView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
-  private ArrayList<SatellitePosition> satellites = new ArrayList<SatellitePosition>();
-
-  private void createLayout() {
-    LinearLayout llSkyplot = (LinearLayout) findViewById(R.id.linear_layout_skyplot);
-    llSkyplot.removeAllViews();
-
-    // return and add view to first linearLayout
-    satelliteView = new Satellite2DView(SatelliteActivity.this, satellites);
-    llSkyplot.addView(satelliteView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
-    // change colors for 3.0+
-    if (Utils.isAndroid30OrMore()) {
-      findViewById(R.id.linear_layout_bottom_3).setBackgroundColor(CustomDialog.BOTTOM_COLOR_A3);
-    }
-
-    // and final bottom buttons
-    buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
-    buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
-    buttonGps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-      @Override
-      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (!isChecked) {
-          LocationState.setGpsOff(SatelliteActivity.this);
-
-          // disable satellites on screen
-          satellites.clear();
-          satelliteView.invalidate();
-        } else {
-          LocationState.setGpsOn(SatelliteActivity.this);
+        // change colors for 3.0+
+        if (Utils.isAndroid30OrMore()) {
+            findViewById(R.id.linear_layout_bottom_3).setBackgroundColor(CustomDialog.BOTTOM_COLOR_A3);
         }
 
+        // and final bottom buttons
+        buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
+        buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
+        buttonGps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    LocationState.setGpsOff(SatelliteActivity.this);
+
+                    // disable satellites on screen
+                    satellites.clear();
+                    satelliteView.invalidate();
+                } else {
+                    LocationState.setGpsOn(SatelliteActivity.this);
+                }
+
+                onGpsStatusChanged(0, null);
+                PreferenceValues.enableWakeLock();
+            }
+        });
+
+        ToggleButton buttonCompass = (ToggleButton) findViewById(R.id.btn_compass_on_off);
+        buttonCompass.setChecked(PreferenceValues.getPrefBoolean(this,
+                PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR,
+                PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR));
+        buttonCompass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
+                PreferenceValues.setPrefBoolean(SatelliteActivity.this,
+                        PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR, isChecked);
+                Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(isChecked);
+                A.getRotator().manageSensors();
+            }
+        });
+    }
+
+    @Override
+    public String getName() {
+        return TAG;
+    }
+
+    public int getPriority() {
+        return ILocationEventListener.PRIORITY_MEDIUM;
+    }
+
+    @Override
+    public boolean isRequired() {
+        return false;
+    }
+
+    public void notifyGpsDisable() {
+        buttonGps.setChecked(false);
+    }
+
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.satellite_screen_activity);
+
+        createLayout();
+    }
+
+    public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> gpsStatus) {
+        try {
+            Point2D.Int num = setSatellites(gpsStatus);
+            satelliteView.invalidate();
+            ((TextView) findViewById(R.id.text_view_satellites)).setText(num.x + " | " + num.y);
+        } catch (Exception e) {
+            Logger.e(TAG, "onGpsStatusChanged(" + event + ", " + gpsStatus + "), e:" + e.toString());
+        }
+    }
+
+    public void onLocationChanged(final Location location) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                String provider = location.getProvider();
+                if (provider.equals(LocationManager.GPS_PROVIDER)) {
+                    provider = getString(R.string.provider_gps);
+                } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+                    provider = getString(R.string.provider_network);
+                } else {
+                    provider = getString(R.string.provider_passive);
+                }
+                ((TextView) findViewById(R.id.text_view_provider)).setText(provider);
+                ((TextView) findViewById(R.id.text_view_latitude)).setText(UtilsFormat
+                        .formatLatitude(location.getLatitude()));
+                ((TextView) findViewById(R.id.text_view_longitude)).setText(UtilsFormat
+                        .formatLongitude(location.getLongitude()));
+                ((TextView) findViewById(R.id.text_view_altitude)).setText(UtilsFormat.formatAltitude(
+                        location.getAltitude(), true));
+                ((TextView) findViewById(R.id.text_view_accuracy)).setText(UtilsFormat.formatDistance(
+                        location.getAccuracy(), false));
+                ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
+                        location.getSpeed(), false));
+                ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
+                        .formatAngle(Orientation.getDeclination()));
+                long lastFix = LocationState.getLastFixTime();
+                if (lastFix > 0) {
+                    ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
+                            .formatDate(lastFix));
+                } else {
+                    ((TextView) findViewById(R.id.text_view_time_gps)).setText("~");
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onLocationChanged(LocationState.getLocation());
         onGpsStatusChanged(0, null);
-        PreferenceValues.enableWakeLock();
-      }
-    });
-
-    ToggleButton buttonCompass = (ToggleButton) findViewById(R.id.btn_compass_on_off);
-    buttonCompass.setChecked(PreferenceValues.getPrefBoolean(this,
-        PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR,
-        PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR));
-    buttonCompass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
-        PreferenceValues.setPrefBoolean(SatelliteActivity.this,
-            PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR, isChecked);
-        Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(isChecked);
-        A.getRotator().manageSensors();
-      }
-    });
-  }
-
-  @Override
-  public String getName() {
-    return TAG;
-  }
-
-  public int getPriority() {
-    return ILocationEventListener.PRIORITY_MEDIUM;
-  }
-
-  @Override
-  public boolean isRequired() {
-    return false;
-  }
-
-  public void notifyGpsDisable() {
-    buttonGps.setChecked(false);
-  }
-
-  /** Called when the activity is first created. */
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.satellite_screen_activity);
-
-    createLayout();
-  }
-
-  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> gpsStatus) {
-    try {
-      Point2D.Int num = setSatellites(gpsStatus);
-      satelliteView.invalidate();
-      ((TextView) findViewById(R.id.text_view_satellites)).setText(num.x + " | " + num.y);
-    } catch (Exception e) {
-      Logger.e(TAG, "onGpsStatusChanged(" + event + ", " + gpsStatus + "), e:" + e.toString());
     }
-  }
 
-  public void onLocationChanged(final Location location) {
-    runOnUiThread(new Runnable() {
-      @Override
-      public void run() {
-        String provider = location.getProvider();
-        if (provider.equals(LocationManager.GPS_PROVIDER)) {
-          provider = getString(R.string.provider_gps);
-        } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-          provider = getString(R.string.provider_network);
-        } else {
-          provider = getString(R.string.provider_passive);
-        }
-        ((TextView) findViewById(R.id.text_view_provider)).setText(provider);
-        ((TextView) findViewById(R.id.text_view_latitude)).setText(UtilsFormat
-            .formatLatitude(location.getLatitude()));
-        ((TextView) findViewById(R.id.text_view_longitude)).setText(UtilsFormat
-            .formatLongitude(location.getLongitude()));
-        ((TextView) findViewById(R.id.text_view_altitude)).setText(UtilsFormat.formatAltitude(
-            location.getAltitude(), true));
-        ((TextView) findViewById(R.id.text_view_accuracy)).setText(UtilsFormat.formatDistance(
-            location.getAccuracy(), false));
-        ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
-            location.getSpeed(), false));
-        ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
-            .formatAngle(Orientation.getDeclination()));
-        long lastFix = LocationState.getLastFixTime();
-        if (lastFix > 0) {
-          ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
-              .formatDate(lastFix));
-        } else {
-          ((TextView) findViewById(R.id.text_view_time_gps)).setText("~");
-        }
-      }
-    });
-
-
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    onLocationChanged(LocationState.getLocation());
-    onGpsStatusChanged(0, null);
-  }
-
-  public void onStart() {
-    super.onStart();
-    LocationState.addLocationChangeListener(this);
-    if (buttonGps.isChecked() && !LocationState.isActuallyHardwareGpsOn())
-      notifyGpsDisable();
-  }
-
-  public void onStatusChanged(String provider, int state, Bundle extra) {}
-
-  public void onStop() {
-    super.onStop();
-    LocationState.removeLocationChangeListener(this);
-  }
-
-  private Point2D.Int setSatellites(ArrayList<SatellitePosition> sats) {
-    synchronized (satellites) {
-      Point2D.Int satCount = new Point2D.Int();
-      satellites.clear();
-      if (sats != null && satellites != null) {
-        for (int i = 0; i < sats.size(); i++) {
-          SatellitePosition sat = sats.get(i);
-          if (sat.isFixed())
-            satCount.x++;
-          satCount.y++;
-          satellites.add(sat);
-        }
-      }
-      return satCount;
+    public void onStart() {
+        super.onStart();
+        LocationState.addLocationChangeListener(this);
+        if (buttonGps.isChecked() && !LocationState.isActuallyHardwareGpsOn())
+            notifyGpsDisable();
     }
-  }
+
+    public void onStatusChanged(String provider, int state, Bundle extra) {
+    }
+
+    public void onStop() {
+        super.onStop();
+        LocationState.removeLocationChangeListener(this);
+    }
+
+    private Point2D.Int setSatellites(ArrayList<SatellitePosition> sats) {
+        synchronized (satellites) {
+            Point2D.Int satCount = new Point2D.Int();
+            satellites.clear();
+            if (sats != null) {
+                for (int i = 0; i < sats.size(); i++) {
+                    SatellitePosition sat = sats.get(i);
+                    if (sat.isFixed())
+                        satCount.x++;
+                    satCount.y++;
+                    satellites.add(sat);
+                }
+            }
+            return satCount;
+        }
+    }
 }

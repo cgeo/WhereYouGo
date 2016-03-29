@@ -14,11 +14,6 @@
  */
 package menion.android.whereyougo.maps.mapsforge.filefilter;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.mapsforge.graphics.android.AndroidGraphics;
 import org.mapsforge.map.reader.header.FileOpenResult;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
@@ -26,31 +21,36 @@ import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.rule.RenderThemeHandler;
 import org.xml.sax.SAXException;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 /**
  * Accepts all valid render theme XML files.
  */
 public final class ValidRenderTheme implements ValidFileFilter {
-  private FileOpenResult fileOpenResult;
+    private FileOpenResult fileOpenResult;
 
-  @Override
-  public boolean accept(File file) {
-    try {
-      XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(file);
-      RenderThemeHandler.getRenderTheme(AndroidGraphics.INSTANCE, xmlRenderTheme);
-      this.fileOpenResult = FileOpenResult.SUCCESS;
-    } catch (ParserConfigurationException e) {
-      this.fileOpenResult = new FileOpenResult(e.getMessage());
-    } catch (SAXException e) {
-      this.fileOpenResult = new FileOpenResult(e.getMessage());
-    } catch (IOException e) {
-      this.fileOpenResult = new FileOpenResult(e.getMessage());
+    @Override
+    public boolean accept(File file) {
+        try {
+            XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(file);
+            RenderThemeHandler.getRenderTheme(AndroidGraphics.INSTANCE, xmlRenderTheme);
+            this.fileOpenResult = FileOpenResult.SUCCESS;
+        } catch (ParserConfigurationException e) {
+            this.fileOpenResult = new FileOpenResult(e.getMessage());
+        } catch (SAXException e) {
+            this.fileOpenResult = new FileOpenResult(e.getMessage());
+        } catch (IOException e) {
+            this.fileOpenResult = new FileOpenResult(e.getMessage());
+        }
+
+        return this.fileOpenResult.isSuccess();
     }
 
-    return this.fileOpenResult.isSuccess();
-  }
-
-  @Override
-  public FileOpenResult getFileOpenResult() {
-    return this.fileOpenResult;
-  }
+    @Override
+    public FileOpenResult getFileOpenResult() {
+        return this.fileOpenResult;
+    }
 }

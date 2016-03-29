@@ -17,87 +17,94 @@
 
 package menion.android.whereyougo.utils;
 
-import menion.android.whereyougo.R;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import menion.android.whereyougo.R;
+
 public class Images {
 
-  private static final String TAG = "Images";
+    /**
+     * bigger icon size for titles, logos, etc...
+     */
+    public static final int SIZE_HUGE = (int) Utils.getDpPixels(48);
+    /**
+     * bigger icon size for titles, logos, etc...
+     */
+    public static final int SIZE_BIG = (int) Utils.getDpPixels(32);
+    /**
+     * smaller icon size mainly for map items
+     */
+    public static final int SIZE_MEDIUM = (int) Utils.getDpPixels(24);
+    /**
+     * smallest icon size
+     */
+    public static final int SIZE_SMALL = (int) Utils.getDpPixels(16);
+    private static final String TAG = "Images";
+    public static final Bitmap IMAGE_EMPTY_B = getImageB(R.drawable.var_empty);
 
-  /** bigger icon size for titles, logos, etc... */
-  public static final int SIZE_HUGE = (int) Utils.getDpPixels(48);
-  /** bigger icon size for titles, logos, etc... */
-  public static final int SIZE_BIG = (int) Utils.getDpPixels(32);
-  /** smaller icon size mainly for map items */
-  public static final int SIZE_MEDIUM = (int) Utils.getDpPixels(24);
-  /** smallest icon size */
-  public static final int SIZE_SMALL = (int) Utils.getDpPixels(16);
-
-  public static final Bitmap IMAGE_EMPTY_B = getImageB(R.drawable.var_empty);
-
-  public static Bitmap getImageB(int id) {
-    try {
-      if (id <= 0)
-        return IMAGE_EMPTY_B;
-      return BitmapFactory.decodeResource(A.getApp().getResources(), id);
-    } catch (Exception e) {
-      Logger.w(TAG, "getImageB(" + id + "), e:" + e.toString());
-      return IMAGE_EMPTY_B;
+    public static Bitmap getImageB(int id) {
+        try {
+            if (id <= 0)
+                return IMAGE_EMPTY_B;
+            return BitmapFactory.decodeResource(A.getApp().getResources(), id);
+        } catch (Exception e) {
+            Logger.w(TAG, "getImageB(" + id + "), e:" + e.toString());
+            return IMAGE_EMPTY_B;
+        }
     }
-  }
 
-  public static Bitmap getImageB(int id, int width) {
-    Bitmap bitmap = getImageB(id);
-    return resizeBitmap(bitmap, width);
-  }
-
-  public static Drawable getImageD(Bitmap bitmap) {
-    Drawable draw = new BitmapDrawable(bitmap);
-    draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
-    return draw;
-  }
-
-  public static Drawable getImageD(int id) {
-    try {
-      Drawable draw = A.getApp().getResources().getDrawable(id);
-      draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
-      return draw;
-    } catch (Exception e) {
-      // some exceptions on market (crash errors)
-      return null;
+    public static Bitmap getImageB(int id, int width) {
+        Bitmap bitmap = getImageB(id);
+        return resizeBitmap(bitmap, width);
     }
-  }
 
-  public static Drawable getImageD(int id, int size) {
-    if (A.getApp() == null)
-      return null;
+    public static Drawable getImageD(Bitmap bitmap) {
+        Drawable draw = new BitmapDrawable(bitmap);
+        draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
+        return draw;
+    }
 
-    Drawable draw = A.getApp().getResources().getDrawable(id);
-    return getSizeOptimizedIcon(draw, size);
-  }
+    public static Drawable getImageD(int id) {
+        try {
+            Drawable draw = A.getApp().getResources().getDrawable(id);
+            draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
+            return draw;
+        } catch (Exception e) {
+            // some exceptions on market (crash errors)
+            return null;
+        }
+    }
 
-  public static Drawable getSizeOptimizedIcon(Drawable draw, int newSize) {
-    if (draw == null)
-      return getImageD(R.drawable.var_empty);
-    draw.setBounds(0, 0, newSize, newSize);
-    draw.invalidateSelf();
-    return draw;
-  }
+    public static Drawable getImageD(int id, int size) {
+        if (A.getApp() == null)
+            return null;
 
-  public static Bitmap resizeBitmap(Bitmap draw, int newWidth) {
-    if (draw == null)
-      return null;
+        Drawable draw = A.getApp().getResources().getDrawable(id);
+        return getSizeOptimizedIcon(draw, size);
+    }
 
-    return resizeBitmap(draw, newWidth, (int) (newWidth * draw.getHeight() / draw.getWidth()));
-  }
+    public static Drawable getSizeOptimizedIcon(Drawable draw, int newSize) {
+        if (draw == null)
+            return getImageD(R.drawable.var_empty);
+        draw.setBounds(0, 0, newSize, newSize);
+        draw.invalidateSelf();
+        return draw;
+    }
 
-  public static Bitmap resizeBitmap(Bitmap draw, int newWidth, int newHeight) {
-    if (draw == null || newWidth <= 0 || draw.getWidth() == newWidth)
-      return draw;
+    public static Bitmap resizeBitmap(Bitmap draw, int newWidth) {
+        if (draw == null)
+            return null;
 
-    return Bitmap.createScaledBitmap(draw, newWidth, newHeight, true);
-  }
+        return resizeBitmap(draw, newWidth, newWidth * draw.getHeight() / draw.getWidth());
+    }
+
+    public static Bitmap resizeBitmap(Bitmap draw, int newWidth, int newHeight) {
+        if (draw == null || newWidth <= 0 || draw.getWidth() == newWidth)
+            return draw;
+
+        return Bitmap.createScaledBitmap(draw, newWidth, newHeight, true);
+    }
 }

@@ -19,80 +19,77 @@ package menion.android.whereyougo.gui.activity.wherigo;
 
 import java.util.Vector;
 
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.openwig.WUI;
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Thing;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.openwig.WUI;
 
 public class ListActionsActivity extends ListVariousActivity {
 
-  private static Thing thing;
+    private static Thing thing;
 
-  public static void callAction(Action z) {
-    String eventName = "On" + z.getName();
+    public static void callAction(Action z) {
+        String eventName = "On" + z.getName();
 
-    if (z.hasParameter()) {
-      if (z.getActor() == thing) {
-        ListTargetsActivity.reset(thing.name + ": " + z.text, z, thing);
-        MainActivity.wui.showScreen(WUI.SCREEN_TARGETS, null);
-      } else {
-        // TODO necessary?
-        // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
-        Engine.callEvent(z.getActor(), eventName, thing);
-      }
-    } else {
-      // TODO necessary?
-      // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
-      Engine.callEvent(thing, eventName, null);
+        if (z.hasParameter()) {
+            if (z.getActor() == thing) {
+                ListTargetsActivity.reset(thing.name + ": " + z.text, z, thing);
+                MainActivity.wui.showScreen(WUI.SCREEN_TARGETS, null);
+            } else {
+                // TODO necessary?
+                // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
+                Engine.callEvent(z.getActor(), eventName, thing);
+            }
+        } else {
+            // TODO necessary?
+            // MainActivity.wui.showScreen(WUI.DETAILSCREEN, DetailsActivity.et);
+            Engine.callEvent(thing, eventName, null);
+        }
     }
-  }
 
-  public static Vector<Object> getValidActions(Thing thing) {
-    Vector<Object> newActions = new Vector<Object>();
-    for (int i = 0; i < thing.actions.size(); i++)
-      newActions.add(thing.actions.get(i));
+    public static Vector<Object> getValidActions(Thing thing) {
+        Vector<Object> newActions = new Vector<Object>();
+        for (int i = 0; i < thing.actions.size(); i++)
+            newActions.add(thing.actions.get(i));
 
-    for (int i = 0; i < newActions.size(); i++) {
-      Action a = (Action) newActions.elementAt(i);
-      if (!a.isEnabled() || !a.getActor().visibleToPlayer()) {
-        newActions.removeElementAt(i--);
-        continue;
-      }
+        for (int i = 0; i < newActions.size(); i++) {
+            Action a = (Action) newActions.elementAt(i);
+            if (!a.isEnabled() || !a.getActor().visibleToPlayer()) {
+                newActions.removeElementAt(i--);
+            }
+        }
+        return newActions;
     }
-    return newActions;
-  }
 
-  public static void reset(Thing what) {
-    ListActionsActivity.thing = what;
-  }
+    public static void reset(Thing what) {
+        ListActionsActivity.thing = what;
+    }
 
-  @Override
-  protected void callStuff(Object what) {
-    Action z = (Action) what;
-    callAction(z);
-    ListActionsActivity.this.finish();
-  }
+    @Override
+    protected void callStuff(Object what) {
+        Action z = (Action) what;
+        callAction(z);
+        ListActionsActivity.this.finish();
+    }
 
-  @Override
-  protected String getStuffName(Object what) {
-    Action a = (Action) what;
-    if (a.getActor() == thing)
-      return a.text;
-    else
-      return (a.getActor().name + ": " + a.text);
-  }
+    @Override
+    protected String getStuffName(Object what) {
+        Action a = (Action) what;
+        if (a.getActor() == thing)
+            return a.text;
+        else
+            return (a.getActor().name + ": " + a.text);
+    }
 
-  @Override
-  protected Vector<Object> getValidStuff() {
-    return getValidActions(thing);
-  }
+    @Override
+    protected Vector<Object> getValidStuff() {
+        return getValidActions(thing);
+    }
 
-  @Override
-  protected boolean stillValid() {
-    if (!thing.visibleToPlayer())
-      return false;
-    return thing.visibleActions() > 0;
-  }
+    @Override
+    protected boolean stillValid() {
+        return thing.visibleToPlayer() && thing.visibleActions() > 0;
+    }
 
 }

@@ -25,15 +25,15 @@ import menion.android.whereyougo.geo.location.Location;
  */
 public class WaypointGuide extends Guide {
 
-  private static final String TAG = "WaypointGuide";
+    private static final String TAG = "WaypointGuide";
 
-  /**
-   * Creates new waypoint navigator
-   * 
-   * @param target
-   * @param name
-   */
-  public WaypointGuide(String name, Location location) {
-    super(name, location);
-  }
+    /**
+     * Creates new waypoint navigator
+     *
+     * @param target
+     * @param name
+     */
+    public WaypointGuide(String name, Location location) {
+        super(name, location);
+    }
 }

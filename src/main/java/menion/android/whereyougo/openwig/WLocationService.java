@@ -17,46 +17,46 @@
 
 package menion.android.whereyougo.openwig;
 
+import cz.matejcik.openwig.platform.LocationService;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.utils.Logger;
-import cz.matejcik.openwig.platform.LocationService;
 
 public class WLocationService implements LocationService {
 
-  private static final String TAG = "WLocationService";
+    private static final String TAG = "WLocationService";
 
-  public void connect() {
-    Logger.w(TAG, "connect()");
-  }
+    public void connect() {
+        Logger.w(TAG, "connect()");
+    }
 
-  public void disconnect() {
-    Logger.w(TAG, "disconnect()");
-  }
+    public void disconnect() {
+        Logger.w(TAG, "disconnect()");
+    }
 
-  public double getAltitude() {
-    return LocationState.getLocation().getAltitude();
-  }
+    public double getAltitude() {
+        return LocationState.getLocation().getAltitude();
+    }
 
-  public double getHeading() {
-    return LocationState.getLocation().getBearing();
-  }
+    public double getHeading() {
+        return LocationState.getLocation().getBearing();
+    }
 
-  public double getLatitude() {
-    return LocationState.getLocation().getLatitude();
-  }
+    public double getLatitude() {
+        return LocationState.getLocation().getLatitude();
+    }
 
-  public double getLongitude() {
-    return LocationState.getLocation().getLongitude();
-  }
+    public double getLongitude() {
+        return LocationState.getLocation().getLongitude();
+    }
 
-  public double getPrecision() {
-    return LocationState.getLocation().getAccuracy();
-  }
+    public double getPrecision() {
+        return LocationState.getLocation().getAccuracy();
+    }
 
-  public int getState() {
-    if (LocationState.isActuallyHardwareGpsOn())
-      return LocationService.ONLINE;
-    else
-      return LocationService.OFFLINE;
-  }
+    public int getState() {
+        if (LocationState.isActuallyHardwareGpsOn())
+            return LocationService.ONLINE;
+        else
+            return LocationService.OFFLINE;
+    }
 }

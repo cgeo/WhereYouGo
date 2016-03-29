@@ -19,5 +19,5 @@ package menion.android.whereyougo.gui;
 
 public interface IRefreshable {
 
-  public void refresh();
+    void refresh();
 }

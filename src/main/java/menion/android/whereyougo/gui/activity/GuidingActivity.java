@@ -17,6 +17,14 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+
+import cz.matejcik.openwig.EventTable;
+import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.R.id;
 import menion.android.whereyougo.geo.location.Location;
@@ -32,171 +40,168 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Zone;
 
 /**
  * @author menion
  * @since 25.1.2010 2010
  */
 public class GuidingActivity extends CustomActivity implements IGuideEventListener,
-    IOrientationEventListener, IRefreshable {
+        IOrientationEventListener, IRefreshable {
 
-  // private static final String TAG = "GuidingScreen";
+    // private static final String TAG = "GuidingScreen";
 
-  private CompassView viewCompass;
+    private CompassView viewCompass;
 
-  private TextView viewName;
-  private TextView viewProvider;
-  private TextView viewLat;
-  private TextView viewLon;
-  private TextView viewAlt;
-  private TextView viewAcc;
-  private TextView viewSpeed;
-  private TextView viewTimeToTarget;
+    private TextView viewName;
+    private TextView viewProvider;
+    private TextView viewLat;
+    private TextView viewLon;
+    private TextView viewAlt;
+    private TextView viewAcc;
+    private TextView viewSpeed;
+    private TextView viewTimeToTarget;
 
-  /** azimuth from compass */
-  private float mAzimuth;
-  private float mPitch;
-  private float mRoll;
-  // azimuth to target
-  private float azimuthToTarget;
+    /**
+     * azimuth from compass
+     */
+    private float mAzimuth;
+    private float mPitch;
+    private float mRoll;
+    // azimuth to target
+    private float azimuthToTarget;
 
-  @Override
-  public void guideStart() {}
-
-  @Override
-  public void guideStop() {}
-
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (A.getMain() == null) {
-      finish();
-      return;
+    @Override
+    public void guideStart() {
     }
-    setContentView(R.layout.layout_guiding_screen);
 
-    mAzimuth = 0.0f;
-    mPitch = 0.0f;
-    mRoll = 0.0f;
-
-    azimuthToTarget = 0.0f;
-
-    viewCompass = new CompassView(this);
-    ((LinearLayout) findViewById(R.id.linearLayoutCompass)).addView(viewCompass,
-        LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-
-    viewName = (TextView) findViewById(R.id.textViewName);
-    viewProvider = (TextView) findViewById(id.textViewProvider);
-    viewAlt = (TextView) findViewById(R.id.textViewAltitude);
-    viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
-    viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
-    viewLat = (TextView) findViewById(R.id.textViewLatitude);
-    viewLon = (TextView) findViewById(R.id.textViewLongitude);
-    viewTimeToTarget = (TextView) findViewById(R.id.text_view_time_to_target);
-
-    onOrientationChanged(mAzimuth, mPitch, mRoll);
-  }
-
-  @Override
-  public void onOrientationChanged(float azimuth, float pitch, float roll) {
-    // Logger.d(TAG, "onOrientationChanged(" + azimuth + ", " + pitch + ", " + roll + ")");
-    Location loc = LocationState.getLocation();
-    mAzimuth = azimuth;
-    mPitch = pitch;
-    mRoll = roll;
-
-    String provider = loc.getProvider();
-    if (provider.equals(LocationManager.GPS_PROVIDER)) {
-      provider = getString(R.string.provider_gps);
-    } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-      provider = getString(R.string.provider_network);
-    } else {
-      provider = getString(R.string.provider_passive);
+    @Override
+    public void guideStop() {
     }
-    viewProvider.setText(provider);
-    viewLat.setText(UtilsFormat.formatLatitude(loc.getLatitude()));
-    viewLon.setText(UtilsFormat.formatLongitude(loc.getLongitude()));
-    viewAlt.setText(UtilsFormat.formatAltitude(loc.getAltitude(), true));
-    viewAcc.setText(UtilsFormat.formatDistance((double) loc.getAccuracy(), false));
-    viewSpeed.setText(UtilsFormat.formatSpeed(loc.getSpeed(), false));
 
-    repaint();
-  }
-
-  public void onStart() {
-    super.onStart();
-    A.getGuidingContent().addGuidingListener(this);
-    A.getRotator().addListener(this);
-  }
-
-  public void onStop() {
-    super.onStop();
-    A.getGuidingContent().removeGuidingListener(this);
-    A.getRotator().removeListener(this);
-  }
-
-  @Override
-  public void receiveGuideEvent(IGuide guide, String targetName, float azimuthToTarget,
-      double distanceToTarget) {
-    this.viewName.setText(targetName);
-    this.azimuthToTarget = azimuthToTarget;
-    viewCompass.setDistance(distanceToTarget);
-    if (LocationState.getLocation().getSpeed() > 1) {
-      viewTimeToTarget.setText(UtilsFormat.formatTime(true,
-          (long) (distanceToTarget / LocationState.getLocation().getSpeed()) * 1000));
-    } else {
-      viewTimeToTarget.setText(UtilsFormat.formatTime(true, 0));
-    }
-    repaint();
-  }
-
-  @Override
-  public void refresh() {
-    runOnUiThread(new Runnable() {
-
-      @Override
-      public void run() {
-        // refresh target position
-        EventTable et = DetailsActivity.et;
-        if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
-          return;
-        Location l =
-            A.getGuidingContent().getTargetLocation() == null ? new Location() : new Location(A
-                .getGuidingContent().getTargetLocation());
-        if (et instanceof Zone) {
-          Zone z = (Zone) DetailsActivity.et;
-          if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
-            l.setLatitude(z.nearestPoint.latitude);
-            l.setLongitude(z.nearestPoint.longitude);
-          } else if (z.position != null) {
-            l.setLatitude(z.position.latitude);
-            l.setLongitude(z.position.longitude);
-          } else {
-            l.setLatitude(z.bbCenter.latitude);
-            l.setLongitude(z.bbCenter.longitude);
-          }
-        } else {
-          l.setLatitude(et.position.latitude);
-          l.setLongitude(et.position.longitude);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (A.getMain() == null) {
+            finish();
+            return;
         }
-        A.getGuidingContent().onLocationChanged(l);
-      }
-    });
-  }
+        setContentView(R.layout.layout_guiding_screen);
 
-  private void repaint() {
-    viewCompass.moveAngles(azimuthToTarget, mAzimuth, mPitch, mRoll);
-  }
+        mAzimuth = 0.0f;
+        mPitch = 0.0f;
+        mRoll = 0.0f;
 
-  @Override
-  public void trackGuideCallRecalculate() {
-    // ignore
-  }
+        azimuthToTarget = 0.0f;
+
+        viewCompass = new CompassView(this);
+        ((LinearLayout) findViewById(R.id.linearLayoutCompass)).addView(viewCompass,
+                LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+
+        viewName = (TextView) findViewById(R.id.textViewName);
+        viewProvider = (TextView) findViewById(id.textViewProvider);
+        viewAlt = (TextView) findViewById(R.id.textViewAltitude);
+        viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
+        viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
+        viewLat = (TextView) findViewById(R.id.textViewLatitude);
+        viewLon = (TextView) findViewById(R.id.textViewLongitude);
+        viewTimeToTarget = (TextView) findViewById(R.id.text_view_time_to_target);
+
+        onOrientationChanged(mAzimuth, mPitch, mRoll);
+    }
+
+    @Override
+    public void onOrientationChanged(float azimuth, float pitch, float roll) {
+        // Logger.d(TAG, "onOrientationChanged(" + azimuth + ", " + pitch + ", " + roll + ")");
+        Location loc = LocationState.getLocation();
+        mAzimuth = azimuth;
+        mPitch = pitch;
+        mRoll = roll;
+
+        String provider = loc.getProvider();
+        if (provider.equals(LocationManager.GPS_PROVIDER)) {
+            provider = getString(R.string.provider_gps);
+        } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+            provider = getString(R.string.provider_network);
+        } else {
+            provider = getString(R.string.provider_passive);
+        }
+        viewProvider.setText(provider);
+        viewLat.setText(UtilsFormat.formatLatitude(loc.getLatitude()));
+        viewLon.setText(UtilsFormat.formatLongitude(loc.getLongitude()));
+        viewAlt.setText(UtilsFormat.formatAltitude(loc.getAltitude(), true));
+        viewAcc.setText(UtilsFormat.formatDistance((double) loc.getAccuracy(), false));
+        viewSpeed.setText(UtilsFormat.formatSpeed(loc.getSpeed(), false));
+
+        repaint();
+    }
+
+    public void onStart() {
+        super.onStart();
+        A.getGuidingContent().addGuidingListener(this);
+        A.getRotator().addListener(this);
+    }
+
+    public void onStop() {
+        super.onStop();
+        A.getGuidingContent().removeGuidingListener(this);
+        A.getRotator().removeListener(this);
+    }
+
+    @Override
+    public void receiveGuideEvent(IGuide guide, String targetName, float azimuthToTarget,
+                                  double distanceToTarget) {
+        this.viewName.setText(targetName);
+        this.azimuthToTarget = azimuthToTarget;
+        viewCompass.setDistance(distanceToTarget);
+        if (LocationState.getLocation().getSpeed() > 1) {
+            viewTimeToTarget.setText(UtilsFormat.formatTime(true,
+                    (long) (distanceToTarget / LocationState.getLocation().getSpeed()) * 1000));
+        } else {
+            viewTimeToTarget.setText(UtilsFormat.formatTime(true, 0));
+        }
+        repaint();
+    }
+
+    @Override
+    public void refresh() {
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                // refresh target position
+                EventTable et = DetailsActivity.et;
+                if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
+                    return;
+                Location l =
+                        A.getGuidingContent().getTargetLocation() == null ? new Location() : new Location(A
+                                .getGuidingContent().getTargetLocation());
+                if (et instanceof Zone) {
+                    Zone z = (Zone) DetailsActivity.et;
+                    if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
+                        l.setLatitude(z.nearestPoint.latitude);
+                        l.setLongitude(z.nearestPoint.longitude);
+                    } else if (z.position != null) {
+                        l.setLatitude(z.position.latitude);
+                        l.setLongitude(z.position.longitude);
+                    } else {
+                        l.setLatitude(z.bbCenter.latitude);
+                        l.setLongitude(z.bbCenter.longitude);
+                    }
+                } else {
+                    l.setLatitude(et.position.latitude);
+                    l.setLongitude(et.position.longitude);
+                }
+                A.getGuidingContent().onLocationChanged(l);
+            }
+        });
+    }
+
+    private void repaint() {
+        viewCompass.moveAngles(azimuthToTarget, mAzimuth, mPitch, mRoll);
+    }
+
+    @Override
+    public void trackGuideCallRecalculate() {
+        // ignore
+    }
 }

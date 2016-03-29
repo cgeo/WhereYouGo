@@ -17,71 +17,72 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import android.os.Bundle;
+
 import java.util.Vector;
 
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.Thing;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
 import se.krka.kahlua.vm.LuaTable;
-import android.os.Bundle;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Thing;
 
 public class ListThingsActivity extends ListVariousActivity {
 
-  public static final int INVENTORY = 0;
-  public static final int SURROUNDINGS = 1;
-  private int mode;
+    public static final int INVENTORY = 0;
+    public static final int SURROUNDINGS = 1;
+    private int mode;
 
-  @Override
-  protected void callStuff(Object what) {
-    Thing t = (Thing) what;
-    if (t.hasEvent("OnClick")) {
-      Engine.callEvent(t, "OnClick", null);
-    } else {
-      MainActivity.wui.showScreen(WUI.DETAILSCREEN, t);
+    @Override
+    protected void callStuff(Object what) {
+        Thing t = (Thing) what;
+        if (t.hasEvent("OnClick")) {
+            Engine.callEvent(t, "OnClick", null);
+        } else {
+            MainActivity.wui.showScreen(WUI.DETAILSCREEN, t);
+        }
+        ListThingsActivity.this.finish();
     }
-    ListThingsActivity.this.finish();
-  }
 
-  @Override
-  protected String getStuffName(Object what) {
-    return ((Thing) what).name;
-  }
-
-  @Override
-  protected Vector<Object> getValidStuff() {
-    LuaTable container;
-    if (mode == INVENTORY)
-      container = Engine.instance.player.inventory;
-    else
-      container = Engine.instance.cartridge.currentThings();
-
-    Vector<Object> newthings = new Vector<Object>();
-    Object key = null;
-    while ((key = container.next(key)) != null) {
-      Thing t = (Thing) container.rawget(key);
-      if (t.isVisible())
-        newthings.add(t);
+    @Override
+    protected String getStuffName(Object what) {
+        return ((Thing) what).name;
     }
-    return newthings;
-  }
 
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    mode = getIntent().getIntExtra("mode", INVENTORY);
-  }
+    @Override
+    protected Vector<Object> getValidStuff() {
+        LuaTable container;
+        if (mode == INVENTORY)
+            container = Engine.instance.player.inventory;
+        else
+            container = Engine.instance.cartridge.currentThings();
 
-  @Override
-  protected boolean stillValid() {
-    return true;
-  }
+        Vector<Object> newthings = new Vector<Object>();
+        Object key = null;
+        while ((key = container.next(key)) != null) {
+            Thing t = (Thing) container.rawget(key);
+            if (t.isVisible())
+                newthings.add(t);
+        }
+        return newthings;
+    }
 
-  // TODO in TAB version
-  // public boolean onKeyDown(int keyCode, KeyEvent event) {
-  // if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-  // return getParent().onKeyDown(keyCode, event);
-  // } else {
-  // return super.onKeyDown(keyCode, event);
-  // }
-  // }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mode = getIntent().getIntExtra("mode", INVENTORY);
+    }
+
+    @Override
+    protected boolean stillValid() {
+        return true;
+    }
+
+    // TODO in TAB version
+    // public boolean onKeyDown(int keyCode, KeyEvent event) {
+    // if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+    // return getParent().onKeyDown(keyCode, event);
+    // } else {
+    // return super.onKeyDown(keyCode, event);
+    // }
+    // }
 }

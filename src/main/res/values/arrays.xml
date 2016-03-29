@@ -37,62 +37,77 @@
     <string-array name="pref_map_provider_entries">
         <item>@string/pref_map_provider_vector</item>
         <item>@string/pref_map_provider_locus</item>
-    </string-array>    
+    </string-array>
     <string-array name="pref_map_provider_entry_values">
-        <item>0</item><!-- build in mapforge -->
-        <item>1</item><!-- external Locus -->
+        <item>0</item>
+        <!-- build in mapforge -->
+        <item>1</item>
+        <!-- external Locus -->
     </string-array>
 
     <string-array name="pref_guiding_waypoint_sound_entries">
         <item>@string/pref_guiding_waypoint_sound_increasing</item>
         <item>@string/pref_guiding_waypoint_sound_beep_on_distance</item>
         <item>@string/pref_guiding_waypoint_sound_custom_on_distance</item>
-    </string-array>    
+    </string-array>
     <string-array name="pref_guiding_waypoint_sound_entry_values">
-        <item>0</item><!-- VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER  -->
-        <item>1</item><!-- VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE -->
-        <item>2</item><!-- VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND -->
-    </string-array>     
-    
+        <item>0</item>
+        <!-- VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER  -->
+        <item>1</item>
+        <!-- VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE -->
+        <item>2</item>
+        <!-- VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND -->
+    </string-array>
+
     <string-array name="pref_guiding_zone_point_entries">
         <item>@string/pref_guiding_zone_point_center</item>
         <item>@string/pref_guiding_zone_point_nearest</item>
-    </string-array>    
+    </string-array>
     <string-array name="pref_guiding_zone_point_entry_values">
-        <item>0</item><!-- VALUE_GUIDING_ZONE_POINT_CENTER -->
-        <item>1</item><!-- VALUE_GUIDING_ZONE_POINT_NEAREST -->
-    </string-array>    
-   
+        <item>0</item>
+        <!-- VALUE_GUIDING_ZONE_POINT_CENTER -->
+        <item>1</item>
+        <!-- VALUE_GUIDING_ZONE_POINT_NEAREST -->
+    </string-array>
+
     <string-array name="pref_highlight_entries">
         <item>@string/pref_highlight_off_text</item>
         <item>@string/pref_highlight_only_gps_text</item>
         <item>@string/pref_highlight_always_text</item>
-    </string-array>    
+    </string-array>
     <string-array name="pref_highlight_entry_values">
-        <item>0</item><!-- VALUE_HIGHLIGHT_OFF -->
-        <item>1</item><!-- VALUE_HIGHLIGHT_ONLY_GPS -->
-        <item>2</item><!-- VALUE_HIGHLIGHT_ALWAYS -->
-    </string-array> 
+        <item>0</item>
+        <!-- VALUE_HIGHLIGHT_OFF -->
+        <item>1</item>
+        <!-- VALUE_HIGHLIGHT_ONLY_GPS -->
+        <item>2</item>
+        <!-- VALUE_HIGHLIGHT_ALWAYS -->
+    </string-array>
 
     <string-array name="pref_font_size_entries">
         <item>@string/pref_font_size_default</item>
         <item>@string/pref_font_size_small</item>
         <item>@string/pref_font_size_medium</item>
         <item>@string/pref_font_size_large</item>
-    </string-array>    
+    </string-array>
     <string-array name="pref_font_size_entry_values">
-        <item>0</item><!-- VALUE_FONT_SIZE_DEFAULT -->
-        <item>1</item><!-- VALUE_FONT_SIZE_SMALL -->
-        <item>2</item><!-- VALUE_FONT_SIZE_MEDIUM -->
-        <item>3</item><!-- VALUE_FONT_SIZE_LARGE -->
-    </string-array>         
+        <item>0</item>
+        <!-- VALUE_FONT_SIZE_DEFAULT -->
+        <item>1</item>
+        <!-- VALUE_FONT_SIZE_SMALL -->
+        <item>2</item>
+        <!-- VALUE_FONT_SIZE_MEDIUM -->
+        <item>3</item>
+        <!-- VALUE_FONT_SIZE_LARGE -->
+    </string-array>
 
     <string-array name="pref_language_entries">
-        <item>@string/pref_language_default</item> <!-- should be changed to pref_language_name_default -->
+        <item>@string/pref_language_default</item>
+        <!-- should be changed to pref_language_name_default -->
         <item>@string/pref_language_ar_name</item>
         <item>@string/pref_language_cs_name</item>
         <item>@string/pref_language_da_name</item>
-        <item>@string/pref_language_de_name</item>                        
+        <item>@string/pref_language_de_name</item>
         <item>@string/pref_language_el_name</item>
         <item>@string/pref_language_en_name</item>
         <item>@string/pref_language_es_name</item>
@@ -104,18 +119,18 @@
         <item>@string/pref_language_ko_name</item>
         <item>@string/pref_language_nl_name</item>
         <item>@string/pref_language_pl_name</item>
-        <item>@string/pref_language_pt_name</item>                        
+        <item>@string/pref_language_pt_name</item>
         <item>@string/pref_language_ptbr_name</item>
         <item>@string/pref_language_ru_name</item>
-        <item>@string/pref_language_sk_name</item>       
-    </string-array>    
-    
+        <item>@string/pref_language_sk_name</item>
+    </string-array>
+
     <string-array name="pref_language_entry_values">
         <item>@string/pref_language_default_value</item>
         <item>@string/pref_language_ar_shortcut</item>
         <item>@string/pref_language_cs_shortcut</item>
         <item>@string/pref_language_da_shortcut</item>
-        <item>@string/pref_language_de_shortcut</item>                        
+        <item>@string/pref_language_de_shortcut</item>
         <item>@string/pref_language_el_shortcut</item>
         <item>@string/pref_language_en_shortcut</item>
         <item>@string/pref_language_es_shortcut</item>
@@ -127,29 +142,29 @@
         <item>@string/pref_language_ko_shortcut</item>
         <item>@string/pref_language_nl_shortcut</item>
         <item>@string/pref_language_pl_shortcut</item>
-        <item>@string/pref_language_pt_shortcut</item>                        
+        <item>@string/pref_language_pt_shortcut</item>
         <item>@string/pref_language_ptbr_shortcut</item>
         <item>@string/pref_language_ru_shortcut</item>
-        <item>@string/pref_language_sk_shortcut</item>                                       
-    </string-array>     
-    
+        <item>@string/pref_language_sk_shortcut</item>
+    </string-array>
+
     <string-array name="pref_units_altitude_entries">
         <item>@string/metres</item>
-		<item>@string/feet</item>
-    </string-array>	
+        <item>@string/feet</item>
+    </string-array>
     <string-array name="pref_units_altitude_entry_values">
         <item>@string/pref_VALUE_UNITS_ALTITUDE_METRES</item>
-		<item>@string/pref_VALUE_UNITS_ALTITUDE_FEET</item>
-    </string-array>	
+        <item>@string/pref_VALUE_UNITS_ALTITUDE_FEET</item>
+    </string-array>
 
     <string-array name="pref_units_angle_entries">
         <item>@string/pref_units_angle_degree</item>
-		<item>@string/pref_units_angle_mil</item>
-    </string-array>	
+        <item>@string/pref_units_angle_mil</item>
+    </string-array>
     <string-array name="pref_units_angle_entry_values">
         <item>@string/pref_VALUE_UNITS_ANGLE_DEGREE</item>
-		<item>@string/pref_VALUE_UNITS_ANGLE_MIL</item>
-    </string-array>	
+        <item>@string/pref_VALUE_UNITS_ANGLE_MIL</item>
+    </string-array>
 
     <string-array name="pref_units_coo_latlon_entries">
         <!-- TODO
@@ -158,48 +173,48 @@
 		<item>@string/pref_units_coo_latlon_sec</item>
 		-->
         <item>DD.DDDDD°</item>
-		<item>DD° MM.MMM\'</item>
-		<item>DD° MM\' SS.SS\"</item>		
-    </string-array>	
+        <item>DD° MM.MMM\'</item>
+        <item>DD° MM\' SS.SS\"</item>
+    </string-array>
     <string-array name="pref_units_coo_latlon_entry_values">
         <item>@string/pref_VALUE_UNITS_COO_LATLON_DEC</item>
-		<item>@string/pref_VALUE_UNITS_COO_LATLON_MIN</item>
-		<item>@string/pref_VALUE_UNITS_COO_LATLON_SEC</item>
-    </string-array>	
+        <item>@string/pref_VALUE_UNITS_COO_LATLON_MIN</item>
+        <item>@string/pref_VALUE_UNITS_COO_LATLON_SEC</item>
+    </string-array>
 
     <string-array name="pref_units_length_entries">
         <item>@string/pref_units_length_me</item>
-		<item>@string/pref_units_length_im</item>
-		<item>@string/pref_units_length_na</item>
-    </string-array>	
+        <item>@string/pref_units_length_im</item>
+        <item>@string/pref_units_length_na</item>
+    </string-array>
     <string-array name="pref_units_length_entry_values">
         <item>@string/pref_VALUE_UNITS_LENGTH_ME</item>
-		<item>@string/pref_VALUE_UNITS_LENGTH_IM</item>
-		<item>@string/pref_VALUE_UNITS_LENGTH_NA</item>
-    </string-array>	
+        <item>@string/pref_VALUE_UNITS_LENGTH_IM</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_NA</item>
+    </string-array>
 
     <string-array name="pref_units_speed_entries">
         <item>km/h</item>
-		<item>miles/h</item>
-		<item>knots</item>
-    </string-array>	
+        <item>miles/h</item>
+        <item>knots</item>
+    </string-array>
     <string-array name="pref_units_speed_entry_values">
         <item>@string/pref_VALUE_UNITS_SPEED_KMH</item>
-		<item>@string/pref_VALUE_UNITS_SPEED_MILH</item>
-		<item>@string/pref_VALUE_UNITS_SPEED_KNOTS</item>
+        <item>@string/pref_VALUE_UNITS_SPEED_MILH</item>
+        <item>@string/pref_VALUE_UNITS_SPEED_KNOTS</item>
     </string-array>
-     
+
     <string-array name="pref_sensors_orient_filter_entries">
         <item>@string/pref_sensors_orient_filter_no_filter</item>
         <item>@string/pref_sensors_orient_filter_ligth</item>
-		<item>@string/pref_sensors_orient_filter_medium</item>
-		<item>@string/pref_sensors_orient_filter_heavy</item>
-    </string-array>	
+        <item>@string/pref_sensors_orient_filter_medium</item>
+        <item>@string/pref_sensors_orient_filter_heavy</item>
+    </string-array>
     <string-array name="pref_sensors_orient_filter_entry_values">
         <item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_NO</item>
         <item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_LIGHT</item>
-		<item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_MEDIUM</item>
-		<item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_HEAVY</item>
-    </string-array>	
+        <item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_MEDIUM</item>
+        <item>@string/pref_VALUE_SENSORS_ORIENT_FILTER_HEAVY</item>
+    </string-array>
 
 </resources>

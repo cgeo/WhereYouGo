@@ -17,6 +17,15 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -31,98 +40,90 @@ import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.text.Html;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class CartridgeDetailsActivity extends CustomActivity {
 
-  private static final String TAG = "CartridgeDetails";
+    private static final String TAG = "CartridgeDetails";
 
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (A.getMain() == null || MainActivity.selectedFile == null
-        || MainActivity.cartridgeFile == null) {
-      finish();
-      return;
-    }
-    setContentView(R.layout.layout_details);
-    if(!Preferences.APPEARANCE_IMAGE_STRETCH){
-      findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
-    }
-
-    TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
-    tvName.setText(Html.fromHtml(MainActivity.cartridgeFile.name));
-
-    TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
-    tvState.setText(Html.fromHtml(Locale.get(R.string.author) + ": "
-        + MainActivity.cartridgeFile.author));
-
-    TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-    tvDescription.setText(Html.fromHtml(MainActivity.cartridgeFile.description));
-
-    ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
-    try {
-      byte[] is = MainActivity.cartridgeFile.getFile(MainActivity.cartridgeFile.splashId);
-      Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-      MainActivity.setBitmapToImageView(i, ivImage);
-    } catch (Exception e) {
-    }
-
-    TextView tvText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
-    tvText.setVisibility(View.GONE);
-
-    TextView tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
-
-    Location loc = new Location(TAG);
-    loc.setLatitude(MainActivity.cartridgeFile.latitude);
-    loc.setLongitude(MainActivity.cartridgeFile.longitude);
-
-    StringBuffer buff = new StringBuffer();
-    buff.append(Locale.get(R.string.distance)).append(": ").append("<b>")
-        .append(UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false))
-        .append("</b>").append("<br />").append(Locale.get(R.string.latitude)).append(": ")
-        .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude)).append("<br />")
-        .append(Locale.get(R.string.longitude)).append(": ")
-        .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
-
-    tvDistance.setText(Html.fromHtml(buff.toString()));
-
-    CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
-      @Override
-      public boolean onClick(CustomDialog dialog, View v, int btn) {
-        CartridgeDetailsActivity.this.finish();
-        File file =
-            new File(MainActivity.selectedFile.substring(0, MainActivity.selectedFile.length() - 3)
-                + "gwl");
-        FileOutputStream fos = null;
-        try {
-          if (!file.exists())
-            file.createNewFile();
-          fos = new FileOutputStream(file);
-        } catch (Exception e) {
-          Logger.e(TAG, "onResume() - create empy saveGame file", e);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (A.getMain() == null || MainActivity.selectedFile == null
+                || MainActivity.cartridgeFile == null) {
+            finish();
+            return;
         }
-        MainActivity.loadCartridge(fos);
-        return true;
-      }
-    }, null, null, getString(R.string.navigate), new CustomDialog.OnClickListener() {
-      @Override
-      public boolean onClick(CustomDialog dialog, View v, int btn) {
+        setContentView(R.layout.layout_details);
+        if (!Preferences.APPEARANCE_IMAGE_STRETCH) {
+            findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
+        }
+
+        TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
+        tvName.setText(Html.fromHtml(MainActivity.cartridgeFile.name));
+
+        TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+        tvState.setText(Html.fromHtml(Locale.get(R.string.author) + ": "
+                + MainActivity.cartridgeFile.author));
+
+        TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+        tvDescription.setText(Html.fromHtml(MainActivity.cartridgeFile.description));
+
+        ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+        try {
+            byte[] is = MainActivity.cartridgeFile.getFile(MainActivity.cartridgeFile.splashId);
+            Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
+            MainActivity.setBitmapToImageView(i, ivImage);
+        } catch (Exception e) {
+        }
+
+        TextView tvText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
+        tvText.setVisibility(View.GONE);
+
+        TextView tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
+
         Location loc = new Location(TAG);
         loc.setLatitude(MainActivity.cartridgeFile.latitude);
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
-        Guide guide = new Guide(MainActivity.cartridgeFile.name, loc);
-        A.getGuidingContent().guideStart(guide);
-        MainActivity.callGudingScreen(CartridgeDetailsActivity.this);
-        CartridgeDetailsActivity.this.finish();
-        return true;
-      }
-    });
-  }
+
+        StringBuilder buff = new StringBuilder();
+        buff.append(Locale.get(R.string.distance)).append(": ").append("<b>")
+                .append(UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false))
+                .append("</b>").append("<br />").append(Locale.get(R.string.latitude)).append(": ")
+                .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude)).append("<br />")
+                .append(Locale.get(R.string.longitude)).append(": ")
+                .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
+
+        tvDistance.setText(Html.fromHtml(buff.toString()));
+
+        CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
+            @Override
+            public boolean onClick(CustomDialog dialog, View v, int btn) {
+                CartridgeDetailsActivity.this.finish();
+                File file =
+                        new File(MainActivity.selectedFile.substring(0, MainActivity.selectedFile.length() - 3)
+                                + "gwl");
+                FileOutputStream fos = null;
+                try {
+                    if (!file.exists())
+                        file.createNewFile();
+                    fos = new FileOutputStream(file);
+                } catch (Exception e) {
+                    Logger.e(TAG, "onResume() - create empy saveGame file", e);
+                }
+                MainActivity.loadCartridge(fos);
+                return true;
+            }
+        }, null, null, getString(R.string.navigate), new CustomDialog.OnClickListener() {
+            @Override
+            public boolean onClick(CustomDialog dialog, View v, int btn) {
+                Location loc = new Location(TAG);
+                loc.setLatitude(MainActivity.cartridgeFile.latitude);
+                loc.setLongitude(MainActivity.cartridgeFile.longitude);
+                Guide guide = new Guide(MainActivity.cartridgeFile.name, loc);
+                A.getGuidingContent().guideStart(guide);
+                MainActivity.callGudingScreen(CartridgeDetailsActivity.this);
+                CartridgeDetailsActivity.this.finish();
+                return true;
+            }
+        });
+    }
 }

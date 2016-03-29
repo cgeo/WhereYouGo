@@ -23,10 +23,10 @@ package menion.android.whereyougo.geo.orientation;
  */
 public interface IOrientationEventListener {
 
-  /**
-   * Called everytime, azimuth change.
-   * 
-   * @param azimuth Value of actual azimuth, positive value is from north to right.
-   */
-  public void onOrientationChanged(float azimuth, float pitch, float roll);
+    /**
+     * Called everytime, azimuth change.
+     *
+     * @param azimuth Value of actual azimuth, positive value is from north to right.
+     */
+    void onOrientationChanged(float azimuth, float pitch, float roll);
 }

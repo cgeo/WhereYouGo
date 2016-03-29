@@ -17,6 +17,19 @@
 
 package menion.android.whereyougo.openwig;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Vibrator;
+import android.widget.Toast;
+
+import java.util.Arrays;
+
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.EventTable;
+import cz.matejcik.openwig.Media;
+import cz.matejcik.openwig.platform.UI;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.audio.UtilsAudio;
 import menion.android.whereyougo.gui.IRefreshable;
@@ -38,240 +51,228 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Vibrator;
-import android.widget.Toast;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
-import cz.matejcik.openwig.platform.UI;
 
 public class WUI implements UI {
 
-  private static final String TAG = "WUI";
+    public static final int SCREEN_MAIN = 10;
+    public static final int SCREEN_CART_DETAIL = 11;
+    public static final int SCREEN_ACTIONS = 12;
+    public static final int SCREEN_TARGETS = 13;
+    public static final int SCREEN_MAP = 14;
+    private static final String TAG = "WUI";
+    public static boolean saving = false;
 
-  public static final int SCREEN_MAIN = 10;
-  public static final int SCREEN_CART_DETAIL = 11;
-  public static final int SCREEN_ACTIONS = 12;
-  public static final int SCREEN_TARGETS = 13;
-  public static final int SCREEN_MAP = 14;
+    private static ProgressDialog progressDialog;
 
-  public static boolean saving = false;
-
-  private static ProgressDialog progressDialog;
-
-  private static void closeActivity(Activity activity) {
-    if (activity instanceof PushDialogActivity || activity instanceof GuidingActivity) {
-      activity.finish();
-    }
-  }
-
-  private static CustomActivity getParentActivity() {
-    Activity activity = PreferenceValues.getCurrentActivity();
-
-    if (activity == null || !(activity instanceof CustomActivity))
-      activity = (CustomActivity) A.getMain();
-
-    return (CustomActivity) activity;
-  }
-
-  public static void showTextProgress(final String text) {
-    Logger.i(TAG, "showTextProgress(" + text + ")");
-  }
-
-  public static void startProgressDialog() {
-    progressDialog = new ProgressDialog(((CustomActivity) A.getMain()));
-    progressDialog.setMessage("Loading...");
-    progressDialog.show();
-  }
-
-  public void blockForSaving() {
-    Logger.w(TAG, "blockForSaving()");
-    saving = true;
-  }
-
-  public void debugMsg(String msg) {
-    Logger.w(TAG, "debugMsg(" + msg.trim() + ")");
-  }
-
-  public void end() {
-    if (progressDialog != null && progressDialog.isShowing()) {
-      try {
-        progressDialog.dismiss();
-      } catch (Exception e) {
-        Logger.e(TAG, "end(): dismiss progressDialog", e);
-      }
-    }
-    Engine.kill();
-    showScreen(SCREEN_MAIN, null);
-  }
-
-  // @Override
-  public String getDeviceId() {
-    String appVersion = "";
-    try {
-      appVersion =
-          A.getMain().getPackageManager().getPackageInfo(A.getMain().getPackageName(), 0).versionName;
-    } catch (Exception e) {
-    }
-    return "WhereYouGo, app:" + appVersion;
-  }
-
-  public void playSound(byte[] data, String mime) {
-    UtilsAudio.playSound(data, mime);
-  }
-  
-  public void command(String cmd) {
-    if("StopSound".equals(cmd)){
-      UtilsAudio.stopSound();
-    } else if("Alert".equals(cmd)){
-      UtilsAudio.playBeep(1);
-    }
-  }
-
-  public void pushDialog(String[] texts, Media[] media, String button1, String button2,
-      LuaClosure callback) {
-    Logger.w(TAG, "pushDialog(" + texts + ", " + media + ", " + button1 + ", " + button2 + ", "
-        + callback + ")");
-
-    Activity activity = getParentActivity();
-    PushDialogActivity.setDialog(texts, media, button1, button2, callback);
-    Intent intent = new Intent(activity, PushDialogActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    activity.startActivity(intent);
-    activity.overridePendingTransition(0, 0);
-    closeActivity(activity);
-
-    Vibrator v = (Vibrator) A.getMain().getSystemService(Context.VIBRATOR_SERVICE);
-    v.vibrate(25);
-  }
-
-  public void pushInput(EventTable input) {
-    Logger.w(TAG, "pushInput(" + input + ")");
-    Activity activity = getParentActivity();
-    InputScreenActivity.setInput(input);
-    Intent intent = new Intent(activity, InputScreenActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    activity.startActivity(intent);
-    activity.overridePendingTransition(0, 0);
-    closeActivity(activity);
-  }
-
-  public void refresh() {
-    Activity activity = PreferenceValues.getCurrentActivity();
-    Logger.w(TAG, "refresh(), currentActivity:" + activity);
-    if (activity != null && activity instanceof IRefreshable) {
-      ((IRefreshable) activity).refresh();
-    }
-  }
-
-  public void setStatusText(final String text) {
-    Logger.w(TAG, "setStatus(" + text + ")");
-    if (text == null || text.length() == 0)
-      return;
-
-    try {
-      final CustomActivity activity = getParentActivity();
-      activity.runOnUiThread(new Runnable() {
-        public void run() {
-          Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+    private static void closeActivity(Activity activity) {
+        if (activity instanceof PushDialogActivity || activity instanceof GuidingActivity) {
+            activity.finish();
         }
-      });
-    } catch (Exception e) {
-      Logger.e(TAG, "setStatusText(" + text + ")", e);
-    }
-  }
-
-  public void showError(String msg) {
-    Logger.w(TAG, "showError(" + msg.trim() + ")");
-    UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
-  }
-
-  public void showScreen(int screenId, EventTable details) {
-    Activity activity = getParentActivity();
-    Logger.w(TAG, "showScreen(" + screenId + "), parent:" + activity + ", param:" + details);
-
-    // disable currentActivity
-    PreferenceValues.setCurrentActivity(null);
-
-    switch (screenId) {
-      case MAINSCREEN:
-        Intent intent01 = new Intent(activity, MainMenuActivity.class);
-        activity.startActivity(intent01);
-        return;
-      case SCREEN_CART_DETAIL:
-        Intent intent02 = new Intent(activity, CartridgeDetailsActivity.class);
-        activity.startActivity(intent02);
-        return;
-      case DETAILSCREEN:
-        DetailsActivity.et = details;
-        Intent intent03 = new Intent(activity, DetailsActivity.class);
-        intent03.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        activity.startActivity(intent03);
-        return;
-      case INVENTORYSCREEN:
-        Intent intent04 = new Intent(activity, ListThingsActivity.class);
-        intent04.putExtra("title", A.getApp().getResources().getString(R.string.inventory));
-        intent04.putExtra("mode", ListThingsActivity.INVENTORY);
-        activity.startActivity(intent04);
-        return;
-      case ITEMSCREEN:
-        Intent intent05 = new Intent(activity, ListThingsActivity.class);
-        intent05.putExtra("title", A.getApp().getResources().getString(R.string.you_see));
-        intent05.putExtra("mode", ListThingsActivity.SURROUNDINGS);
-        activity.startActivity(intent05);
-        return;
-      case LOCATIONSCREEN:
-        Intent intent06 = new Intent(activity, ListZonesActivity.class);
-        intent06.putExtra("title", A.getApp().getResources().getString(R.string.locations));
-        activity.startActivity(intent06);
-        return;
-      case TASKSCREEN:
-        Intent intent07 = new Intent(activity, ListTasksActivity.class);
-        intent07.putExtra("title", A.getApp().getResources().getString(R.string.tasks));
-        activity.startActivity(intent07);
-        return;
-      case SCREEN_ACTIONS:
-        Intent intent09 = new Intent(activity, ListActionsActivity.class);
-        if (details != null)
-          intent09.putExtra("title", details.name);
-        activity.startActivity(intent09);
-        return;
-      case SCREEN_TARGETS:
-        Intent intent10 = new Intent(activity, ListTargetsActivity.class);
-        if (details != null)
-          intent10.putExtra("title", details.name);
-        activity.startActivity(intent10);
-        return;
-      case SCREEN_MAP:
-        MapHelper.showMap(activity, details);
-        return;
     }
 
-    closeActivity(activity);
-  }
+    private static CustomActivity getParentActivity() {
+        Activity activity = PreferenceValues.getCurrentActivity();
 
-  public void start() {
-    ((CustomActivity) A.getMain()).runOnUiThread(new Runnable() {
-      public void run() {
+        if (activity == null || !(activity instanceof CustomActivity))
+            activity = A.getMain();
+
+        return (CustomActivity) activity;
+    }
+
+    public static void showTextProgress(final String text) {
+        Logger.i(TAG, "showTextProgress(" + text + ")");
+    }
+
+    public static void startProgressDialog() {
+        progressDialog = new ProgressDialog(A.getMain());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+    }
+
+    public void blockForSaving() {
+        Logger.w(TAG, "blockForSaving()");
+        saving = true;
+    }
+
+    public void debugMsg(String msg) {
+        Logger.w(TAG, "debugMsg(" + msg.trim() + ")");
+    }
+
+    public void end() {
         if (progressDialog != null && progressDialog.isShowing()) {
-          try {
-            progressDialog.dismiss();
-          } catch (Exception e) {
-            Logger.e(TAG, "start(): dismiss progressDialog", e);
-          }
+            try {
+                progressDialog.dismiss();
+            } catch (Exception e) {
+                Logger.e(TAG, "end(): dismiss progressDialog", e);
+            }
         }
-      }
-    });
-    showScreen(MAINSCREEN, null);
-  }
+        Engine.kill();
+        showScreen(SCREEN_MAIN, null);
+    }
 
-  public void unblock() {
-    Logger.w(TAG, "unblock()");
-    saving = false;
-  }
+    // @Override
+    public String getDeviceId() {
+        String appVersion = "";
+        try {
+            appVersion =
+                    A.getMain().getPackageManager().getPackageInfo(A.getMain().getPackageName(), 0).versionName;
+        } catch (Exception e) {
+        }
+        return "WhereYouGo, app:" + appVersion;
+    }
+
+    public void playSound(byte[] data, String mime) {
+        UtilsAudio.playSound(data, mime);
+    }
+
+    public void command(String cmd) {
+        if ("StopSound".equals(cmd)) {
+            UtilsAudio.stopSound();
+        } else if ("Alert".equals(cmd)) {
+            UtilsAudio.playBeep(1);
+        }
+    }
+
+    public void pushDialog(String[] texts, Media[] media, String button1, String button2,
+                           LuaClosure callback) {
+        Logger.w(TAG, "pushDialog(" + Arrays.toString(texts) + ", " + Arrays.toString(media) + ", " + button1 + ", " + button2 + ", "
+                + callback + ")");
+
+        Activity activity = getParentActivity();
+        PushDialogActivity.setDialog(texts, media, button1, button2, callback);
+        Intent intent = new Intent(activity, PushDialogActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
+        closeActivity(activity);
+
+        Vibrator v = (Vibrator) A.getMain().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(25);
+    }
+
+    public void pushInput(EventTable input) {
+        Logger.w(TAG, "pushInput(" + input + ")");
+        Activity activity = getParentActivity();
+        InputScreenActivity.setInput(input);
+        Intent intent = new Intent(activity, InputScreenActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
+        closeActivity(activity);
+    }
+
+    public void refresh() {
+        Activity activity = PreferenceValues.getCurrentActivity();
+        Logger.w(TAG, "refresh(), currentActivity:" + activity);
+        if (activity != null && activity instanceof IRefreshable) {
+            ((IRefreshable) activity).refresh();
+        }
+    }
+
+    public void setStatusText(final String text) {
+        Logger.w(TAG, "setStatus(" + text + ")");
+        if (text == null || text.length() == 0)
+            return;
+
+        try {
+            final CustomActivity activity = getParentActivity();
+            activity.runOnUiThread(new Runnable() {
+                public void run() {
+                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            Logger.e(TAG, "setStatusText(" + text + ")", e);
+        }
+    }
+
+    public void showError(String msg) {
+        Logger.w(TAG, "showError(" + msg.trim() + ")");
+        UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
+    }
+
+    public void showScreen(int screenId, EventTable details) {
+        Activity activity = getParentActivity();
+        Logger.w(TAG, "showScreen(" + screenId + "), parent:" + activity + ", param:" + details);
+
+        // disable currentActivity
+        PreferenceValues.setCurrentActivity(null);
+
+        switch (screenId) {
+            case MAINSCREEN:
+                Intent intent01 = new Intent(activity, MainMenuActivity.class);
+                activity.startActivity(intent01);
+                return;
+            case SCREEN_CART_DETAIL:
+                Intent intent02 = new Intent(activity, CartridgeDetailsActivity.class);
+                activity.startActivity(intent02);
+                return;
+            case DETAILSCREEN:
+                DetailsActivity.et = details;
+                Intent intent03 = new Intent(activity, DetailsActivity.class);
+                intent03.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                activity.startActivity(intent03);
+                return;
+            case INVENTORYSCREEN:
+                Intent intent04 = new Intent(activity, ListThingsActivity.class);
+                intent04.putExtra("title", A.getApp().getResources().getString(R.string.inventory));
+                intent04.putExtra("mode", ListThingsActivity.INVENTORY);
+                activity.startActivity(intent04);
+                return;
+            case ITEMSCREEN:
+                Intent intent05 = new Intent(activity, ListThingsActivity.class);
+                intent05.putExtra("title", A.getApp().getResources().getString(R.string.you_see));
+                intent05.putExtra("mode", ListThingsActivity.SURROUNDINGS);
+                activity.startActivity(intent05);
+                return;
+            case LOCATIONSCREEN:
+                Intent intent06 = new Intent(activity, ListZonesActivity.class);
+                intent06.putExtra("title", A.getApp().getResources().getString(R.string.locations));
+                activity.startActivity(intent06);
+                return;
+            case TASKSCREEN:
+                Intent intent07 = new Intent(activity, ListTasksActivity.class);
+                intent07.putExtra("title", A.getApp().getResources().getString(R.string.tasks));
+                activity.startActivity(intent07);
+                return;
+            case SCREEN_ACTIONS:
+                Intent intent09 = new Intent(activity, ListActionsActivity.class);
+                if (details != null)
+                    intent09.putExtra("title", details.name);
+                activity.startActivity(intent09);
+                return;
+            case SCREEN_TARGETS:
+                Intent intent10 = new Intent(activity, ListTargetsActivity.class);
+                if (details != null)
+                    intent10.putExtra("title", details.name);
+                activity.startActivity(intent10);
+                return;
+            case SCREEN_MAP:
+                MapHelper.showMap(activity, details);
+                return;
+        }
+
+        closeActivity(activity);
+    }
+
+    public void start() {
+        A.getMain().runOnUiThread(new Runnable() {
+            public void run() {
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    try {
+                        progressDialog.dismiss();
+                    } catch (Exception e) {
+                        Logger.e(TAG, "start(): dismiss progressDialog", e);
+                    }
+                }
+            }
+        });
+        showScreen(MAINSCREEN, null);
+    }
+
+    public void unblock() {
+        Logger.w(TAG, "unblock()");
+        saving = false;
+    }
 
 }

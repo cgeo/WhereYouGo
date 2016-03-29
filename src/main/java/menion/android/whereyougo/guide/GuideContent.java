@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.guide;
 
+import android.os.Bundle;
+
 import java.util.ArrayList;
 
 import menion.android.whereyougo.geo.location.ILocationEventListener;
@@ -25,7 +27,6 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.geo.location.SatellitePosition;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Logger;
-import android.os.Bundle;
 
 /**
  * @author menion
@@ -33,135 +34,149 @@ import android.os.Bundle;
  */
 public class GuideContent implements ILocationEventListener {
 
-  private static String TAG = "NavigationContent";
+    private static String TAG = "NavigationContent";
 
-  /** actual navigator */
-  private IGuide mGuide;
+    /**
+     * actual navigator
+     */
+    private IGuide mGuide;
 
-  /** last location */
-  private Location mLocation;
+    /**
+     * last location
+     */
+    private Location mLocation;
 
-  /** name of target */
-  private String mTargetName;
-  /** azimuth to actual target */
-  private float mAzimuthToTarget;
-  /** distance to target */
-  private float mDistanceToTarget;
+    /**
+     * name of target
+     */
+    private String mTargetName;
+    /**
+     * azimuth to actual target
+     */
+    private float mAzimuthToTarget;
+    /**
+     * distance to target
+     */
+    private float mDistanceToTarget;
 
 
-  /** actual array of listeners */
-  private ArrayList<IGuideEventListener> listeners;
+    /**
+     * actual array of listeners
+     */
+    private ArrayList<IGuideEventListener> listeners;
 
-  public GuideContent() {
-    listeners = new ArrayList<IGuideEventListener>();
-  }
+    public GuideContent() {
+        listeners = new ArrayList<IGuideEventListener>();
+    }
 
-  public void addGuidingListener(IGuideEventListener listener) {
-    this.listeners.add(listener);
-    // actualize data and send event to new listener
-    onLocationChanged(LocationState.getLocation());
-  }
+    public void addGuidingListener(IGuideEventListener listener) {
+        this.listeners.add(listener);
+        // actualize data and send event to new listener
+        onLocationChanged(LocationState.getLocation());
+    }
 
-  public IGuide getGuide() {
-    return mGuide;
-  }
+    public IGuide getGuide() {
+        return mGuide;
+    }
 
-  @Override
-  public String getName() {
-    return TAG;
-  }
+    @Override
+    public String getName() {
+        return TAG;
+    }
 
-  public int getPriority() {
-    return ILocationEventListener.PRIORITY_HIGH;
-  }
+    public int getPriority() {
+        return ILocationEventListener.PRIORITY_HIGH;
+    }
 
-  public Location getTargetLocation() {
-    if (mGuide == null)
-      return null;
-    else
-      return mGuide.getTargetLocation();
-  }
+    public Location getTargetLocation() {
+        if (mGuide == null)
+            return null;
+        else
+            return mGuide.getTargetLocation();
+    }
 
-  public void guideStart(IGuide guide) {
-    this.mGuide = guide;
+    public void guideStart(IGuide guide) {
+        this.mGuide = guide;
 
-    // set location listener
-    LocationState.addLocationChangeListener(this);
-    // call one onLocationChange, to update actual values imediately
-    onLocationChanged(LocationState.getLocation());
-    // Logger.d(TAG, "X");
-    Thread thread = new Thread(new Runnable() {
-      public void run() {
-        try {
-          while (mGuide != null) {
-            if (Preferences.GUIDING_SOUNDS) {
-              mGuide.manageDistanceSoundsBeeping(mDistanceToTarget);
+        // set location listener
+        LocationState.addLocationChangeListener(this);
+        // call one onLocationChange, to update actual values imediately
+        onLocationChanged(LocationState.getLocation());
+        // Logger.d(TAG, "X");
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    while (mGuide != null) {
+                        if (Preferences.GUIDING_SOUNDS) {
+                            mGuide.manageDistanceSoundsBeeping(mDistanceToTarget);
+                        }
+                        Thread.sleep(100);
+                    }
+                } catch (Exception e) {
+                    Logger.e(TAG, "guideStart(" + mGuide + ")", e);
+                }
             }
-            Thread.sleep(100);
-          }
-        } catch (Exception e) {
-          Logger.e(TAG, "guideStart(" + mGuide + ")", e);
+        });
+        thread.start();
+
+        for (IGuideEventListener list : listeners) {
+            list.guideStart();
         }
-      }
-    });
-    thread.start();
-
-    for (IGuideEventListener list : listeners) {
-      list.guideStart();
-    }
-  }
-
-  public void guideStop() {
-    this.mGuide = null;
-
-    LocationState.removeLocationChangeListener(this);
-    onLocationChanged(LocationState.getLocation());
-    for (IGuideEventListener list : listeners) {
-      list.guideStop();
-    }
-  }
-
-  public boolean isGuiding() {
-    return getTargetLocation() != null;
-  }
-
-  @Override
-  public boolean isRequired() {
-    return Preferences.GUIDING_GPS_REQUIRED;
-  }
-
-  public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {}
-
-  public void onLocationChanged(Location location) {
-    // Logger.d(TAG, "onLocationChanged(" + location + ")");
-    if (mGuide != null && location != null) {
-      mGuide.actualizeState(location);
-
-      mTargetName = mGuide.getTargetName();
-      mAzimuthToTarget = mGuide.getAzimuthToTaget();
-      mDistanceToTarget = mGuide.getDistanceToTarget();
-
-      mLocation = location;
-    } else {
-      mTargetName = null;
-      mAzimuthToTarget = 0.0f;
-      mDistanceToTarget = 0.0f;
     }
 
-    for (IGuideEventListener list : listeners) {
-      list.receiveGuideEvent(mGuide, mTargetName, mAzimuthToTarget, mDistanceToTarget);
+    public void guideStop() {
+        this.mGuide = null;
+
+        LocationState.removeLocationChangeListener(this);
+        onLocationChanged(LocationState.getLocation());
+        for (IGuideEventListener list : listeners) {
+            list.guideStop();
+        }
     }
-  }
 
-  public void onStatusChanged(String provider, int state, Bundle extra) {}
-
-  public void removeGuidingListener(IGuideEventListener listener) {
-    this.listeners.remove(listener);
-  }
-
-  protected void trackGuideCallRecalculate() {
-    for (IGuideEventListener list : listeners) {
-      list.trackGuideCallRecalculate();
+    public boolean isGuiding() {
+        return getTargetLocation() != null;
     }
-  }
+
+    @Override
+    public boolean isRequired() {
+        return Preferences.GUIDING_GPS_REQUIRED;
+    }
+
+    public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {
+    }
+
+    public void onLocationChanged(Location location) {
+        // Logger.d(TAG, "onLocationChanged(" + location + ")");
+        if (mGuide != null && location != null) {
+            mGuide.actualizeState(location);
+
+            mTargetName = mGuide.getTargetName();
+            mAzimuthToTarget = mGuide.getAzimuthToTaget();
+            mDistanceToTarget = mGuide.getDistanceToTarget();
+
+            mLocation = location;
+        } else {
+            mTargetName = null;
+            mAzimuthToTarget = 0.0f;
+            mDistanceToTarget = 0.0f;
+        }
+
+        for (IGuideEventListener list : listeners) {
+            list.receiveGuideEvent(mGuide, mTargetName, mAzimuthToTarget, mDistanceToTarget);
+        }
+    }
+
+    public void onStatusChanged(String provider, int state, Bundle extra) {
+    }
+
+    public void removeGuidingListener(IGuideEventListener listener) {
+        this.listeners.remove(listener);
+    }
+
+    protected void trackGuideCallRecalculate() {
+        for (IGuideEventListener list : listeners) {
+            list.trackGuideCallRecalculate();
+        }
+    }
 }

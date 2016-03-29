@@ -14,43 +14,43 @@
  */
 package menion.android.whereyougo.maps.mapsforge.preferences;
 
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
+import android.content.Context;
+import android.util.AttributeSet;
 
 import org.mapsforge.core.model.Tile;
 
-import android.content.Context;
-import android.util.AttributeSet;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
 
 /**
  * Preferences class for adjusting the cache size.
  */
 public class CacheSizePreference extends SeekBarPreference {
-  private static final double ONE_MEGABYTE = 1000000d;
-  private static final int TILE_SIZE_IN_BYTES = Tile.TILE_SIZE * Tile.TILE_SIZE * 2;
+    private static final double ONE_MEGABYTE = 1000000d;
+    private static final int TILE_SIZE_IN_BYTES = Tile.TILE_SIZE * Tile.TILE_SIZE * 2;
 
-  /**
-   * Construct a new cache size preference seek bar.
-   * 
-   * @param context the context activity.
-   * @param attrs A set of attributes (currently ignored).
-   */
-  public CacheSizePreference(Context context, AttributeSet attrs) {
-    super(context, attrs);
-    // define the text message
-    this.messageText = getContext().getString(R.string.preferences_cache_size_desc);
+    /**
+     * Construct a new cache size preference seek bar.
+     *
+     * @param context the context activity.
+     * @param attrs   A set of attributes (currently ignored).
+     */
+    public CacheSizePreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        // define the text message
+        this.messageText = getContext().getString(R.string.preferences_cache_size_desc);
 
-    // define the current and maximum value of the seek bar
-    this.seekBarCurrentValue =
-        this.preferencesDefault.getInt(this.getKey(),
-            MapsforgeActivity.FILE_SYSTEM_CACHE_SIZE_DEFAULT);
-    this.max = MapsforgeActivity.FILE_SYSTEM_CACHE_SIZE_MAX;
-  }
+        // define the current and maximum value of the seek bar
+        this.seekBarCurrentValue =
+                this.preferencesDefault.getInt(this.getKey(),
+                        MapsforgeActivity.FILE_SYSTEM_CACHE_SIZE_DEFAULT);
+        this.max = MapsforgeActivity.FILE_SYSTEM_CACHE_SIZE_MAX;
+    }
 
-  @Override
-  String getCurrentValueText(int progress) {
-    String format = getContext().getString(R.string.preferences_cache_size_value);
-    Double value = Double.valueOf(TILE_SIZE_IN_BYTES * progress / ONE_MEGABYTE);
-    return String.format(format, value);
-  }
+    @Override
+    String getCurrentValueText(int progress) {
+        String format = getContext().getString(R.string.preferences_cache_size_value);
+        Double value = TILE_SIZE_IN_BYTES * progress / ONE_MEGABYTE;
+        return String.format(format, value);
+    }
 }
