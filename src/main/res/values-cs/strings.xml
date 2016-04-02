@@ -94,5 +94,6 @@
     <string name="you_have_to_restart_app_force">Je potřeba restartovat aplikaci!</string>
     <string name="you_have_to_restart_app_recommended">Je doporučeno restartovat aplikaci!</string>
     <string name="you_see">Vidíte</string>
+    <string name="cancelled">zrušeno</string>
 
 </resources>

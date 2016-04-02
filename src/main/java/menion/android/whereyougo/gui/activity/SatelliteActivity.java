@@ -173,7 +173,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
                 long lastFix = LocationState.getLastFixTime();
                 if (lastFix > 0) {
                     ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
-                            .formatDate(lastFix));
+                            .formatTime(lastFix));
                 } else {
                     ((TextView) findViewById(R.id.text_view_time_gps)).setText("~");
                 }

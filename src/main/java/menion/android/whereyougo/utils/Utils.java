@@ -25,6 +25,11 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 
 import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -72,6 +77,29 @@ public class Utils {
             buf.append(hexDigit[b[j] & 0x0f]);
         }
         return buf.toString();
+    }
+
+    public static String streamToString(final InputStream is) {
+        final char[] buffer = new char[1024];
+        final StringBuilder out = new StringBuilder();
+        Reader in = null;
+        try {
+            in = new InputStreamReader(is, "UTF-8");
+            for (;;) {
+                int rsz = in.read(buffer, 0, buffer.length);
+                if (rsz < 0)
+                    break;
+                out.append(buffer, 0, rsz);
+            }
+        }
+        catch (UnsupportedEncodingException ex) {
+        }
+        catch (IOException ex) {
+        }
+        finally {
+            closeStream(is);
+        }
+        return out.toString();
     }
 
     public static void closeStream(Closeable is) {

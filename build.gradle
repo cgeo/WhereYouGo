@@ -2,12 +2,17 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 17
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
         minSdkVersion 8
         targetSdkVersion 17
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 
     buildTypes {
@@ -22,6 +27,7 @@ dependencies {
     compile project(':locusAPI')
     compile project(':locusAPI_android')
     compile project(':openwig')
-    compile 'com.android.support:support-v4:18.0.0'
     compile files('libs/mapsforge-map-0.3.1-SNAPSHOT-jar-with-dependencies.jar')
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }

@@ -29,7 +29,7 @@
     <application
         android:name="menion.android.whereyougo.MainApplication"
         android:allowBackup="true"
-        android:debuggable="false"
+        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
         android:theme="@style/AppTheme">
@@ -118,6 +118,23 @@
                     android:host="www.wherigo.com"
                     android:pathPrefix="/cartridge/details.aspx"
                     android:scheme="http" />
+
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/download.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="https" />
+                <data
+                    android:host="www.wherigo.com"
+                    android:pathPrefix="/cartridge/details.aspx"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
 

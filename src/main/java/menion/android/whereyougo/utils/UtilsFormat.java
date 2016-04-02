@@ -23,6 +23,7 @@ import org.mapsforge.core.model.GeoPoint;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -38,6 +39,9 @@ public class UtilsFormat {
     // angle mi value
     private static double angleInMi = (2 * Math.PI * 1000.0 / 360.0);
     private static Date mDate;
+    private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private static DecimalFormat[][] formats;
 
@@ -157,12 +161,25 @@ public class UtilsFormat {
         }
     }
 
+    public static String formatTime(long time) {
+        if (mDate == null)
+            mDate = new Date();
+        mDate.setTime(time);
+        return timeFormat.format(mDate);
+    }
+
     public static String formatDate(long time) {
         if (mDate == null)
             mDate = new Date();
         mDate.setTime(time);
-        return mDate.getHours() + ":" + formatDouble(mDate.getMinutes(), 0, 2) + ":"
-                + formatDouble(mDate.getSeconds(), 0, 2);
+        return dateFormat.format(mDate);
+    }
+
+    public static String formatDatetime(long time) {
+        if (mDate == null)
+            mDate = new Date();
+        mDate.setTime(time);
+        return datetimeFormat.format(mDate);
     }
 
     /**

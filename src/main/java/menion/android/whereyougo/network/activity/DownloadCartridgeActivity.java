@@ -43,6 +43,7 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomMainActivity {
     private static final String TAG = "DownloadCartridgeActivity";
@@ -66,7 +67,6 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
             finish();
             return;
         }
-        cartridgeFile = FileSystem.findFile(cguid);
 
         setContentView(R.layout.layout_details);
 
@@ -76,11 +76,20 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
         tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
 
+        cartridgeFile = FileSystem.findFile(cguid);
         if (cartridgeFile != null) {
-            tvDescription.setText(Html.fromHtml("CGUID " + cguid + "\n" + cartridgeFile.getName().replace(cguid + "_", "")));
-            tvState.setText(Html.fromHtml(getString(R.string.download_successful)));
+            tvDescription.setText(Html.fromHtml(
+                    String.format("CGUID:<br>%s<br>\n%s",
+                            cguid,
+                            cartridgeFile.getName().replace(cguid + "_", "")
+                    )));
+            tvState.setText(Html.fromHtml(
+                    String.format("%s<br>%s",
+                            getString(R.string.download_successful),
+                            UtilsFormat.formatDatetime(cartridgeFile.lastModified())
+                    )));
         } else {
-            tvDescription.setText(Html.fromHtml("CGUID " + cguid));
+            tvDescription.setText(Html.fromHtml(String.format("CGUID:<br>%s", cguid)));
         }
 
         ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
@@ -132,13 +141,6 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
         }
     }
 
-    protected void startCartridge(String cguid) {
-        PreferenceValues.setCurrentActivity(null);
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("cguid", cguid);
-        startActivity(intent);
-    }
-
     @Override
     protected void eventCreateLayout() {
         // TODO Auto-generated method stub
@@ -185,7 +187,7 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
         ProgressDialog progressDialog;
 
         public DownloadTask(final Context context, String username, String password) {
-            super(username, password);
+            super(context, username, password);
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -202,7 +204,7 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
                         downloadTask.cancel(false);
                         downloadTask = null;
                         Log.i("down", "cancel");
-                        Toast.makeText(context, "cancelled", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.cancelled, Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -220,15 +222,8 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
             if (result) {
                 progressDialog.dismiss();
                 MainActivity.refreshCartridges();
-                cartridgeFile = FileSystem.findFile(cguid);
-                if (cartridgeFile != null) {
-                    tvDescription.setText(Html.fromHtml("CGUID " + cguid + "\n" + cartridgeFile.getName().replace(cguid + "_", "")));
-                    tvState.setText(Html.fromHtml(getString(R.string.download_successful)));
-                } else {
-                    tvDescription.setText(Html.fromHtml("CGUID " + cguid));
-                    tvState.setText(Html.fromHtml(""));
-                }
-                buttonStart.setEnabled(cartridgeFile != null);
+                DownloadCartridgeActivity.this.finish();
+                DownloadCartridgeActivity.this.startActivity(DownloadCartridgeActivity.this.getIntent());
             } else {
                 progressDialog.setIndeterminate(false);
             }
@@ -240,6 +235,7 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
             super.onProgressUpdate(values);
             Progress progress = values[0];
             switch (progress.getTask()) {
+                case INIT:
                 case PING:
                     progressDialog.setIndeterminate(true);
                     if (progress.getState() == State.WORKING) {
@@ -296,7 +292,5 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
         }
 
     }
-
-
 }
 
