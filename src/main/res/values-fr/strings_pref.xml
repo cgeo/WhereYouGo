@@ -61,7 +61,6 @@
     <string name="pref_map_provider_locus">Locus (Locus doit être installé)</string>
     <string name="pref_orientation">Orientation</string>
     <string name="pref_root">Dossier Wherigo</string>
-    <string name="pref_root_desc">Recherche les cartouches Wehereigo dans ce dossier</string>
     <string name="pref_save_game_auto">Enregistrer automatiquement le jeu</string>
     <string name="pref_save_game_auto_desc">Le jeu sera enregistré automatiquement lorsque vous basculez sur une autre application.</string>
     <string name="pref_sensors">Capteurs</string>

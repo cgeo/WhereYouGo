@@ -64,7 +64,7 @@
     <string name="pref_map_provider_locus">Locus (Locus notwendig)</string>
     <string name="pref_orientation">Ausrichtung</string>
     <string name="pref_root">Wherigo Verzeichnis</string>
-    <string name="pref_root_desc">Wählen Sie beliebiges Wherigo im Zielverzeichnis.</string>
+    <string name="pref_root_desc">Wählen Sie ein Zielverzeichnis für Wherigo.</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
     <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert werden, wenn Sie die Anwendung minimieren.</string>
     <string name="pref_sensors">Sensoren</string>

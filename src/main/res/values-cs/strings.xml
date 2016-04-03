@@ -95,5 +95,7 @@
     <string name="you_have_to_restart_app_recommended">Je doporučeno restartovat aplikaci!</string>
     <string name="you_see">Vidíte</string>
     <string name="cancelled">zrušeno</string>
+    <string name="folder_default">Automaticky</string>
+    <string name="folder_select">Vybrat...</string>
 
 </resources>

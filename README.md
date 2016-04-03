@@ -30,14 +30,17 @@ Uses the following projects:
 * execute
 ```
 git clone https://github.com/biylda/WhereYouGo.git whereyougo
-git clone --depth 1 --single-branch https://github.com/biylda/openwig.git -b whereyougo openwig
-cd openwig
-git filter-branch --prune-empty --subdirectory-filter OpenWIGLibrary HEAD
-cd ..
+git clone https://github.com/biylda/openwig.git -b whereyougo openwig
+git clone https://github.com/jfmdev/aFileDialog.git aFileDialog
 ```
 * add the following lines to your `settings.gradle`
 ```
+include ':locusAPI'
+include ':locusAPI_android'
+include ':aFileDialog'
+project(':aFileDialog').projectDir = new File('aFileDialog/library/app')
 include ':openwig'
+project(':openwig').projectDir = new File('openwig/OpenWIGLibrary')
 include ':whereyougo'
 ```
 ##What's new
@@ -259,8 +262,6 @@ include ':whereyougo'
 <h2>
 	
 ##TODO
-* sorting objects in inventary
+* sorting objects in inventory
 * saving to and loading from custom files (or saving slots)
-* change cartridge folder
-* fix downloading from http://wherigo.com
 * add downloading from http://wherigofoundation.com

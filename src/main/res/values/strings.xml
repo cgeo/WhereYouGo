@@ -97,5 +97,7 @@
     <string name="you_have_to_restart_app_recommended">It\'s recommended to restart application!</string>
     <string name="you_see">You see</string>
     <string name="cancelled">cancelled</string>
+    <string name="folder_default">Default</string>
+    <string name="folder_select">Select...</string>
 
 </resources>

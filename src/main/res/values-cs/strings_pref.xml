@@ -62,7 +62,7 @@
     <string name="pref_map_provider_locus">Locus (vyžaduje nainstalovaný Locus)</string>
     <string name="pref_orientation">Orientace</string>
     <string name="pref_root">Složka s wherigo</string>
-    <string name="pref_root_desc">Vyberte libovolné wherigo v cílové složce</string>
+    <string name="pref_root_desc">Vyberte složku pro soubory wherigo</string>
     <string name="pref_save_game_auto">Automaticky ukládat hru</string>
     <string name="pref_save_game_auto_desc">Hra bude automaticky uložena při přepnutí na jinou aplikaci.</string>
     <string name="pref_sensors">Senzory</string>

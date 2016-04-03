@@ -1,6 +1,8 @@
 package menion.android.whereyougo.gui.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
@@ -13,10 +15,11 @@ import android.preference.PreferenceScreen;
 
 import java.io.File;
 
+import ar.com.daidalos.afiledialog.FileChooserDialog;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
-import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
-import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.preferences.PreviewPreference;
@@ -121,10 +124,55 @@ public class XmlSettingsActivity extends PreferenceActivity
         if (key.equals("")) {
             // DO NOTHING
         } else if (key.equals(getString(R.string.pref_KEY_S_ROOT))) {
-            // call file picker
-            FilePicker.setFileDisplayFilter(new FilterByFileExtension(".gwc"));
-            FilePicker.setFileSelectFilter(null);
-            startActivityForResult(new Intent(XmlSettingsActivity.this, FilePicker.class), R.string.pref_KEY_S_ROOT);
+            UtilsGUI.dialogDoItem(this, getText(R.string.pref_root), R.drawable.var_empty, getText(R.string.pref_root_desc),
+                    getString(R.string.cancel), null,
+                    getString(R.string.folder_select), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            FileChooserDialog selectDialog = new FileChooserDialog(XmlSettingsActivity.this);
+                            selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
+                            selectDialog.setFolderMode(true);
+                            selectDialog.setCanCreateFiles(false);
+                            selectDialog.setShowCancelButton(true);
+                            selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                                public void onFileSelected(Dialog source, File folder) {
+                                    source.dismiss();
+                                    FileSystem.setRootDirectory(null, folder.getAbsolutePath());
+                                    MainActivity.refreshCartridges();
+                                    Preferences.GLOBAL_ROOT = FileSystem.ROOT;
+                                    PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                                    preferenceRoot.setValue(Preferences.GLOBAL_ROOT);
+                                }
+
+                                public void onFileSelected(Dialog source, File folder, String name) {
+                                    String newFolder = folder.getAbsolutePath() + "/" + name;
+                                    new File(newFolder).mkdir();
+                                    ((FileChooserDialog) source).loadFolder(newFolder);
+                                }
+                            });
+                            selectDialog.show();
+                        }
+                    },
+                    getString(R.string.folder_default), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            FileSystem.ROOT = null;
+                            if (!FileSystem.createRoot(MainApplication.APP_NAME)) {
+                                try {
+                                    FileSystem.setRootDirectory(null, getExternalFilesDir(null).getAbsolutePath());
+                                } catch (Exception e1) {
+                                    try {
+                                        FileSystem.setRootDirectory(null, getFilesDir().getAbsolutePath());
+                                    } catch (Exception e2) {
+                                    }
+                                }
+                            }
+                            MainActivity.refreshCartridges();
+                            Preferences.GLOBAL_ROOT = FileSystem.ROOT;
+                            PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                            preferenceRoot.setValue(Preferences.GLOBAL_ROOT);
+                        }
+                    });
             return false;
         } else if (key.equals(getString(R.string.pref_KEY_X_ABOUT))) {
             /*
@@ -279,21 +327,6 @@ public class XmlSettingsActivity extends PreferenceActivity
                             uri.toString());
                     Preferences.GUIDING_WAYPOINT_SOUND = Utils.parseInt(R.string.pref_VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND);
                     Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI = uri.toString();
-                }
-            }
-        } else if (requestCode == R.string.pref_KEY_S_ROOT) {
-            if (resultCode == Activity.RESULT_OK && data != null) {
-                String filename = data.getStringExtra(FilePicker.SELECTED_FILE);
-                if (filename != null) {
-                    File file = new File(filename);
-                    String dir = file.getParent();
-
-                    PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                    preferenceRoot.setValue(dir);
-
-                    Preferences.GLOBAL_ROOT = dir;
-                    FileSystem.setRootDirectory(null, dir);
-                    MainActivity.refreshCartridges();
                 }
             }
         }

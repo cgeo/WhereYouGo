@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="menion.android.whereyougo"
     android:installLocation="auto"
     android:versionCode="39"
@@ -32,7 +33,8 @@
         android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="icon, label">
         <activity
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
             android:label="WhereYouGo"
@@ -49,6 +51,7 @@
             android:theme="@style/Mapsforge" />
         <activity android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
         <activity android:name="menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker" />
+        <activity android:name="ar.com.daidalos.afiledialog.FileChooserActivity" />
         <activity
             android:name="menion.android.whereyougo.maps.mapsforge.InfoView"
             android:theme="@android:style/Theme.NoTitleBar" />
