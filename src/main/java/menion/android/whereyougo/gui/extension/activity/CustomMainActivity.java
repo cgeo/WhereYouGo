@@ -233,22 +233,20 @@ public abstract class CustomMainActivity extends CustomActivity {
             A.registerApp((MainApplication) getApplication());
 
             // not test some things
-            if (testFileSystem() && testFreeSpace()) {
-                // set last known location
-                if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
-                        && Preferences.getBooleanPreference(R.string.pref_KEY_B_START_GPS_AUTOMATICALLY)) {
-                    LocationState.setGpsOn(CustomMainActivity.this);
-                } else {
-                    LocationState.setGpsOff(CustomMainActivity.this);
-                }
+            testFileSystem();
 
-                eventFirstInit();
-                setScreenBasic(this);
-                eventCreateLayout();
-                callSecondInit = true;
+            // set last known location
+            if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
+                    && Preferences.getBooleanPreference(R.string.pref_KEY_B_START_GPS_AUTOMATICALLY)) {
+                LocationState.setGpsOn(CustomMainActivity.this);
             } else {
-                // do nothing, just close APP
+                LocationState.setGpsOff(CustomMainActivity.this);
             }
+
+            eventFirstInit();
+            setScreenBasic(this);
+            eventCreateLayout();
+            callSecondInit = true;
         } else {
             // Logger.w(TAG, "onCreate() - only register");
             setScreenBasic(this);
@@ -395,7 +393,7 @@ public abstract class CustomMainActivity extends CustomActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            showDialogFinish(FINISH_EXIT_FORCE);
+                            //showDialogFinish(FINISH_EXIT_FORCE);
                         }
                     });
             return false;
@@ -413,8 +411,13 @@ public abstract class CustomMainActivity extends CustomActivity {
             return true;
 
         // check disk space (at least 5MB)
-        StatFs stat = new StatFs(FileSystem.ROOT);
-        long bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
+        long bytesFree = 0;
+        try {
+            StatFs stat = new StatFs(FileSystem.ROOT);
+            bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
+        } catch (Exception e) {
+            return false;
+        }
         long megFree = bytesFree / 1048576;
         // Logger.d(TAG, "megAvailable:" + megAvail + ", free:" + megFree);
         if (megFree > 0 && megFree < 5) {
@@ -424,7 +427,7 @@ public abstract class CustomMainActivity extends CustomActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            showDialogFinish(FINISH_EXIT_FORCE);
+                            //showDialogFinish(FINISH_EXIT_FORCE);
                         }
                     });
             return false;
