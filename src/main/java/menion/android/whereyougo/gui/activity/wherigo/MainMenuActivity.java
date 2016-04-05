@@ -23,11 +23,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -48,11 +52,13 @@ import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
 import menion.android.whereyougo.openwig.WUI;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
+import menion.android.whereyougo.utils.UtilsFormat;
 
 public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
@@ -236,17 +242,71 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         }, getString(R.string.save_game), new CustomDialog.OnClickListener() {
             @Override
             public boolean onClick(CustomDialog dialog, View v, int btn) {
-                // backup
-                try {
-                    FileSystem.backupFile(MainActivity.getSaveFile());
-                } catch (Exception e) {
-                }
-
+                MainActivity.wui.setOnSavingFinished(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(MainMenuActivity.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        MainActivity.wui.setOnSavingFinished(null);
+                    }
+                });
                 Engine.requestSync();
-                Toast.makeText(MainMenuActivity.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        try {
+            File savefile = MainActivity.getSaveFile();
+            for (int slot = 1; slot <= Preferences.GLOBAL_SAVEGAME_SLOTS; ++slot) {
+                File slotFile = new File(savefile.getAbsolutePath() + "." + slot);
+                String text;
+                if (slotFile.exists()) {
+                    text = String.format("%s %d: %s", getText(R.string.save_game_slot), slot, UtilsFormat.formatDatetime(slotFile.lastModified()));
+                } else {
+                    text = String.format("%s %d", getText(R.string.save_game_slot), slot);
+                }
+                menu.add(0, slot, Preferences.GLOBAL_SAVEGAME_SLOTS - slot, text);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        MainActivity.wui.setOnSavingFinished(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    File savefile = MainActivity.getSaveFile();
+                    File slotFile = new File(savefile.getAbsolutePath() + "." + item.getItemId());
+                    FileSystem.copyFile(savefile, slotFile);
+                    item.setTitle(String.format("%s %d: %s", getText(R.string.save_game_slot), item.getItemId(), UtilsFormat.formatDatetime(slotFile.lastModified())));
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(MainMenuActivity.this,
+                                    String.format("%s %d\n%s", getText(R.string.save_game_slot), item.getItemId(), getText(R.string.save_game_ok)),
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                MainActivity.wui.setOnSavingFinished(null);
+            }
+        });
+        Engine.requestSync();
+        return true;
     }
 
     @Override
@@ -259,12 +319,6 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // backup
-                                try {
-                                    FileSystem.backupFile(MainActivity.getSaveFile());
-                                } catch (Exception e) {
-                                }
-
                                 Engine.requestSync();
                                 MainActivity.selectedFile = null;
                                 DetailsActivity.et = null;

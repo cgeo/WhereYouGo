@@ -20,7 +20,6 @@ package menion.android.whereyougo.gui.activity;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -46,6 +45,8 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.dialog.ChooseCartridgeDialog;
+import menion.android.whereyougo.gui.dialog.ChooseSavegameDialog;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
@@ -55,6 +56,7 @@ import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -69,6 +71,18 @@ public class MainActivity extends CustomMainActivity {
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
     private static Vector<CartridgeFile> cartridgeFiles;
+
+    static {
+        wui.setOnSavingStarted(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FileSystem.backupFile(MainActivity.getSaveFile());
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
 
     /**
      * Call activity that guide onto point.
@@ -92,6 +106,16 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
+    public static File getLogFile() throws IOException {
+        try {
+            File file = new File(selectedFile.substring(0, selectedFile.length() - 3) + "owl");
+            return file;
+        } catch (SecurityException e) {
+            Logger.e(TAG, "getSyncFile()", e);
+            return null;
+        }
+    }
+
     public static String getSelectedFile() {
         return selectedFile;
     }
@@ -105,6 +129,34 @@ public class MainActivity extends CustomMainActivity {
             WUI.startProgressDialog();
             Engine.newInstance(cartridgeFile, log, wui, wLocationService).start();
         } catch (Throwable t) {
+        }
+    }
+
+    public static void restoreCartridge(OutputStream log) {
+        try {
+            WUI.startProgressDialog();
+            Engine.newInstance(cartridgeFile, log, wui, wLocationService).restore();
+        } catch (Throwable t) {
+        }
+    }
+
+    public static void startSelectedCartridge(boolean restore) {
+        try {
+            File file = getLogFile();
+            FileOutputStream fos = null;
+            try {
+                if (!file.exists())
+                    file.createNewFile();
+                fos = new FileOutputStream(file, true);
+            } catch (Exception e) {
+                Logger.e(TAG, "onResume() - create empty saveGame file", e);
+            }
+            if (restore)
+                MainActivity.restoreCartridge(fos);
+            else
+                MainActivity.loadCartridge(fos);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -150,14 +202,6 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    public static void restoreCartridge(OutputStream log) {
-        try {
-            WUI.startProgressDialog();
-            Engine.newInstance(cartridgeFile, log, wui, wLocationService).restore();
-        } catch (Throwable t) {
-        }
-    }
-
     public static void setBitmapToImageView(Bitmap i, ImageView iv) {
         Logger.w(TAG, "setBitmapToImageView(), " + i.getWidth() + " x " + i.getHeight());
         float width = i.getWidth() - 10;
@@ -170,6 +214,25 @@ public class MainActivity extends CustomMainActivity {
         iv.setMinimumWidth((int) width);
         iv.setMinimumHeight((int) height);
         iv.setImageBitmap(i);
+    }
+
+    public static void openCartridge(final CartridgeFile cartridgeFile) {
+        final CustomActivity activity = A.getMain();
+        if (activity == null) {
+            return;
+        }
+        try {
+            MainActivity.cartridgeFile = cartridgeFile;
+            MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
+            File saveFile = MainActivity.getSaveFile();
+            ChooseSavegameDialog chooseSavegameDialog = ChooseSavegameDialog.newInstance(saveFile);
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(chooseSavegameDialog, "DIALOG_TAG_CHOOSE_SAVE_FILE")
+                    .commitAllowingStateLoss();
+        } catch (Exception e) {
+            Logger.e(TAG, "onCreate()", e);
+        }
     }
 
     private void clickMap() {
@@ -187,7 +250,9 @@ public class MainActivity extends CustomMainActivity {
 
         ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
         dialog.setParams(cartridgeFiles);
-        getSupportFragmentManager().beginTransaction().add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
                 .commitAllowingStateLoss();
     }
 
@@ -280,7 +345,7 @@ public class MainActivity extends CustomMainActivity {
             getIntent().removeExtra("cguid");
             File file = FileSystem.findFile(cguid);
             if (file != null) {
-                startCartridge(file);
+                openCartridge(file);
             }
         }
     }
@@ -306,7 +371,7 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    private void startCartridge(File file) {
+    private void openCartridge(File file) {
         try {
             CartridgeFile cart = null;
             try {
@@ -317,48 +382,11 @@ public class MainActivity extends CustomMainActivity {
                     return;
                 }
             } catch (Exception e) {
-                Logger.w(TAG, "startCartridge(), file:" + file + ", e:" + e.toString());
+                Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e.toString());
                 ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
                 // file.delete();
             }
-            MainActivity.cartridgeFile = cart;
-            MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
-
-            if (MainActivity.cartridgeFile.getSavegame().exists()) {
-                UtilsGUI.showDialogQuestion(this, R.string.resume_previous_cartridge,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int btn) {
-                                File file =
-                                        new File(MainActivity.getSelectedFile().substring(0,
-                                                MainActivity.getSelectedFile().length() - 3)
-                                                + "gwl");
-                                FileOutputStream fos = null;
-                                try {
-                                    if (!file.exists())
-                                        file.createNewFile();
-                                    fos = new FileOutputStream(file, true);
-                                } catch (Exception e) {
-                                    Logger.e(TAG, "onResume() - create empty saveGame file", e);
-                                }
-                                MainActivity.restoreCartridge(fos);
-                            }
-                        }, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int btn) {
-                                MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-                                try {
-                                    MainActivity.getSaveFile().delete();
-                                } catch (Exception e) {
-                                    Logger.e(TAG, "onCreate() - deleteSyncFile", e);
-                                }
-                            }
-                        }, null);
-            } else {
-                MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-            }
+            openCartridge(cart);
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }

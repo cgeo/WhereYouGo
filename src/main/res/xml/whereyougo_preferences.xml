@@ -72,6 +72,13 @@
                 android:key="@string/pref_KEY_B_SAVEGAME_AUTO"
                 android:summary="@string/pref_save_game_auto_desc"
                 android:title="@string/pref_save_game_auto" />
+            <menion.android.whereyougo.preferences.PreviewEditTextPreference
+                android:defaultValue="@string/pref_DEFAULT_SAVEGAME_SLOTS"
+                android:inputType="number"
+                android:key="@string/pref_KEY_S_SAVEGAME_SLOTS"
+                android:summary="@string/pref_save_game_slots_desc"
+                android:title="@string/pref_save_game_slots"
+                whereyougo:previewTemplate="(%1$)" />
         </PreferenceCategory>
 
         <!--

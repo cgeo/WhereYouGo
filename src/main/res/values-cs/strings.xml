@@ -96,6 +96,14 @@
     <string name="you_see">Vidíte</string>
     <string name="cancelled">zrušeno</string>
     <string name="folder_default">Automaticky</string>
-    <string name="folder_select">Vybrat...</string>
+    <string name="folder_select">Vybrat…</string>
+    <string name="saving">Ukládám…</string>
+    <string name="loading">Nahrávám…</string>
+    <string name="save_game_slot">Slot</string>
+    <string name="load_game">Načíst hru</string>
+    <string name="save_file_main">Hlavní</string>
+    <string name="save_file_backup">Záložní</string>
+    <string name="delete_save_game">Smazat uloženou hru?</string>
+    <string name="save_file_new">Nová hra</string>
 
 </resources>

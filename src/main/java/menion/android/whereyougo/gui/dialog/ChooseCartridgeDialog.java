@@ -8,10 +8,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,18 +24,18 @@ import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.DataInfo;
-import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialogFragment;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 
 public class ChooseCartridgeDialog extends CustomDialogFragment {
 
-    private static final String TAG = "DialogChooseCartridge";
-
+    private static final String TAG = "ChooseCartridgeDialog";
+    private ArrayList<DataInfo> data;
+    private BaseAdapter adapter;
     private Vector<CartridgeFile> cartridgeFiles;
 
     public ChooseCartridgeDialog() {
@@ -64,7 +65,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
             });
 
             // prepare list
-            ArrayList<DataInfo> data = new ArrayList<DataInfo>();
+            data = new ArrayList<DataInfo>();
             for (int i = 0; i < cartridgeFiles.size(); i++) {
                 CartridgeFile file = cartridgeFiles.get(i);
                 byte[] iconData = file.getFile(file.iconId);
@@ -83,21 +84,17 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
                 data.add(di);
             }
 
-            // complete adapter
-            IconedListAdapter adapter = new IconedListAdapter(A.getMain(), data, null);
-            adapter.setTextView02Visible(View.VISIBLE, false);
-
             // create listView
-            ListView lv = UtilsGUI.createListView(getActivity(), false, data);
+            ListView listView = UtilsGUI.createListView(getActivity(), false, data);
             // set click listener
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     itemClicked(position);
                 }
             });
             // set on long click listener for file deletion
-            lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -105,9 +102,13 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
                     return true;
                 }
             });
+            adapter = (BaseAdapter) listView.getAdapter();
             // construct dialog
-            return new AlertDialog.Builder(getActivity()).setTitle(R.string.choose_cartridge)
-                    .setIcon(R.drawable.ic_title_logo).setView(lv).setNeutralButton(R.string.close, null)
+            return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.choose_cartridge)
+                    .setIcon(R.drawable.ic_title_logo)
+                    .setView(listView)
+                    .setNeutralButton(R.string.close, null)
                     .create();
         } catch (Exception e) {
             Logger.e(TAG, "createDialog()", e);
@@ -117,53 +118,16 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
     private void itemClicked(int position) {
         try {
-            MainActivity.cartridgeFile = cartridgeFiles.get(position);
-            MainActivity.selectedFile = MainActivity.cartridgeFile.filename;
-
-            if (MainActivity.cartridgeFile.getSavegame().exists()) {
-                UtilsGUI.showDialogQuestion(getActivity(), R.string.resume_previous_cartridge,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int btn) {
-                                File file =
-                                        new File(MainActivity.getSelectedFile().substring(0,
-                                                MainActivity.getSelectedFile().length() - 3)
-                                                + "gwl");
-                                FileOutputStream fos = null;
-                                try {
-                                    if (!file.exists())
-                                        file.createNewFile();
-                                    fos = new FileOutputStream(file, true);
-                                } catch (Exception e) {
-                                    Logger.e(TAG, "onResume() - create empty saveGame file", e);
-                                }
-                                MainActivity.restoreCartridge(fos);
-                            }
-                        }, new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int btn) {
-                                MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-                                try {
-                                    MainActivity.getSaveFile().delete();
-                                } catch (Exception e) {
-                                    Logger.e(TAG, "onCreate() - deleteSyncFile", e);
-                                }
-                            }
-                        }, null);
-            } else {
-                MainActivity.wui.showScreen(WUI.SCREEN_CART_DETAIL, null);
-            }
+            MainActivity.openCartridge(cartridgeFiles.get(position));
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
         dismiss();
     }
 
-    private void itemLongClicked(int position) {
+    private void itemLongClicked(final int position) {
         try {
-            CartridgeFile cartridgeFile = cartridgeFiles.get(position);
+            final CartridgeFile cartridgeFile = cartridgeFiles.get(position);
             final String filename = cartridgeFile.filename.substring(0,
                     cartridgeFile.filename.length() - 3);
 
@@ -172,16 +136,25 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
                         @Override
                         public void onClick(DialogInterface dialog, int btn) {
-                            new File(filename + "gwc").delete();
-                            new File(filename + "gwl").delete();
-                            new File(filename + "ows").delete();
+                            File[] files = FileSystem.getFiles2(new File(cartridgeFile.filename).getParent(), new FileFilter() {
+                                @Override
+                                public boolean accept(File pathname) {
+                                    return pathname.getAbsolutePath().startsWith(filename);
+                                }
+                            });
+                            for (File file : files) {
+                                file.delete();
+                            }
                             MainActivity.refreshCartridges();
+                            cartridgeFiles.remove(position);
+                            data.remove(position);
+                            if (adapter != null)
+                                adapter.notifyDataSetChanged();
                         }
                     }, null);
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
-        dismiss();
     }
 
     public void setParams(Vector<CartridgeFile> cartridgeFiles) {

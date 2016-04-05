@@ -98,6 +98,14 @@
     <string name="you_see">You see</string>
     <string name="cancelled">cancelled</string>
     <string name="folder_default">Default</string>
-    <string name="folder_select">Select...</string>
+    <string name="folder_select">Select…</string>
+    <string name="saving">Saving…</string>
+    <string name="loading">Loading…</string>
+    <string name="save_game_slot">Slot</string>
+    <string name="load_game">Load game</string>
+    <string name="save_file_main">Main savegame</string>
+    <string name="save_file_backup">Backup savegame</string>
+    <string name="delete_save_game">Delete savegame?</string>
+    <string name="save_file_new">New game</string>
 
 </resources>

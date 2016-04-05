@@ -279,6 +279,14 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_SAVEGAME_AUTO)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_SAVEGAME_SLOTS)) {
+            String newValue = sharedPreferences.getString(key, null);
+            int value = Utils.parseInt(newValue);
+            if (value > 0) {
+                Preferences.GLOBAL_SAVEGAME_SLOTS = value;
+            } else {
+                ManagerNotify.toastShortMessage(R.string.invalid_value);
+            }
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GC_USERNAME)) {
             Preferences.GC_USERNAME = sharedPreferences.getString(key, null);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GC_PASSWORD)) {

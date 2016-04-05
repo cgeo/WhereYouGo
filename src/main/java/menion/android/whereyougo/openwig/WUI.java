@@ -61,8 +61,9 @@ public class WUI implements UI {
     public static final int SCREEN_MAP = 14;
     private static final String TAG = "WUI";
     public static boolean saving = false;
-
     private static ProgressDialog progressDialog;
+    private Runnable onSavingStarted;
+    private Runnable onSavingFinished;
 
     private static void closeActivity(Activity activity) {
         if (activity instanceof PushDialogActivity || activity instanceof GuidingActivity) {
@@ -85,13 +86,16 @@ public class WUI implements UI {
 
     public static void startProgressDialog() {
         progressDialog = new ProgressDialog(A.getMain());
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage(A.getMain().getString(R.string.loading));
         progressDialog.show();
     }
 
     public void blockForSaving() {
         Logger.w(TAG, "blockForSaving()");
         saving = true;
+        if (onSavingStarted != null) {
+            onSavingStarted.run();
+        }
     }
 
     public void debugMsg(String msg) {
@@ -273,6 +277,16 @@ public class WUI implements UI {
     public void unblock() {
         Logger.w(TAG, "unblock()");
         saving = false;
+        if (onSavingFinished != null) {
+            onSavingFinished.run();
+        }
     }
 
+    public void setOnSavingStarted(Runnable onSavingStarted) {
+        this.onSavingStarted = onSavingStarted;
+    }
+
+    public void setOnSavingFinished(Runnable onSavingFinished) {
+        this.onSavingFinished = onSavingFinished;
+    }
 }

@@ -26,9 +26,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -38,7 +35,6 @@ import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 public class CartridgeDetailsActivity extends CustomActivity {
@@ -98,18 +94,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
             @Override
             public boolean onClick(CustomDialog dialog, View v, int btn) {
                 CartridgeDetailsActivity.this.finish();
-                File file =
-                        new File(MainActivity.selectedFile.substring(0, MainActivity.selectedFile.length() - 3)
-                                + "gwl");
-                FileOutputStream fos = null;
-                try {
-                    if (!file.exists())
-                        file.createNewFile();
-                    fos = new FileOutputStream(file);
-                } catch (Exception e) {
-                    Logger.e(TAG, "onResume() - create empy saveGame file", e);
-                }
-                MainActivity.loadCartridge(fos);
+                MainActivity.startSelectedCartridge(false);
                 return true;
             }
         }, null, null, getString(R.string.navigate), new CustomDialog.OnClickListener() {

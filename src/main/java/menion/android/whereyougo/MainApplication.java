@@ -302,15 +302,16 @@ public class MainApplication extends Application {
         if (Preferences.GLOBAL_SAVEGAME_AUTO
                 && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
                 && MainActivity.selectedFile != null && Engine.instance != null) {
-
-            // backup
-            try {
-                FileSystem.backupFile(MainActivity.getSaveFile());
-            } catch (Exception e) {
+            if (MainActivity.wui != null) {
+                MainActivity.wui.setOnSavingFinished(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainApplication.this, R.string.save_game_auto, Toast.LENGTH_SHORT).show();
+                        MainActivity.wui.setOnSavingFinished(null);
+                    }
+                });
             }
-
             Engine.requestSync();
-            Toast.makeText(this, R.string.save_game_auto, Toast.LENGTH_SHORT).show();
         }
     }
 

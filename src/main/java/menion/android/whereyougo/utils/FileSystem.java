@@ -194,7 +194,8 @@ public class FileSystem {
     public static boolean backupFile(File file) {
         try {
             if (file.length() > 0) {
-                FileSystem.copyFile(file, new File(file.getAbsolutePath() + ".bak"));
+                File backupFile = new File(file.getAbsolutePath() + ".bak");
+                FileSystem.copyFile(file, backupFile);
             }
         } catch (IOException e) {
             return false;
@@ -203,6 +204,9 @@ public class FileSystem {
     }
 
     public static void copyFile(File source, File dest) throws IOException {
+        if (source.equals(dest)) {
+            return;
+        }
         if (!dest.exists()) {
             dest.createNewFile();
         }
@@ -216,5 +220,6 @@ public class FileSystem {
             sourceChannel.close();
             destChannel.close();
         }
+        dest.setLastModified(source.lastModified());
     }
 }

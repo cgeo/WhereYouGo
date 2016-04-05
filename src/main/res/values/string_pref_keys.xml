@@ -43,6 +43,8 @@
     <string name="pref_VALUE_HIGHLIGHT_ALWAYS">2</string>
     <string name="pref_KEY_B_SAVEGAME_AUTO">KEY_B_SAVEGAME_AUTO</string>
     <string name="pref_DEFAULT_SAVEGAME_AUTO">true</string>
+    <string name="pref_KEY_S_SAVEGAME_SLOTS">KEY_S_SAVEGAME_SLOTS</string>
+    <string name="pref_DEFAULT_SAVEGAME_SLOTS">5</string>
     <string name="pref_KEY_B_IMAGE_STRETCH">KEY_B_IMAGE_STRETCH</string>
     <string name="pref_DEFAULT_IMAGE_STRETCH">true</string>
     <string name="pref_KEY_S_FONT_SIZE">KEY_S_FONT_SIZE</string>

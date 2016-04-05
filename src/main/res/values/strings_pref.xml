@@ -65,6 +65,8 @@
     <string name="pref_root_desc">Select folder for wherigo files</string>
     <string name="pref_save_game_auto">Save game automatically</string>
     <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
+    <string name="pref_save_game_slots">Savegame slots</string>
+    <string name="pref_save_game_slots_desc">Number of slots for saving game via menu button</string>
     <string name="pref_sensors">Sensors</string>
     <string name="pref_sensors_compass_auto_change">Auto change</string>
     <string name="pref_sensors_compass_auto_change_desc">Use source for bearing defined by "Use hardware compass" settings for low speed. For high speed use bearing from GPS</string>

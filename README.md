@@ -263,5 +263,4 @@ include ':whereyougo'
 	
 ##TODO
 * sorting objects in inventory
-* saving to and loading from custom files (or saving slots)
 * add downloading from http://wherigofoundation.com
