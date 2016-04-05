@@ -45,7 +45,7 @@
     <string name="no_location_providers_available">사용가능한 위치 제공자 없음!</string>
     <string name="no_satellites">인공위성 없음</string>
     <string name="no_target">목적지 없음!</string>
-    <string name="no_wherigo_cartridge_available">Whereigo 카드리지 불가함.\n카드리지 파일(*.gwc)을 추가요망\n %1$s 디렉토리에\n그리고 %2$s재출발 요망!</string>
+    <string name="no_wherigo_cartridge_available">Whereigo 카드리지 불가함.\n카드리지 파일(*.gwc)을 추가요망\n%1$s\n디렉토리에\n그리고 %2$s재출발 요망!</string>
     <string name="not_enough_disk_space_x">SD카드에 여유 공간이 부족합니다!\n(%1$s, 여유:%2$s)</string>
     <string name="ok">확인</string>
     <string name="pending">보류</string>

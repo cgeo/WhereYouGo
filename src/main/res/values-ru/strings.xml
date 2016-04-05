@@ -45,7 +45,7 @@
     <string name="no_location_providers_available">Нет поставщиков данных о местоположении!</string>
     <string name="no_satellites">Нет спутников</string>
     <string name="no_target">Нет цели!</string>
-    <string name="no_wherigo_cartridge_available">Нет доступных картриджей Wherigo.\nДобавьте файл картриджа (*.gwc) в\n %1$s каталог\n и начните %2$s снова!</string>
+    <string name="no_wherigo_cartridge_available">Нет доступных картриджей Wherigo.\nДобавьте файл картриджа (*.gwc) в\n%1$s\nкаталог и начните %2$s снова!</string>
     <string name="not_enough_disk_space_x">Недостаточно свободного места на карте памяти!\n(%1$S, свободно:%2$S)</string>
     <string name="ok">ОК</string>
     <string name="pending">Ожидание</string>

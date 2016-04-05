@@ -59,7 +59,7 @@
     <string name="no_location_providers_available">Aucun équipement de localisation disponible !</string>
     <string name="no_satellites">Aucun satellite</string>
     <string name="no_target">Aucune cible !</string>
-    <string name="no_wherigo_cartridge_available">Aucune cartouche Wherigo disponible.\nAjouter le fichier de la cartouche (*.gwc) dans\n le dossier %1$ \n et redémarrez %2$s !</string>
+    <string name="no_wherigo_cartridge_available">Aucune cartouche Wherigo disponible.\nAjouter le fichier de la cartouche (*.gwc) dans le dossier\n%1$s\net redémarrez %2$s !</string>
     <string name="not_enough_disk_space_x">Pas assez d\'espace disque libre sur SDCard!\n(%1$s, libre:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">En attente</string>

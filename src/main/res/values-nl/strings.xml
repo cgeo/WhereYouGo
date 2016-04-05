@@ -45,7 +45,7 @@
     <string name="no_location_providers_available">Geen locale aanbieders beschikbaar!</string>
     <string name="no_satellites">Geen satellieten</string>
     <string name="no_target">Geen doel!</string>
-    <string name="no_wherigo_cartridge_available">Geen Wherigo cartridge beschikbaar.\nVoeg cartridge bestand (*.gwc) toe in\n %1$s map\n en start %2$s opnieuw!</string>
+    <string name="no_wherigo_cartridge_available">Geen Wherigo cartridge beschikbaar.\nVoeg cartridge bestand (*.gwc) toe in\n%1$s\nmap en start %2$s opnieuw!</string>
     <string name="not_enough_disk_space_x">Niet genoeg vrije schijfruimte op SDCard!\n(%1$s,gratis:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">In behandeling</string>

@@ -45,7 +45,6 @@
     <string name="no_location_providers_available">Żaden dostawca lokalizacji nie jest dostępny!</string>
     <string name="no_satellites">Brak satelitów</string>
     <string name="no_target">Brak celu!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into\n %1$s directory\n and start %2$s again!</string>
     <string name="not_enough_disk_space_x">Za mało wolnego miejsca na dysku SDCard!\n(%1$s, wolne: %2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pending</string>

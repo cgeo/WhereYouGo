@@ -45,7 +45,7 @@
     <string name="no_location_providers_available">Sijaintitarjoajia ei saatavilla!</string>
     <string name="no_satellites">Ei satelliittia</string>
     <string name="no_target">Ei kohdetta!</string>
-    <string name="no_wherigo_cartridge_available">Wherigo-kasetti ei ole saatavilla.\nLisää kasettitiedosto(*.gwc) \n %1$s hakemistoon\n ja aloita %2$s uudelleen!</string>
+    <string name="no_wherigo_cartridge_available">Wherigo-kasetti ei ole saatavilla.\nLisää kasettitiedosto(*.gwc)\n%1$s\nhakemistoon ja aloita %2$s uudelleen!</string>
     <string name="not_enough_disk_space_x">Ei ole tarpeeksi vapaata tilaa SD-kortilla!\n(%1$s, vapaana:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Odotettaessa</string>

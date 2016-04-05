@@ -45,7 +45,6 @@
     <string name="no_location_providers_available">利用可能なロケーションプロバイダがありません</string>
     <string name="no_satellites">GPS衛星なし</string>
     <string name="no_target">目標なし</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into\n %1$s directory\n and start %2$s again!</string>
     <string name="not_enough_disk_space_x">SDカードに充分な空スペースがない\n(%1$s, 空き:%2$s)</string>
     <string name="ok">はい</string>
     <string name="pending">Pending</string>

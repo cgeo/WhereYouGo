@@ -45,7 +45,6 @@
     <string name="no_location_providers_available">Ingen placeringsudbydere tilgængelig!</string>
     <string name="no_satellites">Ingen satellitter</string>
     <string name="no_target">Intet mål!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into\n %1$s directory\n and start %2$s again!</string>
     <string name="not_enough_disk_space_x">Ikke nok ledig diskplads på SDKort\n(%1$s,ledig:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pending</string>

@@ -60,7 +60,7 @@
     <string name="no_location_providers_available">Keine Standort-Anbieter verfügbar!</string>
     <string name="no_satellites">Keine Satelliten</string>
     <string name="no_target">Kein Ziel!</string>
-    <string name="no_wherigo_cartridge_available">Kein Wherigo Cartridge gefunden.\nFügen Sie Cartridgedatei (*.gwc) ins\n %1$s Verzeichnis\n und starten Sie %2$s wieder!</string>
+    <string name="no_wherigo_cartridge_available">Kein Wherigo Cartridge gefunden.\nFügen Sie Cartridgedatei (*.gwc) ins Verzeichnis\n%1$s\nund starten Sie %2$s wieder!</string>
     <string name="not_enough_disk_space_x">Nicht genügend freier Speicherplatz auf SDCard!\n(%1$s, frei:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pending</string>

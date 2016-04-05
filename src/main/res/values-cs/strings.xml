@@ -58,7 +58,7 @@
     <string name="no_location_providers_available">Není dostupný žádný poskytovatel pozice!</string>
     <string name="no_satellites">Žádné satelity</string>
     <string name="no_target">Žádný cíl!</string>
-    <string name="no_wherigo_cartridge_available">Žádné Wherigo cartridge není k dispozici.\nPřidejte cartridge (*.gwc) do\n %1$s adresáře\n a spusťte %2$s znovu.</string>
+    <string name="no_wherigo_cartridge_available">Žádné Wherigo cartridge není k dispozici.\nPřidejte cartridge (*.gwc) do adresáře\n%1$s\na spusťte %2$s znovu.</string>
     <string name="not_enough_disk_space_x">Nedostatek volného místa na SD kartě!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čeká na vyřízení</string>
