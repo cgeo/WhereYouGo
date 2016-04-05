@@ -68,7 +68,11 @@ public class Guide implements IGuide {
         this.location = location;
         alreadyBeeped = false;
         lastSonarCall = 0;
-        audioBeep = new AudioClip(A.getApp(), R.raw.sound_beep_01);
+        try {
+            audioBeep = new AudioClip(A.getApp(), R.raw.sound_beep_01);
+        } catch (Exception e) {
+            Logger.e(TAG, "Guide(" + R.raw.sound_beep_01 + "), e:" + e.toString());
+        }
     }
 
     public void actualizeState(Location actualLocation) {
@@ -123,7 +127,7 @@ public class Guide implements IGuide {
             switch (Preferences.GUIDING_WAYPOINT_SOUND) {
                 case PreferenceValues.VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE:
                     if (distance < Preferences.GUIDING_WAYPOINT_SOUND_DISTANCE && !alreadyBeeped) {
-                        audioBeep.play();
+                        playSingleBeep();
                         alreadyBeeped = true;
                     }
                     break;
@@ -150,7 +154,7 @@ public class Guide implements IGuide {
 
     protected void playCustomSound() {
         String uri = Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
-        if (uri != null && uri.length() > 0) {
+        try {
             final AudioClip audioClip = new AudioClip(A.getApp(), Uri.parse(uri));
             audioClip.play();
             new Timer().schedule(new TimerTask() {
@@ -159,10 +163,13 @@ public class Guide implements IGuide {
                     AudioClip.destroyAudio(audioClip);
                 }
             }, 5000);
+        } catch (Exception e) {
+            Logger.e(TAG, "playCustomSound(" + uri + "), e:" + e.toString());
         }
     }
 
     protected void playSingleBeep() {
-        audioBeep.play();
+        if (audioBeep != null)
+            audioBeep.play();
     }
 }

@@ -122,7 +122,7 @@ public class FileSystem {
             return file.listFiles(filter);
         } catch (Exception e) {
             Logger.e(TAG, "getFiles2(), folder: " + folder);
-            return null;
+            return new File[0];
         }
     }
 

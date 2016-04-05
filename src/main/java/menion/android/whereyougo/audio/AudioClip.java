@@ -34,7 +34,11 @@ public class AudioClip {
     private AudioListener listener;
 
     public AudioClip(Context ctx, int resID) {
-        name = ctx.getResources().getResourceName(resID);
+        try {
+            name = ctx.getResources().getResourceName(resID);
+        } catch (Exception e) {
+            // name is used only for debug purposes
+        }
         mPlayer = MediaPlayer.create(ctx, resID);
         initMediaPlayer();
     }
