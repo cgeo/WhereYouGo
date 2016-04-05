@@ -63,7 +63,7 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
         if (bundle == null) {
             return false;
         }
-        String saveFileName = getArguments().getString(SAVE_FILE);
+        String saveFileName = bundle.getString(SAVE_FILE);
         if (saveFileName == null) {
             return false;
         }
