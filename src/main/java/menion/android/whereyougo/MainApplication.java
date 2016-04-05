@@ -53,10 +53,15 @@ public class MainApplication extends Application {
     public static String APP_NAME = "WhereYouGo";
     private static Timer mTimer;
     private static OnAppVisibilityChange onAppVisibilityChange;
+    private static Context applicationContext;
     private Locale locale = null;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
     private boolean mScreenOff = false;
+
+    public static Context getContext() {
+        return applicationContext;
+    }
 
     public static void appRestored() {
         onAppRestored();
@@ -236,6 +241,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        applicationContext = this;
         Log.d(TAG, "onCreate()");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 

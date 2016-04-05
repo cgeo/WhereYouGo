@@ -310,33 +310,33 @@ public abstract class CustomMainActivity extends CustomActivity {
 
         runOnUiThread(new Runnable() {
             public void run() {
-                String title = Locale.get(R.string.question);
+                String title = Locale.getString(R.string.question);
                 String message = "";
                 boolean cancelable =
                         !(finishType == FINISH_RESTART_FORCE || finishType == FINISH_RESTART_FACTORY_RESET
                                 || finishType == FINISH_REINSTALL || finishType == FINISH_EXIT_FORCE);
                 switch (finishType) {
                     case FINISH_EXIT:
-                        message = Locale.get(R.string.do_you_really_want_to_exit);
+                        message = Locale.getString(R.string.do_you_really_want_to_exit);
                         break;
                     case FINISH_EXIT_FORCE:
-                        title = Locale.get(R.string.info);
-                        message = Locale.get(R.string.you_have_to_exit_app_force);
+                        title = Locale.getString(R.string.info);
+                        message = Locale.getString(R.string.you_have_to_exit_app_force);
                         break;
                     case FINISH_RESTART:
-                        message = Locale.get(R.string.you_have_to_restart_app_recommended);
+                        message = Locale.getString(R.string.you_have_to_restart_app_recommended);
                         break;
                     case FINISH_RESTART_FORCE:
-                        title = Locale.get(R.string.info);
-                        message = Locale.get(R.string.you_have_to_restart_app_force);
+                        title = Locale.getString(R.string.info);
+                        message = Locale.getString(R.string.you_have_to_restart_app_force);
                         break;
                     case FINISH_RESTART_FACTORY_RESET:
-                        title = Locale.get(R.string.info);
-                        message = Locale.get(R.string.you_have_to_restart_app_force);
+                        title = Locale.getString(R.string.info);
+                        message = Locale.getString(R.string.you_have_to_restart_app_force);
                         break;
                     case FINISH_REINSTALL:
-                        title = Locale.get(R.string.info);
-                        message = Locale.get(R.string.new_version_will_be_installed);
+                        title = Locale.getString(R.string.info);
+                        message = Locale.getString(R.string.new_version_will_be_installed);
                         break;
                 }
 

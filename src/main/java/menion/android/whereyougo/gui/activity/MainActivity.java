@@ -191,7 +191,7 @@ public class MainActivity extends CustomMainActivity {
                     }
                 } catch (Exception e) {
                     Logger.w(TAG, "refreshCartridge(), file:" + actualFile + ", e:" + e.toString());
-                    ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, actualFile.getName()));
+                    ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, actualFile.getName()));
                     // file.delete();
                 }
             }
@@ -383,7 +383,7 @@ public class MainActivity extends CustomMainActivity {
                 }
             } catch (Exception e) {
                 Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e.toString());
-                ManagerNotify.toastShortMessage(Locale.get(R.string.invalid_cartridge, file.getName()));
+                ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, file.getName()));
                 // file.delete();
             }
             openCartridge(cart);

@@ -17,29 +17,21 @@
 
 package menion.android.whereyougo.preferences;
 
-import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.MainApplication;
 
 public class Locale {
 
-    public static String get(int string) {
-        if (A.getApp() != null) {
-            return A.getApp().getString(string);
+    public static String getString(int string) {
+        if (MainApplication.getContext() != null) {
+            return MainApplication.getContext().getString(string);
         } else {
             return "";
         }
     }
 
-    public static String get(int string, String replace) {
-        if (A.getApp() != null) {
-            return A.getApp().getString(string, replace);
-        } else {
-            return "";
-        }
-    }
-
-    public static String get(int string, String replace01, String replace02) {
-        if (A.getApp() != null) {
-            return A.getApp().getString(string, replace01, replace02);
+    public static String getString(int string, Object... formatArgs) {
+        if (MainApplication.getContext() != null) {
+            return MainApplication.getContext().getString(string, formatArgs);
         } else {
             return "";
         }

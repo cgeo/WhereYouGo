@@ -20,6 +20,7 @@ import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.preferences.PreviewPreference;
@@ -39,7 +40,7 @@ public class XmlSettingsActivity extends PreferenceActivity
     private boolean needRestart;
 
     private static String getKey(final int prefKeyId) {
-        return A.getApp().getString(prefKeyId);
+        return Locale.getString(prefKeyId);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class XmlSettingsActivity extends PreferenceActivity
          * Workaround: Update/set value preview
 		 */
         // String dir = Preferences.getStringPreference( R.string.pref_KEY_S_ROOT );
-        // x.setSummary( "(" + dir + ") " + Locale.get( R.string.pref_root_desc ) ); // TODO make it better :-(
+        // x.setSummary( "(" + dir + ") " + Locale.getString( R.string.pref_root_desc ) ); // TODO make it better :-(
 
 		/* TODO - check this code */
         if (!Utils.isAndroid201OrMore()) {

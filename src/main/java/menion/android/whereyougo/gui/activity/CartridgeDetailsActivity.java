@@ -32,7 +32,6 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.guide.Guide;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
@@ -57,7 +56,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
         tvName.setText(Html.fromHtml(MainActivity.cartridgeFile.name));
 
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
-        tvState.setText(Html.fromHtml(Locale.get(R.string.author) + ": "
+        tvState.setText(Html.fromHtml(getString(R.string.author) + ": "
                 + MainActivity.cartridgeFile.author));
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
@@ -81,11 +80,11 @@ public class CartridgeDetailsActivity extends CustomActivity {
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
 
         StringBuilder buff = new StringBuilder();
-        buff.append(Locale.get(R.string.distance)).append(": ").append("<b>")
+        buff.append(getString(R.string.distance)).append(": ").append("<b>")
                 .append(UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false))
-                .append("</b>").append("<br />").append(Locale.get(R.string.latitude)).append(": ")
+                .append("</b>").append("<br />").append(getString(R.string.latitude)).append(": ")
                 .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude)).append("<br />")
-                .append(Locale.get(R.string.longitude)).append(": ")
+                .append(getString(R.string.longitude)).append(": ")
                 .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
 
         tvDistance.setText(Html.fromHtml(buff.toString()));

@@ -34,7 +34,7 @@ public class ManagerNotify {
     private static final String TAG = "ManagerNotify";
 
     public static void toastInternetProblem() {
-        toastLongMessage(Locale.get(R.string.problem_with_internet_connection));
+        toastLongMessage(Locale.getString(R.string.problem_with_internet_connection));
     }
 
     public static void toastLongMessage(final Context context, final String msg) {
@@ -42,7 +42,7 @@ public class ManagerNotify {
     }
 
     public static void toastLongMessage(final int msg) {
-        toastLongMessage(Locale.get(msg));
+        toastLongMessage(Locale.getString(msg));
     }
 
     public static void toastLongMessage(final String msg) {
@@ -74,7 +74,7 @@ public class ManagerNotify {
     }
 
     public static void toastShortMessage(final int msg) {
-        toastShortMessage(Locale.get(msg));
+        toastShortMessage(Locale.getString(msg));
     }
 
     public static void toastShortMessage(final String msg) {
@@ -82,6 +82,6 @@ public class ManagerNotify {
     }
 
     public static void toastUnexpectedProblem() {
-        toastLongMessage(Locale.get(R.string.unexpected_problem));
+        toastLongMessage(Locale.getString(R.string.unexpected_problem));
     }
 }

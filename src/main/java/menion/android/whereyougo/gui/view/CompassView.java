@@ -100,12 +100,12 @@ public class CompassView extends View {
 
     private void drawCompassTexts(Canvas c) {
         float space = r1 / 20;
-        c.drawText(Locale.get(R.string.distance), cX1, cY1 - paintValueDistance.getTextSize() - space,
+        c.drawText(Locale.getString(R.string.distance), cX1, cY1 - paintValueDistance.getTextSize() - space,
                 paintValueLabel);
         c.drawText(UtilsFormat.formatDistance(mDistanceToTarget, false), cX1, cY1 - space,
                 paintValueDistance);
 
-        c.drawText(Locale.get(R.string.azimuth), cX1, cY1 + paintValueLabel.getTextSize() + space,
+        c.drawText(Locale.getString(R.string.azimuth), cX1, cY1 + paintValueLabel.getTextSize() + space,
                 paintValueLabel);
         c.drawText(UtilsFormat.formatAngle(mAzimuthToTarget - mAzimuth), cX1,
                 cY1 + paintValueLabel.getTextSize() + paintValueAzimuth.getTextSize() + space,

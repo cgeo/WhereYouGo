@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Utils;
 
@@ -209,7 +208,7 @@ public class UtilsGUI {
                                             DialogInterface.OnClickListener posLis) {
         dialogDoItem(
                 activity,
-                Locale.get(R.string.question),
+                activity.getString(R.string.question),
                 R.drawable.ic_question_default,
                 (itemName != null ? activity.getString(R.string.do_you_really_want_to_delete_x,
                         Html.fromHtml(itemName)) : activity

@@ -58,8 +58,11 @@ import menion.android.whereyougo.utils.UtilsFormat;
 public class DetailsActivity extends CustomActivity implements IRefreshable, ILocationEventListener {
 
     private static final String TAG = "Details";
-    private static final String[] taskStates = {Locale.get(R.string.pending),
-            Locale.get(R.string.finished), Locale.get(R.string.failed)};
+    private static final String[] taskStates = {
+            Locale.getString(R.string.pending),
+            Locale.getString(R.string.finished),
+            Locale.getString(R.string.failed)
+    };
     public static EventTable et;
     private TextView tvName;
     private ImageView ivImage;

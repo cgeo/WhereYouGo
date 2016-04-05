@@ -47,6 +47,7 @@ import menion.android.whereyougo.gui.activity.wherigo.PushDialogActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapHelper;
+import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
@@ -86,7 +87,7 @@ public class WUI implements UI {
 
     public static void startProgressDialog() {
         progressDialog = new ProgressDialog(A.getMain());
-        progressDialog.setMessage(A.getMain().getString(R.string.loading));
+        progressDialog.setMessage(Locale.getString(R.string.loading));
         progressDialog.show();
     }
 
@@ -192,7 +193,8 @@ public class WUI implements UI {
 
     public void showError(String msg) {
         Logger.w(TAG, "showError(" + msg.trim() + ")");
-        UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
+        if (PreferenceValues.getCurrentActivity() != null)
+            UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
     }
 
     public void showScreen(int screenId, EventTable details) {
@@ -219,24 +221,24 @@ public class WUI implements UI {
                 return;
             case INVENTORYSCREEN:
                 Intent intent04 = new Intent(activity, ListThingsActivity.class);
-                intent04.putExtra("title", A.getApp().getResources().getString(R.string.inventory));
+                intent04.putExtra("title", Locale.getString(R.string.inventory));
                 intent04.putExtra("mode", ListThingsActivity.INVENTORY);
                 activity.startActivity(intent04);
                 return;
             case ITEMSCREEN:
                 Intent intent05 = new Intent(activity, ListThingsActivity.class);
-                intent05.putExtra("title", A.getApp().getResources().getString(R.string.you_see));
+                intent05.putExtra("title", Locale.getString(R.string.you_see));
                 intent05.putExtra("mode", ListThingsActivity.SURROUNDINGS);
                 activity.startActivity(intent05);
                 return;
             case LOCATIONSCREEN:
                 Intent intent06 = new Intent(activity, ListZonesActivity.class);
-                intent06.putExtra("title", A.getApp().getResources().getString(R.string.locations));
+                intent06.putExtra("title", Locale.getString(R.string.locations));
                 activity.startActivity(intent06);
                 return;
             case TASKSCREEN:
                 Intent intent07 = new Intent(activity, ListTasksActivity.class);
-                intent07.putExtra("title", A.getApp().getResources().getString(R.string.tasks));
+                intent07.putExtra("title", Locale.getString(R.string.tasks));
                 activity.startActivity(intent07);
                 return;
             case SCREEN_ACTIONS:

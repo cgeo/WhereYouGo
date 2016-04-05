@@ -115,7 +115,7 @@ public class Satellite2DView extends View {
             mPaintText.setColor(Color.BLACK);
             if (satCount == 0) {
                 mPaintText.setTextSize(Utils.getDpPixels(20.0f));
-                c.drawText(Locale.get(R.string.no_satellites), spX, spY + mPaintText.descent(), mPaintText);
+                c.drawText(Locale.getString(R.string.no_satellites), spX, spY + mPaintText.descent(), mPaintText);
                 drawLock = false;
                 return;
             }

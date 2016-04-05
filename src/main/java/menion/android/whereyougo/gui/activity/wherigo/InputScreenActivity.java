@@ -141,7 +141,7 @@ public class InputScreenActivity extends CustomActivity {
                 mode = MULTI;
             }
 
-            CustomDialog.setBottom(this, Locale.get(R.string.answer), new CustomDialog.OnClickListener() {
+            CustomDialog.setBottom(this, Locale.getString(R.string.answer), new CustomDialog.OnClickListener() {
 
                 @Override
                 public boolean onClick(CustomDialog dialog, View v, int btn) {
