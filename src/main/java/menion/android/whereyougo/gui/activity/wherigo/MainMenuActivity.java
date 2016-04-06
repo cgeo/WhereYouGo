@@ -313,7 +313,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Logger.d(TAG, "onKeyDown(" + keyCode + ", " + event + ")");
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if (event.getDownTime() - lastPressedTime < DOUBLE_PRESS_HK_BACK_PERIOD) {
+            if (!Preferences.GLOBAL_DOUBLE_CLICK || event.getDownTime() - lastPressedTime < DOUBLE_PRESS_HK_BACK_PERIOD) {
         /* exit game */
                 UtilsGUI.showDialogQuestion(this, R.string.save_game_before_exit,
                         new DialogInterface.OnClickListener() {

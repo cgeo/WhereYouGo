@@ -79,6 +79,11 @@
                 android:summary="@string/pref_save_game_slots_desc"
                 android:title="@string/pref_save_game_slots"
                 whereyougo:previewTemplate="(%1$)" />
+            <CheckBoxPreference
+                android:defaultValue="@string/pref_DEFAULT_DOUBLE_CLICK"
+                android:key="@string/pref_KEY_B_DOUBLE_CLICK"
+                android:summary="@string/pref_double_click_desc"
+                android:title="@string/pref_double_click" />
         </PreferenceCategory>
 
         <!--

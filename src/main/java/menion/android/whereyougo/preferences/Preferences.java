@@ -67,6 +67,10 @@ public class Preferences {
      */
     public static int GLOBAL_SAVEGAME_SLOTS;
     /**
+     * is fullscreen enabled
+     */
+    public static boolean GLOBAL_DOUBLE_CLICK;
+    /**
      * GC credentials
      */
     public static String GC_USERNAME;
@@ -218,6 +222,7 @@ public class Preferences {
             GLOBAL_MAP_PROVIDER = getNumericalPreference(R.string.pref_KEY_S_MAP_PROVIDER);
             GLOBAL_SAVEGAME_AUTO = getBooleanPreference(R.string.pref_KEY_B_SAVEGAME_AUTO);
             GLOBAL_SAVEGAME_SLOTS = getNumericalPreference(R.string.pref_KEY_S_SAVEGAME_SLOTS);
+            GLOBAL_DOUBLE_CLICK = getBooleanPreference(R.string.pref_KEY_B_DOUBLE_CLICK);
             GC_USERNAME = getStringPreference(R.string.pref_KEY_S_GC_USERNAME);
             GC_PASSWORD = getStringPreference(R.string.pref_KEY_S_GC_PASSWORD);
 

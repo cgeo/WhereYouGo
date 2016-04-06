@@ -288,6 +288,9 @@ public class XmlSettingsActivity extends PreferenceActivity
             } else {
                 ManagerNotify.toastShortMessage(R.string.invalid_value);
             }
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_DOUBLE_CLICK)) {
+            boolean newValue = sharedPreferences.getBoolean(key, false);
+            Preferences.GLOBAL_DOUBLE_CLICK = Utils.parseBoolean(newValue);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GC_USERNAME)) {
             Preferences.GC_USERNAME = sharedPreferences.getString(key, null);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GC_PASSWORD)) {

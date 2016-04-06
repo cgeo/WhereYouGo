@@ -102,5 +102,7 @@
     <string name="pref_units_length_na">Nautical</string>
     <string name="pref_units_speed">Speed units</string>
     <string name="pref_units_speed_desc">Choose default speed units</string>
+    <string name="pref_double_click">Double tap</string>
+    <string name="pref_double_click_desc">To exit the game use double tap on BACK</string>
 
 </resources>
