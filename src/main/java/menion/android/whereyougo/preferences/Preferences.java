@@ -97,6 +97,11 @@ public class Preferences {
     public static int APPEARANCE_FONT_SIZE;
 
     // GPS
+    public static boolean GPS;
+    /**
+     * automatically start GPS
+     */
+    public static boolean GPS_START_AUTOMATICALLY;
     /**
      * gps min time
      */
@@ -198,19 +203,29 @@ public class Preferences {
   
   /* ------------ */
 
-    public static void setStringPreference(final int PreferenceId, final String value) {
+    public static void setStringPreference(final int PreferenceId, final Object value) {
+        String key = prefContext.getString(PreferenceId);
+        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();
+    }
+
+    public static void setPreference(final int PreferenceId, final String value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, value).commit();
     }
 
-    public static void setStringPreference(final int PreferenceId, final int value) {
+    public static void setPreference(final int PreferenceId, final int value) {
         String key = prefContext.getString(PreferenceId);
-        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();
+        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putInt(key, value).commit();
     }
 
-    public static void setStringPreference(final int PreferenceId, final double value) {
+    public static void setPreference(final int PreferenceId, final float value) {
         String key = prefContext.getString(PreferenceId);
-        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();
+        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putFloat(key, value).commit();
+    }
+
+    public static void setPreference(final int PreferenceId, final boolean value) {
+        String key = prefContext.getString(PreferenceId);
+        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putBoolean(key, value).commit();
     }
 
     /* Note: Default values are defined in xml/<preferences>.xml and loaded at programm start */
@@ -238,12 +253,14 @@ public class Preferences {
             FORMAT_LENGTH = getNumericalPreference(R.string.pref_KEY_S_UNITS_LENGTH);
             FORMAT_SPEED = getNumericalPreference(R.string.pref_KEY_S_UNITS_SPEED);
 
+            GPS = getBooleanPreference(R.string.pref_KEY_B_GPS);
+            GPS_START_AUTOMATICALLY = getBooleanPreference(R.string.pref_KEY_B_GPS_START_AUTOMATICALLY);
             GPS_MIN_TIME = getNumericalPreference(R.string.pref_KEY_S_GPS_MIN_TIME_NOTIFICATION);
             GPS_BEEP_ON_GPS_FIX = getBooleanPreference(R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX);
             GPS_ALTITUDE_CORRECTION = getDecimalPreference(R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION);
             GPS_DISABLE_WHEN_HIDE = getBooleanPreference(R.string.pref_KEY_B_GPS_DISABLE_WHEN_HIDE);
 
-            SENSOR_HARDWARE_COMPASS = getBooleanPreference(R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR);
+            SENSOR_HARDWARE_COMPASS = getBooleanPreference(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS);
             SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = getBooleanPreference(R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE);
             SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE = getNumericalPreference(R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE);
             SENSOR_BEARING_TRUE = getBooleanPreference(R.string.pref_KEY_B_SENSORS_BEARING_TRUE);

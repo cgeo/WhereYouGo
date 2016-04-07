@@ -63,8 +63,9 @@
     <string name="pref_DEFAULT_CONFIRM_ON_EXIT">true</string>
     <string name="pref_KEY_I_GET_COORDINATES_LAST_INDEX">KEY_I_GET_COORDINATES_LAST_INDEX</string>
     <string name="pref_DEFAULT_GET_COORDINATES_LAST_INDEX">0</string>
-    <string name="pref_KEY_B_START_GPS_AUTOMATICALLY">KEY_B_START_GPS_AUTOMATICALLY</string>
-    <string name="pref_DEFAULT_START_GPS_AUTOMATICALLY">true</string>
+    <string name="pref_KEY_B_GPS">KEY_B_GPS</string>
+    <string name="pref_KEY_B_GPS_START_AUTOMATICALLY">KEY_B_GPS_START_AUTOMATICALLY</string>
+    <string name="pref_DEFAULT_GPS_START_AUTOMATICALLY">true</string>
     <string name="pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE">KEY_F_LAST_KNOWN_LOCATION_LATITUDE</string>
     <string name="pref_DEFAULT_LAST_KNOWN_LOCATION_LATITUDE">50.07967</string>
     <!-- nice place? -->
@@ -81,8 +82,8 @@
     <string name="pref_DEFAULT_GPS_BEEP_ON_GPS_FIX">true</string>
     <string name="pref_KEY_B_GPS_DISABLE_WHEN_HIDE">KEY_B_GPS_DISABLE_WHEN_HIDE</string>
     <string name="pref_DEFAULT_GPS_DISABLE_WHEN_HIDE">false</string>
-    <string name="pref_KEY_B_HARDWARE_COMPASS_SENSOR">KEY_B_HARDWARE_COMPASS_SENSOR</string>
-    <string name="pref_DEFAULT_HARDWARE_COMPASS_SENSOR">true</string>
+    <string name="pref_KEY_B_SENSOR_HARDWARE_COMPASS">KEY_B_SENSOR_HARDWARE_COMPASS</string>
+    <string name="pref_DEFAULT_SENSOR_HARDWARE_COMPASS">true</string>
     <string name="pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE">KEY_B_HARDWARE_COMPASS_AUTO_CHANGE</string>
     <string name="pref_DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE">false</string>
     <string name="pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE">KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE</string>

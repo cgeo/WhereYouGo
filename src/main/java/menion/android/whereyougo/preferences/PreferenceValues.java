@@ -21,9 +21,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.PowerManager;
-import android.preference.PreferenceManager;
-
-import java.util.Locale;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
@@ -35,18 +32,13 @@ import menion.android.whereyougo.utils.Logger;
 
 public class PreferenceValues {
 
-    /**
-     * root directory
-     */
-    public static final String KEY_S_ROOT = "KEY_S_ROOT";
-
     // GLOBAL
-    public static final String DEFAULT_ROOT = "";
     /**
      * map provider
      */
     public static final int VALUE_MAP_PROVIDER_VECTOR = 0;
     public static final int VALUE_MAP_PROVIDER_LOCUS = 1;
+    // APPEARANCE
     /**
      * screen highlight mode
      */
@@ -60,45 +52,8 @@ public class PreferenceValues {
     public static final int VALUE_FONT_SIZE_SMALL = 1;
     public static final int VALUE_FONT_SIZE_MEDIUM = 2;
     public static final int VALUE_FONT_SIZE_LARGE = 3;
-    /**
-     * GC credentials
-     */
-    public static final String KEY_S_GC_USERNAME = "KEY_S_GC_USERNAME";
-
-    // LOGIN
-    public static final String DEFAULT_GC_USERNAME = "";
-    public static final String KEY_S_GC_PASSWORD = "KEY_S_GC_PASSWORD";
-    public static final String DEFAULT_GC_PASSWORD = "";
-    /**
-     * default language
-     */
-    public static final String VALUE_LANGUAGE_CZ = "cs";
-
-    // GENERAL
-    public static final String VALUE_LANGUAGE_EN = "en";
-    /**
-     * if GPS should start automatically after application start
-     */
-    public static final String KEY_B_START_GPS_AUTOMATICALLY = "KEY_B_START_GPS_AUTOMATICALLY";
-
-    // GPS & LOCATION
-    public static final boolean DEFAULT_START_GPS_AUTOMATICALLY = true;
-    /**
-     * beep on first gps fix
-     */
-    public static final String KEY_B_GPS_BEEP_ON_GPS_FIX = "KEY_B_GPS_BEEP_ON_GPS_FIX";
-    /**
-     * disable GPS when not needed
-     */
-    public static final String KEY_B_GPS_DISABLE_WHEN_HIDE = "KEY_B_GPS_DISABLE_WHEN_HIDE";
-    public static final boolean DEFAULT_GPS_DISABLE_WHEN_HIDE = false;
-    /**
-     * is hardware orientation sensor enabled
-     */
-    public static final String KEY_B_HARDWARE_COMPASS_SENSOR = "KEY_B_HARDWARE_COMPASS_SENSOR";
 
     // SENSORS
-    public static final boolean DEFAULT_HARDWARE_COMPASS_SENSOR = true;
     public static final int VALUE_SENSORS_ORIENT_FILTER_NO = 0;
     public static final int VALUE_SENSORS_ORIENT_FILTER_LIGHT = 1;
     public static final int VALUE_SENSORS_ORIENT_FILTER_MEDIUM = 2;
@@ -107,7 +62,6 @@ public class PreferenceValues {
     public static final int VALUE_GUIDING_WAYPOINT_SOUND_INCREASE_CLOSER = 0;
     public static final int VALUE_GUIDING_WAYPOINT_SOUND_BEEP_ON_DISTANCE = 1;
     public static final int VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND = 2;
-    public static final String VALUE_GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI = "";
     /**
      * navigation point
      */
@@ -144,15 +98,9 @@ public class PreferenceValues {
     public static final int VALUE_UNITS_ANGLE_DEGREE = 0;
     public static final int VALUE_UNITS_ANGLE_MIL = 1;
     private static final String TAG = "PreferenceValues";
-  
- 
-  /* LAST KNOW LOCATION */
-    /**
-     * last known location
-     */
-    // public static Location lastKnownLocation;
 
-    // setted from onResume();
+
+    // set from onResume();
     private static Activity currentActivity;
 
     private static PowerManager.WakeLock wl;
@@ -228,14 +176,12 @@ public class PreferenceValues {
     }
 
     public static String getLanguageCode() {
-        String lang = Locale.getDefault().getLanguage();
+        String lang = java.util.Locale.getDefault().getLanguage();
         Logger.w(TAG, "getLanguageCode() - " + lang);
-        if (lang == null)
-            return VALUE_LANGUAGE_EN;
-        if (lang.equals(VALUE_LANGUAGE_CZ)) {
-            return VALUE_LANGUAGE_CZ;
+        if (Locale.getString(R.string.pref_language_cs_shortcut).equals(lang)) {
+            return lang;
         } else {
-            return VALUE_LANGUAGE_EN;
+            return Locale.getString(R.string.pref_language_en_shortcut);
         }
     }
 
@@ -245,27 +191,6 @@ public class PreferenceValues {
         lastKnownLocation.setLongitude(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE));
         lastKnownLocation.setAltitude(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE));
         return lastKnownLocation;
-    }
-
-    /* still used in SatelliteActivity.java, LocationState.java */
-    @Deprecated
-    public static boolean getPrefBoolean(Context context, String key, boolean def) {
-        // Logger.v(TAG, "getPrefBoolean(" + key + ", " + def + ")");
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, def);
-    }
-
-    @Deprecated
-    public static String getPrefString(Context context, String key, String def) {
-        // Logger.v(TAG, "getPrefString(" + key + ", " + def + ")");
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, def);
-    }
-
-    @Deprecated
-    public static String getPrefString(String key, String def) {
-        if (A.getApp() == null) {
-            return def;
-        }
-        return PreferenceManager.getDefaultSharedPreferences(A.getApp()).getString(key, def);
     }
 
     public static void setLastKnownLocation() {
@@ -280,12 +205,4 @@ public class PreferenceValues {
             Logger.e(TAG, "setLastKnownLocation()", e);
         }
     }
-
-    /* still used in SatelliteActivity, LocationState (3x) */
-    @Deprecated
-    public static void setPrefBoolean(Context context, String key, boolean value) {
-        // Logger.v(TAG, "setPrefBoolean(" + key + ", " + value + ")");
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(key, value).commit();
-    }
-
 }

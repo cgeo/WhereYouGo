@@ -237,7 +237,7 @@ public abstract class CustomMainActivity extends CustomActivity {
 
             // set last known location
             if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
-                    && Preferences.getBooleanPreference(R.string.pref_KEY_B_START_GPS_AUTOMATICALLY)) {
+                    && (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY)) {
                 LocationState.setGpsOn(CustomMainActivity.this);
             } else {
                 LocationState.setGpsOff(CustomMainActivity.this);

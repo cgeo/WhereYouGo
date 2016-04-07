@@ -104,5 +104,7 @@
     <string name="pref_units_speed_desc">Vyberte jednotky pro zobrazení rychlosti</string>
     <string name="pref_double_click">Dvojklik</string>
     <string name="pref_double_click_desc">Pro ukončení hry použít dvojklik na tlačítko ZPĚT</string>
+    <string name="pref_gps">Povolit GPS</string>
+    <string name="pref_gps_desc">Spustí GPS automaticky po startu programu</string>
 
 </resources>

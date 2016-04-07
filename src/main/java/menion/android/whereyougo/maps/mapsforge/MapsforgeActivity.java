@@ -490,6 +490,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                     return true;
                 }
             });
+            if (mapGeneratorInternal != null && mapGeneratorInternal.name().equals(generator.name())) {
+                item.setChecked(true);
+            }
         }
         mapgeneratorMenu.setGroupCheckable(R.id.menu_mapgenerator_group, true, true);
         return true;

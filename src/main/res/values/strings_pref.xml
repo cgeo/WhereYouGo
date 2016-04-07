@@ -104,5 +104,7 @@
     <string name="pref_units_speed_desc">Choose default speed units</string>
     <string name="pref_double_click">Double tap</string>
     <string name="pref_double_click_desc">To exit the game use double tap on BACK</string>
+    <string name="pref_gps">Allow GPS</string>
+    <string name="pref_gps_desc">Starts GPS automatically on start</string>
 
 </resources>

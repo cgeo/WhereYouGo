@@ -92,15 +92,12 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
         });
 
         ToggleButton buttonCompass = (ToggleButton) findViewById(R.id.btn_compass_on_off);
-        buttonCompass.setChecked(PreferenceValues.getPrefBoolean(this,
-                PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR,
-                PreferenceValues.DEFAULT_HARDWARE_COMPASS_SENSOR));
+        buttonCompass.setChecked(Preferences.SENSOR_HARDWARE_COMPASS);
         buttonCompass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
-                PreferenceValues.setPrefBoolean(SatelliteActivity.this,
-                        PreferenceValues.KEY_B_HARDWARE_COMPASS_SENSOR, isChecked);
-                Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(isChecked);
+                Preferences.SENSOR_HARDWARE_COMPASS = isChecked;
+                Preferences.setPreference(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS, Preferences.SENSOR_HARDWARE_COMPASS);
                 A.getRotator().manageSensors();
             }
         });

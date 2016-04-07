@@ -210,6 +210,12 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_FULLSCREEN)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.APPEARANCE_FULLSCREEN = Utils.parseBoolean(newValue);
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_GPS)) {
+            boolean newValue = sharedPreferences.getBoolean(key, false);
+            Preferences.GPS = Utils.parseBoolean(newValue);
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_GPS_START_AUTOMATICALLY)) {
+            boolean newValue = sharedPreferences.getBoolean(key, false);
+            Preferences.GPS_START_AUTOMATICALLY = Utils.parseBoolean(newValue);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION)) {
             String newValue = sharedPreferences.getString(key, null);
             Preferences.GPS_ALTITUDE_CORRECTION = Utils.parseDouble(newValue);
@@ -261,7 +267,7 @@ public class XmlSettingsActivity extends PreferenceActivity
             } else {
                 ManagerNotify.toastShortMessage(R.string.invalid_value);
             }
-        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_HARDWARE_COMPASS_SENSOR)) {
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(newValue);
             A.getRotator().manageSensors();

@@ -18,18 +18,13 @@
 package menion.android.whereyougo.geo.location;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,12 +36,12 @@ import java.util.Iterator;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.SatelliteActivity;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
 
 /**
  * @author menion
@@ -443,9 +438,10 @@ public class LocationState {
 
 
         // save to start GPS with new start
-        if (writeToSettings && context != null)
-            PreferenceValues.setPrefBoolean(context, PreferenceValues.KEY_B_START_GPS_AUTOMATICALLY,
-                    source == GPS_ON);
+        if (writeToSettings && context != null) {
+            Preferences.GPS = source == GPS_ON;
+            Preferences.setPreference(R.string.pref_KEY_B_GPS, Preferences.GPS);
+        }
 
         if (source == GPS_ON && context != null) {
             LocationState.mSource = GPS_ON;
@@ -466,50 +462,17 @@ public class LocationState {
                 // activity.startService(new Intent(activity, GpsConnectionService.class));
                 gpsConn = new GpsConnection(context);
             } else {
-                if (PreferenceValues.getPrefBoolean(context, KEY_B_GPS_ENABLE_ASK_ON_ENABLE, true)) {
-                    LinearLayout ll = new LinearLayout(context);
-                    ll.setOrientation(LinearLayout.VERTICAL);
+                UtilsGUI.showDialogQuestion(PreferenceValues.getCurrentActivity(), R.string.gps_not_enabled_show_system_settings,
+                        new DialogInterface.OnClickListener() {
 
-                    int pad = (int) Utils.getDpPixels(5.0f);
-                    TextView tv = new TextView(context);
-                    tv.setPadding(pad, pad, pad, pad);
-                    tv.setText(R.string.gps_not_enabled_show_system_settings);
-                    tv.setTextColor(Color.BLACK);
-                    ll.addView(tv);
-
-                    final CheckBox chb = new CheckBox(context);
-                    chb.setText(R.string.dont_ask);
-                    chb.setTextColor(Color.BLACK);
-                    ll.addView(chb);
-
-                    // show dialog
-                    AlertDialog.Builder b = new AlertDialog.Builder(context);
-                    b.setCancelable(true);
-                    b.setTitle(R.string.question);
-                    b.setIcon(R.drawable.ic_question_alt);
-                    b.setView(ll);
-                    b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (chb.isChecked()) {
-                                PreferenceValues.setPrefBoolean(context, KEY_B_GPS_ENABLE_ASK_ON_ENABLE, false);
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                context.startActivity(intent);
                             }
-                            Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            context.startActivity(intent);
-                        }
-                    });
-                    b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (chb.isChecked()) {
-                                PreferenceValues.setPrefBoolean(context, KEY_B_GPS_ENABLE_ASK_ON_ENABLE, false);
-                            }
-                        }
-                    });
-                    b.show();
-                }
+                        },
+                        null
+                );
                 gpsNotEnabled = true;
             }
 

@@ -135,7 +135,7 @@ public class MainApplication extends Application {
         // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
         // e){Log.i("FS", "-");}
         // initialize root directory
-        if (Preferences.GLOBAL_ROOT.equals(PreferenceValues.DEFAULT_ROOT)
+        if ("".equals(Preferences.GLOBAL_ROOT)
                 || !FileSystem.setRootDirectory(null, Preferences.GLOBAL_ROOT)) {
             if (!FileSystem.createRoot(APP_NAME)) {
                 try {
