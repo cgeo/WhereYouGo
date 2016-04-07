@@ -180,7 +180,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
                 description += z.name;
                 if (z.contains(Engine.instance.player))
-                    description += " (INSIDE)";
+                    description += String.format(" (%s)", getString(R.string.zone_state_inside));
             }
         }
         return description;

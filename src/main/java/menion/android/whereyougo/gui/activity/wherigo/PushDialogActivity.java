@@ -30,6 +30,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
@@ -58,7 +59,7 @@ public class PushDialogActivity extends CustomActivity {
             PushDialogActivity.page = -1;
 
             if (button1 == null)
-                button1 = "OK";
+                button1 = Locale.getString(R.string.ok);
 
             menu01Text = button1;
             menu02Text = button2;

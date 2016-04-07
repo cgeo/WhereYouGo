@@ -79,7 +79,7 @@ public class ListActionsActivity extends ListVariousActivity {
         if (a.getActor() == thing)
             return a.text;
         else
-            return (a.getActor().name + ": " + a.text);
+            return (String.format("%s: %s", a.getActor().name, a.text));
     }
 
     @Override

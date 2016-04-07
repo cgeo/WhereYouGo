@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -40,6 +38,7 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.ExceptionHandler;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -169,10 +168,7 @@ public class MainApplication extends Application {
 
         // set DeviceID for OpenWig
         try {
-            PackageManager pm = getPackageManager();
-            PackageInfo pi = pm.getPackageInfo(getPackageName(), 0);
-            String name =
-                    String.format("%s, app:%s", pm.getApplicationLabel(pi.applicationInfo), pi.versionName);
+            String name = String.format("%s %s", A.getAppName(), A.getAppVersion());
             String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);

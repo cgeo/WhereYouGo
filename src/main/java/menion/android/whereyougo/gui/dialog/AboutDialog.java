@@ -2,7 +2,6 @@ package menion.android.whereyougo.gui.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -21,13 +20,8 @@ public class AboutDialog extends CustomDialogFragment {
     @Override
     public Dialog createDialog(Bundle savedInstanceState) {
         StringBuilder buffer = new StringBuilder();
-        buffer.append("<div align=\"center\"><h2><b>WhereYouGo</b></h2></div>");
-        try {
-            PackageManager pm = getActivity().getPackageManager();
-            String versionName = pm.getPackageInfo(getActivity().getPackageName(), 0).versionName;
-            buffer.append("<div align=\"center\"><h3><b>").append(versionName).append("</b></h3></div>");
-        } catch (Exception e) {
-        }
+        buffer.append("<div align=\"center\"><h2><b>").append(A.getAppName()).append("</b></h2></div>");
+        buffer.append("<div align=\"center\"><h3><b>").append(A.getAppVersion()).append("</b></h3></div>");
         // add info
         buffer.append(CustomMainActivity.loadAssetString(PreferenceValues.getLanguageCode()
                 + "_first.html"));

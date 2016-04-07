@@ -253,7 +253,7 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
         if (actions > 0) {
             if (location) {
                 // only one empty button, set actions on it
-                btn03 = "Actions (" + actions + ")";
+                btn03 = getString(R.string.actions_more, actions);
                 btn03Click = new CustomDialog.OnClickListener() {
                     @Override
                     public boolean onClick(CustomDialog dialog, View v, int btn) {
@@ -310,7 +310,7 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
                         };
                     }
                 } else {
-                    btn03 = "Actions (" + actions + ")";
+                    btn03 = getString(R.string.actions_more, actions);
                     btn03Click = new CustomDialog.OnClickListener() {
                         @Override
                         public boolean onClick(CustomDialog dialog, View v, int btn) {
@@ -351,24 +351,24 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
         }
 
         Zone z = (Zone) et;
-        String ss = "(nothing)";
+        String ss = getString(R.string.zone_state_unknown);
         switch (z.contain) {
             case Zone.DISTANT:
-                ss = "distant";
+                ss = getString(R.string.zone_state_distant);
                 break;
             case Zone.PROXIMITY:
-                ss = "near";
+                ss = getString(R.string.zone_state_near);
                 break;
             case Zone.INSIDE:
-                ss = "inside";
+                ss = getString(R.string.zone_state_inside);
                 break;
         }
-        tvState.setText("State: " + ss);
+        tvState.setText(getString(R.string.zone_state, ss));
 
         if (z.contain == Zone.INSIDE) {
-            tvDistance.setText("Distance: inside");
+            tvDistance.setText(getString(R.string.zone_distance, getString(R.string.zone_state_inside)));
         } else {
-            tvDistance.setText("Distance: " + UtilsFormat.formatDistance(z.distance, false));
+            tvDistance.setText(getString(R.string.zone_distance, UtilsFormat.formatDistance(z.distance, false)));
         }
     }
 }

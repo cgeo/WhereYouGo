@@ -29,6 +29,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/layoutDetailsTextViewDistance"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:id="@+id/layoutDetailsImageViewImage"
                 android:layout_width="wrap_content"
@@ -44,11 +49,6 @@
 
             <TextView
                 android:id="@+id/layoutDetailsTextViewDescription"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/layoutDetailsTextViewDistance"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

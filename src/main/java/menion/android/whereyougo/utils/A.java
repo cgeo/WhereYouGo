@@ -97,4 +97,20 @@ public class A {
     public static void registerMain(CustomMainActivity main) {
         A.main = main;
     }
+
+    public static String getAppName() {
+        try {
+            return app.getPackageManager().getApplicationLabel(app.getApplicationInfo()).toString();
+        } catch (Exception e) {
+            return "WhereYouGo";
+        }
+    }
+
+    public static String getAppVersion() {
+        try {
+            return app.getPackageManager().getPackageInfo(app.getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }

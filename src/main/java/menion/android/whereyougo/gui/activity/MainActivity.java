@@ -362,8 +362,9 @@ public class MainActivity extends CustomMainActivity {
             case R.id.menu_wherigo:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wherigo.com/")));
                 return true;
+            case R.id.menu_github:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/biylda/WhereYouGo")));
             default:
-//        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.wherigo.com/cartridge/details.aspx?CGUID=2320bd5c-9787-4de8-aec3-e4ac7a6abe71")));
                 return false;
         }
     }

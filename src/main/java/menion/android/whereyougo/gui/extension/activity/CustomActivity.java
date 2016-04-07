@@ -36,6 +36,7 @@ import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
 
@@ -123,11 +124,11 @@ public class CustomActivity extends FragmentActivity {
                 Notification notif = null;
                 if (sdkVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
                     notif =
-                            new Notification(R.drawable.ic_title_logo, "WhereYouGo", System.currentTimeMillis());
-                    notif.setLatestEventInfo(activity, "WhereYouGo", "", pIntent);
+                            new Notification(R.drawable.ic_title_logo, A.getAppName(), System.currentTimeMillis());
+                    notif.setLatestEventInfo(activity, A.getAppName(), "", pIntent);
                 } else {
                     NotificationCompat.Builder builder =
-                            new NotificationCompat.Builder(activity).setContentTitle("WhereYouGo")
+                            new NotificationCompat.Builder(activity).setContentTitle(A.getAppName())
                                     .setSmallIcon(R.drawable.ic_title_logo).setContentIntent(pIntent);
                     notif = builder.build();
                 }

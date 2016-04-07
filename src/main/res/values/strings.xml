@@ -107,5 +107,12 @@
     <string name="save_file_backup">Backup savegame</string>
     <string name="delete_save_game">Delete savegame?</string>
     <string name="save_file_new">New game</string>
+    <string name="actions_more">Actions (%1$d)</string>
+    <string name="zone_state_unknown">unknown</string>
+    <string name="zone_state_distant">distant</string>
+    <string name="zone_state_near">near</string>
+    <string name="zone_state_inside">inside</string>
+    <string name="zone_state">State: %1$s</string>
+    <string name="zone_distance">Distance: %1$s</string>
 
 </resources>

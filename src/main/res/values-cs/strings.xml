@@ -105,5 +105,12 @@
     <string name="save_file_backup">Záložní</string>
     <string name="delete_save_game">Smazat uloženou hru?</string>
     <string name="save_file_new">Nová hra</string>
+    <string name="actions_more">Akce (%1$d)</string>
+    <string name="zone_state_unknown">neznámý</string>
+    <string name="zone_state_distant">vzdálený</string>
+    <string name="zone_state_near">blízko</string>
+    <string name="zone_state_inside">uvnitř</string>
+    <string name="zone_state">Stav: %1$s</string>
+    <string name="zone_distance">Vzdálenost: %1$s</string>
 
 </resources>

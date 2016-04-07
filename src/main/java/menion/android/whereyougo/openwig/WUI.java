@@ -117,13 +117,7 @@ public class WUI implements UI {
 
     // @Override
     public String getDeviceId() {
-        String appVersion = "";
-        try {
-            appVersion =
-                    A.getMain().getPackageManager().getPackageInfo(A.getMain().getPackageName(), 0).versionName;
-        } catch (Exception e) {
-        }
-        return "WhereYouGo, app:" + appVersion;
+        return String.format("%s %s", A.getAppName(), A.getAppVersion());
     }
 
     public void playSound(byte[] data, String mime) {
