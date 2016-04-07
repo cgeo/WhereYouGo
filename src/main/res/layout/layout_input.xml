@@ -35,15 +35,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_horizontal"
-                android:textSize="20dp" />
+                android:layout_marginTop="10dp" />
 
-            <LinearLayout
-                android:id="@+id/layoutInputLinearLayout01"
-                android:layout_width="fill_parent"
+            <EditText
+                android:id="@+id/layoutInputEditText"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" />
+                android:visibility="gone" />
+
+            <Spinner
+                android:id="@+id/layoutInputSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

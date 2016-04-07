@@ -22,11 +22,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -101,20 +99,20 @@ public class InputScreenActivity extends CustomActivity {
 
             // set question TextView
             TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
-            String text = Engine.removeHtml((String) input.table.rawget("Text"));
+            String text = (String) input.table.rawget("Text");
             tvQuestion.setText(text);
 
-            // set answer LinearLayout
+            // set answer
+            final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+            editText.setVisibility(View.GONE);
+            final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
+            spinner.setVisibility(View.GONE);
             String type = (String) input.table.rawget("InputType");
-            final LinearLayout ll = (LinearLayout) findViewById(R.id.layoutInputLinearLayout01);
-            ll.removeAllViews();
             mode = -1;
 
             if ("Text".equals(type)) {
-                EditText editText = new EditText(this);
-                editText.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-                        LayoutParams.WRAP_CONTENT));
-                ll.addView(editText);
+                editText.setText("");
+                editText.setVisibility(View.VISIBLE);
                 mode = TEXT;
             } else if ("MultipleChoice".equals(type)) {
                 LuaTable choices = (LuaTable) input.table.rawget("Choices");
@@ -128,12 +126,8 @@ public class InputScreenActivity extends CustomActivity {
                 ArrayAdapter<String> adapter =
                         new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                Spinner spinner = new Spinner(this);
                 spinner.setAdapter(adapter);
-                spinner.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-                        LayoutParams.WRAP_CONTENT));
-                ll.addView(spinner);
-
+                spinner.setVisibility(View.VISIBLE);
                 mode = MULTI;
             }
 
@@ -142,10 +136,10 @@ public class InputScreenActivity extends CustomActivity {
                 @Override
                 public boolean onClick(CustomDialog dialog, View v, int btn) {
                     if (mode == TEXT) {
-                        Engine.callEvent(input, "OnGetInput", ((EditText) ll.getChildAt(0)).getText()
+                        Engine.callEvent(input, "OnGetInput", editText.getText()
                                 .toString());
                     } else if (mode == MULTI) {
-                        String item = String.valueOf(((Spinner) ll.getChildAt(0)).getSelectedItem());
+                        String item = String.valueOf(spinner.getSelectedItem());
                         Engine.callEvent(input, "OnGetInput", item);
                     } else {
                         Engine.callEvent(input, "OnGetInput", null);
