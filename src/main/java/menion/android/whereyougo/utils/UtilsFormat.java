@@ -115,10 +115,7 @@ public class UtilsFormat {
     public static String formatAngle(double angle) {
         try {
             // fix angle values
-            if (angle < 0)
-                angle += 360.0;
-            if (angle > 360.0)
-                angle -= 360.0f;
+            angle = ((angle % 360) + 360) % 360;
 
             if (Preferences.FORMAT_ANGLE == PreferenceValues.VALUE_UNITS_ANGLE_DEGREE) {
                 return formatDouble(angle, 0) + degree;
