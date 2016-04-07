@@ -98,6 +98,7 @@ import menion.android.whereyougo.maps.mapsforge.overlay.SensorMyLocationOverlay;
 import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
 import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
 import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 /**
@@ -424,26 +425,78 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             builder.setIcon(android.R.drawable.ic_menu_mylocation);
             builder.setTitle(R.string.menu_position_enter_coordinates);
             LayoutInflater factory = LayoutInflater.from(this);
-            final View view = factory.inflate(R.layout.dialog_enter_coordinates, null);
-            builder.setView(view);
-            builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // disable GPS follow mode if it is enabled
-                    disableSnapToLocation(true);
-
-                    // set the map center and zoom level
-                    EditText latitudeView = (EditText) view.findViewById(R.id.latitude);
-                    EditText longitudeView = (EditText) view.findViewById(R.id.longitude);
-                    double latitude = Double.parseDouble(latitudeView.getText().toString());
-                    double longitude = Double.parseDouble(longitudeView.getText().toString());
-                    GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                    SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
-                    MapPosition newMapPosition =
-                            new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
-                    MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+            switch (Preferences.FORMAT_COO_LATLON) {
+                case PreferenceValues.VALUE_UNITS_COO_LATLON_SEC: {
+                    final View view = factory.inflate(R.layout.dialog_enter_coordinates_dms, null);
+                    builder.setView(view);
+                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // disable GPS follow mode if it is enabled
+                            disableSnapToLocation(true);
+                            // set the map center and zoom level
+                            double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
+                            double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
+                            double latitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_s)).getText().toString());
+                            double latitude = latitude_d + latitude_m / 60 + latitude_s / 3600;
+                            double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
+                            double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
+                            double longitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_s)).getText().toString());
+                            double longitude = longitude_d + longitude_m / 60 + longitude_s / 3600;
+                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                            MapPosition newMapPosition =
+                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                        }
+                    });
                 }
-            });
+                break;
+                case PreferenceValues.VALUE_UNITS_COO_LATLON_MIN: {
+                    final View view = factory.inflate(R.layout.dialog_enter_coordinates_dm, null);
+                    builder.setView(view);
+                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // disable GPS follow mode if it is enabled
+                            disableSnapToLocation(true);
+                            // set the map center and zoom level
+                            double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
+                            double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
+                            double latitude = latitude_d + latitude_m / 60;
+                            double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
+                            double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
+                            double longitude = longitude_d + longitude_m / 60;
+                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                            MapPosition newMapPosition =
+                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                        }
+                    });
+                }
+                break;
+                default: {
+                    final View view = factory.inflate(R.layout.dialog_enter_coordinates, null);
+                    builder.setView(view);
+                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // disable GPS follow mode if it is enabled
+                            disableSnapToLocation(true);
+                            // set the map center and zoom level
+                            double latitude = Double.parseDouble(((EditText) view.findViewById(R.id.latitude)).getText().toString());
+                            double longitude = Double.parseDouble(((EditText) view.findViewById(R.id.longitude)).getText().toString());
+                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                            MapPosition newMapPosition =
+                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                        }
+                    });
+                }
+                break;
+            }
             builder.setNegativeButton(R.string.cancel, null);
             return builder.create();
         } else if (id == DIALOG_LOCATION_PROVIDER_DISABLED) {
@@ -625,15 +678,43 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     @Override
     protected void onPrepareDialog(int id, final Dialog dialog) {
         if (id == DIALOG_ENTER_COORDINATES) {
-            // latitude
-            EditText editText = (EditText) dialog.findViewById(R.id.latitude);
             MapViewPosition mapViewPosition = this.mapView.getMapViewPosition();
             GeoPoint mapCenter = mapViewPosition.getCenter();
-            editText.setText(Double.toString(mapCenter.latitude));
-
-            // longitude
-            editText = (EditText) dialog.findViewById(R.id.longitude);
-            editText.setText(Double.toString(mapCenter.longitude));
+            double latitude = mapCenter.latitude;
+            double longitude = mapCenter.longitude;
+            switch (Preferences.FORMAT_COO_LATLON) {
+                case PreferenceValues.VALUE_UNITS_COO_LATLON_SEC: {
+                    int latitude_d = (int) latitude;
+                    int latitude_m = (int) ((latitude - latitude_d) * 60);
+                    double latitude_s = (latitude - latitude_d - latitude_m / 60) * 3600;
+                    ((EditText) dialog.findViewById(R.id.latitude_d)).setText(Integer.toString(latitude_d));
+                    ((EditText) dialog.findViewById(R.id.latitude_m)).setText(Integer.toString(latitude_m));
+                    ((EditText) dialog.findViewById(R.id.latitude_s)).setText(Double.toString(latitude_s));
+                    int longitude_d = (int) longitude;
+                    int longitude_m = (int) ((longitude - longitude_d) * 60);
+                    double longitude_s = (longitude - longitude_d - longitude_m / 60) * 3600;
+                    ((EditText) dialog.findViewById(R.id.longitude_d)).setText(Integer.toString(longitude_d));
+                    ((EditText) dialog.findViewById(R.id.longitude_m)).setText(Integer.toString(longitude_m));
+                    ((EditText) dialog.findViewById(R.id.longitude_s)).setText(Double.toString(longitude_s));
+                }
+                break;
+                case PreferenceValues.VALUE_UNITS_COO_LATLON_MIN: {
+                    int latitude_d = (int) latitude;
+                    double latitude_m = (latitude - latitude_d) * 60;
+                    ((EditText) dialog.findViewById(R.id.latitude_d)).setText(Integer.toString(latitude_d));
+                    ((EditText) dialog.findViewById(R.id.latitude_m)).setText(Double.toString(latitude_m));
+                    int longitude_d = (int) longitude;
+                    double longitude_m = (longitude - longitude_d) * 60;
+                    ((EditText) dialog.findViewById(R.id.longitude_d)).setText(Integer.toString(longitude_d));
+                    ((EditText) dialog.findViewById(R.id.longitude_m)).setText(Double.toString(longitude_m));
+                }
+                break;
+                default: {
+                    ((EditText) dialog.findViewById(R.id.latitude)).setText(Double.toString(latitude));
+                    ((EditText) dialog.findViewById(R.id.longitude)).setText(Double.toString(longitude));
+                }
+                break;
+            }
 
             // zoom level
             SeekBar zoomlevel = (SeekBar) dialog.findViewById(R.id.zoomLevel);
