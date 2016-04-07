@@ -45,6 +45,31 @@ include ':whereyougo'
 ```
 ##What's new
 <h4>
+	<a name="#0.9.0"></a>
+	0.9.0 (9. 4. 2016)
+	<a href="#0.9.0" class="section_anchor"></a>
+</h4>
+<p>
+  <ul>
+    <li>Added saving slots. User can set the number of available saving slots in Settings->Main. While playing a game, user can use the menu key to show up the menu with available saving slots. Upon clicking on a saving slot, it saves main game and copies the savefile to corresponding saving slot file. When loading a game, user can select whether to start a New game, Main game, Backup game or from Slots. Upon starting a New game, the Main game savefile is not overwritten until user saves. Message about successful saving is shown after the game is successfully saved.</li>
+    <li>Added settings option to use single or double click to exit the game</li>
+    <li>Added settings option to start GPS automatically after the application is started.</li>
+    <li>Added new settings options for units formatting (distance, speed, angle).</li>
+    <li>Changed dialog for selecting wherigo folder, user can now select folder without *.gwc files present, also default folder can be set</li>
+    <li>Changed input coordinates dialog in map to respect Lat/Lon format from settings.</li>
+    <li>Changed input question to be normal text with HTML allowed.</li>
+    <li>Fixed downloading of cartridges from wherigo.com. The server uses TLSv1.2, so it most likely requires Android API >= 16 (Android 4.1 Jellybean).</li>
+    <li>Fixed: on some devices, lists with actions, zones, etc. were too narrow</li>
+    <li>Fixed image stretching option</li>
+    <li>Fixed angle format (negative values in azimuth).</li>
+    <li>Fixed issue with info dialog in czech language.</li>
+    <li>Fixed issue with string shown when no cartridge is available. This caused the app to crash in French.</li>
+    <li>Fixed recovering selected map provider in options menu of a map.</li>
+    <li>Fixed compatibility with the newest version of Locus.</li>
+    <li>Fixed: Locus map could not be shown when no cartridges were present</li>
+  </ul>
+</p>
+<h4>
 	<a name="#0.8.13"></a>
 	0.8.13 (23. 9. 2014)
 	<a href="#0.8.13" class="section_anchor"></a>

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="menion.android.whereyougo"
     android:installLocation="auto"
-    android:versionCode="39"
-    android:versionName="0.8.13">
+    android:versionCode="40"
+    android:versionName="0.9.0">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
