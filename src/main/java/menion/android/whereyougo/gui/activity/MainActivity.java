@@ -56,6 +56,7 @@ import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
@@ -204,15 +205,11 @@ public class MainActivity extends CustomMainActivity {
 
     public static void setBitmapToImageView(Bitmap i, ImageView iv) {
         Logger.w(TAG, "setBitmapToImageView(), " + i.getWidth() + " x " + i.getHeight());
-        float width = i.getWidth() - 10;
-        float height = (Const.SCREEN_WIDTH / width) * i.getHeight();
-
-        if ((height / Const.SCREEN_HEIGHT) > 0.60f) {
-            height = 0.60f * Const.SCREEN_HEIGHT;
-            width = (height / i.getHeight()) * i.getWidth();
+        if (Preferences.APPEARANCE_IMAGE_STRETCH) {
+            int newWidth = Const.SCREEN_WIDTH;
+            int newHeight = i.getHeight() * newWidth / i.getWidth();
+            i = Bitmap.createScaledBitmap(i, newWidth, newHeight, false);
         }
-        iv.setMinimumWidth((int) width);
-        iv.setMinimumHeight((int) height);
         iv.setImageBitmap(i);
     }
 

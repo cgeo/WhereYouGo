@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,7 +31,6 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.guide.Guide;
-import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
 
@@ -48,9 +46,6 @@ public class CartridgeDetailsActivity extends CustomActivity {
             return;
         }
         setContentView(R.layout.layout_details);
-        if (!Preferences.APPEARANCE_IMAGE_STRETCH) {
-            findViewById(R.id.layoutDetailsImageViewImage).getLayoutParams().width = LayoutParams.WRAP_CONTENT;
-        }
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(Html.fromHtml(MainActivity.cartridgeFile.name));

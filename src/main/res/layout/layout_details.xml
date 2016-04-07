@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -31,9 +31,10 @@
 
             <ImageView
                 android:id="@+id/layoutDetailsImageViewImage"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter" />
 
             <TextView
