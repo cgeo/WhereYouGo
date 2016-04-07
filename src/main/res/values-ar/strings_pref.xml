@@ -56,7 +56,7 @@
     <string name="pref_units_angle">واحدات الزوايا</string>
     <string name="pref_units_angle_degree">درجات</string>
     <string name="pref_units_angle_desc">واحدات الزوايا على الشاشة</string>
-    <string name="pref_units_angle_mil">Angular mil</string>
+    <string name="pref_units_angle_angular_mil">Angular mil</string>
     <string name="pref_units_coo_latlon">صيغة خط طول / خط عرض</string>
     <string name="pref_units_coo_latlon_dec">14,94323 </string>
     <string name="pref_units_coo_latlon_min">14  52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Coordinates (latitude/longitude) format for display</string>
     <string name="pref_units_length">واحدات الطول</string>
     <string name="pref_units_length_desc">اخيار واحدات العرض الافتراضية</string>
-    <string name="pref_units_length_im">أمريكي</string>
-    <string name="pref_units_length_me">متري</string>
-    <string name="pref_units_length_na">Nautical</string>
     <string name="pref_units_speed">واحدات السرعة</string>
     <string name="pref_units_speed_desc">اختيار واحدات السرعة الافتراضية</string>
 </resources>

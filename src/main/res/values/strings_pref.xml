@@ -89,7 +89,9 @@
     <string name="pref_units_angle">Angle units</string>
     <string name="pref_units_angle_degree">Degree</string>
     <string name="pref_units_angle_desc">Angle units for display</string>
-    <string name="pref_units_angle_mil">Angular mil</string>
+    <string name="pref_units_angle_angular_mil">Angular mil</string>
+    <string name="pref_units_angle_russian_mil">Russian mil</string>
+    <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string>
     <string name="pref_units_coo_latlon" changed="2014-09-17">Coordinates format</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
@@ -97,9 +99,13 @@
     <string name="pref_units_coo_latlon_desc">Coordinates (latitude/longitude) format for display</string>
     <string name="pref_units_length">Length units</string>
     <string name="pref_units_length_desc">Choose default display units</string>
-    <string name="pref_units_length_im">Imperial</string>
-    <string name="pref_units_length_me">Metric</string>
-    <string name="pref_units_length_na">Nautical</string>
+    <string name="pref_units_length_im_f">Imperial (ft)</string>
+    <string name="pref_units_length_im_fm">Imperial (ft/mi)</string>
+    <string name="pref_units_length_im_y">Imperial (yd)</string>
+    <string name="pref_units_length_im_ym">Imperial (yd/mi)</string>
+    <string name="pref_units_length_me_m">Metric (m)</string>
+    <string name="pref_units_length_me_mkm">Metric (m/km)</string>
+    <string name="pref_units_length_na_nmi">Nautical (m/nmi)</string>
     <string name="pref_units_speed">Speed units</string>
     <string name="pref_units_speed_desc">Choose default speed units</string>
     <string name="pref_double_click">Double tap</string>

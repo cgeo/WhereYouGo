@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Unidades do ângulo</string>
     <string name="pref_units_angle_degree">Grau</string>
     <string name="pref_units_angle_desc">Unidades do ângulo para visualização</string>
-    <string name="pref_units_angle_mil">Milésimos angulares</string>
+    <string name="pref_units_angle_angular_mil">Milésimos angulares</string>
     <string name="pref_units_coo_latlon">Formato Lat/Lon</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14 ° 52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Formato de coordenadas (latitude/longitude) para exibição</string>
     <string name="pref_units_length">Unidades de comprimento</string>
     <string name="pref_units_length_desc">Escolha as unidades de exibição padrão</string>
-    <string name="pref_units_length_im">Imperial</string>
-    <string name="pref_units_length_me">Métrica</string>
-    <string name="pref_units_length_na">Náutico</string>
     <string name="pref_units_speed">Unidades de velocidade</string>
     <string name="pref_units_speed_desc">Escolha as unidades de velocidade padrão</string>
 </resources>

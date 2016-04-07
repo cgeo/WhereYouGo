@@ -89,7 +89,7 @@
     <string name="pref_units_angle">Úhlové jednotky</string>
     <string name="pref_units_angle_degree">Stupeň</string>
     <string name="pref_units_angle_desc">Zobrazení úhlových jednotek</string>
-    <string name="pref_units_angle_mil">Mil (dílec)</string>
+    <string name="pref_units_angle_angular_mil">Mil (dílec)</string>
     <string name="pref_units_coo_latlon">Formát zem. délky/šířky</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52,123\'</string>
@@ -97,9 +97,13 @@
     <string name="pref_units_coo_latlon_desc">Formát zobrazení souřadnic (zem. délka/šířka)</string>
     <string name="pref_units_length">Délkové jednotky</string>
     <string name="pref_units_length_desc">Volba délkových jednotek</string>
-    <string name="pref_units_length_im">Imperiální</string>
-    <string name="pref_units_length_me">Metrické</string>
-    <string name="pref_units_length_na">Námořní</string>
+    <string name="pref_units_length_im_f">Imperiální (ft)</string>
+    <string name="pref_units_length_im_fm">Imperiální (ft/mi)</string>
+    <string name="pref_units_length_im_y">Imperiální (yd)</string>
+    <string name="pref_units_length_im_ym">Imperiální (yd/mi)</string>
+    <string name="pref_units_length_me_m">Metrické (m)</string>
+    <string name="pref_units_length_me_mkm">Metrické (m/km)</string>
+    <string name="pref_units_length_na_nmi">Námořní (m/nmi)</string>
     <string name="pref_units_speed">Jednotky pro rychlost</string>
     <string name="pref_units_speed_desc">Vyberte jednotky pro zobrazení rychlosti</string>
     <string name="pref_double_click">Dvojklik</string>

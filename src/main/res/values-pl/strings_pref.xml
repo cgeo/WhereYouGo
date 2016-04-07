@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Jednostki kątowe</string>
     <string name="pref_units_angle_degree">Stopień</string>
     <string name="pref_units_angle_desc">Wyświetlane jednostki kątowe</string>
-    <string name="pref_units_angle_mil">Tysiączna</string>
+    <string name="pref_units_angle_angular_mil">Tysiączna</string>
     <string name="pref_units_coo_latlon">Format szer/dług geograficznej</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Format wyświetlania współrzędnych (długość i szerokość geograficzna)</string>
     <string name="pref_units_length">Jednostki długości</string>
     <string name="pref_units_length_desc">Wybierz domyśnie wyświetlane jednostki</string>
-    <string name="pref_units_length_im">Imperialne (anglosaskie)</string>
-    <string name="pref_units_length_me">Metryczne</string>
-    <string name="pref_units_length_na">Morskie</string>
     <string name="pref_units_speed">Jednostki prędkości</string>
     <string name="pref_units_speed_desc">Wybierz domyślne jednostki prędkości</string>
 </resources>

@@ -21,54 +21,44 @@ import android.location.Location;
 
 import org.mapsforge.core.model.GeoPoint;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 
 public class UtilsFormat {
 
-    public static final double MILE_METERS = 1609.344;
     private static final String TAG = "UtilsFormat";
     // degree sign
     public static String degree = "\u00b0";
-    // angle mi value
-    private static double angleInMi = (2 * Math.PI * 1000.0 / 360.0);
     private static Date mDate;
     private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private static DecimalFormat[][] formats;
+    public static String formatAltitude(double altitude, boolean addUnits) {
+        return locus.api.android.utils.UtilsFormat.formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, addUnits);
+    }
 
-    static {
-        formats =
-                new DecimalFormat[][]{
-                        {new DecimalFormat("#"), new DecimalFormat("#.0"), new DecimalFormat("#.00"),
-                                new DecimalFormat("#.000"), new DecimalFormat("#.0000"),
-                                new DecimalFormat("#.00000"), new DecimalFormat("#.000000")},
-                        {new DecimalFormat("#0"), new DecimalFormat("#0.0"), new DecimalFormat("#0.00"),
-                                new DecimalFormat("#0.000"), new DecimalFormat("#0.0000"),
-                                new DecimalFormat("#0.00000"), new DecimalFormat("#0.000000")},
-                        {new DecimalFormat("#00"), new DecimalFormat("#00.0"), new DecimalFormat("#00.00"),
-                                new DecimalFormat("#00.000"), new DecimalFormat("#00.0000"),
-                                new DecimalFormat("#00.00000"), new DecimalFormat("#00.000000")},
-                        {new DecimalFormat("#000"), new DecimalFormat("#000.0"), new DecimalFormat("#000.00"),
-                                new DecimalFormat("#000.000"), new DecimalFormat("#000.0000"),
-                                new DecimalFormat("#000.00000"), new DecimalFormat("#000.000000")},
-                        {new DecimalFormat("#0000"), new DecimalFormat("#0000.0"),
-                                new DecimalFormat("#0000.00"), new DecimalFormat("#0000.000"),
-                                new DecimalFormat("#0000.0000"), new DecimalFormat("#0000.00000"),
-                                new DecimalFormat("#0000.000000")}};
-        for (int i = 0; i < formats.length; i++) {
-            for (int j = 0; j < formats[i].length; j++) {
-                formats[i][j].setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.ENGLISH));
-            }
-        }
+    public static String formatAngle(double angle) {
+        return locus.api.android.utils.UtilsFormat.formatAngle(Preferences.FORMAT_ANGLE, (float) ((angle % 360) + 360) % 360, false, 0);
+    }
+
+    public static String formatSpeed(double speed, boolean withoutUnits) {
+        return locus.api.android.utils.UtilsFormat.formatSpeed(Preferences.FORMAT_SPEED, speed, withoutUnits);
+    }
+
+    public static String formatDistance(double dist, boolean withoutUnits) {
+        return locus.api.android.utils.UtilsFormat.formatDistance(Preferences.FORMAT_LENGTH, dist, withoutUnits);
+    }
+
+    public static String formatDouble(double value, int precision) {
+        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision);
+    }
+
+    public static String formatDouble(double value, int precision, int minlen) {
+        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision, minlen);
     }
 
     public static String addZeros(String text, int count) {
@@ -81,51 +71,31 @@ public class UtilsFormat {
         return res;
     }
 
-    /**
-     * Format distance in metres.
-     *
-     * @param dist Distance in metres.
-     * @return Formated distance in appropriate units.
-     */
-    public static String formatAltitude(double altitude, boolean addUnits) {
-        double value = formatAltitudeValue(altitude);
-        String res = formatDouble(value, 0);
-        if (addUnits)
-            return res + formatAltitudeUnits();
-        else
-            return res;
-    }
-
-    public static String formatAltitudeUnits() {
-        if (Preferences.FORMAT_ALTITUDE == PreferenceValues.VALUE_UNITS_ALTITUDE_FEET) {
-            return "ft";
+    public static String formatLatitude(double latitude) {
+        StringBuffer out = new StringBuffer();
+        if (latitude < 0) {
+            out.append("S ");
         } else {
-            return "m";
+            out.append("N ");
         }
+        latitude = Math.abs(latitude);
+
+        formatCooLatLon(out, latitude, 2);
+        return out.toString();
     }
 
-    public static double formatAltitudeValue(double altitude) {
-        if (Preferences.FORMAT_ALTITUDE == PreferenceValues.VALUE_UNITS_ALTITUDE_FEET) {
-            return altitude * 3.2808;
+    public static String formatLongitude(double longitude) {
+        StringBuffer out = new StringBuffer();
+
+        if (longitude < 0) {
+            out.append("W ");
         } else {
-            return altitude;
+            out.append("E ");
         }
-    }
+        longitude = Math.abs(longitude);
 
-    public static String formatAngle(double angle) {
-        try {
-            // fix angle values
-            angle = ((angle % 360) + 360) % 360;
-
-            if (Preferences.FORMAT_ANGLE == PreferenceValues.VALUE_UNITS_ANGLE_DEGREE) {
-                return formatDouble(angle, 0) + degree;
-            } else if (Preferences.FORMAT_ANGLE == PreferenceValues.VALUE_UNITS_ANGLE_MIL) {
-                return formatDouble(angle * angleInMi, 0);
-            }
-        } catch (Exception e) {
-            Logger.e(TAG, "formatAngle(" + angle + ")", e);
-        }
-        return "";
+        formatCooLatLon(out, longitude, 3);
+        return out.toString();
     }
 
     public static String formatCooByType(double lat, double lon, boolean twoLines) {
@@ -158,6 +128,16 @@ public class UtilsFormat {
         }
     }
 
+    public static String formatGeoPoint(GeoPoint geoPoint) {
+        return formatCooByType(geoPoint.latitude, geoPoint.longitude, false);
+    }
+
+    public static String formatGeoPointDefault(GeoPoint geoPoint) {
+        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
+        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
+        return String.format("N %s E %s", strLatitude, strLongitude);
+    }
+
     public static String formatTime(long time) {
         if (mDate == null)
             mDate = new Date();
@@ -179,198 +159,6 @@ public class UtilsFormat {
         return datetimeFormat.format(mDate);
     }
 
-    /**
-     * Format distance in metres.
-     *
-     * @param dist Distance in metres.
-     * @return Formated distance in appropriate units.
-     */
-    public static String formatDistance(double dist, boolean withoutUnits) {
-        String value = null;
-        if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_IM) {
-            double feet = dist * 3.2808;
-            if (feet > 1000.0) {
-                double mi = dist / 1609.344;
-                if (mi > 100) {
-                    value = formatDouble(mi, 0);
-                } else if (mi > 1) {
-                    value = formatDouble(mi, 1);
-                } else {
-                    value = formatDouble(mi, 2);
-                }
-            } else {
-                if (feet < 10)
-                    value = formatDouble(feet, 1); // to ft
-                else
-                    value = formatDouble(feet, 0); // to ft
-            }
-        } else if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_NA) {
-            if (dist > 1852.0) {
-                double nmi = dist / 1852.0;
-                if (nmi > 100) {
-                    value = formatDouble(nmi, 0);
-                } else {
-                    value = formatDouble(nmi, 1);
-                }
-            } else {
-                value = formatDouble(dist, 0);
-            }
-        } else { // metric
-            if (dist > 1000.0) {
-                double km = dist / 1000.0;
-                if (km > 100) {
-                    value = formatDouble(km, 0);
-                } else {
-                    value = formatDouble(km, 1);
-                }
-            } else {
-                if (dist < 10)
-                    value = formatDouble(dist, 1);
-                else
-                    value = formatDouble(dist, 0);
-            }
-        }
-
-        if (withoutUnits)
-            return value;
-        else
-            return value + formatDistanceUnits(dist);
-    }
-
-    public static String formatDistanceUnits(double dist) {
-        if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_IM) {
-            double feet = dist * 3.2808;
-            if (feet > 1000.0) {
-                return "mi";
-            } else {
-                return "ft";
-            }
-        } else if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_NA) {
-            if (dist > 1852.0) {
-                return "nmi";
-            } else {
-                return "m";
-            }
-        } else { // metric
-            if (dist > 1000.0) {
-                return "km";
-            } else {
-                return "m";
-            }
-        }
-    }
-
-    public static double formatDistanceValue(double dist) {
-        if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_IM) {
-            double feet = dist * 3.2808;
-            if (feet > 1000.0) {
-                return dist / 1609.344;
-            } else {
-                return feet;
-            }
-        } else if (Preferences.FORMAT_LENGTH == PreferenceValues.VALUE_UNITS_LENGTH_NA) {
-            if (dist > 1852.0) {
-                return dist / 1852.0;
-            } else {
-                return dist;
-            }
-        } else { // metric
-            if (dist > 1000.0) {
-                return dist / 1000.0;
-            } else {
-                return dist;
-            }
-        }
-    }
-
-    public static String formatGeoPoint(GeoPoint geoPoint) {
-        return formatCooByType(geoPoint.latitude, geoPoint.longitude, false);
-    }
-
-    public static String formatGeoPointDefault(GeoPoint geoPoint) {
-        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
-        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
-        return String.format("N %s E %s", strLatitude, strLongitude);
-    }
-
-    /*****************************/
-  /* FORMAT DOUBLE PART */
-
-    /*****************************/
-
-    public static String formatDouble(double value, int precision) {
-        return formatDouble(value, precision, 1);
-    }
-
-    public static String formatDouble(double value, int precision, int minlen) {
-        if (minlen < 0)
-            minlen = 0;
-        else if (minlen > formats.length - 1)
-            minlen = formats.length - 1;
-        if (precision < 0)
-            precision = 0;
-        else if (precision > formats[0].length - 1)
-            precision = formats[0].length - 1;
-        return formats[minlen][precision].format(value);
-    }
-
-    public static String formatLatitude(double latitude) {
-        StringBuffer out = new StringBuffer();
-        if (latitude < 0) {
-            out.append("S ");
-        } else {
-            out.append("N ");
-        }
-        latitude = Math.abs(latitude);
-
-        formatCooLatLon(out, latitude, 2);
-        return out.toString();
-    }
-
-    public static String formatLongitude(double longitude) {
-        StringBuffer out = new StringBuffer();
-
-        if (longitude < 0) {
-            out.append("W ");
-        } else {
-            out.append("E ");
-        }
-        longitude = Math.abs(longitude);
-
-        formatCooLatLon(out, longitude, 3);
-        return out.toString();
-    }
-
-    /**
-     * Format speed to correct format.
-     *
-     * @param Speed Speed in m/s.
-     * @return Formated speed in appropriate units.
-     */
-    public static String formatSpeed(double speed, boolean withoutUnits) {
-        speed = formatSpeedValue(speed);
-        String result = formatDouble(speed, speed > 100 ? 0 : 1);
-
-        if (withoutUnits)
-            return result;
-        else
-            return result + getSpeedUnits();
-    }
-
-    public static double formatSpeedValue(double speed) {
-        if (Preferences.FORMAT_SPEED == PreferenceValues.VALUE_UNITS_SPEED_MILH) {
-            speed *= 2.237;
-        } else if (Preferences.FORMAT_SPEED == PreferenceValues.VALUE_UNITS_SPEED_KNOTS) {
-            speed *= (3.6 / 1.852);
-        } else { // metric UNITS_LENGTH_METRIC
-            speed *= 3.6;
-        }
-        return speed;
-    }
-
-    /**
-     * updated function for time formating as in stop watch
-     */
     public static String formatTime(boolean full, long tripTime) {
         return formatTime(full, tripTime, true);
     }
@@ -410,16 +198,6 @@ public class UtilsFormat {
                             + formatDouble(sec, 0, 2);
                 }
             }
-        }
-    }
-
-    public static String getSpeedUnits() {
-        if (Preferences.FORMAT_SPEED == PreferenceValues.VALUE_UNITS_SPEED_MILH) {
-            return "mi/h";
-        } else if (Preferences.FORMAT_SPEED == PreferenceValues.VALUE_UNITS_SPEED_KNOTS) {
-            return "nmi/h";
-        } else { // metric UNITS_LENGTH_METRIC
-            return "km/h";
         }
     }
 }

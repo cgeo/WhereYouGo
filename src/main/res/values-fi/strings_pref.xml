@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Kulman yksiköt</string>
     <string name="pref_units_angle_degree">Aste</string>
     <string name="pref_units_angle_desc">Kulmayksikkö näytettäväksi</string>
-    <string name="pref_units_angle_mil">Piiru</string>
+    <string name="pref_units_angle_angular_mil">Piiru</string>
     <string name="pref_units_coo_latlon">Lev/Pit-muoto</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Näytettävä koordinaattien (leveys-/pituusaste) muoto</string>
     <string name="pref_units_length">Pituus yksiköt</string>
     <string name="pref_units_length_desc">Valitse oletusyksikkö</string>
-    <string name="pref_units_length_im">Brittiläinen</string>
-    <string name="pref_units_length_me">Metri</string>
-    <string name="pref_units_length_na">Merenkulku</string>
     <string name="pref_units_speed">Nopeusyksikkö</string>
     <string name="pref_units_speed_desc">Valitse oletusnopeusyksikkö</string>
 </resources>

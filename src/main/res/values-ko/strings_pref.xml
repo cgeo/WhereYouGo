@@ -56,7 +56,7 @@
     <string name="pref_units_angle">각도 단위</string>
     <string name="pref_units_angle_degree">도</string>
     <string name="pref_units_angle_desc">표시할 각도 단위</string>
-    <string name="pref_units_angle_mil">각도 밀</string>
+    <string name="pref_units_angle_angular_mil">각도 밀</string>
     <string name="pref_units_coo_latlon">위도/경도 형식</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">좌표 (위도/경도) 표시 형식</string>
     <string name="pref_units_length">길이 단위</string>
     <string name="pref_units_length_desc">기본 표시 단위 선택</string>
-    <string name="pref_units_length_im">야드</string>
-    <string name="pref_units_length_me">미터</string>
-    <string name="pref_units_length_na">해리</string>
     <string name="pref_units_speed">속도 단위</string>
     <string name="pref_units_speed_desc">기본 속도 단위 선택</string>
 </resources>

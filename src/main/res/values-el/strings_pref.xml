@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Γωνία μονάδων</string>
     <string name="pref_units_angle_degree">Μοίρες</string>
     <string name="pref_units_angle_desc">Γωνία μονάδων για προβολή</string>
-    <string name="pref_units_angle_mil">Γωνιακό εκ.</string>
+    <string name="pref_units_angle_angular_mil">Γωνιακό εκ.</string>
     <string name="pref_units_coo_latlon">Μορφή του Γεωγραφικού Πλάτους/Μήκους</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_min">14°52,123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Διάταξη εμφάνισης συντεταγμένων (γεωγραφικό μήκος/γεωγραφικό πλάτος)</string>
     <string name="pref_units_length">Μήκος μονάδων</string>
     <string name="pref_units_length_desc">Επιλέξτε τις προκαθορισμένες μονάδες εμφάνισης</string>
-    <string name="pref_units_length_im">Αγγλοσαξονικό</string>
-    <string name="pref_units_length_me">Μετρικό</string>
-    <string name="pref_units_length_na">Ναυτικό</string>
     <string name="pref_units_speed">Μονάδες ταχύτητας</string>
     <string name="pref_units_speed_desc">Επιλέξτε τις προκαθορισμένες μονάδες ταχύτητας</string>
 </resources>

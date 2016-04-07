@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Единицы углов</string>
     <string name="pref_units_angle_degree">Градусы</string>
     <string name="pref_units_angle_desc">Единицы отображения угла</string>
-    <string name="pref_units_angle_mil">Угловые мили</string>
+    <string name="pref_units_angle_angular_mil">Угловые мили</string>
     <string name="pref_units_coo_latlon">Формат координат</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14°52.123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Формат отображения координат</string>
     <string name="pref_units_length">Единицы расстояний</string>
     <string name="pref_units_length_desc">Единицы отображения расстояний</string>
-    <string name="pref_units_length_im">Британские</string>
-    <string name="pref_units_length_me">Метрические</string>
-    <string name="pref_units_length_na">Морские</string>
     <string name="pref_units_speed">Единицы скорости</string>
     <string name="pref_units_speed_desc">Единицы отображения скорости</string>
 </resources>

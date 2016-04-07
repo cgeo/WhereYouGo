@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Vinkelenheder</string>
     <string name="pref_units_angle_degree">Grader</string>
     <string name="pref_units_angle_desc">Vinkelenheder til visning</string>
-    <string name="pref_units_angle_mil">Vinkel mil</string>
+    <string name="pref_units_angle_angular_mil">Vinkel mil</string>
     <string name="pref_units_coo_latlon">Lat/Lon-format</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_min">14 ° 52,123 \ \'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Koordinater (bredde/længde)-format til visning</string>
     <string name="pref_units_length">Længde enheder</string>
     <string name="pref_units_length_desc">Vælg standard display-enheder</string>
-    <string name="pref_units_length_im">Imperial</string>
-    <string name="pref_units_length_me">Metrisk</string>
-    <string name="pref_units_length_na">Nautisk</string>
     <string name="pref_units_speed">Hastighed enheder</string>
     <string name="pref_units_speed_desc">Vælg standard hastighed enheder</string>
 </resources>

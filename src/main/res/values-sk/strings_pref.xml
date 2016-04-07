@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Uhlové jednotky</string>
     <string name="pref_units_angle_degree">Stupeň</string>
     <string name="pref_units_angle_desc">Zobrazenie uhlových jednotiek</string>
-    <string name="pref_units_angle_mil">Mil (dielec)</string>
+    <string name="pref_units_angle_angular_mil">Mil (dielec)</string>
     <string name="pref_units_coo_latlon">Formát zem. dĺžky/šírky</string>
     <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_min">14° 52,123\'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Formát zobrazenia súradníc (zem. dĺžka/šírka)</string>
     <string name="pref_units_length">Dĺžkové jednotky</string>
     <string name="pref_units_length_desc">Voľba dĺžkových jednotiek</string>
-    <string name="pref_units_length_im">Imperiálne</string>
-    <string name="pref_units_length_me">Metrické</string>
-    <string name="pref_units_length_na">Námorné</string>
     <string name="pref_units_speed">Jednotky pre rýchlosť</string>
     <string name="pref_units_speed_desc">Vyberte jednotky pre zobrazenie rýchlosti</string>
 </resources>

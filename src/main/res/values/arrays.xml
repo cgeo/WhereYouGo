@@ -159,11 +159,15 @@
 
     <string-array name="pref_units_angle_entries">
         <item>@string/pref_units_angle_degree</item>
-        <item>@string/pref_units_angle_mil</item>
+        <item>@string/pref_units_angle_angular_mil</item>
+        <item>@string/pref_units_angle_russian_mil</item>
+        <item>@string/pref_units_angle_us_artillery_mil</item>
     </string-array>
     <string-array name="pref_units_angle_entry_values">
         <item>@string/pref_VALUE_UNITS_ANGLE_DEGREE</item>
-        <item>@string/pref_VALUE_UNITS_ANGLE_MIL</item>
+        <item>@string/pref_VALUE_UNITS_ANGLE_ANGULAR_MIL</item>
+        <item>@string/pref_VALUE_UNITS_ANGLE_RUSSIAN_MIL</item>
+        <item>@string/pref_VALUE_UNITS_ANGLE_US_ARTILLERY_MIL</item>
     </string-array>
 
     <string-array name="pref_units_coo_latlon_entries">
@@ -183,25 +187,35 @@
     </string-array>
 
     <string-array name="pref_units_length_entries">
-        <item>@string/pref_units_length_me</item>
-        <item>@string/pref_units_length_im</item>
-        <item>@string/pref_units_length_na</item>
+        <item>@string/pref_units_length_me_m</item>
+        <item>@string/pref_units_length_me_mkm</item>
+        <item>@string/pref_units_length_im_f</item>
+        <item>@string/pref_units_length_im_fm</item>
+        <item>@string/pref_units_length_im_y</item>
+        <item>@string/pref_units_length_im_ym</item>
+        <item>@string/pref_units_length_na_nmi</item>
     </string-array>
     <string-array name="pref_units_length_entry_values">
-        <item>@string/pref_VALUE_UNITS_LENGTH_ME</item>
-        <item>@string/pref_VALUE_UNITS_LENGTH_IM</item>
-        <item>@string/pref_VALUE_UNITS_LENGTH_NA</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_ME_M</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_ME_MKM</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_IM_F</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_IM_FM</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_IM_Y</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_IM_YM</item>
+        <item>@string/pref_VALUE_UNITS_LENGTH_NA_MNMI</item>
     </string-array>
 
     <string-array name="pref_units_speed_entries">
         <item>km/h</item>
-        <item>miles/h</item>
-        <item>knots</item>
+        <item>mi/h</item>
+        <item>nmi/h</item>
+        <item>kn</item>
     </string-array>
     <string-array name="pref_units_speed_entry_values">
         <item>@string/pref_VALUE_UNITS_SPEED_KMH</item>
         <item>@string/pref_VALUE_UNITS_SPEED_MILH</item>
-        <item>@string/pref_VALUE_UNITS_SPEED_KNOTS</item>
+        <item>@string/pref_VALUE_UNITS_SPEED_NMIH</item>
+        <item>@string/pref_VALUE_UNITS_SPEED_KNOT</item>
     </string-array>
 
     <string-array name="pref_sensors_orient_filter_entries">

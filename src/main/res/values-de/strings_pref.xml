@@ -89,7 +89,7 @@
     <string name="pref_units_angle">Winkeleinheit</string>
     <string name="pref_units_angle_degree">Grad</string>
     <string name="pref_units_angle_desc">Wählen Sie die Einheit für Winkelangaben</string>
-    <string name="pref_units_angle_mil">Winkel</string>
+    <string name="pref_units_angle_angular_mil">Winkel</string>
     <string name="pref_units_coo_latlon">Koordinaten-Format</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_min">14 ° 52,123\'</string>
@@ -97,9 +97,6 @@
     <string name="pref_units_coo_latlon_desc">Wählen Sie das Koordinaten-Format (Latitude/Longitude)</string>
     <string name="pref_units_length">Längeneinheit</string>
     <string name="pref_units_length_desc">Wählen Sie die Einheit für Längenangaben</string>
-    <string name="pref_units_length_im">Imperial</string>
-    <string name="pref_units_length_me">Metrisch</string>
-    <string name="pref_units_length_na">Nautisch</string>
     <string name="pref_units_speed">Geschwindigkeitseinheit</string>
     <string name="pref_units_speed_desc">Wählen Sie die Einheit für die Geschwindigkeit</string>
 

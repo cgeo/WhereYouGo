@@ -56,7 +56,7 @@
     <string name="pref_units_angle">Hoek eenheid</string>
     <string name="pref_units_angle_degree">Graden</string>
     <string name="pref_units_angle_desc">Weergave hoekweergave</string>
-    <string name="pref_units_angle_mil">Mills</string>
+    <string name="pref_units_angle_angular_mil">Mills</string>
     <string name="pref_units_coo_latlon">Lat / Lon-formaat</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_min">14 ° 52,123 \ \'</string>
@@ -64,9 +64,6 @@
     <string name="pref_units_coo_latlon_desc">Coördinaten (lengte / breedte) opmaak voor weergave</string>
     <string name="pref_units_length">Lengte eenheid</string>
     <string name="pref_units_length_desc">Kies standaard weergave-eenheden</string>
-    <string name="pref_units_length_im">Engelse maten</string>
-    <string name="pref_units_length_me">Metrisch</string>
-    <string name="pref_units_length_na">Nautische</string>
     <string name="pref_units_speed">Snelheids eenheid</string>
     <string name="pref_units_speed_desc">Kies standaard eenheid voor snelheid</string>
 </resources>
