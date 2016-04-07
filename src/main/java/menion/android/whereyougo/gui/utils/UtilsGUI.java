@@ -117,15 +117,7 @@ public class UtilsGUI {
     }
 
     public static int getDialogWidth() {
-        if (Utils.isAndroid30OrMore()) {
-            if (Const.SCREEN_WIDTH < 600) {
-                return LayoutParams.MATCH_PARENT;
-            } else {
-                return 600;
-            }
-        } else {
-            return LayoutParams.MATCH_PARENT;
-        }
+        return LayoutParams.MATCH_PARENT;
     }
 
     public static WebView getFilledWebView(Activity activity, String data) {
