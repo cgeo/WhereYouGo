@@ -25,6 +25,7 @@ Uses the following projects:
 * [Android Studio and SDK](https://developer.android.com/sdk/index.html)
 * Mercurial
 * Git
+
 ###Installation
 * follow the guidelines [here](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api:installation) to setup project and acquire Locus API
 * execute
