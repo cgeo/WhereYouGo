@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
@@ -29,7 +30,7 @@
     <application
         android:name="menion.android.whereyougo.MainApplication"
         android:allowBackup="true"
-        android:debuggable="false"
+        android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
         android:theme="@style/AppTheme"
