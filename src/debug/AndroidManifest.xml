@@ -34,7 +34,7 @@
         android:icon="@drawable/icon"
         android:label="WhereYouGo"
         android:theme="@style/AppTheme"
-        tools:replace="icon, label">
+        tools:replace="icon, label, debuggable">
         <activity
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
             android:label="WhereYouGo"
