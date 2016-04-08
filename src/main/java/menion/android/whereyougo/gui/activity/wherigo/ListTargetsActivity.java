@@ -28,7 +28,8 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.openwig.WUI;
-import se.krka.kahlua.vm.LuaTable;
+import se.krka.kahlua.vm.KahluaTable;
+import se.krka.kahlua.vm.KahluaTableIterator;
 
 public class ListTargetsActivity extends ListVariousActivity {
 
@@ -39,14 +40,17 @@ public class ListTargetsActivity extends ListVariousActivity {
     private static Vector<Object> validStuff;
 
     private static void makeValidStuff() {
-        LuaTable current = Engine.instance.cartridge.currentThings();
+        KahluaTable current = Engine.instance.cartridge.currentThings();
         // int size = current.len() + Engine.instance.player.inventory.len();
         validStuff = new Vector<Object>();
-        Object key = null;
-        while ((key = current.next(key)) != null)
-            validStuff.addElement(current.rawget(key));
-        while ((key = Engine.instance.player.inventory.next(key)) != null)
-            validStuff.addElement(Engine.instance.player.inventory.rawget(key));
+        KahluaTableIterator it = current.iterator();
+        while (it.advance()) {
+            validStuff.addElement(it.getValue());
+        }
+        it = Engine.instance.player.inventory.iterator();
+        while (it.advance()) {
+            validStuff.addElement(it.getValue());
+        }
 
         for (int i = 0; i < validStuff.size(); i++) {
             Thing t = (Thing) validStuff.elementAt(i);

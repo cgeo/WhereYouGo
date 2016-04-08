@@ -28,8 +28,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
+import cz.matejcik.openwig.DialogObject;
 import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
@@ -39,117 +41,115 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
-import se.krka.kahlua.vm.LuaTable;
 
 public class InputScreenActivity extends CustomActivity {
 
     private static final String TAG = "InputScreen";
     private static final int TEXT = 0;
     private static final int MULTI = 1;
-    private static EventTable input;
-    private int mode = TEXT;
 
-    public static void reset(EventTable input) {
-        InputScreenActivity.input = input;
+    private static DialogObject dobj;
+    private static String[] choices;
+    private static int mode = TEXT;
+
+    public static void setArguments(DialogObject dobj) {
+        Logger.d(TAG, String.format("setArguments(%s)", dobj));
+        synchronized (InputScreenActivity.class) {
+            InputScreenActivity.dobj = dobj;
+            InputScreenActivity.mode = TEXT;
+        }
     }
 
-    public static void setInput(EventTable input) {
-        InputScreenActivity.input = input;
+    public static void setArguments(DialogObject dobj, String[] choices) {
+        Logger.d(TAG, String.format("setArguments(%s, %s)", dobj, Arrays.toString(choices)));
+        synchronized (InputScreenActivity.class) {
+            InputScreenActivity.dobj = dobj;
+            InputScreenActivity.choices = choices;
+            InputScreenActivity.mode = MULTI;
+        }
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (A.getMain() == null || Engine.instance == null || input == null) {
+        Logger.d(TAG, String.format("onCreate(%d, %s, %s)", mode, dobj, Arrays.toString(choices)));
+        if (A.getMain() == null || Engine.instance == null) {
             finish();
             return;
         }
         setContentView(R.layout.layout_input);
-    }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            Engine.callEvent(input, "OnGetInput", null);
-            InputScreenActivity.this.finish();
-            return true;
+        // set image and it's label
+        ImageView ivImage = (ImageView) findViewById(R.id.layoutInputImageView01);
+        TextView tvImageDesc = (TextView) findViewById(R.id.layoutInputTextView01);
+
+        Media m = dobj.media;
+        if (m != null) {
+            tvImageDesc.setText(m.altText);
+            try {
+                byte[] is = Engine.mediaFile(m);
+                Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
+                MainActivity.setBitmapToImageView(i, ivImage);
+            } catch (Exception e) {
+            }
         } else {
-            return super.onKeyDown(keyCode, event);
+            ivImage.setImageBitmap(Images.IMAGE_EMPTY_B);
         }
-    }
 
-    public void onResume() {
-        super.onResume();
+        // set question TextView
+        TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
+        String text = dobj.text;
+        tvQuestion.setText(text);
 
-        try {
-            // set image and it's label
-            ImageView ivImage = (ImageView) findViewById(R.id.layoutInputImageView01);
-            TextView tvImageDesc = (TextView) findViewById(R.id.layoutInputTextView01);
+        // set answer
+        final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+        editText.setVisibility(View.GONE);
+        final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
+        spinner.setVisibility(View.GONE);
+        CustomDialog.OnClickListener onClickListener = null;
 
-            Media m = (Media) input.table.rawget("Media");
-            if (m != null) {
-                tvImageDesc.setText(m.altText);
-                try {
-                    byte[] is = Engine.mediaFile(m);
-                    Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-                    MainActivity.setBitmapToImageView(i, ivImage);
-                } catch (Exception e) {
-                }
-            } else {
-                ivImage.setImageBitmap(Images.IMAGE_EMPTY_B);
-            }
-
-            // set question TextView
-            TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
-            String text = (String) input.table.rawget("Text");
-            tvQuestion.setText(text);
-
-            // set answer
-            final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
-            editText.setVisibility(View.GONE);
-            final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
-            spinner.setVisibility(View.GONE);
-            String type = (String) input.table.rawget("InputType");
-            mode = -1;
-
-            if ("Text".equals(type)) {
-                editText.setText("");
-                editText.setVisibility(View.VISIBLE);
-                mode = TEXT;
-            } else if ("MultipleChoice".equals(type)) {
-                LuaTable choices = (LuaTable) input.table.rawget("Choices");
-                String[] data = new String[choices.len()];
-                for (int i = 0; i < choices.len(); i++) {
-                    data[i] = (String) choices.rawget((double) (i + 1));
-                    if (data[i] == null)
-                        data[i] = "-";
-                }
-
-                ArrayAdapter<String> adapter =
-                        new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                spinner.setVisibility(View.VISIBLE);
-                mode = MULTI;
-            }
-
-            CustomDialog.setBottom(this, Locale.getString(R.string.answer), new CustomDialog.OnClickListener() {
+        if (mode == TEXT) {
+            editText.setText("");
+            editText.setVisibility(View.VISIBLE);
+            onClickListener = new CustomDialog.OnClickListener() {
 
                 @Override
                 public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    if (mode == TEXT) {
-                        Engine.callEvent(input, "OnGetInput", editText.getText()
-                                .toString());
-                    } else if (mode == MULTI) {
-                        String item = String.valueOf(spinner.getSelectedItem());
-                        Engine.callEvent(input, "OnGetInput", item);
-                    } else {
-                        Engine.callEvent(input, "OnGetInput", null);
-                    }
+                    dobj.doCallback(editText.getText().toString());
                     InputScreenActivity.this.finish();
                     return true;
                 }
-            }, null, null, null, null);
-        } catch (Exception e) {
-            Logger.e(TAG, "onResume()", e);
+            };
+        } else if (mode == MULTI) {
+            ArrayAdapter<String> adapter =
+                    new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, choices);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setVisibility(View.VISIBLE);
+            onClickListener = new CustomDialog.OnClickListener() {
+
+                @Override
+                public boolean onClick(CustomDialog dialog, View v, int btn) {
+                    dobj.doCallback(spinner.getSelectedItemPosition());
+                    InputScreenActivity.this.finish();
+                    return true;
+                }
+            };
         }
+
+        CustomDialog.setBottom(this,
+                Locale.getString(R.string.answer), onClickListener,
+                null, null,
+                null, null
+        );
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Logger.d(TAG, String.format("onKeyDown(%d, %s)", keyCode, event));
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            dobj.doCallback(null);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

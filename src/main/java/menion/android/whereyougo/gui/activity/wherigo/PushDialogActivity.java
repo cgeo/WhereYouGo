@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import cz.matejcik.openwig.DialogObject;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
 import menion.android.whereyougo.R;
@@ -33,78 +34,29 @@ import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-import se.krka.kahlua.vm.LuaClosure;
 
 public class PushDialogActivity extends CustomActivity {
 
     private static final String TAG = "PushDialog";
 
-    private static String menu01Text = null;
-    private static String menu02Text = null;
+    private static DialogObject dobj;
+    private static String button1;
+    private static String button2;
 
-    // STATIC CONTENT
-    private static String[] texts;
-    private static Media[] media;
-    private static LuaClosure callback;
-    private static int page = -1;
-    private ImageView ivImage;
-    private TextView tvImageText;
-
-    public static void setDialog(String[] texts, Media[] media, String button1, String button2,
-                                 LuaClosure callback) {
+    public static void setArguments(DialogObject dobj, String button1, String button2) {
+        Logger.d(TAG, String.format("setArguments(%s, %s, %s)", dobj, button1, button2));
         synchronized (PushDialogActivity.class) {
-            PushDialogActivity.texts = texts;
-            PushDialogActivity.media = media;
-            PushDialogActivity.callback = callback;
-            PushDialogActivity.page = -1;
-
             if (button1 == null)
                 button1 = Locale.getString(R.string.ok);
-
-            menu01Text = button1;
-            menu02Text = button2;
-            Logger.d(TAG, "setDialog() - finish, callBack:" + (callback != null));
-        }
-    }
-
-    private void nextPage() {
-        synchronized (PushDialogActivity.class) {
-            Logger.d(TAG, "nextpage() - page:" + page + ", texts:" + texts.length + ", callback:"
-                    + (callback != null));
-            page++;
-            if (page >= texts.length) {
-                if (callback != null) {
-                    LuaClosure call = callback;
-                    callback = null;
-                    Engine.invokeCallback(call, "Button1");
-                }
-                PushDialogActivity.this.finish();
-                return;
-            }
-
-            tvImageText.setText("");
-
-            Media m = media[page];
-            if (m != null) {
-                try {
-                    byte[] img = Engine.mediaFile(m);
-                    MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
-                            ivImage);
-                } catch (Exception e) {
-                    tvImageText.setText(m.altText);
-                }
-            } else {
-                ivImage.setImageBitmap(null);
-                ivImage.setMinimumWidth(0);
-                ivImage.setMinimumHeight(0);
-            }
-
-            tvImageText.setText(tvImageText.getText().toString() + "\n" + texts[page]);
+            PushDialogActivity.button1 = button1;
+            PushDialogActivity.button2 = button2;
+            PushDialogActivity.dobj = dobj;
         }
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.d(TAG, String.format("onCreate(%s, %s, %s)", dobj, button1, button2));
         if (A.getMain() == null || Engine.instance == null) {
             finish();
             return;
@@ -112,41 +64,64 @@ public class PushDialogActivity extends CustomActivity {
         setContentView(R.layout.layout_details);
         findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
-        findViewById(R.id.layoutDetailsTextViewDescription).setVisibility(View.GONE);
-        ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
-        tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
         findViewById(R.id.layoutDetailsTextViewDistance).setVisibility(View.GONE);
+        findViewById(R.id.layoutDetailsTextViewDescription).setVisibility(View.GONE);
+        ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+        TextView tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
 
-        if (menu02Text == null || menu02Text.length() == 0) {
-            menu02Text = null;
+        tvImageText.setText("");
+
+        Media m = dobj.media;
+        if (m != null) {
+            try {
+                byte[] img = Engine.mediaFile(m);
+                MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
+                        ivImage);
+            } catch (Exception e) {
+                tvImageText.setText(m.altText);
+            }
+        } else {
+            ivImage.setImageBitmap(null);
+            ivImage.setMinimumWidth(0);
+            ivImage.setMinimumHeight(0);
         }
 
-        CustomDialog.setBottom(this, menu01Text, new CustomDialog.OnClickListener() {
+        tvImageText.setText(tvImageText.getText().toString() + "\n" + dobj.text);
 
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                nextPage();
-                return true;
-            }
-        }, null, null, menu02Text, new CustomDialog.OnClickListener() {
-
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                if (callback != null)
-                    Engine.invokeCallback(callback, "Button2");
-                callback = null;
-                PushDialogActivity.this.finish();
-                return true;
-            }
-        });
-
-        if (page == -1) {
-            nextPage();
+        if (button2 == null || button2.length() == 0) {
+            button2 = null;
         }
+
+        CustomDialog.setBottom(this,
+                button1, new CustomDialog.OnClickListener() {
+
+                    @Override
+                    public boolean onClick(CustomDialog dialog, View v, int btn) {
+                        dobj.doCallback("Button1");
+                        PushDialogActivity.this.finish();
+                        return true;
+                    }
+                },
+                null, null,
+                button2, new CustomDialog.OnClickListener() {
+
+                    @Override
+                    public boolean onClick(CustomDialog dialog, View v, int btn) {
+                        dobj.doCallback("Button2");
+                        PushDialogActivity.this.finish();
+                        return true;
+                    }
+                }
+        );
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Logger.d(TAG, "onKeyDown(" + keyCode + ", " + event + ")");
-        return event.getKeyCode() == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+        Logger.d(TAG, String.format("onKeyDown(%d, %s)", keyCode, event));
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            dobj.doCallback(null);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

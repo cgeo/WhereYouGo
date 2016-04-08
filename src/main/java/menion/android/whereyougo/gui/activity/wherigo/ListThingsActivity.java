@@ -25,7 +25,8 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Thing;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
-import se.krka.kahlua.vm.LuaTable;
+import se.krka.kahlua.vm.KahluaTable;
+import se.krka.kahlua.vm.KahluaTableIterator;
 
 public class ListThingsActivity extends ListVariousActivity {
 
@@ -51,16 +52,16 @@ public class ListThingsActivity extends ListVariousActivity {
 
     @Override
     protected Vector<Object> getValidStuff() {
-        LuaTable container;
+        KahluaTable container;
         if (mode == INVENTORY)
             container = Engine.instance.player.inventory;
         else
             container = Engine.instance.cartridge.currentThings();
 
         Vector<Object> newthings = new Vector<Object>();
-        Object key = null;
-        while ((key = container.next(key)) != null) {
-            Thing t = (Thing) container.rawget(key);
+        KahluaTableIterator it = container.iterator();
+        while (it.advance()) {
+            Thing t = (Thing) it.getValue();
             if (t.isVisible())
                 newthings.add(t);
         }

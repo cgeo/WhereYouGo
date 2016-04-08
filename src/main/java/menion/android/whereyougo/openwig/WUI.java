@@ -22,13 +22,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
-import android.widget.Toast;
 
-import java.util.Arrays;
-
+import cz.matejcik.openwig.DialogObject;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.platform.UI;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.audio.UtilsAudio;
@@ -51,7 +48,7 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
-import se.krka.kahlua.vm.LuaClosure;
+import menion.android.whereyougo.utils.ManagerNotify;
 
 public class WUI implements UI {
 
@@ -81,16 +78,30 @@ public class WUI implements UI {
         return (CustomActivity) activity;
     }
 
-    public static void showTextProgress(final String text) {
-        Logger.i(TAG, "showTextProgress(" + text + ")");
-    }
-
     public static void startProgressDialog() {
         progressDialog = new ProgressDialog(A.getMain());
         progressDialog.setMessage(Locale.getString(R.string.loading));
         progressDialog.show();
     }
 
+    public void setOnSavingStarted(Runnable onSavingStarted) {
+        this.onSavingStarted = onSavingStarted;
+    }
+
+    public void setOnSavingFinished(Runnable onSavingFinished) {
+        this.onSavingFinished = onSavingFinished;
+    }
+
+    private void startActivity(Class<?> cls) {
+        Activity activity = getParentActivity();
+        Intent intent = new Intent(activity, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        activity.startActivity(intent);
+        activity.overridePendingTransition(0, 0);
+        closeActivity(activity);
+    }
+
+    @Override
     public void blockForSaving() {
         Logger.w(TAG, "blockForSaving()");
         saving = true;
@@ -99,10 +110,21 @@ public class WUI implements UI {
         }
     }
 
+    @Override
+    public void unblock() {
+        Logger.w(TAG, "unblock()");
+        saving = false;
+        if (onSavingFinished != null) {
+            onSavingFinished.run();
+        }
+    }
+
+    @Override
     public void debugMsg(String msg) {
         Logger.w(TAG, "debugMsg(" + msg.trim() + ")");
     }
 
+    @Override
     public void end() {
         if (progressDialog != null && progressDialog.isShowing()) {
             try {
@@ -115,11 +137,7 @@ public class WUI implements UI {
         showScreen(SCREEN_MAIN, null);
     }
 
-    // @Override
-    public String getDeviceId() {
-        return String.format("%s %s", A.getAppName(), A.getAppVersion());
-    }
-
+    @Override
     public void playSound(byte[] data, String mime) {
         UtilsAudio.playSound(data, mime);
     }
@@ -132,34 +150,7 @@ public class WUI implements UI {
         }
     }
 
-    public void pushDialog(String[] texts, Media[] media, String button1, String button2,
-                           LuaClosure callback) {
-        Logger.w(TAG, "pushDialog(" + Arrays.toString(texts) + ", " + Arrays.toString(media) + ", " + button1 + ", " + button2 + ", "
-                + callback + ")");
-
-        Activity activity = getParentActivity();
-        PushDialogActivity.setDialog(texts, media, button1, button2, callback);
-        Intent intent = new Intent(activity, PushDialogActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
-        closeActivity(activity);
-
-        Vibrator v = (Vibrator) A.getMain().getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(25);
-    }
-
-    public void pushInput(EventTable input) {
-        Logger.w(TAG, "pushInput(" + input + ")");
-        Activity activity = getParentActivity();
-        InputScreenActivity.setInput(input);
-        Intent intent = new Intent(activity, InputScreenActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0);
-        closeActivity(activity);
-    }
-
+    @Override
     public void refresh() {
         Activity activity = PreferenceValues.getCurrentActivity();
         Logger.w(TAG, "refresh(), currentActivity:" + activity);
@@ -168,29 +159,20 @@ public class WUI implements UI {
         }
     }
 
+    @Override
     public void setStatusText(final String text) {
         Logger.w(TAG, "setStatus(" + text + ")");
-        if (text == null || text.length() == 0)
-            return;
-
-        try {
-            final CustomActivity activity = getParentActivity();
-            activity.runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (Exception e) {
-            Logger.e(TAG, "setStatusText(" + text + ")", e);
-        }
+        ManagerNotify.toastShortMessage(getParentActivity(), text);
     }
 
+    @Override
     public void showError(String msg) {
         Logger.w(TAG, "showError(" + msg.trim() + ")");
         if (PreferenceValues.getCurrentActivity() != null)
             UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
     }
 
+    @Override
     public void showScreen(int screenId, EventTable details) {
         Activity activity = getParentActivity();
         Logger.w(TAG, "showScreen(" + screenId + "), parent:" + activity + ", param:" + details);
@@ -255,6 +237,7 @@ public class WUI implements UI {
         closeActivity(activity);
     }
 
+    @Override
     public void start() {
         A.getMain().runOnUiThread(new Runnable() {
             public void run() {
@@ -270,19 +253,50 @@ public class WUI implements UI {
         showScreen(MAINSCREEN, null);
     }
 
-    public void unblock() {
-        Logger.w(TAG, "unblock()");
-        saving = false;
-        if (onSavingFinished != null) {
-            onSavingFinished.run();
-        }
+    @Override
+    public String getDeviceID() {
+        return String.format("%s %s", A.getAppName(), A.getAppVersion());
     }
 
-    public void setOnSavingStarted(Runnable onSavingStarted) {
-        this.onSavingStarted = onSavingStarted;
+    @Override
+    public void uiMessage(DialogObject dobj) {
+        uiConfirm(dobj, "OK");
     }
 
-    public void setOnSavingFinished(Runnable onSavingFinished) {
-        this.onSavingFinished = onSavingFinished;
+    @Override
+    public void uiConfirm(DialogObject dobj, String button) {
+        PushDialogActivity.setArguments(dobj, button, null);
+        startActivity(PushDialogActivity.class);
+        Vibrator v = (Vibrator) A.getMain().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(25);
+    }
+
+    @Override
+    public void uiInput(DialogObject dobj) {
+        InputScreenActivity.setArguments(dobj);
+        startActivity(InputScreenActivity.class);
+    }
+
+    @Override
+    public void uiChoice(DialogObject dobj, String[] choices) {
+        InputScreenActivity.setArguments(dobj, choices);
+        startActivity(InputScreenActivity.class);
+    }
+
+    @Override
+    public void uiNotify(DialogObject dobj) {
+        throw new RuntimeException("not implemented");
+    }
+
+    @Override
+    public void uiCancel(Runnable callback) {
+        if (callback != null)
+            callback.run();
+    }
+
+    @Override
+    public void uiWait(Runnable callback) {
+        if (callback != null)
+            callback.run();
     }
 }

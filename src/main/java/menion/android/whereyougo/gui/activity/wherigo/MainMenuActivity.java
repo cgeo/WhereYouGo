@@ -59,6 +59,7 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
+import se.krka.kahlua.vm.KahluaTableIterator;
 
 public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
@@ -89,9 +90,9 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     private String getVisiblePlayerThingsDescription() {
         Player p = Engine.instance.player;
         String description = null;
-        Object key = null;
-        while ((key = p.inventory.next(key)) != null) {
-            Object o = p.inventory.rawget(key);
+        KahluaTableIterator it = p.inventory.iterator();
+        while (it.advance()) {
+            Object o = it.getValue();
             if (o instanceof Thing && ((Thing) o).isVisible()) {
                 if (description == null)
                     description = "";
@@ -135,9 +136,9 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         String description = null;
         if (!z.showThings())
             return null;
-        Object key = null;
-        while ((key = z.inventory.next(key)) != null) {
-            Object o = z.inventory.rawget(key);
+        KahluaTableIterator it = z.inventory.iterator();
+        while (it.advance()) {
+            Object o = it.getValue();
             if (o instanceof Player)
                 continue;
             if (!(o instanceof Thing))
