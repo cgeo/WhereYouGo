@@ -114,5 +114,6 @@
     <string name="zone_state_inside">inside</string>
     <string name="zone_state">State: %1$s</string>
     <string name="zone_distance">Distance: %1$s</string>
+    <string name="invalid_url">Invalid URL</string>
 
 </resources>

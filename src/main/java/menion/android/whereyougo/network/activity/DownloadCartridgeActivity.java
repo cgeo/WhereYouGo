@@ -36,16 +36,15 @@ import java.io.File;
 
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
-import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.UtilsFormat;
 
-public class DownloadCartridgeActivity extends CustomMainActivity {
+public class DownloadCartridgeActivity extends CustomActivity {
     private static final String TAG = "DownloadCartridgeActivity";
     private TextView tvDescription;
     private TextView tvState;
@@ -58,8 +57,8 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Uri uri = getIntent().getData();
         try {
+            Uri uri = getIntent().getData();
             cguid = uri.getQueryParameter("CGUID");
         } catch (Exception e) {
         }
@@ -118,9 +117,9 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
         }, null, null, getString(R.string.start), new CustomDialog.OnClickListener() {
             @Override
             public boolean onClick(CustomDialog dialog, View v, int btn) {
-                PreferenceValues.setCurrentActivity(null);
                 Intent intent = new Intent(DownloadCartridgeActivity.this, MainActivity.class);
                 intent.putExtra("cguid", cguid);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 DownloadCartridgeActivity.this.finish();
                 return true;
@@ -139,48 +138,6 @@ public class DownloadCartridgeActivity extends CustomMainActivity {
             downloadTask.cancel(true);
             downloadTask = null;
         }
-    }
-
-    @Override
-    protected void eventCreateLayout() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void eventDestroyApp() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void eventFirstInit() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void eventRegisterOnly() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected void eventSecondInit() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    protected String getCloseAdditionalText() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    protected int getCloseValue() {
-        // TODO Auto-generated method stub
-        return 0;
     }
 
     class DownloadTask extends DownloadCartridgeTask {

@@ -112,5 +112,6 @@
     <string name="zone_state_inside">uvnitř</string>
     <string name="zone_state">Stav: %1$s</string>
     <string name="zone_distance">Vzdálenost: %1$s</string>
+    <string name="invalid_url">Neplatný odkaz</string>
 
 </resources>

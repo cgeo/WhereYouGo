@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,7 @@ import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
+import menion.android.whereyougo.network.activity.DownloadCartridgeActivity;
 import menion.android.whereyougo.openwig.WLocationService;
 import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
@@ -333,18 +335,41 @@ public class MainActivity extends CustomMainActivity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            Intent intent = new Intent(getIntent());
+            intent.setClass(this, DownloadCartridgeActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (Intent.ACTION_SEND.equals(getIntent().getAction())) {
+            try {
+                Uri uri = Uri.parse(getIntent().getStringExtra(Intent.EXTRA_TEXT));
+                if (uri.getQueryParameter("CGUID") == null)
+                    throw new Exception("Invalid URL");
+                Intent intent = new Intent(this, DownloadCartridgeActivity.class);
+                intent.setData(uri);
+                startActivity(intent);
+            } catch (Exception e) {
+                ManagerNotify.toastShortMessage(this, getString(R.string.invalid_url));
+            }
+            finish();
+        } else {
+            String cguid = getIntent() == null ? null : getIntent().getStringExtra("cguid");
+            if (cguid != null) {
+                File file = FileSystem.findFile(cguid);
+                if (file != null) {
+                    openCartridge(file);
+                }
+            }
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         refreshCartridges();
-
-        String cguid = getIntent() == null ? null : getIntent().getStringExtra("cguid");
-        if (cguid != null) {
-            getIntent().removeExtra("cguid");
-            File file = FileSystem.findFile(cguid);
-            if (file != null) {
-                openCartridge(file);
-            }
-        }
     }
 
     @Override
