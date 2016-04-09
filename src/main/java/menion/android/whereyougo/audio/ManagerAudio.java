@@ -133,7 +133,9 @@ public class ManagerAudio {
     }
 
     public void stopSound() {
-        Intent intent = new Intent(A.getMain(), AudioPlayService.class);
-        A.getMain().stopService(intent);
+        if (A.getMain() != null) {
+            Intent intent = new Intent(A.getMain(), AudioPlayService.class);
+            A.getMain().stopService(intent);
+        }
     }
 }
