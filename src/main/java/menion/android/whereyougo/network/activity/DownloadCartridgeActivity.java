@@ -30,7 +30,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 
@@ -42,6 +41,7 @@ import menion.android.whereyougo.network.DownloadCartridgeTask;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity {
@@ -161,7 +161,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
                         downloadTask.cancel(false);
                         downloadTask = null;
                         Log.i("down", "cancel");
-                        Toast.makeText(context, R.string.cancelled, Toast.LENGTH_LONG).show();
+                        ManagerNotify.toastShortMessage(context, getString(R.string.cancelled));
                     }
                 }
             });

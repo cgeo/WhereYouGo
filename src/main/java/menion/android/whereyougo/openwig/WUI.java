@@ -22,7 +22,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -51,6 +50,7 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.ManagerNotify;
 import se.krka.kahlua.vm.LuaClosure;
 
 public class WUI implements UI {
@@ -172,17 +172,7 @@ public class WUI implements UI {
         Logger.w(TAG, "setStatus(" + text + ")");
         if (text == null || text.length() == 0)
             return;
-
-        try {
-            final CustomActivity activity = getParentActivity();
-            activity.runOnUiThread(new Runnable() {
-                public void run() {
-                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (Exception e) {
-            Logger.e(TAG, "setStatusText(" + text + ")", e);
-        }
+        ManagerNotify.toastShortMessage(getParentActivity(), text);
     }
 
     public void showError(String msg) {

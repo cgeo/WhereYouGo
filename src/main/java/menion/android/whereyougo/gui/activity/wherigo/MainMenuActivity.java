@@ -28,7 +28,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -245,11 +244,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 MainActivity.wui.setOnSavingFinished(new Runnable() {
                     @Override
                     public void run() {
-                        runOnUiThread(new Runnable() {
-                            public void run() {
-                                Toast.makeText(MainMenuActivity.this, R.string.save_game_ok, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
                         MainActivity.wui.setOnSavingFinished(null);
                     }
                 });
@@ -291,14 +286,8 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                     File slotFile = new File(savefile.getAbsolutePath() + "." + item.getItemId());
                     FileSystem.copyFile(savefile, slotFile);
                     item.setTitle(String.format("%s %d: %s", getText(R.string.save_game_slot), item.getItemId(), UtilsFormat.formatDatetime(slotFile.lastModified())));
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast.makeText(MainMenuActivity.this,
-                                    String.format("%s %d\n%s", getText(R.string.save_game_slot), item.getItemId(), getText(R.string.save_game_ok)),
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                        }
-                    });
+                    ManagerNotify.toastShortMessage(MainMenuActivity.this,
+                            String.format("%s %d\n%s", getText(R.string.save_game_slot), item.getItemId(), getText(R.string.save_game_ok)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

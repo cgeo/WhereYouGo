@@ -26,7 +26,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -42,6 +41,7 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.ExceptionHandler;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.StringToken;
 import menion.android.whereyougo.utils.Utils;
 
@@ -308,7 +308,7 @@ public class MainApplication extends Application {
                 MainActivity.wui.setOnSavingFinished(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainApplication.this, R.string.save_game_auto, Toast.LENGTH_SHORT).show();
+                        ManagerNotify.toastShortMessage(MainApplication.this, getString(R.string.save_game_auto));
                         MainActivity.wui.setOnSavingFinished(null);
                     }
                 });
