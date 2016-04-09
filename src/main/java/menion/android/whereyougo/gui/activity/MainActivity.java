@@ -165,8 +165,6 @@ public class MainActivity extends CustomMainActivity {
 
     public static void refreshCartridges() {
         Logger.w(TAG, "refreshCartridges(), " + (MainActivity.selectedFile == null));
-        if (MainActivity.selectedFile != null)
-            return;
 
         // load cartridge files
         File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");

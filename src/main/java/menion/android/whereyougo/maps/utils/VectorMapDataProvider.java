@@ -18,6 +18,7 @@ package menion.android.whereyougo.maps.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -73,6 +74,8 @@ public class VectorMapDataProvider implements MapDataProvider {
             MapPoint pt =
                     new MapPoint(cartridge.name, cartridge.description, cartridge.latitude,
                             cartridge.longitude);
+            if (MainActivity.cartridgeFile == null && Engine.instance == null)
+                pt.setData(new File(cartridge.filename).getName());
 
             try {
                 byte[] iconData = cartridge.getFile(cartridge.iconId);

@@ -32,6 +32,7 @@ public class MapPoint implements Parcelable {
     };
     String name;
     String description;
+    String data;
     double latitude;
     double longitude;
     boolean target;
@@ -49,6 +50,7 @@ public class MapPoint implements Parcelable {
         latitude = p.readDouble();
         longitude = p.readDouble();
         target = p.readByte() > 0;
+        data = p.readString();
     }
 
     public MapPoint(String name, double latitude, double longitude) {
@@ -109,6 +111,14 @@ public class MapPoint implements Parcelable {
         this.name = name;
     }
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     public boolean isTarget() {
         return target;
     }
@@ -124,6 +134,7 @@ public class MapPoint implements Parcelable {
         p.writeDouble(latitude);
         p.writeDouble(longitude);
         p.writeByte((byte) (target ? 1 : 0));
+        p.writeString(data);
     }
 
 }

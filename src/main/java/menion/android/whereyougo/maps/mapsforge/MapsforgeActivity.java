@@ -80,6 +80,7 @@ import java.util.List;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.IRefreshable;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.maps.container.MapPoint;
 import menion.android.whereyougo.maps.container.MapPointPack;
 import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
@@ -163,20 +164,33 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         public void onTap(final PointOverlay pointOverlay) {
             if (pointOverlay.getPoint() == null)
                 return;
-
             // final MapPoint p = pointOverlay.getPoint();
             //MapsforgeActivity.this.navigationOverlay.setTarget(pointOverlay.getGeoPoint());
-            new AlertDialog.Builder(MapsforgeActivity.this)
+            AlertDialog.Builder builder = new AlertDialog.Builder(MapsforgeActivity.this)
                     .setTitle(pointOverlay.getLabel())
                     .setMessage(
                             UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
                                     + Html.fromHtml(pointOverlay.getDescription(), null, null))
-                    .setNegativeButton(getString(R.string.close), new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
                         }
-                    }).show();
+                    });
+            final String cguid = pointOverlay.getPoint().getData();
+            if (cguid != null)
+                builder.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MapsforgeActivity.this, MainActivity.class);
+                        intent.putExtra("cguid", cguid);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        dialog.dismiss();
+                        MapsforgeActivity.this.finish();
+                    }
+                });
+            builder.show();
         }
     };
 
