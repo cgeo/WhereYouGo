@@ -253,7 +253,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                         MainActivity.wui.setOnSavingFinished(null);
                     }
                 });
-                Engine.requestSync();
+                new SaveGame().execute();
                 return true;
             }
         });
@@ -305,7 +305,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 MainActivity.wui.setOnSavingFinished(null);
             }
         });
-        Engine.requestSync();
+        new SaveGame().execute();
         return true;
     }
 
@@ -319,10 +319,9 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Engine.requestSync();
+                                new SaveGameOnExit().execute();
                                 MainActivity.selectedFile = null;
                                 DetailsActivity.et = null;
-                                new SaveGameOnExit().execute();
                             }
                         }, new DialogInterface.OnClickListener() {
                             @Override
@@ -393,9 +392,15 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         });
     }
 
-    private class SaveGameOnExit extends AsyncTask<Void, Void, Void> {
+    private class SaveGame extends AsyncTask<Void, Void, Void> {
 
-        private ProgressDialog dialog;
+        protected ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            Engine.requestSync();
+            dialog = ProgressDialog.show(MainMenuActivity.this, null, getString(R.string.working));
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -419,14 +424,17 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
             } catch (Exception e) {
                 Logger.w(TAG, "onPostExecute(), e:" + e.toString());
             }
+        }
+
+    }
+
+    private class SaveGameOnExit extends SaveGame {
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
             Engine.kill();
             MainMenuActivity.this.finish();
         }
-
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(MainMenuActivity.this, null, getString(R.string.working));
-        }
-
     }
 }
