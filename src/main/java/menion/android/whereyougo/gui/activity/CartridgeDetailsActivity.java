@@ -20,7 +20,6 @@ package menion.android.whereyougo.gui.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +29,7 @@ import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
@@ -48,14 +48,13 @@ public class CartridgeDetailsActivity extends CustomActivity {
         setContentView(R.layout.layout_details);
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
-        tvName.setText(Html.fromHtml(MainActivity.cartridgeFile.name));
+        tvName.setText(MainActivity.cartridgeFile.name);
 
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
-        tvState.setText(Html.fromHtml(getString(R.string.author) + ": "
-                + MainActivity.cartridgeFile.author));
+        tvState.setText(getString(R.string.author) + ": " + MainActivity.cartridgeFile.author);
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-        tvDescription.setText(Html.fromHtml(MainActivity.cartridgeFile.description));
+        tvDescription.setText(UtilsGUI.html(MainActivity.cartridgeFile.description));
 
         ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
         try {
@@ -82,7 +81,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
                 .append(getString(R.string.longitude)).append(": ")
                 .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
 
-        tvDistance.setText(Html.fromHtml(buff.toString()));
+        tvDistance.setText(UtilsGUI.html(buff.toString()));
 
         CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
             @Override

@@ -35,6 +35,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
@@ -86,7 +87,7 @@ public class InputScreenActivity extends CustomActivity {
 
             Media m = (Media) input.table.rawget("Media");
             if (m != null) {
-                tvImageDesc.setText(m.altText);
+                tvImageDesc.setText(UtilsGUI.html(m.altText));
                 try {
                     byte[] is = Engine.mediaFile(m);
                     Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
@@ -100,7 +101,7 @@ public class InputScreenActivity extends CustomActivity {
             // set question TextView
             TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
             String text = (String) input.table.rawget("Text");
-            tvQuestion.setText(text);
+            tvQuestion.setText(UtilsGUI.html(text));
 
             // set answer
             final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);

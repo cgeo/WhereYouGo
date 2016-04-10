@@ -43,6 +43,7 @@ import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
@@ -171,11 +172,11 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
                 }
 
                 tvName.setText(et.name);
-                tvDescription.setText(et.description);
+                tvDescription.setText(UtilsGUI.html(et.description));
 
                 Media m = (Media) et.table.rawget("Media");
                 if (m != null) {
-                    tvImageText.setText(m.altText);
+                    tvImageText.setText(UtilsGUI.html(m.altText));
                     // Logger.w(TAG, "SET: " + et.name + ", " + m.id);
                     try {
                         byte[] is = Engine.mediaFile(m);

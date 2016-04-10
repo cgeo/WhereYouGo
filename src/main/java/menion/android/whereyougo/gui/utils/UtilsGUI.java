@@ -312,4 +312,8 @@ public class UtilsGUI {
             }
         });
     }
+
+    public static String html(String s) {
+        return s == null ? s : Html.fromHtml(s).toString();
+    }
 }

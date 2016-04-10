@@ -30,6 +30,7 @@ import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
@@ -91,7 +92,7 @@ public class PushDialogActivity extends CustomActivity {
                     MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
                             ivImage);
                 } catch (Exception e) {
-                    tvImageText.setText(m.altText);
+                    tvImageText.setText(UtilsGUI.html(m.altText));
                 }
             } else {
                 ivImage.setImageBitmap(null);
@@ -99,7 +100,7 @@ public class PushDialogActivity extends CustomActivity {
                 ivImage.setMinimumHeight(0);
             }
 
-            tvImageText.setText(tvImageText.getText().toString() + "\n" + texts[page]);
+            tvImageText.setText(tvImageText.getText().toString() + "\n" + UtilsGUI.html(texts[page]));
         }
     }
 

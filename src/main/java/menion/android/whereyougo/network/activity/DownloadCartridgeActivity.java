@@ -70,25 +70,25 @@ public class DownloadCartridgeActivity extends CustomActivity {
         setContentView(R.layout.layout_details);
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
-        tvName.setText(Html.fromHtml(getString(R.string.download_cartridge)));
+        tvName.setText(R.string.download_cartridge);
 
         tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
 
         cartridgeFile = FileSystem.findFile(cguid);
         if (cartridgeFile != null) {
-            tvDescription.setText(Html.fromHtml(
-                    String.format("CGUID:<br>%s<br>\n%s",
+            tvDescription.setText(
+                    String.format("CGUID:\n%s\n%s",
                             cguid,
                             cartridgeFile.getName().replace(cguid + "_", "")
-                    )));
-            tvState.setText(Html.fromHtml(
-                    String.format("%s<br>%s",
+                    ));
+            tvState.setText(
+                    String.format("%s\n%s",
                             getString(R.string.download_successful),
                             UtilsFormat.formatDatetime(cartridgeFile.lastModified())
-                    )));
+                    ));
         } else {
-            tvDescription.setText(Html.fromHtml(String.format("CGUID:<br>%s", cguid)));
+            tvDescription.setText(String.format("CGUID:\n%s", cguid));
         }
 
         ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
