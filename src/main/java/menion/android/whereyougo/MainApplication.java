@@ -113,6 +113,31 @@ public class MainApplication extends Application {
         onAppVisibilityChange = null;
     }
 
+    public boolean setRoot(String pathCustom) {
+        String pathExternal = null;
+        try {
+            pathExternal = getExternalFilesDir(null).getAbsolutePath();
+        } catch (Exception e1) {
+        }
+        String pathInternal = null;
+        try {
+            pathInternal = getFilesDir().getAbsolutePath();
+        } catch (Exception e2) {
+        }
+        boolean set = true;
+        if (pathCustom == null || !FileSystem.setRootDirectory(pathCustom))
+            if (pathExternal == null || !FileSystem.setRootDirectory(pathExternal) || true)
+                if (pathInternal == null || !FileSystem.setRootDirectory(pathInternal))
+                    set = false;
+
+        Preferences.GLOBAL_ROOT = FileSystem.ROOT;
+        Preferences.setStringPreference(R.string.pref_KEY_S_ROOT, Preferences.GLOBAL_ROOT);
+        if (!set) {
+            ManagerNotify.toastShortMessage(this, getString(R.string.filesystem_cannot_create_root));
+        }
+        return set;
+    }
+
     private void initCore() {
         // register screen on/off receiver
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
@@ -135,19 +160,9 @@ public class MainApplication extends Application {
         // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
         // e){Log.i("FS", "-");}
         // initialize root directory
-        if ("".equals(Preferences.GLOBAL_ROOT)
-                || !FileSystem.setRootDirectory(null, Preferences.GLOBAL_ROOT)) {
-            if (!FileSystem.createRoot(APP_NAME)) {
-                try {
-                    FileSystem.setRootDirectory(null, getExternalFilesDir(null).getAbsolutePath());
-                } catch (Exception e1) {
-                    try {
-                        FileSystem.setRootDirectory(null, getFilesDir().getAbsolutePath());
-                    } catch (Exception e2) {
-                    }
-                }
-            }
-        }
+
+        setRoot(Preferences.GLOBAL_ROOT);
+
         try {
             FileSystem.CACHE = getExternalCacheDir().getAbsolutePath();
         } catch (Exception e1) {
@@ -168,7 +183,7 @@ public class MainApplication extends Application {
 
         // set DeviceID for OpenWig
         try {
-            String name = String.format("%s %s", A.getAppName(), A.getAppVersion());
+            String name = String.format("%s, app:%s", A.getAppName(), A.getAppVersion());
             String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);

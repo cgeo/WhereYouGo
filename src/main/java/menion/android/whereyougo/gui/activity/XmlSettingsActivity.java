@@ -138,11 +138,11 @@ public class XmlSettingsActivity extends PreferenceActivity
                             selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
                                 public void onFileSelected(Dialog source, File folder) {
                                     source.dismiss();
-                                    FileSystem.setRootDirectory(null, folder.getAbsolutePath());
-                                    MainActivity.refreshCartridges();
-                                    Preferences.GLOBAL_ROOT = FileSystem.ROOT;
-                                    PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                    preferenceRoot.setValue(Preferences.GLOBAL_ROOT);
+                                    if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
+                                        PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                                        preferenceRoot.setValue(FileSystem.ROOT);
+                                        MainActivity.refreshCartridges();
+                                    }
                                 }
 
                                 public void onFileSelected(Dialog source, File folder, String name) {
@@ -157,21 +157,11 @@ public class XmlSettingsActivity extends PreferenceActivity
                     getString(R.string.folder_default), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            FileSystem.ROOT = null;
-                            if (!FileSystem.createRoot(MainApplication.APP_NAME)) {
-                                try {
-                                    FileSystem.setRootDirectory(null, getExternalFilesDir(null).getAbsolutePath());
-                                } catch (Exception e1) {
-                                    try {
-                                        FileSystem.setRootDirectory(null, getFilesDir().getAbsolutePath());
-                                    } catch (Exception e2) {
-                                    }
-                                }
+                            if (((MainApplication) A.getApp()).setRoot(null)) {
+                                PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                                preferenceRoot.setValue(FileSystem.ROOT);
+                                MainActivity.refreshCartridges();
                             }
-                            MainActivity.refreshCartridges();
-                            Preferences.GLOBAL_ROOT = FileSystem.ROOT;
-                            PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                            preferenceRoot.setValue(Preferences.GLOBAL_ROOT);
                         }
                     });
             return false;

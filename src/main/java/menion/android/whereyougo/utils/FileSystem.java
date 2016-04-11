@@ -136,7 +136,7 @@ public class FileSystem {
     /**
      * Checks folders in given filePath and creates them if necessary
      *
-     * @param filePath file name
+     * @param fileName file name
      */
     public static void checkFolders(String fileName) {
         try {
@@ -149,7 +149,7 @@ public class FileSystem {
     /**
      * Writes binary data into file
      *
-     * @param filePath file name (absolute)
+     * @param fileName file name (absolute)
      * @param data     binary data
      */
     public static synchronized void saveBytes(String fileName, byte[] data) {
@@ -162,18 +162,23 @@ public class FileSystem {
         }
     }
 
-    public static boolean setRootDirectory(String cardRoot, String appRoot) {
+    public static boolean setRootDirectory(String appRoot) {
+        return setRootDirectory(null, appRoot);
+    }
+
+    private static boolean setRootDirectory(String cardRoot, String appRoot) {
+        if (appRoot == null || appRoot.equals(""))
+            return false;
         if (!appRoot.endsWith("/"))
             appRoot += "/";
 
-        FileSystem.ROOT = appRoot;
-
         // create root directory
-        File rootAppDir = new File(ROOT);
+        File rootAppDir = new File(appRoot);
         if (!rootAppDir.exists()) {
             if (!rootAppDir.mkdir())
                 return false;
         }
+        FileSystem.ROOT = appRoot;
         return true;
     }
 

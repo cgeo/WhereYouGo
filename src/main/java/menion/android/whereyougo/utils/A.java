@@ -19,6 +19,7 @@ package menion.android.whereyougo.utils;
 
 import android.app.Application;
 
+import menion.android.whereyougo.BuildConfig;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.audio.ManagerAudio;
 import menion.android.whereyougo.geo.orientation.Orientation;
@@ -110,7 +111,7 @@ public class A {
         try {
             return app.getPackageManager().getPackageInfo(app.getPackageName(), 0).versionName;
         } catch (Exception e) {
-            return "";
+            return BuildConfig.VERSION_NAME;
         }
     }
 }
