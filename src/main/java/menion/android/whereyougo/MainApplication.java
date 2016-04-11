@@ -126,7 +126,7 @@ public class MainApplication extends Application {
         }
         boolean set = true;
         if (pathCustom == null || !FileSystem.setRootDirectory(pathCustom))
-            if (pathExternal == null || !FileSystem.setRootDirectory(pathExternal) || true)
+            if (pathExternal == null || !FileSystem.setRootDirectory(pathExternal))
                 if (pathInternal == null || !FileSystem.setRootDirectory(pathInternal))
                     set = false;
 
