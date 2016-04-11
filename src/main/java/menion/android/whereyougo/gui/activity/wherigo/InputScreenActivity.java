@@ -87,7 +87,7 @@ public class InputScreenActivity extends CustomActivity {
 
             Media m = (Media) input.table.rawget("Media");
             if (m != null) {
-                tvImageDesc.setText(UtilsGUI.html(m.altText));
+                tvImageDesc.setText(UtilsGUI.simpleHtml(m.altText));
                 try {
                     byte[] is = Engine.mediaFile(m);
                     Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
@@ -101,7 +101,7 @@ public class InputScreenActivity extends CustomActivity {
             // set question TextView
             TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
             String text = (String) input.table.rawget("Text");
-            tvQuestion.setText(UtilsGUI.html(text));
+            tvQuestion.setText(UtilsGUI.simpleHtml(text));
 
             // set answer
             final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);

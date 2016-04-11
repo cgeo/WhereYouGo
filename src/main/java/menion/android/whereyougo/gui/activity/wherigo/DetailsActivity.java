@@ -172,11 +172,11 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
                 }
 
                 tvName.setText(et.name);
-                tvDescription.setText(UtilsGUI.html(et.description));
+                tvDescription.setText(UtilsGUI.simpleHtml(et.description));
 
                 Media m = (Media) et.table.rawget("Media");
                 if (m != null) {
-                    tvImageText.setText(UtilsGUI.html(m.altText));
+                    tvImageText.setText(UtilsGUI.simpleHtml(m.altText));
                     // Logger.w(TAG, "SET: " + et.name + ", " + m.id);
                     try {
                         byte[] is = Engine.mediaFile(m);

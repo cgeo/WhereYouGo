@@ -50,6 +50,7 @@ public class PushDialogActivity extends CustomActivity {
     private static int page = -1;
     private ImageView ivImage;
     private TextView tvImageText;
+    private TextView tvText;
 
     public static void setDialog(String[] texts, Media[] media, String button1, String button2,
                                  LuaClosure callback) {
@@ -92,7 +93,7 @@ public class PushDialogActivity extends CustomActivity {
                     MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
                             ivImage);
                 } catch (Exception e) {
-                    tvImageText.setText(UtilsGUI.html(m.altText));
+                    tvImageText.setText(UtilsGUI.simpleHtml(m.altText));
                 }
             } else {
                 ivImage.setImageBitmap(null);
@@ -100,7 +101,7 @@ public class PushDialogActivity extends CustomActivity {
                 ivImage.setMinimumHeight(0);
             }
 
-            tvImageText.setText(tvImageText.getText().toString() + "\n" + UtilsGUI.html(texts[page]));
+            tvText.setText(UtilsGUI.simpleHtml(texts[page]));
         }
     }
 
@@ -113,10 +114,10 @@ public class PushDialogActivity extends CustomActivity {
         setContentView(R.layout.layout_details);
         findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
-        findViewById(R.id.layoutDetailsTextViewDescription).setVisibility(View.GONE);
+        findViewById(R.id.layoutDetailsTextViewDistance).setVisibility(View.GONE);
         ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
         tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
-        findViewById(R.id.layoutDetailsTextViewDistance).setVisibility(View.GONE);
+        tvText = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
 
         if (menu02Text == null || menu02Text.length() == 0) {
             menu02Text = null;

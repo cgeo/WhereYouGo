@@ -20,6 +20,7 @@ package menion.android.whereyougo.gui.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,7 +55,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
         tvState.setText(getString(R.string.author) + ": " + MainActivity.cartridgeFile.author);
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-        tvDescription.setText(UtilsGUI.html(MainActivity.cartridgeFile.description));
+        tvDescription.setText(UtilsGUI.simpleHtml(MainActivity.cartridgeFile.description));
 
         ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
         try {
@@ -81,7 +82,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
                 .append(getString(R.string.longitude)).append(": ")
                 .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
 
-        tvDistance.setText(UtilsGUI.html(buff.toString()));
+        tvDistance.setText(Html.fromHtml(buff.toString()));
 
         CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
             @Override

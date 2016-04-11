@@ -33,6 +33,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
@@ -313,7 +314,17 @@ public class UtilsGUI {
         });
     }
 
-    public static String html(String s) {
-        return s == null ? s : Html.fromHtml(s).toString();
+    public static CharSequence simpleHtml(String s) {
+        return s == null ? s : Engine.removeHtml(s);
+    }
+
+    public static CharSequence html(String s, boolean preserveWhitespaces) {
+        if (s == null)
+            return null;
+        if (preserveWhitespaces) {
+            s = s.replaceAll("\\n", "<br>"); // preserve newlines
+            s = s.replaceAll("  ", "&nbsp;&nbsp;"); // preserve spaces
+        }
+        return Html.fromHtml(s).toString();
     }
 }
