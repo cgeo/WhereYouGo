@@ -290,7 +290,6 @@ public class MainApplication extends Application {
             } else {
                 locale = new Locale(loc.get(0), loc.get(1));
             }
-            Locale.setDefault(locale);
             config.locale = locale;
             getBaseContext().getResources().updateConfiguration(config,
                     getBaseContext().getResources().getDisplayMetrics());

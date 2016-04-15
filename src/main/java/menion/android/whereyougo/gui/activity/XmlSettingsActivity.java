@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
 import menion.android.whereyougo.MainApplication;
@@ -28,6 +30,7 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.StringToken;
 import menion.android.whereyougo.utils.Utils;
 
 
@@ -269,7 +272,25 @@ public class XmlSettingsActivity extends PreferenceActivity
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.APPEARANCE_IMAGE_STRETCH = Utils.parseBoolean(newValue);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_LANGUAGE)) {
-            needRestart = true;
+            String lang = sharedPreferences.getString(key, "");
+            ArrayList<String> loc = StringToken.parse(lang, "_");
+            Configuration config = getBaseContext().getResources().getConfiguration();
+            java.util.Locale locale;
+            if ("default".equals(lang)) {
+                locale = java.util.Locale.getDefault();
+            } else if (loc.size() == 1) {
+                locale = new java.util.Locale(lang);
+            } else if (loc.size() == 2) {
+                locale = new java.util.Locale(loc.get(0), loc.get(1));
+            } else {
+                locale = config.locale;
+            }
+            if (!config.locale.getLanguage().equals(locale.getLanguage())) {
+                config.locale = locale;
+                getBaseContext().getResources().updateConfiguration(config,
+                        getBaseContext().getResources().getDisplayMetrics());
+                needRestart = true;
+            }
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_MAP_PROVIDER)) {
             String newValue = sharedPreferences.getString(key, null);
             Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
