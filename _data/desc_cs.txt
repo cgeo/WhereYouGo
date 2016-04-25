@@ -1,0 +1,24 @@
+WhereYouGo je neoficiální klient pro Wherigo Geocaching. Zobrazuje online i offline vektorové mapy pomocí knihovny Mapsforge, alternativně lze použít pro zobrazení map aplikaci Locus.
+
+Upozornění:
+- Uložené hry z verze 0.6.0 a nižší nejsou kompatibilní s aktuální verzí.
+- Verzi 0.6.0 lze stáhnout zde: https://android-whereyougo.googlecode.com/files/0.6.0.apk
+- Cartridge lze stáhnout z http://www.wherigo.com, používejte verzi "Pocket PC Device".
+- Pokud nepoužíváte vestavěnou funkci stahování, umístěte cartridge do vaší zvolené složky s Wherigo (implicitně "sdcard/WhereYouGo")
+
+Funkce:
+- Wherigo klient
+- Stahování cartridge (uživatel musí v Nastavení vyplnit přihlašovací údaje, poté pomocí Webového prohlížeče navigovat ke kýženému wherigo a zvolit otevření ve WhereYouGo)
+- Automatické ukládání při přepnutí na jinou aplikaci
+- Online mapy
+- Offline vektorové mapy (lze stáhnout např. na stránkách http://download.mapsforge.org/ nebo http://osm.paws.cz/ nebo http://www.openandromaps.org/)
+- Alternativně lze použít pro zobrazení mapy aplikaci Locus http://play.google.com/store/apps/details?id=menion.android.locus
+- Zobrazení objektů na mapě, včetně popisků a hranic zón
+- Vektorové mapy zobrazují i pohyblivé objekty (Locus ne)
+- Kompas
+- Přeloženo do mnoha jazyků (některé části mohou být nepřeložené nebo obsahovat chyby, pokud byste chtěli přispět lepším překladem, kontaktujte mne přes e-mail :)
+
+O projektu:
+Jádro programu je založené na OpenWIG, na zobrazení mapy používá knihovnu MapsForge, alternativně lze použít Locus.
+https://code.google.com/p/android-whereyougo/ - původní stránka projektu (obsahuje verzi 0.7.0)
+https://code.google.com/r/biylda-whereyougo/ - klon projektu (obsahuje aktuální verzi)

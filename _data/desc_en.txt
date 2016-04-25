@@ -1,20 +1,24 @@
-WhereYouGo is an unofficial client for Wherigo Geocaching. It uses offline vector maps, alternatively Locus can be used to display maps.
+WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online and offline vector maps using Mapsforge library, alternatively Locus can be used to display maps.
 
 Notice:
-- Use wherigo cartridge "Pocket PC Device".
 - Savegames from version 0.6.0 and lower are not compatible with current version.
 - Version 0.6.0 can be downloaded here: https://android-whereyougo.googlecode.com/files/0.6.0.apk
+- Cartridges are downloadable from http://www.wherigo.com, use version "Pocket PC Device".
+- If you don't use the built-in download function, place the cartridges into your specified Wherigo folder (default "sdcard/WhereYouGo")
 
 Functions:
 - Wherigo client
+- Download cartridges (user needs to fill login credentials in Settings, browse to desired wherigo via Web Browser and select open in WhereYouGo)
 - Automatic game saving when user switches to another application
-- Offline vector maps (downloadable e.g. here http://download.mapsforge.org/ or http://osm.paws.cz/)
-- Alternatively Locus can be used to display maps (https://play.google.com/store/apps/details?id=menion.android.locus)
+- Online maps
+- Offline vector maps (downloadable e.g. here http://download.mapsforge.org/ or http://osm.paws.cz/ or http://www.openandromaps.org/)
+- Alternatively Locus can be used to display maps http://play.google.com/store/apps/details?id=menion.android.locus
 - Displays objects on map, including labels and zone borders
 - Vector maps display moving objects (Locus does not)
 - Compass
+- Translated into many languages (some parts may be untranslated or contain mistakes, if you'd like to contribute with a better translation, please contact me via e-mail :)
 
 About:
-The core of the application is based on OpenWIG, it uses MapsForge library to display offline vector maps, alternatively Locus can be used.
+The core of the application is based on OpenWIG, it uses Mapsforge library to display maps, alternatively Locus can be used.
 https://code.google.com/p/android-whereyougo/ - original project page (contains version 0.7.0)
 https://code.google.com/r/biylda-whereyougo/ - project clone (contains current version)

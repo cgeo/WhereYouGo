@@ -1,20 +1,24 @@
-WhereYouGo ist unofficial Klient für Wherigo Geocaching. Es benutzt offline vektor Mappen, oder man kann auch Locus Applikation für Mappen benutzen.
+WhereYouGo ist ein unoffizieller Klient für Wherigo Geocaching. Er anzeigt Online-Karten und Offline-Vektor-Karten durch die Mapsforge-Bibliothek, alternativ lässt sich auch die App Locus für die Karten verwenden.
 
-Beachtung:
-- Benutze wherigo Cartridge "Pocket PC Device".
-- Spiel gespeichert im Version 0.6.0 und niedriger ist nicht kompatible mit der aktuelle Version.
+Hinweise:
+- Spiele gespeichert mit Version 0.6.0 und niedriger sind nicht kompatibel mit der aktuelle Version.
 - Version 0.6.0 kann man hier herunterladen: https://android-whereyougo.googlecode.com/files/0.6.0.apk
+- Cartridges kann man auf der Website http://www.wherigo.com herunterladen, verwende die Version "Pocket PC Device".
+- Falls man die eingebaute Herunterladen-Funktion nicht benutzt, musst er die Cartridges in das gewählte Wherigo-Verzeichnis platzieren (voreinstellen "sdcard/WhereYouGo")
 
 Funktionen:
-- Wherigo Klient
-- Das Speil ist automatisch gespeichert, wenn man die Applikation minimisiert.
-- Offline vector Mappen (herunterladen z.B. hier http://download.mapsforge.org/ oder http://osm.paws.cz/)
-- Man kann auch Locus für Mappen benutzen (https://play.google.com/store/apps/details?id=menion.android.locus)
-- Es anzeight Objekte auf der Mappe, inklusive Bildunterschrifte und Zonegrenze
-- Vector Mappen anzeigen auch bewegbare Objekte (Locus nicht)
+- Wherigo-Klient
+- Cartridges herunterladen (man muss seine Anmeldeinformationen in Einstellungen ausfüllen, zur Wherigoseite durch Web-Browser browsen und im WhereYouGo öffnen zu wählen)
+- Das Spiel wird automatisch gespeichert, wenn man die Applikation minimiert.
+- Online-Karten
+- Offline-Vektor-Karten (herunterladen z. B. hier http://download.mapsforge.org/ oder http://osm.paws.cz/ oder http://www.openandromaps.org/)
+- Alternativ kann Locus benutzt werden, um Karten anzuzeigen: http://play.google.com/store/apps/details?id=menion.android.locus
+- Die Objekte werden auf der Karte angezeigt, inklusive Beschriftung und Zonengrenze
+- Vektor-Karten zeigen auch bewegbare Objekte an (Locus nicht)
 - Kompass
+- Übersetzt in viele Fremdsprachen (einige Teile können überhaupt nicht oder falsch übersetzen sein, falls du mit besseren Übersetzung beitragen willst, kontaktiere mich durch das E-mail :)
 
 Über das Projekt:
-Der Kern der Applikation ist auf OpenWIG gegründet, es benutzt MapsForge Bibliothek um offline vektor Mappe zu anzeigen, oder man kan auch Locus benutzen.
-https://code.google.com/p/android-whereyougo/ - original Projekt Seite (enthaltet Version 0.7.0)
-https://code.google.com/r/biylda-whereyougo/ - Projekt Klon (enthaltet aktuelle Version)
+Der Kern der Applikation basiert auf OpenWIG, sie benutzt die Mapsforge-Bibliothek, um Offline-Vektorkarten anzuzeigen, alternativ lässt sich auch Locus benutzen.
+https://code.google.com/p/android-whereyougo/ - Originale Projektseite (enthält Version 0.7.0)
+https://code.google.com/r/biylda-whereyougo/ - Projekt-Klon (enthält aktuelle Version)
