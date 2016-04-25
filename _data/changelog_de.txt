@@ -1,10 +1,10 @@
-! Spiel gespeichert im Version 0.6.0 und niedriger ist nicht kompatible mit der aktuelle Version
+! Spielstände aus Version 0.6.0 oder älter sind nicht kompatibel mit dieser Version.
 
 0.9.0
-Added saving slots.
-Added ability to start wherigo from map after clicking on icon.
-Improved Wherigo folder settings.
-Fixed downloading of cartridges from wherigo.com.
-Added ability to receive wherigo link via Share.
-Added new settings options for units formatting (distance, speed, angle).
+Speicherplätze hinzugefügt
+Starte Wherigo von der Karte durch Klick auf das Icon
+Verbesserte Wherigo-Orderauswahl
+Downloadprobleme von wherigo.com behoben
+Funktion um geteilte Wherigo-Links zu nutzen
+Neue Einstellungen für Einheiten (Entfernung, Geschwindigkeit, Winkel)
 etc...
