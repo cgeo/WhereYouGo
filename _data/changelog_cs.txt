@@ -1,0 +1,9 @@
+! Uložené hry z verze 0.6.0 a nižší nejsou kompatibilní s aktuální verzí !
+
+0.9.0
+Ukládací sloty.
+Lze spustit wherigo z mapy.
+Vylepšeno nastavení složky s Wherigo.
+Opraveno stahování z wherigo.com.
+Pomocí Sdílet lze odkaz na wherigo poslat do WhereYouGo ke stažení.
+atd...
