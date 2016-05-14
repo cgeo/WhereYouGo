@@ -22,27 +22,17 @@ Uses the following projects:
 	
 ##Development
 ###Prerequisites
-* [Android Studio and SDK](https://developer.android.com/sdk/index.html)
-* Mercurial
+* [Android SDK](https://developer.android.com/sdk/index.html)
+* Gradle
 * Git
 
-###Installation
-* follow the guidelines [here](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api:installation) to setup project and acquire Locus API
+###Build
 * execute
 ```
 git clone https://github.com/biylda/WhereYouGo.git whereyougo
-git clone https://github.com/biylda/openwig.git -b whereyougo openwig
-git clone https://github.com/jfmdev/aFileDialog.git aFileDialog
-```
-* add the following lines to your `settings.gradle`
-```
-include ':locusAPI'
-include ':locusAPI_android'
-include ':aFileDialog'
-project(':aFileDialog').projectDir = new File('aFileDialog/library/app')
-include ':openwig'
-project(':openwig').projectDir = new File('openwig/OpenWIGLibrary')
-include ':whereyougo'
+cd whereyougo
+export ANDROID_HOME=/path/to/android-sdk
+gradle build
 ```
 ##What's new
 <h4>

@@ -1,3 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.0'
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+        jcenter()
+    }
+}
+
 apply plugin: 'com.android.application'
 
 android {
@@ -8,7 +24,7 @@ android {
         applicationId "menion.android.whereyougo"
         versionCode 40
         versionName "0.9.0"
-        minSdkVersion 8
+        minSdkVersion 15
         targetSdkVersion 17
     }
 
@@ -23,14 +39,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
-    compile project(':locusAPI')
-    compile project(':locusAPI_android')
-    compile project(':openwig')
-    compile project(':aFileDialog')
-    compile files('libs/mapsforge-map-0.3.1-SNAPSHOT-jar-with-dependencies.jar')
+    compile 'com.asamm:locus-api-android:0.2.2'
+    compile 'com.github.biylda:openwig:a44aa6f'
+    compile 'com.github.jfmdev:aFileDialog:v1.0.6'
+    compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }
