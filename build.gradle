@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.2.2'
     }
 }
 
@@ -17,8 +17,8 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1"
+    compileSdkVersion 21
+    buildToolsVersion "25"
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
@@ -47,10 +47,10 @@ android {
 }
 
 dependencies {
-    compile 'com.asamm:locus-api-android:0.2.2'
+    compile 'com.asamm:locus-api-android:0.2.7'
     compile 'com.github.biylda:openwig:a44aa6f'
     compile 'com.github.jfmdev:aFileDialog:v1.0.6'
     compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
 }
