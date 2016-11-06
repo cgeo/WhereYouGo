@@ -23,7 +23,6 @@ Uses the following projects:
 ##Development
 ###Prerequisites
 * [Android SDK](https://developer.android.com/sdk/index.html)
-* Gradle
 * Git
 
 ###Build
@@ -32,7 +31,7 @@ Uses the following projects:
 git clone https://github.com/biylda/WhereYouGo.git whereyougo
 cd whereyougo
 export ANDROID_HOME=/path/to/android-sdk
-gradle build
+./gradlew build
 ```
 ##What's new
 <h4>
