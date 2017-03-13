@@ -109,33 +109,24 @@ public class CustomActivity extends FragmentActivity {
 
     public static void setStatusbar(Activity activity) {
         try {
-            NotificationManager mNotificationManager =
-                    (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager notificationManager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
             // set statusbar
             if (Preferences.APPEARANCE_STATUSBAR) {
                 Context context = activity.getApplicationContext();
-                Intent intent =
-                        new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
+                Intent intent = new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
                 // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 intent.setAction(Intent.ACTION_MAIN);
-                PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
-                final int sdkVersion = Integer.parseInt(android.os.Build.VERSION.SDK);
-                Notification notif = null;
-                if (sdkVersion < android.os.Build.VERSION_CODES.HONEYCOMB) {
-                    notif =
-                            new Notification(R.drawable.ic_title_logo, A.getAppName(), System.currentTimeMillis());
-                    notif.setLatestEventInfo(activity, A.getAppName(), "", pIntent);
-                } else {
-                    NotificationCompat.Builder builder =
-                            new NotificationCompat.Builder(activity).setContentTitle(A.getAppName())
-                                    .setSmallIcon(R.drawable.ic_title_logo).setContentIntent(pIntent);
-                    notif = builder.build();
-                }
-                notif.flags = Notification.FLAG_ONGOING_EVENT;
-                mNotificationManager.notify(0, notif);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+                Notification notification = new NotificationCompat.Builder(activity)
+                        .setContentTitle(A.getAppName())
+                        .setSmallIcon(R.drawable.ic_title_logo)
+                        .setContentIntent(pendingIntent)
+                        .setOngoing(true)
+                        .build();
+                notificationManager.notify(0, notification);
             } else {
-                mNotificationManager.cancel(0);
+                notificationManager.cancel(0);
             }
         } catch (Exception e) {
             // Logger.e(TAG, "setStatusbar(" + activity + ")", e);
