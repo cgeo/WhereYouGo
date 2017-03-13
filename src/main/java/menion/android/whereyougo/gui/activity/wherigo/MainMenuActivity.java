@@ -65,6 +65,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     private static int DOUBLE_PRESS_HK_BACK_PERIOD = 666;
     private AdapterView.OnItemClickListener listClick;
     private long lastPressedTime = 0;
+    private MenuItem saveGameMainMenuItem;
 
     private String getVisibleCartridgeThingsDescription() {
         String description = null;
@@ -222,6 +223,34 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         };
 
         CustomDialog.setTitle(this, Engine.instance.cartridge.name, null, CustomDialog.NO_IMAGE, null);
+        String saveGameText;
+        CustomDialog.OnClickListener saveGameListener;
+        if (Preferences.GLOBAL_SAVEGAME_SLOTS > 0) {
+            saveGameText = getString(R.string.save_game_slots);
+            saveGameListener = new CustomDialog.OnClickListener() {
+                @Override
+                public boolean onClick(CustomDialog dialog, View v, int btn) {
+                    openOptionsMenu();
+                    return true;
+                }
+            };
+        } else {
+            saveGameText = getString(R.string.save_game);
+            saveGameListener = new CustomDialog.OnClickListener() {
+                @Override
+                public boolean onClick(CustomDialog dialog, View v, int btn) {
+                    MainActivity.wui.setOnSavingFinished(new Runnable() {
+                        @Override
+                        public void run() {
+                            ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
+                            MainActivity.wui.setOnSavingFinished(null);
+                        }
+                    });
+                    new SaveGame().execute();
+                    return true;
+                }
+            };
+        }
         CustomDialog.setBottom(this, getString(R.string.gps), new CustomDialog.OnClickListener() {
             @Override
             public boolean onClick(CustomDialog dialog, View v, int btn) {
@@ -238,34 +267,43 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
                 return true;
             }
-        }, getString(R.string.save_game), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                MainActivity.wui.setOnSavingFinished(new Runnable() {
-                    @Override
-                    public void run() {
-                        ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
-                        MainActivity.wui.setOnSavingFinished(null);
-                    }
-                });
-                new SaveGame().execute();
-                return true;
-            }
-        });
+        }, saveGameText, saveGameListener);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         try {
-            File savefile = MainActivity.getSaveFile();
-            for (int slot = 1; slot <= Preferences.GLOBAL_SAVEGAME_SLOTS; ++slot) {
-                File slotFile = new File(savefile.getAbsolutePath() + "." + slot);
+            File saveFile = MainActivity.getSaveFile();
+            {
+                // main save
                 String text;
-                if (slotFile.exists()) {
-                    text = String.format("%s %d: %s", getText(R.string.save_game_slot), slot, UtilsFormat.formatDatetime(slotFile.lastModified()));
+                if (saveFile.exists()) {
+                    text = String.format("%s: %s",
+                            getString(R.string.save_file_main),
+                            UtilsFormat.formatDatetime(saveFile.lastModified())
+                    );
                 } else {
-                    text = String.format("%s %d", getText(R.string.save_game_slot), slot);
+                    text = String.format("%s",
+                            getString(R.string.save_file_main)
+                    );
+                }
+                saveGameMainMenuItem = menu.add(0, 0, Preferences.GLOBAL_SAVEGAME_SLOTS, text);
+            }
+            for (int slot = 1; slot <= Preferences.GLOBAL_SAVEGAME_SLOTS; ++slot) {
+                File file = new File(saveFile.getAbsolutePath() + "." + slot);
+                String text;
+                if (file.exists()) {
+                    text = String.format("%s %d: %s",
+                            getString(R.string.save_game_slot),
+                            slot,
+                            UtilsFormat.formatDatetime(file.lastModified())
+                    );
+                } else {
+                    text = String.format("%s %d",
+                            getString(R.string.save_game_slot),
+                            slot
+                    );
                 }
                 menu.add(0, slot, Preferences.GLOBAL_SAVEGAME_SLOTS - slot, text);
             }
@@ -278,22 +316,58 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        MainActivity.wui.setOnSavingFinished(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    File savefile = MainActivity.getSaveFile();
-                    File slotFile = new File(savefile.getAbsolutePath() + "." + item.getItemId());
-                    FileSystem.copyFile(savefile, slotFile);
-                    item.setTitle(String.format("%s %d: %s", getText(R.string.save_game_slot), item.getItemId(), UtilsFormat.formatDatetime(slotFile.lastModified())));
-                    ManagerNotify.toastShortMessage(MainMenuActivity.this,
-                            String.format("%s %d\n%s", getText(R.string.save_game_slot), item.getItemId(), getText(R.string.save_game_ok)));
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (item.getGroupId() != 0)
+            return false;
+        if (item.getItemId() == 0) {
+            MainActivity.wui.setOnSavingFinished(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        File saveFile = MainActivity.getSaveFile();
+                        String title = String.format("%s: %s",
+                                getString(R.string.save_file_main),
+                                UtilsFormat.formatDatetime(saveFile.lastModified())
+                        );
+                        item.setTitle(title);
+                        ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    MainActivity.wui.setOnSavingFinished(null);
                 }
-                MainActivity.wui.setOnSavingFinished(null);
-            }
-        });
+            });
+        } else {
+            MainActivity.wui.setOnSavingFinished(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        File saveFile = MainActivity.getSaveFile();
+                        File slotFile = new File(saveFile.getAbsolutePath() + "." + item.getItemId());
+                        FileSystem.copyFile(saveFile, slotFile);
+                        String mainTitle = String.format("%s: %s",
+                                getString(R.string.save_file_main),
+                                UtilsFormat.formatDatetime(saveFile.lastModified())
+                        );
+                        saveGameMainMenuItem.setTitle(mainTitle);
+                        String title = String.format("%s %d: %s",
+                                getString(R.string.save_game_slot),
+                                item.getItemId(),
+                                UtilsFormat.formatDatetime(slotFile.lastModified())
+                        );
+                        item.setTitle(title);
+                        String message = String.format("%s %d\n%s",
+                                getString(R.string.save_game_slot),
+                                item.getItemId(),
+                                getText(R.string.save_game_ok)
+                        );
+                        ManagerNotify.toastShortMessage(MainMenuActivity.this, message);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    MainActivity.wui.setOnSavingFinished(null);
+                }
+            });
+        }
         new SaveGame().execute();
         return true;
     }

@@ -300,7 +300,7 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_SAVEGAME_SLOTS)) {
             String newValue = sharedPreferences.getString(key, null);
             int value = Utils.parseInt(newValue);
-            if (value > 0) {
+            if (value >= 0) {
                 Preferences.GLOBAL_SAVEGAME_SLOTS = value;
             } else {
                 ManagerNotify.toastShortMessage(R.string.invalid_value);
