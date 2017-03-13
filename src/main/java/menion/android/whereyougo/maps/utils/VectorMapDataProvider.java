@@ -74,8 +74,8 @@ public class VectorMapDataProvider implements MapDataProvider {
             MapPoint pt =
                     new MapPoint(cartridge.name, cartridge.description, cartridge.latitude,
                             cartridge.longitude);
-            if (MainActivity.cartridgeFile == null && Engine.instance == null)
-                pt.setData(new File(cartridge.filename).getName());
+
+            pt.setData(new File(cartridge.filename).getName());
 
             try {
                 byte[] iconData = cartridge.getFile(cartridge.iconId);

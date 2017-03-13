@@ -135,6 +135,10 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     public static final int ICON_SIZE_MAX = 32;
 
     private static final String KEY_MAP_GENERATOR = "mapGenerator"; // store map generator
+    public static final String BUNDLE_CENTER = "center";
+    public static final String BUNDLE_NAVIGATE = "navigate";
+    public static final String BUNDLE_ITEMS = "items";
+    public static final String BUNDLE_ALLOW_START_CARTRIDGE = "allowStartCartridge";
     private static final String BUNDLE_CENTER_AT_FIRST_FIX = "centerAtFirstFix";
     private static final String BUNDLE_SHOW_MY_LOCATION = "showMyLocation";
     private static final String BUNDLE_SNAP_TO_LOCATION = "snapToLocation";
@@ -159,6 +163,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     private double itemsLatitude, itemsLongitude;
     private boolean showPins = true;
     private boolean showLabels = true;
+    private boolean allowStartCartridge = false;
     private TapEventListener tapListener = new TapEventListener() {
         @Override
         public void onTap(final PointOverlay pointOverlay) {
@@ -166,11 +171,13 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 return;
             // final MapPoint p = pointOverlay.getPoint();
             //MapsforgeActivity.this.navigationOverlay.setTarget(pointOverlay.getGeoPoint());
+            TextView textView = (TextView) View.inflate(MapsforgeActivity.this, R.layout.point_detail_view, null);
+            textView.setText(UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
+                    + Html.fromHtml(pointOverlay.getDescription()));
+
             AlertDialog.Builder builder = new AlertDialog.Builder(MapsforgeActivity.this)
                     .setTitle(pointOverlay.getLabel())
-                    .setMessage(
-                            UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
-                                    + Html.fromHtml(pointOverlay.getDescription(), null, null))
+                    .setView(textView)
                     .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -178,7 +185,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                         }
                     });
             final String cguid = pointOverlay.getPoint().getData();
-            if (cguid != null)
+            if (allowStartCartridge && cguid != null)
                 builder.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -370,6 +377,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         if (savedInstanceState != null) {
             this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
             this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);
+            this.allowStartCartridge = savedInstanceState.getBoolean(BUNDLE_ALLOW_START_CARTRIDGE, false);
         } else {
             this.showPins = sharedPreferences.getBoolean(BUNDLE_SHOW_PINS, true);
             this.showLabels = sharedPreferences.getBoolean(BUNDLE_SHOW_LABELS, true);
@@ -902,6 +910,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         outState.putBoolean(BUNDLE_SNAP_TO_LOCATION, this.myLocationOverlay.isSnapToLocationEnabled());
         outState.putBoolean(BUNDLE_SHOW_PINS, this.showPins);
         outState.putBoolean(BUNDLE_SHOW_LABELS, this.showLabels);
+        outState.putBoolean(BUNDLE_ALLOW_START_CARTRIDGE, this.allowStartCartridge);
     }
 
     @Override
@@ -926,10 +935,11 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
     private void refreshItems() {
         Bundle bundle = getIntent().getExtras();
-        boolean center = bundle != null && bundle.getBoolean("center", false);
-        boolean navigate = bundle != null && bundle.getBoolean("navigate", false);
-        if (bundle != null && bundle.containsKey("items")) {
-            ArrayList<MapPointPack> items = bundle.getParcelableArrayList("items");
+        boolean center = bundle != null && bundle.getBoolean(BUNDLE_CENTER, false);
+        boolean navigate = bundle != null && bundle.getBoolean(BUNDLE_NAVIGATE, false);
+        allowStartCartridge = bundle != null && bundle.getBoolean(BUNDLE_ALLOW_START_CARTRIDGE, false);
+        if (bundle != null && bundle.containsKey(BUNDLE_ITEMS)) {
+            ArrayList<MapPointPack> items = bundle.getParcelableArrayList(BUNDLE_ITEMS);
             showMapPack(items);
         } else {
             showMapPack(VectorMapDataProvider.getInstance().getItems());

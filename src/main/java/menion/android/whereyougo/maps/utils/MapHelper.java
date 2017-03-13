@@ -26,6 +26,8 @@ import locus.api.android.ActionDisplayTracks;
 import locus.api.android.ActionTools;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Logger;
@@ -61,11 +63,11 @@ public class MapHelper {
         boolean navigate = et != null && et.isLocated();
         boolean center = navigate;
 
-        Intent intent =
-                new Intent(activity, menion.android.whereyougo.maps.mapsforge.MapsforgeActivity.class);
+        Intent intent = new Intent(activity, MapsforgeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra("center", center);
-        intent.putExtra("navigate", navigate);
+        intent.putExtra(MapsforgeActivity.BUNDLE_CENTER, center);
+        intent.putExtra(MapsforgeActivity.BUNDLE_NAVIGATE, navigate);
+        intent.putExtra(MapsforgeActivity.BUNDLE_ALLOW_START_CARTRIDGE, activity instanceof MainActivity);
         activity.startActivity(intent);
     }
 

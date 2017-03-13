@@ -31,7 +31,7 @@ public class UtilsFormat {
 
     private static final String TAG = "UtilsFormat";
     // degree sign
-    public static String degree = "\u00b0";
+    public static char degree = '\u00b0';
     private static Date mDate;
     private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -101,7 +101,7 @@ public class UtilsFormat {
     public static String formatCooByType(double lat, double lon, boolean twoLines) {
         StringBuilder out = new StringBuilder();
         out.append(formatLatitude(lat));
-        out.append(twoLines ? "<br />" : " | ");
+        out.append(twoLines ? "<br />" : " ");
         out.append(formatLongitude(lon));
         return out.toString();
     }
@@ -133,8 +133,8 @@ public class UtilsFormat {
     }
 
     public static String formatGeoPointDefault(GeoPoint geoPoint) {
-        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
-        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', '\u00b0');
+        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', degree);
+        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', degree);
         return String.format("N %s E %s", strLatitude, strLongitude);
     }
 
