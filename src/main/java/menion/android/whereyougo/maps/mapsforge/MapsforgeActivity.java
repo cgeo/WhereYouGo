@@ -489,11 +489,14 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                             double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
                             double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
                             double longitude = longitude_d + longitude_m / 60;
-                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
-                            MapPosition newMapPosition =
-                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
-                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                            try {
+                                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                                SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                                MapPosition newMapPosition =
+                                        new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                                MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                            } catch (IllegalArgumentException e) {
+                            }
                         }
                     });
                 }

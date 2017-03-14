@@ -184,6 +184,7 @@ public class FileSystem {
 
     public static File findFile(String prefix, String extension) {
         File[] files = FileSystem.getFiles(FileSystem.ROOT, extension);
+        if (files == null) return null;
         for (File file : files) {
             if (file.getName().startsWith(prefix)) {
                 return file;
