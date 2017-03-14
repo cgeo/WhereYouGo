@@ -52,7 +52,7 @@ public class PreviewPreference extends Preference {
     @Override
     public CharSequence getSummary() {
         String preview = previewTemplate.toString();
-        if (preview.isEmpty()) {
+        if (preview.length() == 0) {
             preview = "(" + mValue + ")";
         } else {
             preview = preview.replace("%1$", mValue);

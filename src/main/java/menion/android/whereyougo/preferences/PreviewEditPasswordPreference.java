@@ -18,13 +18,11 @@ public class PreviewEditPasswordPreference extends PreviewEditTextPreference {
         String value = getText();
         String newValue = "";
 
-        if (!value.isEmpty()) {
-            for (int i = 0; i < value.length(); i++) {
-                newValue += "\u2022";
-            }
+        for (int i = 0; i < value.length(); i++) {
+            newValue += "\u2022";
         }
 
-        if (preview.isEmpty()) {
+        if (preview.length() == 0) {
             preview = "(" + newValue + ")";
         } else {
             preview = preview.replace("%1$", newValue);

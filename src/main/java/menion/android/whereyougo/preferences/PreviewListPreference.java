@@ -26,7 +26,7 @@ public class PreviewListPreference extends ListPreference {
     @Override
     public CharSequence getSummary() {
         String preview = previewTemplate.toString();
-        if (preview.isEmpty()) {
+        if (preview.length() == 0) {
             preview = "(" + getEntry() + ")";
         } else {
             preview = preview.replace("%1$", getEntry());

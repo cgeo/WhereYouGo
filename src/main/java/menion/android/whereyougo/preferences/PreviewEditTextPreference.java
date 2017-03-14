@@ -28,7 +28,7 @@ public class PreviewEditTextPreference extends EditTextPreference {
         String preview = previewTemplate.toString();
         String value = getText();
 
-        if (preview.isEmpty()) {
+        if (preview.length() == 0) {
             preview = "(" + value + ")";
         } else {
             preview = preview.replace("%1$", value);
