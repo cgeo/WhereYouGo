@@ -253,7 +253,7 @@
             android:title="@string/pref_guiding_compass_sounds">
 
             <CheckBoxPreference
-                android:defaultValue="pref_DEFAULT_GUIDING_COMPASS_SOUNDS"
+                android:defaultValue="@string/pref_DEFAULT_GUIDING_COMPASS_SOUNDS"
                 android:key="@string/pref_KEY_B_GUIDING_COMPASS_SOUNDS"
                 android:summary="@string/pref_guiding_compass_sounds_desc"
                 android:title="@string/pref_guiding_compass_sounds" />

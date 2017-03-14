@@ -17,7 +17,7 @@
      Preference is able to place a specific widget for its particular
      type in the "widget_frame" layout. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+android:id/widget_frame"
+    android:id="@+id/widget_frame"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -33,7 +33,7 @@
         android:layout_marginRight="6dip" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dip"
         android:layout_marginLeft="2dip"
@@ -42,16 +42,16 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+android:id/title"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+android:id/summary"
+            android:id="@+id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@android:id/title"

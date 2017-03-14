@@ -11,38 +11,38 @@
     </style>
 
     <style name="TextStyle12" parent="TextStyle">
-        <item name="android:textSize">12dip</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="TextStyle14" parent="TextStyle">
-        <item name="android:textSize">14dip</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextStyle14B" parent="TextStyleB">
-        <item name="android:textSize">14dip</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextStyle16" parent="TextStyle">
-        <item name="android:textSize">16dip</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextStyle16B" parent="TextStyleB">
-        <item name="android:textSize">16dip</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextStyle18" parent="TextStyle">
-        <item name="android:textSize">18dip</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextStyle18B" parent="TextStyleB">
-        <item name="android:textSize">18dip</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextStyle20B" parent="TextStyleB">
-        <item name="android:textSize">20dip</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

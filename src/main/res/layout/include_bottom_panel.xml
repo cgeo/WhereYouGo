@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:minWidth="100dip"
-        android:singleLine="true" />
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/button_neutral"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:minWidth="100dip"
-        android:singleLine="true" />
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/button_negative"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:minWidth="100dip"
-        android:singleLine="true" />
+        android:maxLines="1" />
 
     <LinearLayout
         android:id="@+id/linear_layout_right_spacer"
