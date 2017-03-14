@@ -380,7 +380,7 @@ public abstract class CustomMainActivity extends CustomActivity {
         });
     }
 
-    private boolean testFileSystem() {
+    protected boolean testFileSystem() {
         if (DIRS == null || DIRS.length == 0)
             return true;
 
@@ -406,7 +406,7 @@ public abstract class CustomMainActivity extends CustomActivity {
         return true;
     }
 
-    private boolean testFreeSpace() {
+    protected boolean testFreeSpace() {
         if (DIRS == null || DIRS.length == 0)
             return true;
 

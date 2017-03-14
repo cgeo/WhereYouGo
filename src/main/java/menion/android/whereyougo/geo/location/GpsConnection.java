@@ -47,6 +47,7 @@ public class GpsConnection {
     private Timer mGpsTimer;
     // temp variable for indicationg wheather network provider is enabled
     private boolean networkProviderEnabled;
+    private boolean gpsProviderEnabled;
     private GpsStatus gpsStatus;
 
     public GpsConnection(Context context) {
@@ -63,7 +64,6 @@ public class GpsConnection {
         // initialize connection
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         providers = locationManager.getAllProviders();
-        networkProviderEnabled = false;
 
         // remove updates
         try {
@@ -94,8 +94,10 @@ public class GpsConnection {
             try {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                         Preferences.GPS_MIN_TIME * 1000, 0, llGPS);
+                gpsProviderEnabled = true;
             } catch (Exception e) {
                 Logger.w(TAG, "problem adding 'GPS' provider, e:" + e);
+                gpsProviderEnabled = false;
             }
         }
 
@@ -106,14 +108,15 @@ public class GpsConnection {
             Logger.w(TAG, "problem adding 'GPS status' listener, e:" + e);
         }
 
-        if (providers.size() == 0 && PreferenceValues.getCurrentActivity() != null) {
-            UtilsGUI.showDialogInfo(PreferenceValues.getCurrentActivity(),
-                    R.string.no_location_providers_available);
-
-            LocationState.setGpsOff(PreferenceValues.getCurrentActivity());
-            destroy();
-        } else {
+        if (networkProviderEnabled || gpsProviderEnabled) {
             ManagerNotify.toastShortMessage(context, context.getString(R.string.gps_enabled));
+        } else {
+            if (PreferenceValues.getCurrentActivity() != null) {
+                UtilsGUI.showDialogInfo(PreferenceValues.getCurrentActivity(),
+                        R.string.no_location_providers_available);
+            }
+            LocationState.setGpsOff(context);
+            destroy();
         }
     }
 

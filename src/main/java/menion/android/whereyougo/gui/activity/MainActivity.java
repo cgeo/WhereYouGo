@@ -17,13 +17,17 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +48,7 @@ import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
+import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.dialog.ChooseCartridgeDialog;
 import menion.android.whereyougo.gui.dialog.ChooseSavegameDialog;
@@ -332,9 +337,34 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
+    private void checkPermissions() {
+        final String[] permissions = new String[] {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        };
+
+        for (String permission : permissions) {
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, permissions, 0);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        testFileSystem();
+        if (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY) {
+            LocationState.setGpsOn(this);
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkPermissions();
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
             Intent intent = new Intent(getIntent());
