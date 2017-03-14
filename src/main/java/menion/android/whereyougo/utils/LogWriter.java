@@ -27,25 +27,40 @@ class LogWriter {
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
 
     static void log(String fname, String msg) {
-        String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+        if (msg == null) return;
         try {
+            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
             FileWriter fstream = new FileWriter(loc, true);
             PrintWriter out = new PrintWriter(fstream);
-            out.println("" + dateFormat.format(new java.util.Date()) + " - " + msg);
+            out.println("" + dateFormat.format(new java.util.Date()) + "\n" + msg);
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
         }
     }
 
     static void log(String fname, Throwable ex) {
-        String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+        if (ex == null) return;
         try {
+            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
             FileWriter fstream = new FileWriter(loc, true);
             PrintWriter out = new PrintWriter(fstream);
-            out.println("" + dateFormat.format(new java.util.Date()) + ":");
+            out.println("" + dateFormat.format(new java.util.Date()));
             ex.printStackTrace(out);
             out.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
+        }
+    }
+
+    static void log(String fname, String msg, Throwable ex) {
+        if (ex == null) return;
+        try {
+            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+            FileWriter fstream = new FileWriter(loc, true);
+            PrintWriter out = new PrintWriter(fstream);
+            out.println("" + dateFormat.format(new java.util.Date()) + "\n" + msg);
+            ex.printStackTrace(out);
+            out.close();
+        } catch (Exception e) {
         }
     }
 }

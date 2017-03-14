@@ -176,7 +176,7 @@ public class WUI implements UI {
     }
 
     public void showError(String msg) {
-        Logger.w(TAG, "showError(" + msg.trim() + ")");
+        Logger.e(TAG, "showError(" + msg.trim() + ")");
         if (PreferenceValues.getCurrentActivity() != null)
             UtilsGUI.showDialogError(PreferenceValues.getCurrentActivity(), msg);
     }

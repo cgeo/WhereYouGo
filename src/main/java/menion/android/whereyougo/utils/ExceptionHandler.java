@@ -24,7 +24,7 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        LogWriter.log("error.log", ex);
+        Logger.e("UncaughtExceptionHandler", "uncaughtException " + thread.getName(), ex);
         defaultHandler.uncaughtException(thread, ex);
     }
 
