@@ -28,6 +28,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
 import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -37,6 +38,7 @@ import okhttp3.Response;
 
 public class DownloadCartridgeTask extends
         AsyncTask<String, DownloadCartridgeTask.Progress, Boolean> {
+    private static final String TAG = "DownloadCartridgeTask";
     static final String LOGIN = "https://www.wherigo.com/login/default.aspx";
     static final String DOWNLOAD = "http://www.wherigo.com/cartridge/download.aspx";
 
@@ -65,7 +67,7 @@ public class DownloadCartridgeTask extends
                     .cookieJar(new NonPersistentCookieJar())
                     .build();
         } catch (KeyManagementException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Logger.e(TAG, "init()", e);
         }
         if (httpClient == null)
             publishProgress(new Progress(Task.INIT, State.FAIL));
@@ -174,7 +176,7 @@ public class DownloadCartridgeTask extends
                 publishProgress(new Progress(Task.DOWNLOAD_SINGLE, completed, total));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.e(TAG, "download(" + filename + ")", e);
         } finally {
             Utils.closeStream(bis);
             Utils.closeStream(bos);
@@ -205,7 +207,7 @@ public class DownloadCartridgeTask extends
                 throw new IOException("Request " + request + " failed: " + response);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.e(TAG, "handleRequest(" + request.toString() + ")", e);
             return null;
         }
         return response;

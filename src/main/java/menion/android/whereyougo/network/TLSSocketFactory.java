@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
@@ -58,7 +59,17 @@ class TLSSocketFactory extends SSLSocketFactory {
 
     private Socket enableTLSOnSocket(Socket socket) {
         if (socket != null && (socket instanceof SSLSocket)) {
-            ((SSLSocket) socket).setEnabledProtocols(new String[]{"TLSv1.1", "TLSv1.2"});
+            SSLSocket sslSocket = (SSLSocket) socket;
+            String[] supportedProtocols = sslSocket.getSupportedProtocols();
+            ArrayList<String> protocols = new ArrayList<>();
+            for (String supportedProtocol : supportedProtocols) {
+                if (supportedProtocol.equals("TLSv1.1") || supportedProtocol.equals("TLSv1.2")) {
+                    protocols.add(supportedProtocol);
+                }
+            }
+            if (!protocols.isEmpty()) {
+                sslSocket.setEnabledProtocols(protocols.toArray(new String[]{}));
+            }
         }
         return socket;
     }
