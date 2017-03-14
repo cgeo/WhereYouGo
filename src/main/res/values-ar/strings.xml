@@ -45,7 +45,6 @@
     <string name="no_location_providers_available">لا يوجد مزود للمواقع !</string>
     <string name="no_satellites">لم يتم العثور على أقمار اصطناعية</string>
     <string name="no_target">لا يوجد هدف !</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into directory\n%1$s\nand start %2$s again!</string>
     <string name="not_enough_disk_space_x">لا يوجد مساحة تخزين كافية على ذاكرة الـ SDCard ! \n(%1$s, free:%2$s)</string>
     <string name="ok">جيد</string>
     <string name="pending">Pending</string>

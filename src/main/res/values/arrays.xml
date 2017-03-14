@@ -4,7 +4,7 @@
         <item>imperial</item>
         <item>metric</item>
     </string-array>
-    <string name="preferences_scale_bar_unit_default">metric</string>
+    <string name="preferences_scale_bar_unit_default" translatable="false">metric</string>
 
     <string-array name="preferences_text_scale_keys">
         <item>0.7</item>
@@ -13,7 +13,7 @@
         <item>1.3</item>
         <item>1.6</item>
     </string-array>
-    <string name="preferences_text_scale_default">1.0</string>
+    <string name="preferences_text_scale_default" translatable="false">1.0</string>
 
     <string-array name="mapgenerator_keys">
         <item>BLANK</item>
@@ -32,7 +32,7 @@
         <item>ESRI_WORLD_STREET_MAP</item>
         <item>ESRI_WORLD_IMAGERY</item>
     </string-array>
-    <string name="mapgenerator_default">BLANK</string>
+    <string name="mapgenerator_default" translatable="false">BLANK</string>
 
     <string-array name="pref_map_provider_entries">
         <item>@string/pref_map_provider_vector</item>

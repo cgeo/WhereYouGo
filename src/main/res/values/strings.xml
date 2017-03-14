@@ -65,7 +65,14 @@
     <string name="no_location_providers_available">No Location providers available!</string>
     <string name="no_satellites">No satellites</string>
     <string name="no_target">No target!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge available.\nAdd cartridge file (*.gwc) into\n %1$s directory\n and start %2$s again!</string>
+    <string name="no_wherigo_cartridge_available">
+No Wherigo cartridge (*.gwc) is available.
+Download or copy them into directory \"%1$s\".
+You can also set a path to custom directory in \"Settings - Main - Wherigo folder\".
+Make sure you granted the application permission to write to external storage and you have write permission in selected directory.
+Some newer devices don\'t allow writing to SD card.
+If you\'re not sure, set \"Wherigo folder\" automatically.
+    </string>
     <string name="not_enough_disk_space_x">Not enough free disk space on SDCard!\n(%1$s, free:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pending</string>
