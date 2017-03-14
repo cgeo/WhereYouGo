@@ -60,10 +60,10 @@ public abstract class CustomMainActivity extends CustomActivity {
     public static final int CLOSE_HIDE_APP = 3;
     private static final String TAG = "CustomMain";
     // create directories during startup
-    protected static String[] DIRS = new String[]{FileSystem.CACHE};
+    private static final String[] DIRS = new String[]{FileSystem.CACHE};
     private static boolean callSecondInit;
     private static boolean callRegisterOnly;
-    protected int finishType = FINISH_NONE;
+    private int finishType = FINISH_NONE;
     private boolean finish = false;
 
     public static String getNewsFromTo(int lastVersion, int actualVersion) {
@@ -400,8 +400,8 @@ public abstract class CustomMainActivity extends CustomActivity {
         }
 
         // fileSystem created successfully
-        for (int i = 0; i < DIRS.length; i++) {
-            (new File(DIRS[i])).mkdirs();
+        for (String DIR : DIRS) {
+            (new File(DIR)).mkdirs();
         }
         return true;
     }
@@ -411,7 +411,7 @@ public abstract class CustomMainActivity extends CustomActivity {
             return true;
 
         // check disk space (at least 5MB)
-        long bytesFree = 0;
+        long bytesFree;
         try {
             StatFs stat = new StatFs(FileSystem.ROOT);
             bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();

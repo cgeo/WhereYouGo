@@ -46,8 +46,7 @@ public class UtilsGUI {
 
     public static final int DIALOG_SPINNER_ID = 10006;
 
-    /******************************/
-  /* LIST VIEW PART */
+    /* LIST VIEW PART */
 
     /******************************/
 
@@ -58,8 +57,7 @@ public class UtilsGUI {
         return lv;
     }
 
-    /******************************/
-  /* DIALOG CONSTRUCTION */
+    /* DIALOG CONSTRUCTION */
 
     /******************************/
 
@@ -192,8 +190,7 @@ public class UtilsGUI {
         activity.getWindow().setAttributes(params);
     }
 
-    /******************************/
-  /* DIALOG DELETE */
+    /* DIALOG DELETE */
 
     /******************************/
 
@@ -219,8 +216,7 @@ public class UtilsGUI {
                 null, activity.getString(R.string.close), cancelList);
     }
 
-    /******************************/
-  /* DIALOG ERROR */
+    /* DIALOG ERROR */
 
     /******************************/
 
@@ -234,8 +230,7 @@ public class UtilsGUI {
                 null, null, activity.getString(R.string.close), null);
     }
 
-    /******************************/
-  /* DIALOG INFO */
+    /* DIALOG INFO */
 
     /******************************/
 
@@ -249,8 +244,7 @@ public class UtilsGUI {
                 activity.getText(msg), null, null, activity.getString(R.string.close), cancelList);
     }
 
-    /******************************/
-  /* DIALOG QUESTION */
+    /* DIALOG QUESTION */
 
     /******************************/
 
@@ -289,8 +283,7 @@ public class UtilsGUI {
         showDialogQuestion(activity, activity.getText(msg), posLis, negLis, cancelLis);
     }
 
-    /*******************************/
-  /* WEBVIEW CONSTRUCTION */
+    /* WEBVIEW CONSTRUCTION */
 
     /*******************************/
 

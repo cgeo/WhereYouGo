@@ -32,7 +32,7 @@ import menion.android.whereyougo.guide.GuideContent;
  */
 public class A {
 
-    protected static CustomMainActivity main;
+    private static CustomMainActivity main;
     private static final String TAG = "A";
     private static MainApplication app;
     private static GuideContent guidingContent;

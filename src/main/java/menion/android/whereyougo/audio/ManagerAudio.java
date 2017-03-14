@@ -39,10 +39,10 @@ import menion.android.whereyougo.utils.Utils;
  */
 public class ManagerAudio {
 
-    public static final int SOUND_POOL_BEEP = 1001;
+    private static final int SOUND_POOL_BEEP = 1001;
     private static final String TAG = "ManagerAudio";
-    private SoundPool soundPool;
-    private Hashtable<Integer, Integer> soundPoolMap;
+    private final SoundPool soundPool;
+    private final Hashtable<Integer, Integer> soundPoolMap;
 
     private long lastVolumeCheck;
 
@@ -50,7 +50,7 @@ public class ManagerAudio {
 
     public ManagerAudio() {
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-        soundPoolMap = new Hashtable<Integer, Integer>();
+        soundPoolMap = new Hashtable<>();
         soundPoolMap.put(SOUND_POOL_BEEP, soundPool.load(A.getApp(), R.raw.sound_beep_01, 1));
     }
 

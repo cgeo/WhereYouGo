@@ -19,7 +19,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 public class ExceptionHandler implements UncaughtExceptionHandler {
 
-    private static UncaughtExceptionHandler defaultHandler = Thread
+    private static final UncaughtExceptionHandler defaultHandler = Thread
             .getDefaultUncaughtExceptionHandler();
 
     @Override

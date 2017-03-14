@@ -71,7 +71,7 @@ public class Satellite2DView extends View {
 
     private int lastWidth;
 
-    private ArrayList<SatellitePosition> satellites;
+    private final ArrayList<SatellitePosition> satellites;
 
     public Satellite2DView(Context context, ArrayList<SatellitePosition> satellites) {
         super(context);

@@ -49,7 +49,7 @@ public class ListActionsActivity extends ListVariousActivity {
     }
 
     public static Vector<Object> getValidActions(Thing thing) {
-        Vector<Object> newActions = new Vector<Object>();
+        Vector<Object> newActions = new Vector<>();
         for (int i = 0; i < thing.actions.size(); i++)
             newActions.add(thing.actions.get(i));
 

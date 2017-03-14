@@ -24,17 +24,17 @@ package menion.android.whereyougo.geo.location;
  */
 public class SatellitePosition {
 
-    protected Integer prn;
-    protected float azimuth;
-    protected float elevation;
+    Integer prn;
+    float azimuth;
+    float elevation;
     /**
      * signal to noise ratio
      */
-    protected int snr;
+    int snr;
     /**
      * is satellite fixed
      */
-    protected boolean fixed;
+    boolean fixed;
 
     public SatellitePosition() {
         this.prn = 0;

@@ -7,7 +7,7 @@ public class ZoneGuide extends Guide {
 
     // private static final String TAG = "ZoneGuide";
 
-    private Zone mZone;
+    private final Zone mZone;
 
     private boolean mAlreadyEntered = false;
 

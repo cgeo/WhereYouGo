@@ -56,8 +56,6 @@ public class AudioClip {
             }
         } catch (Exception e) {
             Logger.e(TAG, "destroyAudio()", e);
-        } finally {
-            mAudio = null;
         }
     }
 

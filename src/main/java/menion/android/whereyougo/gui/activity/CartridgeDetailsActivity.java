@@ -74,15 +74,14 @@ public class CartridgeDetailsActivity extends CustomActivity {
         loc.setLatitude(MainActivity.cartridgeFile.latitude);
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
 
-        StringBuilder buff = new StringBuilder();
-        buff.append(getString(R.string.distance)).append(": ").append("<b>")
-                .append(UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false))
-                .append("</b>").append("<br />").append(getString(R.string.latitude)).append(": ")
-                .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude)).append("<br />")
-                .append(getString(R.string.longitude)).append(": ")
-                .append(UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude));
+        String buff = getString(R.string.distance) + ": " + "<b>" +
+                UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false) +
+                "</b>" + "<br />" + getString(R.string.latitude) + ": " +
+                UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude) + "<br />" +
+                getString(R.string.longitude) + ": " +
+                UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude);
 
-        tvDistance.setText(Html.fromHtml(buff.toString()));
+        tvDistance.setText(Html.fromHtml(buff));
 
         CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
             @Override

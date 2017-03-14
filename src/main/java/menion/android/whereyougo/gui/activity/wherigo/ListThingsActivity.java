@@ -57,7 +57,7 @@ public class ListThingsActivity extends ListVariousActivity {
         else
             container = Engine.instance.cartridge.currentThings();
 
-        Vector<Object> newthings = new Vector<Object>();
+        Vector<Object> newthings = new Vector<>();
         Object key = null;
         while ((key = container.next(key)) != null) {
             Thing t = (Thing) container.rawget(key);

@@ -30,8 +30,8 @@ public class WaypointGuide extends Guide {
     /**
      * Creates new waypoint navigator
      *
-     * @param target
      * @param name
+     * @param location
      */
     public WaypointGuide(String name, Location location) {
         super(name, location);

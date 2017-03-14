@@ -104,7 +104,7 @@ public class AudioPlayService extends Service {
         deleteFile = intent.getBooleanExtra(EXTRA_DELETE_FILE, false);
         // Logger.w(TAG, "serviceStart:" + filePath + ", " + playAsNotification + ", " + deleteFile);
         StringTokenizer token = new StringTokenizer(filePath, ";");
-        filePaths = new ArrayList<String>();
+        filePaths = new ArrayList<>();
         while (token.hasMoreTokens()) {
             String file = token.nextToken().trim();
             if (file.length() > 0 && (new File(file).exists()))

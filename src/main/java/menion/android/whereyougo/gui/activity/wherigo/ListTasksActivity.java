@@ -30,7 +30,7 @@ import menion.android.whereyougo.utils.Images;
 
 public class ListTasksActivity extends ListVariousActivity {
 
-    private static Bitmap[] stateIcons;
+    private static final Bitmap[] stateIcons;
 
     static {
         stateIcons = new Bitmap[3];
@@ -64,7 +64,7 @@ public class ListTasksActivity extends ListVariousActivity {
 
     @Override
     protected Vector<Object> getValidStuff() {
-        Vector<Object> newtasks = new Vector<Object>();
+        Vector<Object> newtasks = new Vector<>();
         for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
             Task t = (Task) Engine.instance.cartridge.tasks.get(i);
             if (t.isVisible())

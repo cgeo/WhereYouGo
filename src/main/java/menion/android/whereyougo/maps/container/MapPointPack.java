@@ -33,13 +33,13 @@ public class MapPointPack implements Parcelable {
                     return new MapPointPack[size];
                 }
             };
-    boolean isPolygon;
-    int resource;
-    Bitmap icon = null;
-    ArrayList<MapPoint> points;
+    private boolean isPolygon;
+    private int resource;
+    private Bitmap icon = null;
+    private ArrayList<MapPoint> points;
 
     public MapPointPack() {
-        points = new ArrayList<MapPoint>();
+        points = new ArrayList<>();
     }
 
     public MapPointPack(ArrayList<MapPoint> points, boolean isPolygon) {

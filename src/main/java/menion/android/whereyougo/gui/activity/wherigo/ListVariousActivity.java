@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -58,9 +57,9 @@ import menion.android.whereyougo.utils.UtilsFormat;
 public abstract class ListVariousActivity extends CustomActivity implements IRefreshable {
 
     private static final String TAG = "ListVarious";
-    private static Paint paintText;
-    private static Paint paintArrow;
-    private static Paint paintArrowBorder;
+    private static final Paint paintText;
+    private static final Paint paintArrow;
+    private static final Paint paintArrowBorder;
 
     static {
         paintText = new Paint();
@@ -80,13 +79,13 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
         paintArrowBorder.setStyle(Style.STROKE);
     }
 
-    protected String title;
+    private String title;
     private ListView lv;
-    private Vector<Object> stuff = new Vector<Object>();
+    private final Vector<Object> stuff = new Vector<>();
 
     abstract protected void callStuff(Object what);
 
-    protected Bitmap getLocatedIcon(EventTable thing) {
+    private Bitmap getLocatedIcon(EventTable thing) {
         if (!thing.isLocated())
             return Images.IMAGE_EMPTY_B;
 
@@ -157,7 +156,7 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
         }
     }
 
-    protected Bitmap getStuffIcon(Object object) {
+    Bitmap getStuffIcon(Object object) {
         if (((EventTable) object).isLocated()) {
             return getLocatedIcon((EventTable) object);
         } else {
@@ -167,8 +166,6 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
                     byte[] icon = Engine.mediaFile(media);
                     if (icon != null)
                         return BitmapFactory.decodeByteArray(icon, 0, icon.length);
-                } catch (IOException e) {
-                    Logger.e(TAG, "getStuffIcon()", e);
                 } catch (Exception e) {
                     Logger.e(TAG, "getStuffIcon()", e);
                 }
@@ -253,10 +250,10 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
                 }
 
                 // create visual part
-                ArrayList<DataInfo> data = new ArrayList<DataInfo>();
+                ArrayList<DataInfo> data = new ArrayList<>();
                 for (int i = 0; i < stuff.size(); i++) {
                     Object s = stuff.get(i);
-                    DataInfo dataInfo = new DataInfo("");
+                    DataInfo dataInfo;
                     // Logger.e("ListVarious", "addToList:" + s + ", " + (s instanceof Action) + ", " + (s
                     // instanceof Cartridge) + ", " + (s instanceof Container) + ", " + (s instanceof Thing));
                     if (s instanceof Thing) {

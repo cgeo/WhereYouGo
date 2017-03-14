@@ -161,8 +161,8 @@ public class CustomDialog {
                                                    final OnClickListener titleExtraClick) {
         // set title extra
         if (titleExtraImg != NO_IMAGE && titleExtraClick != null) {
-            ImageView iv = null;
-            ImageButton ib = null;
+            ImageView iv;
+            ImageButton ib;
             if (button == TITLE_BUTTON_RIGHT) {
                 iv = (ImageView) view.findViewById(R.id.image_view_separator1);
                 ib = (ImageButton) view.findViewById(R.id.image_button_title1);

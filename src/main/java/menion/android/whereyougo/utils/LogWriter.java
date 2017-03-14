@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 class LogWriter {
-    private static DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
 
     static void log(String fname, String msg) {
         if (msg == null) return;

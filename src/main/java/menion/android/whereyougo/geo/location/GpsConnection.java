@@ -39,10 +39,9 @@ public class GpsConnection {
 
     private static final String TAG = "GpsConnection";
     private LocationManager locationManager;
-    private List<String> providers;
-    private MyLocationListener llGPS;
-    private MyLocationListener llNetwork;
-    private MyGpsListener gpsListener;
+    private final MyLocationListener llGPS;
+    private final MyLocationListener llNetwork;
+    private final MyGpsListener gpsListener;
     private boolean isFixed;
     private Timer mGpsTimer;
     // temp variable for indicationg wheather network provider is enabled
@@ -63,7 +62,7 @@ public class GpsConnection {
 
         // initialize connection
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        providers = locationManager.getAllProviders();
+        List<String> providers = locationManager.getAllProviders();
 
         // remove updates
         try {

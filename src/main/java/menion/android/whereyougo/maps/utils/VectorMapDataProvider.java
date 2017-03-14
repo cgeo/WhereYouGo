@@ -39,7 +39,7 @@ public class VectorMapDataProvider implements MapDataProvider {
     private ArrayList<MapPointPack> items = null;
 
     private VectorMapDataProvider() {
-        items = new ArrayList<MapPointPack>();
+        items = new ArrayList<>();
     }
 
     public static VectorMapDataProvider getInstance() {
@@ -53,7 +53,7 @@ public class VectorMapDataProvider implements MapDataProvider {
                 || Engine.instance.cartridge == null || Engine.instance.cartridge.zones == null)
             return;
         clear();
-        Vector<CartridgeFile> v = new Vector<CartridgeFile>();
+        Vector<CartridgeFile> v = new Vector<>();
         v.add(MainActivity.cartridgeFile);
         addCartridges(v);
         addZones((Vector<Zone>) Engine.instance.cartridge.zones, DetailsActivity.et);

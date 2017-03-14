@@ -30,7 +30,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -62,7 +61,7 @@ import menion.android.whereyougo.utils.UtilsFormat;
 public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     private static final String TAG = "CartridgeMainMenu";
-    private static int DOUBLE_PRESS_HK_BACK_PERIOD = 666;
+    private static final int DOUBLE_PRESS_HK_BACK_PERIOD = 666;
     private AdapterView.OnItemClickListener listClick;
     private long lastPressedTime = 0;
     private MenuItem saveGameMainMenuItem;
@@ -104,7 +103,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         return description;
     }
 
-    public int getVisibleTasksCount() {
+    private int getVisibleTasksCount() {
         int count = 0;
         for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
             Task a = (Task) Engine.instance.cartridge.tasks.elementAt(i);
@@ -114,7 +113,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         return count;
     }
 
-    public String getVisibleTasksDescription() {
+    private String getVisibleTasksDescription() {
         String description = null;
         for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
             Task a = (Task) Engine.instance.cartridge.tasks.elementAt(i);
@@ -307,7 +306,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 }
                 menu.add(0, slot, Preferences.GLOBAL_SAVEGAME_SLOTS - slot, text);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -330,7 +329,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                         );
                         item.setTitle(title);
                         ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     MainActivity.wui.setOnSavingFinished(null);
@@ -361,7 +360,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                                 getText(R.string.save_game_ok)
                         );
                         ManagerNotify.toastShortMessage(MainMenuActivity.this, message);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     MainActivity.wui.setOnSavingFinished(null);
@@ -419,7 +418,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                     return;
                 }
 
-                ArrayList<DataInfo> data = new ArrayList<DataInfo>();
+                ArrayList<DataInfo> data = new ArrayList<>();
                 DataInfo diLocations =
                         new DataInfo(getString(R.string.locations) + " ("
                                 + Engine.instance.cartridge.visibleZones() + ")", getVisibleZonesDescription(),
@@ -457,7 +456,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     private class SaveGame extends AsyncTask<Void, Void, Void> {
 
-        protected ProgressDialog dialog;
+        ProgressDialog dialog;
 
         @Override
         protected void onPreExecute() {

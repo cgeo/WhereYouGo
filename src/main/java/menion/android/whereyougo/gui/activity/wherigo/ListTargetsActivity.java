@@ -41,7 +41,7 @@ public class ListTargetsActivity extends ListVariousActivity {
     private static void makeValidStuff() {
         LuaTable current = Engine.instance.cartridge.currentThings();
         // int size = current.len() + Engine.instance.player.inventory.len();
-        validStuff = new Vector<Object>();
+        validStuff = new Vector<>();
         Object key = null;
         while ((key = current.next(key)) != null)
             validStuff.addElement(current.rawget(key));

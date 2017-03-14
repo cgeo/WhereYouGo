@@ -61,11 +61,10 @@ public class MapHelper {
 
     public static void vectorMap(Activity activity, EventTable et) {
         boolean navigate = et != null && et.isLocated();
-        boolean center = navigate;
 
         Intent intent = new Intent(activity, MapsforgeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        intent.putExtra(MapsforgeActivity.BUNDLE_CENTER, center);
+        intent.putExtra(MapsforgeActivity.BUNDLE_CENTER, navigate);
         intent.putExtra(MapsforgeActivity.BUNDLE_NAVIGATE, navigate);
         intent.putExtra(MapsforgeActivity.BUNDLE_ALLOW_START_CARTRIDGE, activity instanceof MainActivity);
         activity.startActivity(intent);

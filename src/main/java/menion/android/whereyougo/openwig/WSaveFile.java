@@ -31,7 +31,7 @@ public class WSaveFile implements FileHandle {
 
     private static final String TAG = "WSaveFile";
 
-    private File file;
+    private final File file;
 
     public WSaveFile(File cartridgeFile) {
         file =

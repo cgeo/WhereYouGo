@@ -118,12 +118,16 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
         mRoll = roll;
 
         String provider = loc.getProvider();
-        if (provider.equals(LocationManager.GPS_PROVIDER)) {
-            provider = getString(R.string.provider_gps);
-        } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-            provider = getString(R.string.provider_network);
-        } else {
-            provider = getString(R.string.provider_passive);
+        switch (provider) {
+            case LocationManager.GPS_PROVIDER:
+                provider = getString(R.string.provider_gps);
+                break;
+            case LocationManager.NETWORK_PROVIDER:
+                provider = getString(R.string.provider_network);
+                break;
+            default:
+                provider = getString(R.string.provider_passive);
+                break;
         }
         viewProvider.setText(provider);
         viewLat.setText(UtilsFormat.formatLatitude(loc.getLatitude()));

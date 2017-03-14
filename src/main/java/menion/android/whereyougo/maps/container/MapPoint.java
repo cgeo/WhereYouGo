@@ -30,12 +30,12 @@ public class MapPoint implements Parcelable {
             return new MapPoint[size];
         }
     };
-    String name;
-    String description;
-    String data;
-    double latitude;
-    double longitude;
-    boolean target;
+    private String name;
+    private String description;
+    private String data;
+    private double latitude;
+    private double longitude;
+    private boolean target;
 
     /**
      * Empty constructor used for {@link Serializable} <br />

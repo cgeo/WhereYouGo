@@ -14,7 +14,7 @@ import javax.net.ssl.SSLSocketFactory;
 
 class TLSSocketFactory extends SSLSocketFactory {
 
-    protected SSLSocketFactory delegate;
+    private SSLSocketFactory delegate;
 
     public TLSSocketFactory() throws KeyManagementException, NoSuchAlgorithmException {
         SSLContext sslContext = SSLContext.getInstance("TLS");

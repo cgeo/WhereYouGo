@@ -26,10 +26,8 @@ public abstract class Point2D {
     /**
      * The default constructor.
      *
-     * @see Point2D.Float
-     * @see Point2D.Double
      */
-    protected Point2D() {
+    Point2D() {
     }
 
     /**

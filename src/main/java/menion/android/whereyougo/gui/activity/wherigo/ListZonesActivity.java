@@ -57,7 +57,7 @@ public class ListZonesActivity extends ListVariousActivity implements ILocationE
 
     @Override
     protected Vector<Object> getValidStuff() {
-        Vector<Object> ret = new Vector<Object>();
+        Vector<Object> ret = new Vector<>();
         @SuppressWarnings("unchecked")
         Vector<Zone> v = Engine.instance.cartridge.zones;
         for (int i = 0; i < v.size(); i++) {

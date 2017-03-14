@@ -125,7 +125,7 @@ public class InputScreenActivity extends CustomActivity {
                 }
 
                 ArrayAdapter<String> adapter =
-                        new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
+                        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
                 spinner.setVisibility(View.VISIBLE);

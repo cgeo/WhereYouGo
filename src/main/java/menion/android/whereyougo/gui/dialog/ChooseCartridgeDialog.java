@@ -65,7 +65,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
             });
 
             // prepare list
-            data = new ArrayList<DataInfo>();
+            data = new ArrayList<>();
             for (int i = 0; i < cartridgeFiles.size(); i++) {
                 CartridgeFile file = cartridgeFiles.get(i);
                 byte[] iconData = file.getFile(file.iconId);

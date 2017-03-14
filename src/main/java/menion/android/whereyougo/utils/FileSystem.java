@@ -62,8 +62,7 @@ public class FileSystem {
 
             // test if exist external mounted sdcard
             String externalCardRoot = null;
-            for (int i = 0; i < EXTERNAL_DIRECTORIES.length; i++) {
-                String cardTestDir = EXTERNAL_DIRECTORIES[i];
+            for (String cardTestDir : EXTERNAL_DIRECTORIES) {
                 if (cardTestDir.contains(CARD_ROOT))
                     cardTestDir = cardTestDir.replace(CARD_ROOT, cardRoot);
 
@@ -223,8 +222,18 @@ public class FileSystem {
             destChannel = new FileOutputStream(dest).getChannel();
             destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
         } finally {
-            sourceChannel.close();
-            destChannel.close();
+            if (sourceChannel != null) {
+                try {
+                    sourceChannel.close();
+                } catch (IOException e) {
+                }
+            }
+            if (destChannel != null) {
+                try {
+                    destChannel.close();
+                } catch (IOException e) {
+                }
+            }
         }
         dest.setLastModified(source.lastModified());
     }

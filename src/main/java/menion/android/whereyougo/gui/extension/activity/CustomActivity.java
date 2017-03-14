@@ -24,9 +24,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -42,8 +42,6 @@ import menion.android.whereyougo.utils.Logger;
 
 public class CustomActivity extends FragmentActivity {
 
-    protected Handler handler;
-
     protected static void customOnCreate(Activity activity) {
         // Logger.v(activity.getLocalClassName(), "customOnCreate(), id:" +
         // activity.hashCode());
@@ -54,8 +52,10 @@ public class CustomActivity extends FragmentActivity {
         }
 
         // set screen size
-        Const.SCREEN_WIDTH = activity.getWindowManager().getDefaultDisplay().getWidth();
-        Const.SCREEN_HEIGHT = activity.getWindowManager().getDefaultDisplay().getHeight();
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        Const.SCREEN_WIDTH = metrics.widthPixels;
+        Const.SCREEN_HEIGHT = metrics.heightPixels;
 
         switch (Preferences.APPEARANCE_FONT_SIZE) {
             case PreferenceValues.VALUE_FONT_SIZE_SMALL:
@@ -70,14 +70,12 @@ public class CustomActivity extends FragmentActivity {
         }
     }
 
-    protected static boolean setScreenBasic(Activity activity) {
+    protected static void setScreenBasic(Activity activity) {
         try {
             activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            return true;
         } catch (Exception e) {
             // TODO Logger.e(TAG, "setFullScreen(" + activity + ")", e);
         }
-        return false;
     }
 
     protected static void customOnPause(Activity activity) {
@@ -161,8 +159,6 @@ public class CustomActivity extends FragmentActivity {
         Logger.v(getLocalClassName(), "onCreate(), id:" + hashCode());
         try {
             super.onCreate(savedInstanceState);
-            // create handler
-            handler = new Handler();
             customOnCreate(this);
         } catch (Exception e) {
             Logger.e(getLocalClassName(), "onCreate()", e);
@@ -203,8 +199,10 @@ public class CustomActivity extends FragmentActivity {
             customOnResume(this);
             // set values again, this fix problem when activity is started after
             // activity in e.g. fixed portrait mode
-            Const.SCREEN_WIDTH = getWindowManager().getDefaultDisplay().getWidth();
-            Const.SCREEN_HEIGHT = getWindowManager().getDefaultDisplay().getHeight();
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            Const.SCREEN_WIDTH = metrics.widthPixels;
+            Const.SCREEN_HEIGHT = metrics.heightPixels;
         } catch (Exception e) {
             Logger.e(getLocalClassName(), "onResume()", e);
         }

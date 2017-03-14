@@ -74,8 +74,8 @@ public class MainActivity extends CustomMainActivity {
 
     private static final String TAG = "Main";
 
-    public static WUI wui = new WUI();
-    public static WLocationService wLocationService = new WLocationService();
+    public static final WUI wui = new WUI();
+    private static final WLocationService wLocationService = new WLocationService();
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
     private static Vector<CartridgeFile> cartridgeFiles;
@@ -106,8 +106,7 @@ public class MainActivity extends CustomMainActivity {
 
     public static File getSaveFile() throws IOException {
         try {
-            File file = new File(selectedFile.substring(0, selectedFile.length() - 3) + "ows");
-            return file;
+            return new File(selectedFile.substring(0, selectedFile.length() - 3) + "ows");
         } catch (SecurityException e) {
             Logger.e(TAG, "getSyncFile()", e);
             return null;
@@ -116,8 +115,7 @@ public class MainActivity extends CustomMainActivity {
 
     public static File getLogFile() throws IOException {
         try {
-            File file = new File(selectedFile.substring(0, selectedFile.length() - 3) + "owl");
-            return file;
+            return new File(selectedFile.substring(0, selectedFile.length() - 3) + "owl");
         } catch (SecurityException e) {
             Logger.e(TAG, "getSyncFile()", e);
             return null;
@@ -132,7 +130,7 @@ public class MainActivity extends CustomMainActivity {
         MainActivity.selectedFile = filepath;
     }
 
-    public static void loadCartridge(OutputStream log) {
+    private static void loadCartridge(OutputStream log) {
         try {
             WUI.startProgressDialog();
             Engine.newInstance(cartridgeFile, log, wui, wLocationService).start();
@@ -140,7 +138,7 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    public static void restoreCartridge(OutputStream log) {
+    private static void restoreCartridge(OutputStream log) {
         try {
             WUI.startProgressDialog();
             Engine.newInstance(cartridgeFile, log, wui, wLocationService).restore();
@@ -173,10 +171,10 @@ public class MainActivity extends CustomMainActivity {
 
         // load cartridge files
         File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");
-        cartridgeFiles = new Vector<CartridgeFile>();
+        cartridgeFiles = new Vector<>();
 
         // add cartridges to map
-        ArrayList<Waypoint> wpts = new ArrayList<Waypoint>();
+        ArrayList<Waypoint> wpts = new ArrayList<>();
 
         File actualFile = null;
         if (files != null) {

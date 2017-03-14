@@ -46,13 +46,8 @@ import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity {
     private static final String TAG = "DownloadCartridgeActivity";
-    private TextView tvDescription;
-    private TextView tvState;
-    private Button buttonDownload;
-    private Button buttonStart;
     private DownloadCartridgeTask downloadTask;
     private String cguid;
-    private File cartridgeFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,10 +67,10 @@ public class DownloadCartridgeActivity extends CustomActivity {
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(R.string.download_cartridge);
 
-        tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-        tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+        TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+        TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
 
-        cartridgeFile = FileSystem.findFile(cguid);
+        File cartridgeFile = FileSystem.findFile(cguid);
         if (cartridgeFile != null) {
             tvDescription.setText(
                     String.format("CGUID:\n%s\n%s",
@@ -125,8 +120,8 @@ public class DownloadCartridgeActivity extends CustomActivity {
                 return true;
             }
         });
-        buttonDownload = (Button) findViewById(R.id.button_positive);
-        buttonStart = (Button) findViewById(R.id.button_negative);
+        Button buttonDownload = (Button) findViewById(R.id.button_positive);
+        Button buttonStart = (Button) findViewById(R.id.button_negative);
         buttonStart.setEnabled(cartridgeFile != null);
     }
 
@@ -141,7 +136,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
     }
 
     class DownloadTask extends DownloadCartridgeTask {
-        ProgressDialog progressDialog;
+        final ProgressDialog progressDialog;
 
         public DownloadTask(final Context context, String username, String password) {
             super(context, username, password);

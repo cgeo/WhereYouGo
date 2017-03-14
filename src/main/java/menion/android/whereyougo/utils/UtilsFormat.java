@@ -30,12 +30,15 @@ import menion.android.whereyougo.preferences.Preferences;
 public class UtilsFormat {
 
     private static final String TAG = "UtilsFormat";
-    // degree sign
-    public static char degree = '\u00b0';
+    // degreeSign sign
+    private static final String degreeSign = "\u00b0";
+    private static final String minuteSign = "'";
+    private static final String secondSign = "''";
+
     private static Date mDate;
-    private static SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String formatAltitude(double altitude, boolean addUnits) {
         return locus.api.android.utils.UtilsFormat.formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, addUnits);
@@ -72,60 +75,39 @@ public class UtilsFormat {
     }
 
     public static String formatLatitude(double latitude) {
-        StringBuffer out = new StringBuffer();
-        if (latitude < 0) {
-            out.append("S ");
-        } else {
-            out.append("N ");
-        }
-        latitude = Math.abs(latitude);
-
-        formatCooLatLon(out, latitude, 2);
-        return out.toString();
+        return (latitude < 0 ? "S" : "N") + " " + formatCooLatLon(Math.abs(latitude), 2);
     }
 
     public static String formatLongitude(double longitude) {
-        StringBuffer out = new StringBuffer();
-
-        if (longitude < 0) {
-            out.append("W ");
-        } else {
-            out.append("E ");
-        }
-        longitude = Math.abs(longitude);
-
-        formatCooLatLon(out, longitude, 3);
-        return out.toString();
+        return (longitude < 0 ? "W" : "E") + " " + formatCooLatLon(Math.abs(longitude), 3);
     }
 
     public static String formatCooByType(double lat, double lon, boolean twoLines) {
-        StringBuilder out = new StringBuilder();
-        out.append(formatLatitude(lat));
-        out.append(twoLines ? "<br />" : " ");
-        out.append(formatLongitude(lon));
-        return out.toString();
+        return formatLatitude(lat) + (twoLines ? "<br />" : " ") + formatLongitude(lon);
     }
 
-    private static void formatCooLatLon(StringBuffer out, double value, int minLen) {
+    private static String formatCooLatLon(double value, int minLen) {
         try {
             if (Preferences.FORMAT_COO_LATLON == PreferenceValues.VALUE_UNITS_COO_LATLON_DEC) {
-                out.append(formatDouble(value, Const.PRECISION, minLen)).append(degree);
+                return formatDouble(value, Const.PRECISION, minLen) + degreeSign;
             } else if (Preferences.FORMAT_COO_LATLON == PreferenceValues.VALUE_UNITS_COO_LATLON_MIN) {
                 double deg = Math.floor(value);
                 double min = (value - deg) * 60;
-                out.append(formatDouble(deg, 0, 2)).append(degree)
-                        .append(formatDouble(min, Const.PRECISION - 2, 2)).append("'");
+                return formatDouble(deg, 0, 2) + degreeSign
+                        + formatDouble(min, Const.PRECISION - 2, 2) + minuteSign;
             } else if (Preferences.FORMAT_COO_LATLON == PreferenceValues.VALUE_UNITS_COO_LATLON_SEC) {
                 double deg = Math.floor(value);
                 double min = Math.floor((value - deg) * 60.0);
                 double sec = (value - deg - min / 60.0) * 3600.0;
-                out.append(formatDouble(deg, 0, 2)).append(degree).append(formatDouble(min, 0, 2))
-                        .append("'").append(formatDouble(sec, Const.PRECISION - 2)).append("''");
+                return formatDouble(deg, 0, 2) + degreeSign
+                        + formatDouble(min, 0, 2) + minuteSign
+                        + formatDouble(sec, Const.PRECISION - 2) + secondSign;
             }
         } catch (Exception e) {
-            Logger.e(TAG, "formatCoordinates(" + out.toString() + ", " + value + ", " + minLen + "), e:"
+            Logger.e(TAG, "formatCoordinates(" + value + ", " + minLen + "), e:"
                     + e.toString());
         }
+        return "";
     }
 
     public static String formatGeoPoint(GeoPoint geoPoint) {
@@ -133,8 +115,8 @@ public class UtilsFormat {
     }
 
     public static String formatGeoPointDefault(GeoPoint geoPoint) {
-        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(':', degree);
-        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(':', degree);
+        String strLatitude = Location.convert(geoPoint.latitude, Location.FORMAT_MINUTES).replace(":", degreeSign);
+        String strLongitude = Location.convert(geoPoint.longitude, Location.FORMAT_MINUTES).replace(":", degreeSign);
         return String.format("N %s E %s", strLatitude, strLongitude);
     }
 

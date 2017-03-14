@@ -40,10 +40,10 @@ import menion.android.whereyougo.preferences.Preferences;
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
     private ArrayList<Track> tracks = null;
-    private PackWaypoints pack;
+    private final PackWaypoints pack;
 
     private LocusMapDataProvider() {
-        tracks = new ArrayList<Track>();
+        tracks = new ArrayList<>();
         pack = new PackWaypoints("WhereYouGo");
     }
 
@@ -70,7 +70,7 @@ public class LocusMapDataProvider implements MapDataProvider {
     }
 
     public void addAll() {
-        Vector<CartridgeFile> v = new Vector<CartridgeFile>();
+        Vector<CartridgeFile> v = new Vector<>();
         v.add(MainActivity.cartridgeFile);
         addCartridges(v);
         addZones((Vector<Zone>) Engine.instance.cartridge.zones, DetailsActivity.et);
@@ -122,7 +122,7 @@ public class LocusMapDataProvider implements MapDataProvider {
         if (z == null || !z.isLocated() || !z.isVisible())
             return;
 
-        ArrayList<Location> locs = new ArrayList<Location>();
+        ArrayList<Location> locs = new ArrayList<>();
         for (int i = 0; i < z.points.length; i++) {
             Location loc = new Location("");
             loc.setLatitude(z.points[i].latitude);

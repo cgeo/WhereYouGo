@@ -39,17 +39,15 @@ import okhttp3.Response;
 public class DownloadCartridgeTask extends
         AsyncTask<String, DownloadCartridgeTask.Progress, Boolean> {
     private static final String TAG = "DownloadCartridgeTask";
-    static final String LOGIN = "https://www.wherigo.com/login/default.aspx";
-    static final String DOWNLOAD = "http://www.wherigo.com/cartridge/download.aspx";
+    private static final String LOGIN = "https://www.wherigo.com/login/default.aspx";
+    private static final String DOWNLOAD = "http://www.wherigo.com/cartridge/download.aspx";
 
-    Context context;
-    String username;
-    String password;
-    OkHttpClient httpClient;
+    private final String username;
+    private final String password;
+    private OkHttpClient httpClient;
 
     public DownloadCartridgeTask(Context context, String username, String password) {
         super();
-        this.context = context;
         this.username = username;
         this.password = password;
     }
@@ -59,7 +57,7 @@ public class DownloadCartridgeTask extends
         return init() && ping() && login() && download(arg0) && logout();
     }
 
-    protected boolean init() {
+    private boolean init() {
         try {
             System.setProperty("http.keepAlive", "false");
             httpClient = new OkHttpClient.Builder()
@@ -74,14 +72,14 @@ public class DownloadCartridgeTask extends
         return httpClient != null;
     }
 
-    protected boolean ping() {
+    private boolean ping() {
         Request request = new Request.Builder()
                 .url(LOGIN)
                 .build();
         return handleRequest(request, Task.PING) != null;
     }
 
-    protected boolean login() {
+    private boolean login() {
         RequestBody formBody = new FormBody.Builder()
                 .add("__EVENTTARGET", "")
                 .add("__EVENTARGUMENT", "")
@@ -104,7 +102,7 @@ public class DownloadCartridgeTask extends
         }
     }
 
-    protected boolean logout() {
+    private boolean logout() {
         RequestBody formBody = new FormBody.Builder()
                 .add("__EVENTTARGET", "ctl00$ProfileWidget$LoginStatus1$ctl00")
                 .add("__EVENTARGUMENT", "")
@@ -116,7 +114,7 @@ public class DownloadCartridgeTask extends
         return handleRequest(request, Task.LOGOUT) != null;
     }
 
-    protected boolean download(String[] cguid) {
+    private boolean download(String[] cguid) {
         publishProgress(new Progress(Task.DOWNLOAD, State.WORKING));
         for (int i = 0; i < cguid.length; ++i) {
             if (download(cguid[i])) {
@@ -129,7 +127,7 @@ public class DownloadCartridgeTask extends
         return true;
     }
 
-    protected boolean download(String cguid) {
+    private boolean download(String cguid) {
         RequestBody formBody = new FormBody.Builder()
                 .add("__EVENTTARGET", "")
                 .add("__EVENTARGUMENT", "")
@@ -159,7 +157,7 @@ public class DownloadCartridgeTask extends
         return false;
     }
 
-    protected boolean download(String filename, InputStream input, long total) {
+    private boolean download(String filename, InputStream input, long total) {
         File file = new File(FileSystem.ROOT + filename);
         long completed = 0;
         int length;
@@ -187,7 +185,7 @@ public class DownloadCartridgeTask extends
         return completed == total;
     }
 
-    protected Response handleRequest(Request request, Task task) {
+    private Response handleRequest(Request request, Task task) {
         publishProgress(new Progress(task, State.WORKING));
         Response response = handleRequest(request);
         if (response != null)
@@ -197,10 +195,10 @@ public class DownloadCartridgeTask extends
         return response;
     }
 
-    protected Response handleRequest(Request request) {
+    private Response handleRequest(Request request) {
         if (isCancelled())
             return null;
-        Response response = null;
+        Response response;
         try {
             response = httpClient.newCall(request).execute();
             if (!response.isSuccessful()) {
@@ -222,8 +220,8 @@ public class DownloadCartridgeTask extends
     }
 
     public class Progress {
-        Task task;
-        State state;
+        final Task task;
+        final State state;
         long total;
         long completed;
 

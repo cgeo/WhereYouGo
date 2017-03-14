@@ -41,7 +41,7 @@ import menion.android.whereyougo.utils.UtilsFormat;
 
 public class ChooseSavegameDialog extends CustomDialogFragment {
 
-    public static final String SAVE_FILE = "SAVE_FILE";
+    private static final String SAVE_FILE = "SAVE_FILE";
     private static final String TAG = "ChooseSavegameDialog";
     private File saveFile;
     private ArrayList<DataInfo> data;

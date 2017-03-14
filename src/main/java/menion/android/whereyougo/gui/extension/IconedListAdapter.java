@@ -44,14 +44,13 @@ import menion.android.whereyougo.utils.Utils;
  */
 public class IconedListAdapter extends BaseAdapter {
 
-    public static final int TYPE_LIST_VIEW = 0;
-    public static final int TYPE_SPINNER_VIEW = 1;
-    public static final int TYPE_OTHER = 2;
+    private static final int TYPE_LIST_VIEW = 0;
+    private static final int TYPE_SPINNER_VIEW = 1;
+    private static final int TYPE_OTHER = 2;
     private static final int PADDING = (int) Utils.getDpPixels(4.0f);
     private static final String TAG = "IconedListAdapter";
-    private ArrayList<DataInfo> mData;
-    private Context context;
-    private ListView listView;
+    private final ArrayList<DataInfo> mData;
+    private final Context context;
     private int type = TYPE_LIST_VIEW;
     /**
      * visibility of bottom view
@@ -73,8 +72,8 @@ public class IconedListAdapter extends BaseAdapter {
         this.mData = data;
 
         if (view instanceof ListView) {
-            this.listView = (ListView) view;
-            this.listView.setBackgroundColor(Color.WHITE);
+            ListView listView = (ListView) view;
+            listView.setBackgroundColor(Color.WHITE);
             this.type = TYPE_LIST_VIEW;
         } else if (view instanceof Spinner) {
             this.type = TYPE_SPINNER_VIEW;
@@ -87,7 +86,7 @@ public class IconedListAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public static LinearLayout createEmptyView(Context context) {
+    private static LinearLayout createEmptyView(Context context) {
         return (LinearLayout) LinearLayout.inflate(context, R.layout.iconed_list_adapter, null);
     }
 
@@ -227,7 +226,6 @@ public class IconedListAdapter extends BaseAdapter {
             iv01.setVisibility(View.VISIBLE);
 
             // set ImageView right
-            iv02 = (ImageView) convertView.findViewById(R.id.layoutIconedListAdapterImageView02);
             iv02.setVisibility(View.GONE);
 
             if (di.getImageRight() != null) {

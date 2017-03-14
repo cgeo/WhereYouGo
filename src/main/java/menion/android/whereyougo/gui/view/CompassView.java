@@ -50,8 +50,6 @@ public class CompassView extends View {
     private float cX1, cY1;
     private float r1;
 
-    private Paint mPaintBitmap;
-
     private Paint paintValueLabel;
     private Paint paintValueDistance;
     private Paint paintValueAzimuth;
@@ -121,7 +119,7 @@ public class CompassView extends View {
         bitCompassArrow = Images.getImageD(R.drawable.var_compass_arrow);
 
         // set paint methods
-        mPaintBitmap = new Paint();
+        Paint mPaintBitmap = new Paint();
         mPaintBitmap.setAntiAlias(true);
         mPaintBitmap.setFilterBitmap(true);
 
@@ -143,8 +141,8 @@ public class CompassView extends View {
     /**
      * Function which rotate arrow and compas (angles in degrees)
      *
-     * @param azimuth     new angle for compas north
-     * @param azimuthDiff new angle for arrow
+     * @param azimuth         new angle for compas north
+     * @param azimuthToTarget new angle for arrow
      */
     public void moveAngles(float azimuthToTarget, float azimuth, float pitch, float roll) {
         this.mAzimuthToTarget = azimuthToTarget;

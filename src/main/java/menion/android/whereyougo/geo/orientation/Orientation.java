@@ -51,7 +51,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
   private static float aboveOrBelow = 0.0f;
   private static GeomagneticField gmf;
   private static long lastCompute;
-  private Vector<IOrientationEventListener> listeners;
+  private final Vector<IOrientationEventListener> listeners;
   private SensorManager sensorManager;
   private float mLastAziGps;
   private float mLastAziSensor;
@@ -59,7 +59,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
   private float mLastRoll;
 
   public Orientation() {
-    this.listeners = new Vector<IOrientationEventListener>();
+    this.listeners = new Vector<>();
   }
 
   public static float getDeclination() {

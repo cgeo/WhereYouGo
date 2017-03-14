@@ -52,7 +52,7 @@ import menion.android.whereyougo.utils.UtilsFormat;
 public class SatelliteActivity extends CustomActivity implements ILocationEventListener {
 
     private static final String TAG = "SatelliteScreen";
-    private final ArrayList<SatellitePosition> satellites = new ArrayList<SatellitePosition>();
+    private final ArrayList<SatellitePosition> satellites = new ArrayList<>();
     private Satellite2DView satelliteView;
     private ToggleButton buttonGps;
 
@@ -147,12 +147,16 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
             @Override
             public void run() {
                 String provider = location.getProvider();
-                if (provider.equals(LocationManager.GPS_PROVIDER)) {
-                    provider = getString(R.string.provider_gps);
-                } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-                    provider = getString(R.string.provider_network);
-                } else {
-                    provider = getString(R.string.provider_passive);
+                switch (provider) {
+                    case LocationManager.GPS_PROVIDER:
+                        provider = getString(R.string.provider_gps);
+                        break;
+                    case LocationManager.NETWORK_PROVIDER:
+                        provider = getString(R.string.provider_network);
+                        break;
+                    default:
+                        provider = getString(R.string.provider_passive);
+                        break;
                 }
                 ((TextView) findViewById(R.id.text_view_provider)).setText(provider);
                 ((TextView) findViewById(R.id.text_view_latitude)).setText(UtilsFormat

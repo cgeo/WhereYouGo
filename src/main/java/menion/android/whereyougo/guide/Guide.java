@@ -39,9 +39,9 @@ public class Guide implements IGuide {
 
     private static final String TAG = "WaypointGuide";
 
-    private Location location;
+    private final Location location;
     private int id;
-    private String name;
+    private final String name;
 
     private float azimuth;
     private float distance;
@@ -60,8 +60,8 @@ public class Guide implements IGuide {
     /**
      * Creates new waypoint navigator
      *
-     * @param target
      * @param name
+     * @param location
      */
     public Guide(String name, Location location) {
         this.name = name;

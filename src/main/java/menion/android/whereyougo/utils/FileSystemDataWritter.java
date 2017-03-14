@@ -24,9 +24,9 @@ public class FileSystemDataWritter extends Thread {
 
     private static final String TAG = "FileSystemDataWritter";
 
-    private String fileToWrite;
-    private byte[] dataToWrite;
-    private long bytePos;
+    private final String fileToWrite;
+    private final byte[] dataToWrite;
+    private final long bytePos;
 
     /**
      * Save bytes to file.

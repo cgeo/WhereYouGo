@@ -65,7 +65,7 @@ public class LocationState {
     // last GPS fix time
     private static long mLastGpsFixTime = 0L;
     // count of satellites
-    private static Point2D.Int mSatsCount = new Point2D.Int();
+    private static final Point2D.Int mSatsCount = new Point2D.Int();
     // is speed correction enabled
     private static boolean speedCorrection = false;
 
@@ -157,8 +157,8 @@ public class LocationState {
 
     public static void init(Context c) {
         if (LocationState.location == null) {
-            LocationState.location = PreferenceValues.getLastKnownLocation(c);
-            mListeners = new ArrayList<ILocationEventListener>();
+            LocationState.location = PreferenceValues.getLastKnownLocation();
+            mListeners = new ArrayList<>();
             lastSource = -1;
         }
     }
@@ -231,7 +231,7 @@ public class LocationState {
         // Logger.w(TAG, "onGpsStatusChanged(" + sats + ")");
         ArrayList<SatellitePosition> pos = null;
         if (sats != null) {
-            pos = new ArrayList<SatellitePosition>();
+            pos = new ArrayList<>();
             Enumeration<SatellitePosition> enuPos = sats.elements();
             mSatsCount.x = 0;
             mSatsCount.y = 0;
@@ -247,7 +247,7 @@ public class LocationState {
         postGpsSatelliteChange(pos);
     }
 
-    protected static void onGpsStatusChanged(int event, GpsStatus gpsStatus) {
+    static void onGpsStatusChanged(int event, GpsStatus gpsStatus) {
         if (mListeners == null || mListeners.size() == 0)
             return;
 
@@ -259,7 +259,7 @@ public class LocationState {
         } else if (event == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
             ArrayList<SatellitePosition> pos = null;
             if (gpsStatus != null) {
-                pos = new ArrayList<SatellitePosition>();
+                pos = new ArrayList<>();
                 Iterator<GpsSatellite> enuSat = gpsStatus.getSatellites().iterator();
                 // clear sats count
                 mSatsCount.x = 0;
@@ -283,7 +283,7 @@ public class LocationState {
         }
     }
 
-    protected static void onLocationChanged(Location location) {
+    static void onLocationChanged(Location location) {
         // Logger.w(TAG, "onLocationChanged(" + location + ")");
         try {
             // check if location is valid
@@ -339,7 +339,7 @@ public class LocationState {
         }
     }
 
-    protected static void onProviderDisabled(String provider) {
+    static void onProviderDisabled(String provider) {
         // Logger.w(TAG, "onProviderDisabled(" + provider + ")");
         // uncomment if GPS must be enabled
         // if (provider.equals(LocationManager.GPS_PROVIDER)) {
@@ -347,7 +347,7 @@ public class LocationState {
         // }
     }
 
-    protected static void onProviderEnabled(String provider) {
+    static void onProviderEnabled(String provider) {
         Logger.w(TAG, "onProviderEnabled(" + provider + ")");
     }
 
@@ -361,7 +361,7 @@ public class LocationState {
         }
     }
 
-    protected static void onStatusChanged(String provider, int status, Bundle extras) {
+    static void onStatusChanged(String provider, int status, Bundle extras) {
         Logger.w(TAG, "onStatusChanged(" + provider + ", " + status + ", " + extras + ")");
         for (int i = 0; i < mListeners.size(); i++) {
             mListeners.get(i).onStatusChanged(provider, status, extras);

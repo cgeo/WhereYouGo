@@ -63,10 +63,10 @@ public class GuideContent implements ILocationEventListener {
     /**
      * actual array of listeners
      */
-    private ArrayList<IGuideEventListener> listeners;
+    private final ArrayList<IGuideEventListener> listeners;
 
     public GuideContent() {
-        listeners = new ArrayList<IGuideEventListener>();
+        listeners = new ArrayList<>();
     }
 
     public void addGuidingListener(IGuideEventListener listener) {

@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class Utils {
 
     private static MessageDigest md;
 
-    private static char[] hexDigit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b',
+    private static final char[] hexDigit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b',
             'c', 'd', 'e', 'f'};
 
     /**
@@ -82,19 +81,16 @@ public class Utils {
     public static String streamToString(final InputStream is) {
         final char[] buffer = new char[1024];
         final StringBuilder out = new StringBuilder();
-        Reader in = null;
+        Reader in;
         try {
             in = new InputStreamReader(is, "UTF-8");
-            for (;;) {
+            while (true) {
                 int rsz = in.read(buffer, 0, buffer.length);
                 if (rsz < 0)
                     break;
                 out.append(buffer, 0, rsz);
             }
-        }
-        catch (UnsupportedEncodingException ex) {
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
         }
         finally {
             closeStream(is);
