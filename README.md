@@ -17,8 +17,6 @@ Uses the following projects:
 * [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
 * [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
 
-  Contact: biylda{at}gmail.com
-
 	
 ##Development
 ###Prerequisites
@@ -34,6 +32,25 @@ export ANDROID_HOME=/path/to/android-sdk
 ./gradlew build
 ```
 ##What's new
+<h4>
+	<a name="#0.9.1"></a>
+	0.9.1 (14. 3. 2017)
+	<a href="#0.9.1" class="section_anchor"></a>
+</h4>
+<p>
+  <ul>
+        <li>Request location and write permissions on start of the application. This should fix some problems with write access.</li>
+        <li>Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.</li>
+        <li>Save button now displays options menu to pick a slot.</li>
+        <li>When clicking on a point on map, it displays a dialog with selectable text. This allows coordinate copying.</li>
+        <li>Added missing Slovak strings.</li>
+        <li>Logging all errors to file "error.log".</li>
+        <li>Fixed: Unable to start a cartridge from map after some cartridge was played.</li>
+        <li>Fixed: Crashing on older devices and devices not supporting TLS (they still won't be able to download cartridges though).</li>
+        <li>Fixed: Crashing if user doesn't have read permission when listing folders.</li>
+        <li>Fixed: Crashing when user inputs invalid coordinates on map.</li>
+  </ul>
+</p>
 <h4>
 	<a name="#0.9.0"></a>
 	0.9.0 (23. 4. 2016)
