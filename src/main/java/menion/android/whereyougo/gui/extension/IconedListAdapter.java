@@ -48,7 +48,7 @@ public class IconedListAdapter extends BaseAdapter {
     public static final int TYPE_SPINNER_VIEW = 1;
     public static final int TYPE_OTHER = 2;
     private static final int PADDING = (int) Utils.getDpPixels(4.0f);
-    private static String TAG = "IconedListAdapter";
+    private static final String TAG = "IconedListAdapter";
     private ArrayList<DataInfo> mData;
     private Context context;
     private ListView listView;

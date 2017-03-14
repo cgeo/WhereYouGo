@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class Utils {
 
-    private static String TAG = "Utils";
+    private static final String TAG = "Utils";
 
 
     private static float density = -1.0f;

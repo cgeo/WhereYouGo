@@ -34,7 +34,7 @@ import menion.android.whereyougo.utils.Logger;
  */
 public class GuideContent implements ILocationEventListener {
 
-    private static String TAG = "NavigationContent";
+    private static final String TAG = "NavigationContent";
 
     /**
      * actual navigator

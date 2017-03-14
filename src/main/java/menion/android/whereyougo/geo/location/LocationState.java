@@ -53,7 +53,7 @@ public class LocationState {
     private static final String KEY_B_GPS_ENABLE_ASK_ON_ENABLE = "KEY_B_GPS_ENABLE_ASK_ON_ENABLE";
     private static final int GPS_ON = 0;
     private static final int GPS_OFF = 1;
-    private static String TAG = "LocationState";
+    private static final String TAG = "LocationState";
     // gps connection "service"
     private static GpsConnection gpsConn;
 

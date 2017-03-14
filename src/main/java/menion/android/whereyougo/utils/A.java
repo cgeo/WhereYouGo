@@ -33,7 +33,7 @@ import menion.android.whereyougo.guide.GuideContent;
 public class A {
 
     protected static CustomMainActivity main;
-    private static String TAG = "A";
+    private static final String TAG = "A";
     private static MainApplication app;
     private static GuideContent guidingContent;
     private static ManagerAudio managerAudio;
