@@ -7,7 +7,7 @@ original project https://code.google.com/p/android-whereyougo/
 my project on Google Code https://code.google.com/r/biylda-whereyougo/
 this project on GitHub https://github.com/biylda/WhereYouGo/
 
-##About
+## About
 
 Clone of [WhereYouGo](https://code.google.com/p/android-whereyougo). Main goal is to add vector maps support and general improvements.
 
@@ -18,12 +18,12 @@ Uses the following projects:
 * [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
 
 	
-##Development
-###Prerequisites
+## Development
+### Prerequisites
 * [Android SDK](https://developer.android.com/sdk/index.html)
 * Git
 
-###Build
+### Build
 * execute
 ```
 git clone https://github.com/biylda/WhereYouGo.git whereyougo
@@ -31,7 +31,7 @@ cd whereyougo
 export ANDROID_HOME=/path/to/android-sdk
 ./gradlew build
 ```
-##What's new
+## What's new
 <h4>
 	<a name="#0.9.1"></a>
 	0.9.1 (14. 3. 2017)
@@ -310,6 +310,6 @@ export ANDROID_HOME=/path/to/android-sdk
 
 <h2>
 	
-##TODO
+## TODO
 * sorting objects in inventory
 * add downloading from http://wherigofoundation.com
