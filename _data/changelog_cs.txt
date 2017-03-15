@@ -1,9 +1,7 @@
-! Uložené hry z verze 0.6.0 a nižší nejsou kompatibilní s aktuální verzí !
-
-0.9.0
-Ukládací sloty.
-Lze spustit wherigo z mapy.
-Vylepšeno nastavení složky s Wherigo.
-Opraveno stahování z wherigo.com.
-Pomocí Sdílet lze odkaz na wherigo poslat do WhereYouGo ke stažení.
-atd...
+Při startu aplikace požádá o udělení práv na polohu a zápis. To by mělo vyřešit některé problémy se čtením cartridgí na novějších Androidech.
+Vhodnější zpráva pokud nejsou nalezeny žádné cartridge. Informuje o možnosti změny složky a o problematice SD karet v Androidu.
+Ukládací tlačítko nyní zobrazí nabídku se sloty.
+Po kliknutí na bod na mapě se zobrazí dialog s vybíratelným textem. To umožní kopírování souřadnic.
+Vylepšena Slovenština.
+Chyby jsou zaznamenány do souboru "error.log".
+Opravy chyb

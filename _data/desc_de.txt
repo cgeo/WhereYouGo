@@ -3,12 +3,13 @@ WhereYouGo ist ein inoffizieller Client für das Wherigo-Geocaching. Es unterst�
 Hinweise:
 - Spielstände aus Version 0.6.0 oder älter sind nicht kompatibel mit der aktuellen Version.
 - Version 0.6.0 kann hier heruntergeladen werden: https://android-whereyougo.googlecode.com/files/0.6.0.apk
-- Cartridges können auf der Webseite http://www.wherigo.com heruntergeladen werden, dabei die Version "Pocket PC Device" verwenden
-- Falls man die eingebaute Herunterladen-Funktion nicht nutzt, muss die Cartridges in das gewählte Wherigo-Verzeichnis platziert werden (Standard: "sdcard/WhereYouGo")
+- Cartridges können auf der Webseite http://www.wherigo.com heruntergeladen werden, dabei die Version "Pocket PC Device" verwenden. Your device must support TLS, otherwise there will be an error during connection.
+- Falls man die eingebaute Herunterladen-Funktion nicht nutzt, muss die Cartridges in das gewählte Wherigo-Verzeichnis (Einstellungen - Allgemein - Wherigo Verzeichnis) platziert werden. Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
 
 Funktionen:
 - Wherigo-Client
 - Cartridges herunterladen (dazu die Anmeldeinformationen in den Einstellungen eintragen, die Wherigo-Seite im Web-Browser öffnen und auswählen diese mit WhereYouGo zu öffnen)
+- Savegame slots
 - Das Spiel wird automatisch gespeichert, wenn man die Applikation minimiert.
 - Online-Karten
 - Offline-Vektorkarten (Quelle z.B. hier: http://download.mapsforge.org/ oder http://osm.paws.cz/ oder http://www.openandromaps.org/)
@@ -21,4 +22,4 @@ Funktionen:
 Über das Projekt:
 Der Kern der Applikation basiert auf OpenWIG, sie benutzt die Mapsforge-Bibliothek um Offline-Vektorkarten anzuzeigen. Alternativ lässt sich auch Locus benutzen.
 https://code.google.com/p/android-whereyougo/ - Originale Projektseite (beinhaltet Version 0.7.0)
-https://code.google.com/r/biylda-whereyougo/ - Projekt-Klon (beinhaltet die aktuelle Version)
+https://github.com/biylda/WhereYouGo/ - Projekt-Klon (beinhaltet die aktuelle Version)

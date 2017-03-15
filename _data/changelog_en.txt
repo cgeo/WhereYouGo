@@ -1,10 +1,7 @@
-! Savegames from version 0.6.0 and lower are not compatible with current version !
-
-0.9.0
-Added saving slots.
-Added ability to start wherigo from map after clicking on icon.
-Improved Wherigo folder settings.
-Fixed downloading of cartridges from wherigo.com.
-Added ability to receive wherigo link via Share.
-Added new settings options for units formatting (distance, speed, angle).
-etc...
+Request location and write permissions on start of the application. This should fix some problems with write access.
+Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.
+Save button now displays options menu to pick a slot.
+When clicking on a point on map, it displays a dialog with selectable text. This allows coordinate copying.
+Added missing Slovak strings.
+Logging all errors to file "error.log".
+Bugfixes

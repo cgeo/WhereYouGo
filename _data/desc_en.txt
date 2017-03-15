@@ -3,12 +3,13 @@ WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online an
 Notice:
 - Savegames from version 0.6.0 and lower are not compatible with current version.
 - Version 0.6.0 can be downloaded here: https://android-whereyougo.googlecode.com/files/0.6.0.apk
-- Cartridges are downloadable from http://www.wherigo.com, use version "Pocket PC Device".
-- If you don't use the built-in download function, place the cartridges into your specified Wherigo folder (default "sdcard/WhereYouGo")
+- Cartridges are downloadable from http://www.wherigo.com, use version "Pocket PC Device". Your device must support TLS, otherwise there will be an error during connection.
+- If you don't use the built-in download function, copy cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
 
 Functions:
 - Wherigo client
 - Download cartridges (user needs to fill login credentials in Settings, browse to desired wherigo via Web Browser and select open in WhereYouGo)
+- Savegame slots
 - Automatic game saving when user switches to another application
 - Online maps
 - Offline vector maps (downloadable e.g. here http://download.mapsforge.org/ or http://osm.paws.cz/ or http://www.openandromaps.org/)
@@ -21,4 +22,4 @@ Functions:
 About:
 The core of the application is based on OpenWIG, it uses Mapsforge library to display maps, alternatively Locus can be used.
 https://code.google.com/p/android-whereyougo/ - original project page (contains version 0.7.0)
-https://code.google.com/r/biylda-whereyougo/ - project clone (contains current version)
+https://github.com/biylda/WhereYouGo/ - project clone (contains current version)
