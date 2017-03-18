@@ -79,7 +79,7 @@
     <string name="pref_KEY_S_GPS_MIN_TIME_NOTIFICATION" translatable="false">KEY_S_GPS_MIN_TIME_NOTIFICATION</string>
     <string name="pref_DEFAULT_GPS_MIN_TIME_NOTIFICATION" translatable="false">0</string>
     <string name="pref_KEY_B_GPS_BEEP_ON_GPS_FIX" translatable="false">KEY_B_GPS_BEEP_ON_GPS_FIX</string>
-    <string name="pref_DEFAULT_GPS_BEEP_ON_GPS_FIX" translatable="false">true</string>
+    <string name="pref_DEFAULT_GPS_BEEP_ON_GPS_FIX" translatable="false">false</string>
     <string name="pref_KEY_B_GPS_DISABLE_WHEN_HIDE" translatable="false">KEY_B_GPS_DISABLE_WHEN_HIDE</string>
     <string name="pref_DEFAULT_GPS_DISABLE_WHEN_HIDE" translatable="false">false</string>
     <string name="pref_KEY_B_SENSOR_HARDWARE_COMPASS" translatable="false">KEY_B_SENSOR_HARDWARE_COMPASS</string>
