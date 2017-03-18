@@ -34,7 +34,7 @@ export ANDROID_HOME=/path/to/android-sdk
 ## What's new
 <h4>
 	<a name="#0.9.1"></a>
-	0.9.1 (14. 3. 2017)
+	0.9.1 (18. 3. 2017)
 	<a href="#0.9.1" class="section_anchor"></a>
 </h4>
 <p>
@@ -45,6 +45,9 @@ export ANDROID_HOME=/path/to/android-sdk
         <li>When clicking on a point on map, it displays a dialog with selectable text. This allows coordinate copying.</li>
         <li>Added missing Slovak strings.</li>
         <li>Logging all errors to file "error.log".</li>
+        <li>Improved saving/loading time</li>
+        <li>Increased timeout for slower connections when downloading cartridge</li>
+        <li>Fixed: Automatic saving progress dialog and completion message.</li>
         <li>Fixed: Unable to start a cartridge from map after some cartridge was played.</li>
         <li>Fixed: Crashing on older devices and devices not supporting TLS (they still won't be able to download cartridges though).</li>
         <li>Fixed: Crashing if user doesn't have read permission when listing folders.</li>
