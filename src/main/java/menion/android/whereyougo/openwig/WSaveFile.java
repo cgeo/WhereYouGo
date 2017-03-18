@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.openwig;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -53,11 +55,11 @@ public class WSaveFile implements FileHandle {
     }
 
     public DataInputStream openDataInputStream() throws IOException {
-        return new DataInputStream(new FileInputStream(file));
+        return new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
     }
 
     public DataOutputStream openDataOutputStream() throws IOException {
-        return new DataOutputStream(new FileOutputStream(file));
+        return new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
     }
 
     public void truncate(long len) throws IOException {
