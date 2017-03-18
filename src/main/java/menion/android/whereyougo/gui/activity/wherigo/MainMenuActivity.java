@@ -20,7 +20,6 @@ package menion.android.whereyougo.gui.activity.wherigo;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -454,40 +453,10 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         });
     }
 
-    private class SaveGame extends AsyncTask<Void, Void, Void> {
-
-        ProgressDialog dialog;
-
-        @Override
-        protected void onPreExecute() {
-            Engine.requestSync();
-            dialog = ProgressDialog.show(MainMenuActivity.this, null, getString(R.string.working));
+    private class SaveGame extends menion.android.whereyougo.gui.SaveGame {
+        public SaveGame() {
+            super(MainMenuActivity.this);
         }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // let thread sleep for a while to be sure that cartridge is saved!
-            try {
-                while (WUI.saving) {
-                    Thread.sleep(100);
-                }
-            } catch (InterruptedException e) {
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            try {
-                if (dialog != null) {
-                    dialog.cancel();
-                    dialog = null;
-                }
-            } catch (Exception e) {
-                Logger.w(TAG, "onPostExecute(), e:" + e.toString());
-            }
-        }
-
     }
 
     private class SaveGameOnExit extends SaveGame {

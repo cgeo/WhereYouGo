@@ -17,6 +17,7 @@
 
 package menion.android.whereyougo;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -34,6 +35,7 @@ import java.util.TimerTask;
 
 import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.gui.SaveGame;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
@@ -318,16 +320,19 @@ public class MainApplication extends Application {
         if (Preferences.GLOBAL_SAVEGAME_AUTO
                 && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
                 && MainActivity.selectedFile != null && Engine.instance != null) {
-            if (MainActivity.wui != null) {
-                MainActivity.wui.setOnSavingFinished(new Runnable() {
-                    @Override
-                    public void run() {
-                        ManagerNotify.toastShortMessage(MainApplication.this, getString(R.string.save_game_auto));
-                        MainActivity.wui.setOnSavingFinished(null);
-                    }
-                });
+            final Activity activity = PreferenceValues.getCurrentActivity();
+            if (activity != null) {
+                if (MainActivity.wui != null) {
+                    MainActivity.wui.setOnSavingFinished(new Runnable() {
+                        @Override
+                        public void run() {
+                            ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
+                            MainActivity.wui.setOnSavingFinished(null);
+                        }
+                    });
+                }
+                new SaveGame(activity).execute();
             }
-            Engine.requestSync();
         }
     }
 
