@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
@@ -63,6 +64,9 @@ public class DownloadCartridgeTask extends
             httpClient = new OkHttpClient.Builder()
                     .sslSocketFactory(new TLSSocketFactory())
                     .cookieJar(new NonPersistentCookieJar())
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
                     .build();
         } catch (KeyManagementException | NoSuchAlgorithmException e) {
             Logger.e(TAG, "init()", e);
