@@ -34,7 +34,7 @@ export ANDROID_HOME=/path/to/android-sdk
 ## What's new
 <h4>
 	<a name="#0.9.1"></a>
-	0.9.1 (18. 3. 2017)
+	0.9.1 (20. 3. 2017)
 	<a href="#0.9.1" class="section_anchor"></a>
 </h4>
 <p>

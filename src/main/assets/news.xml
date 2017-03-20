@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
-    <update name="0.9.1" id="41" time="18.3.2017">
+    <update name="0.9.1" id="42" time="20.3.2017">
         <li>Request location and write permissions on start of the application. This should fix some problems with write access.</li>
         <li>Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.</li>
         <li>Save button now displays options menu to pick a slot.</li>
