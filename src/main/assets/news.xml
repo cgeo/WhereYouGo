@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    <update name="0.9.2" id="43" time="21.3.2017">
+        <li>Input can now be scanned from QR code</li>
+    </update>
     <update name="0.9.1" id="42" time="20.3.2017">
         <li>Request location and write permissions on start of the application. This should fix some problems with write access.</li>
         <li>Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.</li>

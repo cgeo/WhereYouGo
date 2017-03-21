@@ -17,12 +17,14 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -41,6 +43,8 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaTable;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class InputScreenActivity extends CustomActivity {
 
@@ -58,6 +62,7 @@ public class InputScreenActivity extends CustomActivity {
         InputScreenActivity.input = input;
     }
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (A.getMain() == null || Engine.instance == null || input == null) {
@@ -65,20 +70,6 @@ public class InputScreenActivity extends CustomActivity {
             return;
         }
         setContentView(R.layout.layout_input);
-    }
-
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            Engine.callEvent(input, "OnGetInput", null);
-            InputScreenActivity.this.finish();
-            return true;
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
-
-    public void onResume() {
-        super.onResume();
 
         try {
             // set image and it's label
@@ -106,6 +97,15 @@ public class InputScreenActivity extends CustomActivity {
             // set answer
             final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
             editText.setVisibility(View.GONE);
+            final Button scanButton = (Button) findViewById(R.id.layoutInputScanButton);
+            scanButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
+                    integrator.initiateScan();
+                }
+            });
+            scanButton.setVisibility(View.GONE);
             final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
             spinner.setVisibility(View.GONE);
             String type = (String) input.table.rawget("InputType");
@@ -114,6 +114,7 @@ public class InputScreenActivity extends CustomActivity {
             if ("Text".equals(type)) {
                 editText.setText("");
                 editText.setVisibility(View.VISIBLE);
+                scanButton.setVisibility(View.VISIBLE);
                 mode = TEXT;
             } else if ("MultipleChoice".equals(type)) {
                 LuaTable choices = (LuaTable) input.table.rawget("Choices");
@@ -151,6 +152,28 @@ public class InputScreenActivity extends CustomActivity {
             }, null, null, null, null);
         } catch (Exception e) {
             Logger.e(TAG, "onResume()", e);
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            Engine.callEvent(input, "OnGetInput", null);
+            InputScreenActivity.this.finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null && result.getContents() != null) {
+            final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+            editText.setText(result.getContents());
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

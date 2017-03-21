@@ -98,6 +98,7 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
     <string name="save_game_slot">Slot</string>
     <string name="save_game_slots">Uložit…</string>
     <string name="saving">Ukládám…</string>
+    <string name="scanQR">Skenovat QR</string>
     <string name="settings">Nastavení</string>
     <string name="speed">Rychlost</string>
     <string name="start">Start</string>

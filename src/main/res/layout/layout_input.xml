@@ -43,6 +43,13 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
 
+            <Button
+                android:id="@+id/layoutInputScanButton"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scanQR" />
+
             <Spinner
                 android:id="@+id/layoutInputSpinner"
                 android:layout_width="match_parent"

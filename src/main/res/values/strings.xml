@@ -98,6 +98,7 @@ If you\'re not sure, set \"Wherigo folder\" automatically.
     <string name="save_game_slot">Slot</string>
     <string name="save_game_slots">Save…</string>
     <string name="saving">Saving…</string>
+    <string name="scanQR">Scan QR</string>
     <string name="settings">Settings</string>
     <string name="speed">Speed</string>
     <string name="start">Start</string>

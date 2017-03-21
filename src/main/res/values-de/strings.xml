@@ -85,6 +85,7 @@ If you\'re not sure, set \"Wherigo folder\" automatically.
     <string name="save_game_before_exit">Willst du das Spiel speichern?</string>
     <string name="save_game_ok">Das Spiel wurde gespeichert.</string>
     <string name="save_game_slots">Speichern…</string>
+    <string name="scanQR">QR scannen</string>
     <string name="settings">Einstellungen</string>
     <string name="speed">Geschwindigkeit</string>
     <string name="start">Start</string>
