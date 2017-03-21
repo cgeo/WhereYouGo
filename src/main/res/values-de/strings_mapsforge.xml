@@ -70,6 +70,7 @@
     <string name="menu_position_map_file_center">Zentrum der Kartendatei</string>
     <string name="menu_position_my_location_enable">Meine Position anzeigen</string>
     <string name="menu_position_my_location_disable">Meine Position entfernen</string>
+    <string name="menu_position_target">Ziel</string>
     <string name="menu_preferences">Einstellungen</string>
     <string name="menu_render_theme">Render-Theme</string>
     <string name="menu_render_theme_osmarender">Osmarender</string>

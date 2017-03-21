@@ -34,6 +34,9 @@
                 android:id="@+id/menu_position_enter_coordinates"
                 android:title="@string/menu_position_enter_coordinates" />
             <item
+                android:id="@+id/menu_position_target"
+                android:title="@string/menu_position_target" />
+            <item
                 android:id="@+id/menu_position_map_center"
                 android:title="@string/menu_position_map_file_center" />
         </menu>

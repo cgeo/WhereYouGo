@@ -34,12 +34,13 @@ export ANDROID_HOME=/path/to/android-sdk
 ## What's new
 <h4>
 	<a name="#0.9.2"></a>
-	0.9.2 (21. 3. 2017)
+	0.9.2 (22. 3. 2017)
 	<a href="#0.9.2" class="section_anchor"></a>
 </h4>
 <p>
   <ul>
-		<li>Input can now be scanned from QR code</li>
+        <li>Input can now be scanned from QR code</li>
+        <li>Map can be centered to target.</li>
   </ul>
 </p>
 <h4>

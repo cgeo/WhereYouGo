@@ -71,6 +71,7 @@
     <string name="menu_position_my_location_enable">Zobrazit mou pozici</string>
     <string name="menu_position_my_location_disable">Odstranit mou pozici</string>
     <string name="menu_position_snap_to_location">Přichytit k pozici</string>
+    <string name="menu_position_target">Cíl</string>
     <string name="menu_preferences">Nastavení</string>
     <string name="menu_refresh">Obnovit</string>
     <string name="menu_render_theme">Vykreslovací schéma</string>

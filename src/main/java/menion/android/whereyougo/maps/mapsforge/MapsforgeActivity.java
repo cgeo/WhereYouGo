@@ -635,6 +635,12 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 gotoLastKnownPosition();
                 return true;
 
+            case R.id.menu_position_target:
+                GeoPoint geoPoint = navigationOverlay.getTarget();
+                if (geoPoint != null)
+                    this.mapView.getMapViewPosition().setCenter(geoPoint);
+                return true;
+
             case R.id.menu_position_enter_coordinates:
                 showDialog(DIALOG_ENTER_COORDINATES);
                 return true;
@@ -845,6 +851,10 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             menu.findItem(R.id.menu_position_map_center).setEnabled(false);
             menu.findItem(R.id.menu_render_theme).setEnabled(false);
             menu.findItem(R.id.menu_mapfile).setEnabled(false);
+        }
+
+        if (navigationOverlay.getTarget() == null) {
+            menu.findItem(R.id.menu_position_target).setEnabled(false);
         }
 
         return true;
