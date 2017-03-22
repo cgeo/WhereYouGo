@@ -2,11 +2,13 @@
 <resources>
 
     <string name="pref_advanced_settings">Paramètres avancés</string>
-    <string name="pref_appearance">Appearance</string>
+    <string name="pref_appearance">Apparence</string>
     <string name="pref_bearing_true">Utiliser un azimut réel</string>
     <string name="pref_bearing_true_desc">Si activé utiliser l’azimut réel. Sinon, utiliser l’azimut magnétique</string>
     <string name="pref_confirm_on_exit">Confirmer la fermeture de l’application</string>
     <string name="pref_confirm_on_exit_desc">Demander une confirmation avant de quitter Locus avec le bouton Retour</string>
+    <string name="pref_double_click">Appuyez deux fois</string>
+    <string name="pref_double_click_desc">Pour quitter la partie appuyez deux fois sur Arrière</string>
     <string name="pref_font_size">Taille de la police</string>
     <string name="pref_font_size_desc">Taille du texte</string>
     <string name="pref_font_size_default">Par défaut</string>
@@ -20,10 +22,12 @@
     <string name="pref_gc_password">Mot de passe</string>
     <string name="pref_gc_password_desc">Mot de passe Geocaching.com</string>
     <string name="pref_global">Global</string>
+    <string name="pref_gps">Autoriser le GPS</string>
     <string name="pref_gps_altitude_manual_correction">Ajuster l’altitude</string>
     <string name="pref_gps_altitude_manual_correction_desc">Correction manuelle de l’altitude</string>
     <string name="pref_gps_beep_on_gps_fix">Bip lors du fix GPS</string>
     <string name="pref_gps_beep_on_gps_fix_desc">Bipper lorsque le GPS se positionne pour la première fois</string>
+    <string name="pref_gps_desc">Démarrer le GPS automatiquement au démarrage</string>
     <string name="pref_gps_disable">Désactiver lorsque masqué</string>
     <string name="pref_gps_disable_desc">Désactiver le GPS, lorsque l’écran s’éteint ou que l’application est minimisée et que le GPS n’est pas requis</string>
     <string name="pref_gps_min_time">Temps entre les positionnements GPS</string>
@@ -32,7 +36,8 @@
     <string name="pref_guiding_compass_sounds">Sons de guidage</string>
     <string name="pref_guiding_compass_sounds_desc">Activer/Désactiver les sons pendant le guidage</string>
     <string name="pref_guiding_gps_required_desc">Laisser le GPS actif pendant le guidage</string>
-    <string name="pref_guiding_sound_distance_waypoint_desc">Distance (en mètre) utilisée pour les notification sonores. Valeur soit du premier bip, soit du seuil pour l’augmentation de la fréquence</string>
+    <string name="pref_guiding_sound_distance">Notification sonore</string>
+    <string name="pref_guiding_sound_distance_waypoint_desc">Distance (en mètre) utilisée pour les notifications sonores. Valeur soit du premier bip, soit du seuil pour l’augmentation de la fréquence</string>
     <string name="pref_guiding_sound_type">Type de notification sonore</string>
     <string name="pref_guiding_sound_type_waypoint_desc">Changez ici la façon dont les notifications sonores fonctionnent pour les points</string>
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Bip sur la distance</string>
@@ -51,18 +56,21 @@
     <string name="pref_image_stretch_desc">Étirer (si coché) ou conserver la taille originale (si non coché)</string>
     <string name="pref_language">Langue</string>
     <string name="pref_language_desc">Permettre de définir la langue de la sélection</string>
-    <string name="pref_language_default">système par défaut</string>
-    <string name="pref_locale">Paramètres Régionaux</string>
+    <string name="pref_language_default">Système par défaut</string>
+    <string name="pref_locale">Paramètres régionaux</string>
     <string name="pref_login">Identifiant</string>
     <string name="pref_login_desc">Pour télécharger les cartouches depuis le site wherigo.com</string>
     <string name="pref_map_provider">Fournisseur de carte</string>
     <string name="pref_map_provider_desc">Sélectionnez le fournisseur de carte</string>
     <string name="pref_map_provider_vector">Mapsforge (carte en ligne et hors-ligne)</string>
-    <string name="pref_map_provider_locus">Locus (Locus doit être installé)</string>
+    <string name="pref_map_provider_locus">Locus (doit être installé)</string>
     <string name="pref_orientation">Orientation</string>
     <string name="pref_root">Dossier Wherigo</string>
+    <string name="pref_root_desc">Sélectionner le dossier pour les fichiers Wherigo</string>
     <string name="pref_save_game_auto">Enregistrer automatiquement le jeu</string>
     <string name="pref_save_game_auto_desc">Le jeu sera enregistré automatiquement lorsque vous basculez sur une autre application.</string>
+    <string name="pref_save_game_slots">Emplacement de sauvegarde</string>
+    <string name="pref_save_game_slots_desc">Nombre d\'emplacements pour sauvegarder la partie via le bouton menu</string>
     <string name="pref_sensors">Capteurs</string>
     <string name="pref_sensors_compass_auto_change">Changement automatique</string>
     <string name="pref_sensors_compass_auto_change_desc">Utiliser la boussole interne à faible vitesse et le GPS à haute vitesse</string>
@@ -85,7 +93,9 @@
     <string name="pref_units_angle">Unités d’angle</string>
     <string name="pref_units_angle_degree">Degré</string>
     <string name="pref_units_angle_desc">Unités d’angle pour affichage</string>
-    <string name="pref_units_angle_angular_mil">millième angulaire</string>
+    <string name="pref_units_angle_angular_mil">Millième angulaire</string>
+    <string name="pref_units_angle_russian_mil">Russian mil</string>
+    <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string>
     <string name="pref_units_coo_latlon">Format Lat / Lon</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_min">14 ° 52,123 \ \'</string>
@@ -93,6 +103,13 @@
     <string name="pref_units_coo_latlon_desc">Coordonnées (latitude / longitude) pour l’affichage</string>
     <string name="pref_units_length">Unités de longueur</string>
     <string name="pref_units_length_desc">Choisissez les unités d’affichage par défaut</string>
+    <string name="pref_units_length_im_f">Impériale (ft)</string>
+    <string name="pref_units_length_im_fm">Impériale (ft/mi)</string>
+    <string name="pref_units_length_im_y">Impériale (yd)</string>
+    <string name="pref_units_length_im_ym">Impériale (yd/mi)</string>
+    <string name="pref_units_length_me_m">Métrique (m)</string>
+    <string name="pref_units_length_me_mkm">Métrique (m/km)</string>
+    <string name="pref_units_length_na_nmi">Nautique (m/nmi)</string>
     <string name="pref_units_speed">Unités de vitesse</string>
     <string name="pref_units_speed_desc">Choisissez les unités de vitesse par défaut</string>
 

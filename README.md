@@ -41,6 +41,7 @@ export ANDROID_HOME=/path/to/android-sdk
   <ul>
         <li>Input can now be scanned from QR code</li>
         <li>Map can be centered to target.</li>
+        <li>Improved French translation.</li>
   </ul>
 </p>
 <h4>
