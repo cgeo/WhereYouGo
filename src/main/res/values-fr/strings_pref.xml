@@ -56,7 +56,7 @@
     <string name="pref_image_stretch_desc">Étirer (si coché) ou conserver la taille originale (si non coché)</string>
     <string name="pref_language">Langue</string>
     <string name="pref_language_desc">Permettre de définir la langue de la sélection</string>
-    <string name="pref_language_default">système par défaut</string>
+    <string name="pref_language_default">Système par défaut</string>
     <string name="pref_locale">Paramètres régionaux</string>
     <string name="pref_login">Identifiant</string>
     <string name="pref_login_desc">Pour télécharger les cartouches depuis le site wherigo.com</string>
@@ -70,7 +70,7 @@
     <string name="pref_save_game_auto">Enregistrer automatiquement le jeu</string>
     <string name="pref_save_game_auto_desc">Le jeu sera enregistré automatiquement lorsque vous basculez sur une autre application.</string>
     <string name="pref_save_game_slots">Emplacement de sauvegarde</string>
-    <string name="pref_save_game_slots_desc">Nombre d'emplacement pour sauvegarder la partie via le bouton menu</string>
+    <string name="pref_save_game_slots_desc">Nombre d'emplacements pour sauvegarder la partie via le bouton menu</string>
     <string name="pref_sensors">Capteurs</string>
     <string name="pref_sensors_compass_auto_change">Changement automatique</string>
     <string name="pref_sensors_compass_auto_change_desc">Utiliser la boussole interne à faible vitesse et le GPS à haute vitesse</string>

@@ -11,15 +11,15 @@
     <string name="cancelled">annulé</string>
     <string name="choose_cartridge">Choisir la cartouche</string>
     <string name="close">Fermer</string>
-    <string name="coauthor">Current development</string>
-    <string name="compass">Compass</string>
+    <string name="coauthor">Co auteurs</string>
+    <string name="compass">Compas</string>
     <string name="declination">Déclinaison</string>
     <string name="delete_cartridge">Effacer la cartouche ?</string>
     <string name="delete_save_game">Effacer la sauvegarde ?</string>
     <string name="disable_location">Désactiver le GPS</string>
     <string name="distance">Distance</string>
     <string name="do_you_really_want_to_delete_selected_items">Voulez-vous vraiment supprimer les éléments sélectionnés ?</string>
-    <string name="do_you_really_want_to_delete_x">Voulez vous vraiment supprimer \'%1$s\' ?</string>
+    <string name="do_you_really_want_to_delete_x">Voulez-vous vraiment supprimer \'%1$s\' ?</string>
     <string name="do_you_really_want_to_exit">Voulez-vous vraiment quitter ?</string>
     <string name="dont_ask">Ne pas demander</string>
     <string name="download">Télécharger</string>
@@ -65,12 +65,12 @@
     <string name="new_version_will_be_installed">La nouvelle version sera installée !</string>
     <string name="no">Non</string>
     <string name="no_description">Aucune description</string>
-    <string name="no_location_providers_available">Aucun équipement de localisation disponible !</string>
+    <string name="no_location_providers_available">Aucun fournisseur de localisation disponible</string>
     <string name="no_satellites">Aucun satellite</string>
-    <string name="no_target">Aucune cible !</string>
+    <string name="no_target">Aucune cible</string>
     <string name="no_wherigo_cartridge_available">
-Aucune de cartouche WHerigo (*.gwc) disponible.
-Téléchargez où copiez les dans le répertoirei \"%1$s\".
+Aucune cartouche Wherigo (*.gwc) disponible.
+Téléchargez ou copiez les dans le répertoirei \"%1$s\".
 Vous pouvez aussi configurer un répertoire dans \"Paramètres - Global - Dossier Wherigo\".
 Soyez sûr(e) d’avoir autorisé l’application à écrire sur le stockage externe et que vous pouvez écrire dans le répertoire sélectionné.
 Quelques nouveaux appareils n’autorisent pas l’écriture sur la carte SD.
