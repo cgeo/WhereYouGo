@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.WindowManager;
@@ -236,6 +237,9 @@ public class FilePicker extends Activity implements AdapterView.OnItemClickListe
         this.currentDirectory = new File(preferences.getString(CURRENT_DIRECTORY, DEFAULT_DIRECTORY));
         if (!this.currentDirectory.exists() || !this.currentDirectory.canRead()) {
             this.currentDirectory = new File(DEFAULT_DIRECTORY);
+        }
+        if (!this.currentDirectory.exists() || !this.currentDirectory.canRead()) {
+            this.currentDirectory = Environment.getExternalStorageDirectory();
         }
         browseToCurrentDirectory();
     }
