@@ -23,6 +23,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.preferences.Preferences;
 
 public class Images {
 
@@ -94,17 +95,25 @@ public class Images {
         return draw;
     }
 
-    public static Bitmap resizeBitmap(Bitmap draw, int newWidth) {
-        if (draw == null)
-            return null;
-
-        return resizeBitmap(draw, newWidth, newWidth * draw.getHeight() / draw.getWidth());
+    public static Bitmap resizeBitmap(Bitmap bmp) {
+        if (Preferences.APPEARANCE_IMAGE_STRETCH) {
+            return resizeBitmap(bmp, Const.SCREEN_WIDTH);
+        } else {
+            return bmp;
+        }
     }
 
-    public static Bitmap resizeBitmap(Bitmap draw, int newWidth, int newHeight) {
-        if (draw == null || newWidth <= 0 || draw.getWidth() == newWidth)
-            return draw;
+    public static Bitmap resizeBitmap(Bitmap bmp, int newWidth) {
+        if (bmp == null)
+            return null;
 
-        return Bitmap.createScaledBitmap(draw, newWidth, newHeight, true);
+        return resizeBitmap(bmp, newWidth, newWidth * bmp.getHeight() / bmp.getWidth());
+    }
+
+    public static Bitmap resizeBitmap(Bitmap bmp, int newWidth, int newHeight) {
+        if (bmp == null || newWidth <= 0 || bmp.getWidth() == newWidth)
+            return bmp;
+
+        return Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
     }
 }

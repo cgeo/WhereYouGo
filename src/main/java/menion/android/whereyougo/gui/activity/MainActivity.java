@@ -208,16 +208,6 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    public static void setBitmapToImageView(Bitmap i, ImageView iv) {
-        Logger.w(TAG, "setBitmapToImageView(), " + i.getWidth() + " x " + i.getHeight());
-        if (Preferences.APPEARANCE_IMAGE_STRETCH) {
-            int newWidth = Const.SCREEN_WIDTH;
-            int newHeight = i.getHeight() * newWidth / i.getWidth();
-            i = Bitmap.createScaledBitmap(i, newWidth, newHeight, false);
-        }
-        iv.setImageBitmap(i);
-    }
-
     public static void openCartridge(final CartridgeFile cartridgeFile) {
         final CustomActivity activity = A.getMain();
         if (activity == null) {

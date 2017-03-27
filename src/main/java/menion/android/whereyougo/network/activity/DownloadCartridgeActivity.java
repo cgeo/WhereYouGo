@@ -86,7 +86,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
             tvDescription.setText(String.format("CGUID:\n%s", cguid));
         }
 
-        ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+        ImageView ivImage = (ImageView) findViewById(R.id.mediaImageView);
         ivImage.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
         try {
             Bitmap icon = Images.getImageB(R.drawable.icon_gc_wherigo);

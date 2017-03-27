@@ -18,15 +18,12 @@
 package menion.android.whereyougo.gui.activity.wherigo;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,29 +31,21 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Images;
-import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaTable;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class InputScreenActivity extends CustomActivity {
+public class InputScreenActivity extends MediaActivity {
 
     private static final String TAG = "InputScreen";
-    private static final int TEXT = 0;
-    private static final int MULTI = 1;
     private static EventTable input;
-    private int mode = TEXT;
-
-    public static void reset(EventTable input) {
-        InputScreenActivity.input = input;
-    }
+    private enum InputType { NONE, TEXT, MULTI }
+    private InputType inputType = InputType.NONE;
 
     public static void setInput(EventTable input) {
         InputScreenActivity.input = input;
@@ -65,94 +54,75 @@ public class InputScreenActivity extends CustomActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (A.getMain() == null || Engine.instance == null || input == null) {
+        if (A.getMain() == null || Engine.instance == null || input == null || input.table == null) {
             finish();
             return;
         }
         setContentView(R.layout.layout_input);
 
-        try {
-            // set image and it's label
-            ImageView ivImage = (ImageView) findViewById(R.id.layoutInputImageView01);
-            TextView tvImageDesc = (TextView) findViewById(R.id.layoutInputTextView01);
+        Media media = (Media) input.table.rawget("Media");
+        setMedia(media);
 
-            Media m = (Media) input.table.rawget("Media");
-            if (m != null) {
-                tvImageDesc.setText(UtilsGUI.simpleHtml(m.altText));
-                try {
-                    byte[] is = Engine.mediaFile(m);
-                    Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-                    MainActivity.setBitmapToImageView(i, ivImage);
-                } catch (Exception e) {
-                }
-            } else {
-                ivImage.setImageBitmap(Images.IMAGE_EMPTY_B);
+        // set question TextView
+        TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView);
+        String text = (String) input.table.rawget("Text");
+        tvQuestion.setText(UtilsGUI.simpleHtml(text));
+
+        // set answer
+        final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+        editText.setVisibility(View.GONE);
+        final Button scanButton = (Button) findViewById(R.id.layoutInputScanButton);
+        scanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
+                integrator.initiateScan();
+            }
+        });
+        scanButton.setVisibility(View.GONE);
+        final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
+        spinner.setVisibility(View.GONE);
+        String type = (String) input.table.rawget("InputType");
+
+        if ("Text".equals(type)) {
+            editText.setText("");
+            editText.setVisibility(View.VISIBLE);
+            scanButton.setVisibility(View.VISIBLE);
+            inputType = InputType.TEXT;
+        } else if ("MultipleChoice".equals(type)) {
+            LuaTable choices = (LuaTable) input.table.rawget("Choices");
+            String[] data = new String[choices.len()];
+            for (int i = 0; i < choices.len(); i++) {
+                data[i] = (String) choices.rawget((double) (i + 1));
+                if (data[i] == null)
+                    data[i] = "-";
             }
 
-            // set question TextView
-            TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView02);
-            String text = (String) input.table.rawget("Text");
-            tvQuestion.setText(UtilsGUI.simpleHtml(text));
-
-            // set answer
-            final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
-            editText.setVisibility(View.GONE);
-            final Button scanButton = (Button) findViewById(R.id.layoutInputScanButton);
-            scanButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
-                    integrator.initiateScan();
-                }
-            });
-            scanButton.setVisibility(View.GONE);
-            final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
-            spinner.setVisibility(View.GONE);
-            String type = (String) input.table.rawget("InputType");
-            mode = -1;
-
-            if ("Text".equals(type)) {
-                editText.setText("");
-                editText.setVisibility(View.VISIBLE);
-                scanButton.setVisibility(View.VISIBLE);
-                mode = TEXT;
-            } else if ("MultipleChoice".equals(type)) {
-                LuaTable choices = (LuaTable) input.table.rawget("Choices");
-                String[] data = new String[choices.len()];
-                for (int i = 0; i < choices.len(); i++) {
-                    data[i] = (String) choices.rawget((double) (i + 1));
-                    if (data[i] == null)
-                        data[i] = "-";
-                }
-
-                ArrayAdapter<String> adapter =
-                        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
-                spinner.setVisibility(View.VISIBLE);
-                mode = MULTI;
-            }
-
-            CustomDialog.setBottom(this, Locale.getString(R.string.answer), new CustomDialog.OnClickListener() {
-
-                @Override
-                public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    if (mode == TEXT) {
-                        Engine.callEvent(input, "OnGetInput", editText.getText()
-                                .toString());
-                    } else if (mode == MULTI) {
-                        String item = String.valueOf(spinner.getSelectedItem());
-                        Engine.callEvent(input, "OnGetInput", item);
-                    } else {
-                        Engine.callEvent(input, "OnGetInput", null);
-                    }
-                    InputScreenActivity.this.finish();
-                    return true;
-                }
-            }, null, null, null, null);
-        } catch (Exception e) {
-            Logger.e(TAG, "onResume()", e);
+            ArrayAdapter<String> adapter =
+                    new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, data);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+            spinner.setVisibility(View.VISIBLE);
+            inputType = InputType.MULTI;
         }
+
+        CustomDialog.setBottom(this, Locale.getString(R.string.answer), new CustomDialog.OnClickListener() {
+
+            @Override
+            public boolean onClick(CustomDialog dialog, View v, int btn) {
+                if (inputType == InputType.TEXT) {
+                    Engine.callEvent(input, "OnGetInput", editText.getText()
+                            .toString());
+                } else if (inputType == InputType.MULTI) {
+                    String item = String.valueOf(spinner.getSelectedItem());
+                    Engine.callEvent(input, "OnGetInput", item);
+                } else {
+                    Engine.callEvent(input, "OnGetInput", null);
+                }
+                InputScreenActivity.this.finish();
+                return true;
+            }
+        }, null, null, null, null);
     }
 
     @Override

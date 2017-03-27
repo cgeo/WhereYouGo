@@ -33,6 +33,7 @@ import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 public class CartridgeDetailsActivity extends CustomActivity {
@@ -57,15 +58,16 @@ public class CartridgeDetailsActivity extends CustomActivity {
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         tvDescription.setText(UtilsGUI.simpleHtml(MainActivity.cartridgeFile.description));
 
-        ImageView ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
+        ImageView ivImage = (ImageView) findViewById(R.id.mediaImageView);
         try {
-            byte[] is = MainActivity.cartridgeFile.getFile(MainActivity.cartridgeFile.splashId);
-            Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-            MainActivity.setBitmapToImageView(i, ivImage);
+            byte[] data = MainActivity.cartridgeFile.getFile(MainActivity.cartridgeFile.splashId);
+            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            bmp = Images.resizeBitmap(bmp);
+            ivImage.setImageBitmap(bmp);
         } catch (Exception e) {
         }
 
-        TextView tvText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
+        TextView tvText = (TextView) findViewById(R.id.mediaTextView);
         tvText.setVisibility(View.GONE);
 
         TextView tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);

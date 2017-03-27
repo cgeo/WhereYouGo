@@ -17,18 +17,15 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
@@ -36,7 +33,7 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import se.krka.kahlua.vm.LuaClosure;
 
-public class PushDialogActivity extends CustomActivity {
+public class PushDialogActivity extends MediaActivity {
 
     private static final String TAG = "PushDialog";
 
@@ -48,8 +45,6 @@ public class PushDialogActivity extends CustomActivity {
     private static Media[] media;
     private static LuaClosure callback;
     private static int page = -1;
-    private ImageView ivImage;
-    private TextView tvImageText;
     private TextView tvText;
 
     public static void setDialog(String[] texts, Media[] media, String button1, String button2,
@@ -84,22 +79,7 @@ public class PushDialogActivity extends CustomActivity {
                 return;
             }
 
-            tvImageText.setText("");
-
-            Media m = media[page];
-            if (m != null) {
-                try {
-                    byte[] img = Engine.mediaFile(m);
-                    MainActivity.setBitmapToImageView(BitmapFactory.decodeByteArray(img, 0, img.length),
-                            ivImage);
-                } catch (Exception e) {
-                    tvImageText.setText(UtilsGUI.simpleHtml(m.altText));
-                }
-            } else {
-                ivImage.setImageBitmap(null);
-                ivImage.setMinimumWidth(0);
-                ivImage.setMinimumHeight(0);
-            }
+            setMedia(media[page]);
 
             tvText.setText(UtilsGUI.simpleHtml(texts[page]));
         }
@@ -115,8 +95,6 @@ public class PushDialogActivity extends CustomActivity {
         findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewDistance).setVisibility(View.GONE);
-        ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
-        tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
         tvText = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
 
         if (menu02Text == null || menu02Text.length() == 0) {

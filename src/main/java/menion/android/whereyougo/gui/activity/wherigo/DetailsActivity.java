@@ -17,11 +17,8 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,7 +38,7 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.geo.location.SatellitePosition;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.guide.Guide;
@@ -54,7 +51,7 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 // ADD locationListener to update UpdateNavi
-public class DetailsActivity extends CustomActivity implements IRefreshable, ILocationEventListener {
+public class DetailsActivity extends MediaActivity implements IRefreshable, ILocationEventListener {
 
     private static final String TAG = "Details";
     private static final String[] taskStates = {
@@ -64,8 +61,6 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
     };
     public static EventTable et;
     private TextView tvName;
-    private ImageView ivImage;
-    private TextView tvImageText;
     private TextView tvDescription;
     private TextView tvDistance;
     private TextView tvState;
@@ -134,8 +129,6 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
             tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
             tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
             tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-            ivImage = (ImageView) findViewById(R.id.layoutDetailsImageViewImage);
-            tvImageText = (TextView) findViewById(R.id.layoutDetailsTextViewImageText);
             tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
         } else {
             Logger.i(TAG, "onCreate(), et == null, end!");
@@ -174,22 +167,8 @@ public class DetailsActivity extends CustomActivity implements IRefreshable, ILo
                 tvName.setText(et.name);
                 tvDescription.setText(UtilsGUI.simpleHtml(et.description));
 
-                Media m = (Media) et.table.rawget("Media");
-                if (m != null) {
-                    tvImageText.setText(UtilsGUI.simpleHtml(m.altText));
-                    // Logger.w(TAG, "SET: " + et.name + ", " + m.id);
-                    try {
-                        byte[] is = Engine.mediaFile(m);
-                        Bitmap i = BitmapFactory.decodeByteArray(is, 0, is.length);
-                        MainActivity.setBitmapToImageView(i, ivImage);
-                    } catch (Exception e) {
-                        Logger.e(TAG, "refresh()", e);
-                    }
-                } else {
-                    ivImage.setImageBitmap(null);
-                    ivImage.setMinimumWidth(0);
-                    ivImage.setMinimumHeight(0);
-                }
+                Media media = (Media) et.table.rawget("Media");
+                setMedia(media);
 
                 updateNavi();
                 setBottomMenu();
