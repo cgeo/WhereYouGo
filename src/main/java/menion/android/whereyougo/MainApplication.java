@@ -52,22 +52,19 @@ public class MainApplication extends Application {
     private static final String TAG = "MainApplication";
     // application name
     public static final String APP_NAME = "WhereYouGo";
-    private static Timer mTimer;
-    private static OnAppVisibilityChange onAppVisibilityChange;
+    private static MainApplication instance;
     private static Context applicationContext;
+    private static Timer mTimer;
     private Locale locale = null;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
     private boolean mScreenOff = false;
 
+    public static MainApplication getInstance() {
+        return instance;
+    }
     public static Context getContext() {
         return applicationContext;
-    }
-
-    public static void appRestored() {
-        onAppRestored();
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppRestored();
     }
 
     public static void onActivityPause() {
@@ -80,26 +77,10 @@ public class MainApplication extends Application {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!PreferenceValues.existCurrentActivity())
-                    onAppMinimized();
                 LocationState.onActivityPauseInstant(PreferenceValues.getCurrentActivity());
                 mTimer = null;
             }
         }, 2000);
-    }
-
-    private static void onAppMinimized() {
-        Logger.w(TAG, "onAppMinimized()");
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppMinimized();
-    }
-
-    private static void onAppRestored() {
-        Logger.w(TAG, "onAppRestored()");
-    }
-
-    public static void registerVisibilityHandler(OnAppVisibilityChange handler) {
-        MainApplication.onAppVisibilityChange = handler;
     }
 
     public void destroy() {
@@ -112,7 +93,6 @@ public class MainApplication extends Application {
             mTimer.cancel();
             mTimer = null;
         }
-        onAppVisibilityChange = null;
     }
 
     public boolean setRoot(String pathCustom) {
@@ -185,7 +165,7 @@ public class MainApplication extends Application {
 
         // set DeviceID for OpenWig
         try {
-            String name = String.format("%s, app:%s", A.getAppName(), A.getAppVersion());
+            String name = String.format("%s, app:%s", getAppName(), getAppVersion());
             String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
             cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);
@@ -221,12 +201,12 @@ public class MainApplication extends Application {
             sharedPref.getString(key, "");
         } catch (Exception e) {
             try {
-                Log.d(TAG, "legecySupport4PreferencesFloat() - LEGECY SUPPORT: convert float to string");
+                Log.d(TAG, "legacySupport4PreferencesFloat() - LEGACY SUPPORT: convert float to string");
                 Float value = sharedPref.getFloat(key, 0.0f);
                 sharedPref.edit().remove(key).commit();
                 sharedPref.edit().putString(key, String.valueOf(value)).commit();
             } catch (Exception ee) {
-                Log.e(TAG, "legecySupport4PreferencesFloat() - panic remove", ee);
+                Log.e(TAG, "legacySupport4PreferencesFloat() - panic remove", ee);
                 sharedPref.edit().remove(key).commit();
             }
         }
@@ -240,12 +220,12 @@ public class MainApplication extends Application {
             sharedPref.getString(key, "");
         } catch (Exception e) {
             try {
-                Log.d(TAG, "legecySupport4PreferencesInt() - LEGECY SUPPORT: convert int to string");
+                Log.d(TAG, "legacySupport4PreferencesInt() - LEGACY SUPPORT: convert int to string");
                 int value = sharedPref.getInt(key, 0);
                 sharedPref.edit().remove(key).commit();
                 sharedPref.edit().putString(key, String.valueOf(value)).commit();
             } catch (Exception ee) {
-                Log.e(TAG, "legecySupportFloat2Int() - panic remove", ee);
+                Log.e(TAG, "legacySupportFloat2Int() - panic remove", ee);
                 sharedPref.edit().remove(key).commit();
             }
         }
@@ -254,7 +234,8 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationContext = this;
+        instance = this;
+        applicationContext = this.getApplicationContext();
         Log.d(TAG, "onCreate()");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
@@ -272,11 +253,10 @@ public class MainApplication extends Application {
             Log.e(TAG, "onCreate() - PANIC! Wipe out preferences", e);
             PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
         }
-    /* LEGECY SUPPORT -- END */
+    /* LEGACY SUPPORT -- END */
 
         // set basic settings values
         PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
-        Preferences.setContext(this);
         Preferences.init(this);
 
         // get language
@@ -340,12 +320,20 @@ public class MainApplication extends Application {
         }
     }
 
-    public interface OnAppVisibilityChange {
+    public String getAppName() {
+        try {
+            return getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
+        } catch (Exception e) {
+            return "WhereYouGo";
+        }
+    }
 
-        void onAppMinimized();
-
-        void onAppRestored();
-
+    public String getAppVersion() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            return BuildConfig.VERSION_NAME;
+        }
     }
 
     private class ScreenReceiver extends BroadcastReceiver {

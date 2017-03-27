@@ -170,10 +170,6 @@ public class Preferences {
   /* ------------ */
 
     private static Context prefContext;
-
-    public static void setContext(Context c) {
-        prefContext = c;
-    }
   
   /* ------------ */
 
@@ -230,6 +226,7 @@ public class Preferences {
 
     /* Note: Default values are defined in xml/<preferences>.xml and loaded at programm start */
     public static void init(Context c) {
+        prefContext = c;
         Logger.d(TAG, "init(" + c + ")");
 
         try {

@@ -115,11 +115,6 @@ public class WUI implements UI {
         showScreen(SCREEN_MAIN, null);
     }
 
-    // @Override
-    public String getDeviceId() {
-        return String.format("%s %s", A.getAppName(), A.getAppVersion());
-    }
-
     public void playSound(byte[] data, String mime) {
         UtilsAudio.playSound(data, mime);
     }

@@ -117,7 +117,7 @@ public class CustomActivity extends FragmentActivity {
                 intent.setAction(Intent.ACTION_MAIN);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
                 Notification notification = new NotificationCompat.Builder(activity)
-                        .setContentTitle(A.getAppName())
+                        .setContentTitle(MainApplication.getInstance().getAppName())
                         .setSmallIcon(R.drawable.ic_title_logo)
                         .setContentIntent(pendingIntent)
                         .setOngoing(true)

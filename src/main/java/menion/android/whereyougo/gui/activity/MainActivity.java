@@ -20,6 +20,7 @@ package menion.android.whereyougo.gui.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -65,6 +66,7 @@ import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
@@ -174,37 +176,18 @@ public class MainActivity extends CustomMainActivity {
         // load cartridge files
         File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");
         cartridgeFiles = new Vector<>();
+        if (files == null)
+            return;
 
-        // add cartridges to map
-        ArrayList<Waypoint> wpts = new ArrayList<>();
-
-        File actualFile = null;
-        if (files != null) {
-            for (File file : files) {
-                try {
-                    actualFile = file;
-                    CartridgeFile cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
-                    if (cart != null) {
-                        cart.filename = file.getAbsolutePath();
-
-                        Location loc = new Location(TAG);
-                        loc.setLatitude(cart.latitude);
-                        loc.setLongitude(cart.longitude);
-                        Waypoint waypoint = new Waypoint(cart.name, loc);
-
-                        cartridgeFiles.add(cart);
-                        wpts.add(waypoint);
-                    }
-                } catch (Exception e) {
-                    Logger.w(TAG, "refreshCartridge(), file:" + actualFile + ", e:" + e.toString());
-                    ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, actualFile.getName()));
-                    // file.delete();
-                }
+        for (File file : files) {
+            try {
+                CartridgeFile cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
+                cartridgeFiles.add(cart);
+            } catch (Exception e) {
+                Logger.w(TAG, "refreshCartridge(), file:" + file + ", e:" + e.toString());
+                ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, file.getName()));
+                // file.delete();
             }
-        }
-
-        if (wpts.size() > 0) {
-            // TODO add items on map
         }
     }
 
@@ -293,7 +276,7 @@ public class MainActivity extends CustomMainActivity {
     @Override
     protected void eventFirstInit() {
         // call after start actions here
-        VersionInfo.afterStartAction();
+        afterStartAction();
     }
 
     @Override
@@ -420,11 +403,7 @@ public class MainActivity extends CustomMainActivity {
             CartridgeFile cart = null;
             try {
                 cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
-                if (cart != null) {
-                    cart.filename = file.getAbsolutePath();
-                } else {
-                    return;
-                }
+                cart.filename = file.getAbsolutePath();
             } catch (Exception e) {
                 Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e.toString());
                 ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, file.getName()));
@@ -434,5 +413,24 @@ public class MainActivity extends CustomMainActivity {
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
+    }
+
+    private void afterStartAction() {
+        int lastVersion = PreferenceValues.getApplicationVersionLast();
+        final int actualVersion = PreferenceValues.getApplicationVersionActual();
+        if (lastVersion == 0 || actualVersion != lastVersion) {
+            String news = VersionInfo.getNews(lastVersion, actualVersion);
+            if (news != null && news.length() > 0) {
+                // show dialog
+                AlertDialog.Builder b = new AlertDialog.Builder(this);
+                b.setCancelable(false);
+                b.setTitle(MainApplication.APP_NAME);
+                b.setIcon(R.drawable.icon);
+                b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
+                b.setNeutralButton(R.string.yes, null);
+                b.show();
+            }
+        }
+        PreferenceValues.setApplicationVersionLast(actualVersion);
     }
 }

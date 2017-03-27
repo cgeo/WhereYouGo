@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.webkit.WebView;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
@@ -19,8 +20,8 @@ public class AboutDialog extends CustomDialogFragment {
 
     @Override
     public Dialog createDialog(Bundle savedInstanceState) {
-        String buffer = "<div align=\"center\"><h2><b>" + A.getAppName() + "</b></h2></div>" +
-                "<div align=\"center\"><h3><b>" + A.getAppVersion() + "</b></h3></div>" +
+        String buffer = "<div align=\"center\"><h2><b>" + MainApplication.getInstance().getAppName() + "</b></h2></div>" +
+                "<div align=\"center\"><h3><b>" + MainApplication.getInstance().getAppVersion() + "</b></h3></div>" +
                 CustomMainActivity.loadAssetString(PreferenceValues.getLanguageCode() + "_first.html") +
                 "<br /><br />" +
                 CustomMainActivity.loadAssetString(PreferenceValues.getLanguageCode() + "_about.html") +

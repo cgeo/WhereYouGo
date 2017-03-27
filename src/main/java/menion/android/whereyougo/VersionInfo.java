@@ -17,58 +17,14 @@
 
 package menion.android.whereyougo;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
 import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
-import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.utils.A;
 
 /**
  * @author menion
  * @since 1.4.2010 2010
  */
 public class VersionInfo {
-
-    // private static final String TAG = "MainAfterStart";
-
-    /****************************************/
-  /* AFTER START ACTIONS */
-    /****************************************/
-
-    private static boolean stage01Completed = false;
-
-    public static void afterStartAction() {
-        if (!stage01Completed) {
-            int lastVersion = PreferenceValues.getApplicationVersionLast();
-            final int actualVersion = PreferenceValues.getApplicationVersionActual();
-            if (lastVersion == 0 || actualVersion != lastVersion) {
-                String news = getNews(lastVersion, actualVersion);
-                if (news != null && news.length() > 0) {
-                    // show dialog
-                    AlertDialog.Builder b = new AlertDialog.Builder(A.getMain());
-                    b.setCancelable(false);
-                    b.setTitle(MainApplication.APP_NAME);
-                    b.setIcon(R.drawable.icon);
-                    b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
-                    b.setNeutralButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            stage01Completed = true;
-                            PreferenceValues.setApplicationVersionLast(actualVersion);
-                        }
-                    });
-                    b.show();
-                } else {
-                    stage01Completed = true;
-                }
-            } else {
-                stage01Completed = true;
-            }
-        }
-    }
 
     public static String getNews(int lastVersion, int actualVersion) {
         String newsInfo = "";
