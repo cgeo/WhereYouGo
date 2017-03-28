@@ -23,13 +23,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import menion.android.whereyougo.MainApplication;
+
 class LogWriter {
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
 
     static void log(String fname, String msg) {
         if (msg == null) return;
         try {
-            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+            String loc = MainApplication.getInstance().getFilesDir().getAbsolutePath()
+                    + File.separator + fname;
             FileWriter fstream = new FileWriter(loc, true);
             PrintWriter out = new PrintWriter(fstream);
             out.println("" + dateFormat.format(new java.util.Date()) + "\n" + msg);
@@ -41,7 +44,8 @@ class LogWriter {
     static void log(String fname, Throwable ex) {
         if (ex == null) return;
         try {
-            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+            String loc = MainApplication.getInstance().getFilesDir().getAbsolutePath()
+                    + File.separator + fname;
             FileWriter fstream = new FileWriter(loc, true);
             PrintWriter out = new PrintWriter(fstream);
             out.println("" + dateFormat.format(new java.util.Date()));
@@ -54,7 +58,8 @@ class LogWriter {
     static void log(String fname, String msg, Throwable ex) {
         if (ex == null) return;
         try {
-            String loc = menion.android.whereyougo.utils.FileSystem.getRoot() + File.separator + fname;
+            String loc = MainApplication.getInstance().getFilesDir().getAbsolutePath()
+                    + File.separator + fname;
             FileWriter fstream = new FileWriter(loc, true);
             PrintWriter out = new PrintWriter(fstream);
             out.println("" + dateFormat.format(new java.util.Date()) + "\n" + msg);

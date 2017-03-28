@@ -25,7 +25,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +33,6 @@ import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -42,12 +40,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.formats.CartridgeFile;
-import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
@@ -69,7 +66,6 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
@@ -82,7 +78,7 @@ public class MainActivity extends CustomMainActivity {
     private static final WLocationService wLocationService = new WLocationService();
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
-    private static Vector<CartridgeFile> cartridgeFiles;
+    private Vector<CartridgeFile> cartridgeFiles;
 
     static {
         wui.setOnSavingStarted(new Runnable() {
@@ -126,14 +122,6 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    public static String getSelectedFile() {
-        return selectedFile;
-    }
-
-    public static void setSelectedFile(String filepath) {
-        MainActivity.selectedFile = filepath;
-    }
-
     private static void loadCartridge(OutputStream log) {
         try {
             WUI.startProgressDialog();
@@ -170,14 +158,14 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    public static void refreshCartridges() {
+    public void refreshCartridges() {
         Logger.w(TAG, "refreshCartridges(), " + (MainActivity.selectedFile == null));
 
         // load cartridge files
-        File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");
+        ArrayList<File> files = new ArrayList<>();
+        Collections.addAll(files, FileSystem.getFiles(MainApplication.getInstance().getCartridgesDir(), "gwc"));
+        Collections.addAll(files, FileSystem.getFiles(MainApplication.getInstance().getFilesDir(), "gwc"));
         cartridgeFiles = new Vector<>();
-        if (files == null)
-            return;
 
         for (File file : files) {
             try {
@@ -224,46 +212,16 @@ public class MainActivity extends CustomMainActivity {
         }
 
         ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
-        dialog.setParams(cartridgeFiles);
+        dialog.setArguments(cartridgeFiles, new ChooseCartridgeDialog.ChooseCartridgeDialogCallback() {
+            @Override
+            public void onChooseCartridgeResult(CartridgeFile selectedCartridge) {
+                MainActivity.selectedFile = selectedCartridge.filename;
+            }
+        });
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
+                .add(dialog, ChooseCartridgeDialog.TAG)
                 .commitAllowingStateLoss();
-    }
-
-    @Override
-    protected void eventCreateLayout() {
-        setContentView(R.layout.layout_main);
-
-        // set title
-        ((TextView) findViewById(R.id.title_text)).setText(MainApplication.APP_NAME);
-
-        // define buttons
-        View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.button_start:
-                        clickStart();
-                        break;
-                    case R.id.button_gps:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, SatelliteActivity.class));
-                        break;
-                    case R.id.button_settings:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));
-                        break;
-                    case R.id.button_map:
-                        clickMap();
-                        break;
-                    case R.id.button_logo:
-                        getSupportFragmentManager().beginTransaction()
-                                .add(new AboutDialog(), "DIALOG_TAG_MAIN").commitAllowingStateLoss();
-                        break;
-                }
-            }
-        };
-
-        UtilsGUI.setButtons(this, new int[]{R.id.button_start, R.id.button_map, R.id.button_gps,
-                R.id.button_settings, R.id.button_logo}, mOnClickListener, null);
     }
 
     @Override
@@ -279,29 +237,12 @@ public class MainActivity extends CustomMainActivity {
         afterStartAction();
     }
 
-    @Override
-    protected void eventRegisterOnly() {
-    }
-
-    @Override
-    protected void eventSecondInit() {
-    }
-
-    @Override
-    protected String getCloseAdditionalText() {
-        return null;
-    }
-
-    @Override
-    protected int getCloseValue() {
-        return CLOSE_DESTROY_APP_NO_DIALOG;
-    }
-
     private boolean isAnyCartridgeAvailable() {
         if (cartridgeFiles == null || cartridgeFiles.size() == 0) {
             UtilsGUI.showDialogInfo(
                     MainActivity.this,
-                    getString(R.string.no_wherigo_cartridge_available, FileSystem.ROOT,
+                    getString(R.string.no_wherigo_cartridge_available,
+                            MainApplication.getInstance().getCartridgesDir().getAbsolutePath(),
                             MainApplication.APP_NAME));
             return false;
         } else {
@@ -337,6 +278,38 @@ public class MainActivity extends CustomMainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.layout_main);
+
+        // set title
+        ((TextView) findViewById(R.id.title_text)).setText(MainApplication.APP_NAME);
+
+        // define buttons
+        View.OnClickListener mOnClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.button_start:
+                        clickStart();
+                        break;
+                    case R.id.button_gps:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, SatelliteActivity.class));
+                        break;
+                    case R.id.button_settings:
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));
+                        break;
+                    case R.id.button_map:
+                        clickMap();
+                        break;
+                    case R.id.button_logo:
+                        getSupportFragmentManager().beginTransaction()
+                                .add(new AboutDialog(), "DIALOG_TAG_MAIN").commitAllowingStateLoss();
+                        break;
+                }
+            }
+        };
+
+        UtilsGUI.setButtons(this, new int[]{R.id.button_start, R.id.button_map, R.id.button_gps,
+                R.id.button_settings, R.id.button_logo}, mOnClickListener, null);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermissions();
         }
@@ -361,7 +334,7 @@ public class MainActivity extends CustomMainActivity {
         } else {
             String cguid = getIntent() == null ? null : getIntent().getStringExtra("cguid");
             if (cguid != null) {
-                File file = FileSystem.findFile(cguid);
+                File file = FileSystem.findFile(MainApplication.getInstance().getFilesDir(), cguid, "gwc");
                 if (file != null) {
                     openCartridge(file);
                 }

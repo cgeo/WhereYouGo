@@ -63,7 +63,8 @@ public class ManagerAudio {
             Utils.closeStream(is);
 
             // write data
-            File fileMp3 = new File(FileSystem.CACHE + fileName + fileEnd);
+            File fileMp3 = new File(MainApplication.getInstance().getCacheDir().getAbsolutePath()
+                    + File.separator + fileName + fileEnd);
             if (fileMp3.exists())
                 fileMp3.delete();
             fileMp3.getParentFile().mkdirs();
@@ -115,10 +116,10 @@ public class ManagerAudio {
             byte[] data = new byte[is.available()];
             is.read(data);
             Utils.closeStream(is);
-            String filePath =
-                    FileSystem.CACHE + Utils.hashString(fileName) + "." + fileEnd;
-            FileSystem.saveBytes(filePath, data);
-            soundPoolMap.put(audioId, soundPool.load(filePath, 1));
+            File file = new File(MainApplication.getInstance().getCacheDir().getAbsolutePath()
+                    + File.separator +  fileName + "." + fileEnd);
+            FileSystem.saveBytes(file, data);
+            soundPoolMap.put(audioId, soundPool.load(file.getAbsolutePath(), 1));
         } catch (Exception e) {
             Logger.e(TAG, "putAudio(" + audioId + ", " + fileName + ", " + is + ")", e);
         }

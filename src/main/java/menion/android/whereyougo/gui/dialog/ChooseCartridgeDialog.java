@@ -12,13 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -26,17 +26,20 @@ import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialogFragment;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.Logger;
 
 public class ChooseCartridgeDialog extends CustomDialogFragment {
 
-    private static final String TAG = "ChooseCartridgeDialog";
+    public static final String TAG = "ChooseCartridgeDialog";
+    public interface ChooseCartridgeDialogCallback {
+        void onChooseCartridgeResult(CartridgeFile selectedCartridge);
+    }
     private ArrayList<DataInfo> data;
     private BaseAdapter adapter;
     private Vector<CartridgeFile> cartridgeFiles;
+    private ChooseCartridgeDialogCallback chooseCartridgeDialogCallback;
 
     public ChooseCartridgeDialog() {
         super();
@@ -44,7 +47,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
     @Override
     public Dialog createDialog(Bundle savedInstanceState) {
-        if (A.getMain() == null || cartridgeFiles == null) {
+        if (cartridgeFiles == null) {
             return null;
         }
         try {
@@ -116,13 +119,15 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         return null;
     }
 
+    public void setArguments(Vector<CartridgeFile> cartridgeFiles, ChooseCartridgeDialogCallback chooseCartridgeDialogCallback) {
+        this.cartridgeFiles = cartridgeFiles;
+        this.chooseCartridgeDialogCallback = chooseCartridgeDialogCallback;
+    }
+
     private void itemClicked(int position) {
-        try {
-            MainActivity.openCartridge(cartridgeFiles.get(position));
-        } catch (Exception e) {
-            Logger.e(TAG, "onCreate()", e);
-        }
         dismiss();
+        if (chooseCartridgeDialogCallback != null)
+            chooseCartridgeDialogCallback.onChooseCartridgeResult(cartridgeFiles.get(position));
     }
 
     private void itemLongClicked(final int position) {
@@ -136,16 +141,15 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
                         @Override
                         public void onClick(DialogInterface dialog, int btn) {
-                            File[] files = FileSystem.getFiles2(new File(cartridgeFile.filename).getParent(), new FileFilter() {
-                                @Override
-                                public boolean accept(File pathname) {
-                                    return pathname.getAbsolutePath().startsWith(filename);
-                                }
-                            });
-                            for (File file : files) {
+                            for (File file : FileSystem.getFiles(MainApplication.getInstance().getCartridgesDir(), filename, null)) {
                                 file.delete();
                             }
-                            MainActivity.refreshCartridges();
+                            for (File file : FileSystem.getFiles(MainApplication.getInstance().getFilesDir(), filename, null)) {
+                                file.delete();
+                            }
+                            for (File file : FileSystem.getFiles(MainApplication.getInstance().getCacheDir(), filename, null)) {
+                                file.delete();
+                            }
                             cartridgeFiles.remove(position);
                             data.remove(position);
                             if (adapter != null)
@@ -155,9 +159,5 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
-    }
-
-    public void setParams(Vector<CartridgeFile> cartridgeFiles) {
-        this.cartridgeFiles = cartridgeFiles;
     }
 }

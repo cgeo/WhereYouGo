@@ -27,7 +27,6 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.preferences.PreviewPreference;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.StringToken;
@@ -155,8 +154,7 @@ public class XmlSettingsActivity extends PreferenceActivity
                                     source.dismiss();
                                     if (MainApplication.getInstance().setCartridgeDir(folder)) {
                                         PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                        preferenceRoot.setValue(MainApplication.getInstance().getCartridgeDir().getAbsolutePath());
-                                        MainActivity.refreshCartridges();
+                                        preferenceRoot.setValue(MainApplication.getInstance().getCartridgesDir().getAbsolutePath());
                                     }
                                 }
 
@@ -174,8 +172,7 @@ public class XmlSettingsActivity extends PreferenceActivity
                         public void onClick(DialogInterface dialog, int which) {
                             if (MainApplication.getInstance().setCartridgeDir(null)) {
                                 PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                preferenceRoot.setValue(MainApplication.getInstance().getCartridgeDir().getAbsolutePath());
-                                MainActivity.refreshCartridges();
+                                preferenceRoot.setValue(MainApplication.getInstance().getCartridgesDir().getAbsolutePath());
                             }
                         }
                     });

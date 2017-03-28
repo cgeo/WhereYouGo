@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
@@ -71,7 +72,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
 
-        File cartridgeFile = FileSystem.findFile(cguid);
+        File cartridgeFile = FileSystem.findFile(MainApplication.getInstance().getFilesDir(), cguid, "gwc");
         if (cartridgeFile != null) {
             tvDescription.setText(
                     String.format("CGUID:\n%s\n%s",
@@ -174,7 +175,6 @@ public class DownloadCartridgeActivity extends CustomActivity {
             super.onPostExecute(result);
             if (result) {
                 progressDialog.dismiss();
-                MainActivity.refreshCartridges();
                 DownloadCartridgeActivity.this.finish();
                 DownloadCartridgeActivity.this.startActivity(DownloadCartridgeActivity.this.getIntent());
             } else {

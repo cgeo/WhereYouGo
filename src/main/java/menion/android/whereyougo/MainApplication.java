@@ -53,7 +53,7 @@ public class MainApplication extends Application {
     private static final String TAG = "MainApplication";
     private static MainApplication instance;
     private static Timer mTimer;
-    private File cartridgeDir;
+    private File cartridgesDir;
     private File filesDir;
     private File cacheDir;
     private Locale locale = null;
@@ -181,21 +181,21 @@ public class MainApplication extends Application {
     }
 
     public boolean setCartridgeDir(File dir) {
-        cartridgeDir = filesDir = dir;
+        cartridgesDir = filesDir = dir;
         if (dir != null && dir.isDirectory() && dir.canWrite()) {
             cacheDir = new File(dir.getAbsolutePath() + File.separator + "cache");
             cacheDir.mkdir();
         }
 
-        if (cartridgeDir == null || !cartridgeDir.canRead()) {
+        if (cartridgesDir == null || !cartridgesDir.canRead()) {
             try {
-                cartridgeDir = getExternalFilesDir(null);
+                cartridgesDir = getExternalFilesDir(null);
             } catch (Exception e1) {
             }
         }
-        if (cartridgeDir == null || !cartridgeDir.canRead()) {
+        if (cartridgesDir == null || !cartridgesDir.canRead()) {
             try {
-                cartridgeDir = getFilesDir();
+                cartridgesDir = getFilesDir();
             } catch (Exception e1) {
             }
         }
@@ -226,13 +226,13 @@ public class MainApplication extends Application {
             }
         }
 
-        return cartridgeDir != null && cartridgeDir.canRead()
+        return cartridgesDir != null && cartridgesDir.canRead()
                 && filesDir != null && filesDir.canWrite()
                 && cacheDir != null && cacheDir.canWrite();
     }
 
-    public File getCartridgeDir() {
-        return cartridgeDir;
+    public File getCartridgesDir() {
+        return cartridgesDir;
     }
 
     public File getFilesDir() {
@@ -240,7 +240,7 @@ public class MainApplication extends Application {
     }
 
     public File getCacheDir() {
-        return cartridgeDir;
+        return cartridgesDir;
     }
 
     private void initCore() {

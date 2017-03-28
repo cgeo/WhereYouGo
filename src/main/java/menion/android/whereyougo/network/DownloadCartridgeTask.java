@@ -28,6 +28,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
@@ -164,7 +165,8 @@ public class DownloadCartridgeTask extends
     }
 
     private boolean download(String filename, InputStream input, long total) {
-        File file = new File(FileSystem.ROOT + filename);
+        File file = new File(MainApplication.getInstance().getFilesDir().getAbsolutePath()
+                + File.separator + filename);
         long completed = 0;
         int length;
         byte[] buffer = new byte[1024];

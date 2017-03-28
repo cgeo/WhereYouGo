@@ -54,13 +54,7 @@ public abstract class CustomMainActivity extends CustomActivity {
     public static final int FINISH_RESTART_FORCE = 3;
     public static final int FINISH_RESTART_FACTORY_RESET = 4;
     public static final int FINISH_REINSTALL = 5;
-    public static final int CLOSE_DESTROY_APP_NO_DIALOG = 0;
-    public static final int CLOSE_DESTROY_APP_DIALOG_NO_TEXT = 1;
-    public static final int CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT = 2;
-    public static final int CLOSE_HIDE_APP = 3;
     private static final String TAG = "CustomMain";
-    private static boolean callSecondInit;
-    private static boolean callRegisterOnly;
     private int finishType = FINISH_NONE;
     private boolean finish = false;
 
@@ -161,31 +155,12 @@ public abstract class CustomMainActivity extends CustomActivity {
     public boolean dispatchKeyEvent(KeyEvent event) {
         // Logger.d(TAG, "dispatchKeyEvent(" + event.getAction() + ", " + event.getKeyCode() + ")");
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            switch (getCloseValue()) {
-                case CLOSE_DESTROY_APP_NO_DIALOG:
-                    finish = true;
-                    CustomMainActivity.this.finish();
-                    return true;
-                case CLOSE_DESTROY_APP_DIALOG_NO_TEXT:
-                    showDialogFinish(FINISH_EXIT);
-                    return true;
-                case CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT:
-                    showDialogFinish(FINISH_EXIT);
-                    return true;
-                case CLOSE_HIDE_APP:
-                    // no action
-                    break;
-            }
+            finish = true;
+            CustomMainActivity.this.finish();
         }
 
         return super.dispatchKeyEvent(event);
     }
-
-    /**
-     * Method that create layout for actual activity. This is called everytime, onCreate method is
-     * called
-     */
-    protected abstract void eventCreateLayout();
 
     /**
      * This is called only when application really need to be destroyed, so in this method is
@@ -199,34 +174,13 @@ public abstract class CustomMainActivity extends CustomActivity {
      */
     protected abstract void eventFirstInit();
 
-    /**
-     * This is called everytime except first run. It's called in onResume method
-     */
-    protected abstract void eventRegisterOnly();
-
-    /**
-     * This is called only once after application start. It's called in onResume method
-     */
-    protected abstract void eventSecondInit();
-
-    public void finishForceSilent() {
-        finish = true;
-        CustomMainActivity.this.finish();
-    }
-
-    protected abstract String getCloseAdditionalText();
-
-    protected abstract int getCloseValue();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         A.registerMain(this);
 
-        callSecondInit = false;
-        callRegisterOnly = false;
-        if (MainApplication.getInstance() == null) { // first app run
+        if (A.getApp() == null) { // first app run
             // Logger.w(TAG, "onCreate() - init new");
             A.registerApp((MainApplication) getApplication());
 
@@ -239,15 +193,8 @@ public abstract class CustomMainActivity extends CustomActivity {
             }
 
             eventFirstInit();
-            setScreenBasic(this);
-            eventCreateLayout();
-            callSecondInit = true;
-        } else {
-            // Logger.w(TAG, "onCreate() - only register");
-            setScreenBasic(this);
-            eventCreateLayout();
-            callRegisterOnly = true;
         }
+        setScreenBasic(this);
     }
 
     @Override
@@ -280,17 +227,6 @@ public abstract class CustomMainActivity extends CustomActivity {
             }
         } else {
             super.onDestroy();
-        }
-    }
-
-    public void onResumeExtra() {
-        if (callSecondInit) {
-            callSecondInit = false;
-            eventSecondInit();
-        }
-        if (callRegisterOnly) {
-            callRegisterOnly = false;
-            eventRegisterOnly();
         }
     }
 

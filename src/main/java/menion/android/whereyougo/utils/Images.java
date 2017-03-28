@@ -82,9 +82,6 @@ public class Images {
     }
 
     public static Drawable getImageD(int id, int size) {
-        if (MainApplication.getInstance() == null)
-            return null;
-
         Drawable draw = MainApplication.getInstance().getResources().getDrawable(id);
         return getSizeOptimizedIcon(draw, size);
     }

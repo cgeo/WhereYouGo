@@ -17,8 +17,6 @@
 
 package menion.android.whereyougo.utils;
 
-import android.os.Environment;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -36,163 +34,61 @@ import menion.android.whereyougo.MainApplication;
 public class FileSystem {
 
     private static final String TAG = "FileSystem";
-    private static final String CARD_ROOT = "{CARD_ROOT}";
-    private static final String[] EXTERNAL_DIRECTORIES = new String[]{CARD_ROOT + "external_sd",
-            CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
-            CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
-            "/mnt/emms", // CM7 + SGS2
-            "/mnt/external1" // Xoom
-    };
-    public static String ROOT = null;
-    public static String CACHE = "cache/";
 
-    public static boolean createRoot(String appDirName) {
-        if (ROOT != null && new File(ROOT).exists())
-            return true;
-
-        try {
-            // Android native
-            // Logger.i(TAG, "createRoot(), " + android.os.Environment.getExternalStorageState() + ", " +
-            // Environment.getExternalStorageDirectory());
-
-            String cardRoot = getExternalStorageDir();
-            if (cardRoot == null)
-                return false;
-
-            // test if exist external mounted sdcard
-            String externalCardRoot = null;
-            for (String cardTestDir : EXTERNAL_DIRECTORIES) {
-                if (cardTestDir.contains(CARD_ROOT))
-                    cardTestDir = cardTestDir.replace(CARD_ROOT, cardRoot);
-
-                if (new File(cardTestDir).exists()) {
-                    externalCardRoot = cardTestDir + "/";
-                    break;
-                }
-            }
-
-            File appOnCard = new File(cardRoot + appDirName);
-            if (externalCardRoot == null) {
-                return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
-            } else {
-                File appOnExternalCard = new File(externalCardRoot + appDirName);
-                // test whether root already exist
-                if (appOnExternalCard.exists()) {
-                    return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
-                } else if (appOnCard.exists()) {
-                    return setRootDirectory(cardRoot, appOnCard.getAbsolutePath());
-                } else {
-                    return setRootDirectory(externalCardRoot, appOnExternalCard.getAbsolutePath());
-                }
-            }
-        } catch (Exception ex) {
-            Logger.e(TAG, "createRoot(), ex: " + ex.toString());
-        }
-        return false;
-    }
-
-    public static String getExternalStorageDir() {
-        String cardRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
-        if (cardRoot == null)
-            return null;
-
-        if (!cardRoot.endsWith("/"))
-            cardRoot += "/";
-        return cardRoot;
-    }
-
-    public static File[] getFiles(String folder, final String filter) {
+    public static File[] getFiles(File dir, final String prefix, final String suffix) {
         FileFilter fileFilter = new FileFilter() {
-            public boolean accept(File pathname) {
-                return pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter);
+            public boolean accept(File file) {
+                if (prefix == null && suffix == null)
+                    return true;
+                String filename = file.getName().toLowerCase(Locale.getDefault());
+                if (prefix != null && !filename.startsWith(prefix))
+                    return false;
+                if (suffix != null && !filename.endsWith(suffix))
+                    return false;
+                return true;
             }
         };
-        return getFiles2(folder, fileFilter);
+        return getFiles(dir, fileFilter);
     }
 
-    public static File[] getFiles2(String folder, FileFilter filter) {
+    public static File[] getFiles(File dir, final String suffix) {
+        return getFiles(dir, null, suffix);
+    }
+
+    public static File[] getFiles(File dir, FileFilter filter) {
         try {
-            File file = new File(folder);
-            if (!file.exists()) {
-                return new File[0];
-            }
-
-            return file.listFiles(filter);
+            File[] files = dir.listFiles(filter);
+            if (files != null)
+                return files;
         } catch (Exception e) {
-            Logger.e(TAG, "getFiles2(), folder: " + folder);
-            return new File[0];
+            Logger.e(TAG, "getFiles(), folder: " + dir);
         }
-    }
-
-    public static String getRoot() {
-        if (ROOT == null) {
-            createRoot(MainApplication.APP_NAME);
-        }
-        return ROOT;
-    }
-
-    /**
-     * Checks folders in given filePath and creates them if necessary
-     *
-     * @param fileName file name
-     */
-    public static void checkFolders(String fileName) {
-        try {
-            (new File(fileName)).getParentFile().mkdirs();
-        } catch (Exception e) {
-            Logger.e(TAG, "checkFolders(" + fileName + "), ex: " + e.toString());
-        }
+        return new File[0];
     }
 
     /**
      * Writes binary data into file
      *
-     * @param fileName file name (absolute)
+     * @param file     file
      * @param data     binary data
      */
-    public static synchronized void saveBytes(String fileName, byte[] data) {
+    public static synchronized void saveBytes(File file, byte[] data) {
         try {
             if (data.length == 0)
                 return;
-            new FileSystemDataWritter(fileName, data, -1);
+            new FileSystemDataWritter(file, data, -1);
         } catch (Exception e) {
-            Logger.e(TAG, "saveBytes(" + fileName + "), e: " + e.toString());
+            Logger.e(TAG, "saveBytes(" + file + "), e: " + e.toString());
         }
     }
 
-    public static boolean setRootDirectory(String appRoot) {
-        return setRootDirectory(null, appRoot);
-    }
-
-    private static boolean setRootDirectory(String cardRoot, String appRoot) {
-        if (appRoot == null || appRoot.equals(""))
-            return false;
-        if (!appRoot.endsWith("/"))
-            appRoot += "/";
-
-        // create root directory
-        File rootAppDir = new File(appRoot);
-        if (!rootAppDir.exists()) {
-            if (!rootAppDir.mkdir())
-                return false;
-        }
-        FileSystem.ROOT = appRoot;
-        return true;
-    }
-
-    public static File findFile(String prefix, String extension) {
-        File[] files = FileSystem.getFiles(FileSystem.ROOT, extension);
-        if (files == null) return null;
-        for (File file : files) {
-            if (file.getName().startsWith(prefix)) {
-                return file;
-            }
-        }
-        return null;
-    }
-
-    public static File findFile(String prefix) {
-        return findFile(prefix, "gwc");
+    public static File findFile(File dir, String prefix, String suffix) {
+        File file = new File(dir.getAbsolutePath() + File.separator + prefix + suffix);
+        if (file.exists())
+            return file;
+        File[] files = FileSystem.getFiles(dir, prefix, suffix);
+        if (files == null || files.length == 0) return null;
+        return files[0];
     }
 
     public static boolean backupFile(File file) {

@@ -31,7 +31,7 @@ public class WSeekableFile implements SeekableFile {
 
     public WSeekableFile(File file) {
         try {
-            this.raf = new RandomAccessFile(file, "rw");
+            this.raf = new RandomAccessFile(file, "r");
         } catch (Exception e) {
             Logger.e(TAG, "WSeekableFile(" + file.getAbsolutePath() + ")", e);
         }

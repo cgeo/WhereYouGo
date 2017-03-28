@@ -28,6 +28,7 @@ import java.io.File;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.utils.FileSystem;
@@ -62,7 +63,7 @@ public class MediaActivity extends CustomActivity {
         }
         if (view == null)
             return;
-        byte[] data = null;
+        byte[] data;
         try {
             data = Engine.mediaFile(media);
         } catch (Exception e) {
@@ -74,9 +75,10 @@ public class MediaActivity extends CustomActivity {
             ((ImageView) view).setImageBitmap(bmp);
         } else {
             // save file to cache
-            String filename = FileSystem.CACHE + media.jarFilename();
-            FileSystem.saveBytes(filename, data);
+            String filename = MainApplication.getInstance().getCacheDir().getAbsolutePath()
+                    + File.separator + media.jarFilename();
             File file = new File(filename);
+            FileSystem.saveBytes(file, data);
             Uri uri = Uri.fromFile(file);
             if (view.getId() == R.id.mediaGifView) {
                 ((GifImageView) view).setImageURI(uri);

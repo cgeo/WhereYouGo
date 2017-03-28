@@ -27,6 +27,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import cz.matejcik.openwig.platform.FileHandle;
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.utils.Logger;
 
 public class WSaveFile implements FileHandle {
@@ -36,10 +38,10 @@ public class WSaveFile implements FileHandle {
     private final File file;
 
     public WSaveFile(File cartridgeFile) {
-        file =
-                new File(cartridgeFile.getAbsolutePath().substring(0,
-                        cartridgeFile.getAbsolutePath().lastIndexOf("."))
-                        + ".ows");
+        String filename = cartridgeFile.getName();
+        filename = filename.substring(0, filename.length() - 3) + "ows";
+        file = new File(MainApplication.getInstance().getFilesDir().getAbsolutePath()
+                + File.separator + filename);
     }
 
     public void create() throws IOException {

@@ -24,7 +24,7 @@ public class FileSystemDataWritter extends Thread {
 
     private static final String TAG = "FileSystemDataWritter";
 
-    private final String fileToWrite;
+    private final File fileToWrite;
     private final byte[] dataToWrite;
     private final long bytePos;
 
@@ -37,32 +37,31 @@ public class FileSystemDataWritter extends Thread {
      *                    -1 if write as whole new file<br>
      *                    -2 if write at the end of file
      */
-    public FileSystemDataWritter(String fileToWrite, byte[] dataToWrite, long bytePos) {
+    public FileSystemDataWritter(File fileToWrite, byte[] dataToWrite, long bytePos) {
         this.fileToWrite = fileToWrite;
         this.dataToWrite = dataToWrite;
         this.bytePos = bytePos;
         this.start();
     }
 
-    public void run() {
+    public synchronized void run() {
         try {
-            FileSystem.checkFolders(fileToWrite);
+            fileToWrite.getParentFile().mkdirs();
 
             // create if not exist
             // Log.w(TAG, "write to file: " + fileToWrite);
-            File file = new File(fileToWrite);
-            if (!file.exists()) {
-                file.createNewFile();
+            if (!fileToWrite.exists()) {
+                fileToWrite.createNewFile();
             }
 
             if (dataToWrite != null) {
                 FileOutputStream os;
                 if (bytePos == -1) {
-                    os = new FileOutputStream(file, false);
+                    os = new FileOutputStream(fileToWrite, false);
                 } else if (bytePos == -2) {
-                    os = new FileOutputStream(file, true);
+                    os = new FileOutputStream(fileToWrite, true);
                 } else {
-                    os = new FileOutputStream(file, true);
+                    os = new FileOutputStream(fileToWrite, true);
                     os.getChannel().position(bytePos);
                 }
 
