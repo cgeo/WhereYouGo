@@ -61,8 +61,8 @@ public class WUI implements UI {
     public static final int SCREEN_TARGETS = 13;
     public static final int SCREEN_MAP = 14;
     private static final String TAG = "WUI";
-    public static boolean saving = false;
-    private static ProgressDialog progressDialog;
+    public boolean saving = false;
+    private ProgressDialog progressDialog;
     private Runnable onSavingStarted;
     private Runnable onSavingFinished;
 
@@ -85,7 +85,7 @@ public class WUI implements UI {
         Logger.i(TAG, "showTextProgress(" + text + ")");
     }
 
-    public static void startProgressDialog() {
+    public void startProgressDialog() {
         progressDialog = new ProgressDialog(A.getMain());
         progressDialog.setMessage(Locale.getString(R.string.loading));
         progressDialog.show();

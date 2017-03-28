@@ -289,6 +289,7 @@ public class MainApplication extends Application {
 
         // set location state
         locationState = new LocationState();
+        orientation = new Orientation(locationState);
         // initialize DPI
         Utils.getDpPixels(this, 1.0f);
 

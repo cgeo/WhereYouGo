@@ -31,7 +31,7 @@ public class AboutDialog extends CustomDialogFragment {
         // add about info
         // add news
 
-        WebView webView = new WebView(A.getMain());
+        WebView webView = new WebView(getContext());
         webView.loadData(buffer, "text/html; charset=utf-8", "utf-8");
         webView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT));

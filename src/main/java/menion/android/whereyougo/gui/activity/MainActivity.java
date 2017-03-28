@@ -124,7 +124,7 @@ public class MainActivity extends CustomMainActivity {
 
     private static void loadCartridge(OutputStream log) {
         try {
-            WUI.startProgressDialog();
+            wui.startProgressDialog();
             Engine.newInstance(cartridgeFile, log, wui, wLocationService).start();
         } catch (Throwable t) {
         }
@@ -132,7 +132,7 @@ public class MainActivity extends CustomMainActivity {
 
     private static void restoreCartridge(OutputStream log) {
         try {
-            WUI.startProgressDialog();
+            wui.startProgressDialog();
             Engine.newInstance(cartridgeFile, log, wui, wLocationService).restore();
         } catch (Throwable t) {
         }
@@ -170,6 +170,7 @@ public class MainActivity extends CustomMainActivity {
         for (File file : files) {
             try {
                 CartridgeFile cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
+                cart.filename = file.getAbsolutePath();
                 cartridgeFiles.add(cart);
             } catch (Exception e) {
                 Logger.w(TAG, "refreshCartridge(), file:" + file + ", e:" + e.toString());
@@ -211,10 +212,9 @@ public class MainActivity extends CustomMainActivity {
             return;
         }
 
-        ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
-        dialog.setArguments(cartridgeFiles, new ChooseCartridgeDialog.ChooseCartridgeDialogCallback() {
+        ChooseCartridgeDialog dialog = ChooseCartridgeDialog.newInstance(cartridgeFiles, new ChooseCartridgeDialog.ChooseCartridgeDialogCallback() {
             @Override
-            public void onChooseCartridgeResult(CartridgeFile selectedCartridge) {
+            public void onChooseCartridge(CartridgeFile selectedCartridge) {
                 MainActivity.selectedFile = selectedCartridge.filename;
             }
         });

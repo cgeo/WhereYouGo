@@ -73,9 +73,6 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
 
     @Override
     public Dialog createDialog(Bundle savedInstanceState) {
-        if (A.getMain() == null) {
-            return null;
-        }
         if (!(restoreInstance(savedInstanceState) || restoreInstance(getArguments()))) {
             return null;
         }
@@ -152,9 +149,5 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
                             adapter.notifyDataSetChanged();
                     }
                 }, null);
-    }
-
-    public void setParams(File saveFile) {
-        this.saveFile = saveFile;
     }
 }

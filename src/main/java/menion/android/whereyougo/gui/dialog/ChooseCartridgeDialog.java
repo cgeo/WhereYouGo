@@ -21,8 +21,6 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
-import menion.android.whereyougo.geo.location.LocationState;
-import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialogFragment;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
@@ -34,7 +32,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
     public static final String TAG = "ChooseCartridgeDialog";
     public interface ChooseCartridgeDialogCallback {
-        void onChooseCartridgeResult(CartridgeFile selectedCartridge);
+        void onChooseCartridge(CartridgeFile selectedCartridge);
     }
     private ArrayList<DataInfo> data;
     private BaseAdapter adapter;
@@ -43,6 +41,13 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
 
     public ChooseCartridgeDialog() {
         super();
+    }
+
+    public static ChooseCartridgeDialog newInstance(Vector<CartridgeFile> cartridgeFiles, ChooseCartridgeDialogCallback chooseCartridgeDialogCallback) {
+        ChooseCartridgeDialog chooseCartridgeDialog = new ChooseCartridgeDialog();
+        chooseCartridgeDialog.cartridgeFiles = cartridgeFiles;
+        chooseCartridgeDialog.chooseCartridgeDialogCallback = chooseCartridgeDialogCallback;
+        return chooseCartridgeDialog;
     }
 
     @Override
@@ -119,15 +124,10 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         return null;
     }
 
-    public void setArguments(Vector<CartridgeFile> cartridgeFiles, ChooseCartridgeDialogCallback chooseCartridgeDialogCallback) {
-        this.cartridgeFiles = cartridgeFiles;
-        this.chooseCartridgeDialogCallback = chooseCartridgeDialogCallback;
-    }
-
     private void itemClicked(int position) {
         dismiss();
         if (chooseCartridgeDialogCallback != null)
-            chooseCartridgeDialogCallback.onChooseCartridgeResult(cartridgeFiles.get(position));
+            chooseCartridgeDialogCallback.onChooseCartridge(cartridgeFiles.get(position));
     }
 
     private void itemLongClicked(final int position) {

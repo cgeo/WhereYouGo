@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 
 import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.utils.Logger;
 
@@ -42,7 +43,7 @@ public class SaveGame extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... params) {
         // let thread sleep for a while to be sure that cartridge is saved!
         try {
-            while (WUI.saving) {
+            while (MainActivity.wui.saving) {
                 Thread.sleep(100);
             }
         } catch (InterruptedException e) {

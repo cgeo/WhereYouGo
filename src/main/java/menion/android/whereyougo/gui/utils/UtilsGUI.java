@@ -42,10 +42,6 @@ import menion.android.whereyougo.utils.Utils;
 
 public class UtilsGUI {
 
-    public static final int DIALOG_EDIT_TEXT_ID = 10005;
-
-    public static final int DIALOG_SPINNER_ID = 10006;
-
     /* LIST VIEW PART */
 
     /******************************/
@@ -134,10 +130,6 @@ public class UtilsGUI {
                 .setLayoutParams(new ViewGroup.LayoutParams(getDialogWidth(), LayoutParams.WRAP_CONTENT));
         webView.setBackgroundColor(Color.WHITE);
         return webView;
-    }
-
-    public static int getUniqueId() {
-        return (int) (Math.random() * Integer.MAX_VALUE);
     }
 
     public static void setButtons(Activity a, int[] btns, View.OnClickListener onClick,
