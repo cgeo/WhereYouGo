@@ -42,11 +42,6 @@ public class ListZonesActivity extends ListVariousActivity implements ILocationE
         ListZonesActivity.this.finish();
     }
 
-    @Override
-    public String getName() {
-        return TAG;
-    }
-
     public int getPriority() {
         return ILocationEventListener.PRIORITY_MEDIUM;
     }
@@ -60,7 +55,7 @@ public class ListZonesActivity extends ListVariousActivity implements ILocationE
     protected Vector<Object> getValidStuff() {
         Vector<Object> ret = new Vector<>();
         @SuppressWarnings("unchecked")
-        Vector<Zone> v = Engine.instance.cartridge.zones;
+        Vector<Zone> v = MainApplication.getInstance().getEngine().cartridge.zones;
         for (int i = 0; i < v.size(); i++) {
             if (v.get(i).isVisible())
                 ret.add(v.get(i));

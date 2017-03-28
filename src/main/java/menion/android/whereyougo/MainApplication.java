@@ -60,6 +60,7 @@ public class MainApplication extends Application {
     private Locale locale;
     private LocationState locationState;
     private Orientation orientation;
+    private Engine engine;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
     private boolean mScreenOff = false;
@@ -140,7 +141,7 @@ public class MainApplication extends Application {
         try {
             if (level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
                     && Preferences.GLOBAL_SAVEGAME_AUTO
-                    && MainActivity.selectedFile != null && Engine.instance != null) {
+                    && MainActivity.selectedFile != null && MainApplication.getInstance().getEngine() != null) {
                 final Activity activity = PreferenceValues.getCurrentActivity();
                 if (activity != null) {
                     if (MainActivity.wui != null) {
@@ -272,6 +273,14 @@ public class MainApplication extends Application {
 
     public Orientation getOrientation() {
         return orientation;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
     }
 
     public boolean isScreenOff() {

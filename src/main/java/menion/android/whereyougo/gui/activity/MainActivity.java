@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -125,27 +126,33 @@ public class MainActivity extends CustomMainActivity {
     private static void loadCartridge(OutputStream log) {
         try {
             wui.startProgressDialog();
-            Engine.newInstance(cartridgeFile, log, wui, wLocationService).start();
+            Engine engine = Engine.newInstance(cartridgeFile, log, wui, wLocationService);
+            MainApplication.getInstance().setEngine(engine);
+            engine.start();
         } catch (Throwable t) {
+            MainApplication.getInstance().setEngine(null);
         }
     }
 
     private static void restoreCartridge(OutputStream log) {
         try {
             wui.startProgressDialog();
-            Engine.newInstance(cartridgeFile, log, wui, wLocationService).restore();
+            Engine engine = Engine.newInstance(cartridgeFile, log, wui, wLocationService);
+            MainApplication.getInstance().setEngine(engine);
+            engine.restore();
         } catch (Throwable t) {
+            MainApplication.getInstance().setEngine(null);
         }
     }
 
     public static void startSelectedCartridge(boolean restore) {
         try {
             File file = getLogFile();
-            FileOutputStream fos = null;
+            OutputStream fos = null;
             try {
                 if (!file.exists())
                     file.createNewFile();
-                fos = new FileOutputStream(file, true);
+                fos = new BufferedOutputStream(new FileOutputStream(file, true));
             } catch (Exception e) {
                 Logger.e(TAG, "onResume() - create empty saveGame file", e);
             }

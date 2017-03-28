@@ -23,6 +23,7 @@ import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Thing;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
 import se.krka.kahlua.vm.LuaTable;
@@ -53,9 +54,9 @@ public class ListThingsActivity extends ListVariousActivity {
     protected Vector<Object> getValidStuff() {
         LuaTable container;
         if (mode == INVENTORY)
-            container = Engine.instance.player.inventory;
+            container = MainApplication.getInstance().getEngine().player.inventory;
         else
-            container = Engine.instance.cartridge.currentThings();
+            container = MainApplication.getInstance().getEngine().cartridge.currentThings();
 
         Vector<Object> newthings = new Vector<>();
         Object key = null;

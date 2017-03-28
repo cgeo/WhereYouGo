@@ -26,6 +26,7 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.formats.CartridgeFile;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.gui.activity.MainActivity;
@@ -51,14 +52,14 @@ public class VectorMapDataProvider implements MapDataProvider {
     }
 
     public void addAll() {
-        if (MainActivity.cartridgeFile == null || Engine.instance == null
-                || Engine.instance.cartridge == null || Engine.instance.cartridge.zones == null)
+        if (MainActivity.cartridgeFile == null || MainApplication.getInstance().getEngine() == null
+                || MainApplication.getInstance().getEngine().cartridge == null || MainApplication.getInstance().getEngine().cartridge.zones == null)
             return;
         clear();
         Vector<CartridgeFile> v = new Vector<>();
         v.add(MainActivity.cartridgeFile);
         addCartridges(v);
-        addZones((Vector<Zone>) Engine.instance.cartridge.zones, DetailsActivity.et);
+        addZones((Vector<Zone>) MainApplication.getInstance().getEngine().cartridge.zones, DetailsActivity.et);
         if (DetailsActivity.et != null && !(DetailsActivity.et instanceof Zone))
             addOther(DetailsActivity.et, true);
     }

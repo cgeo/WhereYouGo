@@ -23,6 +23,7 @@ import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Task;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.openwig.WUI;
@@ -69,8 +70,8 @@ public class ListTasksActivity extends ListVariousActivity {
     @Override
     protected Vector<Object> getValidStuff() {
         Vector<Object> newtasks = new Vector<>();
-        for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
-            Task t = (Task) Engine.instance.cartridge.tasks.get(i);
+        for (int i = 0; i < MainApplication.getInstance().getEngine().cartridge.tasks.size(); i++) {
+            Task t = (Task) MainApplication.getInstance().getEngine().cartridge.tasks.get(i);
             if (t.isVisible())
                 newtasks.add(t);
         }

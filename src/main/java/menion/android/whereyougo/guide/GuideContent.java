@@ -80,11 +80,6 @@ public class GuideContent implements ILocationEventListener {
         return mGuide;
     }
 
-    @Override
-    public String getName() {
-        return TAG;
-    }
-
     public int getPriority() {
         return ILocationEventListener.PRIORITY_HIGH;
     }

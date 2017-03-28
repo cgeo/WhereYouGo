@@ -112,11 +112,6 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         return 1.0f;
     }
 
-    @Override
-    public String getName() {
-        return TAG;
-    }
-
     public int getPriority() {
         return ILocationEventListener.PRIORITY_MEDIUM;
     }

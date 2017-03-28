@@ -33,8 +33,6 @@ public interface ILocationEventListener {
     int PRIORITY_MEDIUM = 2;
     int PRIORITY_HIGH = 3;
 
-    String getName();
-
     int getPriority();
 
     /**

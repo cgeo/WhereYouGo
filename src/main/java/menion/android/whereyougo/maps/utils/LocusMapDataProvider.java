@@ -32,6 +32,7 @@ import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
@@ -58,7 +59,7 @@ public class LocusMapDataProvider implements MapDataProvider {
         Vector<CartridgeFile> v = new Vector<>();
         v.add(MainActivity.cartridgeFile);
         addCartridges(v);
-        addZones((Vector<Zone>) Engine.instance.cartridge.zones, DetailsActivity.et);
+        addZones((Vector<Zone>) MainApplication.getInstance().getEngine().cartridge.zones, DetailsActivity.et);
         if (DetailsActivity.et != null && !(DetailsActivity.et instanceof Zone))
             addOther(DetailsActivity.et, true);
     }

@@ -104,11 +104,6 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
         });
     }
 
-    @Override
-    public String getName() {
-        return TAG;
-    }
-
     public int getPriority() {
         return ILocationEventListener.PRIORITY_MEDIUM;
     }

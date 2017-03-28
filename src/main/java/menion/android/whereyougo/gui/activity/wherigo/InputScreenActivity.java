@@ -30,6 +30,7 @@ import android.widget.TextView;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
@@ -54,7 +55,7 @@ public class InputScreenActivity extends MediaActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (A.getMain() == null || Engine.instance == null || input == null || input.table == null) {
+        if (A.getMain() == null || MainApplication.getInstance().getEngine() == null || input == null || input.table == null) {
             finish();
             return;
         }

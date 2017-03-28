@@ -37,6 +37,7 @@ import cz.matejcik.openwig.Player;
 import cz.matejcik.openwig.Task;
 import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.MainActivity;
@@ -68,7 +69,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     private String getVisibleCartridgeThingsDescription() {
         String description = null;
         @SuppressWarnings("unchecked")
-        Vector<Zone> zones = Engine.instance.cartridge.zones;
+        Vector<Zone> zones = MainApplication.getInstance().getEngine().cartridge.zones;
         for (int i = 0; i < zones.size(); i++) {
             Zone z = zones.elementAt(i);
             String des = getVisibleThingsDescription(z);
@@ -85,7 +86,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     }
 
     private String getVisiblePlayerThingsDescription() {
-        Player p = Engine.instance.player;
+        Player p = MainApplication.getInstance().getEngine().player;
         String description = null;
         Object key = null;
         while ((key = p.inventory.next(key)) != null) {
@@ -104,8 +105,8 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     private int getVisibleTasksCount() {
         int count = 0;
-        for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
-            Task a = (Task) Engine.instance.cartridge.tasks.elementAt(i);
+        for (int i = 0; i < MainApplication.getInstance().getEngine().cartridge.tasks.size(); i++) {
+            Task a = (Task) MainApplication.getInstance().getEngine().cartridge.tasks.elementAt(i);
             if (a.isVisible())
                 count++;
         }
@@ -114,8 +115,8 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     private String getVisibleTasksDescription() {
         String description = null;
-        for (int i = 0; i < Engine.instance.cartridge.tasks.size(); i++) {
-            Task a = (Task) Engine.instance.cartridge.tasks.elementAt(i);
+        for (int i = 0; i < MainApplication.getInstance().getEngine().cartridge.tasks.size(); i++) {
+            Task a = (Task) MainApplication.getInstance().getEngine().cartridge.tasks.elementAt(i);
             if (a.isVisible()) {
                 if (description == null)
                     description = "";
@@ -155,7 +156,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     /***********************************/
 
     // private Vector<Zone> getVisibleZones() {
-    // Vector<Zone> zones = Engine.instance.cartridge.zones;
+    // Vector<Zone> zones = MainApplication.getInstance().getEngine().cartridge.zones;
     // Vector<Zone> visible = new Vector<Zone>();
     // for (int i = 0; i < zones.size(); i++) {
     // Zone z = (Zone) zones.get(i);
@@ -167,7 +168,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     private String getVisibleZonesDescription() {
         String description = null;
         @SuppressWarnings("unchecked")
-        Vector<Zone> zones = Engine.instance.cartridge.zones;
+        Vector<Zone> zones = MainApplication.getInstance().getEngine().cartridge.zones;
         for (int i = 0; i < zones.size(); i++) {
             Zone z = zones.get(i);
             if (z.isVisible()) {
@@ -177,7 +178,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                     description += ", ";
 
                 description += z.name;
-                if (z.contains(Engine.instance.player))
+                if (z.contains(MainApplication.getInstance().getEngine().player))
                     description += String.format(" (%s)", getString(R.string.zone_state_inside));
             }
         }
@@ -186,7 +187,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (A.getMain() == null || Engine.instance == null) {
+        if (A.getMain() == null || MainApplication.getInstance().getEngine() == null) {
             finish();
             return;
         }
@@ -197,17 +198,17 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 Logger.d(TAG, "onItemClick:" + position);
                 switch (position) {
                     case 0:
-                        if (Engine.instance.cartridge.visibleZones() >= 1) {
+                        if (MainApplication.getInstance().getEngine().cartridge.visibleZones() >= 1) {
                             MainActivity.wui.showScreen(WUI.LOCATIONSCREEN, null);
                         }
                         break;
                     case 1:
-                        if (Engine.instance.cartridge.visibleThings() >= 1) {
+                        if (MainApplication.getInstance().getEngine().cartridge.visibleThings() >= 1) {
                             MainActivity.wui.showScreen(WUI.ITEMSCREEN, null);
                         }
                         break;
                     case 2:
-                        if (Engine.instance.player.visibleThings() >= 1) {
+                        if (MainApplication.getInstance().getEngine().player.visibleThings() >= 1) {
                             MainActivity.wui.showScreen(WUI.INVENTORYSCREEN, null);
                         }
                         break;
@@ -220,7 +221,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
             }
         };
 
-        CustomDialog.setTitle(this, Engine.instance.cartridge.name, null, CustomDialog.NO_IMAGE, null);
+        CustomDialog.setTitle(this, MainApplication.getInstance().getEngine().cartridge.name, null, CustomDialog.NO_IMAGE, null);
         String saveGameText;
         CustomDialog.OnClickListener saveGameListener;
         if (Preferences.GLOBAL_SAVEGAME_SLOTS > 0) {
@@ -413,32 +414,32 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     public void refresh() {
         runOnUiThread(new Runnable() {
             public void run() {
-                if (A.getMain() == null || Engine.instance == null || Engine.instance.cartridge == null) {
+                if (A.getMain() == null || MainApplication.getInstance().getEngine() == null || MainApplication.getInstance().getEngine().cartridge == null) {
                     return;
                 }
 
                 ArrayList<DataInfo> data = new ArrayList<>();
                 DataInfo diLocations =
                         new DataInfo(getString(R.string.locations) + " ("
-                                + Engine.instance.cartridge.visibleZones() + ")", getVisibleZonesDescription(),
+                                + MainApplication.getInstance().getEngine().cartridge.visibleZones() + ")", getVisibleZonesDescription(),
                                 R.drawable.icon_locations);
                 data.add(diLocations);
 
                 DataInfo diYouSee =
                         new DataInfo(getString(R.string.you_see) + " ("
-                                + Engine.instance.cartridge.visibleThings() + ")",
+                                + MainApplication.getInstance().getEngine().cartridge.visibleThings() + ")",
                                 getVisibleCartridgeThingsDescription(), R.drawable.icon_search);
                 data.add(diYouSee);
 
                 DataInfo diInventory =
                         new DataInfo(getString(R.string.inventory) + " ("
-                                + Engine.instance.player.visibleThings() + ")",
+                                + MainApplication.getInstance().getEngine().player.visibleThings() + ")",
                                 getVisiblePlayerThingsDescription(), R.drawable.icon_inventory);
                 data.add(diInventory);
 
                 DataInfo diTasks =
                         new DataInfo(getString(R.string.tasks) + " ("
-                                + Engine.instance.cartridge.visibleTasks() + ")", getVisibleTasksDescription(),
+                                + MainApplication.getInstance().getEngine().cartridge.visibleTasks() + ")", getVisibleTasksDescription(),
                                 R.drawable.icon_tasks);
                 data.add(diTasks);
 

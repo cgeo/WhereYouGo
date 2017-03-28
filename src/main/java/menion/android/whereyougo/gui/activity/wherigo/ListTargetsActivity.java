@@ -24,6 +24,7 @@ import java.util.Vector;
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Thing;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
@@ -39,14 +40,14 @@ public class ListTargetsActivity extends ListVariousActivity {
     private static Vector<Object> validStuff;
 
     private static void makeValidStuff() {
-        LuaTable current = Engine.instance.cartridge.currentThings();
-        // int size = current.len() + Engine.instance.player.inventory.len();
+        LuaTable current = MainApplication.getInstance().getEngine().cartridge.currentThings();
+        // int size = current.len() + MainApplication.getInstance().getEngine().player.inventory.len();
         validStuff = new Vector<>();
         Object key = null;
         while ((key = current.next(key)) != null)
             validStuff.addElement(current.rawget(key));
-        while ((key = Engine.instance.player.inventory.next(key)) != null)
-            validStuff.addElement(Engine.instance.player.inventory.rawget(key));
+        while ((key = MainApplication.getInstance().getEngine().player.inventory.next(key)) != null)
+            validStuff.addElement(MainApplication.getInstance().getEngine().player.inventory.rawget(key));
 
         for (int i = 0; i < validStuff.size(); i++) {
             Thing t = (Thing) validStuff.elementAt(i);

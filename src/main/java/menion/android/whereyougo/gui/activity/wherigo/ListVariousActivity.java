@@ -177,7 +177,7 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
         super.onCreate(savedInstanceState);
         // kill when GC has cleaned engine instance
         // this code must be implemented in the last onCreate method in inheritance chain
-        if (A.getMain() == null || Engine.instance == null) {
+        if (A.getMain() == null || MainApplication.getInstance().getEngine() == null) {
             finish();
             return;
         }
