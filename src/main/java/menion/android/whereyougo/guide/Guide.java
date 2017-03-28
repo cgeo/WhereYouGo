@@ -22,6 +22,7 @@ import android.net.Uri;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.audio.AudioClip;
 import menion.android.whereyougo.geo.location.Location;
@@ -69,7 +70,7 @@ public class Guide implements IGuide {
         alreadyBeeped = false;
         lastSonarCall = 0;
         try {
-            audioBeep = new AudioClip(A.getApp(), R.raw.sound_beep_01);
+            audioBeep = new AudioClip(MainApplication.getInstance(), R.raw.sound_beep_01);
         } catch (Exception e) {
             Logger.e(TAG, "Guide(" + R.raw.sound_beep_01 + "), e:" + e.toString());
         }
@@ -155,7 +156,7 @@ public class Guide implements IGuide {
     protected void playCustomSound() {
         String uri = Preferences.GUIDING_WAYPOINT_SOUND_CUSTOM_SOUND_URI;
         try {
-            final AudioClip audioClip = new AudioClip(A.getApp(), Uri.parse(uri));
+            final AudioClip audioClip = new AudioClip(MainApplication.getInstance(), Uri.parse(uri));
             audioClip.play();
             new Timer().schedule(new TimerTask() {
                 @Override

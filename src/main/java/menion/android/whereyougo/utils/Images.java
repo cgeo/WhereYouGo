@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.preferences.Preferences;
 
@@ -51,7 +52,7 @@ public class Images {
         try {
             if (id <= 0)
                 return IMAGE_EMPTY_B;
-            return BitmapFactory.decodeResource(A.getApp().getResources(), id);
+            return BitmapFactory.decodeResource(MainApplication.getInstance().getResources(), id);
         } catch (Exception e) {
             Logger.w(TAG, "getImageB(" + id + "), e:" + e.toString());
             return IMAGE_EMPTY_B;
@@ -71,7 +72,7 @@ public class Images {
 
     public static Drawable getImageD(int id) {
         try {
-            Drawable draw = A.getApp().getResources().getDrawable(id);
+            Drawable draw = MainApplication.getInstance().getResources().getDrawable(id);
             draw.setBounds(0, 0, draw.getIntrinsicWidth(), draw.getIntrinsicHeight());
             return draw;
         } catch (Exception e) {
@@ -81,10 +82,10 @@ public class Images {
     }
 
     public static Drawable getImageD(int id, int size) {
-        if (A.getApp() == null)
+        if (MainApplication.getInstance() == null)
             return null;
 
-        Drawable draw = A.getApp().getResources().getDrawable(id);
+        Drawable draw = MainApplication.getInstance().getResources().getDrawable(id);
         return getSizeOptimizedIcon(draw, size);
     }
 

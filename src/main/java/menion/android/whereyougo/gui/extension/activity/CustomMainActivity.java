@@ -226,7 +226,7 @@ public abstract class CustomMainActivity extends CustomActivity {
 
         callSecondInit = false;
         callRegisterOnly = false;
-        if (A.getApp() == null) { // first app run
+        if (MainApplication.getInstance() == null) { // first app run
             // Logger.w(TAG, "onCreate() - init new");
             A.registerApp((MainApplication) getApplication());
 
@@ -255,7 +255,7 @@ public abstract class CustomMainActivity extends CustomActivity {
         if (finish) {
             // stop debug if any forgotten
             Debug.stopMethodTracing();
-            // remember value before A.getApp() exist
+            // remember value before MainApplication.getInstance() exist
             boolean clearPackageAllowed =
                     Utils.isPermissionAllowed(Manifest.permission.KILL_BACKGROUND_PROCESSES);
 

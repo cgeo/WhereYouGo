@@ -194,7 +194,7 @@ public class LocationState {
 
     public static void onActivityPauseInstant(Context context) {
         try {
-            boolean screenOff = (A.getApp() != null && ((MainApplication) A.getApp()).isScreenOff());
+            boolean screenOff = MainApplication.getInstance().isScreenOff();
             boolean disableWhenHide =
                     context != null && Preferences.GPS_DISABLE_WHEN_HIDE;
 

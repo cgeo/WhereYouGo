@@ -19,6 +19,7 @@ package menion.android.whereyougo.audio;
 
 import java.io.ByteArrayInputStream;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
@@ -29,10 +30,7 @@ public class UtilsAudio {
 
     public static void playBeep(int count) {
         try {
-            if (A.getApp() != null)
-                new AudioClip(A.getApp(), R.raw.sound_beep_01).play(count);
-            else if (A.getMain() != null)
-                new AudioClip(A.getMain(), R.raw.sound_beep_01).play(count);
+            new AudioClip(MainApplication.getInstance(), R.raw.sound_beep_01).play(count);
         } catch (Exception e) {
             Logger.e(TAG, "playBeep(" + count + ")", e);
         }

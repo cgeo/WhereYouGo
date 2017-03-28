@@ -127,7 +127,7 @@ public class PreferenceValues {
             if (disable && wl != null) {
                 disableWakeLock();
             } else if (!disable && wl == null) {
-                PowerManager pm = (PowerManager) A.getApp().getSystemService(Context.POWER_SERVICE);
+                PowerManager pm = (PowerManager) MainApplication.getInstance().getSystemService(Context.POWER_SERVICE);
                 wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
                 wl.acquire();
             }
@@ -144,7 +144,7 @@ public class PreferenceValues {
 
     public static int getApplicationVersionActual() {
         try {
-            return A.getApp().getPackageManager().getPackageInfo(A.getApp().getPackageName(), 0).versionCode;
+            return MainApplication.getInstance().getPackageManager().getPackageInfo(MainApplication.getInstance().getPackageName(), 0).versionCode;
         } catch (NameNotFoundException e) {
             Logger.e(TAG, "getApplicationVersionActual()", e);
             return 0;

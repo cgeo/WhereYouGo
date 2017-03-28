@@ -32,6 +32,8 @@ import java.io.Reader;
 import java.security.MessageDigest;
 import java.util.List;
 
+import menion.android.whereyougo.MainApplication;
+
 /**
  * @author menion
  * @since 25.1.2010 2010
@@ -130,7 +132,7 @@ public class Utils {
     }
 
     public static float getDpPixels(float pixels) {
-        return getDpPixels(A.getApp(), pixels);
+        return getDpPixels(MainApplication.getInstance(), pixels);
     }
 
     public static int getScreenCategory() {
@@ -201,7 +203,7 @@ public class Utils {
     }
 
     public static boolean isIntentAvailable(Intent intent) {
-        final PackageManager packageManager = A.getApp().getPackageManager();
+        final PackageManager packageManager = MainApplication.getInstance().getPackageManager();
         List<ResolveInfo> list =
                 packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         // Logger.d(TAG, "isIntentAvailable(" + intent + "), res:" + list.size());
@@ -219,7 +221,7 @@ public class Utils {
 
     public static boolean isPermissionAllowed(String permission) {
         try {
-            return A.getApp().checkPermission(permission, android.os.Binder.getCallingPid(),
+            return MainApplication.getInstance().checkPermission(permission, android.os.Binder.getCallingPid(),
                     android.os.Binder.getCallingUid()) == PackageManager.PERMISSION_GRANTED;
         } catch (Exception e) {
             Logger.e(TAG, "isPermissionAllowed(" + permission + ")", e);

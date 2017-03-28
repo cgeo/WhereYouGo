@@ -66,7 +66,7 @@ public class IconedListAdapter extends BaseAdapter {
     private float multiplyImageSize = 1.0f;
 
     // public static final Drawable SEPARATOR =
-    // A.getApp().getResources().getDrawable(R.drawable.var_separator);
+    // MainApplication.getInstance().getResources().getDrawable(R.drawable.var_separator);
 
     public IconedListAdapter(Context context, ArrayList<DataInfo> data, View view) {
         this.mData = data;

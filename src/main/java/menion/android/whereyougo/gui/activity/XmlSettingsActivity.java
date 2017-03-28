@@ -172,9 +172,9 @@ public class XmlSettingsActivity extends PreferenceActivity
                     getString(R.string.folder_default), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (((MainApplication) A.getApp()).setCartridgeDir(null)) {
+                            if (MainApplication.getInstance().setCartridgeDir(null)) {
                                 PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                preferenceRoot.setValue(FileSystem.ROOT);
+                                preferenceRoot.setValue(MainApplication.getInstance().getCartridgeDir().getAbsolutePath());
                                 MainActivity.refreshCartridges();
                             }
                         }

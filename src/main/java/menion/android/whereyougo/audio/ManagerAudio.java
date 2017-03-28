@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Hashtable;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
@@ -51,7 +52,7 @@ public class ManagerAudio {
     public ManagerAudio() {
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         soundPoolMap = new Hashtable<>();
-        soundPoolMap.put(SOUND_POOL_BEEP, soundPool.load(A.getApp(), R.raw.sound_beep_01, 1));
+        soundPoolMap.put(SOUND_POOL_BEEP, soundPool.load(MainApplication.getInstance(), R.raw.sound_beep_01, 1));
     }
 
     public void playMp3File(String fileName, String fileEnd, InputStream is) {
