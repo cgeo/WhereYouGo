@@ -99,7 +99,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
                 ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
                 Preferences.SENSOR_HARDWARE_COMPASS = isChecked;
                 Preferences.setPreference(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS, Preferences.SENSOR_HARDWARE_COMPASS);
-                A.getRotator().manageSensors();
+                MainApplication.getInstance().getOrientation().manageSensors();
             }
         });
     }
@@ -171,7 +171,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
                 ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
                         location.getSpeed(), false));
                 ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
-                        .formatAngle(Orientation.getDeclination()));
+                        .formatAngle(MainApplication.getInstance().getOrientation().getDeclination()));
                 long lastFix = MainApplication.getInstance().getLocationState().getLastFixTime();
                 if (lastFix > 0) {
                     ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat

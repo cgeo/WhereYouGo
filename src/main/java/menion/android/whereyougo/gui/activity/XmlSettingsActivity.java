@@ -260,7 +260,7 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE = Utils.parseBoolean(newValue);
-            A.getRotator().manageSensors();
+            MainApplication.getInstance().getOrientation().manageSensors();
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE)) {
             String newValue = sharedPreferences.getString(key, null);
             int value = Utils.parseInt(newValue);
@@ -272,7 +272,7 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.SENSOR_HARDWARE_COMPASS = Utils.parseBoolean(newValue);
-            A.getRotator().manageSensors();
+            MainApplication.getInstance().getOrientation().manageSensors();
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_HIGHLIGHT)) {
             String newValue = sharedPreferences.getString(key, null);
             Preferences.APPEARANCE_HIGHLIGHT = Utils.parseInt(newValue);

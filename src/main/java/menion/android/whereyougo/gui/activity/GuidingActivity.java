@@ -145,13 +145,13 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
     public void onStart() {
         super.onStart();
         A.getGuidingContent().addGuidingListener(this);
-        A.getRotator().addListener(this);
+        MainApplication.getInstance().getOrientation().addListener(this);
     }
 
     public void onStop() {
         super.onStop();
         A.getGuidingContent().removeGuidingListener(this);
-        A.getRotator().removeListener(this);
+        MainApplication.getInstance().getOrientation().removeListener(this);
     }
 
     @Override

@@ -50,8 +50,8 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
   private static float pitch;
   private static float roll;
   private static float aboveOrBelow = 0.0f;
-  private static GeomagneticField gmf;
-  private static long lastCompute;
+  private GeomagneticField gmf;
+  private long lastCompute;
   private final Vector<IOrientationEventListener> listeners;
   private SensorManager sensorManager;
   private float mLastAziGps;
@@ -63,7 +63,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
     this.listeners = new Vector<>();
   }
 
-  public static float getDeclination() {
+  public float getDeclination() {
     long actualTime = System.currentTimeMillis();
     if (gmf == null || actualTime - lastCompute > 300000) { // once per five minutes
 

@@ -37,16 +37,11 @@ public class A {
     private static MainApplication app;
     private static GuideContent guidingContent;
     private static ManagerAudio managerAudio;
-    private static Orientation rotator;
 
     public static void destroy() {
         guidingContent = null;
         managerAudio = null;
         main = null;
-        if (rotator != null) {
-            rotator.removeAllListeners();
-            rotator = null;
-        }
         // finally destroy app
         if (app != null)
             app.destroy();
@@ -75,20 +70,12 @@ public class A {
         return managerAudio;
     }
 
-    public static Orientation getRotator() {
-        if (rotator == null) {
-            rotator = new Orientation();
-        }
-        return rotator;
-    }
-
     public static void printState() {
         Logger.i(TAG, "printState() - STATIC VARIABLES");
         Logger.i(TAG, "app:" + app);
         Logger.i(TAG, "managerAudio:" + managerAudio);
         Logger.i(TAG, "main:" + main);
         Logger.i(TAG, "guidingContent:" + guidingContent);
-        Logger.i(TAG, "rotator:" + rotator);
     }
 
     public static void registerApp(MainApplication app) {

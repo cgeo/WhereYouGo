@@ -36,6 +36,7 @@ import java.util.TimerTask;
 
 import cz.matejcik.openwig.Engine;
 import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.geo.orientation.Orientation;
 import menion.android.whereyougo.gui.SaveGame;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
@@ -58,6 +59,7 @@ public class MainApplication extends Application {
     private File cacheDir;
     private Locale locale;
     private LocationState locationState;
+    private Orientation orientation;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
     private boolean mScreenOff = false;
@@ -170,6 +172,10 @@ public class MainApplication extends Application {
     }
 
     public void destroy() {
+        if (orientation != null) {
+            orientation.removeAllListeners();
+            orientation = null;
+        }
         try {
             unregisterReceiver(mScreenReceiver);
         } catch (Exception e) {
@@ -262,6 +268,10 @@ public class MainApplication extends Application {
 
     public LocationState getLocationState() {
         return locationState;
+    }
+
+    public Orientation getOrientation() {
+        return orientation;
     }
 
     public boolean isScreenOff() {
