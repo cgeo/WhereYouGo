@@ -52,7 +52,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         }
         try {
             // sort cartridges
-            final Location actLoc = LocationState.getLocation();
+            final Location actLoc = MainApplication.getInstance().getLocationState().getLocation();
             final Location loc1 = new Location(TAG);
             final Location loc2 = new Location(TAG);
             Collections.sort(cartridgeFiles, new Comparator<CartridgeFile>() {

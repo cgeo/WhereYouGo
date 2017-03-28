@@ -31,6 +31,7 @@ import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Task;
 import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
@@ -126,7 +127,7 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
     public void onStart() {
         super.onStart();
         if (et instanceof Zone)
-            LocationState.addLocationChangeListener(this);
+            MainApplication.getInstance().getLocationState().addLocationChangeListener(this);
     }
 
     public void onStatusChanged(String provider, int state, Bundle extras) {
@@ -134,7 +135,7 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
 
     public void onStop() {
         super.onStop();
-        LocationState.removeLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().removeLocationChangeListener(this);
     }
 
     @Override

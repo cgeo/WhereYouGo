@@ -24,6 +24,7 @@ import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -82,7 +83,7 @@ public class ListZonesActivity extends ListVariousActivity implements ILocationE
 
     public void onStart() {
         super.onStart();
-        LocationState.addLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().addLocationChangeListener(this);
     }
 
     public void onStatusChanged(String provider, int state, Bundle extras) {
@@ -90,7 +91,7 @@ public class ListZonesActivity extends ListVariousActivity implements ILocationE
 
     public void onStop() {
         super.onStop();
-        LocationState.removeLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().removeLocationChangeListener(this);
     }
 
     @Override

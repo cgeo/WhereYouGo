@@ -187,9 +187,9 @@ public abstract class CustomMainActivity extends CustomActivity {
             // set last known location
             if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
                     && (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY)) {
-                LocationState.setGpsOn(CustomMainActivity.this);
+                MainApplication.getInstance().getLocationState().setGpsOn(CustomMainActivity.this);
             } else {
-                LocationState.setGpsOff(CustomMainActivity.this);
+                MainApplication.getInstance().getLocationState().setGpsOff(CustomMainActivity.this);
             }
 
             eventFirstInit();
@@ -214,7 +214,7 @@ public abstract class CustomMainActivity extends CustomActivity {
             // save last known location
             PreferenceValues.setLastKnownLocation();
             // disable GPS modul
-            LocationState.destroy(CustomMainActivity.this);
+            MainApplication.getInstance().getLocationState().destroy(CustomMainActivity.this);
 
             // destroy static references
             A.destroy();

@@ -18,7 +18,7 @@
 package menion.android.whereyougo.openwig;
 
 import cz.matejcik.openwig.platform.LocationService;
-import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.utils.Logger;
 
 public class WLocationService implements LocationService {
@@ -34,27 +34,27 @@ public class WLocationService implements LocationService {
     }
 
     public double getAltitude() {
-        return LocationState.getLocation().getAltitude();
+        return MainApplication.getInstance().getLocationState().getLocation().getAltitude();
     }
 
     public double getHeading() {
-        return LocationState.getLocation().getBearing();
+        return MainApplication.getInstance().getLocationState().getLocation().getBearing();
     }
 
     public double getLatitude() {
-        return LocationState.getLocation().getLatitude();
+        return MainApplication.getInstance().getLocationState().getLocation().getLatitude();
     }
 
     public double getLongitude() {
-        return LocationState.getLocation().getLongitude();
+        return MainApplication.getInstance().getLocationState().getLocation().getLongitude();
     }
 
     public double getPrecision() {
-        return LocationState.getLocation().getAccuracy();
+        return MainApplication.getInstance().getLocationState().getLocation().getAccuracy();
     }
 
     public int getState() {
-        if (LocationState.isActuallyHardwareGpsOn())
+        if (MainApplication.getInstance().getLocationState().isActuallyHardwareGpsOn())
             return LocationService.ONLINE;
         else
             return LocationService.OFFLINE;

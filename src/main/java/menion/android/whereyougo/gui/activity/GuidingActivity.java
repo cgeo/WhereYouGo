@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.R.id;
 import menion.android.whereyougo.geo.location.Location;
@@ -114,7 +115,7 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
     @Override
     public void onOrientationChanged(float azimuth, float pitch, float roll) {
         // Logger.d(TAG, "onOrientationChanged(" + azimuth + ", " + pitch + ", " + roll + ")");
-        Location loc = LocationState.getLocation();
+        Location loc = MainApplication.getInstance().getLocationState().getLocation();
         mAzimuth = azimuth;
         mPitch = pitch;
         mRoll = roll;
@@ -159,9 +160,9 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
         this.viewName.setText(targetName);
         this.azimuthToTarget = azimuthToTarget;
         viewCompass.setDistance(distanceToTarget);
-        if (LocationState.getLocation().getSpeed() > 1) {
+        if (MainApplication.getInstance().getLocationState().getLocation().getSpeed() > 1) {
             viewTimeToTarget.setText(UtilsFormat.formatTime(true,
-                    (long) (distanceToTarget / LocationState.getLocation().getSpeed()) * 1000));
+                    (long) (distanceToTarget / MainApplication.getInstance().getLocationState().getLocation().getSpeed()) * 1000));
         } else {
             viewTimeToTarget.setText(UtilsFormat.formatTime(true, 0));
         }

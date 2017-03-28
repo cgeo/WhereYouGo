@@ -115,8 +115,8 @@ public class Guide implements IGuide {
 
     @Override
     public long getTimeToTarget() {
-        if (LocationState.getLocation().getSpeed() > 1.0) {
-            return (long) ((getDistanceToTarget() / LocationState.getLocation().getSpeed()) * 1000);
+        if (MainApplication.getInstance().getLocationState().getLocation().getSpeed() > 1.0) {
+            return (long) ((getDistanceToTarget() / MainApplication.getInstance().getLocationState().getLocation().getSpeed()) * 1000);
         } else {
             return 0;
         }

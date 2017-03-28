@@ -56,7 +56,8 @@ public class MainApplication extends Application {
     private File cartridgesDir;
     private File filesDir;
     private File cacheDir;
-    private Locale locale = null;
+    private Locale locale;
+    private LocationState locationState;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
     private boolean mScreenOff = false;
@@ -75,7 +76,7 @@ public class MainApplication extends Application {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                LocationState.onActivityPauseInstant(PreferenceValues.getCurrentActivity());
+                MainApplication.getInstance().getLocationState().onActivityPauseInstant(PreferenceValues.getCurrentActivity());
                 mTimer = null;
             }
         }, 2000);
@@ -243,6 +244,30 @@ public class MainApplication extends Application {
         return cartridgesDir;
     }
 
+    public String getAppName() {
+        try {
+            return getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
+        } catch (Exception e) {
+            return "WhereYouGo";
+        }
+    }
+
+    public String getAppVersion() {
+        try {
+            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            return BuildConfig.VERSION_NAME;
+        }
+    }
+
+    public LocationState getLocationState() {
+        return locationState;
+    }
+
+    public boolean isScreenOff() {
+        return mScreenOff;
+    }
+
     private void initCore() {
         // register screen on/off receiver
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
@@ -253,7 +278,7 @@ public class MainApplication extends Application {
         setCartridgeDir(new File(Preferences.GLOBAL_ROOT));
 
         // set location state
-        LocationState.init(this);
+        locationState = new LocationState();
         // initialize DPI
         Utils.getDpPixels(this, 1.0f);
 
@@ -266,10 +291,6 @@ public class MainApplication extends Application {
         } catch (Exception e) {
             // not really important
         }
-    }
-
-    public boolean isScreenOff() {
-        return mScreenOff;
     }
 
     /* LEGACY SUPPORT - less v0.8.14
@@ -314,23 +335,6 @@ public class MainApplication extends Application {
         }
     }
 
-
-    public String getAppName() {
-        try {
-            return getPackageManager().getApplicationLabel(getApplicationInfo()).toString();
-        } catch (Exception e) {
-            return "WhereYouGo";
-        }
-    }
-
-    public String getAppVersion() {
-        try {
-            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (Exception e) {
-            return BuildConfig.VERSION_NAME;
-        }
-    }
-
     private class ScreenReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -339,7 +343,7 @@ public class MainApplication extends Application {
                 mScreenOff = true;
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 // Logger.v(TAG, "ACTION_SCREEN_ON");
-                LocationState.onScreenOn(false);
+                MainApplication.getInstance().getLocationState().onScreenOn(false);
                 mScreenOff = false;
             }
         }

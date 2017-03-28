@@ -39,7 +39,6 @@ import menion.android.whereyougo.gui.activity.SatelliteActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
 
@@ -49,35 +48,37 @@ import menion.android.whereyougo.utils.Logger;
  */
 public class LocationState {
 
-    public static final String SIMULATE_LOCATION = "SIMULATE_LOCATION";
-    private static final String KEY_B_GPS_ENABLE_ASK_ON_ENABLE = "KEY_B_GPS_ENABLE_ASK_ON_ENABLE";
     private static final int GPS_ON = 0;
     private static final int GPS_OFF = 1;
     private static final String TAG = "LocationState";
     // gps connection "service"
-    private static GpsConnection gpsConn;
+    private GpsConnection gpsConn;
 
     // last known location
-    private static Location location;
-    // actual gps mSource
-    private static int mSource = GPS_OFF;
+    private Location location;
+    // actual gps source
+    private int source = GPS_OFF;
+    // last current source
+    private int lastSource = -1;
 
     // last GPS fix time
-    private static long mLastGpsFixTime = 0L;
+    private long mLastGpsFixTime = 0L;
     // count of satellites
-    private static final Point2D.Int mSatsCount = new Point2D.Int();
+    private final Point2D.Int satsCount = new Point2D.Int();
     // is speed correction enabled
-    private static boolean speedCorrection = false;
+    private boolean speedCorrection = false;
 
     // location listeners
-    private static ArrayList<ILocationEventListener> mListeners;
-    // last current mSource
-    private static int lastSource;
+    private ArrayList<ILocationEventListener> mListeners = new ArrayList<>();
+
+    public LocationState() {
+        location = PreferenceValues.getLastKnownLocation();
+    }
 
     /**
      * Registers a listener for GPS events
      */
-    public static synchronized void addLocationChangeListener(ILocationEventListener listener) {
+    public synchronized void addLocationChangeListener(ILocationEventListener listener) {
         if (listener == null || mListeners == null)
             return;
 
@@ -96,7 +97,7 @@ public class LocationState {
         }
     }
 
-    public static void destroy(Context context) {
+    public void destroy(Context context) {
         // Logger.d(TAG, "destroy(" + context + ")");
         setState(context, GPS_OFF, false);
         mListeners.clear();
@@ -104,7 +105,7 @@ public class LocationState {
         location = null;
     }
 
-    public static long getLastFixTime() {
+    public long getLastFixTime() {
         return mLastGpsFixTime;
     }
 
@@ -112,7 +113,7 @@ public class LocationState {
      * Returns the last known location of the device using its GPS and network location providers. May
      * be null if location access is disabled, or if the location providers don't exist.
      */
-    public static Location getLastKnownLocation(Activity activity) {
+    public Location getLastKnownLocation(Activity activity) {
         LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         Location gpsLocation = null;
         try {
@@ -145,37 +146,29 @@ public class LocationState {
             return null;
     }
 
-    public static Location getLocation() {
+    public Location getLocation() {
         if (location == null)
             return new Location(TAG);
         return new Location(location);
     }
 
-    public static Point2D.Int getSatCount() {
-        return mSatsCount;
+    public Point2D.Int getSatCount() {
+        return satsCount;
     }
 
-    public static void init(Context c) {
-        if (LocationState.location == null) {
-            LocationState.location = PreferenceValues.getLastKnownLocation();
-            mListeners = new ArrayList<>();
-            lastSource = -1;
-        }
+    public boolean isActualLocationHardwareGps() {
+        return source == GPS_ON && location.getProvider().equals(LocationManager.GPS_PROVIDER);
     }
 
-    public static boolean isActualLocationHardwareGps() {
-        return mSource == GPS_ON && location.getProvider().equals(LocationManager.GPS_PROVIDER);
+    public boolean isActualLocationHardwareNetwork() {
+        return source == GPS_ON && location.getProvider().equals(LocationManager.NETWORK_PROVIDER);
     }
 
-    public static boolean isActualLocationHardwareNetwork() {
-        return mSource == GPS_ON && location.getProvider().equals(LocationManager.NETWORK_PROVIDER);
+    public boolean isActuallyHardwareGpsOn() {
+        return source == GPS_ON;
     }
 
-    public static boolean isActuallyHardwareGpsOn() {
-        return mSource == GPS_ON;
-    }
-
-    public static boolean isGpsRequired() {
+    private boolean isGpsRequired() {
         if (mListeners == null)
             return false;
 
@@ -192,7 +185,7 @@ public class LocationState {
         return required;
     }
 
-    public static void onActivityPauseInstant(Context context) {
+    public void onActivityPauseInstant(Context context) {
         try {
             boolean screenOff = MainApplication.getInstance().isScreenOff();
             boolean disableWhenHide =
@@ -209,12 +202,12 @@ public class LocationState {
 
             // disable GPS if not needed and hidden
             if (mListeners.size() == 0 && !PreferenceValues.existCurrentActivity()) {
-                lastSource = mSource;
+                lastSource = source;
                 setState(context, GPS_OFF, true);
                 // disable gps when screen off or no activity visible (widget only)
             } else if (screenOff || !PreferenceValues.existCurrentActivity()) {
                 if (!isGpsRequired()) {
-                    lastSource = mSource;
+                    lastSource = source;
                     setState(context, GPS_OFF, true);
                 } else {
                     lastSource = -1;
@@ -227,27 +220,27 @@ public class LocationState {
         }
     }
 
-    protected static void onGpsStatusChanged(Hashtable<Integer, SatellitePosition> sats) {
+    protected void onGpsStatusChanged(Hashtable<Integer, SatellitePosition> sats) {
         // Logger.w(TAG, "onGpsStatusChanged(" + sats + ")");
         ArrayList<SatellitePosition> pos = null;
         if (sats != null) {
             pos = new ArrayList<>();
             Enumeration<SatellitePosition> enuPos = sats.elements();
-            mSatsCount.x = 0;
-            mSatsCount.y = 0;
+            satsCount.x = 0;
+            satsCount.y = 0;
             while (enuPos.hasMoreElements()) {
                 SatellitePosition sat = enuPos.nextElement();
                 pos.add(sat);
                 if (sat.fixed)
-                    mSatsCount.x++;
-                mSatsCount.y++;
+                    satsCount.x++;
+                satsCount.y++;
             }
         }
 
         postGpsSatelliteChange(pos);
     }
 
-    static void onGpsStatusChanged(int event, GpsStatus gpsStatus) {
+    void onGpsStatusChanged(int event, GpsStatus gpsStatus) {
         if (mListeners == null || mListeners.size() == 0)
             return;
 
@@ -262,8 +255,8 @@ public class LocationState {
                 pos = new ArrayList<>();
                 Iterator<GpsSatellite> enuSat = gpsStatus.getSatellites().iterator();
                 // clear sats count
-                mSatsCount.x = 0;
-                mSatsCount.y = 0;
+                satsCount.x = 0;
+                satsCount.y = 0;
                 while (enuSat.hasNext()) {
                     GpsSatellite sat = enuSat.next();
                     // pos.add(enuPos.nextElement());
@@ -274,8 +267,8 @@ public class LocationState {
                     satPos.snr = (int) sat.getSnr();
                     satPos.fixed = sat.usedInFix();
                     if (satPos.fixed)
-                        mSatsCount.x++;
-                    mSatsCount.y++;
+                        satsCount.x++;
+                    satsCount.y++;
                     pos.add(satPos);
                 }
             }
@@ -283,41 +276,41 @@ public class LocationState {
         }
     }
 
-    static void onLocationChanged(Location location) {
+    void onLocationChanged(Location location) {
         // Logger.w(TAG, "onLocationChanged(" + location + ")");
         try {
             // check if location is valid
             if (location == null)
                 return;
 
-            if (LocationState.location != null) {
+            if (this.location != null) {
                 // if first location from Network, and new from GPS but with worst precision, do not set
-                if (LocationState.location.getProvider().equals(LocationManager.NETWORK_PROVIDER)
+                if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)
                         && location.getProvider().equals(LocationManager.GPS_PROVIDER)
-                        && (LocationState.location.getAccuracy() * 3) < location.getAccuracy()) {
+                        && (this.location.getAccuracy() * 3) < location.getAccuracy()) {
                     return;
                 }
 
                 // check incorrect speed (if speed bigger then 100, and after 2sec increase more then 50%,
                 // set old speed
-                if (!speedCorrection && (location.getTime() - LocationState.location.getTime()) < 5000
+                if (!speedCorrection && (location.getTime() - this.location.getTime()) < 5000
                         && location.getSpeed() > 100.0f
-                        && location.getSpeed() / LocationState.location.getSpeed() > 2) {
-                    location.setSpeed(LocationState.location.getSpeed());
+                        && location.getSpeed() / this.location.getSpeed() > 2) {
+                    location.setSpeed(this.location.getSpeed());
                     speedCorrection = true;
                 } else {
                     speedCorrection = false;
                 }
 
                 // set last gps fix
-                if (LocationState.location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
-                    mLastGpsFixTime = System.currentTimeMillis();// LocationState.location.getTime();
+                if (this.location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
+                    mLastGpsFixTime = System.currentTimeMillis();// MainApplication.getInstance().getLocationState().location.getTime();
                 }
 
                 // check incorrect azimuth changes when almost zero speed
                 if (location.getSpeed() < 0.5f) {
-                    if (Math.abs(location.getBearing() - LocationState.location.getBearing()) > 25.0) {
-                        location.setBearing(LocationState.location.getBearing());
+                    if (Math.abs(location.getBearing() - this.location.getBearing()) > 25.0) {
+                        location.setBearing(this.location.getBearing());
                     }
                 }
             }
@@ -328,7 +321,7 @@ public class LocationState {
             }
 
             // finally set new location
-            LocationState.location = location;
+            this.location = location;
 
             for (int i = 0; i < mListeners.size(); i++) {
                 ILocationEventListener list = mListeners.get(i);
@@ -339,7 +332,7 @@ public class LocationState {
         }
     }
 
-    static void onProviderDisabled(String provider) {
+    void onProviderDisabled(String provider) {
         // Logger.w(TAG, "onProviderDisabled(" + provider + ")");
         // uncomment if GPS must be enabled
         // if (provider.equals(LocationManager.GPS_PROVIDER)) {
@@ -347,11 +340,11 @@ public class LocationState {
         // }
     }
 
-    static void onProviderEnabled(String provider) {
+    void onProviderEnabled(String provider) {
         Logger.w(TAG, "onProviderEnabled(" + provider + ")");
     }
 
-    public static void onScreenOn(boolean force) {
+    public void onScreenOn(boolean force) {
         // Logger.i(TAG, "onScreenOn(), activity:" + Settings.getCurrentActivity() + ", exist:" +
         // Settings.existCurrentActivity() + ", " + isGpsRequired());
         if (lastSource != -1 && mListeners != null && mListeners.size() > 0
@@ -361,7 +354,7 @@ public class LocationState {
         }
     }
 
-    static void onStatusChanged(String provider, int status, Bundle extras) {
+    void onStatusChanged(String provider, int status, Bundle extras) {
         Logger.w(TAG, "onStatusChanged(" + provider + ", " + status + ", " + extras + ")");
         for (int i = 0; i < mListeners.size(); i++) {
             mListeners.get(i).onStatusChanged(provider, status, extras);
@@ -371,9 +364,9 @@ public class LocationState {
         // status 2 - provider enabled
         // if GPS provider is disabled, set location only as network
         if (provider.equals(LocationManager.GPS_PROVIDER) && status == 1) {
-            if (LocationState.location != null) {
-                LocationState.location.setProvider(LocationManager.NETWORK_PROVIDER);
-                onLocationChanged(LocationState.location);
+            if (location != null) {
+                location.setProvider(LocationManager.NETWORK_PROVIDER);
+                onLocationChanged(location);
             }
         }
         // uncomment if GPS must be enabled
@@ -382,7 +375,7 @@ public class LocationState {
         // }
     }
 
-    private static void postGpsSatelliteChange(final ArrayList<SatellitePosition> pos) {
+    private void postGpsSatelliteChange(final ArrayList<SatellitePosition> pos) {
         if (PreferenceValues.getCurrentActivity() == null)
             return;
 
@@ -398,7 +391,7 @@ public class LocationState {
     /**
      * Unregisters a listener.
      */
-    public static synchronized void removeLocationChangeListener(ILocationEventListener listener) {
+    public synchronized void removeLocationChangeListener(ILocationEventListener listener) {
         if (mListeners.size() == 0)
             return;
 
@@ -409,30 +402,30 @@ public class LocationState {
         }
     }
 
-    public static void setGpsOff(Context context) {
+    public void setGpsOff(Context context) {
         setState(context, GPS_OFF, true);
     }
 
-    public static void setGpsOn(Context context) {
-        if (mSource == GPS_ON)
+    public void setGpsOn(Context context) {
+        if (source == GPS_ON)
             setGpsOff(context);
         setState(context, GPS_ON, true);
     }
 
-    public static void setLocationDirectly(Location location) {
-        if (!Const.STATE_RELEASE && !LocationState.isActuallyHardwareGpsOn()) { // XXX
+    public void setLocationDirectly(Location location) {
+        if (!Const.STATE_RELEASE && !isActuallyHardwareGpsOn()) { // XXX
             location.setSpeed(20.0f);
-            if (LocationState.location != null)
-                location.setBearing(LocationState.location.bearingTo(location));
+            if (this.location != null)
+                location.setBearing(this.location.bearingTo(location));
         }
 
         onLocationChanged(location);
     }
 
-    private static void setState(final Context context, int source, boolean writeToSettings) {
+    private void setState(final Context context, int source, boolean writeToSettings) {
         // Logger.w(TAG, "setLocation(" + context + ", " + source + ", " + writeToSettings +
-        // "), actual:" + LocationState.mSource);
-        if (LocationState.mSource == source) {
+        // "), actual:" + MainApplication.getInstance().getLocationState().source);
+        if (this.source == source) {
             return;
         }
 
@@ -444,7 +437,7 @@ public class LocationState {
         }
 
         if (source == GPS_ON && context != null) {
-            LocationState.mSource = GPS_ON;
+            this.source = GPS_ON;
             if (gpsConn != null) {
                 gpsConn.destroy();
                 gpsConn = null;
@@ -483,7 +476,7 @@ public class LocationState {
                 setState(context, GPS_OFF, true);
             }
         } else {
-            LocationState.mSource = GPS_OFF;
+            this.source = GPS_OFF;
             onGpsStatusChanged(GpsStatus.GPS_EVENT_STOPPED, null);
 
             if (gpsConn != null) {
@@ -493,6 +486,6 @@ public class LocationState {
         }
 
         // notify about changes
-        onLocationChanged(LocationState.location);
+        onLocationChanged(location);
     }
 }

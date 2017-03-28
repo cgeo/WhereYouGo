@@ -29,6 +29,7 @@ import android.view.Surface;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -66,7 +67,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
     long actualTime = System.currentTimeMillis();
     if (gmf == null || actualTime - lastCompute > 300000) { // once per five minutes
 
-      Location loc = LocationState.getLocation();
+      Location loc = MainApplication.getInstance().getLocationState().getLocation();
       // compute this only if needed
       gmf =
               new GeomagneticField((float) loc.getLatitude(), (float) loc.getLongitude(),
@@ -133,7 +134,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       sensorManager.unregisterListener(this);
       sensorManager = null;
       // remove location listener
-      LocationState.removeLocationChangeListener(this);
+      MainApplication.getInstance().getLocationState().removeLocationChangeListener(this);
     }
 
     // start new manager
@@ -151,7 +152,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       // get azimuth from GPS when enabled in settings or by auto-change
       if (!Preferences.SENSOR_HARDWARE_COMPASS || Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE) {
         // register location listener
-        LocationState.addLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().addLocationChangeListener(this);
         // set zero bearing, if previously was seted by sensor
         mLastAziGps = 0.0f;
       }
@@ -247,7 +248,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
   private void sendOrientation(float pitch, float roll) {
     float usedOrient;
     if (!Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE
-            || LocationState.getLocation().getSpeed() < Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE) {
+            || MainApplication.getInstance().getLocationState().getLocation().getSpeed() < Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE_VALUE) {
       if (!Preferences.SENSOR_HARDWARE_COMPASS)
         usedOrient = mLastAziGps;
       else

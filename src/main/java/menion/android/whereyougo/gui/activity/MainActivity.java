@@ -270,7 +270,7 @@ public class MainActivity extends CustomMainActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY) {
-            LocationState.setGpsOn(this);
+            MainApplication.getInstance().getLocationState().setGpsOn(this);
         }
     }
 

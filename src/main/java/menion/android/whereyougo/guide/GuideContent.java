@@ -21,6 +21,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -72,7 +73,7 @@ public class GuideContent implements ILocationEventListener {
     public void addGuidingListener(IGuideEventListener listener) {
         this.listeners.add(listener);
         // actualize data and send event to new listener
-        onLocationChanged(LocationState.getLocation());
+        onLocationChanged(MainApplication.getInstance().getLocationState().getLocation());
     }
 
     public IGuide getGuide() {
@@ -99,9 +100,9 @@ public class GuideContent implements ILocationEventListener {
         this.mGuide = guide;
 
         // set location listener
-        LocationState.addLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().addLocationChangeListener(this);
         // call one onLocationChange, to update actual values imediately
-        onLocationChanged(LocationState.getLocation());
+        onLocationChanged(MainApplication.getInstance().getLocationState().getLocation());
         // Logger.d(TAG, "X");
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -127,8 +128,8 @@ public class GuideContent implements ILocationEventListener {
     public void guideStop() {
         this.mGuide = null;
 
-        LocationState.removeLocationChangeListener(this);
-        onLocationChanged(LocationState.getLocation());
+        MainApplication.getInstance().getLocationState().removeLocationChangeListener(this);
+        onLocationChanged(MainApplication.getInstance().getLocationState().getLocation());
         for (IGuideEventListener list : listeners) {
             list.guideStop();
         }

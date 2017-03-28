@@ -119,7 +119,7 @@ public class PreferenceValues {
             if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_OFF) {
                 disable = true;
             } else if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS) {
-                if (!LocationState.isActuallyHardwareGpsOn()) {
+                if (!MainApplication.getInstance().getLocationState().isActuallyHardwareGpsOn()) {
                     disable = true;
                 }
             }
@@ -197,11 +197,11 @@ public class PreferenceValues {
     public static void setLastKnownLocation() {
         try {
             Preferences.setStringPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE,
-                    LocationState.getLocation().getLatitude());
+                    MainApplication.getInstance().getLocationState().getLocation().getLatitude());
             Preferences.setStringPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE,
-                    LocationState.getLocation().getLongitude());
+                    MainApplication.getInstance().getLocationState().getLocation().getLongitude());
             Preferences.setStringPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE,
-                    LocationState.getLocation().getAltitude());
+                    MainApplication.getInstance().getLocationState().getLocation().getAltitude());
         } catch (Exception e) {
             Logger.e(TAG, "setLastKnownLocation()", e);
         }

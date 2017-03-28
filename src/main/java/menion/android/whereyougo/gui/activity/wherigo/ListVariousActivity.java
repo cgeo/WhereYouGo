@@ -39,6 +39,7 @@ import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -99,8 +100,8 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
 
             Location location = UtilsWherigo.extractLocation(thing);
 
-            float azimuth = LocationState.getLocation().bearingTo(location);
-            float distance = LocationState.getLocation().distanceTo(location);
+            float azimuth = MainApplication.getInstance().getLocationState().getLocation().bearingTo(location);
+            float distance = MainApplication.getInstance().getLocationState().getLocation().distanceTo(location);
 
             double a;
             int radius = bitmap.getHeight() / 2;

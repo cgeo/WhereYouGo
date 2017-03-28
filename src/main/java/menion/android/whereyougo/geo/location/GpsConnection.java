@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.audio.UtilsAudio;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
@@ -114,7 +115,7 @@ public class GpsConnection {
                 UtilsGUI.showDialogInfo(PreferenceValues.getCurrentActivity(),
                         R.string.no_location_providers_available);
             }
-            LocationState.setGpsOff(context);
+            MainApplication.getInstance().getLocationState().setGpsOff(context);
             destroy();
         }
     }
@@ -160,10 +161,10 @@ public class GpsConnection {
                 disableNetwork();
                 isFixed = true;
             }
-            LocationState.onLocationChanged(location);
+            MainApplication.getInstance().getLocationState().onLocationChanged(location);
         } else {
             if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
-                LocationState.onLocationChanged(location);
+                MainApplication.getInstance().getLocationState().onLocationChanged(location);
                 setNewTimer();
             } else {
                 // do not send location
@@ -207,13 +208,13 @@ public class GpsConnection {
                     else
                         gpsStatus = locationManager.getGpsStatus(gpsStatus);
 
-                    LocationState.onGpsStatusChanged(event, gpsStatus);
+                    MainApplication.getInstance().getLocationState().onGpsStatusChanged(event, gpsStatus);
                 } else if (event == GpsStatus.GPS_EVENT_STARTED) {
                     // Logger.w(TAG, "onGpsStatusChanged(" + event + "), started");
-                    LocationState.onGpsStatusChanged(event, null);
+                    MainApplication.getInstance().getLocationState().onGpsStatusChanged(event, null);
                 } else if (event == GpsStatus.GPS_EVENT_STOPPED) {
                     // Logger.w(TAG, "onGpsStatusChanged(" + event + "), stopped");
-                    LocationState.onGpsStatusChanged(event, null);
+                    MainApplication.getInstance().getLocationState().onGpsStatusChanged(event, null);
                     // XXX this happen for unknown reason!
                 }
             } catch (Exception e) {
@@ -233,11 +234,11 @@ public class GpsConnection {
 
         public void onProviderDisabled(String provider) {
             // Logger.i(TAG, "onProviderDisabled(" + provider + ")");
-            LocationState.onProviderDisabled(provider);
+            MainApplication.getInstance().getLocationState().onProviderDisabled(provider);
             if (locationManager != null
                     && !locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                     && !locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                LocationState.setGpsOff(PreferenceValues.getCurrentActivity());
+                MainApplication.getInstance().getLocationState().setGpsOff(PreferenceValues.getCurrentActivity());
                 destroy();
             } else if (provider.equals(LocationManager.GPS_PROVIDER)) {
                 enableNetwork();
@@ -246,13 +247,13 @@ public class GpsConnection {
 
         public void onProviderEnabled(String provider) {
             // Logger.i(TAG, "onProviderEnabled(" + provider + ")");
-            LocationState.onProviderEnabled(provider);
+            MainApplication.getInstance().getLocationState().onProviderEnabled(provider);
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
             // Logger.i(TAG, "onStatusChanged(" + provider + ", status: " + status + ", geoDataExtra: " +
             // extras + ")");
-            LocationState.onStatusChanged(provider, status, extras);
+            MainApplication.getInstance().getLocationState().onStatusChanged(provider, status, extras);
         }
     }
 }

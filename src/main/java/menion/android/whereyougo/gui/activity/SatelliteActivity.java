@@ -27,6 +27,7 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
@@ -71,19 +72,19 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
 
         // and final bottom buttons
         buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
-        buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
+        buttonGps.setChecked(MainApplication.getInstance().getLocationState().isActuallyHardwareGpsOn());
         buttonGps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
-                    LocationState.setGpsOff(SatelliteActivity.this);
+                    MainApplication.getInstance().getLocationState().setGpsOff(SatelliteActivity.this);
 
                     // disable satellites on screen
                     satellites.clear();
                     satelliteView.invalidate();
                 } else {
-                    LocationState.setGpsOn(SatelliteActivity.this);
+                    MainApplication.getInstance().getLocationState().setGpsOn(SatelliteActivity.this);
                 }
 
                 onGpsStatusChanged(0, null);
@@ -171,7 +172,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
                         location.getSpeed(), false));
                 ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
                         .formatAngle(Orientation.getDeclination()));
-                long lastFix = LocationState.getLastFixTime();
+                long lastFix = MainApplication.getInstance().getLocationState().getLastFixTime();
                 if (lastFix > 0) {
                     ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
                             .formatTime(lastFix));
@@ -187,14 +188,14 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
     @Override
     protected void onResume() {
         super.onResume();
-        onLocationChanged(LocationState.getLocation());
+        onLocationChanged(MainApplication.getInstance().getLocationState().getLocation());
         onGpsStatusChanged(0, null);
     }
 
     public void onStart() {
         super.onStart();
-        LocationState.addLocationChangeListener(this);
-        if (buttonGps.isChecked() && !LocationState.isActuallyHardwareGpsOn())
+        MainApplication.getInstance().getLocationState().addLocationChangeListener(this);
+        if (buttonGps.isChecked() && !MainApplication.getInstance().getLocationState().isActuallyHardwareGpsOn())
             notifyGpsDisable();
     }
 
@@ -203,7 +204,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
 
     public void onStop() {
         super.onStop();
-        LocationState.removeLocationChangeListener(this);
+        MainApplication.getInstance().getLocationState().removeLocationChangeListener(this);
     }
 
     private Point2D.Int setSatellites(ArrayList<SatellitePosition> sats) {

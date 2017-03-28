@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -78,7 +79,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
 
         String buff = getString(R.string.distance) + ": " + "<b>" +
-                UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false) +
+                UtilsFormat.formatDistance(MainApplication.getInstance().getLocationState().getLocation().distanceTo(loc), false) +
                 "</b>" + "<br />" + getString(R.string.latitude) + ": " +
                 UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude) + "<br />" +
                 getString(R.string.longitude) + ": " +
