@@ -17,23 +17,19 @@
 
 package menion.android.whereyougo.preferences;
 
+import android.content.Context;
+
 import menion.android.whereyougo.MainApplication;
 
 public class Locale {
 
     public static String getString(int string) {
-        if (MainApplication.getContext() != null) {
-            return MainApplication.getContext().getString(string);
-        } else {
-            return "";
-        }
+        Context context = MainApplication.getInstance().getApplicationContext();
+        return context == null ? "" : context.getString(string);
     }
 
     public static String getString(int string, Object... formatArgs) {
-        if (MainApplication.getContext() != null) {
-            return MainApplication.getContext().getString(string, formatArgs);
-        } else {
-            return "";
-        }
+        Context context = MainApplication.getInstance().getApplicationContext();
+        return context == null ? "" : context.getString(string, formatArgs);
     }
 }

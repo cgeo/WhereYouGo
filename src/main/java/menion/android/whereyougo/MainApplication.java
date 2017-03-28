@@ -28,6 +28,7 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -39,9 +40,7 @@ import menion.android.whereyougo.gui.SaveGame;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.ExceptionHandler;
-import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.StringToken;
@@ -49,12 +48,14 @@ import menion.android.whereyougo.utils.Utils;
 
 public class MainApplication extends Application {
 
-    private static final String TAG = "MainApplication";
     // application name
     public static final String APP_NAME = "WhereYouGo";
+    private static final String TAG = "MainApplication";
     private static MainApplication instance;
-    private static Context applicationContext;
     private static Timer mTimer;
+    private File cartridgeDir;
+    private File filesDir;
+    private File cacheDir;
     private Locale locale = null;
     // screen ON/OFF receiver
     private ScreenReceiver mScreenReceiver;
@@ -62,9 +63,6 @@ public class MainApplication extends Application {
 
     public static MainApplication getInstance() {
         return instance;
-    }
-    public static Context getContext() {
-        return applicationContext;
     }
 
     public static void onActivityPause() {
@@ -83,160 +81,11 @@ public class MainApplication extends Application {
         }, 2000);
     }
 
-    public void destroy() {
-        try {
-            unregisterReceiver(mScreenReceiver);
-        } catch (Exception e) {
-            Logger.w(TAG, "destroy(), e:" + e);
-        }
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
-        }
-    }
-
-    public boolean setRoot(String pathCustom) {
-        String pathExternal = null;
-        try {
-            pathExternal = getExternalFilesDir(null).getAbsolutePath();
-        } catch (Exception e1) {
-        }
-        String pathInternal = null;
-        try {
-            pathInternal = getFilesDir().getAbsolutePath();
-        } catch (Exception e2) {
-        }
-        boolean set = true;
-        if (pathCustom == null || !FileSystem.setRootDirectory(pathCustom))
-            if (pathExternal == null || !FileSystem.setRootDirectory(pathExternal))
-                if (pathInternal == null || !FileSystem.setRootDirectory(pathInternal))
-                    set = false;
-
-        Preferences.GLOBAL_ROOT = FileSystem.ROOT;
-        Preferences.setStringPreference(R.string.pref_KEY_S_ROOT, Preferences.GLOBAL_ROOT);
-        if (!set) {
-            ManagerNotify.toastShortMessage(this, getString(R.string.filesystem_cannot_create_root));
-        }
-        return set;
-    }
-
-    private void initCore() {
-        // register screen on/off receiver
-        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        mScreenReceiver = new ScreenReceiver();
-        registerReceiver(mScreenReceiver, filter);
-
-        // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", getFilesDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalFilesDir(null).getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", Environment.getDataDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getDownloadCacheDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getExternalStorageDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // initialize root directory
-
-        setRoot(Preferences.GLOBAL_ROOT);
-
-        try {
-            FileSystem.CACHE = getExternalCacheDir().getAbsolutePath();
-        } catch (Exception e1) {
-            try {
-                FileSystem.CACHE = getCacheDir().getAbsolutePath();
-            } catch (Exception e2) {
-                FileSystem.CACHE = FileSystem.ROOT + "cache/";
-            }
-        }
-        if (!FileSystem.CACHE.endsWith("/"))
-            FileSystem.CACHE += "/";
-        FileSystem.CACHE_AUDIO = FileSystem.CACHE + "audio/";
-
-        // set location state
-        LocationState.init(this);
-        // initialize DPI
-        Utils.getDpPixels(this, 1.0f);
-
-        // set DeviceID for OpenWig
-        try {
-            String name = String.format("%s, app:%s", getAppName(), getAppVersion());
-            String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
-            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
-            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);
-        } catch (Exception e) {
-            // not really important
-        }
-    }
-
-    public boolean isScreenOff() {
-        return mScreenOff;
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (locale != null) {
-            newConfig.locale = locale;
-            Locale.setDefault(locale);
-            getBaseContext().getResources().updateConfiguration(newConfig,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
-    }
-
-    /* LEGACY SUPPORT - less v0.8.14
-     * Converts preference - comes from a former version (less 0.8.14)
-     * which are not stored as string into string.
-     */
-    private void legacySupport4PreferencesFloat(int prefId) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String key = getString(prefId);
-
-        try {
-            sharedPref.getString(key, "");
-        } catch (Exception e) {
-            try {
-                Log.d(TAG, "legacySupport4PreferencesFloat() - LEGACY SUPPORT: convert float to string");
-                Float value = sharedPref.getFloat(key, 0.0f);
-                sharedPref.edit().remove(key).commit();
-                sharedPref.edit().putString(key, String.valueOf(value)).commit();
-            } catch (Exception ee) {
-                Log.e(TAG, "legacySupport4PreferencesFloat() - panic remove", ee);
-                sharedPref.edit().remove(key).commit();
-            }
-        }
-    }
-
-    private void legacySupport4PreferencesInt(int prefId) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String key = getString(prefId);
-
-        try {
-            sharedPref.getString(key, "");
-        } catch (Exception e) {
-            try {
-                Log.d(TAG, "legacySupport4PreferencesInt() - LEGACY SUPPORT: convert int to string");
-                int value = sharedPref.getInt(key, 0);
-                sharedPref.edit().remove(key).commit();
-                sharedPref.edit().putString(key, String.valueOf(value)).commit();
-            } catch (Exception ee) {
-                Log.e(TAG, "legacySupportFloat2Int() - panic remove", ee);
-                sharedPref.edit().remove(key).commit();
-            }
-        }
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = this;
-        applicationContext = this.getApplicationContext();
         Log.d(TAG, "onCreate()");
+        instance = this;
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
     /* LEGACY SUPPORT - less v0.8.14
@@ -281,25 +130,13 @@ public class MainApplication extends Application {
         initCore();
     }
 
-    public void onLowMemory() {
-        super.onLowMemory();
-        Log.d(TAG, "onLowMemory()");
-    }
-  /* LEGACY SUPPORT -- END */
-
-    public void onTerminate() {
-        super.onTerminate();
-        Log.d(TAG, "onTerminate()");
-    }
-
     @Override
     public void onTrimMemory(int level) {
-        // TODO Auto-generated method stub
         super.onTrimMemory(level);
-        Logger.i(TAG, String.format("onTrimMemory(%d)", level));
+        Logger.d(TAG, String.format("onTrimMemory(%d)", level));
         try {
-            if (Preferences.GLOBAL_SAVEGAME_AUTO
-                    && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
+            if (level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
+                    && Preferences.GLOBAL_SAVEGAME_AUTO
                     && MainActivity.selectedFile != null && Engine.instance != null) {
                 final Activity activity = PreferenceValues.getCurrentActivity();
                 if (activity != null) {
@@ -319,6 +156,164 @@ public class MainApplication extends Application {
             Logger.e(TAG, String.format("onTrimMemory(%d): savegame failed", level));
         }
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (locale != null) {
+            newConfig.locale = locale;
+            Locale.setDefault(locale);
+            getBaseContext().getResources().updateConfiguration(newConfig,
+                    getBaseContext().getResources().getDisplayMetrics());
+        }
+    }
+
+    public void destroy() {
+        try {
+            unregisterReceiver(mScreenReceiver);
+        } catch (Exception e) {
+            Logger.w(TAG, "destroy(), e:" + e);
+        }
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
+
+    public boolean setCartridgeDir(File dir) {
+        cartridgeDir = filesDir = dir;
+        if (dir != null && dir.isDirectory() && dir.canWrite()) {
+            cacheDir = new File(dir.getAbsolutePath() + File.separator + "cache");
+            cacheDir.mkdir();
+        }
+
+        if (cartridgeDir == null || !cartridgeDir.canRead()) {
+            try {
+                cartridgeDir = getExternalFilesDir(null);
+            } catch (Exception e1) {
+            }
+        }
+        if (cartridgeDir == null || !cartridgeDir.canRead()) {
+            try {
+                cartridgeDir = getFilesDir();
+            } catch (Exception e1) {
+            }
+        }
+
+        if (filesDir == null || !filesDir.canWrite()) {
+            try {
+                filesDir = getExternalFilesDir(null);
+            } catch (Exception e1) {
+            }
+        }
+        if (filesDir == null || !filesDir.canWrite()) {
+            try {
+                filesDir = getFilesDir();
+            } catch (Exception e1) {
+            }
+        }
+
+        if (cacheDir == null || !cacheDir.canWrite()) {
+            try {
+                cacheDir = getExternalCacheDir();
+            } catch (Exception e1) {
+            }
+        }
+        if (cacheDir == null || !cacheDir.canWrite()) {
+            try {
+                cacheDir = getCacheDir();
+            } catch (Exception e1) {
+            }
+        }
+
+        return cartridgeDir != null && cartridgeDir.canRead()
+                && filesDir != null && filesDir.canWrite()
+                && cacheDir != null && cacheDir.canWrite();
+    }
+
+    public File getCartridgeDir() {
+        return cartridgeDir;
+    }
+
+    public File getFilesDir() {
+        return filesDir;
+    }
+
+    public File getCacheDir() {
+        return cartridgeDir;
+    }
+
+    private void initCore() {
+        // register screen on/off receiver
+        IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        mScreenReceiver = new ScreenReceiver();
+        registerReceiver(mScreenReceiver, filter);
+
+        setCartridgeDir(new File(Preferences.GLOBAL_ROOT));
+
+        // set location state
+        LocationState.init(this);
+        // initialize DPI
+        Utils.getDpPixels(this, 1.0f);
+
+        // set DeviceID for OpenWig
+        try {
+            String name = String.format("%s, app:%s", getAppName(), getAppVersion());
+            String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE);
+            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
+            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);
+        } catch (Exception e) {
+            // not really important
+        }
+    }
+
+    public boolean isScreenOff() {
+        return mScreenOff;
+    }
+
+    /* LEGACY SUPPORT - less v0.8.14
+     * Converts preference - comes from a former version (less 0.8.14)
+     * which are not stored as string into string.
+     */
+    private void legacySupport4PreferencesFloat(int prefId) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String key = getString(prefId);
+
+        try {
+            sharedPref.getString(key, "");
+        } catch (Exception e) {
+            try {
+                Log.d(TAG, "legacySupport4PreferencesFloat() - LEGACY SUPPORT: convert float to string");
+                Float value = sharedPref.getFloat(key, 0.0f);
+                sharedPref.edit().remove(key).commit();
+                sharedPref.edit().putString(key, String.valueOf(value)).commit();
+            } catch (Exception ee) {
+                Log.e(TAG, "legacySupport4PreferencesFloat() - panic remove", ee);
+                sharedPref.edit().remove(key).commit();
+            }
+        }
+    }
+
+    private void legacySupport4PreferencesInt(int prefId) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String key = getString(prefId);
+
+        try {
+            sharedPref.getString(key, "");
+        } catch (Exception e) {
+            try {
+                Log.d(TAG, "legacySupport4PreferencesInt() - LEGACY SUPPORT: convert int to string");
+                int value = sharedPref.getInt(key, 0);
+                sharedPref.edit().remove(key).commit();
+                sharedPref.edit().putString(key, String.valueOf(value)).commit();
+            } catch (Exception ee) {
+                Log.e(TAG, "legacySupportFloat2Int() - panic remove", ee);
+                sharedPref.edit().remove(key).commit();
+            }
+        }
+    }
+
 
     public String getAppName() {
         try {

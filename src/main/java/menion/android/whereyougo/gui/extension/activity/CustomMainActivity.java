@@ -59,8 +59,6 @@ public abstract class CustomMainActivity extends CustomActivity {
     public static final int CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT = 2;
     public static final int CLOSE_HIDE_APP = 3;
     private static final String TAG = "CustomMain";
-    // create directories during startup
-    private static final String[] DIRS = new String[]{FileSystem.CACHE};
     private static boolean callSecondInit;
     private static boolean callRegisterOnly;
     private int finishType = FINISH_NONE;
@@ -232,9 +230,6 @@ public abstract class CustomMainActivity extends CustomActivity {
             // Logger.w(TAG, "onCreate() - init new");
             A.registerApp((MainApplication) getApplication());
 
-            // not test some things
-            testFileSystem();
-
             // set last known location
             if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
                     && (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY)) {
@@ -378,60 +373,5 @@ public abstract class CustomMainActivity extends CustomActivity {
                 b.show();
             }
         });
-    }
-
-    protected boolean testFileSystem() {
-        if (DIRS == null || DIRS.length == 0)
-            return true;
-
-        if (FileSystem.createRoot(MainApplication.APP_NAME)) {
-            // Logger.w(TAG, "FileSystem succesfully created!");
-        } else {
-            // Logger.w(TAG, "FileSystem cannot be created!");
-            UtilsGUI.showDialogError(CustomMainActivity.this, R.string.filesystem_cannot_create_root,
-                    new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //showDialogFinish(FINISH_EXIT_FORCE);
-                        }
-                    });
-            return false;
-        }
-
-        // fileSystem created successfully
-        for (String DIR : DIRS) {
-            (new File(DIR)).mkdirs();
-        }
-        return true;
-    }
-
-    protected boolean testFreeSpace() {
-        if (DIRS == null || DIRS.length == 0)
-            return true;
-
-        // check disk space (at least 5MB)
-        long bytesFree;
-        try {
-            StatFs stat = new StatFs(FileSystem.ROOT);
-            bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
-        } catch (Exception e) {
-            return false;
-        }
-        long megFree = bytesFree / 1048576;
-        // Logger.d(TAG, "megAvailable:" + megAvail + ", free:" + megFree);
-        if (megFree > 0 && megFree < 5) {
-            UtilsGUI.showDialogError(CustomMainActivity.this,
-                    getString(R.string.not_enough_disk_space_x, FileSystem.ROOT, megFree + "MB"),
-                    new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //showDialogFinish(FINISH_EXIT_FORCE);
-                        }
-                    });
-            return false;
-        }
-        return true;
     }
 }

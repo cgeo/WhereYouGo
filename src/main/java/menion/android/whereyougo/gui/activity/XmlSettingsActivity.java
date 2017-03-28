@@ -153,15 +153,15 @@ public class XmlSettingsActivity extends PreferenceActivity
                             selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
                                 public void onFileSelected(Dialog source, File folder) {
                                     source.dismiss();
-                                    if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
+                                    if (MainApplication.getInstance().setCartridgeDir(folder)) {
                                         PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                        preferenceRoot.setValue(FileSystem.ROOT);
+                                        preferenceRoot.setValue(MainApplication.getInstance().getCartridgeDir().getAbsolutePath());
                                         MainActivity.refreshCartridges();
                                     }
                                 }
 
                                 public void onFileSelected(Dialog source, File folder, String name) {
-                                    String newFolder = folder.getAbsolutePath() + "/" + name;
+                                    String newFolder = folder.getAbsolutePath() + File.separator + name;
                                     new File(newFolder).mkdir();
                                     ((FileChooserDialog) source).loadFolder(newFolder);
                                 }
@@ -172,7 +172,7 @@ public class XmlSettingsActivity extends PreferenceActivity
                     getString(R.string.folder_default), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if (((MainApplication) A.getApp()).setRoot(null)) {
+                            if (((MainApplication) A.getApp()).setCartridgeDir(null)) {
                                 PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
                                 preferenceRoot.setValue(FileSystem.ROOT);
                                 MainActivity.refreshCartridges();

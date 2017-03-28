@@ -328,7 +328,6 @@ public class MainActivity extends CustomMainActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        testFileSystem();
         if (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY) {
             LocationState.setGpsOn(this);
         }

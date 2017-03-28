@@ -45,7 +45,6 @@ public class FileSystem {
     };
     public static String ROOT = null;
     public static String CACHE = "cache/";
-    public static String CACHE_AUDIO = CACHE + "audio/";
 
     public static boolean createRoot(String appDirName) {
         if (ROOT != null && new File(ROOT).exists())
