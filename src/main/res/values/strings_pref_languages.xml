@@ -12,6 +12,8 @@
     <!--  Names -->
     <string name="pref_language_ar_name" translatable="false">العربية</string>
     <!--  Arabic -->
+    <string name="pref_language_ca_name" translatable="false">Català</string>
+    <!-- Catalan -->
     <string name="pref_language_cs_name" translatable="false">Čeština</string>
     <!-- Czech -->
     <string name="pref_language_da_name" translatable="false">Dansk</string>
@@ -40,6 +42,8 @@
     <!-- Japanese -->
     <string name="pref_language_ko_name" translatable="false">한국어</string>
     <!-- Korean -->
+    <string name="pref_language_nb_name" translatable="false">Norsk bokmål</string>
+    <!-- Norwegian -->
     <string name="pref_language_nl_name" translatable="false">Nederlands</string>
     <!-- Dutch -->
     <string name="pref_language_pl_name" translatable="false">Polski</string>
@@ -56,6 +60,8 @@
     <!--  Shortcuts -->
     <string name="pref_language_ar_shortcut" translatable="false">ar</string>
     <!--  Arabic -->
+    <string name="pref_language_ca_shortcut" translatable="false">ca</string>
+    <!-- Catalan -->
     <string name="pref_language_cs_shortcut" translatable="false">cs</string>
     <!-- Czech -->
     <string name="pref_language_da_shortcut" translatable="false">da</string>
@@ -84,6 +90,8 @@
     <!-- Japanese -->
     <string name="pref_language_ko_shortcut" translatable="false">ko</string>
     <!-- Korean -->
+    <string name="pref_language_nb_shortcut" translatable="false">nb</string>
+    <!-- Norwegian -->
     <string name="pref_language_nl_shortcut" translatable="false">nl</string>
     <!-- Dutch -->
     <string name="pref_language_pl_shortcut" translatable="false">pl</string>

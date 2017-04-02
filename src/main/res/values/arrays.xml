@@ -105,6 +105,7 @@
         <item>@string/pref_language_default</item>
         <!-- should be changed to pref_language_name_default -->
         <item>@string/pref_language_ar_name</item>
+        <item>@string/pref_language_ca_name</item>
         <item>@string/pref_language_cs_name</item>
         <item>@string/pref_language_da_name</item>
         <item>@string/pref_language_de_name</item>
@@ -117,6 +118,7 @@
         <item>@string/pref_language_it_name</item>
         <item>@string/pref_language_ja_name</item>
         <item>@string/pref_language_ko_name</item>
+        <item>@string/pref_language_nb_name</item>
         <item>@string/pref_language_nl_name</item>
         <item>@string/pref_language_pl_name</item>
         <item>@string/pref_language_pt_name</item>
@@ -128,6 +130,7 @@
     <string-array name="pref_language_entry_values">
         <item>@string/pref_language_default_value</item>
         <item>@string/pref_language_ar_shortcut</item>
+        <item>@string/pref_language_ca_shortcut</item>
         <item>@string/pref_language_cs_shortcut</item>
         <item>@string/pref_language_da_shortcut</item>
         <item>@string/pref_language_de_shortcut</item>
@@ -140,6 +143,7 @@
         <item>@string/pref_language_it_shortcut</item>
         <item>@string/pref_language_ja_shortcut</item>
         <item>@string/pref_language_ko_shortcut</item>
+        <item>@string/pref_language_nb_shortcut</item>
         <item>@string/pref_language_nl_shortcut</item>
         <item>@string/pref_language_pl_shortcut</item>
         <item>@string/pref_language_pt_shortcut</item>
