@@ -22,8 +22,8 @@ android {
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
-        versionCode 43
-        versionName "0.9.2"
+        versionCode 44
+        versionName "0.9.3"
         minSdkVersion 15
         targetSdkVersion 23
     }
@@ -51,7 +51,7 @@ dependencies {
     compile 'com.github.biylda:openwig:a44aa6f'
     compile 'com.github.jfmdev:aFileDialog:v1.0.6'
     compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
-    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'

@@ -33,6 +33,17 @@ export ANDROID_HOME=/path/to/android-sdk
 ```
 ## What's new
 <h4>
+	<a name="#0.9.3"></a>
+	0.9.3 (2. 4. 2017)
+	<a href="#0.9.3" class="section_anchor"></a>
+</h4>
+<p>
+  <ul>
+        <li>Added support for animated GIF and MP4.</li>
+        <li>Added Norwegian, Catalan languages</li>
+  </ul>
+</p>
+<h4>
 	<a name="#0.9.2"></a>
 	0.9.2 (22. 3. 2017)
 	<a href="#0.9.2" class="section_anchor"></a>
