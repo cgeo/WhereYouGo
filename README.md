@@ -17,7 +17,12 @@ Uses the following projects:
 * [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
 * [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
 
-	
+### Contact
+* https://groups.google.com/forum/#!forum/whereyougo
+* whereyougo{at}googlegroups.com
+* biylda{at}gmail.com
+
+
 ## Development
 ### Prerequisites
 * [Android SDK](https://developer.android.com/sdk/index.html)
@@ -31,6 +36,49 @@ cd whereyougo
 export ANDROID_HOME=/path/to/android-sdk
 ./gradlew build
 ```
+
+## Translation
+### New language
+1. Get files with English text
+	* `src/main/res/values/strings.xml`
+	* `src/main/res/values/strings_pref.xml`
+2. Find the language code for your language
+	* Go to http://stackoverflow.com/a/30028371
+	* Look up the `{code}` for your language
+		* e.g. for Czech it's `cs_CZ` or just simple `cs`
+3. Create a new folder `values_{code}`
+	* e.g. for Czech it's`values_cs`
+4. Copy the files
+	* `values/strings.xml` -> `values_{code}/strings.xml`
+	* `values/strings_pref.xml` -> `values_{code}/strings_pref.xml`
+5. Translate
+	* `values_{code}/strings.xml`
+	* `values_{code}/strings_pref.xml`
+6. If you are familiar with GIT, create a new merge request. Or send the folder `values_{code}` to contact mail.
+	* State the original name of the language
+		* e.g. for Czech it's `Čeština`
+	* State under which name or nickname would you like to be credited in the app
+### Existing language
+1. Get files with English text
+	* `src/main/res/values/strings.xml`
+	* `src/main/res/values/strings_pref.xml`
+2. Find the language code for your language
+	* Go to http://stackoverflow.com/a/30028371
+	* Look up the `{code}` for your language
+		* e.g. for Czech it's `cs_CZ` or just simple `cs`
+3. Get files with text in your language
+	* `src/main/res/values_{code}/strings.xml`
+	* `src/main/res/values_{code}/strings_pref.xml`
+4. Compare the files (rows are sorted alphabetically)
+	* `values/strings.xml`
+	* `values_{code}/strings.xml`
+5. If there are any missing rows, copy them from `values/strings.xml` to `values_{code}/strings.xml`
+6. Translate
+	* `values_{code}/strings.xml`
+	* `values_{code}/strings_pref.xml`
+7. If you are familiar with GIT, create a new merge request. Or send the folder `values_{code}` to contact mail.
+	* State under which name or nickname would you like to be credited in the app
+
 ## What's new
 <h4>
 	<a name="#0.9.3"></a>
@@ -41,6 +89,7 @@ export ANDROID_HOME=/path/to/android-sdk
   <ul>
         <li>Added support for animated GIF and MP4.</li>
         <li>Added Norwegian, Catalan languages</li>
+        <li>Improved German language</li>
   </ul>
 </p>
 <h4>

@@ -2,17 +2,20 @@
 <resources>
     <string name="about_application">Infos über die Anwendung</string>
     <string name="accuracy">Genauigkeit</string>
+    <string name="actions_more">Aktionen (%1$d)</string>
     <string name="altitude">Meereshöhe</string>
     <string name="answer">Antwort</string>
     <string name="author">Autor</string>
     <string name="azimuth">Azimut</string>
     <string name="cancel">Abbrechen</string>
+    <string name="cancelled">abgebrochen</string>
     <string name="choose_cartridge">Cartridge auswählen</string>
     <string name="close">Schließen</string>
     <string name="coauthor">Weiterentwicklung</string>
     <string name="compass">Kompass</string>
     <string name="declination">Deklination</string>
     <string name="delete_cartridge">Cartridge löschen?</string>
+    <string name="delete_save_game">Gespeichertes Spiel löschen?</string>
     <string name="disable_location">Lokalisierung deaktivieren</string>
     <string name="distance">Entfernung</string>
     <string name="do_you_really_want_to_delete_selected_items">Willst du die ausgewählten Elemente wirklich löschen?</string>
@@ -31,6 +34,8 @@
     <string name="feet">Fuß</string>
     <string name="filesystem_cannot_create_root">Root-Verzeichnis kann nicht erstellt werden, wahrscheinlich fehlt die SD-Karte.\n\nBitte eine SD-Karte einsetzen und erneut versuchen!</string>
     <string name="finished">Fertig</string>
+    <string name="folder_default">Automatisch</string>
+    <string name="folder_select">Wählen…</string>
     <string name="gps">Standort</string>
     <string name="gps_and_location">GPS und Standort</string>
     <string name="gps_disabled">Standort deaktiviert</string>
@@ -41,10 +46,13 @@
     <string name="gps_on">Standort</string>
     <string name="info">Information</string>
     <string name="invalid_cartridge">Ungültige Cartridge\n\n %s</string>
+    <string name="invalid_url">Ungültiger Verweis</string>
     <string name="invalid_value">Ungültiger Wert</string>
     <string name="inventory">Inventar</string>
     <string name="latitude">Breitengrad</string>
     <string name="libraries">Bibliotheken</string>
+    <string name="load_game">Laden</string>
+    <string name="loading">Laden…</string>
     <string name="locations">Orte</string>
     <string name="longitude">Längengrad</string>
     <string name="map">Karte</string>
@@ -80,11 +88,16 @@ Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     <string name="resume_previous_cartridge">Willst du den alten Spielstand laden?\n\n(Falls du Nein wählst, wird der alte Spielstand gelöscht.)</string>
     <string name="roll">Neigung</string>
     <string name="satellites">Satelliten</string>
+    <string name="save_file_backup">Back-up</string>
+    <string name="save_file_main">Haupt</string>
+    <string name="save_file_new">Neues Spiel</string>
     <string name="save_game">Speichern</string>
     <string name="save_game_auto">Das Spiel wurde automatisch gespeichert.</string>
     <string name="save_game_before_exit">Willst du das Spiel speichern?</string>
     <string name="save_game_ok">Das Spiel wurde gespeichert.</string>
+    <string name="save_game_slot">Steckplatz</string>
     <string name="save_game_slots">Speichern…</string>
+    <string name="saving">Speichern…</string>
     <string name="scanQR">QR scannen</string>
     <string name="settings">Einstellungen</string>
     <string name="speed">Geschwindigkeit</string>
@@ -102,4 +115,10 @@ Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     <string name="you_have_to_restart_app_force">Anwendung neu starten!</string>
     <string name="you_have_to_restart_app_recommended">Es wird empfohlen, die Anwendung neu zu starten!</string>
     <string name="you_see">Du siehst</string>
+    <string name="zone_distance">Entfernung: %1$s</string>
+    <string name="zone_state">Zustand: %1$s</string>
+    <string name="zone_state_distant">weit</string>
+    <string name="zone_state_inside">innen</string>
+    <string name="zone_state_near">nahe</string>
+    <string name="zone_state_unknown">unbekannt</string>
 </resources>
