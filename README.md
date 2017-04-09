@@ -78,6 +78,14 @@ export ANDROID_HOME=/path/to/android-sdk
 	* `values_{code}/strings_pref.xml`
 7. If you are familiar with GIT, create a new merge request. Or send the folder `values_{code}` to contact mail.
 	* State under which name or nickname would you like to be credited in the app
+### Notifications
+If you'd like to be notified about changes in English text, so that you could translate them into your language, you can use a service for change detection, e.g.
+* https://www.followthatpage.com/
+* https://www.changedetection.com/
+
+and register the following files for change detection:
+* https://github.com/biylda/WhereYouGo/blob/master/src/main/res/values/strings.xml
+* https://github.com/biylda/WhereYouGo/blob/master/src/main/res/values/strings_pref.xml
 
 ## What's new
 <h4>
