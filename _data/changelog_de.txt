@@ -1,7 +1,7 @@
-Request location and write permissions on start of the application. This should fix some problems with write access.
-Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.
-Save button now displays options menu to pick a slot.
-When clicking on a point on map, it displays a dialog with selectable text. This allows coordinate copying.
-Added missing Slovak strings.
-Logging all errors to file "error.log".
+Standort- und Schreib-Berechtigung werden beim Starten der App abgefragt. Dies sollte einige Probleme mit Schreibzugriff beheben.
+Bessere Benachrichtigung, wenn keine Cartridges verfügbar sind. Das sollte Spielern ein wenig helfen, die Probleme mit Android SD-Kartenberechtigungen haben.
+Speicher-Schaltfläche zeigt nun ein Optionsmenü für den Speicherplatz.
+Beim Klick auf einen Punkt der Karte wird ein Dialog mit auswählbarem Text angezeigt. Dies erlaubt das Kopieren von Koordinaten.
+Fehlende slovakische Übersetzung hinzugefügt.
+Speichere alle Fehler in die Datei "error.log".
 Bugfixes

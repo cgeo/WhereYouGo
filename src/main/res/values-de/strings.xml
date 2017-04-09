@@ -59,18 +59,18 @@
     <string name="no_target">Kein Ziel!</string>
     <string name="no_wherigo_cartridge_available">
 Kein Wherigo-Cartridge (*.gwc) gefunden.
-Laden oder kopieren Sie es ins Verzeichnis \"%1$s\".
-Sie können auch ein anderes Verzeichnis durch "Einstellungen - Allgemein - Wherigo Verzeichnis" einstellen.
-Make sure you granted the application permission to write to external storage and you have write permission in selected directory.
-Some newer devices don\'t allow writing to SD card.
-If you\'re not sure, set \"Wherigo folder\" automatically.
+Lade oder kopiere es ins Verzeichnis \"%1$s\".
+Du kannst auch ein anderes Verzeichnis durch "Einstellungen - Allgemein - Wherigo Verzeichnis" einstellen.
+Stelle sicher, dass du der Anwendung die Berechtigung gegeben hast auf den externen Speicher zu schreiben und du Schreibberechtigung im gewählten Verzeichnis hast.
+Einige neuere Geräte erlauben kein Schreiben auf die SD-Karte.        
+Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     </string>
     <string name="not_enough_disk_space_x">Nicht genügend freier Speicherplatz auf der SD-Karte!\n(%1$s, Frei:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">In Arbeit</string>
     <string name="pitch">Neigung</string>
     <string name="point">Punkt</string>
-    <string name="press_color_to_apply">Wählen Sie eine Farbe</string>
+    <string name="press_color_to_apply">Wähle eine Farbe</string>
     <string name="problem_with_internet_connection">Problem mit der Internetverbindung!</string>
     <string name="provider">Standortdienst</string>
     <string name="provider_gps">GPS</string>
