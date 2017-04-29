@@ -52,9 +52,13 @@ public class ListTasksActivity extends ListVariousActivity {
 
     protected Bitmap getStuffIcon(Object what) {
         Bitmap bmp = super.getStuffIcon(what);
-        if (bmp != Images.IMAGE_EMPTY_B)
+        if (bmp == Images.IMAGE_EMPTY_B)
+            bmp = stateIcons[Task.PENDING];
+        if (((Task) what).state() == Task.PENDING)
             return bmp;
-        return stateIcons[((Task) what).state()];
+        // draw state bitmap over task bitmap
+        Bitmap stateBitmap = stateIcons[((Task) what).state()];
+        return Images.overlayBitmapToCenter(bmp, stateBitmap);
     }
 
     @Override

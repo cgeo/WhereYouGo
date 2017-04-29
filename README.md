@@ -98,6 +98,7 @@ and register the following files for change detection:
         <li>Added Norwegian, Catalan languages</li>
         <li>Improved German language</li>
         <li>Clickable URLs in descriptions</li>
+        <li>Task state icons fixed</li>
   </ul>
 </p>
 <h4>

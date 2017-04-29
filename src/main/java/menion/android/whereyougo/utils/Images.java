@@ -19,6 +19,7 @@ package menion.android.whereyougo.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -115,5 +116,22 @@ public class Images {
             return bmp;
 
         return Bitmap.createScaledBitmap(bmp, newWidth, newHeight, true);
+    }
+
+    public static Bitmap overlayBitmapToCenter(Bitmap bitmap1, Bitmap bitmap2) {
+        int bitmapWidth = Math.max(bitmap1.getWidth(), bitmap2.getWidth());
+        int bitmapHeight = Math.max(bitmap1.getHeight(), bitmap2.getHeight());
+
+        float margin1Left = (bitmapWidth - bitmap1.getWidth()) * 0.5f;
+        float margin1Top = (bitmapHeight - bitmap1.getHeight()) * 0.5f;
+
+        float margin2Left = (bitmapWidth - bitmap2.getWidth()) * 0.5f;
+        float margin2Top = (bitmapHeight - bitmap2.getHeight()) * 0.5f;
+
+        Bitmap overlayBitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, bitmap1.getConfig());
+        Canvas canvas = new Canvas(overlayBitmap);
+        canvas.drawBitmap(bitmap1, margin1Left, margin1Top, null);
+        canvas.drawBitmap(bitmap2, margin2Left, margin2Top, null);
+        return overlayBitmap;
     }
 }

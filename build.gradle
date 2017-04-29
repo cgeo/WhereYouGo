@@ -47,12 +47,13 @@ android {
 }
 
 dependencies {
+    fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:25.3.1'
     compile 'com.asamm:locus-api-android:0.2.7'
-    compile 'com.github.biylda:openwig:a44aa6f'
+    compile 'com.github.biylda:openwig:dd2ff73'
     compile 'com.github.jfmdev:aFileDialog:v1.0.6'
     compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
 }
