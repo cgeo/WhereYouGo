@@ -89,7 +89,7 @@ and register the following files for change detection:
 ## What's new
 <h4>
 	<a name="#0.9.3"></a>
-	0.9.3 (2. 4. 2017)
+	0.9.3 (29. 4. 2017)
 	<a href="#0.9.3" class="section_anchor"></a>
 </h4>
 <p>
@@ -97,6 +97,7 @@ and register the following files for change detection:
         <li>Added support for animated GIF and MP4.</li>
         <li>Added Norwegian, Catalan languages</li>
         <li>Improved German language</li>
+        <li>Clickable URLs in descriptions</li>
   </ul>
 </p>
 <h4>

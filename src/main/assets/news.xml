@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
-    <update name="0.9.3" id="44" time="2.4.2017">
+    <update name="0.9.3" id="44" time="29.4.2017">
         <li>Added support for animated GIF and MP4.</li>
         <li>Added Norwegian, Catalan languages</li>
+        <li>Improved German language</li>
+        <li>Clickable URLs in descriptions</li>
     </update>
     <update name="0.9.2" id="43" time="22.3.2017">
         <li>Input can now be scanned from QR code.</li>
