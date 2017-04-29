@@ -81,7 +81,6 @@ export ANDROID_HOME=/path/to/android-sdk
 ### Notifications
 If you'd like to be notified about changes in English text, so that you could translate them into your language, you can use a service for change detection, e.g.
 * https://www.followthatpage.com/
-* https://www.changedetection.com/
 
 and register the following files for change detection:
 * https://github.com/biylda/WhereYouGo/blob/master/src/main/res/values/strings.xml
