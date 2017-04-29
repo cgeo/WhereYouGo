@@ -50,7 +50,7 @@ dependencies {
     fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.asamm:locus-api-android:0.2.7'
-    compile 'com.github.biylda:openwig:dd2ff73'
+    compile 'com.github.biylda:openwig:3a1e405'
     compile 'com.github.jfmdev:aFileDialog:v1.0.6'
     compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
