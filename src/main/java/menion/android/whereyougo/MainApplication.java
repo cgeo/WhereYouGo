@@ -317,22 +317,26 @@ public class MainApplication extends Application {
         // TODO Auto-generated method stub
         super.onTrimMemory(level);
         Logger.i(TAG, String.format("onTrimMemory(%d)", level));
-        if (Preferences.GLOBAL_SAVEGAME_AUTO
-                && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
-                && MainActivity.selectedFile != null && Engine.instance != null) {
-            final Activity activity = PreferenceValues.getCurrentActivity();
-            if (activity != null) {
-                if (MainActivity.wui != null) {
-                    MainActivity.wui.setOnSavingFinished(new Runnable() {
-                        @Override
-                        public void run() {
-                            ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
-                            MainActivity.wui.setOnSavingFinished(null);
-                        }
-                    });
+        try {
+            if (Preferences.GLOBAL_SAVEGAME_AUTO
+                    && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
+                    && MainActivity.selectedFile != null && Engine.instance != null) {
+                final Activity activity = PreferenceValues.getCurrentActivity();
+                if (activity != null) {
+                    if (MainActivity.wui != null) {
+                        MainActivity.wui.setOnSavingFinished(new Runnable() {
+                            @Override
+                            public void run() {
+                                ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
+                                MainActivity.wui.setOnSavingFinished(null);
+                            }
+                        });
+                    }
+                    new SaveGame(activity).execute();
                 }
-                new SaveGame(activity).execute();
             }
+        } catch (Exception e) {
+            Logger.e(TAG, String.format("onTrimMemory(%d): savegame failed", level));
         }
     }
 
