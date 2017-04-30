@@ -112,7 +112,7 @@
 
     <PreferenceScreen
         android:icon="@drawable/ic_action_accounts"
-        android:key=""
+        android:key="@string/pref_KEY_X_LOGIN_PREFERENCES"
         android:persistent="false"
         android:title="@string/pref_login">
 

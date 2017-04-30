@@ -98,7 +98,9 @@ and register the following files for change detection:
         <li>Added Norwegian, Catalan languages</li>
         <li>Improved German language</li>
         <li>Clickable URLs in descriptions</li>
-        <li>Task state icons fixed</li>
+        <li>Task state fixed, icons improved</li>
+        <li>Fixed occasional crashing when using timer or when the app is closing</li>
+        <li>Improved error messages when downloading a cartridge</li>
   </ul>
 </p>
 <h4>

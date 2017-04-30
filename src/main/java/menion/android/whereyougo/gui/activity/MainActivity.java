@@ -263,8 +263,7 @@ public class MainActivity extends CustomMainActivity {
                         clickStart();
                         break;
                     case R.id.button_gps:
-                        Intent intent02 = new Intent(MainActivity.this, SatelliteActivity.class);
-                        startActivity(intent02);
+                        MainActivity.this.startActivity(new Intent(MainActivity.this, SatelliteActivity.class));
                         break;
                     case R.id.button_settings:
                         MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));

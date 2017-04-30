@@ -46,6 +46,7 @@ public class DownloadCartridgeTask extends
     private final String username;
     private final String password;
     private OkHttpClient httpClient;
+    private String errorMessage;
 
     public DownloadCartridgeTask(Context context, String username, String password) {
         super();
@@ -70,9 +71,10 @@ public class DownloadCartridgeTask extends
                     .build();
         } catch (KeyManagementException | NoSuchAlgorithmException e) {
             Logger.e(TAG, "init()", e);
+            errorMessage = e.getMessage();
         }
         if (httpClient == null)
-            publishProgress(new Progress(Task.INIT, State.FAIL));
+            publishProgress(new Progress(Task.INIT, State.FAIL, errorMessage));
         return httpClient != null;
     }
 
@@ -101,7 +103,7 @@ public class DownloadCartridgeTask extends
             publishProgress(new Progress(Task.LOGIN, State.SUCCESS));
             return true;
         } else {
-            publishProgress(new Progress(Task.LOGIN, State.FAIL));
+            publishProgress(new Progress(Task.LOGIN, State.FAIL, errorMessage));
             return false;
         }
     }
@@ -124,7 +126,7 @@ public class DownloadCartridgeTask extends
             if (download(cguid[i])) {
                 publishProgress(new Progress(Task.DOWNLOAD, i, cguid.length));
             } else {
-                publishProgress(new Progress(Task.DOWNLOAD, State.FAIL));
+                publishProgress(new Progress(Task.DOWNLOAD, State.FAIL, errorMessage));
                 return false;
             }
         }
@@ -179,6 +181,7 @@ public class DownloadCartridgeTask extends
             }
         } catch (IOException e) {
             Logger.e(TAG, "download(" + filename + ")", e);
+            errorMessage = e.getMessage();
         } finally {
             Utils.closeStream(bis);
             Utils.closeStream(bos);
@@ -195,7 +198,7 @@ public class DownloadCartridgeTask extends
         if (response != null)
             publishProgress(new Progress(task, State.SUCCESS));
         else
-            publishProgress(new Progress(task, State.FAIL));
+            publishProgress(new Progress(task, State.FAIL, errorMessage));
         return response;
     }
 
@@ -206,10 +209,11 @@ public class DownloadCartridgeTask extends
         try {
             response = httpClient.newCall(request).execute();
             if (!response.isSuccessful()) {
-                throw new IOException("Request " + request + " failed: " + response);
+                throw new IOException("Request " + request.toString() + " failed: " + response);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Logger.e(TAG, "handleRequest(" + request.toString() + ")", e);
+            errorMessage = e.getMessage();
             return null;
         }
         return response;
@@ -228,10 +232,17 @@ public class DownloadCartridgeTask extends
         final State state;
         long total;
         long completed;
+        String message;
 
         public Progress(Task task, State state) {
             this.task = task;
             this.state = state;
+        }
+
+        public Progress(Task task, State state, String message) {
+            this.task = task;
+            this.state = state;
+            this.message = message;
         }
 
         public Progress(Task task, long completed, long total) {
@@ -247,6 +258,10 @@ public class DownloadCartridgeTask extends
 
         public State getState() {
             return state;
+        }
+
+        public String getMessage() {
+            return message;
         }
 
         public long getTotal() {

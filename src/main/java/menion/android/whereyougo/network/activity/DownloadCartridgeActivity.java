@@ -35,6 +35,7 @@ import java.io.File;
 
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
@@ -186,59 +187,44 @@ public class DownloadCartridgeActivity extends CustomActivity {
         protected void onProgressUpdate(Progress... values) {
             super.onProgressUpdate(values);
             Progress progress = values[0];
+            String suffix = "";
+            if (progress.getState() == State.SUCCESS) {
+                suffix = String.format(": %s", getString(R.string.ok));
+            } else if (progress.getState() == State.FAIL) {
+                if (progress.getMessage() == null){
+                    suffix = String.format(": %s", getString(R.string.error));
+                } else {
+                    suffix = String.format(": %s(%s)", getString(R.string.error), progress.getMessage());
+                }
+            }
             switch (progress.getTask()) {
                 case INIT:
                 case PING:
                     progressDialog.setIndeterminate(true);
-                    if (progress.getState() == State.WORKING) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect)));
-                    } else if (progress.getState() == State.SUCCESS) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect) + ": " + getString(R.string.ok)));
-                    } else if (progress.getState() == State.FAIL) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect) + ": " + getString(R.string.error)));
-                    }
+                    progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_connect) + suffix));
                     break;
                 case LOGIN:
                     progressDialog.setIndeterminate(true);
-                    if (progress.getState() == State.WORKING) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login)));
-                    } else if (progress.getState() == State.SUCCESS) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login) + ": " + getString(R.string.ok)));
-                    } else if (progress.getState() == State.FAIL) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login) + ": " + getString(R.string.error)));
+                    progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login) + suffix));
+                    if (progress.getState() == State.FAIL) {
+                        Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
+                        loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
+                        startActivity(loginPreferenceIntent);
                     }
                     break;
                 case LOGOUT:
                     progressDialog.setIndeterminate(true);
-                    if (progress.getState() == State.WORKING) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout)));
-                    } else if (progress.getState() == State.SUCCESS) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout) + ": " + getString(R.string.ok)));
-                    } else if (progress.getState() == State.FAIL) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout) + ": " + getString(R.string.error)));
-                    }
+                    progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_logout) + suffix));
                     break;
                 case DOWNLOAD:
                     progressDialog.setIndeterminate(true);
-                    if (progress.getState() == State.WORKING) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)));
-                    } else if (progress.getState() == State.SUCCESS) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + ": " + getString(R.string.ok)));
-                    } else if (progress.getState() == State.FAIL) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + ": " + getString(R.string.error)));
-                    }
+                    progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + suffix));
                     break;
                 case DOWNLOAD_SINGLE:
                     progressDialog.setIndeterminate(false);
                     progressDialog.setMax((int) progress.getTotal());
                     progressDialog.setProgress((int) progress.getCompleted());
-                    if (progress.getState() == State.WORKING) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download)));
-                    } else if (progress.getState() == State.SUCCESS) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + ": " + getString(R.string.ok)));
-                    } else if (progress.getState() == State.FAIL) {
-                        progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + ": " + getString(R.string.error)));
-                    }
+                    progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_download) + suffix));
                     break;
             }
         }

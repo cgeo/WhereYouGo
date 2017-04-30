@@ -25,6 +25,7 @@
 <resources>
     <string name="pref_KEY_X_ABOUT" translatable="false">KEY_X_ABOUT</string>
     <string name="pref_KEY_X_HIDDEN_PREFERENCES" translatable="false">KEY_X_HIDDEN_PREFERENCES</string>
+    <string name="pref_KEY_X_LOGIN_PREFERENCES" translatable="false">KEY_X_LOGIN_PREFERENCES</string>
     <string name="pref_KEY_S_APPLICATION_VERSION_LAST" translatable="false">KEY_S_APPLICATION_VERSION_LAST</string>
     <string name="pref_KEY_S_ROOT" translatable="false">KEY_S_ROOT</string>
     <string name="pref_KEY_S_MAP_PROVIDER" translatable="false">KEY_S_MAP_PROVIDER</string>

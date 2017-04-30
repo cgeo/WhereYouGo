@@ -5,7 +5,9 @@
         <li>Added Norwegian, Catalan languages</li>
         <li>Improved German language</li>
         <li>Clickable URLs in descriptions</li>
-        <li>Task state icons fixed</li>
+        <li>Task state fixed, icons improved</li>
+        <li>Fixed occasional crashing when using timer or when the app is closing</li>
+        <li>Improved error messages when downloading a cartridge</li>
     </update>
     <update name="0.9.2" id="43" time="22.3.2017">
         <li>Input can now be scanned from QR code.</li>

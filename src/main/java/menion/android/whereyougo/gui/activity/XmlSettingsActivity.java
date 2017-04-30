@@ -105,7 +105,19 @@ public class XmlSettingsActivity extends PreferenceActivity
             }
         }
 
-
+        if (getIntent() != null && getIntent().hasExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES))) {
+            Preference preferenceLogin = findPreference(R.string.pref_KEY_X_LOGIN_PREFERENCES);
+            if (preferenceLogin != null) {
+                PreferenceScreen screen = getPreferenceScreen();
+                for (int i = 0; i < screen.getPreferenceCount(); ++i) {
+                    if (screen.getPreference(i) == preferenceLogin) {
+                        getIntent().putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), false);
+                        screen.onItemClick(null, null, i, 0);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     @Override
