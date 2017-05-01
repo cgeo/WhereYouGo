@@ -49,7 +49,6 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
-import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.dialog.ChooseCartridgeDialog;
 import menion.android.whereyougo.gui.dialog.ChooseSavegameDialog;
@@ -222,7 +221,7 @@ public class MainActivity extends CustomMainActivity {
         ChooseCartridgeDialog dialog = ChooseCartridgeDialog.newInstance(cartridgeFiles, new ChooseCartridgeDialog.ChooseCartridgeDialogCallback() {
             @Override
             public void onChooseCartridge(CartridgeFile selectedCartridge) {
-                MainActivity.selectedFile = selectedCartridge.filename;
+                openCartridge(selectedCartridge);
             }
         });
         getSupportFragmentManager()

@@ -58,16 +58,13 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         try {
             // sort cartridges
             final Location actLoc = MainApplication.getInstance().getLocationState().getLocation();
-            final Location loc1 = new Location(TAG);
-            final Location loc2 = new Location(TAG);
+
             Collections.sort(cartridgeFiles, new Comparator<CartridgeFile>() {
 
                 @Override
                 public int compare(CartridgeFile object1, CartridgeFile object2) {
-                    loc1.setLatitude(object1.latitude);
-                    loc1.setLongitude(object1.longitude);
-                    loc2.setLatitude(object2.latitude);
-                    loc2.setLongitude(object2.longitude);
+                    Location loc1 = new Location(null, object1.latitude, object1.longitude);
+                    Location loc2 = new Location(null, object2.latitude, object2.longitude);
                     return (int) (actLoc.distanceTo(loc1) - actLoc.distanceTo(loc2));
                 }
             });
