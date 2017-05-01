@@ -14,8 +14,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
 
     <supports-screens
         android:anyDensity="true"
@@ -37,15 +37,12 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data
                     android:host="wherigo.com"
                     android:pathPrefix="/cartridge/download.aspx"
@@ -83,7 +80,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
@@ -91,9 +87,12 @@
             android:name="menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"
             android:launchMode="singleTask"
             android:theme="@style/Mapsforge" />
-        <activity android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
-        <activity android:name="menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker" />
-        <activity android:name="ar.com.daidalos.afiledialog.FileChooserActivity" />
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences" />
+        <activity
+            android:name="menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker" />
+        <activity
+            android:name="ar.com.daidalos.afiledialog.FileChooserActivity" />
         <activity
             android:name="menion.android.whereyougo.maps.mapsforge.InfoView"
             android:theme="@android:style/Theme.NoTitleBar" />
@@ -137,24 +136,19 @@
         <activity
             android:name="menion.android.whereyougo.gui.activity.SatelliteActivity"
             android:screenOrientation="portrait" />
-
-        <activity
-            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <service android:name="menion.android.whereyougo.audio.AudioPlayService" />
-
-        <!-- <activity android:name="com.paypal.android.MEP.PayPalActivity"></activity> -->
         <activity
             android:name="menion.android.whereyougo.gui.activity.XmlSettingsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSettings" />
-
+        <activity
+            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+
+        <service android:name="menion.android.whereyougo.audio.AudioPlayService" />
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
-Request location and write permissions on start of the application. This should fix some problems with write access.
-Added better message when no cartridges are available. This should help players a bit with Android SD-card permissions problematics.
-Save button now displays options menu to pick a slot.
-When clicking on a point on map, it displays a dialog with selectable text. This allows coordinate copying.
-Added missing Slovak strings.
-Logging all errors to file "error.log".
-Bugfixes
+Added support for animated GIF and MP4.
+Translations: Norwegian, Catalan, German, French.
+Clickable URLs in text.
+Task state fixed, icons improved.
+Fixed occasional crashing when using timer or when the app is closing.
+Improved error messages when downloading a cartridge.
+Input can now be scanned from QR code.
+Map can be centered to target.
+Fixed issue with selecting map file on Android 7.

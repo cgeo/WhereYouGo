@@ -18,6 +18,7 @@ Funktionen:
 - Vektor-Karten zeigen auch bewegliche Objekte an (Locus nicht)
 - Kompass
 - Übersetzt in viele Sprachen (Einige Teile können überhaupt nicht oder falsch übersetzt sein, falls du mit besserer Übersetzung beitragen willst, kontaktiere mich per e-mail :)
+- QR
 
 Über das Projekt:
 Der Kern der Applikation basiert auf OpenWIG, sie benutzt die Mapsforge-Bibliothek um Offline-Vektorkarten anzuzeigen. Alternativ lässt sich auch Locus benutzen.

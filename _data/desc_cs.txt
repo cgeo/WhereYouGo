@@ -18,6 +18,7 @@ Funkce:
 - Vektorové mapy zobrazují i pohyblivé objekty (Locus ne)
 - Kompas
 - Přeloženo do mnoha jazyků (některé části mohou být nepřeložené nebo obsahovat chyby, pokud byste chtěli přispět lepším překladem, kontaktujte mne přes e-mail :)
+- QR čtečka
 
 O projektu:
 Jádro programu je založené na OpenWIG, na zobrazení mapy používá knihovnu MapsForge, alternativně lze použít Locus.

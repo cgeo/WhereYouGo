@@ -1,7 +1,9 @@
-Při startu aplikace požádá o udělení práv na polohu a zápis. To by mělo vyřešit některé problémy se čtením cartridgí na novějších Androidech.
-Vhodnější zpráva pokud nejsou nalezeny žádné cartridge. Informuje o možnosti změny složky a o problematice SD karet v Androidu.
-Ukládací tlačítko nyní zobrazí nabídku se sloty.
-Po kliknutí na bod na mapě se zobrazí dialog s vybíratelným textem. To umožní kopírování souřadnic.
-Vylepšena Slovenština.
-Chyby jsou zaznamenány do souboru "error.log".
-Opravy chyb
+Přidána podpora pro GIF a MP4.
+Překlady: Norwegian, Catalan, German, French.
+Klikatelné odkazy v textu.
+Opraveny stavy úkolů, vylepšeny ikony.
+Opraveno občasné padání aplikace při používání timeru či při ukončování aplikace.
+Podrobnější chyby při stahování cartridge.
+Vstup lze skenovat z QR kódu.
+Mapy lze vycentrovat na cíl.
+Opraven problém při vybírání map na Androidu 7.

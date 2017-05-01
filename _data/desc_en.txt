@@ -18,6 +18,7 @@ Functions:
 - Vector maps display moving objects (Locus does not)
 - Compass
 - Translated into many languages (some parts may be untranslated or contain mistakes, if you'd like to contribute with a better translation, please contact me via e-mail :)
+- QR reader
 
 About:
 The core of the application is based on OpenWIG, it uses Mapsforge library to display maps, alternatively Locus can be used.
