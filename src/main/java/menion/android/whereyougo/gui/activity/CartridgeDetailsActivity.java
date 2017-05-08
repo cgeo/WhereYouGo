@@ -64,6 +64,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
             Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
             bmp = Images.resizeBitmap(bmp);
             ivImage.setImageBitmap(bmp);
+            ivImage.setVisibility(View.VISIBLE);
         } catch (Exception e) {
         }
 
