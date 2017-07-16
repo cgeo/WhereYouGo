@@ -41,6 +41,7 @@ import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
@@ -65,24 +66,8 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
     private TextView tvDistance;
     private TextView tvState;
 
-    private static Location extractLocation(EventTable et) {
-        if (et == null || !et.isLocated())
-            return null;
-
-        Location loc = new Location(TAG);
-        if (et instanceof Zone) {
-            Zone z = ((Zone) et);
-            loc.setLatitude(z.nearestPoint.latitude);
-            loc.setLongitude(z.nearestPoint.longitude);
-        } else {
-            loc.setLatitude(et.position.latitude);
-            loc.setLongitude(et.position.longitude);
-        }
-        return loc;
-    }
-
     private void enableGuideOnEventTable() {
-        Location loc = extractLocation(et);
+        Location loc = UtilsWherigo.extractLocation(et);
         if (loc != null) {
             A.getGuidingContent().guideStart(new Guide(et.name, loc));
         } else {

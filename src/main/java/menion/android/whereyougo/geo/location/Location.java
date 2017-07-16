@@ -34,4 +34,13 @@ public class Location extends locus.api.objects.extra.Location {
     public Location(String provider, double lat, double lon) {
         super(provider, lat, lon);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Location)) return false;
+        Location other = (Location) obj;
+        return getLatitude() == other.getLatitude() && getLongitude() == other.getLongitude();
+    }
 }

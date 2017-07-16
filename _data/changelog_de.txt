@@ -1,5 +1,5 @@
 Added support for animated GIF and MP4.
-Translations: Norwegian, Catalan, German, French.
+Translations: Norwegian, Catalan, German, French, Japanese.
 Clickable URLs in text.
 Task state fixed, icons improved.
 Fixed occasional crashing when using timer or when the app is closing.
@@ -7,3 +7,4 @@ Improved error messages when downloading a cartridge.
 Input can now be scanned from QR code.
 Map can be centered to target.
 Fixed issue with selecting map file on Android 7.
+Fixed issue with compass and timer

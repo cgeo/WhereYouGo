@@ -27,6 +27,7 @@ import locus.api.android.ActionTools;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
@@ -76,16 +77,7 @@ public class MapHelper {
             ActionDisplayPoints.sendPack(activity, mdp.getPoints(), ExtraAction.NONE);
             ActionDisplayTracks.sendTracks(activity, mdp.getTracks(), ExtraAction.CENTER);
             if (et != null && et.isLocated()) {
-                locus.api.objects.extra.Location loc =
-                        new locus.api.objects.extra.Location(activity.toString());
-                if (et instanceof Zone) {
-                    Zone z = ((Zone) et);
-                    loc.setLatitude(z.nearestPoint.latitude);
-                    loc.setLongitude(z.nearestPoint.longitude);
-                } else {
-                    loc.setLatitude(et.position.latitude);
-                    loc.setLongitude(et.position.longitude);
-                }
+                locus.api.objects.extra.Location loc = UtilsWherigo.extractLocation(et);
                 locus.api.objects.extra.Waypoint wpt = new locus.api.objects.extra.Waypoint(et.name, loc);
                 ActionTools.actionStartGuiding(activity, wpt);
             }

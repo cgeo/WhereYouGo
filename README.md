@@ -89,18 +89,19 @@ and register the following files for change detection:
 ## What's new
 <h4>
 	<a name="#0.9.3"></a>
-	0.9.3 (29. 4. 2017)
+	0.9.3 (14. 7. 2017)
 	<a href="#0.9.3" class="section_anchor"></a>
 </h4>
 <p>
   <ul>
         <li>Added support for animated GIF and MP4.</li>
         <li>Added Norwegian, Catalan languages</li>
-        <li>Improved German language</li>
+        <li>Improved German, Japanese languages</li>
         <li>Clickable URLs in descriptions</li>
         <li>Task state fixed, icons improved</li>
         <li>Fixed occasional crashing when using timer or when the app is closing</li>
         <li>Improved error messages when downloading a cartridge</li>
+        <li>Fixed issue with compass and timer</li>
   </ul>
 </p>
 <h4>

@@ -47,6 +47,7 @@ import menion.android.whereyougo.gui.extension.DataInfo;
 import menion.android.whereyougo.gui.extension.IconedListAdapter;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Images;
@@ -96,17 +97,10 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
             Canvas c = new Canvas(bitmap);
             c.drawColor(Color.TRANSPARENT);
 
-            Location nearest = new Location(TAG);
-            if (thing instanceof Zone) {
-                nearest.setLatitude(((Zone) thing).nearestPoint.latitude);
-                nearest.setLongitude(((Zone) thing).nearestPoint.longitude);
-            } else {
-                nearest.setLatitude(thing.position.latitude);
-                nearest.setLongitude(thing.position.longitude);
-            }
+            Location location = UtilsWherigo.extractLocation(thing);
 
-            float azimuth = LocationState.getLocation().bearingTo(nearest);
-            float distance = LocationState.getLocation().distanceTo(nearest);
+            float azimuth = LocationState.getLocation().bearingTo(location);
+            float distance = LocationState.getLocation().distanceTo(location);
 
             double a;
             int radius = bitmap.getHeight() / 2;

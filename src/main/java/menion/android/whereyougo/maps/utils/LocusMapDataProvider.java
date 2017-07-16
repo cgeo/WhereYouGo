@@ -34,6 +34,7 @@ import locus.api.objects.extra.Track;
 import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 
@@ -51,22 +52,6 @@ public class LocusMapDataProvider implements MapDataProvider {
         if (instance == null)
             instance = new LocusMapDataProvider();
         return instance;
-    }
-
-    public static Waypoint locusMapWaypoint(EventTable et) {
-        if (et == null || !et.isLocated() || !et.isVisible())
-            return null;
-
-        Location loc = new Location();
-        if (et instanceof Zone) {
-            Zone z = ((Zone) et);
-            loc.setLatitude(z.nearestPoint.latitude);
-            loc.setLongitude(z.nearestPoint.longitude);
-        } else {
-            loc.setLatitude(et.position.latitude);
-            loc.setLongitude(et.position.longitude);
-        }
-        return new Waypoint(et.name, loc);
     }
 
     public void addAll() {
@@ -105,16 +90,7 @@ public class LocusMapDataProvider implements MapDataProvider {
         if (et == null || !et.isLocated() || !et.isVisible())
             return;
 
-        Location loc = new Location("");
-        if (et instanceof Zone
-                && Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
-            Zone z = ((Zone) et);
-            loc.setLatitude(z.nearestPoint.latitude);
-            loc.setLongitude(z.nearestPoint.longitude);
-        } else {
-            loc.setLatitude(et.position.latitude);
-            loc.setLongitude(et.position.longitude);
-        }
+        Location loc = UtilsWherigo.extractLocation(et);
         pack.addWaypoint(new Waypoint(et.name, loc));
     }
 

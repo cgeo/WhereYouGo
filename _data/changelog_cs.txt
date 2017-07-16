@@ -1,5 +1,5 @@
 Přidána podpora pro GIF a MP4.
-Překlady: Norwegian, Catalan, German, French.
+Překlady: Norwegian, Catalan, German, French, Japanese.
 Klikatelné odkazy v textu.
 Opraveny stavy úkolů, vylepšeny ikony.
 Opraveno občasné padání aplikace při používání timeru či při ukončování aplikace.
@@ -7,3 +7,4 @@ Podrobnější chyby při stahování cartridge.
 Vstup lze skenovat z QR kódu.
 Mapy lze vycentrovat na cíl.
 Opraven problém při vybírání map na Androidu 7.
+Opraven problém s kompasem pokud je aktivní timer.

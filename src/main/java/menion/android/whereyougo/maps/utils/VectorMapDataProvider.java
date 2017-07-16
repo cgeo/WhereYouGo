@@ -27,8 +27,10 @@ import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.maps.container.MapPoint;
 import menion.android.whereyougo.maps.container.MapPointPack;
 import menion.android.whereyougo.preferences.PreferenceValues;
@@ -118,15 +120,9 @@ public class VectorMapDataProvider implements MapDataProvider {
         items.add(border);
 
         MapPointPack pack = new MapPointPack();
-        if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST
-                || z.position == null) {
-            pack.getPoints().add(
-                    new MapPoint(z.name, z.description, z.nearestPoint.latitude, z.nearestPoint.longitude,
-                            mark));
-        } else {
-            pack.getPoints().add(
-                    new MapPoint(z.name, z.description, z.position.latitude, z.position.longitude, mark));
-        }
+        Location location = UtilsWherigo.extractLocation(z);
+        MapPoint mapPoint = new MapPoint(z.name, z.description, location.getLatitude(), location.getLongitude(), mark);
+        pack.getPoints().add(mapPoint);
         if (mark)
             pack.setResource(R.drawable.marker_green);
         else

@@ -33,7 +33,9 @@ import menion.android.whereyougo.geo.orientation.IOrientationEventListener;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.gui.view.CompassView;
+import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.guide.IGuide;
 import menion.android.whereyougo.guide.IGuideEventListener;
 import menion.android.whereyougo.preferences.PreferenceValues;
@@ -176,26 +178,12 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
                 EventTable et = DetailsActivity.et;
                 if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
                     return;
-                Location l =
-                        A.getGuidingContent().getTargetLocation() == null ? new Location() : new Location(A
-                                .getGuidingContent().getTargetLocation());
-                if (et instanceof Zone) {
-                    Zone z = (Zone) DetailsActivity.et;
-                    if (Preferences.GUIDING_ZONE_NAVIGATION_POINT == PreferenceValues.VALUE_GUIDING_ZONE_POINT_NEAREST) {
-                        l.setLatitude(z.nearestPoint.latitude);
-                        l.setLongitude(z.nearestPoint.longitude);
-                    } else if (z.position != null) {
-                        l.setLatitude(z.position.latitude);
-                        l.setLongitude(z.position.longitude);
-                    } else {
-                        l.setLatitude(z.bbCenter.latitude);
-                        l.setLongitude(z.bbCenter.longitude);
-                    }
-                } else {
-                    l.setLatitude(et.position.latitude);
-                    l.setLongitude(et.position.longitude);
+                Location currentTarget = A.getGuidingContent().getTargetLocation();
+                Location newTarget = UtilsWherigo.extractLocation(et);
+                if (newTarget != null && !newTarget.equals(currentTarget)) {
+                    A.getGuidingContent().guideStart(new Guide(et.name, newTarget));
                 }
-                A.getGuidingContent().onLocationChanged(l);
+
             }
         });
     }
