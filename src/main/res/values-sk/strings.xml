@@ -2,83 +2,83 @@
 <resources>
     <string name="about_application">O aplikácii</string>
     <string name="accuracy">Presnosť</string>
-    <string name="actions_more">Akce (%1$d)</string>
-    <string name="altitude">Nad. výška</string>
+    <string name="actions_more">Akcie (%1$d)</string>
+    <string name="altitude">Nadm. výška</string>
     <string name="answer">Odpoveď</string>
     <string name="author">Autor</string>
     <string name="azimuth">Azimut</string>
     <string name="cancel">Zrušiť</string>
-    <string name="cancelled">zrušeno</string>
-    <string name="choose_cartridge">Zvoľte Cartridge</string>
-    <string name="close">Zatvoriť</string>
+    <string name="cancelled">zrušené</string>
+    <string name="choose_cartridge">Zvoľte cartridge</string>
+    <string name="close">Zavrieť</string>
     <string name="coauthor">Aktuálny vývoj</string>
     <string name="compass">Kompas</string>
     <string name="declination">Deklinácia</string>
-    <string name="delete_cartridge">Smazať cartridge?</string>
-    <string name="delete_save_game">Smazat uloženou hru?</string>
+    <string name="delete_cartridge">Odstrániť cartridge?</string>
+    <string name="delete_save_game">Odstrániť uloženú hru?</string>
     <string name="disable_location">Vypnúť lokalizovanie</string>
     <string name="distance">Vzdialenosť</string>
-    <string name="do_you_really_want_to_delete_selected_items">Naozaj chcete vymazať vybrané položky?</string>
-    <string name="do_you_really_want_to_delete_x">Naozaj chcete vymazať \'%1$s\'?</string>
+    <string name="do_you_really_want_to_delete_selected_items">Naozaj chcete odstrániť vybrané položky?</string>
+    <string name="do_you_really_want_to_delete_x">Naozaj chcete odstrániť \'%1$s\'?</string>
     <string name="do_you_really_want_to_exit">Naozaj UKONČIŤ program?</string>
-    <string name="dont_ask">Nepýtať</string>
+    <string name="dont_ask">Nepýtať sa</string>
     <string name="download">Stiahnuť</string>
     <string name="download_cartridge">Stiahnuť cartridge</string>
-    <string name="download_state_connect">Prípojovanie</string>
-    <string name="download_state_download">Stiahovanie</string>
-    <string name="download_state_login">Prihlasovanie</string>
-    <string name="download_state_logout">Odhlasovanie</string>
-    <string name="download_successful">Úspešne stiahnutý</string>
+    <string name="download_state_connect">Pripája sa</string>
+    <string name="download_state_download">Sťahuje sa</string>
+    <string name="download_state_login">Prihlasuje sa</string>
+    <string name="download_state_logout">Odhlasuje sa</string>
+    <string name="download_successful">Úspešne stiahnuté</string>
     <string name="error">Chyba</string>
-    <string name="failed">Neúspešný</string>
+    <string name="failed">Neúspešné</string>
     <string name="feet">Stopy</string>
-    <string name="filesystem_cannot_create_root">Nemôžem nájsť pamäťovú kartu, pravdepodobne chýba.\n\nProsím vložte ju do prístroja a spustite program znovu!</string>
+    <string name="filesystem_cannot_create_root">Nedá sa nájsť pamäťová karta, pravdepodobne chýba.\n\nVložte ju do prístroja a spustite program znova!</string>
     <string name="finished">Dokončené</string>
     <string name="folder_default">Automaticky</string>
-    <string name="folder_select">Vybrat…</string>
+    <string name="folder_select">Vybrať…</string>
     <string name="gps">GPS</string>
-    <string name="gps_and_location">GPS a umiestnenie</string>
+    <string name="gps_and_location">GPS a poloha</string>
     <string name="gps_disabled">GPS vypnuté</string>
     <string name="gps_enabled">GPS zapnuté</string>
     <string name="gps_fix">Posledný GPS fix</string>
-    <string name="gps_not_enabled_show_system_settings">GPS nie je zapnuté. Chcete ukázať systémové nastavenia?</string>
+    <string name="gps_not_enabled_show_system_settings">GPS nie je zapnuté. Chcete zobraziť systémové nastavenia?</string>
     <string name="gps_off">GPS vypnuté</string>
     <string name="gps_on">GPS zapnuté</string>
-    <string name="info">Informácia</string>
+    <string name="info">Informácie</string>
     <string name="invalid_cartridge">Neplatná cartridge\n\n %s</string>
     <string name="invalid_url">Neplatný odkaz</string>
     <string name="invalid_value">Neplatná hodnota</string>
     <string name="inventory">Inventár</string>
     <string name="latitude">Zem. šírka</string>
     <string name="libraries">Knižnice</string>
-    <string name="load_game">Načíst hru</string>
-    <string name="loading">Nahrávám…</string>
-    <string name="locations">Umiestnenie</string>
+    <string name="load_game">Načítať hru</string>
+    <string name="loading">Načítava sa…</string>
+    <string name="locations">Poloha</string>
     <string name="longitude">Zem. dĺžka</string>
     <string name="map">Mapa</string>
     <string name="metres">Metre</string>
-    <string name="msg_exit_game">Stlačte SPÄŤ dvakrát pre ukončenie hry.</string>
+    <string name="msg_exit_game">Hru ukončíte dvojitým stlačením tlačidla SPÄŤ.</string>
     <string name="navigate">Navigovať</string>
-    <string name="new_version_will_be_installed">Nová verzia bude nainštalovaná!</string>
+    <string name="new_version_will_be_installed">Bude nainštalovaná nová verzia!</string>
     <string name="no">Nie</string>
     <string name="no_description">Bez popisu</string>
-    <string name="no_location_providers_available">Poskytovatelia Polohy, nie sú dostupní!</string>
+    <string name="no_location_providers_available">Poskytovatelia polohy nie sú k dispozícii!</string>
     <string name="no_satellites">Žiadne satelity</string>
     <string name="no_target">Žiadny cieľ!</string>
     <string name="no_wherigo_cartridge_available">
-Žiadna Wherigo cartridge (*.gwc) nie je k dispozícii.
-Stáhněte anebo je nakopírujte do adresáře \"%1$s\".
-Můžete také nastavit cestu k jinému adresáři v \"Nastavení - Hlavní - Složka s Wherigo\".
-Ujistěte se, že jste aplikaci povolili právo na zápis a že ve zvolené složce máte právo na zápis.
-Některá novější zařízení nedovolují zápis na SD kartu.
-Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
+Nie je k dispozícii žiadna Wherigo cartridge (*.gwc).
+Stiahnite ju alebo skopírujte do priečinka \"%1$s\".
+Môžete aj nastaviť cestu k inému priečinku cez \"Nastavenia - Hlavné - Priečinok Wherigo\".
+Uistite sa, či ste v aplikácii povolili právo na zápis a že vo vybranom priečinku máte právo na zápis.
+Niektoré novšie zariadenia nedovoľujú zápis na SD kartu.
+Ak si nie ste istí, nechajte položku \"Priečinok Wherigo\" nastaviť automaticky.
     </string>
     <string name="not_enough_disk_space_x">Nedostatok voľného miesta na SD karte!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čaká na vybavenie</string>
     <string name="pitch">Náklon</string>
     <string name="point">Bod záujmu</string>
-    <string name="press_color_to_apply">Stlač farbu pre použitie</string>
+    <string name="press_color_to_apply">Stlačte farbu, ktorú použiť</string>
     <string name="problem_with_internet_connection">Problém s pripojením k internetu!</string>
     <string name="provider">Zdroj polohy</string>
     <string name="provider_gps">GPS</string>
@@ -88,8 +88,8 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
     <string name="resume_previous_cartridge">Obnoviť predchádzajúcu cartridge?</string>
     <string name="roll">Náklon</string>
     <string name="satellites">Satelity</string>
-    <string name="save_file_backup">Záložní</string>
-    <string name="save_file_main">Hlavní</string>
+    <string name="save_file_backup">Záložné</string>
+    <string name="save_file_main">Hlavné</string>
     <string name="save_file_new">Nová hra</string>
     <string name="save_game">Uložiť</string>
     <string name="save_game_auto">Hra automaticky uložená</string>
@@ -97,7 +97,7 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
     <string name="save_game_ok">Hra uložená</string>
     <string name="save_game_slot">Slot</string>
     <string name="save_game_slots">Uložiť…</string>
-    <string name="saving">Ukládám…</string>
+    <string name="saving">Ukladá sa…</string>
     <string name="scanQR">Skenovať QR</string>
     <string name="settings">Nastavenia</string>
     <string name="speed">Rýchlosť</string>
@@ -105,20 +105,20 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
     <string name="tasks">Úlohy</string>
     <string name="time_to_target">Čas do cieľa</string>
     <string name="translation">Preklad</string>
-    <string name="unexpected_problem">Neočakávaný problém!\n\Kontaktujte ma prosím s popisom vášho problému.</string>
+    <string name="unexpected_problem">Neočakávaný problém!\n\Kontaktujte ma, prosím, s popisom svojho problému.</string>
     <string name="version">Verzia</string>
-    <string name="waypoints">Waypointy</string>
+    <string name="waypoints">Body trasy</string>
     <string name="web_page">Webová stránka</string>
-    <string name="working">Pracujem…</string>
+    <string name="working">Pracuje sa…</string>
     <string name="yes">Áno</string>
     <string name="you_have_to_exit_app_force">Aplikácia bude ukončená!</string>
     <string name="you_have_to_restart_app_force">Je potrebné reštartovať aplikáciu!</string>
-    <string name="you_have_to_restart_app_recommended">Je doporučené reštartovať aplikáciu!</string>
+    <string name="you_have_to_restart_app_recommended">Odporúča sa reštartovať aplikáciu!</string>
     <string name="you_see">Vidíte</string>
-    <string name="zone_distance">Vzdálenost: %1$s</string>
+    <string name="zone_distance">Vzdialenosť: %1$s</string>
     <string name="zone_state">Stav: %1$s</string>
-    <string name="zone_state_distant">vzdálený</string>
-    <string name="zone_state_inside">uvnitř</string>
+    <string name="zone_state_distant">vzdialené</string>
+    <string name="zone_state_inside">vovnútri</string>
     <string name="zone_state_near">blízko</string>
-    <string name="zone_state_unknown">neznámý</string>
+    <string name="zone_state_unknown">neznáme</string>
 </resources>
