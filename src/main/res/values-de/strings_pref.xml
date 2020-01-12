@@ -26,7 +26,7 @@
     <string name="pref_gps_altitude_manual_correction_desc">Manuelle Korrektur der Meereshöhe</string>
     <string name="pref_gps_beep_on_gps_fix">Signalton bei GPS-Fix</string>
     <string name="pref_gps_beep_on_gps_fix_desc">Signalton, wenn das GPS die erste richtige Position erkannt hat</string>
-    <string name="pref_gps_desc">GPS automatisch einschalten mit die App</string>
+    <string name="pref_gps_desc">GPS mit der App starten</string>
     <string name="pref_gps_disable">Deaktivieren, wenn ausgeblendet</string>
     <string name="pref_gps_disable_desc">GPS deaktivieren, wenn der Bildschirm abgeschaltet wird oder die Anwendung minimiert wird und GPS von keiner Funktion benutzt wird</string>
     <string name="pref_gps_min_time">Zeit zwischen GPS-Abfragen</string>

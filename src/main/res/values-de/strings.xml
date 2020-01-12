@@ -8,7 +8,7 @@
     <string name="author">Autor</string>
     <string name="azimuth">Azimut</string>
     <string name="cancel">Abbrechen</string>
-    <string name="cancelled">abgebrochen</string>
+    <string name="cancelled">Abgebrochen</string>
     <string name="choose_cartridge">Cartridge auswählen</string>
     <string name="close">Schließen</string>
     <string name="coauthor">Weiterentwicklung</string>
@@ -88,14 +88,14 @@ Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     <string name="resume_previous_cartridge">Willst du den alten Spielstand laden?\n\n(Falls du Nein wählst, wird der alte Spielstand gelöscht.)</string>
     <string name="roll">Neigung</string>
     <string name="satellites">Satelliten</string>
-    <string name="save_file_backup">Back-up</string>
+    <string name="save_file_backup">Sicherung</string>
     <string name="save_file_main">Haupt</string>
     <string name="save_file_new">Neues Spiel</string>
     <string name="save_game">Speichern</string>
     <string name="save_game_auto">Das Spiel wurde automatisch gespeichert.</string>
     <string name="save_game_before_exit">Willst du das Spiel speichern?</string>
     <string name="save_game_ok">Das Spiel wurde gespeichert.</string>
-    <string name="save_game_slot">Steckplatz</string>
+    <string name="save_game_slot">Speicherplatz</string>
     <string name="save_game_slots">Speichern…</string>
     <string name="saving">Speichern…</string>
     <string name="scanQR">QR scannen</string>
@@ -117,8 +117,8 @@ Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     <string name="you_see">Du siehst</string>
     <string name="zone_distance">Entfernung: %1$s</string>
     <string name="zone_state">Zustand: %1$s</string>
-    <string name="zone_state_distant">weit</string>
-    <string name="zone_state_inside">innen</string>
-    <string name="zone_state_near">nahe</string>
-    <string name="zone_state_unknown">unbekannt</string>
+    <string name="zone_state_distant">Entfernt</string>
+    <string name="zone_state_inside">Innerhalb</string>
+    <string name="zone_state_near">In der Nähe</string>
+    <string name="zone_state_unknown">Unbekannt</string>
 </resources>

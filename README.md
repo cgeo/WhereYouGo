@@ -37,6 +37,14 @@ export ANDROID_HOME=/path/to/android-sdk
 ./gradlew build
 ```
 
+### Branches
+
+- **master** is for development of new features.
+- **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
+
+A more complex bugfix can be first tested against the `master` branch while kept compatible with the `release` branch for a later integration.
+Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release) which can also be applied in principle to this repository.
+
 ## Translation
 ### New language
 1. Get files with English text
