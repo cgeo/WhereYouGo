@@ -1,8 +1,8 @@
-Unterstützung für animierte GIF und MP4 hinzugefügt.
-Übersetzungen: Norwegisch, Katalanisch, Deutsch, Französisch, Japanisch.
+UnterstÃ¼tzung fÃ¼r animierte GIF und MP4 hinzugefÃ¼gt.
+Ãœbersetzungen: Norwegisch, Katalanisch, Deutsch, FranzÃ¶sisch, Japanisch.
 Klickbare URLs im Text.
 Task-Status korrigiert, Icons verbessert.
-Gelegentliche Abstürze bei Timer-Nutzung oder beim Schließen der App behoben.
+Gelegentliche AbstÃ¼rze bei Timer-Nutzung oder beim SchlieÃŸen der App behoben.
 Verbesserte Fehlermeldung beim Herunterladen einer Cartridge.
 Eingabe kann nun von einem QR-Code gescannt werden.
 Karte kann auf das Ziel zentriert werden.
