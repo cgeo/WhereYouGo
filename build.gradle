@@ -1,9 +1,27 @@
+/*
+ * Build scan plugin shall be applied first
+ */
+apply plugin: 'com.gradle.build-scan'
+
 buildscript {
     repositories {
         jcenter()
+        // gradle build-scan for profiling our build script
+        maven {
+            url 'https://plugins.gradle.org/m2'
+        }
+        google()
     }
+    // these dependencies are used by gradle plugins, not by the project
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        // check for updates of gradle plugin dependencies
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
+
+        // Android gradle plugin
+        classpath 'com.android.tools.build:gradle:3.5.3'
+
+        // gradle build script profiling
+        classpath 'com.gradle:build-scan-plugin:2.4.2'
     }
 }
 
@@ -11,26 +29,26 @@ allprojects {
     repositories {
         maven { url "https://jitpack.io" }
         jcenter()
+        google()
     }
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
         versionCode 45
         versionName "0.9.3"
-        minSdkVersion 15
-        targetSdkVersion 23
+        minSdkVersion 16
+        targetSdkVersion 28
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -51,12 +69,27 @@ android {
 
 dependencies {
     fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.asamm:locus-api-android:0.2.7'
-    compile 'com.github.biylda:openwig:3a1e405'
-    compile 'com.github.jfmdev:aFileDialog:v1.0.6'
-    compile 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
-    compile 'com.journeyapps:zxing-android-embedded:3.5.0'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.6'
+    // Support Library AppCompat
+    implementation 'com.android.support:support-v4:28.0.0'
+
+    // Locus Maps integration
+    implementation 'com.asamm:locus-api-android:0.2.7'
+
+    // openwig with extentions
+    implementation 'com.github.biylda:openwig:3a1e405'
+
+    // File select dialog
+    implementation 'com.github.jfmdev:aFileDialog:v1.0.6'
+
+    //
+    implementation 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
+
+    //
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
+    // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+
+    // ani gif support
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
 }
