@@ -1,6 +1,33 @@
 WhereYouGo
 ==========
 
+## About
+
+This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereYouGo/) as it was found unmaintained and was (after confirmation of original author) transfered to here. 
+Development can be continues seamless as we got the ability and allowance to publish the app under the original accounts and signing keys.
+
+The  README.md of the old repository is attached at the end of this file for your information.
+
+## Contact
+As there are no specific support and contact channels for this project yet, please use the issue tracker of this repository to get in contact with the development community for the time being.
+
+If PM contact is needed please contact us at support@cgeo.org 
+
+## Development
+
+### Build
+to be completed
+
+### Branches
+- **master** is for development of new features.
+- **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
+
+A more complex bugfix can be first tested against the `master` branch while kept compatible with the `release` branch for a later integration.
+Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release) which can also be applied in principle to this repository.
+
+
+## Old README.md
+
 WhereYouGo project has moved to GitHub.
 
 original project https://code.google.com/p/android-whereyougo/
@@ -36,14 +63,6 @@ cd whereyougo
 export ANDROID_HOME=/path/to/android-sdk
 ./gradlew build
 ```
-
-### Branches
-
-- **master** is for development of new features.
-- **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
-
-A more complex bugfix can be first tested against the `master` branch while kept compatible with the `release` branch for a later integration.
-Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release) which can also be applied in principle to this repository.
 
 ## Translation
 ### New language
