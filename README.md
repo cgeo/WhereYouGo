@@ -30,15 +30,16 @@ Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/w
 
 WhereYouGo project has moved to GitHub.
 
-original project https://code.google.com/p/android-whereyougo/
-my project on Google Code https://code.google.com/r/biylda-whereyougo/
-this project on GitHub https://github.com/biylda/WhereYouGo/
+* original project https://code.google.com/p/android-whereyougo/
+* my project on Google Code https://code.google.com/r/biylda-whereyougo/
+* this project on GitHub https://github.com/biylda/WhereYouGo/
 
 ## About
 
 Clone of [WhereYouGo](https://code.google.com/p/android-whereyougo). Main goal is to add vector maps support and general improvements.
 
 Uses the following projects:
+
 * [openwig](https://github.com/biylda/openwig/tree/whereyougo)
 * [mapsforge-0.3.1-with-tile-downloader-support](https://github.com/raku/mapsforge-0.3.1-with-tile-downloader-support)
 * [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
