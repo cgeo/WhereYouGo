@@ -4,7 +4,7 @@ WhereYouGo
 ## About
 
 This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereYouGo/) as it was found unmaintained and was (after confirmation of original author) transfered to here. 
-Development can be continues seamless as we got the ability and allowance to publish the app under the original accounts and signing keys.
+Development can be continued seamless as we got the ability and allowance to publish the app under the original accounts and signing keys.
 
 The  README.md of the old repository is attached at the end of this file for your information.
 
