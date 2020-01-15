@@ -403,13 +403,13 @@ public class MainActivity extends CustomMainActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_geocaching:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://geocaching.com/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://geocaching.com/")));
                 return true;
             case R.id.menu_wherigo:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://wherigo.com/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wherigo.com/")));
                 return true;
             case R.id.menu_github:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/biylda/WhereYouGo")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/cgeo/WhereYouGo")));
             default:
                 return false;
         }
