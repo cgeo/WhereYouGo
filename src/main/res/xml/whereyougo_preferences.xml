@@ -89,6 +89,11 @@
                 android:key="@string/pref_KEY_B_DOUBLE_CLICK"
                 android:summary="@string/pref_double_click_desc"
                 android:title="@string/pref_double_click" />
+            <CheckBoxPreference
+                android:defaultValue="@string/pref_DEFAULT_RUN_SCREEN_OFF"
+                android:key="@string/pref_KEY_B_RUN_SCREEN_OFF"
+                android:summary="@string/pref_run_screen_off_desc"
+                android:title="@string/pref_run_screen_off" />
         </PreferenceCategory>
 
         <!--

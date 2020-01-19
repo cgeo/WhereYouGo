@@ -13,6 +13,11 @@
  * see <http://www.gnu.org/licenses/>.
  * 
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
+ *
+ * Changes:
+ * Date        Who        Detail
+ * 19.01.2018  Kurly1     Replaced enableWakeLock function tu support partial WakeLock
+ *                        to allow the application to run if screen is off.
  */
 
 package menion.android.whereyougo.preferences;
@@ -104,32 +109,55 @@ public class PreferenceValues {
     private static Activity currentActivity;
 
     private static PowerManager.WakeLock wl;
+    private static int wl_level = 0;
 
     public static void disableWakeLock() {
         Logger.w(TAG, "disableWakeLock(), wl:" + wl);
         if (wl != null) {
             wl.release();
             wl = null;
+            wl_level = 0;
         }
     }
 
     public static void enableWakeLock() {
         try {
             boolean disable = false;
-            if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_OFF) {
-                disable = true;
-            } else if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS) {
-                if (!LocationState.isActuallyHardwareGpsOn()) {
+            int new_level = 0;
+            if (!Preferences.GLOBAL_RUN_SCREEN_OFF) {
+                if (!existCurrentActivity()) {
                     disable = true;
+                } else {
+                    if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_OFF) {
+                        disable = true;
+                    } else if (Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS) {
+                        if (!LocationState.isActuallyHardwareGpsOn()) {
+                            disable = true;
+                        }
+                    }
                 }
             }
-            Logger.w(TAG, "enableWakeLock(), dis:" + disable + ", wl:" + wl);
-            if (disable && wl != null) {
+
+            if ((Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ONLY_GPS || Preferences.APPEARANCE_HIGHLIGHT == VALUE_HIGHLIGHT_ALWAYS) && existCurrentActivity()) {
+                new_level = PowerManager.SCREEN_BRIGHT_WAKE_LOCK;
+            } else {
+                if (Preferences.GLOBAL_RUN_SCREEN_OFF) {
+                    new_level = PowerManager.PARTIAL_WAKE_LOCK;
+                }
+            }
+            Logger.w(TAG, "enableWakeLock(), dis:" + disable + " level:" + new_level + ", wl:" + wl + " current level:" + wl_level);
+            if ((disable || new_level == 0) && wl != null) {
                 disableWakeLock();
-            } else if (!disable && wl == null) {
+            } else if (!disable && new_level != wl_level) {
+                if (wl != null) {
+                    wl.release();
+                }
                 PowerManager pm = (PowerManager) A.getApp().getSystemService(Context.POWER_SERVICE);
-                wl = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
-                wl.acquire();
+                if (pm != null) {
+                    wl = pm.newWakeLock(new_level, TAG);
+                    wl.acquire();
+                    wl_level = new_level;
+                }
             }
             // Logger.w(TAG, "enableWakeLock(), res:" + wl);
         } catch (Exception e) {
