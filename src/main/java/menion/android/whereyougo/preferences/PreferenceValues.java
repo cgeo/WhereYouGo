@@ -181,11 +181,7 @@ public class PreferenceValues {
             lang = java.util.Locale.getDefault().getLanguage();
         }
         Logger.w(TAG, "getLanguageCode() - " + lang);
-        if (Locale.getString(R.string.pref_language_cs_shortcut).equals(lang)) {
-            return lang;
-        } else {
-            return Locale.getString(R.string.pref_language_en_shortcut);
-        }
+        return Locale.getString(R.string.pref_language_en_shortcut);
     }
 
     public static Location getLastKnownLocation() {
