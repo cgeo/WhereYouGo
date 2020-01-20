@@ -2,7 +2,7 @@
 name: 2. Feature request
 about: Suggest an idea for a new function
 title: ''
-labels: Feature Request
+labels: Feature Request, Unverified
 assignees: ''
 
 ---

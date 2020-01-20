@@ -2,7 +2,7 @@
 name: 1. Bug report
 about: Report a bug or problem
 title: ''
-labels: Bug
+labels: Bug, Unverified
 assignees: ''
 
 ---
