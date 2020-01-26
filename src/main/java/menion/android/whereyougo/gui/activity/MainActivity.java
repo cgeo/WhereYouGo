@@ -410,6 +410,7 @@ public class MainActivity extends CustomMainActivity {
                 return true;
             case R.id.menu_github:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/cgeo/WhereYouGo")));
+                return true;
             default:
                 return false;
         }
