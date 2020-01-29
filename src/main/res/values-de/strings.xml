@@ -121,4 +121,13 @@ Wenn du sich nicht sicher sind, setze den \"Wherigo Ordner\" auf automatisch.
     <string name="zone_state_inside">Innerhalb</string>
     <string name="zone_state_near">In der Nähe</string>
     <string name="zone_state_unknown">Unbekannt</string>
+
+    <!-- permission handling -->
+    <string name="close_app">App schließen</string>
+    <string name="ask_again">Erneut fragen</string>
+    <string name="goto_app_details">\"App-Info\" öffnen</string>
+    <string name="location_permission_request_explanation">WhereYouGo benötigt Zugriff auf das GPS deines Gerätes, um seine Position zu bestimmen sowie um Entfernungen und Richtungen zu Orten der cartridge zu berechnen.</string>
+    <string name="storage_permission_request_explanation">WhereYouGo muss Daten in den Speicher bzw. die externe Karte schreiben, sobald die catridge gespeichert wird.</string>
+    <string name="permission_conclusion">Die App kann ohne diese Berechtigung(en) nicht genutzt werden.</string>
+
 </resources>
