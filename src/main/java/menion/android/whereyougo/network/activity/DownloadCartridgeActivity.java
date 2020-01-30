@@ -63,10 +63,18 @@ public class DownloadCartridgeActivity extends CustomActivity {
             return;
         }
 
+        String username = Preferences.GC_USERNAME;
+        String password = Preferences.GC_PASSWORD;
+
         setContentView(R.layout.layout_details);
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(R.string.download_cartridge);
+        Button buttonDownload = (Button) findViewById(R.id.button_positive);
+        Button buttonStart = (Button) findViewById(R.id.button_negative);
+        // If one of the variables is empty the inner condition is true which get's negated because
+        // the button get's enabled on true and disabled on false.
+        buttonDownload.setEnabled(!(username.isEmpty() && password.isEmpty()));
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
@@ -102,8 +110,6 @@ public class DownloadCartridgeActivity extends CustomActivity {
                     downloadTask.cancel(true);
                     downloadTask = null;
                 } else {
-                    String username = Preferences.GC_USERNAME;
-                    String password = Preferences.GC_PASSWORD;
                     downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
                     downloadTask.execute(cguid);
                 }
@@ -121,8 +127,6 @@ public class DownloadCartridgeActivity extends CustomActivity {
                 return true;
             }
         });
-        Button buttonDownload = (Button) findViewById(R.id.button_positive);
-        Button buttonStart = (Button) findViewById(R.id.button_negative);
         buttonStart.setEnabled(cartridgeFile != null);
     }
 
