@@ -204,7 +204,6 @@ public class LocationState {
 
             // also disable wake-lock here
             if (!PreferenceValues.existCurrentActivity() || screenOff) {
-                PreferenceValues.disableWakeLock();
                 if (Preferences.GLOBAL_RUN_SCREEN_OFF){
                     PreferenceValues.enableWakeLock();
                 } else {
