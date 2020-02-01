@@ -126,8 +126,8 @@ If you\'re not sure, set \"Wherigo folder\" automatically.
     <string name="close_app">Close app</string>
     <string name="ask_again">Ask me again</string>
     <string name="goto_app_details">Open Application Info</string>
-    <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the cartridge locations.</string>
-    <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the catridges.</string>
+    <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
+    <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Catridges.</string>
     <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
 
 </resources>
