@@ -71,6 +71,7 @@ import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.NotificationService;
 
 public class MainActivity extends CustomMainActivity {
 
@@ -434,5 +435,14 @@ public class MainActivity extends CustomMainActivity {
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        // Stop notification
+        Intent intent = new Intent(MainActivity.this, NotificationService.class);
+        intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
+        startService(intent);
+        super.onDestroy();
     }
 }

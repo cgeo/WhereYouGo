@@ -78,7 +78,7 @@
     <string name="pref_sensors_orient_filter_medium">Mittlerer Filter</string>
     <string name="pref_sensors_orient_filter_no_filter">Kein Filter</string>
     <string name="pref_statusbar">Statusbar-Symbol</string>
-    <string name="pref_statusbar_desc">Symbol in der Statusbar anzeigen</string>
+    <string name="pref_statusbar_desc">Symbol in der Statusbar anzeigen (Wen diese Option nicht verfügbar ist, wird die Statusbar durch eine andere Einstellung benötigt.)</string>
     <string name="pref_style_on_map">Stil der Karte</string>
     <string name="pref_units">Formate</string>
     <string name="pref_units_altitude">Höheneinheit</string>
