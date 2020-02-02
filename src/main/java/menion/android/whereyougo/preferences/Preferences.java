@@ -13,10 +13,6 @@
  * see <http://www.gnu.org/licenses/>.
  * 
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
- *
- * Changes:
- * Date         Who                Detail
- * 19.01.2020   Kurly1             Add support for partial WakeLock (KEY_B_RUN_SCREEN_OFF)
  */
 
 package menion.android.whereyougo.preferences;

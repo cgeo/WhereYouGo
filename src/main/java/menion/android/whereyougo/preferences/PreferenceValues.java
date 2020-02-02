@@ -13,11 +13,6 @@
  * see <http://www.gnu.org/licenses/>.
  * 
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
- *
- * Changes:
- * Date        Who        Detail
- * 19.01.2018  Kurly1     Replaced enableWakeLock function tu support partial WakeLock
- *                        to allow the application to run if screen is off.
  */
 
 package menion.android.whereyougo.preferences;
