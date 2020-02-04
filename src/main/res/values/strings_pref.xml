@@ -8,8 +8,8 @@
     <string name="pref_confirm_on_exit_desc">Display confirmation dialog before exiting Locus via the Back Button</string>
     <string name="pref_double_click">Double tap</string>
     <string name="pref_double_click_desc">To exit the game use double tap on BACK</string>
-    <string name="pref_run_screen_off">Run app if screen is off</string>
-    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screenis off.</string>
+    <string name="pref_run_screen_off">Run app even if screen is off</string>
+    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
     <string name="pref_font_size">Font size</string>
     <string name="pref_font_size_default">Default</string>
     <string name="pref_font_size_desc">Size of the text</string>
