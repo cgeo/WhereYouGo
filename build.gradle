@@ -41,7 +41,7 @@ android {
     defaultConfig {
         applicationId "menion.android.whereyougo"
         versionCode 45
-        versionName "0.9.3"
+        versionName "0.10.0"
         minSdkVersion 16
         targetSdkVersion 28
     }
@@ -73,6 +73,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
 
     // Locus Maps integration
+    //noinspection GradleDependency
     implementation 'com.asamm:locus-api-android:0.2.7'
 
     // openwig with extentions
@@ -88,6 +89,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
+    //noinspection GradleDependency
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
 
     // ani gif support

@@ -1,9 +1,7 @@
-WhereYouGo ist ein inoffizieller Client für das Wherigo-Geocaching. Es unterstützt Online-Karten und Offline-Vektorkarten über die Mapsforge-Bibliothek. Alternativ lässt sich die App Locus zur Kartenanzeige verwenden.
+WhereYouGo ist ein inoffizieller Client für das Wherigo-Geocaching. Er unterstützt Online-Karten und Offline-Vektorkarten über die Mapsforge-Bibliothek. Alternativ lässt sich die App Locus zur Kartenanzeige verwenden.
 
 Hinweise:
-- Spielstände aus Version 0.6.0 oder älter sind nicht kompatibel mit der aktuellen Version.
-- Version 0.6.0 kann hier heruntergeladen werden: https://android-whereyougo.googlecode.com/files/0.6.0.apk
-- Cartridges können auf der Webseite http://www.wherigo.com heruntergeladen werden, dabei die Version "Pocket PC Device" verwenden. Your device must support TLS, otherwise there will be an error during connection.
+- Cartridges können auf der Webseite http://www.wherigo.com heruntergeladen werden, dabei ist die Version "Pocket PC Device" verwenden. Your device must support TLS, otherwise there will be an error during connection.
 - Falls man die eingebaute Herunterladen-Funktion nicht nutzt, muss die Cartridges in das gewählte Wherigo-Verzeichnis (Einstellungen - Allgemein - Wherigo Verzeichnis) platziert werden. Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
 
 Funktionen:
@@ -23,4 +21,4 @@ Funktionen:
 Über das Projekt:
 Der Kern der Applikation basiert auf OpenWIG, sie benutzt die Mapsforge-Bibliothek um Offline-Vektorkarten anzuzeigen. Alternativ lässt sich auch Locus benutzen.
 https://code.google.com/p/android-whereyougo/ - Originale Projektseite (beinhaltet Version 0.7.0)
-https://github.com/biylda/WhereYouGo/ - Projekt-Klon (beinhaltet die aktuelle Version)
+https://github.com/cgeo/WhereYouGo/ - Projekt-Klon (beinhaltet die aktuelle Version)

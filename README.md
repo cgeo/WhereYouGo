@@ -25,8 +25,25 @@ to be completed
 A more complex bugfix can be first tested against the `master` branch while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release) which can also be applied in principle to this repository.
 
+## What's new
+<h4>
+	<a name="#0.10.0"></a>
+	0.10.0 (22.02.2020)
+	<a href="#0.10.0" class="section_anchor"></a>
+</h4>
+<p>
+  <b>Restart of WhereYouGo</b>
+  <ul>
+        <li>Change the permissions handling to fulfill the requirements for Google Play</li>
+        <li>Update the code to support Android targetSdk 28</li>
+        <li>Switch to https for cartridge download</li>
+        <li>Improved German, Slovak translations</li>
+        <li>Minor GUI and code improvements</li>
+  </ul>
+</p>
 
-## Old README.md
+
+# Old README.md
 
 WhereYouGo project has moved to GitHub.
 

@@ -1,8 +1,6 @@
 WhereYouGo je neoficiální klient pro Wherigo Geocaching. Zobrazuje online i offline vektorové mapy pomocí knihovny Mapsforge, alternativně lze použít pro zobrazení map aplikaci Locus.
 
 Upozornění:
-- Uložené hry z verze 0.6.0 a nižší nejsou kompatibilní s aktuální verzí.
-- Verzi 0.6.0 lze stáhnout zde: https://android-whereyougo.googlecode.com/files/0.6.0.apk
 - Cartridge lze stáhnout z http://www.wherigo.com, používejte verzi "Pocket PC Device". Vaše zařízení musí podporovat TLS, jinak dojde při pokusu o připojení k chybě.
 - Pokud nepoužíváte vestavěnou funkci stahování, umístěte cartridge do vaší zvolené složky s Wherigo (Nastavení - Hlavní - Wherigo složka). Ujistěte se, že jste aplikaci povolili právo na zápis a že ve zvolené složce máte právo na zápis. Některá novější zařízení nedovolují zápis na SD kartu. Pokud si nejste jisti, nechte "Složku s Wherigo" nastavit automaticky.
 
@@ -23,4 +21,4 @@ Funkce:
 O projektu:
 Jádro programu je založené na OpenWIG, na zobrazení mapy používá knihovnu MapsForge, alternativně lze použít Locus.
 https://code.google.com/p/android-whereyougo/ - původní stránka projektu (obsahuje verzi 0.7.0)
-https://github.com/biylda/WhereYouGo/ - klon projektu (obsahuje aktuální verzi)
+https://github.com/cgeo/WhereYouGo/ - klon projektu (obsahuje aktuální verzi)
