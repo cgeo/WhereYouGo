@@ -1,10 +1,7 @@
-Unterstützung für animierte GIF und MP4 hinzugefügt.
-Übersetzungen: Norwegisch, Katalanisch, Deutsch, Französisch, Japanisch.
-Klickbare URLs im Text.
-Task-Status korrigiert, Icons verbessert.
-Gelegentliche Abstürze bei Timer-Nutzung oder beim Schließen der App behoben.
-Verbesserte Fehlermeldung beim Herunterladen einer Cartridge.
-Eingabe kann nun von einem QR-Code gescannt werden.
-Karte kann auf das Ziel zentriert werden.
-Problem bei der Kartenauswahl mit Android 7 behoben.
-Problem mit Kompass und Timer behoben.
+Neustart von WhereYouGo
+
+- Anpassung der Berechtigungsbehandlung, um den Anforderungen von Google Play zu entsprechen
+- Aktualisierung der Software, um Android tagetSdk 28 zu unterstützen
+- Wechsel auf https zum Herunterladen der WhereIGo cartridge
+- Verbesserung der deutschen und slovakischen Übersetzung
+- Kleinere Verbesserungen der Software und der Benutzeroberfläche
