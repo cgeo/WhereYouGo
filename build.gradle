@@ -91,5 +91,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
 
     // ani gif support
+    // minSdk=17 from version 1.2.16
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
 }

@@ -17,23 +17,16 @@
 
 package menion.android.whereyougo.gui.activity;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -47,6 +40,7 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
+
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
@@ -67,10 +61,14 @@ import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
+
+import static menion.android.whereyougo.permission.PermissionHandler.askAgainFor;
+import static menion.android.whereyougo.permission.PermissionHandler.checkKoPermissions;
+import static menion.android.whereyougo.permission.PermissionHandler.checkPermissions;
+import static menion.android.whereyougo.permission.PermissionHandler.needAskForPermission;
 
 public class MainActivity extends CustomMainActivity {
 
@@ -326,28 +324,16 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void checkPermissions() {
-        final String[] permissions = new String[] {
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        };
-
-        for (String permission : permissions) {
-            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, permissions, 0);
-                break;
-            }
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        testFileSystem();
-        if (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY) {
-            LocationState.setGpsOn(this);
+        String[] koPermissions = checkKoPermissions(this, permissions);
+        if (koPermissions.length > 0) {
+            askAgainFor(this, koPermissions);
+        } else {
+            testFileSystem();
+            if (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY) {
+                LocationState.setGpsOn(this);
+            }
         }
     }
 
@@ -355,8 +341,8 @@ public class MainActivity extends CustomMainActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermissions();
+        if (needAskForPermission()) {
+            checkPermissions(this);
         }
 
         if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
