@@ -42,6 +42,10 @@
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Signalton nach Entfernung</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Nutzerdefinierter Signalton nach Entfernung</string>
     <string name="pref_guiding_waypoint_sound_increasing">Frequenz erhöhen, wenn man näher kommt</string>
+    <string name="pref_guiding_zone_point">Zonen-Navigationspunkt</string>
+    <string name="pref_guiding_zone_point_center">Vom Autor definierte Zonenmitte</string>
+    <string name="pref_guiding_zone_point_desc">Wähle aus, welcher Zonenpunkt für die Navigation verwendet werden soll</string>
+    <string name="pref_guiding_zone_point_nearest">Nächster Grenzpunkt</string>
     <string name="pref_highlight">Bildschirm abschalten</string>
     <string name="pref_highlight_always_text">Bildschirm immer an</string>
     <string name="pref_highlight_desc">Lege fest, ob der Bildschirm immer eingeschaltet bleiben soll</string>
@@ -64,6 +68,8 @@
     <string name="pref_root_desc">Wähle ein Zielverzeichnis für Wherigo.</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
     <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert werden, wenn du die Anwendung minimierst.</string>
+    <string name="pref_save_game_slots">Spielstände</string>
+    <string name="pref_save_game_slots_desc">Anzahl der Slots zum Speichern des Spiels über die Menütaste</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch ändern</string>
     <string name="pref_sensors_compass_auto_change_desc">Einstellungen für die Ausrichtung bei geringeren Geschwindigkeiten von den Einstellungen des Hardware-Kompass verwenden.</string>
@@ -87,6 +93,8 @@
     <string name="pref_units_angle_angular_mil">Winkel</string>
     <string name="pref_units_angle_degree">Grad</string>
     <string name="pref_units_angle_desc">Wähle die Einheit für Winkelangaben</string>
+    <!-- <string name="pref_units_angle_russian_mil">Russian mil</string> -->
+    <!-- <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string> -->
     <string name="pref_units_coo_latlon">Koordinatenformat</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_desc">Wähle das Koordinatenformat (Latitude/Longitude)</string>
@@ -94,6 +102,13 @@
     <string name="pref_units_coo_latlon_sec">14° 52\' 12,34\'\'</string>
     <string name="pref_units_length">Einheit für Entfernung</string>
     <string name="pref_units_length_desc">Wähle die Einheit für Längenangaben</string>
+    <string name="pref_units_length_im_f">Imperial (ft)</string>
+    <string name="pref_units_length_im_fm">Imperial (ft/mi)</string>
+    <string name="pref_units_length_im_y">Imperial (yd)</string>
+    <string name="pref_units_length_im_ym">Imperial (yd/mi)</string>
+    <string name="pref_units_length_me_m">Metrisch (m)</string>
+    <string name="pref_units_length_me_mkm">Metrisch (m/km)</string>
+    <string name="pref_units_length_na_nmi">Nautisch (m/nmi)</string>
     <string name="pref_units_speed">Einheit für Geschwindigkeit</string>
     <string name="pref_units_speed_desc">Wähle die Einheit für die Geschwindigkeit</string>
 </resources>
