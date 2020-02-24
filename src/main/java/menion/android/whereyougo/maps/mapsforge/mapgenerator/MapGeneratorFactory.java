@@ -58,68 +58,33 @@ public final class MapGeneratorFactory {
             case OPENSTREETMAP:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        "\u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
+                        "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        "\u00a9 OpenStreetMap contributors, CC-BY-SA");
             case OPENSTREETMAP_DE:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://a.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png",
-                        "\u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
-            case OPENCYCLEMAP_CYCLE:
+                        "https://a.tile.openstreetmap.de/{z}/{x}/{y}.png",
+                        "\u00a9 OpenStreetMap contributors, CC-BY-SA");
+            case OPENSTREETMAP_CyclOSM:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://a.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-                        "\u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Tiles courtesy of <a href='http://www.opencyclemap.org'>Andy Allan</a>");
-            case OPENCYCLEMAP_TRANSPORT:
+                        "https://a.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png",
+                        "Tiles \u00a9 CyclOSM, Openstreetmap France, data \u00a9 OpenStreetMap contributors, ODBL");
+            case PUBLIC_TRANSPORT_OEPNV:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://a.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png",
-                        "\u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Tiles courtesy of <a href='http://www.opencyclemap.org'>Andy Allan</a>");
-            case OPENMAPSURFER_ROADS:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}",
-                        "Imagery from <a href=\"http://giscience.uni-hd.de/\">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data \u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
-            case MAPQUEST:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
-                        "\u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Tiles Courtesy of <a href=\"http://www.mapquest.com/\">MapQuest</a>");
-            case MAPQUEST_AERIAL:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://otile1.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.png",
-                        "Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href=\"http://www.mapquest.com/\">MapQuest</a>");
-            case THUNDERFOREST_OPENCYCLEMAP:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://a.tile.thunderforest.com/cycle/{z}/{x}/{y}.png",
-                        "Maps \u00a9 <a href=\"http://www.thunderforest.com\">Thunderforest</a>, Data \u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
-            case THUNDERFOREST_TRANSPORT:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://a.tile.opencyclemap.org/transport/{z}/{x}/{y}.png",
-                        "Maps \u00a9 <a href=\"http://www.thunderforest.com\">Thunderforest</a>, Data \u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
-            case THUNDERFOREST_LANDSCAPE:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://a.tile.opencyclemap.org/landscape/{z}/{x}/{y}.png",
-                        "Maps \u00a9 <a href=\"http://www.thunderforest.com\">Thunderforest</a>, Data \u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
-            case THUNDERFOREST_OUTDOORS:
-                return new FormatURLTileDownloader(
-                        18,
-                        "http://a.tile.opencyclemap.org/outdoors/{z}/{x}/{y}.png",
-                        "Maps \u00a9 <a href=\"http://www.thunderforest.com\">Thunderforest</a>, Data \u00a9 <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>");
+                        "https://tile.memomaps.de/tilegen/{z}/{x}/{y}.png",
+                        "\u00a9 OpenStreetMap contributors, CC-BY-SA");
             case ESRI_WORLD_STREET_MAP:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://server.arcgisonline.com//ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png",
-                        "\u00a9 <a href=\"http://www.esri.com/\">Esri</a>, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012");
+                        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}.png",
+                        "\u00a9 Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012");
             case ESRI_WORLD_IMAGERY:
                 return new FormatURLTileDownloader(
                         18,
-                        "http://server.arcgisonline.com//ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.jpg",
-                        "\u00a9 <a href=\"http://www.esri.com/\">Esri</a>, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community");
+                        "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png",
+                        "\u00a9 Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community");
             default:
                 return new Blank();
         }
