@@ -19,15 +19,8 @@
         <item>地図ファイル [*.map] (オフライン)</item>
         <item>OSM Mapnik (オンライン)</item>
         <item>OSM.de (オンライン)</item>
-        <item>OpenCycleMap (オンライン)</item>
-        <item>OpenTransportMap (オンライン)</item>
-        <item>OpenMapSurfer (オンライン)</item>
-        <item>MapQuest OSM (オンライン)</item>
-        <item>MapQuest Aerial (オンライン)</item>
-        <item>TF OpenCycleMap (オンライン)</item>
-        <item>TF Transport (オンライン)</item>
-        <item>TF Landscape (オンライン)</item>
-        <item>TF Outdoors (オンライン)</item>
+        <item>CyclOSM (オンライン)</item>
+        <item>Public Transport(\u00d6PNV) (オンライン)</item>
         <item>Esri World Street (オンライン)</item>
         <item>Esri World Imagery (オンライン)</item>
     </string-array>
