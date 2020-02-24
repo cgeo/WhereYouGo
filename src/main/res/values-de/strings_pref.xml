@@ -43,7 +43,7 @@
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Nutzerdefinierter Signalton nach Entfernung</string>
     <string name="pref_guiding_waypoint_sound_increasing">Frequenz erhöhen, wenn man näher kommt</string>
     <string name="pref_guiding_zone_point">Zonen-Navigationspunkt</string>
-    <string name="pref_guiding_zone_point_center">Vom Autor definiere Zonenmitte</string>
+    <string name="pref_guiding_zone_point_center">Vom Autor definierte Zonenmitte</string>
     <string name="pref_guiding_zone_point_desc">Wähle aus, welcher Zonenpunkt für die Navigation verwendet werden soll</string>
     <string name="pref_guiding_zone_point_nearest">Nächster Grenzpunkt</string>
     <string name="pref_highlight">Bildschirm abschalten</string>
@@ -68,7 +68,7 @@
     <string name="pref_root_desc">Wähle ein Zielverzeichnis für Wherigo.</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
     <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert werden, wenn du die Anwendung minimierst.</string>
-    <string name="pref_save_game_slots">Spielestände</string>
+    <string name="pref_save_game_slots">Spielstände</string>
     <string name="pref_save_game_slots_desc">Anzahl der Slots zum Speichern des Spiels über die Menütaste</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch ändern</string>
