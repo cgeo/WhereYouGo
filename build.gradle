@@ -65,6 +65,11 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+
+    packagingOptions {
+        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
+        exclude "lib/armeabi/**"
+    }
 }
 
 dependencies {
