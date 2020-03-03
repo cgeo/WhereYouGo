@@ -40,7 +40,7 @@ android {
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
-        versionCode 45
+        versionCode 46
         versionName "0.10.0"
         minSdkVersion 16
         targetSdkVersion 28
