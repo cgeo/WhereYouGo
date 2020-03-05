@@ -1,8 +1,13 @@
 Privacy Policy
 ==============
 
-Privacy-relevant Android permissions requested by this app
+WhereYouGo needs the following permissions to do its job and will only use them for that purpose:
 
-* CAMERA
-    * Used for permissions that are associated with accessing camera or capturing images/video from the device.
-    * This permission allows this application to scan QR codes.
+* Location
+    * Of course WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the zones of your Wherigo cartridge.
+
+* Photos/Media/Files
+    * WhereYouGo will use your phone storage for reading cartridge files and offline maps and saving the game progress.
+
+* Camera
+    * This permission allows WhereYouGo to scan QR codes.
