@@ -19,4 +19,6 @@
     <color name="title_separator">#40ffffff</color>
     <color name="title_separator_dark">#40000000</color>
     <color name="btn_disabled">#80aaaaaa</color>
+    <color name="text_dark">#FFFFFFFF</color>
+    <color name="text_light">#FF000000</color>
 </resources>

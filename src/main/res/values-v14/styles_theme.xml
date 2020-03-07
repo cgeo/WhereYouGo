@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">
-        <item name="android:windowAnimationStyle">@null</item>
-    </style>
-
-    <style name="ThemeSettings" parent="@android:style/Theme.Holo.Light.DarkActionBar" />
-</resources>
