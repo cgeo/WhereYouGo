@@ -20,15 +20,8 @@
         <item>DATABASE_RENDERER</item>
         <item>OPENSTREETMAP</item>
         <item>OPENSTREETMAP_DE</item>
-        <item>OPENCYCLEMAP_CYCLE</item>
-        <item>OPENCYCLEMAP_TRANSPORT</item>
-        <item>OPENMAPSURFER_ROADS</item>
-        <item>MAPQUEST</item>
-        <item>MAPQUEST_AERIAL</item>
-        <item>THUNDERFOREST_OPENCYCLEMAP</item>
-        <item>THUNDERFOREST_TRANSPORT</item>
-        <item>THUNDERFOREST_LANDSCAPE</item>
-        <item>THUNDERFOREST_OUTDOORS</item>
+        <item>OPENSTREETMAP_CyclOSM</item>
+        <item>PUBLIC_TRANSPORT_OEPNV</item>
         <item>ESRI_WORLD_STREET_MAP</item>
         <item>ESRI_WORLD_IMAGERY</item>
     </string-array>

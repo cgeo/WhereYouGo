@@ -29,93 +29,44 @@ public enum MapGeneratorInternal {
     DATABASE_RENDERER,
 
     /**
-     * Map tiles are downloaded from http://openstreetmap.org
+     * Map tiles are downloaded from https://openstreetmap.org
      *
-     * @see <a href="http://openstreetmap.org/">OpenStreetMap.org</a>
+     * @see <a href="https://openstreetmap.org/">OpenStreetMap.org</a>
      */
     OPENSTREETMAP,
 
     /**
-     * Map tiles are downloaded from http://openstreetmap.de
+     * Map tiles are downloaded from https://openstreetmap.de
      *
-     * @see <a href="http://openstreetmap.de/">OpenStreetMap.de</a>
+     * @see <a href="https://openstreetmap.de/">OpenStreetMap.de</a>
      */
     OPENSTREETMAP_DE,
 
     /**
-     * Map tiles are downloaded from the OpenCycleMap server.
+     * Map tiles are downloaded from the CyclOSM server.
      *
-     * @see <a href="http://opencyclemap.org/">OpenCycleMap</a>
+     * @see <a href="https://www.cyclosm.org/">CyclOSM</a>
      */
-    OPENCYCLEMAP_CYCLE,
+    OPENSTREETMAP_CyclOSM,
 
     /**
-     * Map tiles are downloaded from the OpenCycleMap server.
+     * Map tiles are downloaded from the Public Transport (\u00d6PNV) server.
      *
-     * @see <a href="http://opencyclemap.org/">OpenCycleMap</a>
+     * @see <a href="https://\u00f6pnvkarte.de/">Public Transport (\u00d6PNV)</a>
      */
-    OPENCYCLEMAP_TRANSPORT,
-
-    /**
-     * Map tiles are downloaded from the OpenCycleMap server.
-     *
-     * @see <a href="http://opencyclemap.org/">OpenCycleMap</a>
-     */
-    OPENMAPSURFER_ROADS,
-
-    /**
-     * Map tiles are downloaded from the Mapquest server.
-     *
-     * @see <a href="http://www.mapquest.com/">Mapquest</a>
-     */
-    MAPQUEST,
-
-    /**
-     * Map tiles are downloaded from the Mapquest server.
-     *
-     * @see <a href="http://www.mapquest.com/">Mapquest</a>
-     */
-    MAPQUEST_AERIAL,
-
-    /**
-     * Map tiles are downloaded from the Thunderforest server.
-     *
-     * @see <a href="http://www.thunderforest.com/">Thunderforest</a>
-     */
-    THUNDERFOREST_OPENCYCLEMAP,
-
-    /**
-     * Map tiles are downloaded from the Thunderforest server.
-     *
-     * @see <a href="http://www.thunderforest.com/">Thunderforest</a>
-     */
-    THUNDERFOREST_TRANSPORT,
-
-    /**
-     * Map tiles are downloaded from the Thunderforest server.
-     *
-     * @see <a href="http://www.thunderforest.com/">Thunderforest</a>
-     */
-    THUNDERFOREST_LANDSCAPE,
-
-    /**
-     * Map tiles are downloaded from the Thunderforest server.
-     *
-     * @see <a href="http://www.thunderforest.com/">Thunderforest</a>
-     */
-    THUNDERFOREST_OUTDOORS,
+    PUBLIC_TRANSPORT_OEPNV,
 
     /**
      * Map tiles are downloaded from the Esri server.
      *
-     * @see <a href="http://www.arcgisonline.com/">ArcGIS</a>
+     * @see <a href="https://www.arcgisonline.com/">ArcGIS</a>
      */
     ESRI_WORLD_STREET_MAP,
 
     /**
      * Map tiles are downloaded from the Esri server.
      *
-     * @see <a href="http://www.arcgisonline.com/">ArcGIS</a>
+     * @see <a href="https://www.arcgisonline.com/">ArcGIS</a>
      */
     ESRI_WORLD_IMAGERY
 }
