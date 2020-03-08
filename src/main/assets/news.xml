@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     <update name="2020.03.05" id="20200305" time="05.03.2020">
-        <li>Fixed broken download of cartridges from wherigo.com</li>
-        <li>Increase target Android version and implement mandatory changes for republishing the app on Google Play</li>
+        <li>Fixed broken download of cartridges from wherigo.com by switching to https</li>                   
+        <li>Change the permissions handling to fulfill the requirements for Google Play</li>
+        <li>Update the code to support Android targetSdk 28</li>
+        <li>Improved German, Slovak translations</li>
+        <li>Minor GUI and code improvements</li>
     </update>
     <update name="0.9.3" id="44" time="14.7.2017">
         <li>Added support for animated GIF and MP4.</li>
