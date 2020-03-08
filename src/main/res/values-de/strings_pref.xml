@@ -93,8 +93,8 @@
     <string name="pref_units_angle_angular_mil">Winkel</string>
     <string name="pref_units_angle_degree">Grad</string>
     <string name="pref_units_angle_desc">Wähle die Einheit für Winkelangaben</string>
-    <!-- <string name="pref_units_angle_russian_mil">Russian mil</string> -->
-    <!-- <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string> -->
+    <string name="pref_units_angle_russian_mil">Russischer Strich</string>
+    <string name="pref_units_angle_us_artillery_mil">Amerikanischer Strich/string>
     <string name="pref_units_coo_latlon">Koordinatenformat</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_desc">Wähle das Koordinatenformat (Latitude/Longitude)</string>
