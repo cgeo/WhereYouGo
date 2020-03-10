@@ -24,6 +24,8 @@ public class NotificationService extends Service {
     public static final String START_NOTIFICATION_SERVICE_FOREGROUND = "START_NOTIFICATION_SERVICE_FOREGROUND";
     public static final String STOP_NOTIFICATION_SERVICE = "STOP_NOTIFICATION_SERVICE";
 
+    private static final String TAG = "NotificationService";
+
     public NotificationService() {
     }
 
@@ -36,7 +38,7 @@ public class NotificationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.v(this.getClass().getName(), "onCreate()");
+        Logger.v(TAG, "onCreate()");
         mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
@@ -68,7 +70,7 @@ public class NotificationService extends Service {
     }
 
     private void startNotificationService(boolean background) {
-        Logger.v(this.getClass().getName(), "Start notification service.");
+        Logger.v(TAG, "Start notification service.");
 
         Context context = A.getMain().getApplicationContext();
         Intent intent = new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
@@ -77,14 +79,11 @@ public class NotificationService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle(contentTitel);
         builder.setSmallIcon(menion.android.whereyougo.R.drawable.ic_title_logo);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setChannelId(NOTIFICATION_CHANNEL_ID);
-        }
 
         Notification notification = builder.build();
 
@@ -109,7 +108,7 @@ public class NotificationService extends Service {
     }
 
     private void stopNotificationService() {
-        Logger.v(this.getClass().getName(), "Stop notification service.");
+        Logger.v(TAG, "Stop notification service.");
         if (foreground) {
             stopForeground(true);
             foreground = false;
