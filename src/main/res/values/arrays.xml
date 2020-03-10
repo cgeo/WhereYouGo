@@ -25,7 +25,7 @@
         <item>ESRI_WORLD_STREET_MAP</item>
         <item>ESRI_WORLD_IMAGERY</item>
     </string-array>
-    <string name="mapgenerator_default" translatable="false">BLANK</string>
+    <string name="mapgenerator_default" translatable="false">OPENSTREETMAP</string>
 
     <string-array name="pref_map_provider_entries">
         <item>@string/pref_map_provider_vector</item>
