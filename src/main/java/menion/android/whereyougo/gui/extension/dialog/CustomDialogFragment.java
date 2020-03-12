@@ -2,7 +2,8 @@ package menion.android.whereyougo.gui.extension.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+
+import androidx.fragment.app.DialogFragment;
 
 public abstract class CustomDialogFragment extends DialogFragment {
 
