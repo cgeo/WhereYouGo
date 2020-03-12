@@ -29,6 +29,9 @@
     <string name="download_state_login">Logging in</string>
     <string name="download_state_logout">Logging out</string>
     <string name="download_successful">Downloaded successfully</string>
+    <string name="import_cartridge">Import cartridge</string>
+    <string name="import_button">Import</string>
+    <string name="import_successful">Imported successfully</string>
     <string name="error">Error</string>
     <string name="failed">Failed</string>
     <string name="feet">Feet</string>
