@@ -251,7 +251,7 @@ public class MainActivity extends CustomMainActivity {
         setContentView(R.layout.layout_main);
 
         // set title
-        ((TextView) findViewById(R.id.title_text)).setText(MainApplication.APP_NAME);
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.app_name);
 
         // define buttons
         View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -316,8 +316,7 @@ public class MainActivity extends CustomMainActivity {
         if (cartridgeFiles == null || cartridgeFiles.size() == 0) {
             UtilsGUI.showDialogInfo(
                     MainActivity.this,
-                    getString(R.string.no_wherigo_cartridge_available, FileSystem.ROOT,
-                            MainApplication.APP_NAME));
+                    getString(R.string.no_wherigo_cartridge_available, FileSystem.ROOT));
             return false;
         } else {
             return true;

@@ -384,7 +384,7 @@ public abstract class CustomMainActivity extends CustomActivity {
         if (DIRS == null || DIRS.length == 0)
             return true;
 
-        if (FileSystem.createRoot(MainApplication.APP_NAME)) {
+        if (FileSystem.createRoot(getString(R.string.app_name))) {
             // Logger.w(TAG, "FileSystem succesfully created!");
         } else {
             // Logger.w(TAG, "FileSystem cannot be created!");

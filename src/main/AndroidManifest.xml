@@ -28,7 +28,7 @@
         android:allowBackup="true"
         android:debuggable="false"
         android:icon="@drawable/icon"
-        android:label="WhereYouGo"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:replace="icon, label">
         <activity
