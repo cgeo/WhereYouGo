@@ -28,6 +28,7 @@ import java.nio.channels.FileChannel;
 import java.util.Locale;
 
 import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
 
 /**
  * @author menion
@@ -127,7 +128,7 @@ public class FileSystem {
 
     public static String getRoot() {
         if (ROOT == null) {
-            createRoot(MainApplication.APP_NAME);
+            createRoot(MainApplication.getContext().getResources().getString(R.string.app_name));
         }
         return ROOT;
     }

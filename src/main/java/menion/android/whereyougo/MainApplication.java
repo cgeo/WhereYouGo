@@ -50,8 +50,7 @@ import menion.android.whereyougo.utils.Utils;
 public class MainApplication extends Application {
 
     private static final String TAG = "MainApplication";
-    // application name
-    public static final String APP_NAME = "WhereYouGo";
+
     private static Timer mTimer;
     private static OnAppVisibilityChange onAppVisibilityChange;
     private static Context applicationContext;
