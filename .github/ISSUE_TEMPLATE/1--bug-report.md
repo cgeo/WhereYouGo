@@ -25,6 +25,10 @@ Describe what you expected to happen instead.
 **Version of WhereYouGo used:**
 You will find the version info by clicking on the WhereYouGo icon in the upper left corner of the main menu.
 
+**System information (Android version, device model):**
+You will find the system information in the Android Settings - About phone - Software information or similar.
+If you are using c:geo, you can also open the About c:geo - System tab and copy the information there.
+
 **Is the problem reproducible:**
 Yes / No
 
