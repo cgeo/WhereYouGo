@@ -26,8 +26,6 @@
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Zrušit</string> -->
-    <!-- 	<string name="error">Chyba</string> -->
     <string name="error_last_location_unknown">Posledná poloha je neznáma</string>
     <string name="file_invalid">Vybraný súbor je neplatný.</string>
     <string name="file_select">Vyberte súbor.</string>
@@ -50,8 +48,6 @@
     <string name="info_map_file_start_position">Počiatočná poloha</string>
     <string name="info_map_file_start_zoom_level">Počiatočné priblíženie</string>
     <string name="info_map_file_version">Verzia</string>
-    <!-- 	<string name="latitude">Zemepisná šírka</string> -->
-    <!-- 	<string name="longitude">Zemepisná dĺžka</string> -->
     <string name="menu_info">Informácie</string>
     <string name="menu_info_map_file">Vlastnosti mapy</string>
     <string name="menu_info_about">O programe</string>
@@ -74,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (stratová)</string>
     <string name="menu_screenshot_png">PNG (bezstratová)</string>
     <string name="no_location_provider_available">Nie je k dispozícii žiadny poskytovateľ polohy</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">Nastavenie pre vývojára</string>
     <string name="preferences_general">Všeobecné nastavenia</string>
     <string name="preferences_cache_persistence">Platnosť vyrovnávacej pamäte</string>
