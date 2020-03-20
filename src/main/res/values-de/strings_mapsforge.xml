@@ -26,8 +26,6 @@
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Abbrechen</string> -->
-    <!-- 	<string name="error">Fehler</string> -->
     <string name="error_last_location_unknown">Die letzte Position ist unbekannt</string>
     <string name="file_invalid">Die gewählte Datei ist ungültig.</string>
     <string name="file_select">Bitte wählen Sie eine Datei.</string>
@@ -50,8 +48,6 @@
     <string name="info_map_file_start_position">Startposition</string>
     <string name="info_map_file_start_zoom_level">Start-Zoomstufe</string>
     <string name="info_map_file_version">Version</string>
-    <!-- 	<string name="latitude">Breitengrad</string> -->
-    <!-- 	<string name="longitude">Längengrad</string> -->
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kartendatei-Info</string>
     <string name="menu_info_about">Über diese Software</string>
@@ -72,7 +68,6 @@
     <string name="menu_screenshot_jpeg">JPEG (verlustbehaftet)</string>
     <string name="menu_screenshot_png">PNG (verlustlos)</string>
     <string name="no_location_provider_available">Keine Standortquelle verfügbar</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">Entwicklungs-Einstellungen</string>
     <string name="preferences_general">Allgemeine Einstellungen</string>
     <string name="preferences_cache_persistence">Cache-Persistenz</string>

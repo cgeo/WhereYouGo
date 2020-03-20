@@ -26,8 +26,6 @@
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Avbryt</string> -->
-    <!-- 	<string name="error">Feil</string> -->
     <string name="error_last_location_unknown">Siste lokasjon er ukjent</string>
     <string name="file_invalid">Valgt fil er ugyldig.</string>
     <string name="file_select">Venligst velg en fil.</string>
@@ -50,8 +48,6 @@
     <string name="info_map_file_start_position">Start possisjon</string>
     <string name="info_map_file_start_zoom_level">Start zoom nivå</string>
     <string name="info_map_file_version">Versjon</string>
-    <!-- 	<string name="latitude">Breddegrad</string> -->
-    <!-- 	<string name="longitude">Lengdegrad</string> -->
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kart filegenskaper</string>
     <string name="menu_info_about">Om denne programvaren</string>
@@ -74,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (tapsbasert)</string>
     <string name="menu_screenshot_png">PNG (tapsfri)</string>
     <string name="no_location_provider_available">Ingen posisjonskilde tilgjengelig</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">feilsøkings innstillinger</string>
     <string name="preferences_general">Generelle instillinger</string>
     <string name="preferences_cache_persistence">buffer utholdenhet</string>
