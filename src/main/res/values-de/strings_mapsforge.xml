@@ -5,33 +5,30 @@
         <item>angloamerikanisch</item>
         <item>metrisch</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>winzig</item>
         <item>klein</item>
-        <item>normal</item>
+        <item>Normal</item>
         <item>groß</item>
         <item>riesig</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>leer</item>
         <item>Mapdatei [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
         <item>CyclOSM (online)</item>
-        <item>Public Transport(\u00d6PNV) (online)</item>
-        <item>Esri World Street (online)</item>
-        <item>Esri World Imagery (online)</item>
+        <item>Öffentlicher Verkehr (\u00d6PNV) (online)</item>
+        <item>Esri Straßen (online)</item>
+        <item>Esri Luftbild (online)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Die letzte Position ist unbekannt</string>
     <string name="file_invalid">Die gewählte Datei ist ungültig.</string>
     <string name="file_select">Bitte wählen Sie eine Datei.</string>
-    <string name="file_size_byte">byte</string>
-    <string name="file_size_bytes">bytes</string>
-    <string name="file_size_kb">kB</string>
+    <string name="file_size_byte">Byte</string>
+    <string name="file_size_bytes">Bytes</string>
+    <string name="file_size_kb">KB</string>
     <string name="file_size_mb">MB</string>
     <string name="file_size_gb">GB</string>
     <string name="go_to_position">Gehe zu Position</string>
@@ -59,8 +56,10 @@
     <string name="menu_position_map_file_center">Zentrum der Kartendatei</string>
     <string name="menu_position_my_location_enable">Meine Position anzeigen</string>
     <string name="menu_position_my_location_disable">Meine Position entfernen</string>
+    <string name="menu_position_snap_to_location">Auf Position einrasten</string>
     <string name="menu_position_target">Ziel</string>
     <string name="menu_preferences">Einstellungen</string>
+    <string name="menu_refresh">Aktualisieren</string>
     <string name="menu_render_theme">Render-Theme</string>
     <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">XML-Datei wählen …</string>

@@ -5,7 +5,6 @@
         <item>ヤード/ポンド法</item>
         <item>メートル法</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>最小</item>
         <item>小</item>
@@ -13,7 +12,6 @@
         <item>大</item>
         <item>最大</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>空</item>
         <item>地図ファイル [*.map] (オフライン)</item>
@@ -24,7 +22,6 @@
         <item>Esri World Street (オンライン)</item>
         <item>Esri World Imagery (オンライン)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">最後の位置が不明です</string>
     <string name="file_invalid">選択したファイルが無効です。</string>
