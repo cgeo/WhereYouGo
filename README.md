@@ -38,6 +38,8 @@ Uses the following projects:
 We started using [Crowdin](https://crowdin.com/project/whereyougo) to support translations.
 At this moment export/import to/from Crowdin is done manually by a member of the development team.
 
+Localization status: [![Crowdin](https://badges.crowdin.net/whereyougo/localized.svg)](https://crowdin.com/project/whereyougo)
+
 ## Releases / Versions
 
 An overview of released beta and production versions and their changelog can be found on the [release page of this repository](https://github.com/cgeo/WhereYouGo/releases).
