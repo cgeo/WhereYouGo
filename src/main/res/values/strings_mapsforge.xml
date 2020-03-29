@@ -19,22 +19,13 @@
         <item>map file [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>OpenCycleMap (online)</item>
-        <item>OpenTransportMap (online)</item>
-        <item>OpenMapSurfer (online)</item>
-        <item>MapQuest OSM (online)</item>
-        <item>MapQuest Aerial (online)</item>
-        <item>TF OpenCycleMap (online)</item>
-        <item>TF Transport (online)</item>
-        <item>TF Landscape (online)</item>
-        <item>TF Outdoors (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Public Transport(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Cancel</string> -->
-    <!-- 	<string name="error">Error</string> -->
     <string name="error_last_location_unknown">The last location is unknown</string>
     <string name="file_invalid">The selected file is invalid.</string>
     <string name="file_select">Please select a file.</string>
@@ -57,8 +48,6 @@
     <string name="info_map_file_start_position">Start position</string>
     <string name="info_map_file_start_zoom_level">Start zoom level</string>
     <string name="info_map_file_version">Version</string>
-    <!-- 	<string name="latitude">Latitude</string> -->
-    <!-- 	<string name="longitude">Longitude</string> -->
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Map file properties</string>
     <string name="menu_info_about">About this software</string>
@@ -81,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (lossy)</string>
     <string name="menu_screenshot_png">PNG (lossless)</string>
     <string name="no_location_provider_available">No location source available</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">Debug settings</string>
     <string name="preferences_general">General settings</string>
     <string name="preferences_cache_persistence">Cache persistence</string>

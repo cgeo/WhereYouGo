@@ -426,14 +426,12 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         });
 
         // restore map generator
-        if (sharedPreferences.contains(KEY_MAP_GENERATOR)) {
-            try {
-                MapGeneratorInternal type =
-                        MapGeneratorInternal.valueOf(sharedPreferences.getString(KEY_MAP_GENERATOR, null));
-                setMapGenerator(type);
-            } catch (Exception e) {
-                // discard
-            }
+        try {
+            MapGeneratorInternal type =
+                    MapGeneratorInternal.valueOf(sharedPreferences.getString(KEY_MAP_GENERATOR, getString(R.string.mapgenerator_default)));
+            setMapGenerator(type);
+        } catch (Exception e) {
+            setMapGenerator(MapGeneratorInternal.valueOf(getString(R.string.mapgenerator_default)));
         }
 
         // add items received via Intent or from provider

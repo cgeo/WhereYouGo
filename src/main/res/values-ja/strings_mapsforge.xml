@@ -19,22 +19,13 @@
         <item>地図ファイル [*.map] (オフライン)</item>
         <item>OSM Mapnik (オンライン)</item>
         <item>OSM.de (オンライン)</item>
-        <item>OpenCycleMap (オンライン)</item>
-        <item>OpenTransportMap (オンライン)</item>
-        <item>OpenMapSurfer (オンライン)</item>
-        <item>MapQuest OSM (オンライン)</item>
-        <item>MapQuest Aerial (オンライン)</item>
-        <item>TF OpenCycleMap (オンライン)</item>
-        <item>TF Transport (オンライン)</item>
-        <item>TF Landscape (オンライン)</item>
-        <item>TF Outdoors (オンライン)</item>
+        <item>CyclOSM (オンライン)</item>
+        <item>Public Transport(\u00d6PNV) (オンライン)</item>
         <item>Esri World Street (オンライン)</item>
         <item>Esri World Imagery (オンライン)</item>
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Cancel</string> -->
-    <!-- 	<string name="error">Error</string> -->
     <string name="error_last_location_unknown">最後の位置が不明です</string>
     <string name="file_invalid">選択したファイルが無効です。</string>
     <string name="file_select">ファイルを選択してください。</string>
@@ -57,8 +48,6 @@
     <string name="info_map_file_start_position">開始位置</string>
     <string name="info_map_file_start_zoom_level">開始ズームレベル</string>
     <string name="info_map_file_version">バージョン</string>
-    <!-- 	<string name="latitude">Latitude</string> -->
-    <!-- 	<string name="longitude">Longitude</string> -->
     <string name="menu_info">情報</string>
     <string name="menu_info_map_file">地図ファイルプロパティ</string>
     <string name="menu_info_about">このソフトウェアについて</string>
@@ -81,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (ロス有)</string>
     <string name="menu_screenshot_png">PNG (ロスレス)</string>
     <string name="no_location_provider_available">利用できる位置ソースがありません</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">デバッグ設定</string>
     <string name="preferences_general">全般設定</string>
     <string name="preferences_cache_persistence">キャッシュ永続化</string>

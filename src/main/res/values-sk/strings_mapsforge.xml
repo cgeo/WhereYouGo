@@ -19,22 +19,13 @@
         <item>súbor [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>OpenCycleMap (online)</item>
-        <item>OpenTransportMap (online)</item>
-        <item>OpenMapSurfer (online)</item>
-        <item>MapQuest OSM (online)</item>
-        <item>MapQuest Aerial (online)</item>
-        <item>TF OpenCycleMap (online)</item>
-        <item>TF Transport (online)</item>
-        <item>TF Landscape (online)</item>
-        <item>TF Outdoors (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Public Transport(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Zrušit</string> -->
-    <!-- 	<string name="error">Chyba</string> -->
     <string name="error_last_location_unknown">Posledná poloha je neznáma</string>
     <string name="file_invalid">Vybraný súbor je neplatný.</string>
     <string name="file_select">Vyberte súbor.</string>
@@ -57,8 +48,6 @@
     <string name="info_map_file_start_position">Počiatočná poloha</string>
     <string name="info_map_file_start_zoom_level">Počiatočné priblíženie</string>
     <string name="info_map_file_version">Verzia</string>
-    <!-- 	<string name="latitude">Zemepisná šírka</string> -->
-    <!-- 	<string name="longitude">Zemepisná dĺžka</string> -->
     <string name="menu_info">Informácie</string>
     <string name="menu_info_map_file">Vlastnosti mapy</string>
     <string name="menu_info_about">O programe</string>
@@ -81,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (stratová)</string>
     <string name="menu_screenshot_png">PNG (bezstratová)</string>
     <string name="no_location_provider_available">Nie je k dispozícii žiadny poskytovateľ polohy</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">Nastavenie pre vývojára</string>
     <string name="preferences_general">Všeobecné nastavenia</string>
     <string name="preferences_cache_persistence">Platnosť vyrovnávacej pamäte</string>

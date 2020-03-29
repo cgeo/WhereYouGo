@@ -353,6 +353,10 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_UNITS_SPEED)) {
             String newValue = sharedPreferences.getString(key, null);
             Preferences.FORMAT_SPEED = Utils.parseInt(newValue);
+        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_RUN_SCREEN_OFF)) {
+            boolean newValue = sharedPreferences.getBoolean(key, false);
+            Preferences.GLOBAL_RUN_SCREEN_OFF = Utils.parseBoolean(newValue);
+            PreferenceValues.enableWakeLock();
         }
     }
 

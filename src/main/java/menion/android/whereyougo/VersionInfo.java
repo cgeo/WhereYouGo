@@ -49,7 +49,7 @@ public class VersionInfo {
                     // show dialog
                     AlertDialog.Builder b = new AlertDialog.Builder(A.getMain());
                     b.setCancelable(false);
-                    b.setTitle(MainApplication.APP_NAME);
+                    b.setTitle(R.string.app_name);
                     b.setIcon(R.drawable.icon);
                     b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
                     b.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {

@@ -19,22 +19,13 @@
         <item>map file [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>OpenCycleMap (online)</item>
-        <item>OpenTransportMap (online)</item>
-        <item>OpenMapSurfer (online)</item>
-        <item>MapQuest OSM (online)</item>
-        <item>MapQuest Aerial (online)</item>
-        <item>TF OpenCycleMap (online)</item>
-        <item>TF Transport (online)</item>
-        <item>TF Landscape (online)</item>
-        <item>TF Outdoors (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Public Transport(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
 
     <string name="application_name">Mapsforge</string>
-    <!-- 	<string name="cancel">Avbryt</string> -->
-    <!-- 	<string name="error">Feil</string> -->
     <string name="error_last_location_unknown">Siste lokasjon er ukjent</string>
     <string name="file_invalid">Valgt fil er ugyldig.</string>
     <string name="file_select">Venligst velg en fil.</string>
@@ -57,8 +48,6 @@
     <string name="info_map_file_start_position">Start possisjon</string>
     <string name="info_map_file_start_zoom_level">Start zoom nivå</string>
     <string name="info_map_file_version">Versjon</string>
-    <!-- 	<string name="latitude">Breddegrad</string> -->
-    <!-- 	<string name="longitude">Lengdegrad</string> -->
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kart filegenskaper</string>
     <string name="menu_info_about">Om denne programvaren</string>
@@ -81,7 +70,6 @@
     <string name="menu_screenshot_jpeg">JPEG (tapsbasert)</string>
     <string name="menu_screenshot_png">PNG (tapsfri)</string>
     <string name="no_location_provider_available">Ingen posisjonskilde tilgjengelig</string>
-    <!-- 	<string name="ok">OK</string> -->
     <string name="preferences_debug">feilsøkings innstillinger</string>
     <string name="preferences_general">Generelle instillinger</string>
     <string name="preferences_cache_persistence">buffer utholdenhet</string>

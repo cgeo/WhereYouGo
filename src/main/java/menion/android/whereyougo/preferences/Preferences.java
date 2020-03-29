@@ -166,7 +166,10 @@ public class Preferences {
      * zone navigation point
      */
     public static int GUIDING_ZONE_NAVIGATION_POINT;
- 
+    /**
+     * run if screen is turned off
+     */
+    public static boolean GLOBAL_RUN_SCREEN_OFF;
   /* ------------ */
 
     private static Context prefContext;
@@ -238,6 +241,7 @@ public class Preferences {
             GLOBAL_SAVEGAME_AUTO = getBooleanPreference(R.string.pref_KEY_B_SAVEGAME_AUTO);
             GLOBAL_SAVEGAME_SLOTS = getNumericalPreference(R.string.pref_KEY_S_SAVEGAME_SLOTS);
             GLOBAL_DOUBLE_CLICK = getBooleanPreference(R.string.pref_KEY_B_DOUBLE_CLICK);
+            GLOBAL_RUN_SCREEN_OFF = getBooleanPreference(R.string.pref_KEY_B_RUN_SCREEN_OFF);
             GC_USERNAME = getStringPreference(R.string.pref_KEY_S_GC_USERNAME);
             GC_PASSWORD = getStringPreference(R.string.pref_KEY_S_GC_PASSWORD);
 

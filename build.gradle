@@ -1,28 +1,18 @@
-/*
- * Build scan plugin shall be applied first
- */
-apply plugin: 'com.gradle.build-scan'
-
 buildscript {
     repositories {
         jcenter()
-        // gradle build-scan for profiling our build script
-        maven {
-            url 'https://plugins.gradle.org/m2'
-        }
         google()
     }
     // these dependencies are used by gradle plugins, not by the project
     dependencies {
-        // check for updates of gradle plugin dependencies
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
-
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.5.3'
-
-        // gradle build script profiling
-        classpath 'com.gradle:build-scan-plugin:2.4.2'
+        classpath 'com.android.tools.build:gradle:3.6.1'
     }
+}
+
+plugins {
+    // check for updates of gradle plugin dependencies
+    id 'com.github.ben-manes.versions' version '0.27.0'
 }
 
 allprojects {
@@ -46,6 +36,9 @@ android {
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
     }
+
+    // define ndk version to use local the same version as on CI
+    ndkVersion '21.0.6113669'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -166,4 +159,13 @@ class GitCommit {
     static String currentShort() {
         return current().substring(0, 7)
     }
+}
+
+/*
+ * Configuration for dependencyUpdates, see https://github.com/ben-manes/gradle-versions-plugin
+ */
+tasks.named('dependencyUpdates') {
+    checkForGradleUpdate = true
+    revision = "release"
+    gradleReleaseChannel = "current"
 }
