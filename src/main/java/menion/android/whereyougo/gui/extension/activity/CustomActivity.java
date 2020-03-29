@@ -24,13 +24,14 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.app.NotificationCompat;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;

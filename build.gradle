@@ -87,8 +87,9 @@ android {
 
 dependencies {
     fileTree(dir: 'libs', include: ['*.jar'])
-    // Support Library AppCompat
-    implementation 'com.android.support:support-v4:28.0.0'
+
+    // Legacy Support Library
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Locus Maps integration
     //noinspection GradleDependency
@@ -103,8 +104,13 @@ dependencies {
     //
     implementation 'com.github.jspricke.mapsforge-map-whereyougo:mapsforge-map:75d7c20'
 
-    //
-    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    // barcode scanner
+    // v4.x: Minimum SDK version 24, downgradable to 14 by using zxing:core 3.3.0, uses androidx
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+    // downgrade zxing:core to 3.3.0 or earlier for Android 14+ support
+    // AndroidManifest.xml: use tools:overrideLibrary="com.google.zxing.client.android" to force usage
+    //noinspection GradleDependency
+    implementation 'com.google.zxing:core:3.3.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
     //noinspection GradleDependency

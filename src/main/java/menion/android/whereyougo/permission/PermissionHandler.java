@@ -9,7 +9,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.List;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.Logger;
 
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 import static menion.android.whereyougo.preferences.Locale.getString;
 
 public class PermissionHandler {
@@ -47,7 +49,7 @@ public class PermissionHandler {
     public static String[] checkKoPermissions(final Activity activity, final String[] permissions) {
     List<String> listKoPermissions = new ArrayList<>();
         for (String permission: permissions) {
-            if (ActivityCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                 listKoPermissions.add(permission);
             }
         }
