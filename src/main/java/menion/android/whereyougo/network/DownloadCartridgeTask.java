@@ -39,9 +39,9 @@ import okhttp3.Response;
 
 public class DownloadCartridgeTask extends
         AsyncTask<String, DownloadCartridgeTask.Progress, Boolean> {
-    private static final String TAG = "DownloadCartridgeTask";
-    private static final String LOGIN = "https://www.wherigo.com/login/default.aspx";
-    private static final String DOWNLOAD = "https://www.wherigo.com/cartridge/download.aspx";
+    private static String TAG = "DownloadCartridgeTask";
+    private static String LOGIN = "https://www.wherigo.com/login/default.aspx";
+    private static String DOWNLOAD = "https://www.wherigo.com/cartridge/download.aspx";
 
     private final String username;
     private final String password;
