@@ -213,8 +213,7 @@ public class Preferences {
 
     public static void setPreference(final int PreferenceId, final String value) {
         String key = prefContext.getString(PreferenceId);
-        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, value).commit();
-    }
+        PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, value).commit();   }
 
     public static void setPreference(final int PreferenceId, final int value) {
         String key = prefContext.getString(PreferenceId);
