@@ -36,7 +36,6 @@
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
             android:label="WhereYouGo"
             android:screenOrientation="fullSensor">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
