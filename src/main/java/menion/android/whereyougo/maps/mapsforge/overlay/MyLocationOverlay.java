@@ -56,7 +56,7 @@ public class MyLocationOverlay implements LocationListener, Overlay {
      *
      * @param context  a reference to the application context.
      * @param mapView  the {@code MapView} on which the location will be displayed.
-     * @param drawable a drawable to display at the current location (might be null).
+     * @param marker   a drawable to display at the current location (might be null).
      */
     public MyLocationOverlay(Context context, MapView mapView, Marker marker) {
         this(context, mapView, marker, getDefaultCircleFill(), getDefaultCircleStroke());
@@ -67,7 +67,7 @@ public class MyLocationOverlay implements LocationListener, Overlay {
      *
      * @param context      a reference to the application context.
      * @param mapView      the {@code MapView} on which the location will be displayed.
-     * @param drawable     a drawable to display at the current location (might be null).
+     * @param marker       a drawable to display at the current location (might be null).
      * @param circleFill   the {@code Paint} used to fill the circle that represents the current
      *                     location (might be null).
      * @param circleStroke the {@code Paint} used to stroke the circle that represents the current
