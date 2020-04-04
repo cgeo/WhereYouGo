@@ -139,7 +139,7 @@ public class CompassView extends View {
     }
 
     /**
-     * Function which rotate arrow and compas (angles in degrees)
+     * Function which rotate arrow and compass (angles in degrees)
      *
      * @param azimuth         new angle for compas north
      * @param azimuthToTarget new angle for arrow

@@ -119,7 +119,7 @@
             to desired wherigo via Web Browser and select open in WhereYouGo)
         </li>
         <li>added: long click on cartridge to show dialog for cartridge deletion</li>
-        <li>added: SD card is no longer required (altough recommended), users with no SD card have
+        <li>added: SD card is no longer required (although recommended), users with no SD card have
             to download cartridges via the newly added downloading function
         </li>
     </update>
@@ -157,7 +157,7 @@
         <li>update: renamed GPS to Location, since location can be received via network as well as
             via GPS
         </li>
-        <li>added: location provider in Sattelite and Compass screen</li>
+        <li>added: location provider in Satellite and Compass screen</li>
     </update>
 
     <update name="0.8.5" id="31" time="12.4.2014">
@@ -227,7 +227,7 @@
         <li>rapid graphics improvements</li>
         <li>improved map screen by Locus style</li>
         <li>fixed some problems with save game</li>
-        <li>some minnor fixs</li>
+        <li>some minor fixes</li>
     </update>
 
     <update name="0.4.13" id="22" time="20.1.2011">
@@ -257,19 +257,19 @@
 
     <update name="0.4.9" id="18">
         <li>fixed problems with map</li>
-        <li>fixed some minnor technical problems</li>
+        <li>fixed some minor technical problems</li>
     </update>
 
     <update name="0.4.8" id="17">
         <li>map handling improvement (multi-touch)</li>
-        <li>fixed some minnor technical problems</li>
+        <li>fixed some minor technical problems</li>
     </update>
 
     <update name="0.4.7" id="16">
         <li>fixed problem with enabling GPS</li>
         <li>fixed visibility in market</li>
         <li>added new crash log system (saving errors into WhereYouGo/logs directory)</li>
-        <li>fixed some minnor technical problems</li>
+        <li>fixed some minor technical problems</li>
     </update>
 
     <update name="0.4.6" id="15">
@@ -279,7 +279,7 @@
 
     <update name="0.4.5" id="14">
         <li>fixed problem with some cartridges</li>
-        <li>small improvements and fixs on maps</li>
+        <li>small improvements and fixes on maps</li>
     </update>
 
     <update name="0.4.4" id="13">
@@ -297,7 +297,7 @@
         <li>possibility to switch to light theme (Settings->Global)</li>
         <li>now creating log file for played cache (send me if any problem with played cartridge)
         </li>
-        <li>minnor graphics improvements</li>
+        <li>minor graphics improvements</li>
     </update>
 
     <update name="0.4.1" id="10">
@@ -309,7 +309,7 @@
     <update name="0.4.0" id="9">
         <li>added support for wav and mp3 sounds</li>
         <li>added online google maps</li>
-        <li>added support for offline maps throught 'Locus' app</li>
+        <li>added support for offline maps through 'Locus' app</li>
         <li>fixed cartridge list (icon size, sorted by distance)</li>
     </update>
 

@@ -385,7 +385,7 @@ public abstract class CustomMainActivity extends CustomActivity {
             return true;
 
         if (FileSystem.createRoot(getString(R.string.app_name))) {
-            // Logger.w(TAG, "FileSystem succesfully created!");
+            // Logger.w(TAG, "FileSystem successfully created!");
         } else {
             // Logger.w(TAG, "FileSystem cannot be created!");
             UtilsGUI.showDialogError(CustomMainActivity.this, R.string.filesystem_cannot_create_root,

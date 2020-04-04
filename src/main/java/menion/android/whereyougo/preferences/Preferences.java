@@ -231,7 +231,7 @@ public class Preferences {
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putBoolean(key, value).commit();
     }
 
-    /* Note: Default values are defined in xml/<preferences>.xml and loaded at programm start */
+    /* Note: Default values are defined in xml/<preferences>.xml and loaded at program start */
     public static void init(Context c) {
         Logger.d(TAG, "init(" + c + ")");
 

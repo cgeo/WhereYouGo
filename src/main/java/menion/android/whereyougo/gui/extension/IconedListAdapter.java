@@ -161,7 +161,7 @@ public class IconedListAdapter extends BaseAdapter {
             // set TextView bottom
             tv02.setTextColor(Color.DKGRAY);
 
-            // set additional parametres
+            // set additional parameters
             if (textView02Visibility != View.GONE) {
                 tv02.setVisibility(View.VISIBLE);
                 String desc = di.getDescription();

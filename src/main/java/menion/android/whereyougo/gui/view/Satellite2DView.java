@@ -55,7 +55,7 @@ public class Satellite2DView extends View {
     private Drawable bitCompassBg;
     private Bitmap bitSnr;
 
-    private float satsPanelHeigh;
+    private float satsPanelHeight;
     private float space;
     private float lineWidth;
     private float snrWidth;
@@ -144,7 +144,7 @@ public class Satellite2DView extends View {
                 } else {
                     mPaintText.setColor(Color.LTGRAY);
                 }
-                c.drawText((sat.getPrn() < 10 ? "0" : "") + sat.getPrn(), xCenter, spSize + satsPanelHeigh,
+                c.drawText((sat.getPrn() < 10 ? "0" : "") + sat.getPrn(), xCenter, spSize + satsPanelHeight,
                         mPaintText);
 
                 int height = (int) (Math.log(sat.getSnr() > 0 ? sat.getSnr() : 1) / ln100 * snrHeight);
@@ -223,9 +223,9 @@ public class Satellite2DView extends View {
         bitSnr = Images.getImageB(R.drawable.var_skyplot_bar, (int) snrWidth);
 
         // define bottom panel height
-        satsPanelHeigh = bitSnr.getHeight() + space + mPaintText.getTextSize();
+        satsPanelHeight = bitSnr.getHeight() + space + mPaintText.getTextSize();
 
-        float skyplotHeight = h - satsPanelHeigh - space;
+        float skyplotHeight = h - satsPanelHeight - space;
         spSize = Math.min(w, skyplotHeight);
         r1 = spSize / 2.0f * 0.95f;
 
@@ -234,7 +234,7 @@ public class Satellite2DView extends View {
         spY = spSize / 2.0f;
 
         // Logger.d(TAG, "W:" + Const.SCREEN_WIDTH + ", " + Const.SCREEN_HEIGHT + ", " +
-        // c.getClipBounds() + ", lineWidth:" + lineWidth + ", " + satsPanelHeigh + ", " + spX + ", " +
+        // c.getClipBounds() + ", lineWidth:" + lineWidth + ", " + satsPanelHeight + ", " + spX + ", " +
         // spY);
     }
 }

@@ -62,7 +62,7 @@ public class StringToken implements Enumeration<Object> {
     /**
      * Returns the number of unprocessed tokens remaining in the string.
      *
-     * @return number of tokens that can be retreived before an {@code Exception} will result from a
+     * @return number of tokens that can be retrieved before an {@code Exception} will result from a
      * call to {@code nextToken()}.
      */
     public int countTokens() {

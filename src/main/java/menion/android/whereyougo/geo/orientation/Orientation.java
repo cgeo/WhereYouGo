@@ -152,7 +152,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       if (!Preferences.SENSOR_HARDWARE_COMPASS || Preferences.SENSOR_HARDWARE_COMPASS_AUTO_CHANGE) {
         // register location listener
         LocationState.addLocationChangeListener(this);
-        // set zero bearing, if previously was seted by sensor
+        // set zero bearing, if previously was set by sensor
         mLastAziGps = 0.0f;
       }
     }

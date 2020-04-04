@@ -126,7 +126,7 @@ public class AudioClip {
                 mPlayer.pause();
             }
         } catch (Exception e) {
-            System.err.println("AduioClip::stop " + name + " " + e.toString());
+            System.err.println("AudioClip::stop " + name + " " + e.toString());
         }
     }
 

@@ -43,8 +43,8 @@ class ScreenshotCapturer extends PausableThread {
         return new File(directory, stringBuilder.toString());
     }
 
-    synchronized void captureScreenshot(CompressFormat screenhotFormat) {
-        this.compressFormat = screenhotFormat;
+    synchronized void captureScreenshot(CompressFormat screenshotFormat) {
+        this.compressFormat = screenshotFormat;
         notify();
     }
 

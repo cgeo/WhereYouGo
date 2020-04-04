@@ -44,7 +44,7 @@ public class GpsConnection {
     private final MyGpsListener gpsListener;
     private boolean isFixed;
     private Timer mGpsTimer;
-    // temp variable for indicationg wheather network provider is enabled
+    // temp variable for indicating whether network provider is enabled
     private boolean networkProviderEnabled;
     private boolean gpsProviderEnabled;
     private GpsStatus gpsStatus;

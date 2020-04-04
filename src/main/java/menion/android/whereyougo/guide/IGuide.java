@@ -27,7 +27,7 @@ public interface IGuide {
 
     void actualizeState(Location actualLocation);
 
-    float getAzimuthToTaget();
+    float getAzimuthToTarget();
 
     float getDistanceToTarget();
 
