@@ -29,7 +29,7 @@ public class Const {
      */
     public static final float RHO = (float) (180 / Math.PI);
     /**
-     * precission value for some rounding functions
+     * precision value for some rounding functions
      */
     public static final int PRECISION = 5;
 

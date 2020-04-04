@@ -100,7 +100,7 @@ public class GuideContent implements ILocationEventListener {
 
         // set location listener
         LocationState.addLocationChangeListener(this);
-        // call one onLocationChange, to update actual values imediately
+        // call one onLocationChange, to update actual values immediately
         onLocationChanged(LocationState.getLocation());
         // Logger.d(TAG, "X");
         Thread thread = new Thread(new Runnable() {
@@ -152,7 +152,7 @@ public class GuideContent implements ILocationEventListener {
             mGuide.actualizeState(location);
 
             mTargetName = mGuide.getTargetName();
-            mAzimuthToTarget = mGuide.getAzimuthToTaget();
+            mAzimuthToTarget = mGuide.getAzimuthToTarget();
             mDistanceToTarget = mGuide.getDistanceToTarget();
 
             mLocation = location;

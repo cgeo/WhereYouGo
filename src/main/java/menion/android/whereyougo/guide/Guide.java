@@ -81,7 +81,7 @@ public class Guide implements IGuide {
     }
 
     @Override
-    public float getAzimuthToTaget() {
+    public float getAzimuthToTarget() {
         return azimuth;
     }
 

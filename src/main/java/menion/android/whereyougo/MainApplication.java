@@ -220,12 +220,12 @@ public class MainApplication extends Application {
             sharedPref.getString(key, "");
         } catch (Exception e) {
             try {
-                Log.d(TAG, "legecySupport4PreferencesFloat() - LEGECY SUPPORT: convert float to string");
+                Log.d(TAG, "legacySupport4PreferencesFloat() - LEGACY SUPPORT: convert float to string");
                 Float value = sharedPref.getFloat(key, 0.0f);
                 sharedPref.edit().remove(key).commit();
                 sharedPref.edit().putString(key, String.valueOf(value)).commit();
             } catch (Exception ee) {
-                Log.e(TAG, "legecySupport4PreferencesFloat() - panic remove", ee);
+                Log.e(TAG, "legacySupport4PreferencesFloat() - panic remove", ee);
                 sharedPref.edit().remove(key).commit();
             }
         }
@@ -239,12 +239,12 @@ public class MainApplication extends Application {
             sharedPref.getString(key, "");
         } catch (Exception e) {
             try {
-                Log.d(TAG, "legecySupport4PreferencesInt() - LEGECY SUPPORT: convert int to string");
+                Log.d(TAG, "legacySupport4PreferencesInt() - LEGACY SUPPORT: convert int to string");
                 int value = sharedPref.getInt(key, 0);
                 sharedPref.edit().remove(key).commit();
                 sharedPref.edit().putString(key, String.valueOf(value)).commit();
             } catch (Exception ee) {
-                Log.e(TAG, "legecySupportFloat2Int() - panic remove", ee);
+                Log.e(TAG, "legacySupportFloat2Int() - panic remove", ee);
                 sharedPref.edit().remove(key).commit();
             }
         }

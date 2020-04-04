@@ -5,7 +5,7 @@ WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online an
 
 ## About
 
-This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereYouGo/) as it was found unmaintained and was (after confirmation of original author) transfered to here. 
+This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereYouGo/) as it was found unmaintained and was (after confirmation of original author) transferred to here.
 Development can be continued seamless as we got the ability and allowance to publish the app under the original accounts and signing keys.
 
 ## Contact

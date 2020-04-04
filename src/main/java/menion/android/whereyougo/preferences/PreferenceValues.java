@@ -72,7 +72,7 @@ public class PreferenceValues {
      */
     public static final int VALUE_UNITS_COO_LATLON_DEC = 0;
 
-    // UNITS PARAMETRES
+    // UNITS PARAMETERS
     public static final int VALUE_UNITS_COO_LATLON_MIN = 1;
     public static final int VALUE_UNITS_COO_LATLON_SEC = 2;
     /**

@@ -146,7 +146,7 @@ public class UtilsFormat {
     }
 
     /**
-     * updated function for time formating as in stop watch
+     * updated function for time formatting as in stop watch
      */
     public static String formatTime(boolean full, long tripTime, boolean withUnits) {
         long hours = tripTime / 3600000;
