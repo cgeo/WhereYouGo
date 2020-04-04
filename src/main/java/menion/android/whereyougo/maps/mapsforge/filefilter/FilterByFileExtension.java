@@ -37,10 +37,11 @@ public class FilterByFileExtension implements FileFilter {
             if (file.isDirectory()) {
                 // accept all directories
                 return true;
-            } else if (file.isFile() && file.getName().endsWith(this.extension)) {
-                return true;
             }
+
+            return file.isFile() && file.getName().endsWith(this.extension);
         }
+
         return false;
     }
 }
