@@ -49,7 +49,7 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
      *
      * @param context  a reference to the application context.
      * @param mapView  the {@code MapView} on which the location will be displayed.
-     * @param drawable a drawable to display at the current location (might be null).
+     * @param marker   a drawable to display at the current location (might be null).
      */
     public SensorMyLocationOverlay(Context context, MapView mapView, RotationMarker marker) {
         super(context, mapView, marker);
@@ -64,7 +64,7 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
      *
      * @param context      a reference to the application context.
      * @param mapView      the {@code MapView} on which the location will be displayed.
-     * @param drawable     a drawable to display at the current location (might be null).
+     * @param marker       a drawable to display at the current location (might be null).
      * @param circleFill   the {@code Paint} used to fill the circle that represents the current
      *                     location (might be null).
      * @param circleStroke the {@code Paint} used to stroke the circle that represents the current
