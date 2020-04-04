@@ -125,11 +125,10 @@ public class MainApplication extends Application {
             pathInternal = getFilesDir().getAbsolutePath();
         } catch (Exception e2) {
         }
-        boolean set = true;
-        if (pathCustom == null || !FileSystem.setRootDirectory(pathCustom))
-            if (pathExternal == null || !FileSystem.setRootDirectory(pathExternal))
-                if (pathInternal == null || !FileSystem.setRootDirectory(pathInternal))
-                    set = false;
+
+        final boolean set = FileSystem.setRootDirectory(pathCustom)
+                || FileSystem.setRootDirectory(pathExternal)
+                || FileSystem.setRootDirectory(pathInternal);
 
         Preferences.GLOBAL_ROOT = FileSystem.ROOT;
         Preferences.setStringPreference(R.string.pref_KEY_S_ROOT, Preferences.GLOBAL_ROOT);
