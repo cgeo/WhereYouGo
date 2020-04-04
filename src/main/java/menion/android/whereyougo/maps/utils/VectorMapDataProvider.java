@@ -33,8 +33,6 @@ import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.maps.container.MapPoint;
 import menion.android.whereyougo.maps.container.MapPointPack;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
 
 public class VectorMapDataProvider implements MapDataProvider {
     private static VectorMapDataProvider instance = null;

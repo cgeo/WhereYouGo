@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;

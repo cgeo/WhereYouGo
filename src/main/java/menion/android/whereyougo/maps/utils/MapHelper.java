@@ -19,7 +19,6 @@ import android.app.Activity;
 import android.content.Intent;
 
 import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Zone;
 import locus.api.android.ActionDisplay.ExtraAction;
 import locus.api.android.ActionDisplayPoints;
 import locus.api.android.ActionDisplayTracks;

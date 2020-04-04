@@ -38,7 +38,6 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
