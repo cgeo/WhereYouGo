@@ -127,7 +127,7 @@ public class LabelMarker extends Marker {
     }
 
     /**
-     * @param new description of this marker (may be null).
+     * @param description new description of this marker (may be null).
      */
     public synchronized void setDescription(String description) {
         this.description = description;
@@ -141,7 +141,7 @@ public class LabelMarker extends Marker {
     }
 
     /**
-     * @param new label of this marker (may be null).
+     * @param label new label of this marker (may be null).
      */
     public synchronized void setLabel(String label) {
         this.label = label;
