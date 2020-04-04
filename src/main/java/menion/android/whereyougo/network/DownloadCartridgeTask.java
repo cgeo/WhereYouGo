@@ -227,7 +227,7 @@ public class DownloadCartridgeTask extends
         WORKING, SUCCESS, FAIL
     }
 
-    public class Progress {
+    public static class Progress {
         final Task task;
         final State state;
         long total;
