@@ -42,7 +42,6 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 
-import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.geo.location.LocationState;

@@ -24,7 +24,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.R.id;
 import menion.android.whereyougo.geo.location.Location;
@@ -38,8 +37,6 @@ import menion.android.whereyougo.gui.view.CompassView;
 import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.guide.IGuide;
 import menion.android.whereyougo.guide.IGuideEventListener;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.UtilsFormat;
 

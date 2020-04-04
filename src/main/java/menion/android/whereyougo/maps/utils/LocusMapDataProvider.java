@@ -35,8 +35,6 @@ import locus.api.objects.extra.Waypoint;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
 
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
