@@ -132,17 +132,13 @@ public class LocationState {
             Logger.w(TAG, "Failed to retrieve location: device has no network provider.");
         }
 
-        if (gpsLocation != null && networkLocation != null) {
-            if (gpsLocation.getTime() > networkLocation.getTime())
-                return gpsLocation;
-            else
-                return networkLocation;
-        } else if (gpsLocation != null)
-            return gpsLocation;
-        else if (networkLocation != null)
+        if (gpsLocation == null) {
             return networkLocation;
-        else
-            return null;
+        } else if (networkLocation == null) {
+            return gpsLocation;
+        }
+
+        return gpsLocation.getTime() > networkLocation.getTime() ? gpsLocation : networkLocation;
     }
 
     public static Location getLocation() {
