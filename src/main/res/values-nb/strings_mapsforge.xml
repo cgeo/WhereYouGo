@@ -5,7 +5,6 @@
         <item>Imperialistisk</item>
         <item>Metrisk</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>Mikro</item>
         <item>Liten</item>
@@ -13,7 +12,6 @@
         <item>Stor</item>
         <item>Gedigen</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>blank</item>
         <item>map file [*.map] (offline)</item>
@@ -24,7 +22,6 @@
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Siste lokasjon er ukjent</string>
     <string name="file_invalid">Valgt fil er ugyldig.</string>
@@ -47,7 +44,7 @@
     <string name="info_map_file_size">Fil størrelse</string>
     <string name="info_map_file_start_position">Start possisjon</string>
     <string name="info_map_file_start_zoom_level">Start zoom nivå</string>
-    <string name="info_map_file_version">Versjon</string>
+    <string name="info_map_file_version">Version</string>
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kart filegenskaper</string>
     <string name="menu_info_about">Om denne programvaren</string>

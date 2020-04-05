@@ -5,7 +5,6 @@
         <item>Imperiální</item>
         <item>Metrické</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>nejmenší</item>
         <item>malý</item>
@@ -13,18 +12,16 @@
         <item>velký</item>
         <item>největší</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>prázdná</item>
         <item>soubor [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>CyclOSM (online)</item>
-        <item>Public Transport(\u00d6PNV) (online)</item>
+        <item>CyklOSM (online)</item>
+        <item>Veřejná doprava(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Poslední pozice je neznámá</string>
     <string name="file_invalid">Vybraný soubor je neplatný.</string>
