@@ -35,7 +35,7 @@
         <activity
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
             android:label="WhereYouGo"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -99,51 +99,52 @@
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.CartridgeDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.MainMenuActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.DetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.InputScreenActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListActionsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListTargetsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListTasksActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListThingsActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListZonesActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.PushDialogActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.GuidingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.SatelliteActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.XmlSettingsActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/ThemeSettings" />
         <activity
             android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
