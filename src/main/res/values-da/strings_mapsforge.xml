@@ -5,7 +5,6 @@
         <item>Imperisk</item>
         <item>Metrisk</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>mini</item>
         <item>lille</item>
@@ -13,7 +12,6 @@
         <item>stor</item>
         <item>kæmpe</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>blank</item>
         <item>map-fil [*.map] (offline)</item>
@@ -24,7 +22,6 @@
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Den sidste placering er ukendt</string>
     <string name="file_invalid">Den valgte fil er ugyldig.</string>
@@ -60,6 +57,7 @@
     <string name="menu_position_my_location_enable">Vis min placering</string>
     <string name="menu_position_my_location_disable">Fjern min placering</string>
     <string name="menu_position_snap_to_location">Lås til placering</string>
+    <string name="menu_position_target">Target</string>
     <string name="menu_preferences">Indstillinger</string>
     <string name="menu_refresh">Genopfrisk</string>
     <string name="menu_render_theme">Renderingstema</string>

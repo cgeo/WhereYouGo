@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MapsForge BEGIN -->
+    <string-array name="preferences_scale_bar_unit_values">
+        <item>Brittiläinen</item>
+        <item>Metrinen</item>
+    </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>pikkuruinen</item>
+        <item>pieni</item>
+        <item>normaali</item>
+        <item>iso</item>
+        <item>jättimäinen</item>
+    </string-array>
+    <string-array name="mapgenerator_values">
+        <item>tyhjä</item>
+        <item>karttatiedosto [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Julkinen liikenne(\u00d6PNV) (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">Viimeisin sijainti on tuntematon</string>
+    <string name="file_invalid">Valittu tiedosto on virheellinen.</string>
+    <string name="file_select">Valitse tiedosto.</string>
+    <string name="file_size_byte">bitti</string>
+    <string name="file_size_bytes">bittiä</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Mene sijaintiin</string>
+    <string name="info_map_file_area">Alue</string>
+    <string name="info_map_file_comment">Kommentti</string>
+    <string name="info_map_file_created_by">Luonut</string>
+    <string name="info_map_file_date">Päivämäärä</string>
+    <string name="info_map_file_debug">Virheenjäljitystiedot</string>
+    <string name="info_map_file_debug_no">ei tietoja</string>
+    <string name="info_map_file_debug_yes">tiedot löytyy</string>
+    <string name="info_map_file_language_preference">Kieliasetus</string>
+    <string name="info_map_file_name">Tiedosto</string>
+    <string name="info_map_file_size">Tiedostokoko</string>
+    <string name="info_map_file_start_position">Aloituspiste</string>
+    <string name="info_map_file_start_zoom_level">Zoomin alkutaso</string>
+    <string name="info_map_file_version">Versio</string>
+    <string name="menu_info">Tiedot</string>
+    <string name="menu_info_map_file">Karttatiedoston tiedot</string>
+    <string name="menu_info_about">Tietoa tästä sovelluksesta</string>
+    <string name="menu_mapfile">Karttatiedosto</string>
+    <string name="menu_mapgenerator">Karttalähde</string>
+    <string name="menu_position">Sijainti</string>
+    <string name="menu_position_enter_coordinates">Syötä koordinaatit</string>
+    <string name="menu_position_last_known">Viimeisin tunnettu sijainti</string>
+    <string name="menu_position_map_file_center">Karttatiedoston keskusta</string>
+    <string name="menu_position_my_location_enable">Näytä oma sijainti</string>
+    <string name="menu_position_my_location_disable">Poista oma sijainti</string>
+    <string name="menu_position_snap_to_location">Lukitse sijaintiin</string>
+    <string name="menu_position_target">Kohde</string>
+    <string name="menu_preferences">Asetukset</string>
+    <string name="menu_refresh">Päivitä</string>
+    <string name="menu_render_theme">Renderöintiteema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">Valitse XML-tiedosto…</string>
+    <string name="menu_screenshot">Ruutukaappaus</string>
+    <string name="menu_screenshot_jpeg">JPEG (häviöllinen)</string>
+    <string name="menu_screenshot_png">PNG (häviötön)</string>
+    <string name="no_location_provider_available">Sijaintilähteitä ei saatavilla</string>
+    <string name="preferences_debug">Vianetsintäasetukset</string>
+    <string name="preferences_general">Yleiset asetukset</string>
+    <string name="preferences_cache_persistence">Välimuistin kestävyys</string>
+    <string name="preferences_cache_persistence_desc">Pidä välimuistissa olevat kuvat suljettaessa</string>
+    <string name="preferences_cache_size">Ulkoinen tallennustila</string>
+    <string name="preferences_cache_size_desc">Säädä välimuistin kokoa</string>
+    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Koko näytön tila</string>
+    <string name="preferences_fullscreen_desc">Piilota tilarivi</string>
+    <string name="preferences_map">Kartan asetukset</string>
+    <string name="preferences_move_speed">Liukumisnopeus</string>
+    <string name="preferences_move_speed_desc">Säädä kartan siirtonopeutta</string>
+    <string name="preferences_move_speed_value">%d %% liukumisnopeus</string>
+    <string name="preferences_scale_bar_unit">Mittapalkin yksikkö</string>
+    <string name="preferences_scale_bar_unit_desc">Valitse mittapalkin yksikkö</string>
+    <string name="preferences_show_fps_counter">Kuvataajuus</string>
+    <string name="preferences_show_fps_counter_desc">Näytä kuvataajuuden tieto</string>
+    <string name="preferences_show_scale_bar">Kartan mittakaava</string>
+    <string name="preferences_show_scale_bar_desc">Näytä kartan mittakaava</string>
+    <string name="preferences_show_tile_coordinates">Laatan koordinaatit</string>
+    <string name="preferences_show_tile_coordinates_desc">Näytä koordinaatit laattojen päällä</string>
+    <string name="preferences_show_tile_frames">Laatan rajat</string>
+    <string name="preferences_show_tile_frames_desc">Piirrä laattojen rajat</string>
+    <string name="preferences_show_water_tiles">Vesilaatat</string>
+    <string name="preferences_show_water_tiles_desc">Korosta laatat joilla on vesitieto päällä</string>
+    <string name="preferences_text_scale">Fonttikoko</string>
+    <string name="preferences_text_scale_desc">Valitse karttaselitteiden tekstin koko</string>
+    <string name="preferences_wake_lock">Pysy hereillä</string>
+    <string name="preferences_wake_lock_desc">Estä näyttöä himmenemästä</string>
+    <string name="snap_to_location_enabled">Lukitus sijaintiin on päällä</string>
+    <string name="snap_to_location_disabled">Lukitus sijaintiin on pois päältä</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Zoomaustaso</string>
+    <!-- MapsForge END -->
+</resources>

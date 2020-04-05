@@ -5,7 +5,6 @@
         <item>Imperiálne</item>
         <item>Metrické</item>
     </string-array>
-
     <string-array name="preferences_text_scale_values">
         <item>najmenší</item>
         <item>malý</item>
@@ -13,7 +12,6 @@
         <item>veľký</item>
         <item>najväčší</item>
     </string-array>
-
     <string-array name="mapgenerator_values">
         <item>prázdna</item>
         <item>súbor [*.map] (offline)</item>
@@ -24,7 +22,6 @@
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
-
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Posledná poloha je neznáma</string>
     <string name="file_invalid">Vybraný súbor je neplatný.</string>
@@ -47,7 +44,7 @@
     <string name="info_map_file_size">Veľkost súboru</string>
     <string name="info_map_file_start_position">Počiatočná poloha</string>
     <string name="info_map_file_start_zoom_level">Počiatočné priblíženie</string>
-    <string name="info_map_file_version">Verzia</string>
+    <string name="info_map_file_version">Version</string>
     <string name="menu_info">Informácie</string>
     <string name="menu_info_map_file">Vlastnosti mapy</string>
     <string name="menu_info_about">O programe</string>
