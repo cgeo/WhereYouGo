@@ -42,8 +42,8 @@
     <string name="gps_enabled">Location enabled</string>
     <string name="gps_fix">Last GPS fix</string>
     <string name="gps_not_enabled_show_system_settings">Location service not enabled. Would you like to show system settings?</string>
-    <string name="gps_off">Location</string>
-    <string name="gps_on">Location</string>
+    <string name="gps_off">Location off</string>
+    <string name="gps_on">Location on</string>
     <string name="info">Information</string>
     <string name="invalid_cartridge">Invalid cartridge\n\n %s</string>
     <string name="invalid_url">Invalid URL</string>
