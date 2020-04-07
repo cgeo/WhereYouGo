@@ -103,11 +103,11 @@ Jos et ole varma, aseta \"Wherigo-kansio\" automaattiseksi.
     <string name="speed">Nopeus</string>
     <string name="start">Aloita</string>
     <string name="tasks">Tehtävät</string>
-    <string name="time_to_target">Time to target</string>
-    <string name="translation">Translation</string>
-    <string name="unexpected_problem">Unexpected problem!\n\nPlease contact me with description of your problem.</string>
-    <string name="version">Version</string>
-    <string name="waypoints">Waypoints</string>
+    <string name="time_to_target">Aika kohteeseen</string>
+    <string name="translation">Käännös</string>
+    <string name="unexpected_problem">Odottamaton ongelma!\n\nOta yhteyttä ja kuvaile ongelma.</string>
+    <string name="version">Versio</string>
+    <string name="waypoints">Reittipisteet</string>
     <string name="web_page">Verkkosivu</string>
     <string name="working">Toimintoa suoritetaan…</string>
     <string name="yes">Kyllä</string>
