@@ -2,104 +2,104 @@
 <resources>
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
-        <item>Imperial</item>
-        <item>Metric</item>
+        <item>야드/파운드법</item>
+        <item>미터법</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
-        <item>tiny</item>
-        <item>small</item>
-        <item>normal</item>
-        <item>large</item>
-        <item>huge</item>
+        <item>아주 작은</item>
+        <item>작은</item>
+        <item>중간</item>
+        <item>대형</item>
+        <item>거대한</item>
     </string-array>
     <string-array name="mapgenerator_values">
-        <item>blank</item>
-        <item>map file [*.map] (offline)</item>
-        <item>OSM Mapnik (online)</item>
-        <item>OSM.de (online)</item>
-        <item>CyclOSM (online)</item>
-        <item>Public Transport(\u00d6PNV) (online)</item>
-        <item>Esri World Street (online)</item>
-        <item>Esri World Imagery (online)</item>
+        <item>비어 있음</item>
+        <item>맵 파일 [*.map] (오프라인)</item>
+        <item>OSM Mapnik (온라인)</item>
+        <item>OSM.de (온라인)</item>
+        <item>CyclOSM (온라인)</item>
+        <item>대중 교통 (\u00d6PNV) (온라인)</item>
+        <item>Esri World Street (온라인)</item>
+        <item>Esri World Imagery (온라인)</item>
     </string-array>
     <string name="application_name">Mapsforge</string>
-    <string name="error_last_location_unknown">The last location is unknown</string>
-    <string name="file_invalid">The selected file is invalid.</string>
-    <string name="file_select">Please select a file.</string>
-    <string name="file_size_byte">byte</string>
-    <string name="file_size_bytes">bytes</string>
+    <string name="error_last_location_unknown">마지막 위치를 알 수 없음</string>
+    <string name="file_invalid">선택한 파일이 유효하지 않습니다.</string>
+    <string name="file_select">파일을 선택해주세요.</string>
+    <string name="file_size_byte">바이트</string>
+    <string name="file_size_bytes">바이트</string>
     <string name="file_size_kb">kB</string>
     <string name="file_size_mb">MB</string>
     <string name="file_size_gb">GB</string>
-    <string name="go_to_position">Go to position</string>
-    <string name="info_map_file_area">Area</string>
-    <string name="info_map_file_comment">Comment</string>
-    <string name="info_map_file_created_by">Created by</string>
-    <string name="info_map_file_date">Date</string>
-    <string name="info_map_file_debug">Debug information</string>
-    <string name="info_map_file_debug_no">not included</string>
-    <string name="info_map_file_debug_yes">included</string>
-    <string name="info_map_file_language_preference">Language preference</string>
-    <string name="info_map_file_name">File</string>
-    <string name="info_map_file_size">File size</string>
-    <string name="info_map_file_start_position">Start position</string>
-    <string name="info_map_file_start_zoom_level">Start zoom level</string>
-    <string name="info_map_file_version">Version</string>
-    <string name="menu_info">Info</string>
-    <string name="menu_info_map_file">Map file properties</string>
-    <string name="menu_info_about">About this software</string>
-    <string name="menu_mapfile">Map file</string>
-    <string name="menu_mapgenerator">Map source</string>
-    <string name="menu_position">Position</string>
-    <string name="menu_position_enter_coordinates">Enter coordinates</string>
-    <string name="menu_position_last_known">Last known location</string>
-    <string name="menu_position_map_file_center">Map file center</string>
-    <string name="menu_position_my_location_enable">Show my location</string>
-    <string name="menu_position_my_location_disable">Remove my location</string>
-    <string name="menu_position_snap_to_location">Snap to position</string>
-    <string name="menu_position_target">Target</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_render_theme">Render theme</string>
-    <string name="menu_render_theme_osmarender">Osmarender</string>
-    <string name="menu_render_theme_select_file">Select XML file …</string>
-    <string name="menu_screenshot">Screenshot</string>
-    <string name="menu_screenshot_jpeg">JPEG (lossy)</string>
-    <string name="menu_screenshot_png">PNG (lossless)</string>
-    <string name="no_location_provider_available">No location source available</string>
-    <string name="preferences_debug">Debug settings</string>
-    <string name="preferences_general">General settings</string>
-    <string name="preferences_cache_persistence">Cache persistence</string>
-    <string name="preferences_cache_persistence_desc">Keep cached images on exit</string>
-    <string name="preferences_cache_size">External storage</string>
-    <string name="preferences_cache_size_desc">Adjust the size of the cache</string>
+    <string name="go_to_position">위치로 이동</string>
+    <string name="info_map_file_area">영역</string>
+    <string name="info_map_file_comment">코멘트</string>
+    <string name="info_map_file_created_by">작성자</string>
+    <string name="info_map_file_date">날짜</string>
+    <string name="info_map_file_debug">디버그 정보</string>
+    <string name="info_map_file_debug_no">포함되지 않음</string>
+    <string name="info_map_file_debug_yes">포함된</string>
+    <string name="info_map_file_language_preference">언어 환경설정</string>
+    <string name="info_map_file_name">파일</string>
+    <string name="info_map_file_size">파일 크기</string>
+    <string name="info_map_file_start_position">시작 위치</string>
+    <string name="info_map_file_start_zoom_level">확대 단계 초기화</string>
+    <string name="info_map_file_version">버전</string>
+    <string name="menu_info">정보</string>
+    <string name="menu_info_map_file">맵 파일 속성</string>
+    <string name="menu_info_about">이 소프트웨어에 대하여</string>
+    <string name="menu_mapfile">지도 파일</string>
+    <string name="menu_mapgenerator">지도 출처</string>
+    <string name="menu_position">위치</string>
+    <string name="menu_position_enter_coordinates">좌표입력</string>
+    <string name="menu_position_last_known">마지막으로 알 수 있는 위치</string>
+    <string name="menu_position_map_file_center">지도 파일 센터</string>
+    <string name="menu_position_my_location_enable">내 위치 표시</string>
+    <string name="menu_position_my_location_disable">내 위치를 제거</string>
+    <string name="menu_position_snap_to_location">위치로 이동</string>
+    <string name="menu_position_target">목표</string>
+    <string name="menu_preferences">환경 설정</string>
+    <string name="menu_refresh">새로 고침</string>
+    <string name="menu_render_theme">테마 렌더링</string>
+    <string name="menu_render_theme_osmarender">오스마렌더</string>
+    <string name="menu_render_theme_select_file">XML 파일 선택…</string>
+    <string name="menu_screenshot">화면저장</string>
+    <string name="menu_screenshot_jpeg">JPEG (손실이 있음)</string>
+    <string name="menu_screenshot_png">PNG (무손실)</string>
+    <string name="no_location_provider_available">사용 가능한 위치 출처가 없습니다</string>
+    <string name="preferences_debug">디버그 설정</string>
+    <string name="preferences_general">일반 설정</string>
+    <string name="preferences_cache_persistence">캐시 지속성</string>
+    <string name="preferences_cache_persistence_desc">종료시 캐시 된 이미지 유지</string>
+    <string name="preferences_cache_size">외부 저장소</string>
+    <string name="preferences_cache_size_desc">캐시 크기 조정</string>
     <string name="preferences_cache_size_value">%.1f MB</string>
-    <string name="preferences_fullscreen">Full screen mode</string>
-    <string name="preferences_fullscreen_desc">Hide the status bar</string>
-    <string name="preferences_map">Map settings</string>
-    <string name="preferences_move_speed">Move speed</string>
-    <string name="preferences_move_speed_desc">Adjust the move speed of the map</string>
-    <string name="preferences_move_speed_value">%d %% move speed</string>
-    <string name="preferences_scale_bar_unit">Scale bar unit</string>
-    <string name="preferences_scale_bar_unit_desc">Select the unit for the map scale bar</string>
-    <string name="preferences_show_fps_counter">Frame rate</string>
-    <string name="preferences_show_fps_counter_desc">Enable frames per second counter</string>
-    <string name="preferences_show_scale_bar">Map scale bar</string>
-    <string name="preferences_show_scale_bar_desc">Show the scale of the map</string>
-    <string name="preferences_show_tile_coordinates">Tile coordinates</string>
-    <string name="preferences_show_tile_coordinates_desc">Show coordinates on tiles</string>
-    <string name="preferences_show_tile_frames">Tile boundaries</string>
-    <string name="preferences_show_tile_frames_desc">Draw tile boundaries</string>
-    <string name="preferences_show_water_tiles">Water tiles</string>
-    <string name="preferences_show_water_tiles_desc">Highlight tiles which have the water flag set</string>
-    <string name="preferences_text_scale">Font size</string>
-    <string name="preferences_text_scale_desc">Select the text size of map labels</string>
-    <string name="preferences_wake_lock">Stay awake</string>
-    <string name="preferences_wake_lock_desc">Stop the screen from dimming</string>
-    <string name="snap_to_location_enabled">Snap to position is activated</string>
-    <string name="snap_to_location_disabled">Snap to position is disabled</string>
+    <string name="preferences_fullscreen">전체 화면 모드</string>
+    <string name="preferences_fullscreen_desc">상태표시줄 숨기기</string>
+    <string name="preferences_map">지도 설정</string>
+    <string name="preferences_move_speed">이동속도</string>
+    <string name="preferences_move_speed_desc">지도의 이동 속도 조정</string>
+    <string name="preferences_move_speed_value">%d %% 이동 속도</string>
+    <string name="preferences_scale_bar_unit">축척 막대 단위</string>
+    <string name="preferences_scale_bar_unit_desc">지도 축척 막대의 단위를 선택하세요</string>
+    <string name="preferences_show_fps_counter">프레임 속도</string>
+    <string name="preferences_show_fps_counter_desc">초당 프레임 사용 카운터</string>
+    <string name="preferences_show_scale_bar">지도 단위 막대</string>
+    <string name="preferences_show_scale_bar_desc">지도의 규모를 표시</string>
+    <string name="preferences_show_tile_coordinates">타일 좌표</string>
+    <string name="preferences_show_tile_coordinates_desc">타일에 좌표 표시</string>
+    <string name="preferences_show_tile_frames">타일 경계</string>
+    <string name="preferences_show_tile_frames_desc">타일 경계선 그리기</string>
+    <string name="preferences_show_water_tiles">물 타일</string>
+    <string name="preferences_show_water_tiles_desc">워터 플래그가 설정된 타일을 강조 표시하세요.</string>
+    <string name="preferences_text_scale">글꼴 크기</string>
+    <string name="preferences_text_scale_desc">지도 레이블의 텍스트 크기를 선택하세요</string>
+    <string name="preferences_wake_lock">켜진 상태로 유지</string>
+    <string name="preferences_wake_lock_desc">화면이 어두워지지 않도록 중지</string>
+    <string name="snap_to_location_enabled">위치에 스냅이 활성화됩니다</string>
+    <string name="snap_to_location_disabled">위치에 스냅이 비활성화되었습니다</string>
     <string name="unit_symbol_kilometer">&#160;km</string>
     <string name="unit_symbol_meter">&#160;m</string>
-    <string name="zoomLevel">Zoom level</string>
+    <string name="zoomLevel">확대 수준</string>
     <!-- MapsForge END -->
 </resources>
