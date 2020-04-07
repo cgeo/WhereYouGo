@@ -48,4 +48,3 @@ Releases for [Google Play](https://play.google.com/store/apps/details?id=menion.
 
 The version code / version name is automatically derived and inccluded during the build process using the date, the release was built on the CI.
 Once built the APK can either be directly uploaded to Google Play as production version or as a beta version and later on be promoted to a production version (under the same version code / version name).
-
