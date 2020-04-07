@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    <update name="2020.04.07" id="20200407" time="07.04.2020">
+        <li>Fix crash on starting cartridge on Android 8 devices</li>                   
+        <li>Update translations for several languages</li>
+        <li>Various small code improvements and fixes</li>
+        <li>Update contact information for user support</li>
+        <li>Set default map to OSM instead of an empty map</li>
+        <li>Allow the app to run if screen is off</li>
+    </update>
     <update name="2020.03.08" id="20200308" time="05.03.2020">
         <li>Fixed broken download of cartridges from wherigo.com by switching to https</li>                   
         <li>Change the permissions handling to fulfill the requirements for Google Play</li>

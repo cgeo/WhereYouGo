@@ -1,7 +1,2 @@
-Version 2020.03.05 - Neustart von WhereYouGo
-
-- Probleme beim Herunterladen von Cartridges von wherigo.com durch Wechsel auf https behoben
-- Anpassung der Berechtigungsbehandlung, um den Anforderungen von Google Play zu entsprechen
-- Aktualisierung der Software, um Android targetSdk 28 zu unterstützen
-- Verbesserung der deutschen und slovakischen Übersetzung
-- Kleinere Verbesserungen der Software und der Benutzeroberfläche
+No longer in use
+Refer to https://github.com/cgeo/WhereYouGo/issues/63
