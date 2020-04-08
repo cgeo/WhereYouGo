@@ -58,7 +58,7 @@
     <string name="menu_position_my_location_disable">Rimuovi la mia posizione</string>
     <string name="menu_position_snap_to_location">Aggancia alla posizione</string>
     <string name="menu_position_target">Destinazione</string>
-    <string name="menu_preferences">Preferences</string>
+    <string name="menu_preferences">Preferenze</string>
     <string name="menu_refresh">Aggiorna</string>
     <string name="menu_render_theme">Rendering tema</string>
     <string name="menu_render_theme_osmarender">Osmarender</string>
