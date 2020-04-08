@@ -35,8 +35,8 @@ Uses the following projects:
 
 ## Translation
 
-We started using [Crowdin](https://crowdin.com/project/whereyougo) to support translations.
-At this moment export/import to/from Crowdin is done manually by a member of the development team.
+We are using [Crowdin](https://crowdin.com/project/whereyougo) to support translations.
+A detailed description of the workflow can be found here: [https://github.com/cgeo/WhereYouGo/wiki/Translation-workflow](https://github.com/cgeo/WhereYouGo/wiki/Translation-workflow)
 
 Localization status: [![Crowdin](https://badges.crowdin.net/whereyougo/localized.svg)](https://crowdin.com/project/whereyougo)
 
