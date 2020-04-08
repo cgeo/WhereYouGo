@@ -98,7 +98,7 @@
     <string name="pref_units_angle_russian_mil">Russian mil</string>
     <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string>
     <string name="pref_units_coo_latlon">Coordinates format</string>
-    <string name="pref_units_coo_latlon_dec">14,94323°</string>
+    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Coordinates (latitude/longitude) format for display</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
