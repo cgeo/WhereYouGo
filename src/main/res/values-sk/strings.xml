@@ -122,10 +122,10 @@ Ak si nie ste istí, nechajte položku \"Priečinok Wherigo\" nastaviť automati
     <string name="zone_state_near">blízko</string>
     <string name="zone_state_unknown">neznáme</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="goto_app_details">Open Application Info</string>
-    <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
-    <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
-    <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
+    <string name="close_app">Zavrieť aplikáciu</string>
+    <string name="ask_again">Opýtať sa znova</string>
+    <string name="goto_app_details">Otvoriť info o aplikácii</string>
+    <string name="location_permission_request_explanation">Aplikácia WhereYouGo potrebuje prístup k GPS na vašom zariadení, aby zistila vašu polohu a vypočítala vzdialenosť a smer ku cartridge.</string>
+    <string name="storage_permission_request_explanation">WhereYouGo zapíše údaje do vášho úložiska telefónu alebo na kartu SD, hneď ako uložíte cartridge.</string>
+    <string name="permission_conclusion">Aplikácia sa bez týchto povolení nemôže používať.</string>
 </resources>

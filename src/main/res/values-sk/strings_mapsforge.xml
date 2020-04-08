@@ -17,8 +17,8 @@
         <item>súbor [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>CyclOSM (online)</item>
-        <item>Public Transport(\u00d6PNV) (online)</item>
+        <item>CyklOSM (online)</item>
+        <item>Verejná doprava(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
@@ -44,7 +44,7 @@
     <string name="info_map_file_size">Veľkost súboru</string>
     <string name="info_map_file_start_position">Počiatočná poloha</string>
     <string name="info_map_file_start_zoom_level">Počiatočné priblíženie</string>
-    <string name="info_map_file_version">Version</string>
+    <string name="info_map_file_version">Verzia</string>
     <string name="menu_info">Informácie</string>
     <string name="menu_info_map_file">Vlastnosti mapy</string>
     <string name="menu_info_about">O programe</string>
