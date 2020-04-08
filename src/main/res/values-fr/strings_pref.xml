@@ -9,10 +9,10 @@
     <string name="pref_confirm_on_exit_desc">Demander une confirmation avant de quitter Locus avec le bouton Retour</string>
     <string name="pref_double_click">Appuyez deux fois</string>
     <string name="pref_double_click_desc">Pour quitter la partie appuyez deux fois sur Arrière</string>
-    <string name="pref_run_screen_off">Run app even if screen is off</string>
-    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">Default</string>
+    <string name="pref_run_screen_off">Exécuter l\'application même si l\'écran est éteint</string>
+    <string name="pref_run_screen_off_desc">S\'assure que l\'application est en cours d\'exécution même si l\'écran est éteint.</string>
+    <string name="pref_font_size">Taille de la police</string>
+    <string name="pref_font_size_default">Par défaut</string>
     <string name="pref_font_size_desc">Taille du texte</string>
     <string name="pref_font_size_large">Grande</string>
     <string name="pref_font_size_medium">Moyenne</string>
@@ -50,7 +50,7 @@
     <string name="pref_guiding_zone_point_desc">Sélectionnez quel point utiliser comme centre de la zone de navigation</string>
     <string name="pref_guiding_zone_point_nearest">Bordure la plus proche</string>
     <string name="pref_highlight">Écran toujours allumé</string>
-    <string name="pref_highlight_always_text">Always screen on</string>
+    <string name="pref_highlight_always_text">Écran toujours allumé</string>
     <string name="pref_highlight_desc">Activer / désactiver l’écran toujours allumé</string>
     <string name="pref_highlight_off_text">Paramètres système</string>
     <string name="pref_highlight_only_gps_text">Seulement lorsque le GPS est actif</string>
@@ -96,8 +96,8 @@
     <string name="pref_units_angle_angular_mil">Millième angulaire</string>
     <string name="pref_units_angle_degree">Degré</string>
     <string name="pref_units_angle_desc">Unités d’angle pour affichage</string>
-    <string name="pref_units_angle_russian_mil">Russian mil</string>
-    <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string>
+    <string name="pref_units_angle_russian_mil">mil soviétique</string>
+    <string name="pref_units_angle_us_artillery_mil">Mil angulaire d\'artillerie des États-Unis</string>
     <string name="pref_units_coo_latlon">Format Lat / Lon</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
     <string name="pref_units_coo_latlon_desc">Coordonnées (latitude / longitude) pour l’affichage</string>
