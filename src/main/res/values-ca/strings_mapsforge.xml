@@ -3,7 +3,7 @@
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
         <item>Imperial</item>
-        <item>Metric</item>
+        <item>Mètric</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
         <item>tiny</item>
@@ -34,28 +34,28 @@
     <string name="go_to_position">Go to position</string>
     <string name="info_map_file_area">Area</string>
     <string name="info_map_file_comment">Comment</string>
-    <string name="info_map_file_created_by">Created by</string>
-    <string name="info_map_file_date">Date</string>
+    <string name="info_map_file_created_by">Creat per</string>
+    <string name="info_map_file_date">Data</string>
     <string name="info_map_file_debug">Debug information</string>
-    <string name="info_map_file_debug_no">not included</string>
-    <string name="info_map_file_debug_yes">included</string>
-    <string name="info_map_file_language_preference">Language preference</string>
-    <string name="info_map_file_name">File</string>
-    <string name="info_map_file_size">File size</string>
-    <string name="info_map_file_start_position">Start position</string>
-    <string name="info_map_file_start_zoom_level">Start zoom level</string>
-    <string name="info_map_file_version">Version</string>
-    <string name="menu_info">Info</string>
-    <string name="menu_info_map_file">Map file properties</string>
-    <string name="menu_info_about">About this software</string>
-    <string name="menu_mapfile">Map file</string>
+    <string name="info_map_file_debug_no">no inclòs</string>
+    <string name="info_map_file_debug_yes">inclòs</string>
+    <string name="info_map_file_language_preference">Preferència d\'idioma</string>
+    <string name="info_map_file_name">Fitxer</string>
+    <string name="info_map_file_size">Mida del fitxer</string>
+    <string name="info_map_file_start_position">Posició inicial</string>
+    <string name="info_map_file_start_zoom_level">Inicia el nivell de zoom</string>
+    <string name="info_map_file_version">Versió</string>
+    <string name="menu_info">Informació</string>
+    <string name="menu_info_map_file">Propietats del fitxer de mapa</string>
+    <string name="menu_info_about">Sobre aquest programari</string>
+    <string name="menu_mapfile">Fitxer del mapa</string>
     <string name="menu_mapgenerator">Map source</string>
-    <string name="menu_position">Position</string>
-    <string name="menu_position_enter_coordinates">Enter coordinates</string>
-    <string name="menu_position_last_known">Last known location</string>
+    <string name="menu_position">Posició</string>
+    <string name="menu_position_enter_coordinates">Entrar coordenades</string>
+    <string name="menu_position_last_known">Última ubicació coneguda</string>
     <string name="menu_position_map_file_center">Map file center</string>
-    <string name="menu_position_my_location_enable">Show my location</string>
-    <string name="menu_position_my_location_disable">Remove my location</string>
+    <string name="menu_position_my_location_enable">Mostra la meva ubicació</string>
+    <string name="menu_position_my_location_disable">Eliminar localització</string>
     <string name="menu_position_snap_to_location">Snap to position</string>
     <string name="menu_position_target">Target</string>
     <string name="menu_preferences">Preferences</string>
