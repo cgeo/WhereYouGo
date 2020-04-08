@@ -1,0 +1,9 @@
+files:
+  - source: /src/main/res/values/string*.xml
+    ignore:
+      - strings_not_translatable.xml
+      - strings_pref_languages.xml
+      - string_pref_keys.xml
+    translation: /src/main/res/values-%two_letters_code%/%original_file_name%
+    translate_attributes: 0
+    content_segmentation: 0
