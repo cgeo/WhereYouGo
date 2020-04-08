@@ -2,7 +2,7 @@
 <resources>
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
-        <item>angloamerikanisch</item>
+        <item>Angloamerikanisch</item>
         <item>metrisch</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
