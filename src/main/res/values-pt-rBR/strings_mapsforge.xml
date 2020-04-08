@@ -3,91 +3,91 @@
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
         <item>Imperial</item>
-        <item>Metric</item>
+        <item>Métrico</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
-        <item>tiny</item>
-        <item>small</item>
+        <item>mini</item>
+        <item>pequeno</item>
         <item>normal</item>
-        <item>large</item>
-        <item>huge</item>
+        <item>grande</item>
+        <item>enorme</item>
     </string-array>
     <string-array name="mapgenerator_values">
-        <item>blank</item>
-        <item>map file [*.map] (offline)</item>
+        <item>Em branco/vazio</item>
+        <item>ficheiro do mapa [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
         <item>CyclOSM (online)</item>
-        <item>Public Transport(\u00d6PNV) (online)</item>
+        <item>Transporte Público (\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
-        <item>Esri World Imagery (online)</item>
+        <item>Esri World Street (online)</item>
     </string-array>
     <string name="application_name">Mapsforge</string>
-    <string name="error_last_location_unknown">The last location is unknown</string>
-    <string name="file_invalid">The selected file is invalid.</string>
-    <string name="file_select">Please select a file.</string>
+    <string name="error_last_location_unknown">A ultima localização é desconhecida</string>
+    <string name="file_invalid">O ficheiro seleccionado é inválido.</string>
+    <string name="file_select">Por favor, seleccione um ficheiro.</string>
     <string name="file_size_byte">byte</string>
     <string name="file_size_bytes">bytes</string>
     <string name="file_size_kb">kB</string>
     <string name="file_size_mb">MB</string>
     <string name="file_size_gb">GB</string>
-    <string name="go_to_position">Go to position</string>
-    <string name="info_map_file_area">Area</string>
-    <string name="info_map_file_comment">Comment</string>
-    <string name="info_map_file_created_by">Created by</string>
-    <string name="info_map_file_date">Date</string>
-    <string name="info_map_file_debug">Debug information</string>
-    <string name="info_map_file_debug_no">not included</string>
-    <string name="info_map_file_debug_yes">included</string>
-    <string name="info_map_file_language_preference">Language preference</string>
-    <string name="info_map_file_name">File</string>
-    <string name="info_map_file_size">File size</string>
-    <string name="info_map_file_start_position">Start position</string>
-    <string name="info_map_file_start_zoom_level">Start zoom level</string>
-    <string name="info_map_file_version">Version</string>
-    <string name="menu_info">Info</string>
-    <string name="menu_info_map_file">Map file properties</string>
-    <string name="menu_info_about">About this software</string>
-    <string name="menu_mapfile">Map file</string>
-    <string name="menu_mapgenerator">Map source</string>
-    <string name="menu_position">Position</string>
-    <string name="menu_position_enter_coordinates">Enter coordinates</string>
-    <string name="menu_position_last_known">Last known location</string>
-    <string name="menu_position_map_file_center">Map file center</string>
-    <string name="menu_position_my_location_enable">Show my location</string>
-    <string name="menu_position_my_location_disable">Remove my location</string>
-    <string name="menu_position_snap_to_location">Snap to position</string>
-    <string name="menu_position_target">Target</string>
-    <string name="menu_preferences">Preferences</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="menu_render_theme">Render theme</string>
+    <string name="go_to_position">Ir para posição</string>
+    <string name="info_map_file_area">Área</string>
+    <string name="info_map_file_comment">Comentário</string>
+    <string name="info_map_file_created_by">Criado por</string>
+    <string name="info_map_file_date">Data</string>
+    <string name="info_map_file_debug">Informação de depuração</string>
+    <string name="info_map_file_debug_no">não incluído</string>
+    <string name="info_map_file_debug_yes">incluído</string>
+    <string name="info_map_file_language_preference">Preferência de idioma</string>
+    <string name="info_map_file_name">Ficheiro</string>
+    <string name="info_map_file_size">Tamanho do ficheiro</string>
+    <string name="info_map_file_start_position">Posição inicial</string>
+    <string name="info_map_file_start_zoom_level">Nível inicial de zoom</string>
+    <string name="info_map_file_version">Versão</string>
+    <string name="menu_info">Informação</string>
+    <string name="menu_info_map_file">Propriedades do ficheiro de mapa</string>
+    <string name="menu_info_about">Acerca deste software</string>
+    <string name="menu_mapfile">Ficheiro do mapa</string>
+    <string name="menu_mapgenerator">Origem do mapa</string>
+    <string name="menu_position">Posição</string>
+    <string name="menu_position_enter_coordinates">Inserir coordenadas</string>
+    <string name="menu_position_last_known">Última localização conhecida</string>
+    <string name="menu_position_map_file_center">Centro do mapa</string>
+    <string name="menu_position_my_location_enable">Mostrar a minha localização</string>
+    <string name="menu_position_my_location_disable">Remover a minha localização</string>
+    <string name="menu_position_snap_to_location">Alinhar à posição</string>
+    <string name="menu_position_target">Destino</string>
+    <string name="menu_preferences">Preferências</string>
+    <string name="menu_refresh">Actualizar</string>
+    <string name="menu_render_theme">Renderizar tema</string>
     <string name="menu_render_theme_osmarender">Osmarender</string>
-    <string name="menu_render_theme_select_file">Select XML file …</string>
-    <string name="menu_screenshot">Screenshot</string>
-    <string name="menu_screenshot_jpeg">JPEG (lossy)</string>
-    <string name="menu_screenshot_png">PNG (lossless)</string>
-    <string name="no_location_provider_available">No location source available</string>
-    <string name="preferences_debug">Debug settings</string>
-    <string name="preferences_general">General settings</string>
-    <string name="preferences_cache_persistence">Cache persistence</string>
-    <string name="preferences_cache_persistence_desc">Keep cached images on exit</string>
-    <string name="preferences_cache_size">External storage</string>
-    <string name="preferences_cache_size_desc">Adjust the size of the cache</string>
+    <string name="menu_render_theme_select_file">Seleccione o ficheiro XML …</string>
+    <string name="menu_screenshot">Captura de Ecrã</string>
+    <string name="menu_screenshot_jpeg">JPEG (com perda)</string>
+    <string name="menu_screenshot_png">PNG (menos perda)</string>
+    <string name="no_location_provider_available">Nenhum fornecedor de localização disponível</string>
+    <string name="preferences_debug">Configurações do modo de depuração</string>
+    <string name="preferences_general">Configurações gerais</string>
+    <string name="preferences_cache_persistence">Persistência da Cache</string>
+    <string name="preferences_cache_persistence_desc">Manter imagens em cache ao sair</string>
+    <string name="preferences_cache_size">Armazenamento externo</string>
+    <string name="preferences_cache_size_desc">Ajustar o tamanho da cache</string>
     <string name="preferences_cache_size_value">%.1f MB</string>
-    <string name="preferences_fullscreen">Full screen mode</string>
-    <string name="preferences_fullscreen_desc">Hide the status bar</string>
-    <string name="preferences_map">Map settings</string>
-    <string name="preferences_move_speed">Move speed</string>
-    <string name="preferences_move_speed_desc">Adjust the move speed of the map</string>
-    <string name="preferences_move_speed_value">%d %% move speed</string>
-    <string name="preferences_scale_bar_unit">Scale bar unit</string>
-    <string name="preferences_scale_bar_unit_desc">Select the unit for the map scale bar</string>
-    <string name="preferences_show_fps_counter">Frame rate</string>
-    <string name="preferences_show_fps_counter_desc">Enable frames per second counter</string>
-    <string name="preferences_show_scale_bar">Map scale bar</string>
-    <string name="preferences_show_scale_bar_desc">Show the scale of the map</string>
-    <string name="preferences_show_tile_coordinates">Tile coordinates</string>
-    <string name="preferences_show_tile_coordinates_desc">Show coordinates on tiles</string>
+    <string name="preferences_fullscreen">Modo de ecrã inteiro</string>
+    <string name="preferences_fullscreen_desc">Ocultar a barra de estado</string>
+    <string name="preferences_map">Configurações do mapa</string>
+    <string name="preferences_move_speed">Velocidade de movimento</string>
+    <string name="preferences_move_speed_desc">Ajustar a velocidade de movimento do mapa</string>
+    <string name="preferences_move_speed_value">%d %% velocidade do movimento</string>
+    <string name="preferences_scale_bar_unit">Unidade da Barra de escala</string>
+    <string name="preferences_scale_bar_unit_desc">Seleccione a unidade para a barra de escala do mapa</string>
+    <string name="preferences_show_fps_counter">Taxa de frames (fps)</string>
+    <string name="preferences_show_fps_counter_desc">Activar o contador de frames por segundo</string>
+    <string name="preferences_show_scale_bar">Barra de escala do mapa</string>
+    <string name="preferences_show_scale_bar_desc">Mostrar a escala do mapa</string>
+    <string name="preferences_show_tile_coordinates">Coordenadas do bloco</string>
+    <string name="preferences_show_tile_coordinates_desc">Mostrar coordenadas nos blocos</string>
     <string name="preferences_show_tile_frames">Tile boundaries</string>
     <string name="preferences_show_tile_frames_desc">Draw tile boundaries</string>
     <string name="preferences_show_water_tiles">Water tiles</string>
@@ -96,7 +96,7 @@
     <string name="preferences_text_scale_desc">Select the text size of map labels</string>
     <string name="preferences_wake_lock">Stay awake</string>
     <string name="preferences_wake_lock_desc">Stop the screen from dimming</string>
-    <string name="snap_to_location_enabled">Snap to position is activated</string>
+    <string name="snap_to_location_enabled">Ajustar à posição está activado</string>
     <string name="snap_to_location_disabled">Snap to position is disabled</string>
     <string name="unit_symbol_kilometer">&#160;km</string>
     <string name="unit_symbol_meter">&#160;m</string>
