@@ -100,9 +100,9 @@
     <string name="pref_units_angle_us_artillery_mil">Amerikanischer Strich</string>
     <string name="pref_units_coo_latlon">Koordinatenformat</string>
     <string name="pref_units_coo_latlon_dec">14,94323 °</string>
-    <string name="pref_units_coo_latlon_desc">Wähle das Koordinatenformat (Latitude/Longitude)</string>
-    <string name="pref_units_coo_latlon_min">14 ° 52,123\'</string>
-    <string name="pref_units_coo_latlon_sec">14° 52\' 12,34\'\'</string>
+    <string name="pref_units_coo_latlon_desc">Wähle das Koordinatenformat (Breiten-/Längengrad)</string>
+    <string name="pref_units_coo_latlon_min">14 ° 52.123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Einheit für Entfernung</string>
     <string name="pref_units_length_desc">Wähle die Einheit für Längenangaben</string>
     <string name="pref_units_length_im_f">Imperial (ft)</string>
