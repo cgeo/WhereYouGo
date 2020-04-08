@@ -36,7 +36,7 @@
     <string name="pref_gps_min_time_desc">Zeit (in Sekunden) zwischen GPS-Positionsabfragen. Um die Batterie zu schonen wird ein Wert über 60s empfohlen.</string>
     <string name="pref_guiding">Routenführung</string>
     <string name="pref_guiding_compass_sounds">Klänge während der Führung</string>
-    <string name="pref_guiding_compass_sounds_desc">Aktivieren / Deaktivieren von Sounds während der Führung</string>
+    <string name="pref_guiding_compass_sounds_desc">Aktiviere/Deaktiviere Töne während der Führung</string>
     <string name="pref_guiding_gps_required_desc">GPS angeschaltet lassen, wenn die Anwendung während der Routenführung minimiert ist</string>
     <string name="pref_guiding_sound_distance">Entfernung für Signaltöne</string>
     <string name="pref_guiding_sound_distance_waypoint_desc">Entfernung (Meter), die für Signaltöne benutzt werden. Startwert für die Erhöhung oder nur ein Wert für einen Piepton</string>
@@ -68,9 +68,9 @@
     <string name="pref_map_provider_vector">Mapsforge (Offline- und Online-Karten)</string>
     <string name="pref_orientation">Ausrichtung</string>
     <string name="pref_root">Wherigo-Ordner</string>
-    <string name="pref_root_desc">Wähle einen Zielordner für Wherigo</string>
+    <string name="pref_root_desc">Wähle einen Zielordner für Wherigo-Dateien</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
-    <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert werden, wenn du die Anwendung minimierst.</string>
+    <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert, wenn du die Anwendung minimierst.</string>
     <string name="pref_save_game_slots">Spielstände</string>
     <string name="pref_save_game_slots_desc">Anzahl der Slots zum Speichern des Spiels über die Menütaste</string>
     <string name="pref_sensors">Sensoren</string>
@@ -89,7 +89,7 @@
     <string name="pref_statusbar">Statusbar-Symbol</string>
     <string name="pref_statusbar_desc">Symbol in der Statusbar anzeigen</string>
     <string name="pref_style_on_map">Stil der Karte</string>
-    <string name="pref_units">Formate</string>
+    <string name="pref_units">Einheiten</string>
     <string name="pref_units_altitude">Höheneinheit</string>
     <string name="pref_units_altitude_desc">Wähle die Einheit für Höhenangaben</string>
     <string name="pref_units_angle">Winkeleinheit</string>
