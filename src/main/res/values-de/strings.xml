@@ -96,7 +96,7 @@ Wenn du nicht sicher bist, setze den \"Wherigo-Ordner\" auf Automatisch.    </st
     <string name="save_game_ok">Spiel gespeichert</string>
     <string name="save_game_slot">Speicherplatz</string>
     <string name="save_game_slots">Speichern …</string>
-    <string name="saving">Speichern…</string>
+    <string name="saving">Speichert …</string>
     <string name="scanQR">QR-Code scannen</string>
     <string name="settings">Einstellungen</string>
     <string name="speed">Geschwindigkeit</string>
@@ -108,18 +108,18 @@ Wenn du nicht sicher bist, setze den \"Wherigo-Ordner\" auf Automatisch.    </st
     <string name="version">Version</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="web_page">Webseite</string>
-    <string name="working">Arbeitet…</string>
+    <string name="working">Arbeitet …</string>
     <string name="yes">Ja</string>
-    <string name="you_have_to_exit_app_force">Anwendung beenden!</string>
-    <string name="you_have_to_restart_app_force">Anwendung neu starten!</string>
+    <string name="you_have_to_exit_app_force">Du musst die Anwendung beenden!</string>
+    <string name="you_have_to_restart_app_force">Du musst die Anwendung neu starten!</string>
     <string name="you_have_to_restart_app_recommended">Es wird empfohlen, die Anwendung neu zu starten!</string>
     <string name="you_see">Du siehst</string>
     <string name="zone_distance">Entfernung: %1$s</string>
     <string name="zone_state">Zustand: %1$s</string>
-    <string name="zone_state_distant">Entfernt</string>
-    <string name="zone_state_inside">Innerhalb</string>
-    <string name="zone_state_near">In der Nähe</string>
-    <string name="zone_state_unknown">Unbekannt</string>
+    <string name="zone_state_distant">entfernt</string>
+    <string name="zone_state_inside">innerhalb</string>
+    <string name="zone_state_near">in der Nähe</string>
+    <string name="zone_state_unknown">unbekannt</string>
     <!-- permission handling -->
     <string name="close_app">App schließen</string>
     <string name="ask_again">Erneut fragen</string>
