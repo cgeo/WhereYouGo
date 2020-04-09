@@ -3,12 +3,12 @@
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
         <item>Angloamerikanisch</item>
-        <item>metrisch</item>
+        <item>Metrisch</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
         <item>winzig</item>
         <item>klein</item>
-        <item>Normal</item>
+        <item>normal</item>
         <item>groß</item>
         <item>riesig</item>
     </string-array>
@@ -25,7 +25,7 @@
     <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Die letzte Position ist unbekannt</string>
     <string name="file_invalid">Die gewählte Datei ist ungültig.</string>
-    <string name="file_select">Bitte wählen Sie eine Datei.</string>
+    <string name="file_select">Bitte wähle eine Datei.</string>
     <string name="file_size_byte">Byte</string>
     <string name="file_size_bytes">Bytes</string>
     <string name="file_size_kb">kB</string>
@@ -71,11 +71,11 @@
     <string name="preferences_general">Allgemeine Einstellungen</string>
     <string name="preferences_cache_persistence">Cache-Persistenz</string>
     <string name="preferences_cache_persistence_desc">Zwischenspeicher beim Beenden beibehalten</string>
-    <string name="preferences_cache_size">Externer Speicher</string>
+    <string name="preferences_cache_size">Cachegröße</string>
     <string name="preferences_cache_size_desc">Größe des Caches anpassen</string>
     <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Vollbildmodus</string>
-    <string name="preferences_fullscreen_desc">Verberge die Statusleiste</string>
+    <string name="preferences_fullscreen_desc">Statusleiste ausblenden</string>
     <string name="preferences_map">Karteneinstellungen</string>
     <string name="preferences_move_speed">Scrollgeschwindigkeit</string>
     <string name="preferences_move_speed_desc">Scrollgeschwindigkeit der Karte anpassen</string>
@@ -84,12 +84,12 @@
     <string name="preferences_scale_bar_unit_desc">Einheit des Kartenmaßstabs auswählen</string>
     <string name="preferences_show_fps_counter">Bildfrequenz</string>
     <string name="preferences_show_fps_counter_desc">FPS-Zähler anzeigen</string>
-    <string name="preferences_show_scale_bar">Kartenmaßstab</string>
+    <string name="preferences_show_scale_bar">Maßstabsbalken</string>
     <string name="preferences_show_scale_bar_desc">Maßstabsbalken der Karte anzeigen</string>
     <string name="preferences_show_tile_coordinates">Tile-Koordinaten</string>
     <string name="preferences_show_tile_coordinates_desc">Koordinaten auf Kacheln anzeigen</string>
     <string name="preferences_show_tile_frames">Kachel-Umrandungen</string>
-    <string name="preferences_show_tile_frames_desc">Rahmen um Kacheln malen</string>
+    <string name="preferences_show_tile_frames_desc">Rahmen um Kacheln anzeigen</string>
     <string name="preferences_show_water_tiles">Wasser-Kacheln</string>
     <string name="preferences_show_water_tiles_desc">Kacheln mit gesetztem Wasser-Bit hervorheben</string>
     <string name="preferences_text_scale">Schriftgröße</string>
