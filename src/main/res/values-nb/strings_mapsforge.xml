@@ -44,7 +44,7 @@
     <string name="info_map_file_size">Fil størrelse</string>
     <string name="info_map_file_start_position">Start possisjon</string>
     <string name="info_map_file_start_zoom_level">Start zoom nivå</string>
-    <string name="info_map_file_version">Version</string>
+    <string name="info_map_file_version">Versjon</string>
     <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kart filegenskaper</string>
     <string name="menu_info_about">Om denne programvaren</string>
