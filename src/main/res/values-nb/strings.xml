@@ -71,7 +71,7 @@
     <string name="ok">OK</string>
     <string name="pending">Venter</string>
     <string name="pitch">Bane</string>
-    <string name="point">Point</string>
+    <string name="point">Punkt</string>
     <string name="press_color_to_apply">Trykk farge for å velge</string>
     <string name="problem_with_internet_connection">Problem med Internet Tilkobling!</string>
     <string name="provider">Lokasjons Tilbyder</string>
@@ -82,7 +82,7 @@
     <string name="resume_previous_cartridge">Laste Lagret Spill?\n(Om du velger nei, Blir lagringen slettet.)</string>
     <string name="roll">Rull</string>
     <string name="satellites">Satelliter</string>
-    <string name="save_file_backup">Backup</string>
+    <string name="save_file_backup">Sikkerhetskopi</string>
     <string name="save_file_main">Hoved</string>
     <string name="save_file_new">Nytt spill</string>
     <string name="save_game">Lagre</string>
@@ -116,8 +116,8 @@
     <string name="zone_state_near">nær</string>
     <string name="zone_state_unknown">Ukjent</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
+    <string name="close_app">Lukk app</string>
+    <string name="ask_again">Spør meg igjen</string>
     <string name="goto_app_details">Open Application Info</string>
     <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
     <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
