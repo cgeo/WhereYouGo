@@ -95,8 +95,8 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.asamm:locus-api-android:0.2.7'
 
-    // openwig with extentions
-    implementation 'com.github.biylda:openwig:3a1e405'
+    // openwig@cgeo
+    implementation 'com.github.cgeo:openwig:1.0.0'
 
     // File select dialog
     implementation 'com.github.jfmdev:aFileDialog:v1.0.6'
