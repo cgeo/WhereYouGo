@@ -7,3 +7,6 @@ files:
     translation: /src/main/res/values-%two_letters_code%/%original_file_name%
     translate_attributes: 0
     content_segmentation: 0
+  - source: /_data/playstore/source/*.txt
+    translation: /_data/playstore/%two_letters_code%/%original_file_name%    
+    content_segmentation: 1
