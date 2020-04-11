@@ -1,0 +1,29 @@
+WhereYouGo is an unofficial client for Wherigo Geoaching.
+
+It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate. 
+WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online and offline vector maps using the Mapsforge library, alternatively Locus can be used to display maps.
+Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+
+Main features:
+- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
+- Use compass to navigate to the next game zone or location
+- View game zones and locations on a map
+- Uses online maps from various sources
+- Supports offline map files (only Mapsforge v0.3 format at this moment)  
+- Seamless interworking with Locus to display maps (alternatively to internal maps)
+- Several save game slots per cartridge
+- Automatic game saving when switching to another app
+- Integrated QR-code reader
+
+About:
+WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+
+After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
+If you are able and willing to help us, you can find information and source code in the link below. We need your help: https://github.com/cgeo/WhereYouGo
+The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+
+Notes:
+- When manually downloading cartridges wherigo.com, make sure to use the version "Pocket PC Device". 
+- Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
+- If you have problems installing or using WhereYouGo please contact us at whereryougo@cgeo.org 
+- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
