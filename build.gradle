@@ -39,7 +39,7 @@ android {
         // include only those language resources from libraries that we actively maintain ourselves in the translation project
         // when changed here - also change in array.xml/strings_pref_languages.xml is necessary
         // not yet enough strings translated (>40%): "sl","sv","tr"
-        resConfigs "en","ar","ca","cs","da","de", "el","es","fi","fr","hu","it","ja","ko","nb","nl","pl","pt-rBR","pt-rPT","ru","sk"
+        resConfigs "en","ar","ca","cs","da","de", "el","es","fi","fr","hu","it","ja","ko","nb","nl","pl","pt-rBR","pt-rPT","ru","sk","tr"
     }
 
     // define ndk version to use local the same version as on CI
