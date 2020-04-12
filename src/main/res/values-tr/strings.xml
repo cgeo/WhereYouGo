@@ -33,7 +33,7 @@
     <string name="error">Hata</string>
     <string name="failed">Başarısız oldu</string>
     <string name="feet">Adım</string>
-    <string name="filesystem_cannot_create_root">Cannot create Root directory, SDCard probably missing.\n\nInsert it into device and run again!</string>
+    <string name="filesystem_cannot_create_root">Kök dizini oluşturulamıyor, muhtemelen SD kart yok.\n\nYeniden takın ve çalıştırın!</string>
     <string name="finished">Bitti</string>
     <string name="folder_default">Varsayılan</string>
     <string name="folder_select">Seç…</string>
@@ -66,13 +66,12 @@
     <string name="no_location_providers_available">Konum sağlayıcı mevcut değil!</string>
     <string name="no_satellites">Uydu yok</string>
     <string name="no_target">Hedef yok!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.
-Download or copy them into directory \"%1$s\".
-You can also set a path to custom directory in \"Settings - Main - Wherigo folder\".
-Make sure you granted the application permission to write to external storage and you have write permission in selected directory.
-Some newer devices don\'t allow writing to SD card.
-If you\'re not sure, set \"Wherigo folder\" automatically.
-    </string>
+    <string name="no_wherigo_cartridge_available">Herhangi bir Wherigo kartuşu (*.gwc) bulunmuyor.
+Kartuşları \"%1$s\" dizinine kopyalayın veya indirin.
+Ayrıca \"Ayarlar - Başlıca - Wherigo dosyası\" konumuna da yol oluşturabilirsiniz.
+Seçili dizine ve harici belleğe veri kaydı izni verdiğinizden emin olun.
+Bazı cihazlar SD kart üzerine veri yazılmasına izin vermez.
+Emin değilseniz \'\'Wherigo dosyası\'\'nı otomatik olarak ayarlayın.</string>
     <string name="not_enough_disk_space_x">SD kartta yeterli boş disk alanı yok!\n(%1$s, boş:%2$s)</string>
     <string name="ok">Tamam</string>
     <string name="pending">Bekliyor</string>
