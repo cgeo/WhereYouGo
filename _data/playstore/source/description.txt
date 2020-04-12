@@ -1,7 +1,6 @@
 WhereYouGo is an unofficial client for Wherigo Geoaching.
 
-It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate. 
-WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online and offline vector maps using the Mapsforge library, alternatively Locus can be used to display maps.
+It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
 Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
 
 Main features:
