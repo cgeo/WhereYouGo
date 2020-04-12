@@ -83,7 +83,7 @@
     <string name="preferences_scale_bar_unit">Ölçek birimi</string>
     <string name="preferences_scale_bar_unit_desc">Harita ölçeği için birim seçin</string>
     <string name="preferences_show_fps_counter">Çerçeve hızı</string>
-    <string name="preferences_show_fps_counter_desc">Enable frames per second counter</string>
+    <string name="preferences_show_fps_counter_desc">Saniyede çerçeve sayacını etkinleştir</string>
     <string name="preferences_show_scale_bar">Harita ölçeği</string>
     <string name="preferences_show_scale_bar_desc">Harita ölçeğini göster</string>
     <string name="preferences_show_tile_coordinates">Karo koordinatları</string>
