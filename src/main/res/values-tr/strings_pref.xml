@@ -6,7 +6,7 @@
     <string name="pref_bearing_true">Gerçek sapmayı kullan</string>
     <string name="pref_bearing_true_desc">Etkinleştirilirse gerçek sapmayı kullan. Aksi takdirde manyetik sapmayı kullan</string>
     <string name="pref_confirm_on_exit">Çıkış onayı</string>
-    <string name="pref_confirm_on_exit_desc">Display confirmation dialog before exiting Locus via the Back Button</string>
+    <string name="pref_confirm_on_exit_desc">Geri düğmesi ile Locus\'tan çıkmadan önce onay iletişim kutusunu görüntüle</string>
     <string name="pref_double_click">Çift tık</string>
     <string name="pref_double_click_desc">Oyundan çıkmak için GERİ\'ye iki kez basın.</string>
     <string name="pref_run_screen_off">Ekran kapalı olsa da uygulamayı açık tut</string>
@@ -28,12 +28,12 @@
     <string name="pref_gps_altitude_manual_correction">İrtifayı Uygula</string>
     <string name="pref_gps_altitude_manual_correction_desc">İrtifayı elle düzelt</string>
     <string name="pref_gps_beep_on_gps_fix">GPS düzeltmesi sesi</string>
-    <string name="pref_gps_beep_on_gps_fix_desc">Beep when GPS receive first valid fixed position</string>
+    <string name="pref_gps_beep_on_gps_fix_desc">İlk geçerli GPS konumuna ulaşınca ses çıkart</string>
     <string name="pref_gps_desc">Açılışta GPS otomatik olarak başlatılır.</string>
     <string name="pref_gps_disable">Gizlendiğinde devre dışı bırak</string>
-    <string name="pref_gps_disable_desc">Disable GPS, when screen turn off or application is minimized and GPS is not required by any function</string>
+    <string name="pref_gps_disable_desc">Ekran kapandığında, uygulama arka plana alındığında ve herhangi bir özellik için gerekli değilken GPS\'i devredışı bırak.</string>
     <string name="pref_gps_min_time">GPS konumları arasındaki zaman</string>
-    <string name="pref_gps_min_time_desc">Time (in sec) between GPS try to get new location. To conserve battery, suggest values more then 60s</string>
+    <string name="pref_gps_min_time_desc">GPS\'in yeni konumu belirleme aralığı (saniye) Daha uzun pil ömrü için 60\'dan büyük değerler tavsiye edilir.</string>
     <string name="pref_guiding">Yönlendiriyor</string>
     <string name="pref_guiding_compass_sounds">Klavuz sesleri</string>
     <string name="pref_guiding_compass_sounds_desc">Yönlendirme sırasında sesleri aç/kapa</string>
@@ -61,7 +61,7 @@
     <string name="pref_language_desc">Dil ayarlarını seçiminize göre ayarlar</string>
     <string name="pref_locale">Lokalizasyon</string>
     <string name="pref_login">Giriş bilgileri</string>
-    <string name="pref_login_desc">You need the login credentials to download Wherigo cartridges from wherigo.com. If you don\'t have any login for wherigo.com you can use your credentials from www.geocaching.com.</string>
+    <string name="pref_login_desc">wherigo.com üzerinden Wherigo kartuşlarını indirebilmek için giriş yapmalısınız. Eğer wherigo.com üyeliğiniz yoksa www.geocaching.com üyeliğinizi kullanabilirsiniz.</string>
     <string name="pref_map_provider">Harita sağlayıcısı</string>
     <string name="pref_map_provider_desc">Harita sağlayıcısını seç</string>
     <string name="pref_map_provider_locus">Locus (Locus gerekli)</string>
@@ -72,7 +72,7 @@
     <string name="pref_save_game_auto">Oyunu otomatik kaydet</string>
     <string name="pref_save_game_auto_desc">Kullanıcı başka bir uygulamaya geçtiğinde oyun otomatik olarak kaydedilecektir.</string>
     <string name="pref_save_game_slots">Oyun kayıt yuvaları</string>
-    <string name="pref_save_game_slots_desc">Number of slots for saving game via menu button</string>
+    <string name="pref_save_game_slots_desc">Menü tuşu ile oyun kaydetmek için yuva sayısı</string>
     <string name="pref_sensors">Algılayıcılar</string>
     <string name="pref_sensors_compass_auto_change">Otomatik değiştirme</string>
     <string name="pref_sensors_compass_auto_change_desc">Use source for bearing defined by \"Use hardware compass\" settings for low speed. For high speed use bearing from GPS</string>
