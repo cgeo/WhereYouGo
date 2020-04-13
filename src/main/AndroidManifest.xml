@@ -87,6 +87,7 @@
         </activity>
         <activity
             android:name="menion.android.whereyougo.maps.mapsforge.MapsforgeActivity"
+            android:exported="true"
             android:launchMode="singleTask"
             android:theme="@style/Mapsforge" />
         <activity

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">WhereYouGo</string>
+
+    <!-- link data to c:geo - must be according to c:geo configuration in their AndroidManifest.xml -->
+    <string name="cgeo_package" translatable="false">cgeo.geocaching</string>
+    <string name="cgeo_action_queryMapFile" translatable="false">cgeo.geocaching.helper.QueryMapFile</string>
+
+    <!-- the following values must be the same as defined in c:geo -->
+    <string name="cgeo_queryMapFile_actionParam" translatable="false">forceAndFeedback</string>
+    <string name="cgeo_queryMapFile_resultParam" translatable="false">mapfile</string>
 </resources>

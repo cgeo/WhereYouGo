@@ -54,6 +54,7 @@
     <string name="menu_info_about">About this software</string>
     <string name="menu_mapfile">Map file</string>
     <string name="menu_mapgenerator">Map source</string>
+    <string name="menu_acquire_from_cgeo">Acquire map from c:geo</string>
     <string name="menu_position">Position</string>
     <string name="menu_position_enter_coordinates">Enter coordinates</string>
     <string name="menu_position_last_known">Last known location</string>
@@ -107,4 +108,10 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Zoom level</string>
     <!-- MapsForge END -->
+
+    <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geo application not found</string>
+    <string name="receivemapfile_success">Mapfile set</string>
+    <string name="receivemapfile_error">Error setting mapfile</string>
+    <string name="receivemapfile_notset">No mapfile set in c:geo</string>
 </resources>
