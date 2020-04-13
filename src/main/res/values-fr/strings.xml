@@ -43,8 +43,8 @@
     <string name="gps_enabled">GPS activé</string>
     <string name="gps_fix">Dernier fix GPS</string>
     <string name="gps_not_enabled_show_system_settings">GPS désactivé. Afficher les réglages systèmes ?</string>
-    <string name="gps_off">Location</string>
-    <string name="gps_on">Location</string>
+    <string name="gps_off">Localisation désactivée</string>
+    <string name="gps_on">Localisation activée</string>
     <string name="info">Information</string>
     <string name="invalid_cartridge">Cartouche %s invalide</string>
     <string name="invalid_url">URL invalide</string>
@@ -66,13 +66,7 @@
     <string name="no_location_providers_available">Aucun fournisseur de localisation disponible</string>
     <string name="no_satellites">Aucun satellite</string>
     <string name="no_target">Aucune cible</string>
-    <string name="no_wherigo_cartridge_available">Aucune cartouche Wherigo (*.gwc) n\'est disponible.
-Téléchargez ou copiez les dans le répertoire \"%1$s\".
-Vous pouvez aussi configurer un répertoire dans \"Paramètres - Global - Dossier Wherigo\".
-Soyez sûr(e) d’avoir autorisé l’application à écrire sur le stockage externe et que vous pouvez écrire dans le répertoire sélectionné.
-Certains appareils récents n’autorisent pas l’écriture sur la carte SD.
-Si vous n’êtes pas sûr(e), configurez le \"Dossier Wherigo\" par défaut.
-    </string>
+    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">Pas assez d’espace disque libre sur Carte SD.\n(%1$s, libre : %2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">En attente</string>
