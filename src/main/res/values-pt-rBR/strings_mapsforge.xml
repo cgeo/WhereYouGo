@@ -23,7 +23,7 @@
         <item>Esri World Street (online)</item>
     </string-array>
     <string name="application_name">Mapsforge</string>
-    <string name="error_last_location_unknown">A ultima localização é desconhecida</string>
+    <string name="error_last_location_unknown">A última localização é desconhecida</string>
     <string name="file_invalid">O ficheiro seleccionado é inválido.</string>
     <string name="file_select">Por favor, seleccione um ficheiro.</string>
     <string name="file_size_byte">byte</string>
