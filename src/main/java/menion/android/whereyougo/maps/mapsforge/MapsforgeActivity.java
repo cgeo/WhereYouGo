@@ -17,6 +17,8 @@ package menion.android.whereyougo.maps.mapsforge;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -66,6 +68,7 @@ import org.mapsforge.android.maps.overlay.Polyline;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.MapPosition;
+import org.mapsforge.map.reader.header.FileOpenResult;
 import org.mapsforge.map.reader.header.MapFileInfo;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 
@@ -100,6 +103,7 @@ import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
 import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.CgeoUtils;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 /**
@@ -434,8 +438,27 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             setMapGenerator(MapGeneratorInternal.valueOf(getString(R.string.mapgenerator_default)));
         }
 
+        // check if offline map file is set
+        checkOfflineMapFile(false);
+
         // add items received via Intent or from provider
         refreshItems();
+    }
+
+    private void checkOfflineMapFile(final boolean forceAndFeedback) {
+        // if no local mapFile is set: query c:geo for current mapFile
+        if (forceAndFeedback || this.mapView.getMapFile() == null) {
+            try {
+                final Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setComponent(new ComponentName(getString(R.string.cgeo_package), getString(R.string.cgeo_action_queryMapFile)));
+                intent.putExtra(getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                if (forceAndFeedback) {
+                    Toast.makeText(this, R.string.receivemapfile_cgeonotfound, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     @Deprecated
@@ -682,6 +705,10 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 startMapFilePicker();
                 return true;
 
+            case R.id.menu_acquire_from_cgeo:
+                checkOfflineMapFile(true);
+                return true;
+
             case R.id.menu_mapgenerator:
                 return true;
 
@@ -855,6 +882,8 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             menu.findItem(R.id.menu_position_target).setEnabled(false);
         }
 
+        menu.findItem(R.id.menu_acquire_from_cgeo).setVisible(CgeoUtils.isInstalled(this));
+
         return true;
     }
 
@@ -947,6 +976,24 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
     private void refreshItems() {
         Bundle bundle = getIntent().getExtras();
+
+        // received mapfile from c:geo? (triggered by checkOfflineMapFile() above)
+        if (null != bundle) {
+            final String newMapfile = bundle.getString(getString(R.string.cgeo_queryMapFile_resultParam), "");
+            boolean forceAndFeedback = bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam), false);
+            if (!"".equals(newMapfile)) {
+                FileOpenResult result = mapView.setMapFile(new File(newMapfile));
+                if (result == FileOpenResult.SUCCESS) {
+                    setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
+                }
+                if (forceAndFeedback) {
+                    Toast.makeText(this, result == FileOpenResult.SUCCESS ? R.string.receivemapfile_success : R.string.receivemapfile_error, Toast.LENGTH_SHORT).show();
+                }
+            } else if (forceAndFeedback) {
+                Toast.makeText(this, R.string.receivemapfile_notset, Toast.LENGTH_SHORT).show();
+            }
+        }
+
         boolean center = bundle != null && bundle.getBoolean(BUNDLE_CENTER, false);
         boolean navigate = bundle != null && bundle.getBoolean(BUNDLE_NAVIGATE, false);
         allowStartCartridge = bundle != null && bundle.getBoolean(BUNDLE_ALLOW_START_CARTRIDGE, false);
