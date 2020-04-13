@@ -71,7 +71,7 @@
     <string name="pitch">Bane</string>
     <string name="point">Punkt</string>
     <string name="press_color_to_apply">Trykk farge for å velge</string>
-    <string name="problem_with_internet_connection">Problem med Internet Tilkobling!</string>
+    <string name="problem_with_internet_connection">Problem med Internett Tilkobling!</string>
     <string name="provider">Lokasjons Tilbyder</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Netverk</string>
