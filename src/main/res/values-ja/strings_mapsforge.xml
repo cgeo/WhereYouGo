@@ -22,15 +22,11 @@
         <item>Esri World Street (オンライン)</item>
         <item>Esri World Imagery (オンライン)</item>
     </string-array>
-    <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">最後の位置が不明です</string>
     <string name="file_invalid">選択したファイルが無効です。</string>
     <string name="file_select">ファイルを選択してください。</string>
     <string name="file_size_byte">バイト</string>
     <string name="file_size_bytes">バイト</string>
-    <string name="file_size_kb">kB</string>
-    <string name="file_size_mb">MB</string>
-    <string name="file_size_gb">GB</string>
     <string name="go_to_position">位置に移動</string>
     <string name="info_map_file_area">エリア</string>
     <string name="info_map_file_comment">コメント</string>
@@ -44,7 +40,6 @@
     <string name="info_map_file_size">ファイルサイズ</string>
     <string name="info_map_file_start_position">開始位置</string>
     <string name="info_map_file_start_zoom_level">開始ズームレベル</string>
-    <string name="info_map_file_version">Version</string>
     <string name="menu_info">情報</string>
     <string name="menu_info_map_file">地図ファイルプロパティ</string>
     <string name="menu_info_about">このソフトウェアについて</string>
@@ -61,7 +56,6 @@
     <string name="menu_preferences">設定</string>
     <string name="menu_refresh">更新</string>
     <string name="menu_render_theme">描画テーマ</string>
-    <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">XML ファイルを選択 …</string>
     <string name="menu_screenshot">スクリーンショット</string>
     <string name="menu_screenshot_jpeg">JPEG (ロス有)</string>
@@ -73,7 +67,6 @@
     <string name="preferences_cache_persistence_desc">終了時にキャッシュした画像を保存する</string>
     <string name="preferences_cache_size">外部ストレージ</string>
     <string name="preferences_cache_size_desc">キャッシュのサイズを調整する</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">フルスクリーンモード</string>
     <string name="preferences_fullscreen_desc">ステータスバーを非表示にする</string>
     <string name="preferences_map">地図設定</string>
@@ -98,8 +91,6 @@
     <string name="preferences_wake_lock_desc">画面が暗くなるのを停止</string>
     <string name="snap_to_location_enabled">位置にスナップが有効です</string>
     <string name="snap_to_location_disabled">位置にスナップが無効です</string>
-    <string name="unit_symbol_kilometer">&#160;km</string>
-    <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">ズームレベル</string>
     <!-- MapsForge END -->
 </resources>
