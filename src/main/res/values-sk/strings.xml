@@ -66,13 +66,7 @@
     <string name="no_location_providers_available">Poskytovatelia polohy nie sú k dispozícii!</string>
     <string name="no_satellites">Žiadne satelity</string>
     <string name="no_target">Žiadny cieľ!</string>
-    <string name="no_wherigo_cartridge_available">Nie je k dispozícii žiadna Wherigo cartridge (*.gwc).
-Stiahnite ju alebo skopírujte do priečinka \"%1$s\".
-Môžete aj nastaviť cestu k inému priečinku cez \"Nastavenia - Hlavné - Priečinok Wherigo\".
-Uistite sa, či ste v aplikácii povolili právo na zápis a že vo vybranom priečinku máte právo na zápis.
-Niektoré novšie zariadenia nedovoľujú zápis na SD kartu.
-Ak si nie ste istí, nechajte položku \"Priečinok Wherigo\" nastaviť automaticky.
-    </string>
+    <string name="no_wherigo_cartridge_available">Nie je k dispozícii žiadna wherigo cartridge (*.gwc).\nStiahnite alebo skopírujte ich do priečinka \"%1$s\". Môžete aj nastaviť vlastný priečinok cez ponuku \"Nastavenia - Hlavné - Priečinok Wherigo\". Nezabudnite aplikácii udeliť povolenie zápisu do externej pamäte. Musíte mať aj právo zápisu do vybraného priečinka. Niektoré novšie zariadenia neumožňujú zápis na kartu SD. Ak si nie ste istí, nastavte položku \"Priečinok Wherigo\" automaticky.</string>
     <string name="not_enough_disk_space_x">Nedostatok voľného miesta na SD karte!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čaká na vybavenie</string>
