@@ -7,19 +7,12 @@
     <string name="pref_bearing_true_desc">Se attivato usa la direzione reale. Altrimenti usa la direzione magnetica</string>
     <string name="pref_confirm_on_exit">Conferma all\'uscita</string>
     <string name="pref_confirm_on_exit_desc">Visualizza una finestra di conferma prima di uscire da Locus usando il pulsante \"Indietro\"</string>
-    <string name="pref_double_click">Double tap</string>
-    <string name="pref_double_click_desc">To exit the game use double tap on BACK</string>
-    <string name="pref_run_screen_off">Run app even if screen is off</string>
-    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">Default</string>
     <string name="pref_font_size_desc">Dimensione del testo</string>
     <string name="pref_font_size_large">Grande</string>
     <string name="pref_font_size_medium">Medio</string>
     <string name="pref_font_size_small">Piccolo</string>
     <string name="pref_fullscreen">Modalità schermo pieno</string>
     <string name="pref_fullscreen_desc">Nasconde la barra delle notifiche</string>
-    <string name="pref_gc_password">Password</string>
     <string name="pref_gc_password_desc">Password Geocaching.com</string>
     <string name="pref_gc_username">Nome utente</string>
     <string name="pref_gc_username_desc">Nome utente Geocaching.com</string>
@@ -50,7 +43,6 @@
     <string name="pref_guiding_zone_point_desc">Seleziona quale punto di zona deve essere utilizzato per la navigazione</string>
     <string name="pref_guiding_zone_point_nearest">Punto di confine più vicino</string>
     <string name="pref_highlight">Schermo sempre acceso</string>
-    <string name="pref_highlight_always_text">Always screen on</string>
     <string name="pref_highlight_desc">Abilita / disabilita l\'illuminazione dello schermo</string>
     <string name="pref_highlight_off_text">Impostazioni di sistema</string>
     <string name="pref_highlight_only_gps_text">Solo quando il GPS è attivo</string>
@@ -61,7 +53,6 @@
     <string name="pref_language_desc">Permette di impostare la lingua da una lista di selezione</string>
     <string name="pref_locale">Localizzazione</string>
     <string name="pref_login">Credenziali di accesso</string>
-    <string name="pref_login_desc">You need the login credentials to download Wherigo cartridges from wherigo.com. If you don\'t have any login for wherigo.com you can use your credentials from www.geocaching.com.</string>
     <string name="pref_map_provider">Base della mappa</string>
     <string name="pref_map_provider_desc">Seleziona base della mappa</string>
     <string name="pref_map_provider_locus">Locus (richiesto Locus)</string>
@@ -86,8 +77,6 @@
     <string name="pref_sensors_orient_filter_ligth">Filtro leggero</string>
     <string name="pref_sensors_orient_filter_medium">Filtro medio</string>
     <string name="pref_sensors_orient_filter_no_filter">Nessun filtro</string>
-    <string name="pref_statusbar">Statusbar Icon</string>
-    <string name="pref_statusbar_desc">Show icon in statusbar</string>
     <string name="pref_style_on_map">Stile sulla mappa</string>
     <string name="pref_units">Formati</string>
     <string name="pref_units_altitude">Unità per l\'altitudine</string>
