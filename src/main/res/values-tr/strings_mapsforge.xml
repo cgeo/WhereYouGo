@@ -91,7 +91,6 @@
     <string name="preferences_show_tile_frames">Karo sınırları</string>
     <string name="preferences_show_tile_frames_desc">Karo sınırı çiz</string>
     <string name="preferences_show_water_tiles">Karo</string>
-    <string name="preferences_show_water_tiles_desc">Highlight tiles which have the water flag set</string>
     <string name="preferences_text_scale">Yazı boyutu</string>
     <string name="preferences_text_scale_desc">Harita etiketlerinin boyutunu seçin</string>
     <string name="preferences_wake_lock">Açık kal</string>
