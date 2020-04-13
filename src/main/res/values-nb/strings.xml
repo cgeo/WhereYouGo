@@ -12,7 +12,6 @@
     <string name="cancelled">avbrutt</string>
     <string name="choose_cartridge">Velg Kassett</string>
     <string name="close">Lukk</string>
-    <string name="coauthor">Current development</string>
     <string name="compass">Kompass</string>
     <string name="declination">Deklinasjon</string>
     <string name="delete_cartridge">Slette Kassett?</string>
@@ -66,14 +65,13 @@
     <string name="no_location_providers_available">Ingen Lokasjons leverandører er tilgjengelig!</string>
     <string name="no_satellites">Ingen Satelitter er Tilgjengelig</string>
     <string name="no_target">Ingen Mål!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">Ikke nok ledig plass på SDKort!\n(%1$s, free:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Venter</string>
     <string name="pitch">Bane</string>
     <string name="point">Punkt</string>
     <string name="press_color_to_apply">Trykk farge for å velge</string>
-    <string name="problem_with_internet_connection">Problem med Internett Tilkobling!</string>
+    <string name="problem_with_internet_connection">Problem med Internet Tilkobling!</string>
     <string name="provider">Lokasjons Tilbyder</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Netverk</string>
@@ -118,8 +116,4 @@
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør meg igjen</string>
-    <string name="goto_app_details">Open Application Info</string>
-    <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
-    <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
-    <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
 </resources>
