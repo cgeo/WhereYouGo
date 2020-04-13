@@ -9,13 +9,8 @@
     <string name="pref_confirm_on_exit_desc">Vis bekræftelsesdialog før du afslutter Locus via knappen Tilbage</string>
     <string name="pref_double_click">Dobbelttryk</string>
     <string name="pref_double_click_desc">For at afslutte spillet tryk to gange på TILBAGE</string>
-    <string name="pref_run_screen_off">Run app even if screen is off</string>
-    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">Default</string>
     <string name="pref_font_size_desc">Størrelse på teksten</string>
     <string name="pref_font_size_large">Stor</string>
-    <string name="pref_font_size_medium">Medium</string>
     <string name="pref_font_size_small">Lille</string>
     <string name="pref_fullscreen">Fuldskærm</string>
     <string name="pref_fullscreen_desc">Skjul system panel</string>
@@ -50,7 +45,6 @@
     <string name="pref_guiding_zone_point_desc">Vælg hvilket zonepunkt der skal bruges til navigering</string>
     <string name="pref_guiding_zone_point_nearest">Nærmeste grænsepunkt</string>
     <string name="pref_highlight">Altid skærmen tændt</string>
-    <string name="pref_highlight_always_text">Always screen on</string>
     <string name="pref_highlight_desc">Aktiver / deaktiver altid skærmen tændt</string>
     <string name="pref_highlight_off_text">Systemindstillinger</string>
     <string name="pref_highlight_only_gps_text">Kun når GPS er tændt</string>
@@ -84,7 +78,6 @@
     <string name="pref_sensors_orient_filter_desc">Filter anvendes til orientering. Stærkere filter forårsager langsommere reaktioner, men mere flydende bevægelse</string>
     <string name="pref_sensors_orient_filter_heavy">Tungt filter</string>
     <string name="pref_sensors_orient_filter_ligth">Let filter</string>
-    <string name="pref_sensors_orient_filter_medium">Medium filter</string>
     <string name="pref_sensors_orient_filter_no_filter">Ingen filtrering</string>
     <string name="pref_statusbar">Statusbjælkeikon</string>
     <string name="pref_statusbar_desc">Vis ikon i statusbjælken</string>
@@ -99,10 +92,8 @@
     <string name="pref_units_angle_russian_mil">Russisk mil</string>
     <string name="pref_units_angle_us_artillery_mil">US artilleri mil</string>
     <string name="pref_units_coo_latlon">Koordinatformat</string>
-    <string name="pref_units_coo_latlon_dec">14,94323°</string>
     <string name="pref_units_coo_latlon_desc">Koordinater (bredde/længde)-format til visning</string>
     <string name="pref_units_coo_latlon_min">14° 52,123\'</string>
-    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Længde enheder</string>
     <string name="pref_units_length_desc">Vælg standard display-enheder</string>
     <string name="pref_units_length_im_f">Imperisk (ft)</string>
