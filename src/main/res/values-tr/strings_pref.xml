@@ -39,7 +39,6 @@
     <string name="pref_guiding_compass_sounds_desc">Yönlendirme sırasında sesleri aç/kapa</string>
     <string name="pref_guiding_gps_required_desc">Yönlendirme sırasında uygulama arka plandayken GPS\'i açık tut</string>
     <string name="pref_guiding_sound_distance">Gidim sesi</string>
-    <string name="pref_guiding_sound_distance_waypoint_desc">Distance (metres) used in sounds. Start value for increasing or just a value for one beep</string>
     <string name="pref_guiding_sound_type">Ses bildirimi türü</string>
     <string name="pref_guiding_sound_type_waypoint_desc">Buradan nokta bildirim seslerinin nasıl çalıştığını değiştirebilirsiniz</string>
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Gidim sesi</string>
@@ -55,7 +54,7 @@
     <string name="pref_highlight_off_text">Sistem ayarları</string>
     <string name="pref_highlight_only_gps_text">Sadece GPS açıkken</string>
     <string name="pref_image_stretch">Görselleri genişlet</string>
-    <string name="pref_image_stretch_desc">Genişlet (onayla) veya orijinal boyutu göster (onayı kaldır)</string>
+    <string name="pref_image_stretch_desc">Genişlet (onayla) veya orjinal boyutu göster (onayı kaldır)</string>
     <string name="pref_language">Dil</string>
     <string name="pref_language_default">Varsayılan sistem</string>
     <string name="pref_language_desc">Dil ayarlarını seçiminize göre ayarlar</string>
@@ -75,13 +74,10 @@
     <string name="pref_save_game_slots_desc">Menü tuşu ile oyun kaydetmek için yuva sayısı</string>
     <string name="pref_sensors">Algılayıcılar</string>
     <string name="pref_sensors_compass_auto_change">Otomatik değiştirme</string>
-    <string name="pref_sensors_compass_auto_change_desc">Use source for bearing defined by \"Use hardware compass\" settings for low speed. For high speed use bearing from GPS</string>
     <string name="pref_sensors_compass_auto_change_value">Hız değeri</string>
-    <string name="pref_sensors_compass_auto_change_value_desc">Value that define which source for bearing will be used (low speed below this value, high speed above this value)</string>
     <string name="pref_sensors_compass_hardware">Dahili pusulayı kullan</string>
     <string name="pref_sensors_compass_hardware_desc">Harita yönlendirmesi ve pusula ekranı için dahili pusulayı kullanın. Eğer devredışı ise GPS sapma açısı (araç için daha iyidir) kullanılacaktır.</string>
     <string name="pref_sensors_orient_filter">Yönlendirme filtresi</string>
-    <string name="pref_sensors_orient_filter_desc">Filter applied to orientation. Stronger filter cause slower reactions, but fluent movement</string>
     <string name="pref_sensors_orient_filter_heavy">Ağır filtre</string>
     <string name="pref_sensors_orient_filter_ligth">Hafif filtre</string>
     <string name="pref_sensors_orient_filter_medium">Orta filtre</string>
