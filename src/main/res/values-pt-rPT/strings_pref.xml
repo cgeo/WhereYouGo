@@ -12,7 +12,7 @@
     <string name="pref_run_screen_off">Run app even if screen is off</string>
     <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
     <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">Default</string>
+    <string name="pref_font_size_default">Predefinição</string>
     <string name="pref_font_size_desc">Size of the text</string>
     <string name="pref_font_size_large">Large</string>
     <string name="pref_font_size_medium">Medium</string>

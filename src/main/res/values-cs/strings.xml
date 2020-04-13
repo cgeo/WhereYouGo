@@ -66,13 +66,11 @@
     <string name="no_location_providers_available">Není dostupný žádný poskytovatel pozice!</string>
     <string name="no_satellites">Žádné satelity</string>
     <string name="no_target">Žádný cíl!</string>
-    <string name="no_wherigo_cartridge_available">Žádná Wherigo cartridge (*.gwc) není k dispozici.
-Stáhněte anebo je nakopírujte do adresáře \"%1$s\".
+    <string name="no_wherigo_cartridge_available">Žádná Wherigo cartridge (*.gwc) není k dispozici.\nStáhněte anebo je nakopírujte do adresáře \"%1$s\".
 Můžete také nastavit cestu k jinému adresáři v \"Nastavení - Hlavní - Složka s Wherigo\".
 Ujistěte se, že jste aplikaci povolili právo na zápis a že ve zvolené složce máte právo na zápis.
 Některá novější zařízení nedovolují zápis na SD kartu.
-Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.
-    </string>
+Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.</string>
     <string name="not_enough_disk_space_x">Nedostatek volného místa na SD kartě!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čeká na vyřízení</string>

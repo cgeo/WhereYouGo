@@ -66,13 +66,7 @@
     <string name="no_location_providers_available">Helyszolgáltató nem elérhető!</string>
     <string name="no_satellites">Nincsenek műholdak</string>
     <string name="no_target">Nincs cél!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.
-Download or copy them into directory \"%1$s\".
-You can also set a path to custom directory in \"Settings - Main - Wherigo folder\".
-Make sure you granted the application permission to write to external storage and you have write permission in selected directory.
-Some newer devices don\'t allow writing to SD card.
-If you\'re not sure, set \"Wherigo folder\" automatically.
-    </string>
+    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">Nincs elég szabad hely az SD-kártyán!\n(%1$s, szabad:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Függő</string>

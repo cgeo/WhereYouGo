@@ -1,0 +1,28 @@
+WhereYouGo je neoficiální klient pro Wherigo Geoaching.
+
+Podporuje přehrávání cartridgí Wherigo, což je interaktivní geocachingová hra založená na poloze. Můžete načíst, hrát a uložit aktuální stav svojí Wherigo hry. Kompas a online nebo offline mapy lze použít k navigaci. K zobrazení map je možné alternativně použít Locus.
+Cartridge na použití s aplikací WhereYouGo je možné stáhnout z https://www.wherigo.com a dalších služeb.
+
+Hlavní funkce:
+- Automatické stahování cartridgí z wherigo.com (lze jej spustit z prohlížeče otevřením stránky listingu na wherigo.com nebo z jiných geocachingových aplikací, jako je například c: geo)
+- Použití kompasu k navigaci do další herní zóny nebo na místo
+- Zobrazení herních zón a míst na mapě
+- Používá online mapy z různých zdrojů
+- Podporuje offline mapové soubory (nyní pouze formát Mapsforge v0.3)  
+- Bezproblémové propojení na Locus se zobrazením map (případně na interní mapy)
+- Více herních slotů pro uložení jedné cartridge
+- Automatické uložení hry při přepnutí do jiné aplikace
+- Integrovaná čtečka QR kódů
+
+Informace:
+WhereYouGo má otevřený zdrojový kód a je poskytován v rámci licence GNU General Public License v3.0.
+
+Po tom, co byl zdrojový kód několik let neudržovaný, mohl konečně nový vývojový tým (tým aplikace c: geo) se souhlasem původního autora převzít zdrojový kód a pokračovat ve vývoji aplikace.
+Pokud máte možnost a chcete nám pomoci, na odkazu níže najdete informace a zdrojový kód. Potřebujeme vaši pomoc: https://github.com/cgeo/WhereYouGo
+Jádro aplikace je založeno na OpenWIG, používá knihovnu Mapsforge k zobrazení map, alternativně může být použit Locus.
+
+Poznámky:
+- Když stahujete cartridge ručně z wherigo.com, nezapomeňte použít verzi "Pocket PC Device". 
+- Zkopírujte cartridge do složky Wherigo (Nastavení - Hlavní - Složka Wherigo). Ujistěte se, že jste udělili aplikaci oprávnění k zápisu na externí úložiště a máte oprávnění k zápisu do vybraného adresáře. Některá novější zařízení neumožňují zápis na SD kartu. Pokud si nejste jisti, nastavte "Wherigo složku" automaticky.
+- Pokud máte problémy s instalací nebo s používáním WhereYouGo kontaktujte nás prosím na adrese whereyougo@cgeo.org 
+- Pokud potřebujete vědět, proč aplikace WhereYouGo vyžaduje požadované povolení, viz vysvětlení na adrese https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md

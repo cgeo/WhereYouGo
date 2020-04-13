@@ -1,0 +1,28 @@
+WhereYouGo on epävirallinen sovellus Wherigo-geokätköjen etsimiseen.
+
+Se tukee Wherigo-kasettien toistamista. Wherigo on interaktiivinen sijaintiin perustuva geokätköilypeli. Voit ladata, pelata ja tallentaa Wherigo-pelisi tämänhetkisen tilan. Voit käyttää navigoinnin apuna kompassia sekä online- ja offline-karttoja. Myös Locusta voidaan käyttää karttojen näyttämisen apuna.
+Kasetteja, joita käytetään WhereYouGossa, voi ladata osoitteesta https://www.wherigo.com ja muista vastaavista palveluista.
+
+Päätoiminnot:
+- Automaattinen kasettien lataus wherigo.comista (voidaan avata selaimestasi avaamalla kasetin sivu wherigo.comissa tai muista geokätköilysovelluksista kuten c:geo)
+- Käytä kompassia navigoidaksesi pelin seuraavaan alueeseen tai sijaintiin
+- Tutki pelin alueita ja sijainteja kartalla
+- Käytä online-karttoja eri karttalähteistä
+- Käytä offline-karttatiedostoja (tukee tällä hetkellä vain Mapsforge v0.3-muotoa)  
+- Tutki karttoja saumattomasti Locus-sovelluksen kanssa (sisäisten karttojen lisäksi)
+- Useita tallennuspaikkoja per kasetti
+- Automaattinen pelin tallennus vaihdettaessa toiseen sovellukseen
+- Sisäinen QR-koodin lukija
+
+Tietoja:
+WhereYouGo on avoimen lähdekoodin ohjelmisto ja lisensoitu GNU-hankkeen yleisen lisenssin alle (GNU General Public License v3.0).
+
+Uusi kehitystiimi (c:geon tiimi) sai (vanhan kehittäjän suostumuksella) ottaa vastulleen lähdekoodin päivittämisen ja jatkaa sen kehittämistä sen jälkeen kun lähdekoodi unohdettiin ja jätettiin useamman vuoden ajan päivittämättä.
+Jos pystyt ja haluaisit auttaa meitä, löydät lisätietoja ja lähdekoodin allaolevasta linkistä (englanniksi). Tarvitsemme apuasi: https://github.com/cgeo/WhereYouGo
+Ohjelman ydin perustuu OpenWIGiin, joka käyttää Mapsforge-kirjastoa karttojen näyttämiseen. Vaihtoehtoisesti voidaan käyttää Locus-sovellusta.
+
+Huomaa:
+- Jos lataat kasetteja manuaalisesti wherigo.comista, käytä kasettiversiota "Pocket PC Device". 
+- Kopioi kasetit Wherigo-kansioosi (Asetukset - Pääasetukset - Wherigo-kansio). Varmista että olet antanut sovellukselle luvat kirjoittaa ulkoiselle tallennustilalle ja sinulla on kirjoituslupa valittuun hakemistoon. Jotkut uudemmat laitteet eivät salli kirjoitusta SD-kortille. Jos et ole varma, aseta Wherigo-kansio automaattiseksi.
+- Jos sinulla on ongelmia WhereYouGo:n asentamisessa tai käyttämisessä, ota yhteys osoitteeseen whereyougo@cgeo.org 
+- Jos haluat tietoa miksi WhereYouGo tarvitsee pyydetyt luvat laitteeseesi, löydät niistä kuvauksen englanniksi osoitteesta https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md.

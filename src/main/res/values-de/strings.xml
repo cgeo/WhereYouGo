@@ -66,12 +66,7 @@
     <string name="no_location_providers_available">Keine Standort-Dienst verfügbar!</string>
     <string name="no_satellites">Keine Satelliten</string>
     <string name="no_target">Kein Ziel!</string>
-    <string name="no_wherigo_cartridge_available">Kein Wherigo-Cartridge (*.gwc) gefunden.
-Lade oder kopiere es in den Ordner \"%1$s\".
-Du kannst auch einen anderen Ordner in \"Einstellungen - Allgemein - Wherigo-Ordner\" einstellen.
-Stelle sicher, dass du der Anwendung die Berechtigung gegeben hast auf den externen Speicher zu schreiben und du Schreibberechtigung im gewählten Ordner hast.
-Einige neuere Geräte erlauben kein Schreiben auf die SD-Karte. 
-Wenn du nicht sicher bist, setze den \"Wherigo-Ordner\" auf Automatisch.    </string>
+    <string name="no_wherigo_cartridge_available">Kein Wherigo-Cartridge (*.gwc) gefunden.\nLade oder kopiere es in den Ordner \"%1$s\". Du kannst auch einen anderen Ordner in \"Einstellungen - Allgemein - Wherigo-Ordner\" einstellen. Stelle sicher, dass du der Anwendung die Berechtigung gegeben hast auf den externen Speicher zu schreiben und du Schreibberechtigung im gewählten Ordner hast. Einige neuere Geräte erlauben kein Schreiben auf die SD-Karte. Wenn du nicht sicher bist, setze den \"Wherigo-Ordner\" auf Automatisch.</string>
     <string name="not_enough_disk_space_x">Nicht genügend freier Speicherplatz auf der SD-Karte!\n(%1$s, Frei:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">In Arbeit</string>

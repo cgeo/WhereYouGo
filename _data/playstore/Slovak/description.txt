@@ -1,0 +1,28 @@
+WhereYouGo je neoficiálny klient pre wherigo geocaching.
+
+Podporuje hranie wherigo cartridge, čo sú interaktívne geocachingové hry založené na polohe. Môžete načítať, hrať a ukladať aktuálny stav svojej wherigo hry. Kompas a online alebo offline mapy možno použiť na navigáciu. Na zobrazenie máp možno alternatívne použiť Locus.
+Cartridge na použitie s aplikáciou WhereYouGo možno stiahnuť z https://www.wherigo.com a ďalších služieb.
+
+Hlavné funkcie:
+– Automatické sťahovanie cartridge z wherigo.com (možno ho spustiť z prehliadača otvorením stránky listingu na wherigo.com alebo z iných geocachingových aplikácií, ako je napríklad c:geo)
+– Použitie kompasu na navigáciu do ďalšej hernej zóny alebo na miesto
+– Zobrazenie herných zón a miest na mape
+– Používa online mapy z rôznych zdrojov
+– Podporuje offline mapové súbory (v tejto chvíli len Mapsforge v0.3)  
+– Bezproblémové prepojenie na Locus so zobrazením máp (prípadne na interné mapy)
+– Viac herných slotov na uloženie jednej cartridge
+– Automatické uloženie hry pri prepnutí do inej aplikácie
+– Zabudovaná čítačka QR kódov
+
+Informácie:
+WhereYouGo je s otvoreným zdrojovým kódom a poskytuje sa v rámci licencie GNU General Public License v3.0.
+
+Po tom, čo bol zdrojový kód niekoľko rokov neudržiavaný, mohol konečne nový vývojový tím (tím aplikácie c:geo) so súhlasom pôvodného autora prevziať zdrojový kód a pokračuje vo vývoji aplikácie.
+Ak máte možnosť a chcete nám pomôcť, na odkaze dole nájdete informácie a zdrojový kód. Potrebujeme vašu pomoc: https://github.com/cgeo/WhereYouGo
+Jadro aplikácie je založené na OpenWIG, používa knižnicu Mapsforge na zobrazenie máp. Alternatívne možno použiť Locus.
+
+Poznámky:
+– Keď sťahujete cartridge ručne z wherigo.com, nezabudnite použiť verziu "Pocket PC Device". 
+– Skopírujte cartridge do priečinka Wherigo (Nastavenia – Hlavné – Priečinok Wherigo). Zaistite udelenie povolenia aplikácie na zápis do externej pamäte a to, či máte povolenie zápisu vo vybranom priečinku. Niektoré novšie zariadenia neumožňujú zápis na kartu SD. Ak si nie ste istí, nastavte "Priečinok Wherigo" automaticky.
+– Ak máte problémy s inštaláciou alebo používaním aplikácie WhereYouGo, obráťte sa nás na adrese whereyougo@cgeo.org 
+– Ak potrebujete vedieť, prečo aplikácia WhereYouGo vyžaduje požadované povolenia, pozrite si vysvetlenie na adrese https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md

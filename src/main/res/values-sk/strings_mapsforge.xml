@@ -85,13 +85,13 @@
     <string name="preferences_show_fps_counter">Počet snímok za sekundu</string>
     <string name="preferences_show_fps_counter_desc">Povoliť počítadlo snímok za sekundu</string>
     <string name="preferences_show_scale_bar">Mierka</string>
-    <string name="preferences_show_scale_bar_desc">Zobrazit mmierku mapy</string>
+    <string name="preferences_show_scale_bar_desc">Zobraziť mierku mapy</string>
     <string name="preferences_show_tile_coordinates">Súradnice dielika</string>
     <string name="preferences_show_tile_coordinates_desc">Zobraziť súradnice na dielikoch</string>
     <string name="preferences_show_tile_frames">Hranice dielikov</string>
     <string name="preferences_show_tile_frames_desc">Vykresliť hranice dielikov</string>
     <string name="preferences_show_water_tiles">Vodné dieliky</string>
-    <string name="preferences_show_water_tiles_desc">Zvýrazniť vodníé dieliky</string>
+    <string name="preferences_show_water_tiles_desc">Zvýrazniť vodné dieliky</string>
     <string name="preferences_text_scale">Veľkosť písma</string>
     <string name="preferences_text_scale_desc">Vyberte veľkosť popiskov mapy</string>
     <string name="preferences_wake_lock">Zostať hore</string>

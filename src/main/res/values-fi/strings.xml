@@ -66,13 +66,7 @@
     <string name="no_location_providers_available">Sijaintitarjoajia ei saatavilla!</string>
     <string name="no_satellites">Ei satelliitteja</string>
     <string name="no_target">Ei kohdetta!</string>
-    <string name="no_wherigo_cartridge_available">Wherigo-kasetteja (*.gwc) ei ole saatavilla.
-Lataa tai kopioi ne hakemistoon \"%1$s\".
-Voit myös asettaa oman kansiosi kohdassa \"Asetukset - Pääasetukset - Wherigo-kansio\".
-Varmistathan, että olet antanut sovellukselle luvat kirjoittaa ulkoiseen tallennustilaan ja sinulla on kirjoitusoikeudet valittuun hakemistoon.
-Jotkut uudemmat laitteet eivät salli kirjoittaa SD-kortille.
-Jos et ole varma, aseta \"Wherigo-kansio\" automaattiseksi.
-    </string>
+    <string name="no_wherigo_cartridge_available">Wherigo-kasetteja (*.gwc) ei ole saatavilla.\nLataa tai kopioi ne hakemistoon \"%1$s\". Voit myös asettaa oman kansiosi kohdassa \"Asetukset - Pääasetukset - Wherigo-kansio\". Varmista, että olet antanut sovellukselle luvat kirjoittaa ulkoiseen tallennustilaan ja sinulla on kirjoitusoikeudet valittuun hakemistoon. Jotkut uudemmat laitteet eivät salli kirjoittaa SD-kortille. Jos et ole varma, aseta \"Wherigo-kansio\" automaattiseksi.</string>
     <string name="not_enough_disk_space_x">SD-kortilla ei ole tarpeeksi vapaata tilaa!\n(%1$s, vapaana:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Vireillä</string>
