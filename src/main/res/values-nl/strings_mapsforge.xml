@@ -22,15 +22,9 @@
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
-    <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">De laatste locatie is onbekend</string>
     <string name="file_invalid">Het geselecteerde bestand is ongeldig.</string>
     <string name="file_select">Selecteer een bestand.</string>
-    <string name="file_size_byte">byte</string>
-    <string name="file_size_bytes">bytes</string>
-    <string name="file_size_kb">kB</string>
-    <string name="file_size_mb">MB</string>
-    <string name="file_size_gb">GB</string>
     <string name="go_to_position">Ga naar positie</string>
     <string name="info_map_file_area">Gebied</string>
     <string name="info_map_file_comment">Opmerking</string>
@@ -45,7 +39,6 @@
     <string name="info_map_file_start_position">Startpositie</string>
     <string name="info_map_file_start_zoom_level">Standaard zoomniveau</string>
     <string name="info_map_file_version">Versie</string>
-    <string name="menu_info">Info</string>
     <string name="menu_info_map_file">Kaart bestand eigenschappen</string>
     <string name="menu_info_about">Over deze software</string>
     <string name="menu_mapfile">Kaartbestand</string>
@@ -61,7 +54,6 @@
     <string name="menu_preferences">Voorkeuren</string>
     <string name="menu_refresh">Verversen</string>
     <string name="menu_render_theme">Thema weergeven</string>
-    <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">Selecteer XML-bestand …</string>
     <string name="menu_screenshot">Schermafbeelding</string>
     <string name="menu_screenshot_jpeg">JPEG (verlieshebbend)</string>
@@ -73,7 +65,6 @@
     <string name="preferences_cache_persistence_desc">Houd afbeeldingen in de cache bij afsluiten</string>
     <string name="preferences_cache_size">Externe opslag</string>
     <string name="preferences_cache_size_desc">Pas de grootte van de cache aan </string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Volledig scherm modus</string>
     <string name="preferences_fullscreen_desc">Statusbalk verbergen</string>
     <string name="preferences_map">Kaartinstellingen</string>
@@ -98,8 +89,6 @@
     <string name="preferences_wake_lock_desc">Voorkom het dimmen van het scherm</string>
     <string name="snap_to_location_enabled">Uitlijnen op positie is geactiveerd</string>
     <string name="snap_to_location_disabled">Uitlijnen op positie is uitgeschakeld</string>
-    <string name="unit_symbol_kilometer">&#160;km</string>
-    <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Zoomniveau</string>
     <!-- MapsForge END -->
 </resources>
