@@ -24,5 +24,5 @@ The core of the application is based on OpenWIG, it uses the Mapsforge library t
 Notes:
 - When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
 - Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
-- If you have problems installing or using WhereYouGo please contact us at whereryougo@cgeo.org 
+- If you have problems installing or using WhereYouGo please contact us at whereyougo@cgeo.org 
 - If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
