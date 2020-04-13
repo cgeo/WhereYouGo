@@ -54,7 +54,7 @@
     <string name="pref_highlight_off_text">Sistem ayarları</string>
     <string name="pref_highlight_only_gps_text">Sadece GPS açıkken</string>
     <string name="pref_image_stretch">Görselleri genişlet</string>
-    <string name="pref_image_stretch_desc">Genişlet (onayla) veya orjinal boyutu göster (onayı kaldır)</string>
+    <string name="pref_image_stretch_desc">Genişlet (onayla) veya orijinal boyutu göster (onayı kaldır)</string>
     <string name="pref_language">Dil</string>
     <string name="pref_language_default">Varsayılan sistem</string>
     <string name="pref_language_desc">Dil ayarlarını seçiminize göre ayarlar</string>
