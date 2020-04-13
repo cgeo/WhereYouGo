@@ -66,7 +66,6 @@
     <string name="no_location_providers_available">利用可能なロケーションプロバイダがありません</string>
     <string name="no_satellites">GPS衛星なし</string>
     <string name="no_target">対象なし</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">SDカードに充分な空スペースがない\n(%1$s, 空き:%2$s)</string>
     <string name="ok">はい</string>
     <string name="pending">保留中</string>
@@ -75,9 +74,7 @@
     <string name="press_color_to_apply">適用する色を押す</string>
     <string name="problem_with_internet_connection">インターネット接続出来ません</string>
     <string name="provider">ロケーションプロバイダ</string>
-    <string name="provider_gps">GPS</string>
     <string name="provider_network">ネットワーク</string>
-    <string name="provider_passive">-</string>
     <string name="question">質問</string>
     <string name="resume_previous_cartridge">以前のカートリッジを再開しますか?</string>
     <string name="roll">ロール</string>
@@ -116,10 +113,4 @@
     <string name="zone_state_near">近く</string>
     <string name="zone_state_unknown">不明</string>
     <!-- permission handling -->
-    <string name="close_app">Close app</string>
-    <string name="ask_again">Ask me again</string>
-    <string name="goto_app_details">Open Application Info</string>
-    <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
-    <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
-    <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
 </resources>

@@ -66,7 +66,6 @@
     <string name="no_location_providers_available">사용가능한 위치 제공자 없음!</string>
     <string name="no_satellites">인공위성 없음</string>
     <string name="no_target">목적지 없음!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">SD카드에 여유 공간이 부족합니다!\n(%1$s, 여유:%2$s)</string>
     <string name="ok">확인</string>
     <string name="pending">보류</string>

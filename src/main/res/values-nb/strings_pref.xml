@@ -9,13 +9,8 @@
     <string name="pref_confirm_on_exit_desc">Vis dialog bekreftelse før du avslutter Locus via Tilbake-knappen</string>
     <string name="pref_double_click">Dobbel trykk</string>
     <string name="pref_double_click_desc">For å lukke spillet dobbeltrykk på tilbake</string>
-    <string name="pref_run_screen_off">Run app even if screen is off</string>
-    <string name="pref_run_screen_off_desc">Ensures that the app is running even if the screen is off.</string>
-    <string name="pref_font_size">Font size</string>
-    <string name="pref_font_size_default">Default</string>
     <string name="pref_font_size_desc">Størrelse på tekst</string>
     <string name="pref_font_size_large">Stor</string>
-    <string name="pref_font_size_medium">Medium</string>
     <string name="pref_font_size_small">Liten</string>
     <string name="pref_fullscreen">FullSkjerm</string>
     <string name="pref_fullscreen_desc">Gjem system panel</string>
@@ -23,7 +18,6 @@
     <string name="pref_gc_password_desc">Geocaching.com passord</string>
     <string name="pref_gc_username">Brukernavn</string>
     <string name="pref_gc_username_desc">Geocaching.com brukernavn</string>
-    <string name="pref_global">Global</string>
     <string name="pref_gps">Tillat GPS</string>
     <string name="pref_gps_altitude_manual_correction">Juster Høyde</string>
     <string name="pref_gps_altitude_manual_correction_desc">Manuell korreksjon av Høyde</string>
@@ -32,7 +26,6 @@
     <string name="pref_gps_desc">Starter GPS automatisk ved start</string>
     <string name="pref_gps_disable">Deaktivert når skjult</string>
     <string name="pref_gps_disable_desc">Deaktiver GPS, når skjermen slås av eller programmet er minimert og GPS ikke er påkrevd av noen funksjoner</string>
-    <string name="pref_gps_min_time">Time between GPS locations</string>
     <string name="pref_gps_min_time_desc">Tid (i sekunder) mellom når GPS prøver å få ny plassering. For å spare batteri, foreslåes verdier mer enn 60s</string>
     <string name="pref_guiding">Guider</string>
     <string name="pref_guiding_compass_sounds">Guiding lyder</string>
@@ -50,7 +43,6 @@
     <string name="pref_guiding_zone_point_desc">Velg hvilket sone punkt som bør brukes til navigasjon</string>
     <string name="pref_guiding_zone_point_nearest">Nærmeste grense punkt</string>
     <string name="pref_highlight">Skjerm Alltid på</string>
-    <string name="pref_highlight_always_text">Always screen on</string>
     <string name="pref_highlight_desc">Aktivere/deaktivere permanent skjerm på</string>
     <string name="pref_highlight_off_text">System instillinger</string>
     <string name="pref_highlight_only_gps_text">Bare når GPS er PÅ</string>
@@ -84,7 +76,6 @@
     <string name="pref_sensors_orient_filter_desc">Filter for orientering. Sterkere filter forårsaker tregere reaksjoner, men flytende bevegelser</string>
     <string name="pref_sensors_orient_filter_heavy">Tungt filter</string>
     <string name="pref_sensors_orient_filter_ligth">Lett filter</string>
-    <string name="pref_sensors_orient_filter_medium">Medium filter</string>
     <string name="pref_sensors_orient_filter_no_filter">Ingen filtrering</string>
     <string name="pref_statusbar">Statuslinje Ikon</string>
     <string name="pref_statusbar_desc">vis ikon i statuslinje</string>
