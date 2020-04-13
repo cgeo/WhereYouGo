@@ -66,13 +66,7 @@
     <string name="no_location_providers_available">Sense proveďdors d\'ubicació!</string>
     <string name="no_satellites">Sense satčl\·lits</string>
     <string name="no_target">Sense objectiu!</string>
-    <string name="no_wherigo_cartridge_available">No hi ha cap cartutx Wherigo(*.gwc) disponible.
-Descarregueu-ne un o copieu-los al directori \"%1$s\".
-També podeu configurar una ruta personalitzada a \"Ajustaments - Principal - Carpeta Wherigo\".
-Assegureu-vos que l\'aplicació té permisos per escriure al magatzem extern i que vosaltres teniu permisos per escriure-hi.
-Alguns dispositiu nous no permeten escriure a les targetes SD.
-Si no esteu segurs configureu la \"Carpeta Wherigo\" com a automŕtica.
-    </string>
+    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">No hi ha suficient espai a la targeta SD!\n(%1$s, lliure:%2$s)</string>
     <string name="ok">D\'ACORD</string>
     <string name="pending">Pendent</string>
