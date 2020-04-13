@@ -24,7 +24,6 @@
     <string name="do_you_really_want_to_exit">Wilt u werkelijk afsluiten?</string>
     <string name="dont_ask">Niet meer vragen\'</string>
     <string name="download">Downloaden</string>
-    <string name="download_cartridge">Download cartridge</string>
     <string name="download_state_connect">Bezig met verbinden</string>
     <string name="download_state_download">Bezig met downloaden</string>
     <string name="download_state_login">Bezig met inloggen</string>
@@ -66,7 +65,6 @@
     <string name="no_location_providers_available">Geen locale aanbieders beschikbaar!</string>
     <string name="no_satellites">Geen satellieten</string>
     <string name="no_target">Geen doel!</string>
-    <string name="no_wherigo_cartridge_available">No Wherigo cartridge (*.gwc) is available.\nDownload or copy them into directory \"%1$s\". You can also set a path to custom directory in \"Settings - Main - Wherigo folder\". Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don\'t allow writing to SD card.If you\'re not sure, set \"Wherigo folder\" automatically.</string>
     <string name="not_enough_disk_space_x">Niet genoeg vrije schijfruimte op SDCard!\n(%1$s,gratis:%2$s)</string>
     <string name="ok">Ok</string>
     <string name="pending">In behandeling</string>
@@ -75,9 +73,7 @@
     <string name="press_color_to_apply">Druk op kleur om toe te passen</string>
     <string name="problem_with_internet_connection">Probleem met internet verbinding!</string>
     <string name="provider">Locatieprovider</string>
-    <string name="provider_gps">GPS</string>
     <string name="provider_network">Netwerk</string>
-    <string name="provider_passive">-</string>
     <string name="question">Vraag</string>
     <string name="resume_previous_cartridge">Vorige cartridge hervatten?</string>
     <string name="roll">Rol</string>
@@ -89,19 +85,16 @@
     <string name="save_game_auto">Spel automatisch opgeslagen</string>
     <string name="save_game_before_exit">Spel opslaan voor afsluiten?</string>
     <string name="save_game_ok">Het spel is opgeslagen</string>
-    <string name="save_game_slot">Slot</string>
     <string name="save_game_slots">Opslaan…</string>
     <string name="saving">Bezig met opslaan…</string>
     <string name="scanQR">Scan QR-code</string>
     <string name="settings">Instellingen</string>
     <string name="speed">Snelheid</string>
-    <string name="start">Start</string>
     <string name="tasks">Taken</string>
     <string name="time_to_target">Tijd tot doel</string>
     <string name="translation">Vertaling</string>
     <string name="unexpected_problem">Onverwacht probleem!\n\n Neem contact met me op en beschrijf het probleem.</string>
     <string name="version">Versie</string>
-    <string name="waypoints">Waypoints</string>
     <string name="web_page">Webpagina</string>
     <string name="working">Bezig …</string>
     <string name="yes">Ja</string>
