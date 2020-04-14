@@ -66,6 +66,7 @@
     <string name="no_location_providers_available">사용가능한 위치 제공자 없음!</string>
     <string name="no_satellites">인공위성 없음</string>
     <string name="no_target">목적지 없음!</string>
+    <string name="no_wherigo_cartridge_available">웨리고 카트리지 (*.gwc)가 없습니다.\n\"%1$s\" 디렉토리로 다운로드하거나 복사하세요. \"설정-메인-웨리고 폴더\"에서 사용자 정의 디렉토리의 경로를 설정할 수도 있습니다. 응용 프로그램에 외부 저장소에 쓸 수있는 권한을 부여하고 선택한 디렉토리에 대한 쓰기 권한이 있는지 확인하세요. 일부 최신 장치에서는 SD 카드에 쓸 수 없습니다. 확실하지 않으면 \"웨리고 폴더\"를 자동으로 설정하세요.</string>
     <string name="not_enough_disk_space_x">SD카드에 여유 공간이 부족합니다!\n(%1$s, 여유:%2$s)</string>
     <string name="ok">확인</string>
     <string name="pending">보류</string>
