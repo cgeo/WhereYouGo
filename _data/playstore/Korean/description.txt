@@ -1,28 +1,28 @@
-WhereYouGo is an unofficial client for Wherigo Geoaching.
+WhereYouGo는 웨리고 지오캐싱의 비공식 고객입니다.
 
-It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
-Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+대화식 위치 기반 지오캐싱 게임인 웨리고 카트리지 재생을 지원합니다. 웨리고 게임의 현재 상태를 로드, 재생 및 저장할 수 있습니다. 나침반 및 온라인 또는 오프라인지도를 사용하여 탐색 할 수 있으며 Locus를 사용하여지도를 표시 할 수도 있습니다.
+WhereYouGo와 함께 사용하기위한 카트리지는 https://www.wherigo.com 및 기타 서비스에서 다운로드 할 수 있습니다.
 
-Main features:
-- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
-- Use compass to navigate to the next game zone or location
-- View game zones and locations on a map
-- Uses online maps from various sources
-- Supports offline map files (only Mapsforge v0.3 format at this moment)  
-- Seamless interworking with Locus to display maps (alternatively to internal maps)
-- Several save game slots per cartridge
-- Automatic game saving when switching to another app
-- Integrated QR-code reader
+주요 특징:
+-wherigo.com에서 카트리지 자동 다운로드 (wherigo.com에서 목록 페이지를 열거 나 c:geo와 같은 다른 지오캐싱 앱에서 브라우저를 통해 트리거할 수 있음)
+-나침반을 사용하여 다음 게임 영역 또는 위치로 이동
+-지도에서 게임 존과 위치를 봅니다
+-다양한 출처의 온라인지도를 사용합니다
+-오프라인지도 파일 지원 (현재는 Mapsforge v0.3 형식만)  
+-지도를 표시하기 위해 Locus와의 원활한 연동 (또는 내부지도로)
+-카트리지 당 여러 개의 저장 게임 슬롯
+-다른 앱으로 전환시 자동 게임 저장
+-통합 QR 코드 리더
 
-About:
-WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+소개:
+WhereYouGo는 OpenSource이며 GNU General Public License v3.0에 따라 라이센스가 부여됩니다.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
-If you are able and willing to help us, you can find information and source code in the link below. We need your help: https://github.com/cgeo/WhereYouGo
-The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+소스 코드가 몇 년 동안 유지되지 않은 후, 새로운 개발 팀 (c:geo 팀)은 최초의 저자와 동의하여 마침내 소스 코드를 인수하고 앱 개발을 계속할 수있었습니다.
+도움이되고 기꺼이 도와 줄 수 있으면 아래 링크에서 정보와 소스 코드를 찾을 수 있습니다. 우리는 당신의 도움이 필요합니다: https://github.com/cgeo/WhereYouGo
+응용 프로그램의 핵심은 OpenWIG를 기반으로하며 Mapsforge 라이브러리를 사용하여 맵을 표시하거나 Locus를 사용할 수 있습니다.
 
-Notes:
-- When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
-- Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
-- If you have problems installing or using WhereYouGo please contact us at whereyougo@cgeo.org 
-- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
+메모:
+-wherigo.com에서 카트리지를 수동으로 다운로드 할 때는 "Pocket PC Device"버전을 사용해야합니다. 
+-카트리지를 웨리고 폴더 (설정-메인-웨리고 폴더)에 복사하세요. 응용 프로그램에 외부 저장소에 쓸 수있는 권한을 부여하고 선택한 디렉토리에 대한 쓰기 권한이 있는지 확인하세요. 일부 최신 장치에서는 SD 카드에 쓸 수 없습니다. 확실하지 않으면 "웨리고 폴더"를 자동으로 설정하세요.
+-WhereYouGo 설치 또는 사용에 문제가있는 경우 whereyougo@cgeo.org로 문의하세요. 
+-WhereYouGo에 요청 된 권한이 필요한 이유를 알고 싶으면 https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md에서 설명을 확인하세요.
