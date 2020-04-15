@@ -14,7 +14,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.widget.CheckBox;
 
 import java.io.File;
 import java.util.ArrayList;

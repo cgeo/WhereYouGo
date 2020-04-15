@@ -26,9 +26,6 @@ public class NotificationService extends Service {
 
     private static final String TAG = "NotificationService";
 
-    public NotificationService() {
-    }
-
     @Override
     public IBinder onBind(Intent intent) {
         // Used only in case if service are bound (Bound Services).
@@ -63,6 +60,7 @@ public class NotificationService extends Service {
                     case STOP_NOTIFICATION_SERVICE:
                         stopNotificationService();
                         break;
+                    default:
                 }
             }
         }
@@ -87,15 +85,12 @@ public class NotificationService extends Service {
 
         Notification notification = builder.build();
 
-        if (runing) {
-            if (background == foreground) {
-                if (foreground) {
-                    stopForeground(true);
-                } else {
-                    mNM.cancel(notification_id);
-                }
-
-            }
+        if (runing && background == foreground) {
+           if (foreground) {
+              stopForeground(true);
+           } else {
+              mNM.cancel(notification_id);
+           }
         }
         if (!background) {
             startForeground(notification_id, notification);

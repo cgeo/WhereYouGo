@@ -84,7 +84,7 @@
     <string name="pref_sensors_orient_filter_medium">Medium filter</string>
     <string name="pref_sensors_orient_filter_no_filter">No filtration</string>
     <string name="pref_statusbar">Statusbar Icon</string>
-    <string name="pref_statusbar_desc">Show icon in statusbar (If this option is not available, the statusbar is forced by an other seting.)</string>
+    <string name="pref_statusbar_desc">Show icon in statusbar</string>
     <string name="pref_style_on_map">Style on map</string>
     <string name="pref_units">Units</string>
     <string name="pref_units_altitude">Altitude units</string>
