@@ -15,6 +15,7 @@
     <string name="pref_font_size_default">Standaard</string>
     <string name="pref_font_size_desc">Grootte van de tekst</string>
     <string name="pref_font_size_large">Groot</string>
+    <string name="pref_font_size_medium">Medium</string>
     <string name="pref_font_size_small">Klein</string>
     <string name="pref_fullscreen">Schermvullend</string>
     <string name="pref_fullscreen_desc">Systeem paneel verbergen</string>
@@ -70,6 +71,7 @@
     <string name="pref_root_desc">Selecteer de map voor wherigo-bestanden</string>
     <string name="pref_save_game_auto">Spel automatisch opslaan</string>
     <string name="pref_save_game_auto_desc">Spel zal automatisch worden opgeslagen als de gebruiker naar een ander programma overschakelt.</string>
+    <string name="pref_save_game_slots">Savegame slots</string>
     <string name="pref_save_game_slots_desc">Aantal slots voor het opslaan van spel via de menuknop</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch wijzigen</string>
@@ -97,7 +99,10 @@
     <string name="pref_units_angle_russian_mil">Russische mil</string>
     <string name="pref_units_angle_us_artillery_mil">Amerikaanse Artillerie mil</string>
     <string name="pref_units_coo_latlon">Lat / Lon-formaat</string>
+    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Coördinaten (lengte / breedte) opmaak voor weergave</string>
+    <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Lengte eenheid</string>
     <string name="pref_units_length_desc">Kies standaard weergave-eenheden</string>
     <string name="pref_units_length_im_f">Imperiaal (ft)</string>

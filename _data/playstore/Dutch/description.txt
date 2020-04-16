@@ -1,28 +1,28 @@
-WhereYouGo is an unofficial client for Wherigo Geoaching.
+WhereYouGo is een onofficiële client voor Wherigo Geoaching.
 
-It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
-Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+Het ondersteunt het spelen van Wherigo cartridges, wat een interactieve locatie gebaseerd geocaching spel is. Je kunt een Wherigo-spel laden, spelen en de huidige status opslaan. Kompas en online of offline kaarten kunnen worden gebruikt om te navigeren, als alternatief kan Locus worden gebruikt om kaarten weer te geven.
+Cartridges voor gebruik met WhereYouGo kunnen worden gedownload vanaf https://www.wherigo.com en andere diensten.
 
-Main features:
-- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
-- Use compass to navigate to the next game zone or location
-- View game zones and locations on a map
-- Uses online maps from various sources
-- Supports offline map files (only Mapsforge v0.3 format at this moment)  
-- Seamless interworking with Locus to display maps (alternatively to internal maps)
-- Several save game slots per cartridge
-- Automatic game saving when switching to another app
-- Integrated QR-code reader
+Belangrijkste functies:
+- Automatisch downloaden van cartridges van wherigo.com (kan worden geactiveerd vanuit uw browser door een lijst pagina te openen op wherigo.com of vanuit andere geocaching apps zoals c:geo)
+- Gebruik kompas om naar de volgende spelzone of locatie te navigeren
+- Bekijk spelzones en locaties op een kaart
+- Gebruikt online kaarten van verschillende bronnen
+- Ondersteunt offline kaart bestanden (alleen Mapsforge v0.3 formaat op dit moment)  
+- Naadloos communiceren met Locus om kaarten weer te geven (alternatief voor interne kaarten)
+- Verschillende opslagplaatsen per cartridge
+- Automatisch opslaan van spel wanneer je overschakelt naar een andere app
+- Geïntegreerde QR-code lezer
 
-About:
-WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+Over:
+WhereYouGo is OpenSource en gelicenseerd onder GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
-If you are able and willing to help us, you can find information and source code in the link below. We need your help: https://github.com/cgeo/WhereYouGo
-The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+Nadat de broncode enkele jaren niet onderhouden was geweest kon een nieuw ontwikkelingsteam (het c:geo team) eindelijk de broncode overnemen en de ontwikkeling van de app voortzetten.
+Als je ons wilt en kunt helpen, kan je via de onderstaande link informatie en broncode vinden. We hebben je hulp nodig: https://github.com/cgeo/WhereYouGo
+De kern van de applicatie is gebaseerd op OpenWIG, het gebruikt de Mapsforge bibliotheek om kaarten weer te geven, als alternatief kan Locus worden gebruikt.
 
-Notes:
-- When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
-- Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
-- If you have problems installing or using WhereYouGo please contact us at whereyougo@cgeo.org 
-- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
+Opmerkingen:
+- Wanneer handmatig cartridges worden gedownload van wherigo.com, gebruik dan de versie "Pocket PC Apparaat". 
+- Kopieer de cartridges naar uw Wherigo map (Instellingen - Hoofd - Wherigo map). Zorg ervoor dat je de applicatie schrijfrechten hebt verleend voor externe opslag en dat je schrijfrechten hebt in de geselecteerde map. Sommige nieuwere apparaten staan het niet toe om naar de SD-kaart te schrijven. Als je het niet zeker weet, stel dan "Wherigo map" automatisch in.
+- Als je problemen hebt met het installeren of het gebruik van WhereYouGo neem dan contact met ons op via whereyougo@cgeo.org 
+- Als je wilt weten waarom WhereYouGo de gevraagde machtigingen nodig heeft, kijk dan op https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md voor uitleg.
