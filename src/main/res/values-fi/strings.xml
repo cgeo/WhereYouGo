@@ -83,7 +83,7 @@
     <string name="roll">Kierrä</string>
     <string name="satellites">Satelliitit</string>
     <string name="save_file_backup">Varmuuskopio</string>
-    <string name="save_file_main">Päävalikko</string>
+    <string name="save_file_main">Päätallennus</string>
     <string name="save_file_new">Uusi peli</string>
     <string name="save_game">Tallenna</string>
     <string name="save_game_auto">Peli tallennettu automaattisesti</string>
