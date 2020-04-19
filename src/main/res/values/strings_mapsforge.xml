@@ -74,7 +74,7 @@
     <string name="preferences_general">General settings</string>
     <string name="preferences_cache_persistence">Cache persistence</string>
     <string name="preferences_cache_persistence_desc">Keep cached images on exit</string>
-    <string name="preferences_cache_size">Cache size</string>
+    <string name="preferences_cache_size">External storage</string>
     <string name="preferences_cache_size_desc">Adjust the size of the cache</string>
     <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Full screen mode</string>
