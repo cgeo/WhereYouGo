@@ -91,7 +91,7 @@
     <string name="pref_style_on_map">Tyyli kartalla</string>
     <string name="pref_units">Yksiköt</string>
     <string name="pref_units_altitude">Korkeusyksiköt</string>
-    <string name="pref_units_altitude_desc">Korkeuden etäisyysyksikkö</string>
+    <string name="pref_units_altitude_desc">Korkeuden mittayksikkö</string>
     <string name="pref_units_angle">Kulman yksiköt</string>
     <string name="pref_units_angle_angular_mil">Radiaani</string>
     <string name="pref_units_angle_degree">Aste</string>
