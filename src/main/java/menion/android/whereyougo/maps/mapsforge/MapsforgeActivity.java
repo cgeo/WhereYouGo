@@ -889,9 +889,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             this.wakeLock.acquire();
         }
 
-        boolean persistent = sharedPreferences.getBoolean("cachePersistence", false);
+        boolean persistent = sharedPreferences.getBoolean("tileCachePersistence", true);
         int capacity =
-                Math.min(sharedPreferences.getInt("cacheSize", FILE_SYSTEM_CACHE_SIZE_DEFAULT),
+                Math.min(sharedPreferences.getInt("tileCacheSize", FILE_SYSTEM_CACHE_SIZE_DEFAULT),
                         FILE_SYSTEM_CACHE_SIZE_MAX);
         TileCache fileSystemTileCache = this.mapView.getFileSystemTileCache();
         fileSystemTileCache.setPersistent(persistent);

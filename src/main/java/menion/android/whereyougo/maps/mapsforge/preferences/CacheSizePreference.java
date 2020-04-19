@@ -38,7 +38,7 @@ public class CacheSizePreference extends SeekBarPreference {
     public CacheSizePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         // define the text message
-        this.messageText = getContext().getString(R.string.preferences_cache_size_desc);
+        this.messageText = getContext().getString(R.string.preferences_tileCache_size_desc);
 
         // define the current and maximum value of the seek bar
         this.seekBarCurrentValue =
@@ -49,7 +49,7 @@ public class CacheSizePreference extends SeekBarPreference {
 
     @Override
     String getCurrentValueText(int progress) {
-        String format = getContext().getString(R.string.preferences_cache_size_value);
+        String format = getContext().getString(R.string.preferences_tileCache_size_value);
         Double value = TILE_SIZE_IN_BYTES * progress / ONE_MEGABYTE;
         return String.format(format, value);
     }

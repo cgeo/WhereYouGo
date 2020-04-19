@@ -32,18 +32,22 @@
             android:key="wakeLock"
             android:summary="@string/preferences_wake_lock_desc"
             android:title="@string/preferences_wake_lock" />
-        <CheckBoxPreference
-            android:key="cachePersistence"
-            android:summary="@string/preferences_cache_persistence_desc"
-            android:title="@string/preferences_cache_persistence" />
-        <menion.android.whereyougo.maps.mapsforge.preferences.CacheSizePreference
-            android:key="cacheSize"
-            android:summary="@string/preferences_cache_size_desc"
-            android:title="@string/preferences_cache_size" />
         <menion.android.whereyougo.maps.mapsforge.preferences.MoveSpeedPreference
             android:key="moveSpeed"
             android:summary="@string/preferences_move_speed_desc"
             android:title="@string/preferences_move_speed" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preferences_tileCache">
+        <menion.android.whereyougo.maps.mapsforge.preferences.CacheSizePreference
+            android:key="tileCacheSize"
+            android:summary="@string/preferences_tileCache_size_desc"
+            android:title="@string/preferences_tileCache_size" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="tileCachePersistence"
+            android:summary="@string/preferences_tileCache_persistence_desc"
+            android:title="@string/preferences_tileCache_persistence" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preferences_debug">
