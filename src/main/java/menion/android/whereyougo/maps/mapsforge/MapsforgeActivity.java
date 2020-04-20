@@ -110,14 +110,14 @@ import menion.android.whereyougo.utils.UtilsFormat;
  */
 public class MapsforgeActivity extends MapActivity implements IRefreshable {
     /**
-     * The default number of tiles in the file system cache.
+     * The default number of tiles in the file system cache. (229 = 30 MB)
      */
-    public static final int FILE_SYSTEM_CACHE_SIZE_DEFAULT = 250;
+    public static final int FILE_SYSTEM_CACHE_SIZE_DEFAULT = 229;
 
     /**
-     * The maximum number of tiles in the file system cache.
+     * The maximum number of tiles in the file system cache. (381 = 50 MB)
      */
-    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 500;
+    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 381;
 
     /**
      * The default move speed factor of the map.
