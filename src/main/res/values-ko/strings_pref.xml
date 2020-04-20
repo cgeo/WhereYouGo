@@ -99,7 +99,7 @@
     <string name="pref_units_angle_russian_mil">러시안 밀</string>
     <string name="pref_units_angle_us_artillery_mil">미 포병 밀</string>
     <string name="pref_units_coo_latlon">위도/경도 형식</string>
-    <string name="pref_units_coo_latlon_dec">14,94323°</string>
+    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">좌표 (위도/경도) 표시 형식</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
