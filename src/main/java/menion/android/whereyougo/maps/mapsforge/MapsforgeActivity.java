@@ -115,9 +115,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     public static final int FILE_SYSTEM_CACHE_SIZE_DEFAULT = 229;
 
     /**
-     * The maximum number of tiles in the file system cache. (381 = 50 MB)
+     * The maximum number of tiles in the file system cache. (458 = 60 MB)
      */
-    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 381;
+    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 458;
 
     /**
      * The default move speed factor of the map.
