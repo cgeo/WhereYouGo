@@ -64,6 +64,7 @@ import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.NotificationService;
 
 import static menion.android.whereyougo.permission.PermissionHandler.askAgainFor;
 import static menion.android.whereyougo.permission.PermissionHandler.checkKoPermissions;
@@ -420,5 +421,14 @@ public class MainActivity extends CustomMainActivity {
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        // Stop notification
+        Intent intent = new Intent(MainActivity.this, NotificationService.class);
+        intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
+        startService(intent);
+        super.onDestroy();
     }
 }
