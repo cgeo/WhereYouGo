@@ -875,7 +875,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             this.mapView.setTextScale(Float.parseFloat(sharedPreferences.getString("textScale",
                     textScaleDefault)));
         } catch (NumberFormatException e) {
-            this.mapView.setTextScale(1);
+            this.mapView.setTextScale(getResources().getDisplayMetrics().density);
         }
 
         if (sharedPreferences.getBoolean("fullscreen", false)) {
