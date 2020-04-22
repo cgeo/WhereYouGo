@@ -72,11 +72,12 @@
     <string name="no_location_provider_available">No location source available</string>
     <string name="preferences_debug">Debug settings</string>
     <string name="preferences_general">General settings</string>
-    <string name="preferences_cache_persistence">Cache persistence</string>
-    <string name="preferences_cache_persistence_desc">Keep cached images on exit</string>
-    <string name="preferences_cache_size">External storage</string>
-    <string name="preferences_cache_size_desc">Adjust the size of the cache</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Map tile cache settings</string>
+    <string name="preferences_tileCache_persistence">Tile cache persistence</string>
+    <string name="preferences_tileCache_persistence_desc">Keep cached images on exit</string>
+    <string name="preferences_tileCache_size">Tile cache size</string>
+    <string name="preferences_tileCache_size_desc">Adjust the size of the tile cache</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Full screen mode</string>
     <string name="preferences_fullscreen_desc">Hide the status bar</string>
     <string name="preferences_map">Map settings</string>

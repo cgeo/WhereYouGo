@@ -110,14 +110,14 @@ import menion.android.whereyougo.utils.UtilsFormat;
  */
 public class MapsforgeActivity extends MapActivity implements IRefreshable {
     /**
-     * The default number of tiles in the file system cache.
+     * The default number of tiles in the file system cache. (229 = 30 MB)
      */
-    public static final int FILE_SYSTEM_CACHE_SIZE_DEFAULT = 250;
+    public static final int FILE_SYSTEM_CACHE_SIZE_DEFAULT = 229;
 
     /**
-     * The maximum number of tiles in the file system cache.
+     * The maximum number of tiles in the file system cache. (458 = 60 MB)
      */
-    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 500;
+    public static final int FILE_SYSTEM_CACHE_SIZE_MAX = 458;
 
     /**
      * The default move speed factor of the map.
@@ -889,9 +889,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             this.wakeLock.acquire();
         }
 
-        boolean persistent = sharedPreferences.getBoolean("cachePersistence", false);
+        boolean persistent = sharedPreferences.getBoolean("tileCachePersistence", true);
         int capacity =
-                Math.min(sharedPreferences.getInt("cacheSize", FILE_SYSTEM_CACHE_SIZE_DEFAULT),
+                Math.min(sharedPreferences.getInt("tileCacheSize", FILE_SYSTEM_CACHE_SIZE_DEFAULT),
                         FILE_SYSTEM_CACHE_SIZE_MAX);
         TileCache fileSystemTileCache = this.mapView.getFileSystemTileCache();
         fileSystemTileCache.setPersistent(persistent);
