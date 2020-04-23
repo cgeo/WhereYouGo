@@ -35,8 +35,7 @@
         tools:replace="icon, label">
         <activity
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
-            android:label="WhereYouGo"
-            android:screenOrientation="fullSensor">
+            android:label="WhereYouGo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -100,57 +99,41 @@
             android:name="menion.android.whereyougo.maps.mapsforge.InfoView"
             android:theme="@android:style/Theme.NoTitleBar" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.CartridgeDetailsActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.CartridgeDetailsActivity" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.MainMenuActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="fullSensor" />
+            android:launchMode="singleTask" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.wherigo.DetailsActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.wherigo.DetailsActivity" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.wherigo.InputScreenActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.wherigo.InputScreenActivity" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.wherigo.ListActionsActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListActionsActivity" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.wherigo.ListTargetsActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.wherigo.ListTargetsActivity" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListTasksActivity"
-            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListThingsActivity"
-            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.ListZonesActivity"
-            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.wherigo.PushDialogActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="fullSensor" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.GuidingActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.GuidingActivity" />
         <activity
-            android:name="menion.android.whereyougo.gui.activity.SatelliteActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.gui.activity.SatelliteActivity" />
         <activity
             android:name="menion.android.whereyougo.gui.activity.XmlSettingsActivity"
-            android:screenOrientation="fullSensor"
             android:theme="@style/ThemeSettings" />
         <activity
-            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity"
-            android:screenOrientation="fullSensor" />
+            android:name="menion.android.whereyougo.network.activity.DownloadCartridgeActivity" />
         <activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation" />
+            android:name="com.journeyapps.barcodescanner.CaptureActivity" />
 
         <service android:name="menion.android.whereyougo.audio.AudioPlayService" />
         <service
