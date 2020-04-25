@@ -11,6 +11,7 @@
         <item>normaali</item>
         <item>iso</item>
         <item>jättimäinen</item>
+        <item>automaattinen</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>tyhjä</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Sijaintilähteitä ei saatavilla</string>
     <string name="preferences_debug">Vianetsintäasetukset</string>
     <string name="preferences_general">Yleiset asetukset</string>
-    <string name="preferences_cache_persistence">Välimuistin kestävyys</string>
-    <string name="preferences_cache_persistence_desc">Pidä välimuistissa olevat kuvat suljettaessa</string>
-    <string name="preferences_cache_size">Ulkoinen tallennustila</string>
-    <string name="preferences_cache_size_desc">Säädä välimuistin kokoa</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Karttaruutuvälimuistin asetukset</string>
+    <string name="preferences_tileCache_persistence">Ruudun välimuistin kestävyys</string>
+    <string name="preferences_tileCache_persistence_desc">Pidä välimuistissa olevat kuvat suljettaessa</string>
+    <string name="preferences_tileCache_size">Karttaruudun välimustin koko</string>
+    <string name="preferences_tileCache_size_desc">Säädä karttaruudun välimuistin kokoa</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Koko näytön tila</string>
     <string name="preferences_fullscreen_desc">Piilota tilarivi</string>
     <string name="preferences_map">Kartan asetukset</string>
@@ -102,4 +104,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Zoomaustaso</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>
