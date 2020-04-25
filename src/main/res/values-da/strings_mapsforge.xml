@@ -11,6 +11,7 @@
         <item>normal</item>
         <item>stor</item>
         <item>kæmpe</item>
+        <item>automatic</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>blank</item>
@@ -57,10 +58,6 @@
     <string name="no_location_provider_available">Ingen placeringskilde tilgængelig</string>
     <string name="preferences_debug">Debug-indstillinger</string>
     <string name="preferences_general">Generelle indstillinger</string>
-    <string name="preferences_cache_persistence">Cache</string>
-    <string name="preferences_cache_persistence_desc">Behold cachede billeder ved afslutning</string>
-    <string name="preferences_cache_size">Eksternt lager</string>
-    <string name="preferences_cache_size_desc">Tilpas størrelsen på cachen</string>
     <string name="preferences_fullscreen">Fuldskærms-tilstand</string>
     <string name="preferences_fullscreen_desc">Skjul statuslinjen</string>
     <string name="preferences_map">Kortindstillinger</string>
@@ -87,4 +84,5 @@
     <string name="snap_to_location_disabled">Lås til placering er inaktiveret</string>
     <string name="zoomLevel">Zoomniveau</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>
