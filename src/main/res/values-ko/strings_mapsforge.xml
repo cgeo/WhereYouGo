@@ -11,6 +11,7 @@
         <item>중간</item>
         <item>대형</item>
         <item>거대한</item>
+        <item>automatic</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>비어 있음</item>
@@ -69,11 +70,6 @@
     <string name="no_location_provider_available">사용 가능한 위치 출처가 없습니다</string>
     <string name="preferences_debug">디버그 설정</string>
     <string name="preferences_general">일반 설정</string>
-    <string name="preferences_cache_persistence">캐시 지속성</string>
-    <string name="preferences_cache_persistence_desc">종료시 캐시 된 이미지 유지</string>
-    <string name="preferences_cache_size">외부 저장소</string>
-    <string name="preferences_cache_size_desc">캐시 크기 조정</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">전체 화면 모드</string>
     <string name="preferences_fullscreen_desc">상태표시줄 숨기기</string>
     <string name="preferences_map">지도 설정</string>
@@ -102,4 +98,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">확대 수준</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>
