@@ -11,6 +11,7 @@
         <item>normale</item>
         <item>grande</item>
         <item>molto grande</item>
+        <item>automatic</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>vuoto</item>
@@ -49,10 +50,10 @@
     <string name="menu_render_theme">Rendering tema</string>
     <string name="menu_render_theme_select_file">Seleziona file XML …</string>
     <string name="preferences_general">Impostazioni generali</string>
-    <string name="preferences_cache_size">Memoria esterna</string>
     <string name="preferences_move_speed">Velocità di movimento</string>
     <string name="preferences_text_scale">Dimensione carattere</string>
     <string name="preferences_wake_lock">Rimane attivo</string>
     <string name="zoomLevel">Livello zoom</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>
