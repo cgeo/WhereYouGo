@@ -987,7 +987,11 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                     setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
                 }
                 if (forceAndFeedback) {
-                    Toast.makeText(this, result == FileOpenResult.SUCCESS ? R.string.receivemapfile_success : R.string.receivemapfile_error, Toast.LENGTH_SHORT).show();
+                    if (result == FileOpenResult.SUCCESS) {
+                        Toast.makeText(this, R.string.receivemapfile_success, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, getString(R.string.receivemapfile_error) + "\n(" + result.getErrorMessage() + ")", Toast.LENGTH_LONG).show();
+                    }
                 }
             } else if (forceAndFeedback) {
                 Toast.makeText(this, R.string.receivemapfile_notset, Toast.LENGTH_SHORT).show();
