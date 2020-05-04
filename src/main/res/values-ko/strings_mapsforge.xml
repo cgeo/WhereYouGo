@@ -11,7 +11,7 @@
         <item>중간</item>
         <item>대형</item>
         <item>거대한</item>
-        <item>automatic</item>
+        <item>자동</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>비어 있음</item>
@@ -51,6 +51,7 @@
     <string name="menu_info_about">이 소프트웨어에 대하여</string>
     <string name="menu_mapfile">지도 파일</string>
     <string name="menu_mapgenerator">지도 출처</string>
+    <string name="menu_acquire_from_cgeo">c:geo에서 지도 획득</string>
     <string name="menu_position">위치</string>
     <string name="menu_position_enter_coordinates">좌표입력</string>
     <string name="menu_position_last_known">마지막으로 알 수 있는 위치</string>
@@ -70,6 +71,12 @@
     <string name="no_location_provider_available">사용 가능한 위치 출처가 없습니다</string>
     <string name="preferences_debug">디버그 설정</string>
     <string name="preferences_general">일반 설정</string>
+    <string name="preferences_tileCache">지도 타일 캐시 설정</string>
+    <string name="preferences_tileCache_persistence">타일 캐시 지속성</string>
+    <string name="preferences_tileCache_persistence_desc">종료시 캐시 된 이미지 유지</string>
+    <string name="preferences_tileCache_size">캐시 타일 크기</string>
+    <string name="preferences_tileCache_size_desc">타일 캐시 크기 조정</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">전체 화면 모드</string>
     <string name="preferences_fullscreen_desc">상태표시줄 숨기기</string>
     <string name="preferences_map">지도 설정</string>
@@ -99,4 +106,8 @@
     <string name="zoomLevel">확대 수준</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geo 응용프로그램을 찾을 수 없습니다</string>
+    <string name="receivemapfile_success">지도 파일 설정</string>
+    <string name="receivemapfile_error">지도 파일 설정중 오류</string>
+    <string name="receivemapfile_notset">c:geo에 지도 파일 설정 없음</string>
 </resources>

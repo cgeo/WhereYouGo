@@ -7,12 +7,19 @@
     <string name="pref_bearing_true_desc">Se attivato usa la direzione reale. Altrimenti usa la direzione magnetica</string>
     <string name="pref_confirm_on_exit">Conferma all\'uscita</string>
     <string name="pref_confirm_on_exit_desc">Visualizza una finestra di conferma prima di uscire da Locus usando il pulsante \"Indietro\"</string>
+    <string name="pref_double_click">Doppio tocco</string>
+    <string name="pref_double_click_desc">Per uscire dal gioco, usa il doppio tocco su INDIETRO</string>
+    <string name="pref_run_screen_off">Avvia l\'app anche se lo schermo è spento</string>
+    <string name="pref_run_screen_off_desc">Assicurati che l\'app rimanga attiva anche se lo schermo è spento.</string>
+    <string name="pref_font_size">Dimensione caratteri</string>
+    <string name="pref_font_size_default">Predefinita</string>
     <string name="pref_font_size_desc">Dimensione del testo</string>
     <string name="pref_font_size_large">Grande</string>
     <string name="pref_font_size_medium">Medio</string>
     <string name="pref_font_size_small">Piccolo</string>
     <string name="pref_fullscreen">Modalità schermo pieno</string>
     <string name="pref_fullscreen_desc">Nasconde la barra delle notifiche</string>
+    <string name="pref_gc_password">Password</string>
     <string name="pref_gc_password_desc">Password Geocaching.com</string>
     <string name="pref_gc_username">Nome utente</string>
     <string name="pref_gc_username_desc">Nome utente Geocaching.com</string>
@@ -43,6 +50,7 @@
     <string name="pref_guiding_zone_point_desc">Seleziona quale punto di zona deve essere utilizzato per la navigazione</string>
     <string name="pref_guiding_zone_point_nearest">Punto di confine più vicino</string>
     <string name="pref_highlight">Schermo sempre acceso</string>
+    <string name="pref_highlight_always_text">Schermo sempre acceso</string>
     <string name="pref_highlight_desc">Abilita / disabilita l\'illuminazione dello schermo</string>
     <string name="pref_highlight_off_text">Impostazioni di sistema</string>
     <string name="pref_highlight_only_gps_text">Solo quando il GPS è attivo</string>
@@ -53,6 +61,7 @@
     <string name="pref_language_desc">Permette di impostare la lingua da una lista di selezione</string>
     <string name="pref_locale">Localizzazione</string>
     <string name="pref_login">Credenziali di accesso</string>
+    <string name="pref_login_desc">Hai bisogno delle credenziali di accesso per scaricare Wherigo cartridges da wherigo.com. Se non hai nessun login per wherigo.com puoi utilizzare le tue credenziali da www.geocaching.com.</string>
     <string name="pref_map_provider">Base della mappa</string>
     <string name="pref_map_provider_desc">Seleziona base della mappa</string>
     <string name="pref_map_provider_locus">Locus (richiesto Locus)</string>
@@ -77,6 +86,8 @@
     <string name="pref_sensors_orient_filter_ligth">Filtro leggero</string>
     <string name="pref_sensors_orient_filter_medium">Filtro medio</string>
     <string name="pref_sensors_orient_filter_no_filter">Nessun filtro</string>
+    <string name="pref_statusbar">Icona barra di stato</string>
+    <string name="pref_statusbar_desc">Mostra icona nella barra di stato</string>
     <string name="pref_style_on_map">Stile sulla mappa</string>
     <string name="pref_units">Formati</string>
     <string name="pref_units_altitude">Unità per l\'altitudine</string>
@@ -88,6 +99,7 @@
     <string name="pref_units_angle_russian_mil">Millesimo radiante Russia</string>
     <string name="pref_units_angle_us_artillery_mil">Millesimo radiante US</string>
     <string name="pref_units_coo_latlon">Formato Lat/Lon</string>
+    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Formato di visualizzazione delle coordinate (latitudine/longitudine)</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>

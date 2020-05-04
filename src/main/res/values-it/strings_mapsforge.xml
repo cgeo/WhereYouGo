@@ -38,6 +38,7 @@
     <string name="menu_info">Informazioni</string>
     <string name="menu_info_about">Informazioni su questo software</string>
     <string name="menu_mapfile">File mappa</string>
+    <string name="menu_acquire_from_cgeo">Acquisisci mappa da c:geo</string>
     <string name="menu_position">Posizione</string>
     <string name="menu_position_enter_coordinates">Inserisci le coordinate</string>
     <string name="menu_position_last_known">Ultima posizione conosciuta</string>
@@ -56,4 +57,8 @@
     <string name="zoomLevel">Livello zoom</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">applicazione c:geo non trovata</string>
+    <string name="receivemapfile_success">File di mappa impostato</string>
+    <string name="receivemapfile_error">Errore settando il file di mappa</string>
+    <string name="receivemapfile_notset">Nessun file di mappa impostato in c:geo</string>
 </resources>

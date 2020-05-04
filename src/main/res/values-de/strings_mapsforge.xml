@@ -51,6 +51,7 @@
     <string name="menu_info_about">Über diese Software</string>
     <string name="menu_mapfile">Kartendatei</string>
     <string name="menu_mapgenerator">Kartentyp</string>
+    <string name="menu_acquire_from_cgeo">Karte über c:geo anfragen</string>
     <string name="menu_position">Position</string>
     <string name="menu_position_enter_coordinates">Koordinaten eingeben</string>
     <string name="menu_position_last_known">Letzte bekannte Position</string>
@@ -105,4 +106,7 @@
     <string name="zoomLevel">Zoomstufe</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geo nicht gefunden</string>
+    <string name="receivemapfile_success">Kartendatei gesetzt</string>
+    <string name="receivemapfile_notset">Keine Kartendatei in c:geo gesetzt</string>
 </resources>

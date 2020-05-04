@@ -51,6 +51,7 @@
     <string name="menu_info_about">O programe</string>
     <string name="menu_mapfile">Súbor mapy</string>
     <string name="menu_mapgenerator">Typ mapy</string>
+    <string name="menu_acquire_from_cgeo">Získať mapu z c:geo</string>
     <string name="menu_position">Poloha</string>
     <string name="menu_position_enter_coordinates">Vložte súradnice</string>
     <string name="menu_position_last_known">Posledná známa poloha</string>
@@ -105,4 +106,8 @@
     <string name="zoomLevel">Priblíženie</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Aplikácia c:geo sa nenašla</string>
+    <string name="receivemapfile_success">Súbor s mapou nastavený</string>
+    <string name="receivemapfile_error">Chyba pri nastavení súboru s mapou</string>
+    <string name="receivemapfile_notset">V aplikácii c:geo nie je nastavený žiadny súbor s mapou</string>
 </resources>

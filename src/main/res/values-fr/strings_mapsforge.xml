@@ -105,4 +105,5 @@
     <string name="zoomLevel">Niveau de zoom</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Application c:geo introuvable</string>
 </resources>
