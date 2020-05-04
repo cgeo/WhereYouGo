@@ -33,7 +33,7 @@
     <string name="error">Chyba</string>
     <string name="failed">Neúspěšný</string>
     <string name="feet">Stopy</string>
-    <string name="filesystem_cannot_create_root">Nemohu nalézt paměťovou kartu, pravděpodobně chybí.\n\nProsím vložte ji do přístroje a spusťe program znovu!</string>
+    <string name="filesystem_cannot_create_root">Nelze vytvořit kořenový adresář, pravděpodobně chybí SD karta.\n\nVložte ji a spusťe program znovu!</string>
     <string name="finished">Dokončeno</string>
     <string name="folder_default">Automaticky</string>
     <string name="folder_select">Vybrat…</string>
