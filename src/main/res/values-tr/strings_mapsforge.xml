@@ -51,6 +51,7 @@
     <string name="menu_info_about">Yazılım hakkında</string>
     <string name="menu_mapfile">Harita dosyası</string>
     <string name="menu_mapgenerator">Harita kaynağı</string>
+    <string name="menu_acquire_from_cgeo">Haritayı c:geo\'dan al</string>
     <string name="menu_position">Konum</string>
     <string name="menu_position_enter_coordinates">Koordinat gir</string>
     <string name="menu_position_last_known">Bilinen son konum</string>
@@ -104,4 +105,8 @@
     <string name="zoomLevel">Yakınlaştırma seviyesi</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geo uygulaması bulunamadı</string>
+    <string name="receivemapfile_success">Harita dosyası ayarı</string>
+    <string name="receivemapfile_error">Harita dosyası ayarı başarısız</string>
+    <string name="receivemapfile_notset">c:geo\'da harita dosyası ayarı bulunmuyor</string>
 </resources>
