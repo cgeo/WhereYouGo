@@ -11,6 +11,7 @@
         <item>normal</item>
         <item>groß</item>
         <item>riesig</item>
+        <item>automatisch</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>leer</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Keine Standortquelle verfügbar</string>
     <string name="preferences_debug">Entwicklungs-Einstellungen</string>
     <string name="preferences_general">Allgemeine Einstellungen</string>
-    <string name="preferences_cache_persistence">Cache-Persistenz</string>
-    <string name="preferences_cache_persistence_desc">Zwischenspeicher beim Beenden beibehalten</string>
-    <string name="preferences_cache_size">Cachegröße</string>
-    <string name="preferences_cache_size_desc">Größe des Caches anpassen</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Karten-Cache Einstellungen</string>
+    <string name="preferences_tileCache_persistence">Cache-Persistenz</string>
+    <string name="preferences_tileCache_persistence_desc">Zwischenspeicher beim Beenden beibehalten</string>
+    <string name="preferences_tileCache_size">Cachegröße</string>
+    <string name="preferences_tileCache_size_desc">Größe des Caches anpassen</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Vollbildmodus</string>
     <string name="preferences_fullscreen_desc">Statusleiste ausblenden</string>
     <string name="preferences_map">Karteneinstellungen</string>
@@ -102,4 +104,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Zoomstufe</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

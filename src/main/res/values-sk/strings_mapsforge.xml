@@ -11,6 +11,7 @@
         <item>normálny</item>
         <item>veľký</item>
         <item>najväčší</item>
+        <item>automaticky</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>prázdna</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Nie je k dispozícii žiadny poskytovateľ polohy</string>
     <string name="preferences_debug">Nastavenie pre vývojára</string>
     <string name="preferences_general">Všeobecné nastavenia</string>
-    <string name="preferences_cache_persistence">Platnosť vyrovnávacej pamäte</string>
-    <string name="preferences_cache_persistence_desc">Ponechať vyrovnávaciu pamäť pri ukončení</string>
-    <string name="preferences_cache_size">Externý uklad. priestor</string>
-    <string name="preferences_cache_size_desc">Zmeniť veľkosť vyrovnávacej pamäte</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Nastavenie vyrov. pamäte dlaždice mapy</string>
+    <string name="preferences_tileCache_persistence">Platnosť vyrov. pamäte dlaždice</string>
+    <string name="preferences_tileCache_persistence_desc">Ponechať obrázky v pamäti po ukončení</string>
+    <string name="preferences_tileCache_size">Veľkosť vyrov. pamäte dlaždice</string>
+    <string name="preferences_tileCache_size_desc">Nastavte veľkosť vyrov. pamäte dlaždice</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Celá obrazovka</string>
     <string name="preferences_fullscreen_desc">Skryť stavový riadok</string>
     <string name="preferences_map">Nastavenie máp</string>
@@ -102,4 +104,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Priblíženie</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

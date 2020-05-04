@@ -68,7 +68,7 @@
     <string name="pref_map_provider_vector">Mapsforge (Offline- und Online-Karten)</string>
     <string name="pref_orientation">Ausrichtung</string>
     <string name="pref_root">Wherigo-Ordner</string>
-    <string name="pref_root_desc">Wähle Zielordner für Wherigos</string>
+    <string name="pref_root_desc">Wähle einen Zielordner für Wherigo-Dateien</string>
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
     <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert, wenn du die Anwendung minimierst.</string>
     <string name="pref_save_game_slots">Spielstände</string>

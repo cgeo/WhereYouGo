@@ -11,6 +11,7 @@
         <item>normaal</item>
         <item>groot</item>
         <item>zeer groot</item>
+        <item>automatisch</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>leeg</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Geen locatiebron beschikbaar</string>
     <string name="preferences_debug">Debug instellingen</string>
     <string name="preferences_general">Algemene instellingen</string>
-    <string name="preferences_cache_persistence">Cache-persistentie</string>
-    <string name="preferences_cache_persistence_desc">Houd afbeeldingen in de cache bij afsluiten</string>
-    <string name="preferences_cache_size">Externe opslag</string>
-    <string name="preferences_cache_size_desc">Pas de grootte van de cache aan </string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Kaart tegel cache instellingen</string>
+    <string name="preferences_tileCache_persistence">Tegel cache persistentie</string>
+    <string name="preferences_tileCache_persistence_desc">Houd afbeeldingen in de cache bij afsluiten</string>
+    <string name="preferences_tileCache_size">Tegel cache grootte</string>
+    <string name="preferences_tileCache_size_desc">De grootte van de tegelcache aanpassen</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Volledig scherm modus</string>
     <string name="preferences_fullscreen_desc">Statusbalk verbergen</string>
     <string name="preferences_map">Kaartinstellingen</string>
@@ -102,4 +104,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Zoomniveau</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

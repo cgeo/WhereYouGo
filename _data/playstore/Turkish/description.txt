@@ -1,7 +1,7 @@
 WhereYouGo, Wherigo Geoaching için resmi olmayan bir istemcisidir.
 
-Etkileşimli konum tabanlı bir Geocaching oyunu olan Wherigo kartuşlarının kullanılmasına yarar. Wherigo oyununuzun son halini kaydedebilir, yükleyebilir veya oynayabilirsiniz. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
-Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+Etkileşimli konum tabanlı bir Geocaching oyunu olan Wherigo kartuşlarının kullanılmasına yarar. Wherigo oyununuzun son halini kaydedebilir, yükleyebilir veya oynayabilirsiniz. Pusula ve çevrimiçi/çevrimdışı haritalar Locus'a alternatif olarak yönlendirme ve izleme için kullanılabilirler.
+WhereYouGo kartuşları https://www.wherigo.com ve diğer servisler üzerinden indirilebilirler.
 
 Ana özellikler:
 - Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
@@ -17,12 +17,12 @@ Ana özellikler:
 Hakkında:
 WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
+Birkaç yıldır kaynak kodlarının güncellenmemesi üzerine, uygulama sahibinin onayıyla, yeni bir geliştirme ekibi (c:geo ekibi) uygulamanın geliştirilmesi için kodlar üzerinde çalışmaya başladı.
 Eğer bize yardım etmek isterseniz, aşağıdaki bağlantıdan gerekli bilgiye ve kaynak koduna ulaşabilirsiniz. Yardımınıza ihtiyacımız var: https://github.com/cgeo/WhereYouGo
 The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
 
 Not:
-- When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
-- Kartuşları Wherigo dosyanıza kopyalayın (Ayarlar - Başlıca - Wherigo dosyası). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Bazı yeni cihazlarda SD kart üzerine veri kaydına izin verilmez. Emin değilseniz, "Wherigo dosyası"nı otomatik oluşturun.
-- If you have problems installing or using WhereYouGo please contact us at whereyougo@cgeo.org 
-- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
+- wherigo.com üzerinden kartuşları doğrudan cihazınıza indirirken "Pocket PC Device" versiyonunu seçtiğinizden emin olun. 
+- Kartuşları Wherigo dosyanıza kopyalayın (Ayarlar - Başlıca - Wherigo dosyası). Uygulamaya harici depolama üzerine ve seçili dizine veri kaydı izni verdiğinizden emin olun. Bazı yeni cihazlarda SD kart üzerine veri kaydına izin verilmez. Emin değilseniz, "Wherigo dosyası"nı otomatik oluşturun.
+- WhereYouGo kurulumunda veya kullanımında sorun yaşıyorsanız lütfen whereyougo@cgeo.org üzerinden bize ulaşın 
+-WhereYouGo'nun istenilen izinlere neden ihtiyaç duyduğunu öğrenmek isterseniz açıklama için lütfen buraya bakın: https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md

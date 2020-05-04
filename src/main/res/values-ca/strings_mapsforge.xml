@@ -25,4 +25,5 @@
     <string name="menu_position_my_location_enable">Mostra la meva ubicació</string>
     <string name="menu_position_my_location_disable">Eliminar localització</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

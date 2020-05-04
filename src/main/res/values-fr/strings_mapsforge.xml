@@ -11,6 +11,7 @@
         <item>normal</item>
         <item>grand</item>
         <item>très grand</item>
+        <item>automatique</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>vide</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Aucune source de positionnement disponible</string>
     <string name="preferences_debug">Paramètres de débogage</string>
     <string name="preferences_general">Paramètres généraux</string>
-    <string name="preferences_cache_persistence">Persistance du cache</string>
-    <string name="preferences_cache_persistence_desc">Ne pas supprimer les images en cache à la fermeture</string>
-    <string name="preferences_cache_size">Mémoire externe</string>
-    <string name="preferences_cache_size_desc">Définir la taille du cache</string>
-    <string name="preferences_cache_size_value">%.1f Mo</string>
+    <string name="preferences_tileCache">Paramètres du cache des tuiles de carte</string>
+    <string name="preferences_tileCache_persistence">Persistance du cache des tuiles</string>
+    <string name="preferences_tileCache_persistence_desc">Conserver les images en cache à la fermeture</string>
+    <string name="preferences_tileCache_size">Taille du cache des tuiles</string>
+    <string name="preferences_tileCache_size_desc">Définir la taille du cache des tuiles</string>
+    <string name="preferences_tileCache_size_value">%.1f Mo</string>
     <string name="preferences_fullscreen">Mode plein écran</string>
     <string name="preferences_fullscreen_desc">Masquer la barre d\'état</string>
     <string name="preferences_map">Paramètres de la carte</string>
@@ -102,4 +104,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Niveau de zoom</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

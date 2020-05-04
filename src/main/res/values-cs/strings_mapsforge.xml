@@ -11,6 +11,7 @@
         <item>normální</item>
         <item>velký</item>
         <item>největší</item>
+        <item>automatic</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>prázdná</item>
@@ -69,11 +70,6 @@
     <string name="no_location_provider_available">Není dostupný žádný poskytovatel pozice</string>
     <string name="preferences_debug">Nastavení pro vývojáře</string>
     <string name="preferences_general">Obecné nastavení</string>
-    <string name="preferences_cache_persistence">Platnost vyrovnávací paměti</string>
-    <string name="preferences_cache_persistence_desc">Ponechat vyrovnávací paměť při ukončení</string>
-    <string name="preferences_cache_size">Externí úložiště</string>
-    <string name="preferences_cache_size_desc">Změnit velikost vyrovnávací paměti</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Celá obrazovka</string>
     <string name="preferences_fullscreen_desc">Schovat statusbar</string>
     <string name="preferences_map">Nastavení map</string>
@@ -102,4 +98,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Přiblížení</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

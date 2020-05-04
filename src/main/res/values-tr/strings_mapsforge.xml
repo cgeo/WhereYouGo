@@ -11,6 +11,7 @@
         <item>normal</item>
         <item>büyük</item>
         <item>devasa</item>
+        <item>otomatik</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>boş</item>
@@ -69,11 +70,12 @@
     <string name="no_location_provider_available">Konum kaynağı mevcut değil</string>
     <string name="preferences_debug">Hata Ayıklama Ayarları</string>
     <string name="preferences_general">Genel ayarlar</string>
-    <string name="preferences_cache_persistence">Bellek sürekliliği</string>
-    <string name="preferences_cache_persistence_desc">Çıkışta, belleğe alınan resimleri sakla</string>
-    <string name="preferences_cache_size">Harici depolama</string>
-    <string name="preferences_cache_size_desc">Cache boyutunu ayarla</string>
-    <string name="preferences_cache_size_value">%.1f MB</string>
+    <string name="preferences_tileCache">Harita bellek ayarları</string>
+    <string name="preferences_tileCache_persistence">Karo bellek sürekliliği</string>
+    <string name="preferences_tileCache_persistence_desc">Belleğe alınan görselleri çıkışta sakla</string>
+    <string name="preferences_tileCache_size">Karo bellek boyutu</string>
+    <string name="preferences_tileCache_size_desc">Karo belleği boyutunu uygula</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Tam ekran modu</string>
     <string name="preferences_fullscreen_desc">Bildirim çubuğunu gizle</string>
     <string name="preferences_map">Harita Ayarları</string>
@@ -101,4 +103,5 @@
     <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Yakınlaştırma seviyesi</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>

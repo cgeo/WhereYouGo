@@ -11,6 +11,7 @@
         <item>Normal</item>
         <item>Stor</item>
         <item>Gedigen</item>
+        <item>automatic</item>
     </string-array>
     <string name="error_last_location_unknown">Siste lokasjon er ukjent</string>
     <string name="file_invalid">Valgt fil er ugyldig.</string>
@@ -56,10 +57,6 @@
     <string name="no_location_provider_available">Ingen posisjonskilde tilgjengelig</string>
     <string name="preferences_debug">feilsøkings innstillinger</string>
     <string name="preferences_general">Generelle instillinger</string>
-    <string name="preferences_cache_persistence">buffer utholdenhet</string>
-    <string name="preferences_cache_persistence_desc">Hold bufrede bilder ved avslutt</string>
-    <string name="preferences_cache_size">Ekstern lagring</string>
-    <string name="preferences_cache_size_desc">Juster størrelsen på bufferen</string>
     <string name="preferences_fullscreen">Fullskjerm-modus</string>
     <string name="preferences_fullscreen_desc">Skjul statuslinjen</string>
     <string name="preferences_map">Kart innstillinger</string>
@@ -86,4 +83,5 @@
     <string name="snap_to_location_disabled">Hopp til posisjon er deaktivert</string>
     <string name="zoomLevel">Zoom nivå</string>
     <!-- MapsForge END -->
+    <!-- receive mapfile -->
 </resources>
