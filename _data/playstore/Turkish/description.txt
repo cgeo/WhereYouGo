@@ -4,7 +4,7 @@ Etkileşimli konum tabanlı bir Geocaching oyunu olan Wherigo kartuşlarının k
 WhereYouGo kartuşları https://www.wherigo.com ve diğer servisler üzerinden indirilebilirler.
 
 Ana özellikler:
-- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
+- wherigo.com'dan kartuşları otomatik indirin (wherigo.com veya c:geo gibi diğer Geocaching uygulamaları üzerinden bir sayfayı açarak)
 - Sıradaki oyun bölgesine veya konuma yönlendirmek için pusulayı kullanır
 - Haritada oyun bölgelerini ve konumları görüntüler
 - Değişik kaynaklardan çevrimiçi haritaları kullanır
@@ -15,7 +15,7 @@ Ana özellikler:
 -Dahili Kare Kod okuyucu bulundurur
 
 Hakkında:
-WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+WhereYouGo açık kaynaklı ve GNU General Public License v3.0 üzerinden lisanslıdır.
 
 Birkaç yıldır kaynak kodlarının güncellenmemesi üzerine, uygulama sahibinin onayıyla, yeni bir geliştirme ekibi (c:geo ekibi) uygulamanın geliştirilmesi için kodlar üzerinde çalışmaya başladı.
 Eğer bize yardım etmek isterseniz, aşağıdaki bağlantıdan gerekli bilgiye ve kaynak koduna ulaşabilirsiniz. Yardımınıza ihtiyacımız var: https://github.com/cgeo/WhereYouGo
