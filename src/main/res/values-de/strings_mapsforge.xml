@@ -108,5 +108,6 @@
     <!-- receive mapfile -->
     <string name="receivemapfile_cgeonotfound">c:geo nicht gefunden</string>
     <string name="receivemapfile_success">Kartendatei gesetzt</string>
+    <string name="receivemapfile_error">Fehler beim Setzen der Kartendatei</string>
     <string name="receivemapfile_notset">Keine Kartendatei in c:geo gesetzt</string>
 </resources>
