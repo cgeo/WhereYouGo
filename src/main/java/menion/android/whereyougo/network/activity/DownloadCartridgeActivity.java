@@ -36,6 +36,7 @@ import java.io.File;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
+import menion.android.whereyougo.gui.dialog.NoPasswordDialogFragment;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
@@ -74,7 +75,8 @@ public class DownloadCartridgeActivity extends CustomActivity {
         Button buttonStart = (Button) findViewById(R.id.button_negative);
         // If one of the variables is empty the inner condition is true which get's negated because
         // the button get's enabled on true and disabled on false.
-        buttonDownload.setEnabled(!(username.isEmpty() && password.isEmpty()));
+        boolean emptyUsernameOrPassword = username.isEmpty() || password.isEmpty();
+        buttonDownload.setEnabled(!emptyUsernameOrPassword);
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
@@ -128,6 +130,11 @@ public class DownloadCartridgeActivity extends CustomActivity {
             }
         });
         buttonStart.setEnabled(cartridgeFile != null);
+
+        if (emptyUsernameOrPassword) {
+            NoPasswordDialogFragment noPasswordDialogFragment = new NoPasswordDialogFragment();
+            noPasswordDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+        }
     }
 
     @Override
