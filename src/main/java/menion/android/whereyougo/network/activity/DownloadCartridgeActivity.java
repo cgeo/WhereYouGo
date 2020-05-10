@@ -151,7 +151,7 @@ public class DownloadCartridgeActivity extends CustomActivity
     }
 
     @Override
-    public void onNeutralClick(DialogFragment dialog) {
+    public void onPositiveClick(DialogFragment dialog) {
         Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
         loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
         startActivity(loginPreferenceIntent);

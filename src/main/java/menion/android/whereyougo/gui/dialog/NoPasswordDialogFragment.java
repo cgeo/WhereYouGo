@@ -15,7 +15,7 @@ public class NoPasswordDialogFragment extends DialogFragment {
     private NoPasswordDialogListener listener;
 
     public interface NoPasswordDialogListener {
-        public void onNeutralClick(DialogFragment dialog);
+        public void onPositiveClick(DialogFragment dialog);
     }
 
     @Override
@@ -36,18 +36,12 @@ public class NoPasswordDialogFragment extends DialogFragment {
         builder.setMessage(R.string.dialog_no_password)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                    }
-                })
-                .setNeutralButton(R.string.settings, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        listener.onNeutralClick(NoPasswordDialogFragment.this);
+                        listener.onPositiveClick(NoPasswordDialogFragment.this);
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                        // User cancelled the dialog --> Do nothing
                     }
                 });
         // Create the AlertDialog object and return it
