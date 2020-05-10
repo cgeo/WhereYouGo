@@ -1,14 +1,14 @@
 /*
  * Copyright 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import java.io.File;
 
 import menion.android.whereyougo.R;
@@ -46,7 +48,8 @@ import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.UtilsFormat;
 
-public class DownloadCartridgeActivity extends CustomActivity {
+public class DownloadCartridgeActivity extends CustomActivity
+        implements NoPasswordDialogFragment.NoPasswordDialogListener {
     private static final String TAG = "DownloadCartridgeActivity";
     private DownloadCartridgeTask downloadTask;
     private String cguid;
@@ -147,6 +150,13 @@ public class DownloadCartridgeActivity extends CustomActivity {
         }
     }
 
+    @Override
+    public void onNeutralClick(DialogFragment dialog) {
+        Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
+        loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
+        startActivity(loginPreferenceIntent);
+    }
+
     class DownloadTask extends DownloadCartridgeTask {
         final ProgressDialog progressDialog;
 
@@ -202,7 +212,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
             if (progress.getState() == State.SUCCESS) {
                 suffix = String.format(": %s", getString(R.string.ok));
             } else if (progress.getState() == State.FAIL) {
-                if (progress.getMessage() == null){
+                if (progress.getMessage() == null) {
                     suffix = String.format(": %s", getString(R.string.error));
                 } else {
                     suffix = String.format(": %s(%s)", getString(R.string.error), progress.getMessage());
