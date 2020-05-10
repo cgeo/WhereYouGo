@@ -107,7 +107,7 @@
     <!-- MapsForge END -->
     <!-- receive mapfile -->
     <string name="receivemapfile_cgeonotfound">c:geo nicht gefunden</string>
-    <string name="receivemapfile_success">Kartendatei gesetzt</string>
-    <string name="receivemapfile_error">Fehler beim Setzen der Kartendatei</string>
-    <string name="receivemapfile_notset">Keine Kartendatei in c:geo gesetzt</string>
+    <string name="receivemapfile_success">Kartendatei festgelegt</string>
+    <string name="receivemapfile_error">Fehler beim Festlegen der Kartendatei</string>
+    <string name="receivemapfile_notset">Keine Kartendatei in c:geo festgelegt</string>
 </resources>
