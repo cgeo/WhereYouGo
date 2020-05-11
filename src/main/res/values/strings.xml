@@ -122,6 +122,6 @@
     <string name="location_permission_request_explanation">WhereYouGo needs access to the GPS on your device to locate your position and calculate distance and direction to the Cartridge locations.</string>
     <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
     <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
-    <string name="dialog_no_password">You havn\'t configured a password and/or username! Please do so in the WhereYouGo Settings. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
+    <string name="dialog_no_password">You have not configured your user name and/or password! Please do so in the WhereYouGo Settings. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
 
 </resources>
