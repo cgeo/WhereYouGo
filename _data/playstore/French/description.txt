@@ -1,28 +1,28 @@
-WhereYouGo is an unofficial client for Wherigo Geoaching.
+WhereYouGo est un client non officiel pour Wherigo Geoaching.
 
-It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
-Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+Il prend en charge les cartouches Wherigo, un jeu de géocaching interactif basé sur la localisation. Vous pouvez charger, jouer et enregistrer l'état de votre partie Wherigo. La boussole ainsi que des cartes en ligne ou hors ligne peuvent être utilisées pour naviguer, ou bien on peut utiliser Locus pour afficher des cartes.
+Les cartouches à utiliser avec WhereYouGo peuvent être téléchargées à partir de https://www.wherigo.com et d'autres services.
 
-Main features:
-- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
-- Use compass to navigate to the next game zone or location
-- View game zones and locations on a map
-- Uses online maps from various sources
-- Supports offline map files (only Mapsforge v0.3 format at this moment)  
-- Seamless interworking with Locus to display maps (alternatively to internal maps)
-- Several save game slots per cartridge
-- Automatic game saving when switching to another app
-- Integrated QR-code reader
+Fonctionnalités principales :
+- Téléchargement automatique des cartouches depuis wherigo.com (peut être déclenché à partir de votre navigateur en ouvrant une page descriptive sur wherigo.com ou à partir d'autres applications de géocaching comme c:geo)
+- Utilisez la boussole pour accéder à la zone de jeu ou à la position suivante
+- Afficher les zones de jeu et les positions sur une carte
+- Utilisez des cartes en ligne venant de diverses sources
+- Accepte les fichiers de carte hors ligne (uniquement le format Mapsforge v0.3 pour le moment)  
+- Interaction transparente avec Locus pour afficher des cartes (en remplacement des cartes internes)
+- Plusieurs emplacements de sauvegardes de jeu par cartouche
+- Sauvegarde automatique du jeu lors du passage à une autre application
+- Lecteur de code QR intégré
 
-About:
-WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+À propos :
+WhereYouGo est un logiciel libre (OpenSource) et sous licence GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
-If you are able and willing to help us, you can find information and source code in the link below. We need your help: https://github.com/cgeo/WhereYouGo
-The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+Après plusieurs années sans maintenance du code source, une nouvelle équipe de développement (l'équipe c:geo) a finalement été capable - avec l'accord de l'auteur original - de reprendre le code source et de poursuivre le développement de l'application.
+Si vous êtes capable et désireux de nous aider, vous pouvez trouver des informations et le code source grâce au lien ci-dessous. Nous avons besoin de votre aide sur https://github.com/cgeo/WhereYouGo
+Le cœur de l'application est basé sur OpenWIG, elle utilise la bibliothèque Mapsforge pour afficher des cartes, Locus peut être employé alternativement.
 
-Notes:
-- When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
-- Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
+Notes :
+- Lorsque vous téléchargez les cartouches sur le site wherigo.com, assurez-vous de choisir la version "Pocket PC Device" (appareil Pocket PC). 
+- Copiez les cartouches dans votre dossier Wherigo (Paramètres - Global - Dossier Wherigo). Assurez-vous que vous avez autorisé l'application à écrire sur le stockage externe et que vous avez la permission d'écriture dans le répertoire sélectionné. Certains appareils parmi les plus récents n'autorisent pas l'écriture sur la carte SD. Si vous n'êtes pas sûr(e), sélectionnez le "Dossier Wherigo" par défaut.
 - Si vous rencontrez des problèmes d'installation ou d'utilisation de WhereYouGo, veuillez nous contacter à whereyougo@cgeo.org 
-- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
+- Si vous souhaitez savoir pourquoi WhereYouGo a besoin des autorisations demandées, veuillez consulter https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md pour une explication.

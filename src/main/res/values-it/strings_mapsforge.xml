@@ -11,7 +11,7 @@
         <item>normale</item>
         <item>grande</item>
         <item>molto grande</item>
-        <item>automatic</item>
+        <item>automatico</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>vuoto</item>
@@ -23,25 +23,39 @@
         <item>Esri Strade (online)</item>
         <item>Esri ortofoto (online)</item>
     </string-array>
+    <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">Ultima posizione sconosciuta</string>
     <string name="file_invalid">Il file selezionato non è valido.</string>
+    <string name="file_select">Seleziona un file.</string>
+    <string name="file_size_byte">byte</string>
+    <string name="file_size_bytes">bytes</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
     <string name="go_to_position">Vai alla posizione</string>
+    <string name="info_map_file_area">Zona</string>
     <string name="info_map_file_comment">Commento</string>
     <string name="info_map_file_created_by">Creato da</string>
     <string name="info_map_file_date">Data</string>
     <string name="info_map_file_debug">Informazioni debug</string>
     <string name="info_map_file_debug_no">non incluso</string>
     <string name="info_map_file_debug_yes">incluso</string>
+    <string name="info_map_file_language_preference">Lingua preferita</string>
+    <string name="info_map_file_name">File</string>
     <string name="info_map_file_size">Dimensioni file</string>
     <string name="info_map_file_start_position">Posizione iniziale</string>
     <string name="info_map_file_start_zoom_level">Livello zoom iniziale</string>
+    <string name="info_map_file_version">Versione</string>
     <string name="menu_info">Informazioni</string>
+    <string name="menu_info_map_file">Proprietà file mappa</string>
     <string name="menu_info_about">Informazioni su questo software</string>
     <string name="menu_mapfile">File mappa</string>
+    <string name="menu_mapgenerator">Sorgente mappa</string>
     <string name="menu_acquire_from_cgeo">Acquisisci mappa da c:geo</string>
     <string name="menu_position">Posizione</string>
     <string name="menu_position_enter_coordinates">Inserisci le coordinate</string>
     <string name="menu_position_last_known">Ultima posizione conosciuta</string>
+    <string name="menu_position_map_file_center">Centro file mappa</string>
     <string name="menu_position_my_location_enable">Mostra la mia posizione</string>
     <string name="menu_position_my_location_disable">Rimuovi la mia posizione</string>
     <string name="menu_position_snap_to_location">Aggancia alla posizione</string>
@@ -49,11 +63,46 @@
     <string name="menu_preferences">Preferenze</string>
     <string name="menu_refresh">Aggiorna</string>
     <string name="menu_render_theme">Rendering tema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">Seleziona file XML …</string>
+    <string name="menu_screenshot">Schermata</string>
+    <string name="menu_screenshot_jpeg">JPEG (con perdita)</string>
+    <string name="menu_screenshot_png">PNG (senza perdita)</string>
+    <string name="no_location_provider_available">Nessuna fonte di posizione disponibile</string>
+    <string name="preferences_debug">Configurazione debug</string>
     <string name="preferences_general">Impostazioni generali</string>
+    <string name="preferences_tileCache">Impostazioni cache delle caselle</string>
+    <string name="preferences_tileCache_persistence">Persistenza Cache</string>
+    <string name="preferences_tileCache_persistence_desc">Mantieni le immagini memorizzate nella cache all\'uscita</string>
+    <string name="preferences_tileCache_size">Dimensione della cache</string>
+    <string name="preferences_tileCache_size_desc">Regola la dimensione della cache delle caselle</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Modalità a schermo intero</string>
+    <string name="preferences_fullscreen_desc">Nascondi la barra di stato</string>
+    <string name="preferences_map">Impostazioni Mappa</string>
     <string name="preferences_move_speed">Velocità di movimento</string>
+    <string name="preferences_move_speed_desc">Regola la velocità di movimento della mappa</string>
+    <string name="preferences_move_speed_value">%d %% velocità di movimento</string>
+    <string name="preferences_scale_bar_unit">Unità della barra di scala</string>
+    <string name="preferences_scale_bar_unit_desc">Selezionare l\'unità per la barra di scala della mappa</string>
+    <string name="preferences_show_fps_counter">Frame rate</string>
+    <string name="preferences_show_fps_counter_desc">Abilita contatore fotogrammi al secondo</string>
+    <string name="preferences_show_scale_bar">Barra di scala della mappa</string>
+    <string name="preferences_show_scale_bar_desc">Mostra la scala della mappa</string>
+    <string name="preferences_show_tile_coordinates">Coordinate della casella</string>
+    <string name="preferences_show_tile_coordinates_desc">Mostra le coordinate sulle caselle</string>
+    <string name="preferences_show_tile_frames">Confini delle caselle</string>
+    <string name="preferences_show_tile_frames_desc">Disegna confini delle caselle</string>
+    <string name="preferences_show_water_tiles">Caselle ad acqua</string>
+    <string name="preferences_show_water_tiles_desc">Evidenzia le caselle che hanno il flag dell\'acqua</string>
     <string name="preferences_text_scale">Dimensione carattere</string>
+    <string name="preferences_text_scale_desc">Seleziona la dimensione del testo delle etichette della mappa</string>
     <string name="preferences_wake_lock">Rimane attivo</string>
+    <string name="preferences_wake_lock_desc">Interrompi lo schermo dall\'oscuramento</string>
+    <string name="snap_to_location_enabled">L\'aggancio alla posizione è attivato</string>
+    <string name="snap_to_location_disabled">L\'aggancio alla posizione è disabilitato</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Livello zoom</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->

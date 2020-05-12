@@ -51,6 +51,7 @@
     <string name="menu_info_about">À propos de ce logiciel</string>
     <string name="menu_mapfile">Fichier de carte</string>
     <string name="menu_mapgenerator">Source de la carte</string>
+    <string name="menu_acquire_from_cgeo">Importer la carte depuis c:geo</string>
     <string name="menu_position">Emplacement</string>
     <string name="menu_position_enter_coordinates">Entrer les coordonnées</string>
     <string name="menu_position_last_known">Dernière position connue</string>
@@ -106,4 +107,7 @@
     <!-- MapsForge END -->
     <!-- receive mapfile -->
     <string name="receivemapfile_cgeonotfound">Application c:geo introuvable</string>
+    <string name="receivemapfile_success">Fichier de carte configuré</string>
+    <string name="receivemapfile_error">Erreur de configuration du fichier de carte</string>
+    <string name="receivemapfile_notset">Aucun fichier de carte défini dans c:geo</string>
 </resources>

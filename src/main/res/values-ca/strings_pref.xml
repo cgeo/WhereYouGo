@@ -93,6 +93,8 @@
     <string name="pref_units_angle_us_artillery_mil">Mil d\'artilleria d\'US</string>
     <string name="pref_units_coo_latlon">Format de coordenades</string>
     <string name="pref_units_coo_latlon_desc">Coordenades (latitud/longitud) format per mostrar</string>
+    <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Unitats de distŕncia</string>
     <string name="pref_units_length_desc">Escolliu unitats per a mostrar per defecte</string>
     <string name="pref_units_length_im_f">Imperials (ft)</string>
