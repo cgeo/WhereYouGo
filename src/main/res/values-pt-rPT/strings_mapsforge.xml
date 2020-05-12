@@ -11,7 +11,7 @@
         <item>normal</item>
         <item>grande</item>
         <item>enorme</item>
-        <item>automatic</item>
+        <item>automático</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>Em branco/vazio</item>
@@ -51,6 +51,7 @@
     <string name="menu_info_about">Acerca deste software</string>
     <string name="menu_mapfile">Ficheiro do mapa</string>
     <string name="menu_mapgenerator">Origem do mapa</string>
+    <string name="menu_acquire_from_cgeo">Abrir o mapa a partir do c:geo</string>
     <string name="menu_position">Posição</string>
     <string name="menu_position_enter_coordinates">Inserir coordenadas</string>
     <string name="menu_position_last_known">Última localização conhecida</string>
@@ -62,6 +63,7 @@
     <string name="menu_preferences">Preferências</string>
     <string name="menu_refresh">Actualizar</string>
     <string name="menu_render_theme">Renderizar tema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">Seleccione o ficheiro XML …</string>
     <string name="menu_screenshot">Captura de Ecrã</string>
     <string name="menu_screenshot_jpeg">JPEG (com perda)</string>
@@ -69,6 +71,12 @@
     <string name="no_location_provider_available">Nenhum fornecedor de localização disponível</string>
     <string name="preferences_debug">Configurações do modo de depuração</string>
     <string name="preferences_general">Configurações gerais</string>
+    <string name="preferences_tileCache">Configurações da cache dos blocos de mapa</string>
+    <string name="preferences_tileCache_persistence">Persistência da Cache dos blocos</string>
+    <string name="preferences_tileCache_persistence_desc">Manter as imagens em cache ao sair</string>
+    <string name="preferences_tileCache_size">Tile cache size</string>
+    <string name="preferences_tileCache_size_desc">Ajustar o tamanho da cache</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Modo de ecrã inteiro</string>
     <string name="preferences_fullscreen_desc">Ocultar a barra de estado</string>
     <string name="preferences_map">Configurações do mapa</string>
@@ -83,7 +91,23 @@
     <string name="preferences_show_scale_bar_desc">Mostrar a escala do mapa</string>
     <string name="preferences_show_tile_coordinates">Coordenadas do bloco</string>
     <string name="preferences_show_tile_coordinates_desc">Mostrar coordenadas nos blocos</string>
+    <string name="preferences_show_tile_frames">Limites dos blocos</string>
+    <string name="preferences_show_tile_frames_desc">Desenhar limites dos blocos</string>
+    <string name="preferences_show_water_tiles">Blocos de água</string>
+    <string name="preferences_show_water_tiles_desc">Destacar blocos definidos como sendo água</string>
+    <string name="preferences_text_scale">Tamanho da fonte do texto</string>
+    <string name="preferences_text_scale_desc">Seleccione o tamanho do texto das etiquetas do mapa</string>
+    <string name="preferences_wake_lock">Manter activo</string>
+    <string name="preferences_wake_lock_desc">Impedir que o ecrã escureça</string>
     <string name="snap_to_location_enabled">Ajustar à posição está activado</string>
+    <string name="snap_to_location_disabled">Alinhar à posição está desactivado</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Nível de ampliação</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">A aplicação c:geo não foi encontrada</string>
+    <string name="receivemapfile_success">Conjunto de mapas</string>
+    <string name="receivemapfile_error">Erro ao definir o mapa</string>
+    <string name="receivemapfile_notset">Nenhum mapa foi definido na aplicação c:geo</string>
 </resources>
