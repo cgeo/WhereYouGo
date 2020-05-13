@@ -5,8 +5,16 @@
         <item>Imperialne</item>
         <item>Metryczne</item>
     </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>malutki</item>
+        <item>mały</item>
+        <item>normalny</item>
+        <item>duży</item>
+        <item>ogromny</item>
+        <item>automatyczny</item>
+    </string-array>
     <string-array name="mapgenerator_values">
-        <item>blank</item>
+        <item>puste</item>
         <item>plik mapy [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
@@ -15,30 +23,91 @@
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">Ostatnia lokalizacja jest nieznana</string>
+    <string name="file_invalid">Wybrany plik jest nieprawidłowy.</string>
+    <string name="file_select">Proszę wybrać plik.</string>
     <string name="file_size_byte">bajt</string>
     <string name="file_size_bytes">bajty</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Przejdź do pozycji</string>
+    <string name="info_map_file_area">Obszar</string>
     <string name="info_map_file_comment">Komentarz</string>
+    <string name="info_map_file_created_by">Utworzony przez</string>
     <string name="info_map_file_date">Data</string>
+    <string name="info_map_file_debug">Informacje debugowania</string>
+    <string name="info_map_file_debug_no">nie dołączaj</string>
+    <string name="info_map_file_debug_yes">dołączaj</string>
+    <string name="info_map_file_language_preference">Ustawienia języka</string>
     <string name="info_map_file_name">Plik</string>
     <string name="info_map_file_size">Rozmiar pliku</string>
+    <string name="info_map_file_start_position">Pozycja początkowa</string>
+    <string name="info_map_file_start_zoom_level">Początkowy poziom powiększenia</string>
+    <string name="info_map_file_version">Wersja</string>
     <string name="menu_info">Informacje</string>
+    <string name="menu_info_map_file">Właściwości pliku mapy</string>
+    <string name="menu_info_about">O tym oprogramowaniu</string>
     <string name="menu_mapfile">Plik mapy</string>
     <string name="menu_mapgenerator">Źródło mapy</string>
+    <string name="menu_acquire_from_cgeo">Uzyskaj mapę z c:geo</string>
     <string name="menu_position">Położenie</string>
+    <string name="menu_position_enter_coordinates">Wprowadź współrzędne</string>
     <string name="menu_position_last_known">Ostatnia znana lokalizacja</string>
+    <string name="menu_position_map_file_center">Wyśrodkuj plik z mapą</string>
+    <string name="menu_position_my_location_enable">Pokaż moją lokalizację</string>
+    <string name="menu_position_my_location_disable">Usuń moją lokalizację</string>
+    <string name="menu_position_snap_to_location">Przyciągnij do pozycji</string>
     <string name="menu_position_target">Cel</string>
     <string name="menu_preferences">Preferencje</string>
     <string name="menu_refresh">Odśwież</string>
     <string name="menu_render_theme">Motyw renderowania</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
     <string name="menu_render_theme_select_file">Wybierz plik XML …</string>
     <string name="menu_screenshot">Zrzut ekranu</string>
     <string name="menu_screenshot_jpeg">JPEG (kompresja stratna)</string>
     <string name="menu_screenshot_png">PNG(kompresja bezstratna)</string>
+    <string name="no_location_provider_available">Brak dostępnego źródła lokalizacji</string>
+    <string name="preferences_debug">Ustawienia debugowania</string>
     <string name="preferences_general">Ustawienia ogólne</string>
+    <string name="preferences_tileCache">Ustawienia pamięci podręcznej kafelków mapy</string>
+    <string name="preferences_tileCache_persistence">Trwałość pamięci podręcznej kafelków</string>
+    <string name="preferences_tileCache_persistence_desc">Zachowaj buforowane obrazy przy wyjściu</string>
+    <string name="preferences_tileCache_size">Rozmiar pamięci podręcznej kafelków</string>
+    <string name="preferences_tileCache_size_desc">Dostosuj rozmiar pamięci podręcznej kafelków</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Tryb pełnoekranowy</string>
+    <string name="preferences_fullscreen_desc">Ukryj pasek stanu</string>
     <string name="preferences_map">Ustawienia mapy</string>
+    <string name="preferences_move_speed">Prędkość ruchu</string>
+    <string name="preferences_move_speed_desc">Dostosuj prędkość ruchu mapy</string>
+    <string name="preferences_move_speed_value">%d %% prędkość ruchu</string>
+    <string name="preferences_scale_bar_unit">Jednostka paska skali</string>
+    <string name="preferences_scale_bar_unit_desc">Wybierz jednostkę dla paska skali mapy</string>
+    <string name="preferences_show_fps_counter">Klatek na sekundę</string>
+    <string name="preferences_show_fps_counter_desc">Włącz licznik klatek na sekundę</string>
+    <string name="preferences_show_scale_bar">Skala mapy</string>
+    <string name="preferences_show_scale_bar_desc">Pokaż skalę mapy</string>
+    <string name="preferences_show_tile_coordinates">Współrzędne kafelków</string>
     <string name="preferences_show_tile_coordinates_desc">Pokaż współrzędne na kafelkach</string>
+    <string name="preferences_show_tile_frames">Granice kafelków</string>
+    <string name="preferences_show_tile_frames_desc">Rysuj granice kafelków</string>
+    <string name="preferences_show_water_tiles">Kafelki wody</string>
+    <string name="preferences_show_water_tiles_desc">Podświetl kafelki, które mają ustawioną flagę wody</string>
     <string name="preferences_text_scale">Rozmiar czcionki</string>
+    <string name="preferences_text_scale_desc">Wybierz rozmiar tekstu etykiet mapy</string>
+    <string name="preferences_wake_lock">Blokowanie uśpienia</string>
+    <string name="preferences_wake_lock_desc">Zatrzymaj przyciemnianie ekranu</string>
+    <string name="snap_to_location_enabled">Przyciąganie do pozycji jest aktywne</string>
+    <string name="snap_to_location_disabled">Przyciąganie do pozycji jest wyłączone</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">Poziom powiększenia</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Nie znaleziono aplikacji c:geo</string>
+    <string name="receivemapfile_success">Ustawiono plik mapy</string>
+    <string name="receivemapfile_error">Błąd ustawiania pliku mapy</string>
+    <string name="receivemapfile_notset">Nie ustawiono pliku mapy w c:geo</string>
 </resources>

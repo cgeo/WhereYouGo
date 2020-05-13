@@ -3,6 +3,7 @@
 <resources>
     <string name="about_application">O aplikacji</string>
     <string name="accuracy">Dokładność</string>
+    <string name="actions_more">Akcje (%1$d)</string>
     <string name="altitude">Wysokość</string>
     <string name="answer">Odpowiedź</string>
     <string name="author">Autor</string>
@@ -11,10 +12,12 @@
     <string name="cancelled">anulowane</string>
     <string name="choose_cartridge">Wybierz kartridż</string>
     <string name="close">Zamknij</string>
+    <string name="coauthor">Aktualny rozwój</string>
     <string name="compass">Kompas</string>
     <string name="declination">Odchylenie</string>
     <string name="delete_cartridge">Usunąć kartridż?</string>
     <string name="delete_save_game">Usunąć zapis?</string>
+    <string name="disable_location">Wyłącz lokalizację</string>
     <string name="distance">Odległość</string>
     <string name="do_you_really_want_to_delete_selected_items">Czy na pewno chcesz usunąć wybrane elementy?</string>
     <string name="do_you_really_want_to_delete_x">Czy na pewno chcesz usunąć \'%1$s\'?</string>
@@ -48,25 +51,33 @@
     <string name="invalid_value">Nieprawidłowa wartość</string>
     <string name="inventory">Inwentarz</string>
     <string name="latitude">Szerokość</string>
+    <string name="libraries">Biblioteki</string>
     <string name="load_game">Wczytaj grę</string>
     <string name="loading">Ładowanie…</string>
     <string name="locations">Lokalizacje</string>
     <string name="longitude">Długość</string>
     <string name="map">Mapa</string>
     <string name="metres">Metry</string>
+    <string name="msg_exit_game">Naciśnij dwukrotnie WSTECZ, aby wyjść z gry.</string>
+    <string name="navigate">Nawiguj</string>
     <string name="new_version_will_be_installed">Nowa wersja zostanie zainstalowana!</string>
     <string name="no">Nie</string>
     <string name="no_description">Brak opisu</string>
     <string name="no_location_providers_available">Żaden dostawca lokalizacji nie jest dostępny!</string>
     <string name="no_satellites">Brak satelitów</string>
     <string name="no_target">Brak celu!</string>
+    <string name="no_wherigo_cartridge_available">Brak dostępnego kartridża Wherigo (*.gwc).\nPobierz lub skopiuj je do folderu \"%1$s\". Możesz także ustawić ścieżkę do niestandardowego folderu w \"Ustawienia - Globalne - Folder Wherigo\". Upewnij się, że przyznałeś aplikacji uprawnienia do zapisu w pamięci zewnętrznej i masz uprawnienia do zapisu w wybranym folderze. Niektóre nowsze urządzenia nie pozwalają na zapis na karcie SD. Jeśli nie masz pewności, wybierz domyślny „Folder Wherigo”.</string>
     <string name="not_enough_disk_space_x">Za mało wolnego miejsca na dysku SDCard!\n(%1$s, wolne: %2$s)</string>
+    <string name="ok">OK</string>
+    <string name="pending">Oczekiwanie</string>
     <string name="pitch">Pułap</string>
     <string name="point">Punkt</string>
     <string name="press_color_to_apply">Wybierz kolor aby zastosować</string>
     <string name="problem_with_internet_connection">Problem z dostępem do Internetu!</string>
     <string name="provider">Dostawca lokalizacji</string>
+    <string name="provider_gps">GPS</string>
     <string name="provider_network">Sieć</string>
+    <string name="provider_passive">-</string>
     <string name="question">Pytanie</string>
     <string name="resume_previous_cartridge">Załadować zapis?\n(Jeśli wybierzesz Nie, zapis zostanie usunięty.)</string>
     <string name="roll">Odchylenie</string>
@@ -78,11 +89,13 @@
     <string name="save_game_auto">Gra zapisana automatycznie</string>
     <string name="save_game_before_exit">Zapisać grę przed wyjściem?</string>
     <string name="save_game_ok">Gra zapisana</string>
+    <string name="save_game_slot">Slot</string>
     <string name="save_game_slots">Zapisz…</string>
     <string name="saving">Zapisywanie…</string>
     <string name="scanQR">Skanuj kod QR</string>
     <string name="settings">Ustawienia</string>
     <string name="speed">Prędkość</string>
+    <string name="start">Start</string>
     <string name="tasks">Zadania</string>
     <string name="time_to_target">Czas do celu</string>
     <string name="translation">Tłumaczenie</string>
@@ -95,11 +108,18 @@
     <string name="you_have_to_exit_app_force">Musisz zamknąć aplikację!</string>
     <string name="you_have_to_restart_app_force">Musisz ponownie uruchomić aplikację!</string>
     <string name="you_have_to_restart_app_recommended">Zaleca się ponowne uruchomienie aplikacji!</string>
+    <string name="you_see">Widzisz</string>
+    <string name="zone_distance">Odległość: %1$s</string>
+    <string name="zone_state">Stan: %1$s</string>
+    <string name="zone_state_distant">odległy</string>
     <string name="zone_state_inside">wewnątrz</string>
     <string name="zone_state_near">blisko</string>
+    <string name="zone_state_unknown">nieznany</string>
     <!-- permission handling -->
     <string name="close_app">Zamknij aplikację</string>
     <string name="ask_again">Zapytaj mnie ponownie</string>
     <string name="goto_app_details">Otwórz informacje o aplikacji</string>
     <string name="location_permission_request_explanation">WhereYouGo potrzebuje dostępu do GPS\'u w twoim urządzeniu, aby zlokalizować swoją pozycję oraz obliczyć odległość i kierunek do położenia kartridża.</string>
+    <string name="storage_permission_request_explanation">WhereYouGo zapisze dane w pamięci telefonu lub na karcie SD jak tylko zapiszesz kartridż.</string>
+    <string name="permission_conclusion">Aplikacja nie może być użyta bez tych uprawnień.</string>
 </resources>
