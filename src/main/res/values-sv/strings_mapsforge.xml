@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MapsForge BEGIN -->
+    <string-array name="preferences_text_scale_values">
+        <item>tiny</item>
+        <item>small</item>
+        <item>normal</item>
+        <item>large</item>
+        <item>huge</item>
+        <item>automatisk</item>
+    </string-array>
+    <string name="menu_acquire_from_cgeo">Skaffa karta från c:geo</string>
+    <string name="preferences_tileCache">Cache-inställningar för kartrutor</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geo-programmet hittades inte</string>
 </resources>
