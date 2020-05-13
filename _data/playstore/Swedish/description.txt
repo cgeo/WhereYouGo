@@ -1,28 +1,28 @@
-WhereYouGo is an unofficial client for Wherigo Geoaching.
+WhereYouGo är en inofficiell klient för Wherigo Geoaching.
 
-It supports playing Wherigo cartridges, which is an interactive location based geocaching game. You can load, play and save the current state of your Wherigo game. Compass and online or offline maps can be used to navigate, alternatively Locus can be used to display maps.
-Cartridges for usage with WhereYouGo can be downloaded from https://www.wherigo.com and other services.
+Den stöder spelande av Wherigo patroner, som är en interaktiv platsbaserad geocaching spel. Du kan ladda, spela och spara det aktuella tillståndet av ditt Wherigo-spel. Kompass och online eller offline kartor kan användas för att navigera, alternativt kan Locus användas för att visa kartor.
+Patroner för användning med WhereYouGo kan laddas ner från https://www.wherigo.com och andra tjänster.
 
-Main features:
-- Automatic download of cartridges from wherigo.com (can be triggered from your browser by opening a listing page on wherigo.com or from other geocaching apps like c:geo)
-- Use compass to navigate to the next game zone or location
-- View game zones and locations on a map
-- Uses online maps from various sources
-- Supports offline map files (only Mapsforge v0.3 format at this moment)  
-- Seamless interworking with Locus to display maps (alternatively to internal maps)
+Huvudfunktioner:
+- Automatisk nedladdning av patroner från wherigo.com (kan utlösas från din webbläsare genom att öppna en listningssida på wherigo.com eller från andra geocaching-appar som c:geo)
+- Använd kompassen för att navigera till nästa spelzon eller plats
+- Visa spelzoner och platser på en karta
+- Använder online-kartor från olika källor
+- Stöder offline-kartfiler (endast Mapsforge v0.3 format just nu)  
+- Sömlös samverkan med Locus för att visa kartor (som alternativ till interna kartor)
 - Several save game slots per cartridge
-- Automatic game saving when switching to another app
-- Integrated QR-code reader
+- Automatisk sparning av spel när du byter till en annan app
+- Integrerad QR-kodsläsare
 
-About:
-WhereYouGo is OpenSource and licensed under GNU General Public License v3.0.
+Om:
+WhereYouGo är OpenSource och licensieras under GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the orignal author - finally able to take over the source code and continue app development.
-If you are able and willing to help us, you can find information and source code in the link below. We need your help: https://github.com/cgeo/WhereYouGo
-The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+Efter att källkoden var ounderhållen i flera år, ett nytt utvecklingsteam (c:geo teamet) var - med samtycke av ursprungsförfattaren - äntligen kunnig att ta över källkoden och fortsätta apputvecklingen.
+Om du kan och vill hjälpa oss kan du hitta information och källkod i länken nedan. Vi behöver din hjälp: https://github.com/cgeo/WhereYouGo
+Kärnan i programmet är baserad på OpenWIG, den använder Mapsforge biblioteket för att visa kartor, alternativt kan Locus användas.
 
-Notes:
-- When manually downloading cartridges from wherigo.com, make sure to use the version "Pocket PC Device". 
-- Copy the cartridges into your Wherigo folder (Settings - Main - Wherigo folder). Make sure you granted the application permission to write to external storage and you have write permission in selected directory. Some newer devices don't allow writing to SD card. If you're not sure, set "Wherigo folder" automatically.
-- If you have problems installing or using WhereYouGo please contact us at whereyougo@cgeo.org 
-- If you would like to know why WhereYouGo needs the permissions requested, please check https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for an explanation.
+Anteckningar:
+- När du laddar ner patroner manuellt från wherigo.com, se till att använda "Pocket PC Device" versionen. 
+- Kopiera patronerna till din Wherigo-mapp (inställningar - Allmänt - Wherigo mappen). Se till att du har behörighet att skriva till extern lagring och att du har skrivrättigheter i valda katalogen. Vissa nyare enheter tillåter inte att skriva till SD-kort. Om du inte är säker, ställ in "Wherigo mapp" automatiskt.
+- Om du har problem med att installera eller använda WhereYouGo vänligen kontakta oss på whereyougo@cgeo.org 
+- Om du vill veta varför WhereYouGo behöver de behörigheter som begärs, vänligen kontrollera https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md för en förklaring.
