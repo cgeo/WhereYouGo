@@ -11,7 +11,7 @@
         <item>normální</item>
         <item>velký</item>
         <item>největší</item>
-        <item>automatic</item>
+        <item>automaticky</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>prázdná</item>
@@ -51,6 +51,7 @@
     <string name="menu_info_about">O programu</string>
     <string name="menu_mapfile">Soubor mapy</string>
     <string name="menu_mapgenerator">Typ mapy</string>
+    <string name="menu_acquire_from_cgeo">Získat mapu z c:geo</string>
     <string name="menu_position">Pozice</string>
     <string name="menu_position_enter_coordinates">Vložte souřadnice</string>
     <string name="menu_position_last_known">Poslední známá pozice</string>
@@ -70,6 +71,12 @@
     <string name="no_location_provider_available">Není dostupný žádný poskytovatel pozice</string>
     <string name="preferences_debug">Nastavení pro vývojáře</string>
     <string name="preferences_general">Obecné nastavení</string>
+    <string name="preferences_tileCache">Nastavení vyrovnávací paměti dlaždice mapy</string>
+    <string name="preferences_tileCache_persistence">Platnost vyrovnávací paměti dlaždice</string>
+    <string name="preferences_tileCache_persistence_desc">Po ukončení ponechat obrázky v mezipaměti</string>
+    <string name="preferences_tileCache_size">Velikost vyrovnávací paměti dlaždice</string>
+    <string name="preferences_tileCache_size_desc">Nastavte velikost vyrovnávací paměti dlaždice</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
     <string name="preferences_fullscreen">Celá obrazovka</string>
     <string name="preferences_fullscreen_desc">Schovat statusbar</string>
     <string name="preferences_map">Nastavení map</string>
@@ -99,4 +106,8 @@
     <string name="zoomLevel">Přiblížení</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Aplikace c:geo nebyla nalezena</string>
+    <string name="receivemapfile_success">Soubor s mapou nastavený</string>
+    <string name="receivemapfile_error">Při nastavování mapového souboru došlo k chybě</string>
+    <string name="receivemapfile_notset">V aplikaci c:geo není nastaven žádný soubor s mapou</string>
 </resources>
