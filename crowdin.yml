@@ -1,4 +1,4 @@
-commit_message: "[skip ci]" 
+commit_message: '[skip ci]' 
 files:
   - source: /src/main/res/values/string*.xml
     ignore:
