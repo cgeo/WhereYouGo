@@ -66,6 +66,7 @@
     <string name="no_location_providers_available">Não há provedores de localização disponíveis!</string>
     <string name="no_satellites">Nenhum satélite</string>
     <string name="no_target">Nenhum destino!</string>
+    <string name="no_wherigo_cartridge_available">Nenhum cartucho Wherigo (*.gwc) disponível.\nDescarregue ou copie-os para a pasta \"%1$s\". Também pode definir um caminho para a paste personalizada em \"Configurações - Geral - Pasta Wherigo\". Certifique-se de que concedeu permissão à aplicação para gravar no armazenamento externo e que tem permissão de gravação na pasta seleccionada. Alguns dispositivos mais novos não permitem escrever no cartão SD. Se não tem a certeza, defina automaticamente \"Pasta Wherigo\".</string>
     <string name="not_enough_disk_space_x">Não há espaço livre suficiente no SDCard!\n(%1$s,livre:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Pendente</string>
@@ -76,6 +77,7 @@
     <string name="provider">Serviço de localização</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Rede</string>
+    <string name="provider_passive">-</string>
     <string name="question">Pergunta</string>
     <string name="resume_previous_cartridge">Resume previous cartridge?</string>
     <string name="roll">Rolar</string>
