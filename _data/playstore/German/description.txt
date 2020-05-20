@@ -4,7 +4,7 @@ Es unterstützt das Spielen von Wherigo-Cartridges, ein interaktives standortbas
 Cartridges zur Nutzung mit WhereYouGo können von https://www.wherigo.com und anderen Diensten heruntergeladen werden.
 
 Hauptfunktionen:
-- Automatisches Herunterladen von Cartridges von wherigo.com (kann ausgelöst werden von deinem Browser durch Öffnen einer Listing-Seite auf wherigo.com oder von anderen Geocaching-Apps wie c:geo)
+- Automatisches Herunterladen von Cartridges von wherigo.com (kann von deinem Browser durch Öffnen einer Listing-Seite auf wherigo.com oder von anderen Geocaching-Apps wie c:geo ausgelöst werden)
 - Benutzt den Kompass, um zur nächsten Spielzone oder Position zu navigieren
 - Spielzonen und Standorte auf der Karte anzeigen
 - Verwendet Online-Karten aus verschiedenen Quellen
