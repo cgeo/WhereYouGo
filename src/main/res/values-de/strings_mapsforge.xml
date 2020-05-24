@@ -19,15 +19,8 @@
         <item>Mapdatei [*.map] (offline)</item>
         <item>OSM Mapnik (online)</item>
         <item>OSM.de (online)</item>
-        <item>OpenCycleMap (online)</item>
-        <item>OpenTransportMap (online)</item>
-        <item>OpenMapSurfer (online)</item>
-        <item>MapQuest OSM (online)</item>
-        <item>MapQuest Aerial (online)</item>
-        <item>TF OpenCycleMap (online)</item>
-        <item>TF Transport (online)</item>
-        <item>TF Landscape (online)</item>
-        <item>TF Outdoors (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Public Transport(\u00d6PNV) (online)</item>
         <item>Esri World Street (online)</item>
         <item>Esri World Imagery (online)</item>
     </string-array>

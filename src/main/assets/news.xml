@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    <update name="0.9.4" id="45" time="24.05.2020">
+        <li>Document the project switch to the cgeo team</li>
+        <li>Fixed broken download of cartridges from wherigo.com by switching to https</li>
+        <li>Fixed other links by switching to https</li>
+        <li>Update the map provider</li>
+        <li>Minor code improvements</li>
+        <li>Updated the dependencies to compile on current development infrastructure</li>
+    </update>
     <update name="0.9.3" id="44" time="14.7.2017">
         <li>Added support for animated GIF and MP4.</li>
         <li>Added Norwegian, Catalan languages</li>

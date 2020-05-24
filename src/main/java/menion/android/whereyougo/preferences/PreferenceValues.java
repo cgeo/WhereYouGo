@@ -176,16 +176,10 @@ public class PreferenceValues {
     }
 
     public static String getLanguageCode() {
-        String lang = Preferences.getStringPreference(R.string.pref_KEY_S_LANGUAGE);
-        if ("".equals(lang) || "default".equals(lang)) {
-            lang = java.util.Locale.getDefault().getLanguage();
-        }
-        Logger.w(TAG, "getLanguageCode() - " + lang);
-        if (Locale.getString(R.string.pref_language_cs_shortcut).equals(lang)) {
-            return lang;
-        } else {
-            return Locale.getString(R.string.pref_language_en_shortcut);
-        }
+        // language for info dialog html files
+        // only english supported
+        Logger.w(TAG, "getLanguageCode() - " + "en");
+        return Locale.getString(R.string.pref_language_en_shortcut);
     }
 
     public static Location getLastKnownLocation() {
