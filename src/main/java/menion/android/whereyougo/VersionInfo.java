@@ -52,7 +52,7 @@ public class VersionInfo {
                     b.setTitle(MainApplication.APP_NAME);
                     b.setIcon(R.drawable.icon);
                     b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
-                    b.setNeutralButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    b.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
