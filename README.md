@@ -9,29 +9,33 @@ This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereY
 Development can be continued seamless as we got the ability and allowance to publish the app under the original accounts and signing keys.
 
 ## Contact
+
 As there are no specific support and contact channels for this project yet, please use the issue tracker of this repository to get in contact with the development community for the time being.
 
-If PM contact is needed please contact us at whereyougo@cgeo.org 
+If PM contact is needed please contact us at [whereyougo@cgeo.org]
 
 ## Development
 
 ### Build
+
 to be completed
 
 ### Branches
-  - **master** is for development of new features.
-  - **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
+
+- **master** is for development of new features.
+- **release** is for all bug fixes of already existing features. So if a bug is reported in released version, it should be fixed on this branch (and merged to master afterwards).
 
 A more complex bugfix can be first tested against the `master` branch while kept compatible with the `release` branch for a later integration.
 Such a procedure is [described in the c:geo wiki](https://github.com/cgeo/cgeo/wiki/How-to-get-a-bug-fix-into-the-release) which can also be applied in principle to this repository.
 
 ### Dependencies
+
 Uses the following projects:
 
-  - [openwig](https://github.com/cgeo/openwig)
-  - [mapsforge-0.3.1-with-tile-downloader-support](https://github.com/raku/mapsforge-0.3.1-with-tile-downloader-support)
-  - [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
-  - [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
+- [openwig](https://github.com/cgeo/openwig)
+- [mapsforge-0.3.1-with-tile-downloader-support](https://github.com/raku/mapsforge-0.3.1-with-tile-downloader-support)
+- [mapsforge-map-0.3.1-with-onTap](https://github.com/jeancaffou/mapsforge-map-0.3.1-with-onTap)
+- [Locus API](http://docs.locusmap.eu/doku.php?id=manual:advanced:locus_api)
 
 ## Translation
 
@@ -40,7 +44,7 @@ A detailed description of the workflow can be found here: [https://github.com/cg
 
 Localization status: [![Crowdin](https://badges.crowdin.net/whereyougo/localized.svg)](https://crowdin.com/project/whereyougo)
 
-## Releases / Versions
+## Releases and Versions
 
 An overview of released beta and production versions and their changelog can be found on the [release page of this repository](https://github.com/cgeo/WhereYouGo/releases).
 
