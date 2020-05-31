@@ -13,9 +13,20 @@ import menion.android.whereyougo.R;
 public class NoPasswordDialogFragment extends DialogFragment {
 
     private NoPasswordDialogListener listener;
+    private int message;
 
     public interface NoPasswordDialogListener {
         void onPositiveClick(DialogFragment dialog);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            message = getArguments().getInt("message");
+        } else {
+            throw new IllegalArgumentException("This dialog needs to be handed a Bundle as an arguement with the key \"message\" which is a Android string resource int.");
+        }
     }
 
     @Override
@@ -34,7 +45,7 @@ public class NoPasswordDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.dialog_no_password)
+        builder.setMessage(message)
                 .setPositiveButton(R.string.ok, (dialog, id) -> listener.onPositiveClick(NoPasswordDialogFragment.this))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                     // User cancelled the dialog --> Do nothing

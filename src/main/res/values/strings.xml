@@ -123,5 +123,6 @@
     <string name="storage_permission_request_explanation">WhereYouGo will write data onto your phone storage or SD card as soon as you save the Cartridge.</string>
     <string name="permission_conclusion">The app cannot be used without this permission(s).</string>
     <string name="dialog_no_password">You have not configured your user name and/or password! Please do so in the WhereYouGo Settings. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
+    <string name="dialog_wrong_credentials">The download of the cartridge has failed. This may be due to wrong credentials or due to connection problems. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
 
 </resources>

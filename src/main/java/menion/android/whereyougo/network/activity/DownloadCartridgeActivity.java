@@ -50,9 +50,11 @@ import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity
         implements NoPasswordDialogFragment.NoPasswordDialogListener {
-    private static final String TAG = "DownloadCartridgeActivity";
+    private static final String TAG = "DownloadCartridgeAct";
     private DownloadCartridgeTask downloadTask;
     private String cguid;
+    private String Username;
+    private String Password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,19 +69,15 @@ public class DownloadCartridgeActivity extends CustomActivity
             return;
         }
 
-        String username = Preferences.GC_USERNAME;
-        String password = Preferences.GC_PASSWORD;
+        Username = Preferences.GC_USERNAME;
+        Password = Preferences.GC_PASSWORD;
 
         setContentView(R.layout.layout_details);
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(R.string.download_cartridge);
-        Button buttonDownload = (Button) findViewById(R.id.button_positive);
         Button buttonStart = (Button) findViewById(R.id.button_negative);
-        // If one of the variables is empty the inner condition is true which get's negated because
-        // the button get's enabled on true and disabled on false.
-        boolean emptyUsernameOrPassword = username.isEmpty() || password.isEmpty();
-        buttonDownload.setEnabled(!emptyUsernameOrPassword);
+        adjustDownloadButtonToUsernamePasswordState();
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
@@ -115,7 +113,7 @@ public class DownloadCartridgeActivity extends CustomActivity
                     downloadTask.cancel(true);
                     downloadTask = null;
                 } else {
-                    downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
+                    downloadTask = new DownloadTask(DownloadCartridgeActivity.this, Username, Password);
                     downloadTask.execute(cguid);
                 }
                 return true;
@@ -134,10 +132,21 @@ public class DownloadCartridgeActivity extends CustomActivity
         });
         buttonStart.setEnabled(cartridgeFile != null);
 
-        if (emptyUsernameOrPassword) {
+        if (checkEmptyUsernamePassword()) {
+            Bundle args = new Bundle();
+            args.putInt("message", R.string.dialog_no_password);
             NoPasswordDialogFragment noPasswordDialogFragment = new NoPasswordDialogFragment();
+            noPasswordDialogFragment.setArguments(args);
             noPasswordDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Username = Preferences.GC_USERNAME;
+        Password = Preferences.GC_PASSWORD;
+        adjustDownloadButtonToUsernamePasswordState();
     }
 
     @Override
@@ -150,11 +159,25 @@ public class DownloadCartridgeActivity extends CustomActivity
         }
     }
 
+    /**
+     * This method implements the Interface "NoPasswordDialogListener".
+     */
     @Override
     public void onPositiveClick(DialogFragment dialog) {
         Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
         loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
         startActivity(loginPreferenceIntent);
+    }
+
+    private void adjustDownloadButtonToUsernamePasswordState(){
+        Button buttonDownload = (Button) findViewById(R.id.button_positive);
+        // If one of the variables is empty the inner condition is true which get's negated because
+        // the button get's enabled on true and disabled on false.
+        buttonDownload.setEnabled(!checkEmptyUsernamePassword());
+    }
+
+    private boolean checkEmptyUsernamePassword() {
+        return Username.isEmpty() || Password.isEmpty();
     }
 
     class DownloadTask extends DownloadCartridgeTask {
@@ -228,9 +251,11 @@ public class DownloadCartridgeActivity extends CustomActivity
                     progressDialog.setIndeterminate(true);
                     progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login) + suffix));
                     if (progress.getState() == State.FAIL) {
-                        Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
-                        loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
-                        startActivity(loginPreferenceIntent);
+                        Bundle args = new Bundle();
+                        args.putInt("message", R.string.dialog_wrong_credentials);
+                        NoPasswordDialogFragment noPasswordDialogFragment = new NoPasswordDialogFragment();
+                        noPasswordDialogFragment.setArguments(args);
+                        noPasswordDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
                     }
                     break;
                 case LOGOUT:
