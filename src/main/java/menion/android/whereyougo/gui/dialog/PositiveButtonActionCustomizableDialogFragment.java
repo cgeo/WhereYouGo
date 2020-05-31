@@ -10,12 +10,12 @@ import androidx.fragment.app.DialogFragment;
 
 import menion.android.whereyougo.R;
 
-public class NoPasswordDialogFragment extends DialogFragment {
+public class PositiveButtonActionCustomizableDialogFragment extends DialogFragment {
 
-    private NoPasswordDialogListener listener;
+    private PositiveButtonActionCustomizableDialogListener listener;
     private int message;
 
-    public interface NoPasswordDialogListener {
+    public interface PositiveButtonActionCustomizableDialogListener {
         void onPositiveClick(DialogFragment dialog);
     }
 
@@ -34,7 +34,7 @@ public class NoPasswordDialogFragment extends DialogFragment {
         super.onAttach(context);
 
         try {
-            listener = (NoPasswordDialogListener) context;
+            listener = (PositiveButtonActionCustomizableDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() + "must implement NoPasswordDialogListener.");
         }
@@ -46,7 +46,7 @@ public class NoPasswordDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(message)
-                .setPositiveButton(R.string.ok, (dialog, id) -> listener.onPositiveClick(NoPasswordDialogFragment.this))
+                .setPositiveButton(R.string.ok, (dialog, id) -> listener.onPositiveClick(PositiveButtonActionCustomizableDialogFragment.this))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                     // User cancelled the dialog --> Do nothing
                 });

@@ -38,7 +38,7 @@ import java.io.File;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
-import menion.android.whereyougo.gui.dialog.NoPasswordDialogFragment;
+import menion.android.whereyougo.gui.dialog.PositiveButtonActionCustomizableDialogFragment;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
@@ -49,7 +49,7 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity
-        implements NoPasswordDialogFragment.NoPasswordDialogListener {
+        implements PositiveButtonActionCustomizableDialogFragment.PositiveButtonActionCustomizableDialogListener {
     private static final String TAG = "DownloadCartridgeAct";
     private DownloadCartridgeTask downloadTask;
     private String cguid;
@@ -135,9 +135,9 @@ public class DownloadCartridgeActivity extends CustomActivity
         if (checkEmptyUsernamePassword()) {
             Bundle args = new Bundle();
             args.putInt("message", R.string.dialog_no_password);
-            NoPasswordDialogFragment noPasswordDialogFragment = new NoPasswordDialogFragment();
-            noPasswordDialogFragment.setArguments(args);
-            noPasswordDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+            PositiveButtonActionCustomizableDialogFragment positiveButtonActionCustomizableDialogFragment = new PositiveButtonActionCustomizableDialogFragment();
+            positiveButtonActionCustomizableDialogFragment.setArguments(args);
+            positiveButtonActionCustomizableDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
         }
     }
 
@@ -253,9 +253,9 @@ public class DownloadCartridgeActivity extends CustomActivity
                     if (progress.getState() == State.FAIL) {
                         Bundle args = new Bundle();
                         args.putInt("message", R.string.dialog_wrong_credentials);
-                        NoPasswordDialogFragment noPasswordDialogFragment = new NoPasswordDialogFragment();
-                        noPasswordDialogFragment.setArguments(args);
-                        noPasswordDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+                        PositiveButtonActionCustomizableDialogFragment positiveButtonActionCustomizableDialogFragment = new PositiveButtonActionCustomizableDialogFragment();
+                        positiveButtonActionCustomizableDialogFragment.setArguments(args);
+                        positiveButtonActionCustomizableDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
                     }
                     break;
                 case LOGOUT:
