@@ -50,11 +50,10 @@ import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity
         implements PositiveButtonActionCustomizableDialogFragment.PositiveButtonActionCustomizableDialogListener {
-    private static final String TAG = "DownloadCartridgeAct";
     private DownloadCartridgeTask downloadTask;
     private String cguid;
-    private String Username;
-    private String Password;
+    private String username;
+    private String password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,8 +68,8 @@ public class DownloadCartridgeActivity extends CustomActivity
             return;
         }
 
-        Username = Preferences.GC_USERNAME;
-        Password = Preferences.GC_PASSWORD;
+        username = Preferences.GC_USERNAME;
+        password = Preferences.GC_PASSWORD;
 
         setContentView(R.layout.layout_details);
 
@@ -113,7 +112,7 @@ public class DownloadCartridgeActivity extends CustomActivity
                     downloadTask.cancel(true);
                     downloadTask = null;
                 } else {
-                    downloadTask = new DownloadTask(DownloadCartridgeActivity.this, Username, Password);
+                    downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
                     downloadTask.execute(cguid);
                 }
                 return true;
@@ -144,8 +143,8 @@ public class DownloadCartridgeActivity extends CustomActivity
     @Override
     public void onResume() {
         super.onResume();
-        Username = Preferences.GC_USERNAME;
-        Password = Preferences.GC_PASSWORD;
+        username = Preferences.GC_USERNAME;
+        password = Preferences.GC_PASSWORD;
         adjustDownloadButtonToUsernamePasswordState();
     }
 
@@ -160,7 +159,7 @@ public class DownloadCartridgeActivity extends CustomActivity
     }
 
     /**
-     * This method implements the Interface "NoPasswordDialogListener".
+     * This method implements the Interface "PositiveButtonActionCustomizableDialogListener".
      */
     @Override
     public void onPositiveClick(DialogFragment dialog) {
@@ -177,7 +176,7 @@ public class DownloadCartridgeActivity extends CustomActivity
     }
 
     private boolean checkEmptyUsernamePassword() {
-        return Username.isEmpty() || Password.isEmpty();
+        return username.isEmpty() || password.isEmpty();
     }
 
     class DownloadTask extends DownloadCartridgeTask {
@@ -256,6 +255,7 @@ public class DownloadCartridgeActivity extends CustomActivity
                         PositiveButtonActionCustomizableDialogFragment positiveButtonActionCustomizableDialogFragment = new PositiveButtonActionCustomizableDialogFragment();
                         positiveButtonActionCustomizableDialogFragment.setArguments(args);
                         positiveButtonActionCustomizableDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+                        progressDialog.cancel();
                     }
                     break;
                 case LOGOUT:

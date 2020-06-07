@@ -25,32 +25,35 @@ public class PositiveButtonActionCustomizableDialogFragment extends DialogFragme
         if (getArguments() != null) {
             message = getArguments().getInt("message");
         } else {
-            throw new IllegalArgumentException("This dialog needs to be handed a Bundle as an arguement with the key \"message\" which is a Android string resource int.");
+            throw new IllegalArgumentException("This dialog needs to be handed a Bundle as an "
+                    + "argument with the key \"message\" which is a Android string resource int.");
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
             listener = (PositiveButtonActionCustomizableDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + "must implement NoPasswordDialogListener.");
+            String exceptionDescription = String.format("%s must implement "
+                            + "PositiveButtonActionCustomizableDialogListener.",
+                    getActivity().toString());
+            throw new ClassCastException(exceptionDescription);
         }
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(message)
-                .setPositiveButton(R.string.ok, (dialog, id) -> listener.onPositiveClick(PositiveButtonActionCustomizableDialogFragment.this))
+                .setPositiveButton(R.string.ok, (dialog, id) ->
+                        listener.onPositiveClick(
+                                PositiveButtonActionCustomizableDialogFragment.this))
                 .setNegativeButton(R.string.cancel, (dialog, id) -> {
                     // User cancelled the dialog --> Do nothing
                 });
-        // Create the AlertDialog object and return it
         return builder.create();
     }
 }
