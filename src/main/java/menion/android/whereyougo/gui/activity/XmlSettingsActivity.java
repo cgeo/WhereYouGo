@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -127,10 +128,15 @@ public class XmlSettingsActivity extends PreferenceActivity
             CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
             CheckBoxPreference gps_hide = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GPS_DISABLE_WHEN_HIDE);
             CheckBoxPreference gps_guiding = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GUIDING_GPS_REQUIRED);
-            if (gps_hide.isChecked()) {
-                status_bar.setEnabled(!gps_guiding.isChecked());
-            } else {
+            CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
                 status_bar.setEnabled(false);
+            } else {
+                if (gps_hide.isChecked()) {
+                    status_bar.setEnabled(!gps_guiding.isChecked());
+                } else {
+                    status_bar.setEnabled(false);
+                }
             }
         }
     }
@@ -248,14 +254,19 @@ public class XmlSettingsActivity extends PreferenceActivity
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
                 CheckBoxPreference gps_guideing = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GUIDING_GPS_REQUIRED);
-                if (newValue) {
+                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
+                    status_bar.setEnabled(false);
+                } else {
+                 if (newValue) {
                     if (gps_guideing.isChecked()) {
                         status_bar.setEnabled(false);
                     } else {
                         status_bar.setEnabled(true);
                     }
-                } else {
+                 } else {
                     status_bar.setEnabled(false);
+                 }
                 }
             }
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS)) {
@@ -266,7 +277,12 @@ public class XmlSettingsActivity extends PreferenceActivity
             Preferences.GUIDING_GPS_REQUIRED = Utils.parseBoolean(newValue);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
-                status_bar.setEnabled(!newValue);
+                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+                if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
+                    status_bar.setEnabled(false);
+                } else {
+                    status_bar.setEnabled(!newValue);
+                }
             }
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND)) {
             String newValue = sharedPreferences.getString(key, null);
@@ -388,6 +404,10 @@ public class XmlSettingsActivity extends PreferenceActivity
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_RUN_SCREEN_OFF)) {
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.GLOBAL_RUN_SCREEN_OFF = Utils.parseBoolean(newValue);
+            CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
+            if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && newValue == true) {
+                status_bar.setEnabled(false);
+            }
             PreferenceValues.enableWakeLock();
         }
     }

@@ -113,16 +113,21 @@ public class CustomActivity extends FragmentActivity {
             Intent intent = new Intent(activity, NotificationService.class);
             intent.putExtra(NotificationService.TITEL, A.getAppName());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                if (!Preferences.GPS_DISABLE_WHEN_HIDE || (Preferences.GPS_DISABLE_WHEN_HIDE && Preferences.GUIDING_GPS_REQUIRED)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && Preferences.GLOBAL_RUN_SCREEN_OFF) {
                     intent.setAction(NotificationService.START_NOTIFICATION_SERVICE_FOREGROUND);
                     activity.startService(intent);
                 } else {
-                    if (Preferences.APPEARANCE_STATUSBAR) {
-                        intent.setAction(NotificationService.START_NOTIFICATION_SERVICE);
+                    if (!Preferences.GPS_DISABLE_WHEN_HIDE || (Preferences.GPS_DISABLE_WHEN_HIDE && Preferences.GUIDING_GPS_REQUIRED)) {
+                        intent.setAction(NotificationService.START_NOTIFICATION_SERVICE_FOREGROUND);
                         activity.startService(intent);
                     } else {
-                        intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
-                        activity.startService(intent);
+                        if (Preferences.APPEARANCE_STATUSBAR) {
+                            intent.setAction(NotificationService.START_NOTIFICATION_SERVICE);
+                            activity.startService(intent);
+                        } else {
+                            intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
+                            activity.startService(intent);
+                        }
                     }
                 }
             } else {
