@@ -17,7 +17,6 @@ package menion.android.whereyougo.network.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -192,16 +191,12 @@ public class DownloadCartridgeActivity extends CustomActivity
             progressDialog.setCanceledOnTouchOutside(false);
 
             progressDialog.setCancelable(true);
-            progressDialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
-
-                @Override
-                public void onCancel(DialogInterface arg0) {
-                    if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
-                        downloadTask.cancel(false);
-                        downloadTask = null;
-                        Log.i("down", "cancel");
-                        ManagerNotify.toastShortMessage(context, getString(R.string.cancelled));
-                    }
+            progressDialog.setOnCancelListener(arg0 -> {
+                if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
+                    downloadTask.cancel(false);
+                    downloadTask = null;
+                    Log.i("down", "cancel");
+                    ManagerNotify.toastShortMessage(context, getString(R.string.cancelled));
                 }
             });
         }
