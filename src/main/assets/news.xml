@@ -2,6 +2,7 @@
 <document>
     <update name="2020.04.07" id="20200407" time="07.04.2020">
         <li>Fix crash on starting cartridge on Android 8 devices</li>                   
+        <li>Allow the app to run in landscape mode</li>                   
         <li>Update translations for several languages</li>
         <li>Various small code improvements and fixes</li>
         <li>Update contact information for user support</li>
