@@ -1,4 +1,4 @@
-WhereYouGo je neoficiální klient pro Wherigo Geoaching.
+WhereYouGo je neoficiální klient pro Wherigo Geocaching.
 
 Podporuje přehrávání cartridgí Wherigo, což je interaktivní geocachingová hra založená na poloze. Můžete načíst, hrát a uložit aktuální stav svojí Wherigo hry. Kompas a online nebo offline mapy lze použít k navigaci. K zobrazení map je možné alternativně použít Locus.
 Cartridge na použití s aplikací WhereYouGo je možné stáhnout z https://www.wherigo.com a dalších služeb.
