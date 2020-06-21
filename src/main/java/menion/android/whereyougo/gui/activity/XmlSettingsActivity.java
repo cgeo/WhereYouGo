@@ -405,7 +405,7 @@ public class XmlSettingsActivity extends PreferenceActivity
             boolean newValue = sharedPreferences.getBoolean(key, false);
             Preferences.GLOBAL_RUN_SCREEN_OFF = Utils.parseBoolean(newValue);
             CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
-            if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && newValue == true) {
+            if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && newValue) {
                 status_bar.setEnabled(false);
             }
             PreferenceValues.enableWakeLock();
