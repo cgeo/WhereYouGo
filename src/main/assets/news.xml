@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
-    <update name="0.9.4" id="45" time="24.05.2020">
+    <update name=2020.06.25-legacy" id="20200625" time="25.06.2020">
+        <li>Published this version as dedicated legacy version for Android 4.1 devices.</li>
         <li>Document the project switch to the cgeo team</li>
         <li>Fixed broken download of cartridges from wherigo.com by switching to https</li>
         <li>Fixed other links by switching to https</li>
