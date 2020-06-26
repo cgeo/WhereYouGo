@@ -1,14 +1,14 @@
 /*
  * Copyright 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
@@ -17,7 +17,6 @@ package menion.android.whereyougo.network.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -31,11 +30,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import java.io.File;
 
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
+import menion.android.whereyougo.gui.dialog.PositiveButtonActionCustomizableDialogFragment;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
 import menion.android.whereyougo.network.DownloadCartridgeTask;
@@ -45,10 +47,12 @@ import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.UtilsFormat;
 
-public class DownloadCartridgeActivity extends CustomActivity {
-    private static final String TAG = "DownloadCartridgeActivity";
+public class DownloadCartridgeActivity extends CustomActivity
+        implements PositiveButtonActionCustomizableDialogFragment.PositiveButtonActionCustomizableDialogListener {
     private DownloadCartridgeTask downloadTask;
     private String cguid;
+    private String username;
+    private String password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +67,15 @@ public class DownloadCartridgeActivity extends CustomActivity {
             return;
         }
 
+        username = Preferences.GC_USERNAME;
+        password = Preferences.GC_PASSWORD;
+
         setContentView(R.layout.layout_details);
 
         TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(R.string.download_cartridge);
+        Button buttonStart = (Button) findViewById(R.id.button_negative);
+        adjustDownloadButtonToUsernamePasswordState();
 
         TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
         TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
@@ -102,8 +111,6 @@ public class DownloadCartridgeActivity extends CustomActivity {
                     downloadTask.cancel(true);
                     downloadTask = null;
                 } else {
-                    String username = Preferences.GC_USERNAME;
-                    String password = Preferences.GC_PASSWORD;
                     downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
                     downloadTask.execute(cguid);
                 }
@@ -121,9 +128,23 @@ public class DownloadCartridgeActivity extends CustomActivity {
                 return true;
             }
         });
-        Button buttonDownload = (Button) findViewById(R.id.button_positive);
-        Button buttonStart = (Button) findViewById(R.id.button_negative);
         buttonStart.setEnabled(cartridgeFile != null);
+
+        if (checkEmptyUsernamePassword()) {
+            Bundle args = new Bundle();
+            args.putInt("message", R.string.dialog_no_password);
+            PositiveButtonActionCustomizableDialogFragment positiveButtonActionCustomizableDialogFragment = new PositiveButtonActionCustomizableDialogFragment();
+            positiveButtonActionCustomizableDialogFragment.setArguments(args);
+            positiveButtonActionCustomizableDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        username = Preferences.GC_USERNAME;
+        password = Preferences.GC_PASSWORD;
+        adjustDownloadButtonToUsernamePasswordState();
     }
 
     @Override
@@ -134,6 +155,27 @@ public class DownloadCartridgeActivity extends CustomActivity {
             downloadTask.cancel(true);
             downloadTask = null;
         }
+    }
+
+    /**
+     * This method implements the Interface "PositiveButtonActionCustomizableDialogListener".
+     */
+    @Override
+    public void onPositiveClick(DialogFragment dialog) {
+        Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
+        loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
+        startActivity(loginPreferenceIntent);
+    }
+
+    private void adjustDownloadButtonToUsernamePasswordState(){
+        Button buttonDownload = (Button) findViewById(R.id.button_positive);
+        // If one of the variables is empty the inner condition is true which get's negated because
+        // the button get's enabled on true and disabled on false.
+        buttonDownload.setEnabled(!checkEmptyUsernamePassword());
+    }
+
+    private boolean checkEmptyUsernamePassword() {
+        return username.isEmpty() || password.isEmpty();
     }
 
     class DownloadTask extends DownloadCartridgeTask {
@@ -149,16 +191,12 @@ public class DownloadCartridgeActivity extends CustomActivity {
             progressDialog.setCanceledOnTouchOutside(false);
 
             progressDialog.setCancelable(true);
-            progressDialog.setOnCancelListener(new ProgressDialog.OnCancelListener() {
-
-                @Override
-                public void onCancel(DialogInterface arg0) {
-                    if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
-                        downloadTask.cancel(false);
-                        downloadTask = null;
-                        Log.i("down", "cancel");
-                        ManagerNotify.toastShortMessage(context, getString(R.string.cancelled));
-                    }
+            progressDialog.setOnCancelListener(arg0 -> {
+                if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
+                    downloadTask.cancel(false);
+                    downloadTask = null;
+                    Log.i("down", "cancel");
+                    ManagerNotify.toastShortMessage(context, getString(R.string.cancelled));
                 }
             });
         }
@@ -191,7 +229,7 @@ public class DownloadCartridgeActivity extends CustomActivity {
             if (progress.getState() == State.SUCCESS) {
                 suffix = String.format(": %s", getString(R.string.ok));
             } else if (progress.getState() == State.FAIL) {
-                if (progress.getMessage() == null){
+                if (progress.getMessage() == null) {
                     suffix = String.format(": %s", getString(R.string.error));
                 } else {
                     suffix = String.format(": %s(%s)", getString(R.string.error), progress.getMessage());
@@ -207,9 +245,12 @@ public class DownloadCartridgeActivity extends CustomActivity {
                     progressDialog.setIndeterminate(true);
                     progressDialog.setMessage(Html.fromHtml(getString(R.string.download_state_login) + suffix));
                     if (progress.getState() == State.FAIL) {
-                        Intent loginPreferenceIntent = new Intent(DownloadCartridgeActivity.this, XmlSettingsActivity.class);
-                        loginPreferenceIntent.putExtra(getString(R.string.pref_KEY_X_LOGIN_PREFERENCES), true);
-                        startActivity(loginPreferenceIntent);
+                        Bundle args = new Bundle();
+                        args.putInt("message", R.string.dialog_wrong_credentials);
+                        PositiveButtonActionCustomizableDialogFragment positiveButtonActionCustomizableDialogFragment = new PositiveButtonActionCustomizableDialogFragment();
+                        positiveButtonActionCustomizableDialogFragment.setArguments(args);
+                        positiveButtonActionCustomizableDialogFragment.show(getSupportFragmentManager(), "NoUsernameOrPassword");
+                        progressDialog.cancel();
                     }
                     break;
                 case LOGOUT:
