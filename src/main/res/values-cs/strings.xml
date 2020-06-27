@@ -126,4 +126,6 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.</strin
     <string name="location_permission_request_explanation">WhereYouGo potřebuje přístup k GPS na vašem zařízení, aby bylo možné zjistit polohu a vypočítat vzdálenost a směr k umístění Cartridge.</string>
     <string name="storage_permission_request_explanation">WhereYouGo zapíše data na úložiště telefonu nebo na SD kartu, jakmile uložíte Cartridge.</string>
     <string name="permission_conclusion">Aplikaci nelze použít bez těchto oprávnění.</string>
+    <string name="dialog_no_password">Nenastavili jste své uživatelské jméno a/nebo heslo! Udělejte to prosím v nastavení WhereYouGo. Klepnutím na OK otevřete nastavení WhereYouGo. Klepnutím na tlačítko Storno zavřete toto dialogové okno a vrátíte se zpět na předchozí obrazovku.</string>
+    <string name="dialog_wrong_credentials">Stahování cartridge selhalo. Může to být způsobeno nesprávnými přihlašovacími údaji nebo problémy s připojením. Klepnutím na OK otevřete nastavení WhereYouGo. Klepnutím na tlačítko Storno zavřete toto dialogové okno a vrátíte se zpět na předchozí obrazovku.</string>
 </resources>
