@@ -122,4 +122,6 @@
     <string name="location_permission_request_explanation">Aplikácia WhereYouGo potrebuje prístup k GPS na vašom zariadení, aby zistila vašu polohu a vypočítala vzdialenosť a smer ku cartridge.</string>
     <string name="storage_permission_request_explanation">WhereYouGo zapíše údaje do vášho úložiska telefónu alebo na kartu SD, hneď ako uložíte cartridge.</string>
     <string name="permission_conclusion">Aplikácia sa bez týchto povolení nemôže používať.</string>
+    <string name="dialog_no_password">Nemáte nakonfigurované svoje používateľské meno a/alebo heslo. Urobte to v nastaveniach aplikácie WhereYouGo. Otvorte teraz nastavenia WhereYouGo kliknutím na tlačidlo OK. Kliknutím na tlačidlo Zrušiť zatvoríte toto dialógové okno a vrátite sa na predchádzajúcu obrazovku.</string>
+    <string name="dialog_wrong_credentials">Cartridge sa nepodarilo stiahnuť. Môžete to byť kvôli nesprávnym prihlasovacím údajom, prípadne problémom s pripojením. Otvorte teraz nastavenia WhereYouGo kliknutím na tlačidlo OK. Kliknutím na tlačidlo Zrušiť zatvoríte toto dialógové okno a vrátite sa na predchádzajúcu obrazovku.</string>
 </resources>
