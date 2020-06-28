@@ -122,4 +122,6 @@
     <string name="location_permission_request_explanation">WhereYouGo a besoin d\'accéder au GPS de votre appareil pour localiser votre position et calculer la distance et la direction vers les emplacements des cartouches.</string>
     <string name="storage_permission_request_explanation">WhereYouGo écrira des données sur le stockage de votre téléphone ou sur la carte SD dès que vous sauvegarderez la cartouche.</string>
     <string name="permission_conclusion">L\'application ne peut pas être utilisée sans cette/ces autorisation(s).</string>
+    <string name="dialog_no_password">Vous n\'avez pas configuré votre nom d\'utilisateur et/ou votre mot de passe ! Veuillez le faire dans les paramètres de WhereYouGo. Cliquez sur OK pour ouvrir les paramètres de WhereYouGo maintenant. Cliquez sur Annuler pour fermer cette boîte de dialogue et revenir à l\'écran précédent.</string>
+    <string name="dialog_wrong_credentials">Le téléchargement de la cartouche a échoué. Cela peut être dû à de mauvais identifiants ou à des problèmes de connexion. Cliquez sur OK pour ouvrir les paramètres de WhereYouGo maintenant. Cliquez sur Annuler pour fermer cette boîte de dialogue et revenir à l\'écran précédent.</string>
 </resources>
