@@ -1,4 +1,4 @@
-WhereYouGo é uma APP cliente não oficial para Caches do tipo Wherigo para Geocaching.
+WhereYouGo é uma APP cliente não oficial para Caches do tipo Wherigo, no Geocaching.
 
 Suporta cartuchos Wherigo, um tipo de jogo de geocaching baseado na localização interativa. Pode carregar, jogar e gravar o estado actual do seu jogo Wherigo. Bússola e mapas online ou offline podem ser usados para navegar, alternativamente poderá usar a aplicação Locus para exibir os mapas.
 Os cartuchos para uso da APP WhereYouGo podem ser descarregados no site https://www.wherigo.com e outros serviços.
