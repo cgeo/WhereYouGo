@@ -87,18 +87,23 @@ public class NotificationService extends Service {
         if (runing && background == foreground) {
            if (foreground) {
               stopForeground(true);
+              runing = false;
            } else {
               mNM.cancel(notification_id);
+              runing = false;
            }
         }
-        if (!background) {
-            startForeground(notification_id, notification);
-            foreground = true;
-        } else {
-            mNM.notify(notification_id, notification);
-            foreground = false;
+
+        if (!runing) {
+            if (!background) {
+                startForeground(notification_id, notification);
+                foreground = true;
+            } else {
+                mNM.notify(notification_id, notification);
+                foreground = false;
+            }
+            runing = true;
         }
-        runing = true;
     }
 
     private void stopNotificationService() {
