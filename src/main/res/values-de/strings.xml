@@ -122,4 +122,6 @@
     <string name="location_permission_request_explanation">WhereYouGo benötigt Zugriff auf das GPS deines Gerätes, um seine Position zu bestimmen sowie um Entfernungen und Richtungen zu Orten der Cartridge zu berechnen.</string>
     <string name="storage_permission_request_explanation">WhereYouGo muss Daten in den Speicher bzw. die externe Karte schreiben, sobald die Cartridge gespeichert wird.</string>
     <string name="permission_conclusion">Die App kann ohne diese Berechtigung(en) nicht genutzt werden.</string>
+    <string name="dialog_no_password">Du hast deinen Benutzernamen und/oder Passwort nicht konfiguriert! Bitte in den WhereYouGo-Einstellungen eintragen. Klicke auf OK, um die WhereYouGo-Einstellungen zu öffnen. Klicke auf Abbrechen, um den Dialog zu schließen und zum vorherigen Bildschirm zurückzukehren.</string>
+    <string name="dialog_wrong_credentials">Der Download der Cartridge ist fehlgeschlagen. Dies kann auf falsche Anmeldedaten oder Verbindungsprobleme zurückzuführen sein. Klicke auf OK, um die WhereYouGo-Einstellungen zu öffnen. Klicke auf Abbrechen, um den Dialog zu schließen und zum vorherigen Bildschirm zurückzukehren.</string>
 </resources>
