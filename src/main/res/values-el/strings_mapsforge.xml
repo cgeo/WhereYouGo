@@ -1,6 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MapsForge BEGIN -->
+    <string-array name="preferences_scale_bar_unit_values">
+        <item>Αγγλοσαξωνικές</item>
+        <item>Μετρικό</item>
+    </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>μικροσκοπικό</item>
+        <item>μικρό</item>
+        <item>κανονικό</item>
+        <item>μεγάλο</item>
+        <item>τεράστιο</item>
+        <item>αυτόματο</item>
+    </string-array>
+    <string-array name="mapgenerator_values">
+        <item>κενό</item>
+        <item>αρχείο χάρτη [*.map] (εκτός σύνδεσης)</item>
+        <item>OSM Mapnik (σσ σύνδεση)</item>
+        <item>OSM.de (σε σύνδεση)</item>
+        <item>CyclOSM (σε σύνδεση)</item>
+        <item>Μέσα Μεταφοράς(\u00d6PNV) (σε σύνδεση)</item>
+        <item>Esri World Street (σε σύνδεση)</item>
+        <item>Esri World Imagery (σε σύνδεση)</item>
+    </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">Η τελευταία τοποθεσία είναι άγνωστη</string>
+    <string name="file_invalid">Το επιλεγμένο αρχείο δεν είναι έγκυρο.</string>
+    <string name="file_select">Επιλέξτε ένα αρχείο.</string>
+    <string name="file_size_byte">byte</string>
+    <string name="file_size_bytes">bytes</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Πηγαίνετε στην θέση</string>
+    <string name="info_map_file_area">Περιοχή</string>
+    <string name="info_map_file_comment">Σχόλιο</string>
+    <string name="info_map_file_created_by">Δημιουργήθηκε από</string>
+    <string name="info_map_file_date">Ημερομηνία</string>
+    <string name="info_map_file_debug">Πληροφορίες εντοπισμού σφαλμάτων</string>
+    <string name="info_map_file_debug_no">Δεν συμπεριλαμβάνεται</string>
+    <string name="info_map_file_debug_yes">συμπεριλαμβάνεται</string>
+    <string name="info_map_file_language_preference">Προτιμήσεις γλώσσας</string>
+    <string name="info_map_file_name">Αρχείο</string>
+    <string name="info_map_file_size">Μέγεθος αρχείου</string>
+    <string name="info_map_file_start_position">Θέση έναρξης</string>
+    <string name="info_map_file_start_zoom_level">Αρχικό επίπεδο εστίασης</string>
+    <string name="info_map_file_version">Έκδοση</string>
+    <string name="menu_info">Πληροφορίες</string>
+    <string name="menu_info_map_file">Ιδιότητες αρχείου χάρτη</string>
+    <string name="menu_info_about">Σχετικά με αυτό το λογισμικό</string>
+    <string name="menu_mapfile">Αρχείο χάρτη</string>
+    <string name="menu_mapgenerator">Πηγή χάρτη</string>
+    <string name="menu_acquire_from_cgeo">Ανακτήστε τον χάρτη από το c:geo</string>
+    <string name="menu_position">Θέση</string>
+    <string name="menu_position_enter_coordinates">Εισαγωγή συντεταγμένων</string>
+    <string name="menu_position_last_known">Τελευταία γνωστή θέση</string>
+    <string name="menu_position_map_file_center">Κέντρο του χάρτη</string>
+    <string name="menu_position_my_location_enable">Εμφάνιση της τοποθεσίας μου</string>
+    <string name="menu_position_my_location_disable">Κατάργηση της θέσης μου</string>
+    <string name="menu_position_snap_to_location">Κλείδωμα στην θέση</string>
+    <string name="menu_position_target">Στόχος</string>
+    <string name="menu_preferences">Προτιμήσεις</string>
+    <string name="menu_refresh">Ανανέωση</string>
+    <string name="menu_render_theme">Render theme</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">Επιλογή αρχείου XML …</string>
+    <string name="menu_screenshot">Στιγμιότυπο οθόνης</string>
+    <string name="menu_screenshot_jpeg">JPEG (lossy)</string>
+    <string name="menu_screenshot_png">PNG (lossless)</string>
+    <string name="no_location_provider_available">Καμία πληροφορία για θέσης</string>
+    <string name="preferences_debug">Ρυθμίσεις Αποσφαλμάτωσης</string>
+    <string name="preferences_general">Γενικές ρυθμίσεις</string>
+    <string name="preferences_tileCache">Ρυθμίσεις μνήμης πλακιδίων χάρτη</string>
+    <string name="preferences_tileCache_persistence">Διατήρηση πλακιδίων μνήμης</string>
+    <string name="preferences_tileCache_persistence_desc">Διατήρηση εικόνων που είναι στην μνήμη κατά την έξοδο</string>
+    <string name="preferences_tileCache_size">Μέγεθος πλακίδιου μνήμης</string>
+    <string name="preferences_tileCache_size_desc">Ρυθμίστε ρο μέγεθος του πλακιδίου μνήμης</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Λειτουργία πλήρους οθόνης</string>
+    <string name="preferences_fullscreen_desc">Απόκρυψη γραμμής κατάστασης</string>
+    <string name="preferences_map">Ρυθμίσεις χάρτη</string>
+    <string name="preferences_move_speed">Ταχύτητα κίνησης</string>
+    <string name="preferences_move_speed_desc">Ρύθμιση της ταχύτητας κίνησης του χάρτη</string>
+    <string name="preferences_move_speed_value">%d%% ταχύτητα κίνησης</string>
+    <string name="preferences_scale_bar_unit">Μονάδα γραφικής κλίμακας</string>
+    <string name="preferences_scale_bar_unit_desc">Επιλέξτε την μονάδα για την γραφική κλίμακα</string>
+    <string name="preferences_show_fps_counter">Ρυθμός καρέ</string>
+    <string name="preferences_show_fps_counter_desc">Ενεργοποίηση μετρητή καρέ ανά δευτερόλεπτο</string>
+    <string name="preferences_show_scale_bar">Γραφική κλίμακα χάρτη</string>
+    <string name="preferences_show_scale_bar_desc">Εμφάνιση της κλίμακας του χάρτη</string>
+    <string name="preferences_show_tile_coordinates">Συντεταγμένες πλακιδίου</string>
+    <string name="preferences_show_tile_coordinates_desc">Εμφάνιση συντεταγμένων στα πλακίδια</string>
+    <string name="preferences_show_tile_frames">Όρια πλακιδίου</string>
+    <string name="preferences_show_tile_frames_desc">Σχεδίαση ορίων πλακιδίου</string>
+    <string name="preferences_show_water_tiles">Πλακίδια υδάτινης επιφάνειας</string>
+    <string name="preferences_show_water_tiles_desc">Επισήμανση πλακιδίων που έχουν τον δείκτη της υδάτινης επιφάνειας</string>
+    <string name="preferences_text_scale">Μέγεθος γραμματοσειράς</string>
+    <string name="preferences_text_scale_desc">Επιλογή μεγέθους κειμένου των ετικετών του χάρτη</string>
+    <string name="preferences_wake_lock">Παραμονή σε λειτουργία</string>
+    <string name="preferences_wake_lock_desc">Αποτροπή σβησίματος οθόνης</string>
+    <string name="snap_to_location_enabled">Το κλείδωμα στη θέση είναι ενεργό</string>
+    <string name="snap_to_location_disabled">Το κλείδωμα στην θέση είναι απενεργοποιημένο</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Επίπεδο εστίασης</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Η εφαρμογή c:geo δεν βρέθηκε</string>
+    <string name="receivemapfile_success">Ορισμός Mapfile</string>
+    <string name="receivemapfile_error">Σφάλμα κατά τον ορισμό του mapfile</string>
+    <string name="receivemapfile_notset">Δεν έχει οριστεί mapfile στο c:geo</string>
 </resources>
