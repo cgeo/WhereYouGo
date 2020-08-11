@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
+    <update name="2020.08.11" id="20200811" time="11.08.2020">
+        <li>Get link to offline maps from c:geo in map menu. Note: Requires Mapsforge V3 map in c:geo as WhereYouGo still only supports this version.</li>                   
+        <li>Various translation updates</li>                   
+        <li>New launcher icon according to Google Play requirements</li>
+        <li>Improve login usability by providing error messages in case of missing or wronfg credentials</li>
+        <li>Make screen rotation optional</li>
+        <li>Use new whereyougo@cgeo.org support mail</li>
+        <li>Adjust map font size for devices with higher DPI</li>
+        <li>New option for automatic text scaling on maps</li>
+        <li>Optimize caching of map tiles and adjust menu entries for it</li>
+        <li>Android 8 fix for getting GPS when running in background</li>
+    </update>
     <update name="2020.04.07" id="20200407" time="07.04.2020">
         <li>Fix crash on starting cartridge on Android 8 devices</li>                   
         <li>Allow the app to run in landscape mode</li>                   
