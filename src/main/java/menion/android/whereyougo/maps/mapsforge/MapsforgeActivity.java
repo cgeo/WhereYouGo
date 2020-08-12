@@ -982,9 +982,16 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             final String newMapfile = bundle.getString(getString(R.string.cgeo_queryMapFile_resultParam), "");
             boolean forceAndFeedback = bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam), false);
             if (!"".equals(newMapfile)) {
+                final File backupMapFile = mapView.getMapFile();
+                final MapGenerator backupMapGenerator = mapView.getMapGenerator();
+                // try to set the map acquired from c:geo
                 FileOpenResult result = mapView.setMapFile(new File(newMapfile));
                 if (result == FileOpenResult.SUCCESS) {
                     setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
+                } else {
+                    // restore the backuped data
+                    mapView.setMapFile(backupMapFile);
+                    mapView.setMapGenerator(backupMapGenerator);
                 }
                 if (forceAndFeedback) {
                     if (result == FileOpenResult.SUCCESS) {
