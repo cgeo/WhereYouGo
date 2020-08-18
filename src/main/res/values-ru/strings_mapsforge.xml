@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MapsForge BEGIN -->
+    <string-array name="preferences_scale_bar_unit_values">
+        <item>Британские</item>
+        <item>Метрические</item>
+    </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>крошечный</item>
+        <item>маленький</item>
+        <item>нормальный</item>
+        <item>крупный</item>
+        <item>огромный</item>
+        <item>автоматический</item>
+    </string-array>
+    <string-array name="mapgenerator_values">
+        <item>пустой</item>
+        <item>map file [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Public Transport(\u00d6PNV) (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
+    <string name="error_last_location_unknown">Последнее местоположение неизвестно</string>
+    <string name="file_select">Выберите файл.</string>
+    <string name="file_size_byte">байт</string>
+    <string name="file_size_bytes">байт</string>
+    <string name="file_size_kb">КБ</string>
+    <string name="file_size_mb">МБ</string>
+    <string name="file_size_gb">ГБ</string>
+    <string name="info_map_file_date">Дата</string>
+    <string name="info_map_file_version">Версия</string>
+    <string name="menu_info">Информация</string>
+    <string name="menu_preferences">Настройки</string>
+    <string name="menu_screenshot_png">PNG (без потерь)</string>
+    <string name="preferences_fullscreen">Полноэкранный режим</string>
+    <string name="preferences_map">Настройки карты</string>
+    <string name="preferences_move_speed">Скорость передвижения</string>
+    <string name="preferences_move_speed_desc">Отрегулировать скорость перемещения карты</string>
+    <string name="preferences_move_speed_value">Скорость перемещения %d %%</string>
+    <string name="preferences_scale_bar_unit">Шкала масштаба</string>
+    <string name="preferences_scale_bar_unit_desc">Выберите единицу измерения масштаба карты</string>
+    <string name="preferences_show_fps_counter">Частота смены кадров</string>
+    <string name="preferences_show_fps_counter_desc">Включить счётчик частоты смены кадров</string>
+    <string name="preferences_show_scale_bar">Шкала масштаба карты</string>
+    <string name="preferences_show_scale_bar_desc">Показать масштаб карты</string>
+    <string name="preferences_text_scale">Размер шрифта</string>
+    <string name="preferences_wake_lock">Не выключать экран</string>
+    <string name="unit_symbol_kilometer">&#160;км</string>
+    <string name="unit_symbol_meter">&#160;м</string>
+    <string name="zoomLevel">Степень масштабирования</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Приложение c:geo не найдено</string>
+    <string name="receivemapfile_success">Файл карты установлен</string>
+    <string name="receivemapfile_error">Ошибка установки файла карты</string>
+    <string name="receivemapfile_notset">В c:geo не установлен файл карты</string>
 </resources>
