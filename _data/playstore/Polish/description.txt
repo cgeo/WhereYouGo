@@ -1,4 +1,4 @@
-WhereYouGo jest nieoficjalnym klientem dla Wherigo Geoaching.
+WhereYouGo is an unofficial client for Wherigo Geocaching.
 
 Wspiera odtwarzanie kartridży Wherigo, które umożliwiają interaktywną grę geocachingową bazującą na lokalizacji. Możesz wczytywać, grać i zapisywać swój aktualny stan gry Wherigo. Kompas oraz mapy online lub offline mogą być używane do nawigacji, alternatywnie aplikacja Locus również może być użyta do wyświetlania map.
 Kartridże do użycia w WhereYouGo mogą zostać pobrane ze strony https://www.wherigo.com oraz z innych serwisów.
