@@ -99,7 +99,6 @@
     <string name="pref_units_angle_russian_mil">Mil (Rússia)</string>
     <string name="pref_units_angle_us_artillery_mil">Mil (Artilharia EUA)</string>
     <string name="pref_units_coo_latlon">Formato Lat/Lon</string>
-    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Formato de coordenadas (latitude/longitude) para exibição</string>
     <string name="pref_units_coo_latlon_min">14 ° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>

@@ -120,4 +120,6 @@
     <string name="location_permission_request_explanation">WhereYouGo behöver tillgång till GPS på enheten för att lokalisera din position och beräkna avstånd och riktning till patronens platser.</string>
     <string name="storage_permission_request_explanation">WhereYouGo kommer att skriva data på din telefons lagring eller SD-kort så snart du sparar patronen.</string>
     <string name="permission_conclusion">Appen kan inte användas utan denna behörighet.</string>
+    <string name="dialog_no_password">Du har inte konfigurerat ditt användarnamn och/eller lösenord! Gör det i WhereYouGo-inställningarna. Klicka på OK för att öppna WhereYouGo-inställningarna nu. Klicka på Avbryt för att stänga den här dialogrutan och återgå till föregående skärm.</string>
+    <string name="dialog_wrong_credentials">Nedladdningen av patronen misslyckades. Detta kan bero på fel uppgifter eller på anslutningsproblem. Klicka på OK för att öppna WhereYouGo-inställningarna nu. Klicka på Avbryt för att stänga den här dialogrutan och återgå till föregående skärm.</string>
 </resources>

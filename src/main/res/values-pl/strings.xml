@@ -43,7 +43,7 @@
     <string name="gps_enabled">GPS włączony</string>
     <string name="gps_fix">Ostatni fix GPS</string>
     <string name="gps_not_enabled_show_system_settings">GPS nie jest włączony. Czy chcesz wyświetlić ustawienia systemu?</string>
-    <string name="gps_off">Location</string>
+    <string name="gps_off">Lokalizacja wyłączona</string>
     <string name="gps_on">Location</string>
     <string name="info">Informacja</string>
     <string name="invalid_cartridge">Niepoprawny kartridż\n\n %s</string>
@@ -122,4 +122,6 @@
     <string name="location_permission_request_explanation">WhereYouGo potrzebuje dostępu do GPS\'u w twoim urządzeniu, aby zlokalizować swoją pozycję oraz obliczyć odległość i kierunek do położenia kartridża.</string>
     <string name="storage_permission_request_explanation">WhereYouGo zapisze dane w pamięci telefonu lub na karcie SD jak tylko zapiszesz kartridż.</string>
     <string name="permission_conclusion">Aplikacja nie może być użyta bez tych uprawnień.</string>
+    <string name="dialog_no_password">Nie skonfigurowałeś swojej nazwy użytkownika i/lub hasła! Proszę zrobić to w ustawieniach WhereYouGo. Kliknij OK, aby otworzyć teraz ustawienia WhereYouGo. Kliknij Anuluj, aby zamknąć to okno i powrócić do poprzedniego ekranu.</string>
+    <string name="dialog_wrong_credentials">Pobieranie kartridża nie powiodło się. Może to być spowodowane błędnymi danymi uwierzytelniającymi lub problemami z połączeniem. Kliknij OK, aby otworzyć teraz ustawienia WhereYouGo. Kliknij Anuluj, aby zamknąć to okno i powrócić do poprzedniego ekranu.</string>
 </resources>

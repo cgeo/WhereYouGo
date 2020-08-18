@@ -1,6 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MapsForge BEGIN -->
+    <string-array name="preferences_scale_bar_unit_values">
+        <item>Imperial</item>
+        <item>Métrico</item>
+    </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>diminuto</item>
+        <item>pequeño</item>
+        <item>normal</item>
+        <item>grande</item>
+        <item>enorme</item>
+        <item>automatic</item>
+    </string-array>
+    <string-array name="mapgenerator_values">
+        <item>en blanco</item>
+        <item>mapa en archivo [*.map] (sin conexión)</item>
+        <item>OSM Mapnik (con conexión)</item>
+        <item>OSM.de (con conexión)</item>
+        <item>CyclOSM (con conexión)</item>
+        <item>Transporte público(\u00d6PNV) (con conexión)</item>
+        <item>Esri World Street (con conexión)</item>
+        <item>Esri World Imagery (con conexión)</item>
+    </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">La última ubicación es desconocida</string>
+    <string name="file_invalid">El archivo seleccionado no es válido.</string>
+    <string name="file_select">Seleccione un archivo.</string>
+    <string name="file_size_byte">byte</string>
+    <string name="file_size_bytes">bytes</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Ir a la posición</string>
+    <string name="info_map_file_area">Área</string>
+    <string name="info_map_file_comment">Comentario</string>
+    <string name="info_map_file_created_by">Creado por</string>
+    <string name="info_map_file_date">Fecha</string>
+    <string name="info_map_file_debug">Información de depuración</string>
+    <string name="info_map_file_debug_no">no incluido</string>
+    <string name="info_map_file_debug_yes">incluido</string>
+    <string name="info_map_file_language_preference">Idioma preferido</string>
+    <string name="info_map_file_name">Archivo</string>
+    <string name="info_map_file_size">Tamaño del archivo</string>
+    <string name="info_map_file_start_position">Posición inicial</string>
+    <string name="info_map_file_start_zoom_level">Nivel de zoom inicial</string>
+    <string name="info_map_file_version">Versión</string>
+    <string name="menu_info">Información</string>
+    <string name="menu_info_map_file">Propiedades del archivo del mapa</string>
+    <string name="menu_info_about">Acerca de este software</string>
+    <string name="menu_mapfile">Archivo del mapa</string>
+    <string name="menu_mapgenerator">Proveedor del mapa</string>
+    <string name="menu_acquire_from_cgeo">Adquirir mapa de c:geo</string>
+    <string name="menu_position">Posición</string>
+    <string name="menu_position_enter_coordinates">Introducir coordenadas</string>
+    <string name="menu_position_last_known">Última ubicación conocida</string>
+    <string name="menu_position_my_location_enable">Mostrar mi ubicación</string>
+    <string name="menu_position_my_location_disable">Eliminar mi ubicación</string>
+    <string name="menu_position_snap_to_location">Adherir a la posición</string>
+    <string name="menu_position_target">Destino</string>
+    <string name="menu_preferences">Preferencias</string>
+    <string name="menu_refresh">Actualizar</string>
+    <string name="menu_render_theme">Procesar tema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">Seleccionar archivo XML …</string>
+    <string name="menu_screenshot">Captura de pantalla</string>
+    <string name="menu_screenshot_jpeg">JPEG</string>
+    <string name="menu_screenshot_png">PNG (sin pérdida)</string>
+    <string name="preferences_debug">Ajustes de depuración</string>
+    <string name="preferences_general">Ajustes generales</string>
+    <string name="preferences_tileCache_persistence_desc">Guardar imágenes en caché al salir</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Modo pantalla completa</string>
+    <string name="preferences_fullscreen_desc">Ocultar la barra de estado</string>
+    <string name="preferences_map">Ajustes del mapa</string>
+    <string name="preferences_move_speed">Velocidad de movimiento</string>
+    <string name="preferences_move_speed_desc">Ajusta la velocidad de movimiento del mapa</string>
+    <string name="preferences_move_speed_value">%d %% velocidad de movimiento</string>
+    <string name="preferences_scale_bar_unit">Unidad de la barra de escala</string>
+    <string name="preferences_scale_bar_unit_desc">Selecciona la unidad para la barra de escala del mapa</string>
+    <string name="preferences_show_fps_counter">Frecuencia de imagen</string>
+    <string name="preferences_show_fps_counter_desc">Habilita contador de frecuencia por segundo</string>
+    <string name="preferences_show_scale_bar">Barra de escala de mapa</string>
+    <string name="preferences_show_scale_bar_desc">Muestra la escala del mapa</string>
+    <string name="preferences_text_scale">Tamaño de letra</string>
+    <string name="preferences_text_scale_desc">Selecciona el tamaño del texto de las etiquetas del mapa</string>
+    <string name="preferences_wake_lock">Pantalla activa</string>
+    <string name="preferences_wake_lock_desc">Previene la atenuación de la pantalla</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Nivel de zoom</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">Aplicación c:geo no encontrada</string>
+    <string name="receivemapfile_success">Mapa configurado</string>
+    <string name="receivemapfile_error">Error al configurar el mapa</string>
+    <string name="receivemapfile_notset">Mapa en c:geo no encontrado</string>
 </resources>
