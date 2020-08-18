@@ -1,4 +1,4 @@
-WhereYouGo, Wherigo Geoaching için resmi olmayan bir istemcisidir.
+WhereYouGo is an unofficial client for Wherigo Geocaching.
 
 Etkileşimli konum tabanlı bir Geocaching oyunu olan Wherigo kartuşlarının kullanılmasına yarar. Wherigo oyununuzun son halini kaydedebilir, yükleyebilir veya oynayabilirsiniz. Pusula ve çevrimiçi/çevrimdışı haritalar Locus'a alternatif olarak yönlendirme ve izleme için kullanılabilirler.
 WhereYouGo kartuşları https://www.wherigo.com ve diğer servisler üzerinden indirilebilirler.
