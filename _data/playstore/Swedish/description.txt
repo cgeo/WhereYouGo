@@ -1,4 +1,4 @@
-WhereYouGo är en inofficiell klient för Wherigo Geoaching.
+WhereYouGo is an unofficial client for Wherigo Geocaching.
 
 Den stöder spelande av Wherigo patroner, som är en interaktiv platsbaserad geocaching spel. Du kan ladda, spela och spara det aktuella tillståndet av ditt Wherigo-spel. Kompass och online eller offline kartor kan användas för att navigera, alternativt kan Locus användas för att visa kartor.
 Patroner för användning med WhereYouGo kan laddas ner från https://www.wherigo.com och andra tjänster.
