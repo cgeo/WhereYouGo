@@ -988,7 +988,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 FileOpenResult result = mapView.setMapFile(new File(newMapfile));
                 if (result == FileOpenResult.SUCCESS) {
                     setMapGenerator(MapGeneratorInternal.DATABASE_RENDERER);
-                } else {
+                } else if (null != backupMapFile && null != backupMapGenerator) {
                     // restore the backuped data
                     mapView.setMapFile(backupMapFile);
                     mapView.setMapGenerator(backupMapGenerator);
