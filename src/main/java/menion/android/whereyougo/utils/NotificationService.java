@@ -14,7 +14,7 @@ public class NotificationService extends Service {
     private static final int notification_id = 10;
     private static final String NOTIFICATION_CHANNEL_ID = "menion.android.whereyougo.utils.NotificationService";
     private boolean foreground = false;
-    private boolean runing = false;
+    private boolean running = false;
     private NotificationManager mNM;
     private String contentTitel;
 
@@ -84,21 +84,25 @@ public class NotificationService extends Service {
 
         Notification notification = builder.build();
 
-        if (runing && background == foreground) {
+        if (running && background == foreground) {
            if (foreground) {
               stopForeground(true);
            } else {
               mNM.cancel(notification_id);
            }
+           running = false;
         }
-        if (!background) {
-            startForeground(notification_id, notification);
-            foreground = true;
-        } else {
-            mNM.notify(notification_id, notification);
-            foreground = false;
+
+        if (!running) {
+            if (!background) {
+                startForeground(notification_id, notification);
+                foreground = true;
+            } else {
+                mNM.notify(notification_id, notification);
+                foreground = false;
+            }
+            running = true;
         }
-        runing = true;
     }
 
     private void stopNotificationService() {
@@ -110,7 +114,7 @@ public class NotificationService extends Service {
             mNM.cancel(notification_id);
         }
 
-        runing = false;
+        running = false;
         stopSelf();
     }
 }
