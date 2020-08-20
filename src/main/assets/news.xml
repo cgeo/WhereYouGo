@@ -4,7 +4,7 @@
         <li>Get link to offline maps from c:geo in map menu. Note: Requires Mapsforge V3 map in c:geo as WhereYouGo still only supports this version.</li>                   
         <li>Various translation updates</li>                   
         <li>New launcher icon according to Google Play requirements</li>
-        <li>Improve login usability by providing error messages in case of missing or wronfg credentials</li>
+        <li>Improve login usability by providing error messages in case of missing or wrong credentials</li>
         <li>Make screen rotation optional</li>
         <li>Use new whereyougo@cgeo.org support mail</li>
         <li>Adjust map font size for devices with higher DPI</li>
