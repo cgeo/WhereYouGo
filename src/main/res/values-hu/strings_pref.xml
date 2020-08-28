@@ -58,6 +58,8 @@
     <string name="pref_units_angle_desc">Szög egység megjelenítése</string>
     <string name="pref_units_coo_latlon">Hossz./Szél. formátum</string>
     <string name="pref_units_coo_latlon_desc">Koordináták megjelenítése (szélesség/hosszúság) formátumban</string>
+    <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Hossz-egységek</string>
     <string name="pref_units_length_desc">Alapértelmezett megjelenési egységek kiválasztása</string>
     <string name="pref_units_speed">Sebesség egységek</string>
