@@ -125,7 +125,4 @@
     <string name="dialog_no_password">You have not configured your user name and/or password! Please do so in the WhereYouGo Settings. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
     <string name="dialog_wrong_credentials">The download of the cartridge has failed. This may be due to wrong credentials or due to connection problems. Click OK to open the WhereYouGo settings now. Click Cancel to close this dialog and return to the previous screen.</string>
 
-    <!-- only a test -->
-    <string name="this_is_a_test_string">Test string</string>
-
 </resources>
