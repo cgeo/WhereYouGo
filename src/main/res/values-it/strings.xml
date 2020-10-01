@@ -124,5 +124,4 @@
     <string name="permission_conclusion">L\'app non può essere utilizzata senza questo permesso.</string>
     <string name="dialog_no_password">Non hai configurato il tuo nome utente e/o password! Per favore fai questo nelle impostazioni di WhereYouGo. Fare clic su OK per aprire le impostazioni WhereYouGo ora. Fare clic su Annulla per chiudere questa finestra di dialogo e tornare alla schermata precedente.</string>
     <string name="dialog_wrong_credentials">Il download della cartuccia non è riuscito. Questo potrebbe essere dovuto a credenziali errate o a problemi di connessione. Fare clic su OK per aprire le impostazioni WhereYouGo ora. Fare clic su Annulla per chiudere questa finestra di dialogo e tornare alla schermata precedente.</string>
-    <!-- only a test -->
 </resources>
