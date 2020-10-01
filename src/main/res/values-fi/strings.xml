@@ -124,4 +124,5 @@
     <string name="permission_conclusion">Sovellusta ei voida käyttää ilman seuraavaa/seuraavia lupia.</string>
     <string name="dialog_no_password">Et ole asettanut käyttäjänimeä ja/tai salasanaa! Ole hyvä ja aseta ne WhereYouGo:n asetuksissa. Klikkaa OK avataksesi WhereYouGo:n asetukset nyt. Klikkaa Peruuta sulkeaksesi tämän viestin ja palataksesi edelliseen näyttöön.</string>
     <string name="dialog_wrong_credentials">Kasetin lataus epäonnistui. Tämä voi johtua vääristä kirjautumistiedoista tai yhteysongelmista. Klikkaa OK avataksesi WhereYouGo:n asetukset nyt. Klikkaa Peruuta palataksesi edelliseen näkymään.</string>
+    <!-- only a test -->
 </resources>

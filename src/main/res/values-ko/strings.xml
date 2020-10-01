@@ -122,4 +122,7 @@
     <string name="location_permission_request_explanation">WhereYouGo는 위치를 찾고 카트리지 위치까지의 거리와 방향을 계산하기 위해 장치의 GPS에 액세스해야 합니다.</string>
     <string name="storage_permission_request_explanation">WhereYouGo는 카트리지를 저장하자마자 전화 저장 장치 나 SD 카드에 데이터를 기록합니다.</string>
     <string name="permission_conclusion">이 권한이 없으면 앱을 사용할 수 없습니다.</string>
+    <string name="dialog_no_password">사용자 이름 및 / 또는 암호를 구성하지 않았습니다! WhereYouGo 설정에서 그렇게하십시오. 확인을 클릭하여 지금 WhereYouGo 설정을 엽니다. 이 대화 상자를 닫고 이전 화면으로 돌아가려면 취소를 클릭하십시오.</string>
+    <string name="dialog_wrong_credentials">카트리지 다운로드에 실패했습니다. 이는 잘못된 자격 증명이나 연결 문제 때문일 수 있습니다. 확인을 클릭하여 지금 WhereYouGo 설정을 엽니 다. 이 대화 상자를 닫고 이전 화면으로 돌아가려면 취소를 클릭하십시오.</string>
+    <!-- only a test -->
 </resources>

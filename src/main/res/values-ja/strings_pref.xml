@@ -95,6 +95,8 @@
     <string name="pref_units_angle_us_artillery_mil">米国測量ミル</string>
     <string name="pref_units_coo_latlon">緯度/経度の形式</string>
     <string name="pref_units_coo_latlon_desc">座標（緯度/経度）の表示形式</string>
+    <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">距離の単位</string>
     <string name="pref_units_length_desc">デフォルトの距離単位を選択する</string>
     <string name="pref_units_length_im_f">ヤード/ポンド法 (ft)</string>

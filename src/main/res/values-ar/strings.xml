@@ -60,4 +60,5 @@
     <string name="you_have_to_restart_app_force">يجب عليك إعادة تشغيل التطبيق!</string>
     <string name="you_have_to_restart_app_recommended">من الأفضل أن تقوم بإعادة تشغيل التطبيق!</string>
     <!-- permission handling -->
+    <!-- only a test -->
 </resources>

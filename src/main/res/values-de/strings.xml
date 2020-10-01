@@ -124,4 +124,6 @@
     <string name="permission_conclusion">Die App kann ohne diese Berechtigung(en) nicht genutzt werden.</string>
     <string name="dialog_no_password">Du hast deinen Benutzernamen und/oder Passwort nicht konfiguriert! Bitte in den WhereYouGo-Einstellungen eintragen. Klicke auf OK, um die WhereYouGo-Einstellungen zu öffnen. Klicke auf Abbrechen, um den Dialog zu schließen und zum vorherigen Bildschirm zurückzukehren.</string>
     <string name="dialog_wrong_credentials">Der Download der Cartridge ist fehlgeschlagen. Dies kann auf falsche Anmeldedaten oder Verbindungsprobleme zurückzuführen sein. Klicke auf OK, um die WhereYouGo-Einstellungen zu öffnen. Klicke auf Abbrechen, um den Dialog zu schließen und zum vorherigen Bildschirm zurückzukehren.</string>
+    <!-- only a test -->
+    <string name="this_is_a_test_string">nur ein Testtext</string>
 </resources>
