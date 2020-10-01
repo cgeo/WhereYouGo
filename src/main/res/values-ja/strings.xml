@@ -113,5 +113,4 @@
     <string name="zone_state_near">近く</string>
     <string name="zone_state_unknown">不明</string>
     <!-- permission handling -->
-    <!-- only a test -->
 </resources>
