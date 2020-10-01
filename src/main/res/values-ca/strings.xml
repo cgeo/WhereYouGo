@@ -118,4 +118,5 @@
     <string name="goto_app_details">Obre la informació de l\'aplicació</string>
     <string name="location_permission_request_explanation">WhereYouGo necessita accés al GPS del dispositiu per localitzar la vostra posició oer calcular la distància i la direcció a les ubicacions del cartutx.</string>
     <string name="permission_conclusion">L\'aplicació no es pot utilitzar sense aquest permís.</string>
+    <!-- only a test -->
 </resources>

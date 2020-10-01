@@ -117,4 +117,5 @@
     <string name="location_permission_request_explanation">WhereYouGo necessita de aceder ao GPS do seu equipamento para localizar a sua posição e calcular a distância e direcção para as localizações do Cartucho.</string>
     <string name="storage_permission_request_explanation">WhereYouGo vai guardar os dados na memória do seu telefone ou no cartão SD, assim que gravar o Cartucho.</string>
     <string name="permission_conclusion">A aplicação não pode ser usada sem a(s) permissão(ões).</string>
+    <!-- only a test -->
 </resources>
