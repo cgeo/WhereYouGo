@@ -69,5 +69,4 @@
     <string name="you_have_to_restart_app_force">Szükséges az alkalmazás újraindítása!</string>
     <string name="you_have_to_restart_app_recommended">Javasolt az alkalmazás újraindítása!</string>
     <!-- permission handling -->
-    <!-- only a test -->
 </resources>
