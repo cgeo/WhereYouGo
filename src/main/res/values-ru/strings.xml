@@ -116,5 +116,4 @@
     <string name="location_permission_request_explanation">WhereYouGo нужен доступ к GPS на вашем устройстве, чтобы найти ваше местоположение, рассчитать расстояние и направление до мест картриджа.</string>
     <string name="storage_permission_request_explanation">WhereYouGo запишет данные на ваше устройство или SD-карту, как только вы сохраните картридж.</string>
     <string name="permission_conclusion">Приложение не может быть использовано без этого(их) разрешения(ий).</string>
-    <!-- only a test -->
 </resources>

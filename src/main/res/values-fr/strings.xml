@@ -124,5 +124,4 @@
     <string name="permission_conclusion">L\'application ne peut pas être utilisée sans cette/ces autorisation(s).</string>
     <string name="dialog_no_password">Vous n\'avez pas configuré votre nom d\'utilisateur et/ou votre mot de passe ! Veuillez le faire dans les paramètres de WhereYouGo. Cliquez sur OK pour ouvrir les paramètres de WhereYouGo maintenant. Cliquez sur Annuler pour fermer cette boîte de dialogue et revenir à l\'écran précédent.</string>
     <string name="dialog_wrong_credentials">Le téléchargement de la cartouche a échoué. Cela peut être dû à de mauvais identifiants ou à des problèmes de connexion. Cliquez sur OK pour ouvrir les paramètres de WhereYouGo maintenant. Cliquez sur Annuler pour fermer cette boîte de dialogue et revenir à l\'écran précédent.</string>
-    <!-- only a test -->
 </resources>
