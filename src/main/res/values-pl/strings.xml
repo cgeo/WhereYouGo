@@ -124,5 +124,4 @@
     <string name="permission_conclusion">Aplikacja nie może być użyta bez tych uprawnień.</string>
     <string name="dialog_no_password">Nie skonfigurowałeś swojej nazwy użytkownika i/lub hasła! Proszę zrobić to w ustawieniach WhereYouGo. Kliknij OK, aby otworzyć teraz ustawienia WhereYouGo. Kliknij Anuluj, aby zamknąć to okno i powrócić do poprzedniego ekranu.</string>
     <string name="dialog_wrong_credentials">Pobieranie kartridża nie powiodło się. Może to być spowodowane błędnymi danymi uwierzytelniającymi lub problemami z połączeniem. Kliknij OK, aby otworzyć teraz ustawienia WhereYouGo. Kliknij Anuluj, aby zamknąć to okno i powrócić do poprzedniego ekranu.</string>
-    <!-- only a test -->
 </resources>

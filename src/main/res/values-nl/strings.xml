@@ -124,5 +124,4 @@
     <string name="permission_conclusion">De app kan niet worden gebruikt zonder deze toestemming(en).</string>
     <string name="dialog_no_password">Je hebt je gebruikersnaam en/of wachtwoord niet geconfigureerd! Gelieve dit te doen in de WhereYouGo Instellingen. Klik op OK om de WhereYouGo instellingen nu te openen. Klik op Annuleren om dit venster te sluiten en terug te gaan naar het vorige scherm.</string>
     <string name="dialog_wrong_credentials">Het downloaden van de cartridge is mislukt. Dit kan worden veroorzaakt door verkeerde inloggegevens of door problemen met de verbinding. Klik op OK om de WhereYouGo instellingen nu te openen. Klik op Annuleren om dit venster te sluiten en terug te gaan naar het vorige scherm.</string>
-    <!-- only a test -->
 </resources>

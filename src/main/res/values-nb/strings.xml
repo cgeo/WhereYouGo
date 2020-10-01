@@ -116,5 +116,4 @@
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør meg igjen</string>
-    <!-- only a test -->
 </resources>
