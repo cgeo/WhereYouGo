@@ -122,5 +122,4 @@
     <string name="location_permission_request_explanation">WhereYouGo konumunuzu belirlemek, kartuş konumlarına mesafe ve yön tayin etmek için aygıtınızdaki GPS\'e ulaşım sağlamalıdır.</string>
     <string name="storage_permission_request_explanation">Kartuşu kaydettiğinizde WhereYouGo telefonunuzun belleğine veya SD kartınıza veri kaydedecektir.</string>
     <string name="permission_conclusion">Bu izinler verilmeden uygulama kullanılamaz.</string>
-    <!-- only a test -->
 </resources>
