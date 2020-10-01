@@ -124,4 +124,5 @@
     <string name="permission_conclusion">A aplicação não pode ser usada sem a(s) permissão(ões).</string>
     <string name="dialog_no_password">Não configurou o seu nome de utilizador e/ou senha! Por favor, faça isso nas configurações do WhereYouGo. Clique em OK para abrir agora as configurações do WhereYouGo. Clique em Cancelar para fechar esta caixa de diálogo e voltar ao ecrã anterior.</string>
     <string name="dialog_wrong_credentials">A transferência do cartucho falhou. Isto pode ser devido a credenciais erradas ou a problemas de conexão. Clique em OK para abrir agora as configurações do WhereYouGo. Clique em Cancelar para fechar esta caixa de diálogo e voltar ao ecrã anterior.</string>
+    <!-- only a test -->
 </resources>
