@@ -9,7 +9,7 @@ Ana özellikler:
 - Haritada oyun bölgelerini ve konumları görüntüler
 - Değişik kaynaklardan çevrimiçi haritaları kullanır
 - Çevrimdışı harita dosyalarını destekler (Şimdilik sadece Mapsforge v0.3 formatı)  
-- Seamless interworking with Locus to display maps (alternatively to internal maps)
+- Haritaları görüntülemek için Locus ile hatasız çalışır (dahili haritalara alternatif olarak)
 - Kartuş başına birçok oyun kayıt yuvası bulundurur
 - Başka bir uygulamaya geçildiğinde otomatik oyun kaydedilebilir
 -Dahili Kare Kod okuyucu bulundurur
@@ -19,7 +19,7 @@ WhereYouGo açık kaynaklı ve GNU General Public License v3.0 üzerinden lisans
 
 Birkaç yıldır kaynak kodlarının güncellenmemesi üzerine, uygulama sahibinin onayıyla, yeni bir geliştirme ekibi (c:geo ekibi) uygulamanın geliştirilmesi için kodlar üzerinde çalışmaya başladı.
 Eğer bize yardım etmek isterseniz, aşağıdaki bağlantıdan gerekli bilgiye ve kaynak koduna ulaşabilirsiniz. Yardımınıza ihtiyacımız var: https://github.com/cgeo/WhereYouGo
-The core of the application is based on OpenWIG, it uses the Mapsforge library to display maps, alternatively Locus can be used.
+Uygulama easen haritaları görüntülemek için Mapsforge kitaplıklaını kullanan OpenWIG ile kurulmuştur, alternatif olarak Locus da kullanılabilir.
 
 Not:
 - wherigo.com üzerinden kartuşları doğrudan cihazınıza indirirken "Pocket PC Device" versiyonunu seçtiğinizden emin olun. 
