@@ -9,5 +9,5 @@ files:
     translate_attributes: 0
     content_segmentation: 0
   - source: /_data/playstore/source/*.txt
-    translation: /_data/playstore/%language%/%original_file_name%    
+    translation: /_data/playstore/translated/%language%/%original_file_name%    
     content_segmentation: 1
