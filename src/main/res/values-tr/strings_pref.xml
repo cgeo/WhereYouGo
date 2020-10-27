@@ -39,6 +39,7 @@
     <string name="pref_guiding_compass_sounds_desc">Yönlendirme sırasında sesleri aç/kapa</string>
     <string name="pref_guiding_gps_required_desc">Yönlendirme sırasında uygulama arka plandayken GPS\'i açık tut</string>
     <string name="pref_guiding_sound_distance">Gidim sesi</string>
+    <string name="pref_guiding_sound_distance_waypoint_desc">Sesler için mesafe (metre). Her bir ses için değer girin</string>
     <string name="pref_guiding_sound_type">Ses bildirimi türü</string>
     <string name="pref_guiding_sound_type_waypoint_desc">Buradan nokta bildirim seslerinin nasıl çalıştığını değiştirebilirsiniz</string>
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Gidim sesi</string>
@@ -80,6 +81,7 @@
     <string name="pref_sensors_compass_hardware">Dahili pusulayı kullan</string>
     <string name="pref_sensors_compass_hardware_desc">Harita yönlendirmesi ve pusula ekranı için dahili pusulayı kullanın. Eğer devredışı ise GPS sapma açısı (araç için daha iyidir) kullanılacaktır.</string>
     <string name="pref_sensors_orient_filter">Yönlendirme filtresi</string>
+    <string name="pref_sensors_orient_filter_desc">Filtre uygulandı. Güçlü filtreler yavaş reaksiyon verilmesine fakat akıcı hareketi sağlar</string>
     <string name="pref_sensors_orient_filter_heavy">Ağır filtre</string>
     <string name="pref_sensors_orient_filter_ligth">Hafif filtre</string>
     <string name="pref_sensors_orient_filter_medium">Orta filtre</string>

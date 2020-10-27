@@ -122,4 +122,6 @@
     <string name="location_permission_request_explanation">WhereYouGo konumunuzu belirlemek, kartuş konumlarına mesafe ve yön tayin etmek için aygıtınızdaki GPS\'e ulaşım sağlamalıdır.</string>
     <string name="storage_permission_request_explanation">Kartuşu kaydettiğinizde WhereYouGo telefonunuzun belleğine veya SD kartınıza veri kaydedecektir.</string>
     <string name="permission_conclusion">Bu izinler verilmeden uygulama kullanılamaz.</string>
+    <string name="dialog_no_password">Kullanıcı adınızı ve/veya şifrenizi belirlemediniz! Lütfen WhereYouGo Ayarlardan belirleyiniz. Ayarları açmak için Tamam\'a tıklayınız. Bu ekranı kapatıp önceki ekrana dönmel için İptal\'e tıklayınız.</string>
+    <string name="dialog_wrong_credentials">Kartuş indirilemedi. Buna giriş bilgilerinizin hatalı olması veya bağlantı problemleri sebep olmuş olabilir. WhereYouGo ayarlarını açmak için Tamam\'a tıklayınız. Bu ekranı kapatıp önceki ekrana dönmek için İptal\'e tıklayınız.</string>
 </resources>
