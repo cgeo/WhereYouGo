@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- As per: https://stackoverflow.com/a/52960668/4730773 -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <bool name="config_materialPreferenceIconSpaceReserved" tools:ignore="MissingDefaultResource,PrivateResource">false</bool>
+</resources>

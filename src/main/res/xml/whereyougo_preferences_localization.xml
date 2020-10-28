@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:whereyougo="http://whereyougo">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/ic_action_web_site"
     android:key=""
     android:persistent="false"
@@ -17,7 +17,8 @@
             android:entryValues="@array/pref_language_entry_values"
             android:key="@string/pref_KEY_S_LANGUAGE"
             android:summary="@string/pref_language_desc"
-            android:title="@string/pref_language" />
+            android:title="@string/pref_language"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -31,7 +32,8 @@
             android:entryValues="@array/pref_units_coo_latlon_entry_values"
             android:key="@string/pref_KEY_S_UNITS_COO_LATLON"
             android:summary="@string/pref_units_coo_latlon_desc"
-            android:title="@string/pref_units_coo_latlon" />
+            android:title="@string/pref_units_coo_latlon"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -45,27 +47,31 @@
             android:entryValues="@array/pref_units_length_entry_values"
             android:key="@string/pref_KEY_S_UNITS_LENGTH"
             android:summary="@string/pref_units_length_desc"
-            android:title="@string/pref_units_length" />
+            android:title="@string/pref_units_length"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_DEFAULT_UNITS_ALTITUDE"
             android:entries="@array/pref_units_altitude_entries"
             android:entryValues="@array/pref_units_altitude_entry_values"
             android:key="@string/pref_KEY_S_UNITS_ALTITUDE"
             android:summary="@string/pref_units_altitude_desc"
-            android:title="@string/pref_units_altitude" />
+            android:title="@string/pref_units_altitude"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_DEFAULT_UNITS_SPEED"
             android:entries="@array/pref_units_speed_entries"
             android:entryValues="@array/pref_units_speed_entry_values"
             android:key="@string/pref_KEY_S_UNITS_SPEED"
             android:summary="@string/pref_units_speed_desc"
-            android:title="@string/pref_units_speed" />
+            android:title="@string/pref_units_speed"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_DEFAULT_UNITS_ANGLE"
             android:entries="@array/pref_units_angle_entries"
             android:entryValues="@array/pref_units_angle_entry_values"
             android:key="@string/pref_KEY_S_UNITS_ANGLE"
             android:summary="@string/pref_units_angle_desc"
-            android:title="@string/pref_units_angle" />
+            android:title="@string/pref_units_angle"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
