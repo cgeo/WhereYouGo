@@ -26,13 +26,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
         minSdkVersion 16
         //noinspection OldTargetApi
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
