@@ -72,23 +72,19 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
         // and final bottom buttons
         buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
         buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
-        buttonGps.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        buttonGps.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (!isChecked) {
+                LocationState.setGpsOff(SatelliteActivity.this);
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked) {
-                    LocationState.setGpsOff(SatelliteActivity.this);
-
-                    // disable satellites on screen
-                    satellites.clear();
-                    satelliteView.invalidate();
-                } else {
-                    LocationState.setGpsOn(SatelliteActivity.this);
-                }
-
-                onGpsStatusChanged(0, null);
-                PreferenceValues.enableWakeLock();
+                // disable satellites on screen
+                satellites.clear();
+                satelliteView.invalidate();
+            } else {
+                LocationState.setGpsOn(SatelliteActivity.this);
             }
+
+            onGpsStatusChanged(0, null);
+            PreferenceValues.enableWakeLock();
         });
 
         ToggleButton buttonCompass = (ToggleButton) findViewById(R.id.btn_compass_on_off);

@@ -145,22 +145,6 @@ public class MainApplication extends Application {
         mScreenReceiver = new ScreenReceiver();
         registerReceiver(mScreenReceiver, filter);
 
-        // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", getFilesDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalFilesDir(null).getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", Environment.getDataDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getDownloadCacheDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getExternalStorageDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // initialize root directory
-
         setRoot(Preferences.GLOBAL_ROOT);
 
         try {
@@ -322,12 +306,9 @@ public class MainApplication extends Application {
                 final Activity activity = PreferenceValues.getCurrentActivity();
                 if (activity != null) {
                     if (MainActivity.wui != null) {
-                        MainActivity.wui.setOnSavingFinished(new Runnable() {
-                            @Override
-                            public void run() {
-                                ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
-                                MainActivity.wui.setOnSavingFinished(null);
-                            }
+                        MainActivity.wui.setOnSavingFinished(() -> {
+                            ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
+                            MainActivity.wui.setOnSavingFinished(null);
                         });
                     }
                     new SaveGame(activity).execute();

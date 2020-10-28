@@ -57,7 +57,7 @@ class TLSSocketFactory extends SSLSocketFactory {
     }
 
     private Socket enableTLSOnSocket(Socket socket) {
-        if (socket != null && (socket instanceof SSLSocket)) {
+        if (socket instanceof SSLSocket) {
             SSLSocket sslSocket = (SSLSocket) socket;
             sslSocket.setEnabledProtocols(sslSocket.getSupportedProtocols());
         }

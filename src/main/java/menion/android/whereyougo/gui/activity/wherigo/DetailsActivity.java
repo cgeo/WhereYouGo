@@ -18,7 +18,6 @@
 package menion.android.whereyougo.gui.activity.wherigo;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -139,25 +138,21 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
 
     @Override
     public void refresh() {
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                if (!stillValid()) {
-                    Logger.d(TAG, "refresh(), not valid anymore");
-                    DetailsActivity.this.finish();
-                    return;
-                }
-
-                tvName.setText(et.name);
-                tvDescription.setText(UtilsGUI.simpleHtml(et.description));
-
-                Media media = (Media) et.table.rawget("Media");
-                setMedia(media);
-
-                updateNavi();
-                setBottomMenu();
+        runOnUiThread(() -> {
+            if (!stillValid()) {
+                Logger.d(TAG, "refresh(), not valid anymore");
+                DetailsActivity.this.finish();
+                return;
             }
+
+            tvName.setText(et.name);
+            tvDescription.setText(UtilsGUI.simpleHtml(et.description));
+
+            Media media = (Media) et.table.rawget("Media");
+            setMedia(media);
+
+            updateNavi();
+            setBottomMenu();
         });
     }
 
@@ -185,32 +180,25 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
         // set location on first two buttons
         if (location) {
             btn01 = getString(R.string.navigate);
-            btn01Click = new CustomDialog.OnClickListener() {
-                @Override
-                public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    try {
-                        enableGuideOnEventTable();
-                        MainActivity.callGudingScreen(DetailsActivity.this);
-                        // this was causing closing of another DetailsActivity, that was called in action
-                        //DetailsActivity.this.finish();
-                    } catch (Exception e) {
-                        Logger.w(TAG, "btn01.click() - unknown problem");
-                    }
-                    return true;
+            btn01Click = (dialog, v, btn) -> {
+                try {
+                    enableGuideOnEventTable();
+                    MainActivity.callGudingScreen(DetailsActivity.this);
+                    // this was causing closing of another DetailsActivity, that was called in action
+                    //DetailsActivity.this.finish();
+                } catch (Exception e) {
+                    Logger.w(TAG, "btn01.click() - unknown problem");
                 }
+                return true;
             };
 
             btn02 = getString(R.string.map);
-            btn02Click = new CustomDialog.OnClickListener() {
-
-                @Override
-                public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    MapDataProvider mdp = MapHelper.getMapDataProvider();
-                    mdp.clear();
-                    mdp.addAll();
-                    MainActivity.wui.showScreen(WUI.SCREEN_MAP, et);
-                    return true;
-                }
+            btn02Click = (dialog, v, btn) -> {
+                MapDataProvider mdp = MapHelper.getMapDataProvider();
+                mdp.clear();
+                mdp.addAll();
+                MainActivity.wui.showScreen(WUI.SCREEN_MAP, et);
+                return true;
             };
         }
 
@@ -219,15 +207,12 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
             if (location) {
                 // only one empty button, set actions on it
                 btn03 = getString(R.string.actions_more, actions);
-                btn03Click = new CustomDialog.OnClickListener() {
-                    @Override
-                    public boolean onClick(CustomDialog dialog, View v, int btn) {
-                        ListActionsActivity.reset((Thing) et);
-                        MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-                        // this was causing closing of another DetailsActivity, that was called in action
-                        //DetailsActivity.this.finish();
-                        return true;
-                    }
+                btn03Click = (dialog, v, btn) -> {
+                    ListActionsActivity.reset((Thing) et);
+                    MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+                    // this was causing closing of another DetailsActivity, that was called in action
+                    //DetailsActivity.this.finish();
+                    return true;
                 };
             } else {
                 // all three buttons free
@@ -235,56 +220,44 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
                     if (actions > 0) {
                         final Action action = (Action) validActions.get(0);
                         btn01 = action.text;
-                        btn01Click = new CustomDialog.OnClickListener() {
-                            @Override
-                            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                                ListActionsActivity.reset((Thing) et);
-                                ListActionsActivity.callAction(action);
-                                // this was causing closing of another DetailsActivity, that was called in action
-                                //DetailsActivity.this.finish();
-                                return true;
-                            }
+                        btn01Click = (dialog, v, btn) -> {
+                            ListActionsActivity.reset((Thing) et);
+                            ListActionsActivity.callAction(action);
+                            // this was causing closing of another DetailsActivity, that was called in action
+                            //DetailsActivity.this.finish();
+                            return true;
                         };
                     }
                     if (actions > 1) {
                         final Action action = (Action) validActions.get(1);
                         btn02 = action.text;
-                        btn02Click = new CustomDialog.OnClickListener() {
-                            @Override
-                            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                                ListActionsActivity.reset((Thing) et);
-                                ListActionsActivity.callAction(action);
-                                // this was causing closing of another DetailsActivity, that was called in action
-                                //DetailsActivity.this.finish();
-                                return true;
-                            }
+                        btn02Click = (dialog, v, btn) -> {
+                            ListActionsActivity.reset((Thing) et);
+                            ListActionsActivity.callAction(action);
+                            // this was causing closing of another DetailsActivity, that was called in action
+                            //DetailsActivity.this.finish();
+                            return true;
                         };
                     }
                     if (actions > 2) {
                         final Action action = (Action) validActions.get(2);
                         btn03 = action.text;
-                        btn03Click = new CustomDialog.OnClickListener() {
-                            @Override
-                            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                                ListActionsActivity.reset((Thing) et);
-                                ListActionsActivity.callAction(action);
-                                // this was causing closing of another DetailsActivity, that was called in action
-                                //DetailsActivity.this.finish();
-                                return true;
-                            }
+                        btn03Click = (dialog, v, btn) -> {
+                            ListActionsActivity.reset((Thing) et);
+                            ListActionsActivity.callAction(action);
+                            // this was causing closing of another DetailsActivity, that was called in action
+                            //DetailsActivity.this.finish();
+                            return true;
                         };
                     }
                 } else {
                     btn03 = getString(R.string.actions_more, actions);
-                    btn03Click = new CustomDialog.OnClickListener() {
-                        @Override
-                        public boolean onClick(CustomDialog dialog, View v, int btn) {
-                            ListActionsActivity.reset((Thing) et);
-                            MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
-                            // this was causing closing of another DetailsActivity, that was called in action
-                            //DetailsActivity.this.finish();
-                            return true;
-                        }
+                    btn03Click = (dialog, v, btn) -> {
+                        ListActionsActivity.reset((Thing) et);
+                        MainActivity.wui.showScreen(WUI.SCREEN_ACTIONS, et);
+                        // this was causing closing of another DetailsActivity, that was called in action
+                        //DetailsActivity.this.finish();
+                        return true;
                     };
                 }
             }

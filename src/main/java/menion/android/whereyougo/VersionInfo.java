@@ -31,11 +31,7 @@ import menion.android.whereyougo.utils.A;
  */
 public class VersionInfo {
 
-    // private static final String TAG = "MainAfterStart";
-
-    /****************************************/
-  /* AFTER START ACTIONS */
-    /****************************************/
+    /* AFTER START ACTIONS */
 
     private static boolean stage01Completed = false;
 

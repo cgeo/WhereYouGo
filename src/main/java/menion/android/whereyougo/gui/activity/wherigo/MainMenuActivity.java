@@ -126,8 +126,9 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         return description;
     }
 
-    /***********************************/
-  /* SPECIAL ITEMS FUNCTIONS */
+
+    /* SPECIAL ITEMS FUNCTIONS */
+
     private String getVisibleThingsDescription(Zone z) {
         String description = null;
         if (!z.showThings())
@@ -191,31 +192,29 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         }
         setContentView(R.layout.custom_dialog);
 
-        listClick = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Logger.d(TAG, "onItemClick:" + position);
-                switch (position) {
-                    case 0:
-                        if (Engine.instance.cartridge.visibleZones() >= 1) {
-                            MainActivity.wui.showScreen(WUI.LOCATIONSCREEN, null);
-                        }
-                        break;
-                    case 1:
-                        if (Engine.instance.cartridge.visibleThings() >= 1) {
-                            MainActivity.wui.showScreen(WUI.ITEMSCREEN, null);
-                        }
-                        break;
-                    case 2:
-                        if (Engine.instance.player.visibleThings() >= 1) {
-                            MainActivity.wui.showScreen(WUI.INVENTORYSCREEN, null);
-                        }
-                        break;
-                    case 3:
-                        if (getVisibleTasksCount() > 0) {
-                            MainActivity.wui.showScreen(WUI.TASKSCREEN, null);
-                        }
-                        break;
-                }
+        listClick = (parent, view, position, id) -> {
+            Logger.d(TAG, "onItemClick:" + position);
+            switch (position) {
+                case 0:
+                    if (Engine.instance.cartridge.visibleZones() >= 1) {
+                        MainActivity.wui.showScreen(WUI.LOCATIONSCREEN, null);
+                    }
+                    break;
+                case 1:
+                    if (Engine.instance.cartridge.visibleThings() >= 1) {
+                        MainActivity.wui.showScreen(WUI.ITEMSCREEN, null);
+                    }
+                    break;
+                case 2:
+                    if (Engine.instance.player.visibleThings() >= 1) {
+                        MainActivity.wui.showScreen(WUI.INVENTORYSCREEN, null);
+                    }
+                    break;
+                case 3:
+                    if (getVisibleTasksCount() > 0) {
+                        MainActivity.wui.showScreen(WUI.TASKSCREEN, null);
+                    }
+                    break;
             }
         };
 
@@ -224,46 +223,31 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         CustomDialog.OnClickListener saveGameListener;
         if (Preferences.GLOBAL_SAVEGAME_SLOTS > 0) {
             saveGameText = getString(R.string.save_game_slots);
-            saveGameListener = new CustomDialog.OnClickListener() {
-                @Override
-                public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    openOptionsMenu();
-                    return true;
-                }
+            saveGameListener = (dialog, v, btn) -> {
+                openOptionsMenu();
+                return true;
             };
         } else {
             saveGameText = getString(R.string.save_game);
-            saveGameListener = new CustomDialog.OnClickListener() {
-                @Override
-                public boolean onClick(CustomDialog dialog, View v, int btn) {
-                    MainActivity.wui.setOnSavingFinished(new Runnable() {
-                        @Override
-                        public void run() {
-                            ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
-                            MainActivity.wui.setOnSavingFinished(null);
-                        }
-                    });
-                    new SaveGame().execute();
-                    return true;
-                }
+            saveGameListener = (dialog, v, btn) -> {
+                MainActivity.wui.setOnSavingFinished(() -> {
+                    ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
+                    MainActivity.wui.setOnSavingFinished(null);
+                });
+                new SaveGame().execute();
+                return true;
             };
         }
-        CustomDialog.setBottom(this, getString(R.string.gps), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                Intent intent = new Intent(MainMenuActivity.this, SatelliteActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        }, getString(R.string.map), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                MapDataProvider mdp = MapHelper.getMapDataProvider();
-                mdp.clear();
-                mdp.addAll();
-                MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-                return true;
-            }
+        CustomDialog.setBottom(this, getString(R.string.gps), (dialog, v, btn) -> {
+            Intent intent = new Intent(MainMenuActivity.this, SatelliteActivity.class);
+            startActivity(intent);
+            return true;
+        }, getString(R.string.map), (dialog, v, btn) -> {
+            MapDataProvider mdp = MapHelper.getMapDataProvider();
+            mdp.clear();
+            mdp.addAll();
+            MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
+            return true;
         }, saveGameText, saveGameListener);
     }
 
@@ -376,21 +360,15 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
             if (!Preferences.GLOBAL_DOUBLE_CLICK || event.getDownTime() - lastPressedTime < DOUBLE_PRESS_HK_BACK_PERIOD) {
         /* exit game */
                 UtilsGUI.showDialogQuestion(this, R.string.save_game_before_exit,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                new SaveGameOnExit().execute();
-                                MainActivity.selectedFile = null;
-                                DetailsActivity.et = null;
-                            }
-                        }, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Engine.kill();
-                                MainActivity.selectedFile = null;
-                                DetailsActivity.et = null;
-                                MainMenuActivity.this.finish();
-                            }
+                        (dialog, which) -> {
+                            new SaveGameOnExit().execute();
+                            MainActivity.selectedFile = null;
+                            DetailsActivity.et = null;
+                        }, (dialog, which) -> {
+                            Engine.kill();
+                            MainActivity.selectedFile = null;
+                            DetailsActivity.et = null;
+                            MainMenuActivity.this.finish();
                         }, null);
 
                 return true;
@@ -410,45 +388,43 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     }
 
     public void refresh() {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                if (A.getMain() == null || Engine.instance == null || Engine.instance.cartridge == null) {
-                    return;
-                }
-
-                ArrayList<DataInfo> data = new ArrayList<>();
-                DataInfo diLocations =
-                        new DataInfo(getString(R.string.locations) + " ("
-                                + Engine.instance.cartridge.visibleZones() + ")", getVisibleZonesDescription(),
-                                R.drawable.icon_locations);
-                data.add(diLocations);
-
-                DataInfo diYouSee =
-                        new DataInfo(getString(R.string.you_see) + " ("
-                                + Engine.instance.cartridge.visibleThings() + ")",
-                                getVisibleCartridgeThingsDescription(), R.drawable.icon_search);
-                data.add(diYouSee);
-
-                DataInfo diInventory =
-                        new DataInfo(getString(R.string.inventory) + " ("
-                                + Engine.instance.player.visibleThings() + ")",
-                                getVisiblePlayerThingsDescription(), R.drawable.icon_inventory);
-                data.add(diInventory);
-
-                DataInfo diTasks =
-                        new DataInfo(getString(R.string.tasks) + " ("
-                                + Engine.instance.cartridge.visibleTasks() + ")", getVisibleTasksDescription(),
-                                R.drawable.icon_tasks);
-                data.add(diTasks);
-
-                ListView lv = new ListView(MainMenuActivity.this);
-                IconedListAdapter adapter = new IconedListAdapter(MainMenuActivity.this, data, lv);
-                adapter.setMinHeight((int) Utils.getDpPixels(70));
-                adapter.setTextView02Visible(View.VISIBLE, true);
-                lv.setAdapter(adapter);
-                lv.setOnItemClickListener(listClick);
-                CustomDialog.setContent(MainMenuActivity.this, lv, 0, true, false);
+        runOnUiThread(() -> {
+            if (A.getMain() == null || Engine.instance == null || Engine.instance.cartridge == null) {
+                return;
             }
+
+            ArrayList<DataInfo> data = new ArrayList<>();
+            DataInfo diLocations =
+                    new DataInfo(getString(R.string.locations) + " ("
+                            + Engine.instance.cartridge.visibleZones() + ")", getVisibleZonesDescription(),
+                            R.drawable.icon_locations);
+            data.add(diLocations);
+
+            DataInfo diYouSee =
+                    new DataInfo(getString(R.string.you_see) + " ("
+                            + Engine.instance.cartridge.visibleThings() + ")",
+                            getVisibleCartridgeThingsDescription(), R.drawable.icon_search);
+            data.add(diYouSee);
+
+            DataInfo diInventory =
+                    new DataInfo(getString(R.string.inventory) + " ("
+                            + Engine.instance.player.visibleThings() + ")",
+                            getVisiblePlayerThingsDescription(), R.drawable.icon_inventory);
+            data.add(diInventory);
+
+            DataInfo diTasks =
+                    new DataInfo(getString(R.string.tasks) + " ("
+                            + Engine.instance.cartridge.visibleTasks() + ")", getVisibleTasksDescription(),
+                            R.drawable.icon_tasks);
+            data.add(diTasks);
+
+            ListView lv = new ListView(MainMenuActivity.this);
+            IconedListAdapter adapter = new IconedListAdapter(MainMenuActivity.this, data, lv);
+            adapter.setMinHeight((int) Utils.getDpPixels(70));
+            adapter.setTextView02Visible(View.VISIBLE, true);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(listClick);
+            CustomDialog.setContent(MainMenuActivity.this, lv, 0, true, false);
         });
     }
 

@@ -104,11 +104,7 @@ public class FileSystem {
     }
 
     public static File[] getFiles(String folder, final String filter) {
-        FileFilter fileFilter = new FileFilter() {
-            public boolean accept(File pathname) {
-                return pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter);
-            }
-        };
+        FileFilter fileFilter = pathname -> pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter);
         return getFiles2(folder, fileFilter);
     }
 

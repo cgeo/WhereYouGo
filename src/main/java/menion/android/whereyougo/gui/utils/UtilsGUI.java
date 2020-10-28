@@ -48,8 +48,6 @@ public class UtilsGUI {
 
     /* LIST VIEW PART */
 
-    /******************************/
-
     public static ListView createListView(Context context, boolean setMultiple,
                                           ArrayList<DataInfo> adapterData) {
         ListView lv = new ListView(context);
@@ -58,8 +56,6 @@ public class UtilsGUI {
     }
 
     /* DIALOG CONSTRUCTION */
-
-    /******************************/
 
     public static void dialogDoItem(final Activity activity, final CharSequence title,
                                     final int icon, final CharSequence msg, final String posText,
@@ -91,27 +87,25 @@ public class UtilsGUI {
                                     final DialogInterface.OnClickListener posLis, final String negText,
                                     final DialogInterface.OnClickListener negLis, final String cancelText,
                                     final DialogInterface.OnClickListener cancelLis) {
-        activity.runOnUiThread(new Runnable() {
-            public void run() {
-                if (activity.isFinishing())
-                    return;
-                AlertDialog.Builder b = new AlertDialog.Builder(activity);
-                b.setCancelable(true);
-                b.setTitle(title);
-                b.setIcon(icon);
-                b.setMessage(msg);
-                if (!TextUtils.isEmpty(posText)) {
-                    b.setPositiveButton(posText, posLis);
-                }
-                if (!TextUtils.isEmpty(negText)) {
-                    b.setNegativeButton(negText, negLis);
-                }
-                if (!TextUtils.isEmpty(cancelText)) {
-                    b.setNeutralButton(cancelText, cancelLis);
-                }
-                if (!activity.isFinishing())
-                    b.show();
+        activity.runOnUiThread(() -> {
+            if (activity.isFinishing())
+                return;
+            AlertDialog.Builder b = new AlertDialog.Builder(activity);
+            b.setCancelable(true);
+            b.setTitle(title);
+            b.setIcon(icon);
+            b.setMessage(msg);
+            if (!TextUtils.isEmpty(posText)) {
+                b.setPositiveButton(posText, posLis);
             }
+            if (!TextUtils.isEmpty(negText)) {
+                b.setNegativeButton(negText, negLis);
+            }
+            if (!TextUtils.isEmpty(cancelText)) {
+                b.setNeutralButton(cancelText, cancelLis);
+            }
+            if (!activity.isFinishing())
+                b.show();
         });
     }
 
@@ -192,8 +186,6 @@ public class UtilsGUI {
 
     /* DIALOG DELETE */
 
-    /******************************/
-
     public static void showDialogDeleteItem(Activity activity, String itemName,
                                             DialogInterface.OnClickListener posLis) {
         dialogDoItem(
@@ -218,8 +210,6 @@ public class UtilsGUI {
 
     /* DIALOG ERROR */
 
-    /******************************/
-
     public static void showDialogError(Activity activity, int msg,
                                        DialogInterface.OnClickListener cancelList) {
         showDialogError(activity, activity.getText(msg), cancelList);
@@ -232,8 +222,6 @@ public class UtilsGUI {
 
     /* DIALOG INFO */
 
-    /******************************/
-
     public static void showDialogInfo(Activity activity, int msg) {
         showDialogInfo(activity, activity.getText(msg));
     }
@@ -245,8 +233,6 @@ public class UtilsGUI {
     }
 
     /* DIALOG QUESTION */
-
-    /******************************/
 
     public static void showDialogQuestion(Activity activity, CharSequence msg,
                                           DialogInterface.OnClickListener posLis) {
@@ -284,8 +270,6 @@ public class UtilsGUI {
     }
 
     /* WEBVIEW CONSTRUCTION */
-
-    /*******************************/
 
     public static void showDialogWebView(final Activity activity, final int title, final String msg) {
         showDialogWebView(activity, activity.getString(title), msg);

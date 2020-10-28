@@ -99,20 +99,11 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
         // create listView
         ListView listView = UtilsGUI.createListView(getActivity(), false, data);
         // set click listener
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemClicked(position);
-            }
-        });
+        listView.setOnItemClickListener((parent, view, position, id) -> itemClicked(position));
         // set on long click listener for file deletion
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                itemLongClicked(position);
-                return true;
-            }
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            itemLongClicked(position);
+            return true;
         });
         adapter = (BaseAdapter) listView.getAdapter();
         // construct dialog
@@ -143,14 +134,10 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
         if (position == 0)
             return;
         UtilsGUI.showDialogQuestion(getActivity(), R.string.delete_save_game,
-                new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int btn) {
-                        ((File) data.remove(position).addData01).delete();
-                        if (adapter != null)
-                            adapter.notifyDataSetChanged();
-                    }
+                (dialog, btn) -> {
+                    ((File) data.remove(position).addData01).delete();
+                    if (adapter != null)
+                        adapter.notifyDataSetChanged();
                 }, null);
     }
 

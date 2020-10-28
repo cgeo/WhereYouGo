@@ -82,13 +82,10 @@ public class MainActivity extends CustomMainActivity {
     private static Vector<CartridgeFile> cartridgeFiles;
 
     static {
-        wui.setOnSavingStarted(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    FileSystem.backupFile(MainActivity.getSaveFile());
-                } catch (Exception e) {
-                }
+        wui.setOnSavingStarted(() -> {
+            try {
+                FileSystem.backupFile(MainActivity.getSaveFile());
+            } catch (Exception e) {
             }
         });
     }
@@ -414,7 +411,7 @@ public class MainActivity extends CustomMainActivity {
                 }
             } catch (Exception e) {
                 Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e.toString());
-                ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, file.getName()));
+                ManagerNotify.toastShortMessage(getString(R.string.invalid_cartridge, file.getName()));
                 // file.delete();
             }
             openCartridge(cart);
