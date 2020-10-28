@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:whereyougo="http://whereyougo">
+    xmlns:whereyougo="http://whereyougo"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/ic_action_settings"
     android:key=""
     android:persistent="false"
@@ -14,7 +15,8 @@
             android:defaultValue="@string/pref_DEFAULT_ROOT"
             android:key="@string/pref_KEY_S_ROOT"
             android:summary="@string/pref_root_desc"
-            android:title="@string/pref_root" />
+            android:title="@string/pref_root"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_DEFAULT_MAP_PROVIDER"
             android:entries="@array/pref_map_provider_entries"
@@ -22,28 +24,33 @@
             android:key="@string/pref_KEY_S_MAP_PROVIDER"
             android:summary="@string/pref_map_provider_desc"
             android:title="@string/pref_map_provider"
-            whereyougo:previewTemplate="(%1$)" />
+            whereyougo:previewTemplate="(%1$)"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="@string/pref_DEFAULT_SAVEGAME_AUTO"
             android:key="@string/pref_KEY_B_SAVEGAME_AUTO"
             android:summary="@string/pref_save_game_auto_desc"
-            android:title="@string/pref_save_game_auto" />
+            android:title="@string/pref_save_game_auto"
+            app:iconSpaceReserved="false" />
         <EditTextPreference
             android:defaultValue="@string/pref_DEFAULT_SAVEGAME_SLOTS"
             android:inputType="number"
             android:key="@string/pref_KEY_S_SAVEGAME_SLOTS"
             android:summary="@string/pref_save_game_slots_desc"
             android:title="@string/pref_save_game_slots"
-            whereyougo:previewTemplate="(%1$)" />
+            whereyougo:previewTemplate="(%1$)"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="@string/pref_DEFAULT_DOUBLE_CLICK"
             android:key="@string/pref_KEY_B_DOUBLE_CLICK"
             android:summary="@string/pref_double_click_desc"
-            android:title="@string/pref_double_click" />
+            android:title="@string/pref_double_click"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="@string/pref_DEFAULT_RUN_SCREEN_OFF"
             android:key="@string/pref_KEY_B_RUN_SCREEN_OFF"
             android:summary="@string/pref_run_screen_off_desc"
-            android:title="@string/pref_run_screen_off" />
+            android:title="@string/pref_run_screen_off"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <EditTextPreference
         android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LATITUDE"
-        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE" />
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE"
+        app:iconSpaceReserved="false" />
     <EditTextPreference
         android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE"
-        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE" />
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE"
+        app:iconSpaceReserved="false" />
     <EditTextPreference
         android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_ALTITUDE"
-        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE" />
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE"
+        app:iconSpaceReserved="false" />
     <EditTextPreference
         android:defaultValue="0"
-        android:key="@string/pref_KEY_S_APPLICATION_VERSION_LAST" />
+        android:key="@string/pref_KEY_S_APPLICATION_VERSION_LAST"
+        app:iconSpaceReserved="false" />
     <EditTextPreference
         android:defaultValue="@string/pref_DEFAULT_GPS_MIN_TIME_NOTIFICATION"
-        android:key="@string/pref_KEY_S_GPS_MIN_TIME_NOTIFICATION" />
+        android:key="@string/pref_KEY_S_GPS_MIN_TIME_NOTIFICATION"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="@string/pref_DEFAULT_GPS_START_AUTOMATICALLY"
         android:key="@string/pref_KEY_B_GPS"
         android:summary="@string/pref_gps_desc"
-        android:title="@string/pref_gps" />
+        android:title="@string/pref_gps"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>
