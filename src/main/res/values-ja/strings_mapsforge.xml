@@ -69,7 +69,7 @@
     <string name="menu_screenshot_jpeg">JPEG(非可逆圧縮)</string>
     <string name="menu_screenshot_png">PNG(可逆圧縮)</string>
     <string name="no_location_provider_available">利用できる位置ソースがありません</string>
-    <string name="preferences_debug">デバッグ設定(通常時はチェックを外してください)</string>
+    <string name="preferences_debug">デバッグ設定\n(通常時はチェックを外してください)</string>
     <string name="preferences_general">全般</string>
     <string name="preferences_tileCache">地図タイルのキャッシュ設定</string>
     <string name="preferences_tileCache_persistence">キャッシュされた地図タイル保持</string>
@@ -90,7 +90,7 @@
     <string name="preferences_show_scale_bar">地図スケールバー</string>
     <string name="preferences_show_scale_bar_desc">地図のスケールバーを表示する</string>
     <string name="preferences_show_tile_coordinates">タイル座標</string>
-    <string name="preferences_show_tile_coordinates_desc">タイルに座標を表示</string>
+    <string name="preferences_show_tile_coordinates_desc">タイルの座標を表示</string>
     <string name="preferences_show_tile_frames">タイル境界</string>
     <string name="preferences_show_tile_frames_desc">タイルの境界を表示</string>
     <string name="preferences_show_water_tiles">ウォータータイル</string>
