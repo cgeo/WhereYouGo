@@ -144,17 +144,15 @@ public abstract class CustomMainActivity extends CustomActivity {
     }
 
     private void clearPackageFromMemory() {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    ActivityManager aM =
-                            (ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE);
+        new Thread(() -> {
+            try {
+                ActivityManager aM =
+                        (ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE);
 
-                    Thread.sleep(1250);
-                    aM.killBackgroundProcesses(getPackageName());
-                } catch (Exception e) {
-                    Logger.e(TAG, "clearPackageFromMemory()", e);
-                }
+                Thread.sleep(1250);
+                aM.killBackgroundProcesses(getPackageName());
+            } catch (Exception e) {
+                Logger.e(TAG, "clearPackageFromMemory()", e);
             }
         }).start();
     }
@@ -169,12 +167,11 @@ public abstract class CustomMainActivity extends CustomActivity {
                     CustomMainActivity.this.finish();
                     return true;
                 case CLOSE_DESTROY_APP_DIALOG_NO_TEXT:
-                    showDialogFinish(FINISH_EXIT);
-                    return true;
                 case CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT:
                     showDialogFinish(FINISH_EXIT);
                     return true;
                 case CLOSE_HIDE_APP:
+                default:
                     // no action
                     break;
             }
@@ -306,88 +303,83 @@ public abstract class CustomMainActivity extends CustomActivity {
 
         this.finishType = typeOfFinish;
 
-        runOnUiThread(new Runnable() {
-            public void run() {
-                String title = Locale.getString(R.string.question);
-                String message = "";
-                boolean cancelable =
-                        !(finishType == FINISH_RESTART_FORCE || finishType == FINISH_RESTART_FACTORY_RESET
-                                || finishType == FINISH_REINSTALL || finishType == FINISH_EXIT_FORCE);
-                switch (finishType) {
-                    case FINISH_EXIT:
-                        message = Locale.getString(R.string.do_you_really_want_to_exit);
-                        break;
-                    case FINISH_EXIT_FORCE:
-                        title = Locale.getString(R.string.info);
-                        message = Locale.getString(R.string.you_have_to_exit_app_force);
-                        break;
-                    case FINISH_RESTART:
-                        message = Locale.getString(R.string.you_have_to_restart_app_recommended);
-                        break;
-                    case FINISH_RESTART_FORCE:
-                        title = Locale.getString(R.string.info);
-                        message = Locale.getString(R.string.you_have_to_restart_app_force);
-                        break;
-                    case FINISH_RESTART_FACTORY_RESET:
-                        title = Locale.getString(R.string.info);
-                        message = Locale.getString(R.string.you_have_to_restart_app_force);
-                        break;
-                    case FINISH_REINSTALL:
-                        title = Locale.getString(R.string.info);
-                        message = Locale.getString(R.string.new_version_will_be_installed);
-                        break;
-                }
-
-                AlertDialog.Builder b = new AlertDialog.Builder(CustomMainActivity.this);
-                b.setCancelable(cancelable);
-                b.setTitle(title);
-                b.setIcon(R.drawable.ic_question_alt);
-                b.setMessage(message);
-                b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
-                            finish = true;
-                            CustomMainActivity.this.finish();
-                        } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
-                                || finishType == FINISH_RESTART_FACTORY_RESET) {
-                            // Setup one-short alarm to restart my application in 3 seconds - TODO need use
-                            // another context
-                            // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                            // Intent intent = new Intent(APP_INTENT_MAIN);
-                            // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
-                            // PendingIntent.FLAG_ONE_SHOT);
-                            // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
-                            finish = true;
-                            CustomMainActivity.this.finish();
-                        } else if (finishType == FINISH_REINSTALL) {
-                            // Intent intent = new Intent();
-                            // intent.setAction(android.content.Intent.ACTION_VIEW);
-                            // intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")),
-                            // "application/vnd.android.package-archive");
-                            //
-                            // startActivity(intent);
-                            showDialogFinish(FINISH_EXIT_FORCE);
-                        }
-                    }
-                });
-                if (cancelable) {
-                    b.setNegativeButton(R.string.cancel, null);
-                }
-                b.show();
+        runOnUiThread(() -> {
+            String title = getString(R.string.question);
+            String message = "";
+            boolean cancelable =
+                    !(finishType == FINISH_RESTART_FORCE || finishType == FINISH_RESTART_FACTORY_RESET
+                            || finishType == FINISH_REINSTALL || finishType == FINISH_EXIT_FORCE);
+            switch (finishType) {
+                case FINISH_EXIT:
+                    message = getString(R.string.do_you_really_want_to_exit);
+                    break;
+                case FINISH_EXIT_FORCE:
+                    title = getString(R.string.info);
+                    message = getString(R.string.you_have_to_exit_app_force);
+                    break;
+                case FINISH_RESTART:
+                    message = getString(R.string.you_have_to_restart_app_recommended);
+                    break;
+                case FINISH_RESTART_FORCE:
+                case FINISH_RESTART_FACTORY_RESET:
+                    title = getString(R.string.info);
+                    message = getString(R.string.you_have_to_restart_app_force);
+                    break;
+                case FINISH_REINSTALL:
+                    title = getString(R.string.info);
+                    message = getString(R.string.new_version_will_be_installed);
+                    break;
             }
+
+            AlertDialog.Builder b = new AlertDialog.Builder(CustomMainActivity.this);
+            b.setCancelable(cancelable);
+            b.setTitle(title);
+            b.setIcon(R.drawable.ic_question_alt);
+            b.setMessage(message);
+            b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
+                        finish = true;
+                        CustomMainActivity.this.finish();
+                    } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
+                            || finishType == FINISH_RESTART_FACTORY_RESET) {
+                        // Setup one-short alarm to restart my application in 3 seconds - TODO need use
+                        // another context
+                        // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                        // Intent intent = new Intent(APP_INTENT_MAIN);
+                        // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
+                        // PendingIntent.FLAG_ONE_SHOT);
+                        // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
+                        finish = true;
+                        CustomMainActivity.this.finish();
+                    } else if (finishType == FINISH_REINSTALL) {
+                        // Intent intent = new Intent();
+                        // intent.setAction(android.content.Intent.ACTION_VIEW);
+                        // intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")),
+                        // "application/vnd.android.package-archive");
+                        //
+                        // startActivity(intent);
+                        showDialogFinish(FINISH_EXIT_FORCE);
+                    }
+                }
+            });
+            if (cancelable) {
+                b.setNegativeButton(R.string.cancel, null);
+            }
+            b.show();
         });
     }
 
     protected boolean testFileSystem() {
-        if (DIRS == null || DIRS.length == 0)
+        if (DIRS.length == 0)
             return true;
 
         if (FileSystem.createRoot(getString(R.string.app_name))) {
-            // Logger.w(TAG, "FileSystem successfully created!");
+            Logger.i(TAG, "FileSystem successfully created!");
         } else {
-            // Logger.w(TAG, "FileSystem cannot be created!");
+            Logger.w(TAG, "FileSystem cannot be created!");
             UtilsGUI.showDialogError(CustomMainActivity.this, R.string.filesystem_cannot_create_root,
                     new DialogInterface.OnClickListener() {
 
@@ -407,7 +399,7 @@ public abstract class CustomMainActivity extends CustomActivity {
     }
 
     protected boolean testFreeSpace() {
-        if (DIRS == null || DIRS.length == 0)
+        if (DIRS.length == 0)
             return true;
 
         // check disk space (at least 5MB)

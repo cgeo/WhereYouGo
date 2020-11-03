@@ -17,8 +17,6 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.content.DialogInterface;
-
 import java.util.Vector;
 
 import cz.matejcik.openwig.Action;
@@ -83,13 +81,7 @@ public class ListTargetsActivity extends ListVariousActivity {
 
     public void refresh() {
         if (validStuff.isEmpty()) {
-            UtilsGUI.showDialogInfo(this, R.string.no_target, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ListTargetsActivity.this.finish();
-                }
-            });
+            UtilsGUI.showDialogInfo(this, R.string.no_target, (dialog, which) -> ListTargetsActivity.this.finish());
         } else {
             super.refresh();
         }

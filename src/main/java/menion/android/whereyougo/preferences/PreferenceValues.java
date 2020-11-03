@@ -149,7 +149,7 @@ public class PreferenceValues {
                 }
                 PowerManager pm = (PowerManager) A.getApp().getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
-                    wl = pm.newWakeLock(new_level, TAG);
+                    wl = pm.newWakeLock(new_level, "whereyougo:" + TAG);
                     wl.acquire();
                     wl_level = new_level;
                 }

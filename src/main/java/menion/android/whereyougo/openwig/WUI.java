@@ -75,7 +75,7 @@ public class WUI implements UI {
     private static CustomActivity getParentActivity() {
         Activity activity = PreferenceValues.getCurrentActivity();
 
-        if (activity == null || !(activity instanceof CustomActivity))
+        if (!(activity instanceof CustomActivity))
             activity = A.getMain();
 
         return (CustomActivity) activity;
@@ -163,7 +163,7 @@ public class WUI implements UI {
     public void refresh() {
         Activity activity = PreferenceValues.getCurrentActivity();
         Logger.w(TAG, "refresh(), currentActivity:" + activity);
-        if (activity != null && activity instanceof IRefreshable) {
+        if (activity instanceof IRefreshable) {
             ((IRefreshable) activity).refresh();
         }
     }
@@ -240,20 +240,18 @@ public class WUI implements UI {
             case SCREEN_MAP:
                 MapHelper.showMap(activity, details);
                 return;
+            default:
+                closeActivity(activity);
         }
-
-        closeActivity(activity);
     }
 
     public void start() {
-        A.getMain().runOnUiThread(new Runnable() {
-            public void run() {
-                if (progressDialog != null && progressDialog.isShowing()) {
-                    try {
-                        progressDialog.dismiss();
-                    } catch (Exception e) {
-                        Logger.e(TAG, "start(): dismiss progressDialog", e);
-                    }
+        A.getMain().runOnUiThread(() -> {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                try {
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    Logger.e(TAG, "start(): dismiss progressDialog", e);
                 }
             }
         });

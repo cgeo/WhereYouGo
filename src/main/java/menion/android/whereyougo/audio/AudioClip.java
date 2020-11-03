@@ -61,21 +61,18 @@ public class AudioClip {
 
     private void initMediaPlayer() {
         mPlayer.setVolume(1000, 1000);
-        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-            public void onCompletion(MediaPlayer mp) {
-                mPlaying = false;
-                if (mLoop) {
-                    System.out.println("AudioClip loop " + name);
-                    mp.start();
-                } else if (playCount > 0) {
-                    playCount--;
-                    mp.start();
-                } else {
-                    // really finished
-                    if (listener != null)
-                        listener.playCompleted();
-                }
+        mPlayer.setOnCompletionListener(mp -> {
+            mPlaying = false;
+            if (mLoop) {
+                System.out.println("AudioClip loop " + name);
+                mp.start();
+            } else if (playCount > 0) {
+                playCount--;
+                mp.start();
+            } else {
+                // really finished
+                if (listener != null)
+                    listener.playCompleted();
             }
         });
     }
