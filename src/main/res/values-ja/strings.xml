@@ -13,7 +13,7 @@
     <string name="choose_cartridge">カートリッジを選択</string>
     <string name="close">閉じる</string>
     <string name="coauthor">現在開発者</string>
-    <string name="compass">コンパス</string>
+    <string name="compass">地磁気センサー</string>
     <string name="declination">磁気偏角</string>
     <string name="delete_cartridge">カートリッジを削除しますか?</string>
     <string name="delete_save_game">保存したゲームを削除しますか?</string>
@@ -58,7 +58,7 @@
     <string name="longitude">経度</string>
     <string name="map">地図</string>
     <string name="metres">メートル</string>
-    <string name="msg_exit_game">\"戻る\"を2回押すと、ゲームを終了します</string>
+    <string name="msg_exit_game">\"戻る\"をダブルタップでゲームを終了します。チェックを外すとシングルタップで終了します</string>
     <string name="navigate">ナビゲーション</string>
     <string name="new_version_will_be_installed">新バージョンがインストールできます</string>
     <string name="no">いいえ</string>
