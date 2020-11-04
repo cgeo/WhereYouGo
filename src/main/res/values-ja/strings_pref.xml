@@ -13,7 +13,7 @@
     <string name="pref_run_screen_off_desc">画面が消灯してもアプリを動作させます</string>
     <string name="pref_font_size">フォントサイズ</string>
     <string name="pref_font_size_default">デフォルト</string>
-    <string name="pref_font_size_desc">\フォントのサイズ</string>
+    <string name="pref_font_size_desc">\nフォントのサイズ</string>
     <string name="pref_font_size_large">大</string>
     <string name="pref_font_size_medium">中</string>
     <string name="pref_font_size_small">小</string>
@@ -22,11 +22,11 @@
     <string name="pref_gc_password">パスワード</string>
     <string name="pref_gc_password_desc">Geocaching.comパスワード</string>
     <string name="pref_gc_username">ユーザー名</string>
-    <string name="pref_gc_username_desc">Geocaching.comユーザー名</string>
+    <string name="pref_gc_username_desc">\nGeocaching.comユーザー名</string>
     <string name="pref_global">全般</string>
     <string name="pref_gps">GPSを許可</string>
     <string name="pref_gps_altitude_manual_correction">標高の調整</string>
-    <string name="pref_gps_altitude_manual_correction_desc">標高の手動調整</string>
+    <string name="pref_gps_altitude_manual_correction_desc">\n標高の手動調整</string>
     <string name="pref_gps_beep_on_gps_fix">測位確立時に音を鳴らす</string>
     <string name="pref_gps_beep_on_gps_fix_desc">GPSの最初の測位時にビープ音を鳴らす</string>
     <string name="pref_gps_desc">起動時に自動的にGPSを開始</string>
@@ -72,14 +72,14 @@
     <string name="pref_save_game_auto">自動的にゲームを保存</string>
     <string name="pref_save_game_auto_desc">ほかのアプリに切り替えた時にゲームを自動保存する</string>
     <string name="pref_save_game_slots">ゲーム保存スロット</string>
-    <string name="pref_save_game_slots_desc">メニューボタンでゲームをセーブするスロット数</string>
+    <string name="pref_save_game_slots_desc">\nメニューボタンでゲームを保存するスロット数</string>
     <string name="pref_sensors">センサー</string>
     <string name="pref_sensors_compass_auto_change">自動切替</string>
-    <string name="pref_sensors_compass_auto_change_desc">低速移動時に地磁気センサーで方位を測定し、速移動時はGPSから方位を測定します</string>
+    <string name="pref_sensors_compass_auto_change_desc">低速移動時に地磁気センサーで方位を測定し、高速移動時はGPSから方位を測定します</string>
     <string name="pref_sensors_compass_auto_change_value">切替える速度</string>
     <string name="pref_sensors_compass_auto_change_value_desc">\nどちらのセンサーを使用するかの閾値(この値未満は地磁気センサー、以上はGPS)</string>
     <string name="pref_sensors_compass_hardware">地磁気センサーの使用</string>
-    <string name="pref_sensors_compass_hardware_desc">地図の自動回転とコンパス画面のために地磁気センサーを使用。無効時はGPS測位(自動車に最適)で方向を割り出します</string>
+    <string name="pref_sensors_compass_hardware_desc">地図の自動回転とコンパス画面のために地磁気センサーを使用。チェックを外すとGPS測位(自動車に適してます)で方位を測定します</string>
     <string name="pref_sensors_orient_filter">方向の表示フィルタ</string>
     <string name="pref_sensors_orient_filter_desc">\n方向表示に使用されるフィルタを選択。強いフィルタは反応が遅いがスムーズな表示が可能です</string>
     <string name="pref_sensors_orient_filter_heavy">強</string>
@@ -89,13 +89,13 @@
     <string name="pref_statusbar">ステータスバーのアイコン</string>
     <string name="pref_statusbar_desc">ステータスバーにアイコンを表示する</string>
     <string name="pref_style_on_map">地図のスタイル</string>
-    <string name="pref_units">書式</string>
+    <string name="pref_units">単位</string>
     <string name="pref_units_altitude">標高の単位</string>
-    <string name="pref_units_altitude_desc">\n標高の単位の設定</string>
+    <string name="pref_units_altitude_desc">\n標高の単位を選択</string>
     <string name="pref_units_angle">角度の単位</string>
     <string name="pref_units_angle_angular_mil">ミル(mil)</string>
     <string name="pref_units_angle_degree">度(°)</string>
-    <string name="pref_units_angle_desc">\n角度の単位の設定</string>
+    <string name="pref_units_angle_desc">\n角度の単位を選択</string>
     <string name="pref_units_angle_russian_mil">ロシアミル(mil)</string>
     <string name="pref_units_angle_us_artillery_mil">砲兵ミル(Artillery mil)</string>
     <string name="pref_units_coo_latlon">経緯度の形式</string>
@@ -104,7 +104,7 @@
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">距離の単位</string>
-    <string name="pref_units_length_desc">距離単位を選択</string>
+    <string name="pref_units_length_desc">\n距離の単位を選択</string>
     <string name="pref_units_length_im_f">フィート(ft)</string>
     <string name="pref_units_length_im_fm">フィート/マイル(ft/mi)</string>
     <string name="pref_units_length_im_y">ヤード(yd)</string>
@@ -113,5 +113,5 @@
     <string name="pref_units_length_me_mkm">メートル/キロメートル(m/km)</string>
     <string name="pref_units_length_na_nmi">海里(m/nmi)</string>
     <string name="pref_units_speed">速度の単位</string>
-    <string name="pref_units_speed_desc">\n速度単位を選択</string>
+    <string name="pref_units_speed_desc">\n速度の単位を選択</string>
 </resources>
