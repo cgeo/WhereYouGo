@@ -57,7 +57,7 @@
     <string name="locations">位置</string>
     <string name="longitude">経度</string>
     <string name="map">地図</string>
-    <string name="metres">メートル</string>
+    <string name="metres">メートル(m)</string>
     <string name="msg_exit_game">\"戻る\"をダブルタップでゲームを終了します。チェックを外すとシングルタップで終了します</string>
     <string name="navigate">ナビゲーション</string>
     <string name="new_version_will_be_installed">新バージョンがインストールできます</string>
