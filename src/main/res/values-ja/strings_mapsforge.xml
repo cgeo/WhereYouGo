@@ -2,7 +2,7 @@
 <resources>
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
-        <item>ヤード/ポンド</item>
+        <item>ヤード,ポンド</item>
         <item>メートル</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
@@ -88,7 +88,7 @@
     <string name="preferences_show_fps_counter">フレームレート</string>
     <string name="preferences_show_fps_counter_desc">フレーム数/秒を表示</string>
     <string name="preferences_show_scale_bar">地図スケールバー</string>
-    <string name="preferences_show_scale_bar_desc">地図のスケールバーを表示する</string>
+    <string name="preferences_show_scale_bar_desc">地図のスケールバーを表示</string>
     <string name="preferences_show_tile_coordinates">タイル座標</string>
     <string name="preferences_show_tile_coordinates_desc">タイルの座標を表示</string>
     <string name="preferences_show_tile_frames">タイル境界</string>
