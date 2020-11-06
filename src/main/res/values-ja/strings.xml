@@ -49,12 +49,12 @@
     <string name="invalid_cartridge">無効なカートリッジ\n\n %s</string>
     <string name="invalid_url">無効なURL</string>
     <string name="invalid_value">無効な値</string>
-    <string name="inventory">インベントリ</string>
+    <string name="inventory">持ち物</string>
     <string name="latitude">緯度</string>
     <string name="libraries">ライブラリ</string>
     <string name="load_game">ゲームを読み込み</string>
     <string name="loading">読み込み中…</string>
-    <string name="locations">位置</string>
+    <string name="locations">場所</string>
     <string name="longitude">経度</string>
     <string name="map">地図</string>
     <string name="metres">メートル(m)</string>
