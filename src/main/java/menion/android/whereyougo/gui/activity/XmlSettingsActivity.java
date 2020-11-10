@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import ar.com.daidalos.afiledialog.FileChooserDialog;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
@@ -146,7 +145,7 @@ public class XmlSettingsActivity extends PreferenceActivity
         try {
             super.onDestroy();
             if (needRestart) {
-                A.getMain().showDialogFinish(CustomMainActivity.FINISH_RESTART);
+                A.getMain().showDialogFinish(MainActivity.FINISH_RESTART);
             }
         } catch (Exception e) {
             Logger.e(TAG, "onDestroy()", e);

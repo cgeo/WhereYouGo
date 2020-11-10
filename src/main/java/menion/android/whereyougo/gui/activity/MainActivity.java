@@ -17,12 +17,19 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Debug;
+import android.os.StatFs;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,10 +37,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -42,6 +54,7 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
 import locus.api.objects.extra.Waypoint;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -49,7 +62,6 @@ import menion.android.whereyougo.gui.dialog.AboutDialog;
 import menion.android.whereyougo.gui.dialog.ChooseCartridgeDialog;
 import menion.android.whereyougo.gui.dialog.ChooseSavegameDialog;
 import menion.android.whereyougo.gui.extension.activity.CustomActivity;
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
@@ -59,27 +71,48 @@ import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
 import menion.android.whereyougo.openwig.WUI;
 import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.NotificationService;
+import menion.android.whereyougo.utils.Utils;
 
 import static menion.android.whereyougo.permission.PermissionHandler.askAgainFor;
 import static menion.android.whereyougo.permission.PermissionHandler.checkKoPermissions;
 import static menion.android.whereyougo.permission.PermissionHandler.checkPermissions;
 import static menion.android.whereyougo.permission.PermissionHandler.needAskForPermission;
 
-public class MainActivity extends CustomMainActivity {
+public class MainActivity extends CustomActivity {
 
     private static final String TAG = "Main";
+    private static final WLocationService wLocationService = new WLocationService();
+
+    private static Vector<CartridgeFile> cartridgeFiles;
+    private static final String[] DIRS = new String[]{FileSystem.CACHE};
+    private static boolean callSecondInit;
+    private static boolean callRegisterOnly;
 
     public static final WUI wui = new WUI();
-    private static final WLocationService wLocationService = new WLocationService();
+    public static final int FINISH_NONE = -1;
+    public static final int FINISH_EXIT = 0;
+    public static final int FINISH_EXIT_FORCE = 1;
+    public static final int FINISH_RESTART = 2;
+    public static final int FINISH_RESTART_FORCE = 3;
+    public static final int FINISH_RESTART_FACTORY_RESET = 4;
+    public static final int FINISH_REINSTALL = 5;
+    public static final int CLOSE_DESTROY_APP_NO_DIALOG = 0;
+    public static final int CLOSE_DESTROY_APP_DIALOG_NO_TEXT = 1;
+    public static final int CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT = 2;
+    public static final int CLOSE_HIDE_APP = 3;
+
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
-    private static Vector<CartridgeFile> cartridgeFiles;
+
+    private int finishType = FINISH_NONE;
+    private boolean finish = false;
 
     static {
         wui.setOnSavingStarted(() -> {
@@ -223,28 +256,227 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    private void clickMap() {
-        MapDataProvider mdp = MapHelper.getMapDataProvider();
-        mdp.clear();
-        mdp.addCartridges(cartridgeFiles);
-        MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-    }
+    public static String getNewsFromTo(int lastVersion, int actualVersion) {
+        // Logger.d(TAG, "getNewsFromTo(" + lastVersion + ", " + actualVersion + "), file:" +
+        // "news_" + (Const.isPro() ? "pro" : "free") + ".xml");
+        String versionInfo =
+                "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><body>";
+        String data = loadAssetString("news.xml");
+        if (data == null || data.length() == 0)
+            data = loadAssetString("news.xml");
+        if (data != null && data.length() > 0) {
+            XmlPullParser parser;
+            try {
+                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                parser = factory.newPullParser();
+                parser.setInput(new StringReader(data));
 
-    private void clickStart() {
-        // check cartridges
-        if (!isAnyCartridgeAvailable()) {
-            return;
+                int event;
+                String tagName;
+
+                boolean correct = false;
+                while (true) {
+                    event = parser.nextToken();
+                    if (event == XmlPullParser.START_TAG) {
+                        tagName = parser.getName();
+                        if (tagName.equalsIgnoreCase("update")) {
+                            String name = parser.getAttributeValue(null, "name");
+                            int id = Utils.parseInt(parser.getAttributeValue(null, "id"));
+                            if (id > lastVersion && id <= actualVersion) {
+                                correct = true;
+                                versionInfo += ("<h4>" + name + "</h4><ul>");
+                            } else {
+                                correct = false;
+                            }
+                        } else if (tagName.equalsIgnoreCase("li") && correct) {
+                            versionInfo += ("<li>" + parser.nextText() + "</li>");
+                        }
+                    } else if (event == XmlPullParser.END_TAG) {
+                        tagName = parser.getName();
+                        if (tagName.equalsIgnoreCase("update")) {
+                            if (correct) {
+                                correct = false;
+                                versionInfo += "</ul>";
+                            }
+                        } else if (tagName.equals("document")) {
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Logger.e(TAG, "getNews()", e);
+            }
         }
 
-        ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
-        dialog.setParams(cartridgeFiles);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
-                .commitAllowingStateLoss();
+        versionInfo += "</body></html>";
+        return versionInfo;
     }
 
-    @Override
+    public static String loadAssetString(String name) {
+        InputStream is = null;
+        try {
+            is = A.getMain().getAssets().open(name);
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            return new String(buffer);
+        } catch (Exception e) {
+            Logger.e(TAG, "loadAssetString(" + name + ")", e);
+            return "";
+        } finally {
+            Utils.closeStream(is);
+        }
+    }
+
+    public void onResumeExtra() {
+        if (callSecondInit) {
+            callSecondInit = false;
+            eventSecondInit();
+        }
+        if (callRegisterOnly) {
+            callRegisterOnly = false;
+            eventRegisterOnly();
+        }
+    }
+
+    public void showDialogFinish(final int typeOfFinish) {
+        // Logger.d(TAG, "showFinishDialog(" + typeOfFinish + ")");
+        if (typeOfFinish == FINISH_NONE)
+            return;
+
+        this.finishType = typeOfFinish;
+
+        runOnUiThread(() -> {
+            String title = getString(R.string.question);
+            String message = "";
+            boolean cancelable =
+                    !(finishType == FINISH_RESTART_FORCE || finishType == FINISH_RESTART_FACTORY_RESET
+                            || finishType == FINISH_REINSTALL || finishType == FINISH_EXIT_FORCE);
+            switch (finishType) {
+                case FINISH_EXIT:
+                    message = getString(R.string.do_you_really_want_to_exit);
+                    break;
+                case FINISH_EXIT_FORCE:
+                    title = getString(R.string.info);
+                    message = getString(R.string.you_have_to_exit_app_force);
+                    break;
+                case FINISH_RESTART:
+                    message = getString(R.string.you_have_to_restart_app_recommended);
+                    break;
+                case FINISH_RESTART_FORCE:
+                case FINISH_RESTART_FACTORY_RESET:
+                    title = getString(R.string.info);
+                    message = getString(R.string.you_have_to_restart_app_force);
+                    break;
+                case FINISH_REINSTALL:
+                    title = getString(R.string.info);
+                    message = getString(R.string.new_version_will_be_installed);
+                    break;
+                default:
+                    // Do nothing
+                    break;
+            }
+
+            AlertDialog.Builder b = new AlertDialog.Builder(this);
+            b.setCancelable(cancelable);
+            b.setTitle(title);
+            b.setIcon(R.drawable.ic_question_alt);
+            b.setMessage(message);
+            b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
+                        finish = true;
+                        finish();
+                    } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
+                            || finishType == FINISH_RESTART_FACTORY_RESET) {
+                        // Setup one-short alarm to restart my application in 3 seconds - TODO need use
+                        // another context
+                        // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                        // Intent intent = new Intent(APP_INTENT_MAIN);
+                        // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
+                        // PendingIntent.FLAG_ONE_SHOT);
+                        // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
+                        finish = true;
+                        finish();
+                    } else if (finishType == FINISH_REINSTALL) {
+                        // Intent intent = new Intent();
+                        // intent.setAction(android.content.Intent.ACTION_VIEW);
+                        // intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")),
+                        // "application/vnd.android.package-archive");
+                        //
+                        // startActivity(intent);
+                        showDialogFinish(FINISH_EXIT_FORCE);
+                    }
+                }
+            });
+            if (cancelable) {
+                b.setNegativeButton(R.string.cancel, null);
+            }
+            b.show();
+        });
+    }
+
+    protected boolean testFileSystem() {
+        if (DIRS.length == 0)
+            return true;
+
+        if (FileSystem.createRoot(getString(R.string.app_name))) {
+            Logger.i(TAG, "FileSystem successfully created!");
+        } else {
+            Logger.w(TAG, "FileSystem cannot be created!");
+            UtilsGUI.showDialogError(this, R.string.filesystem_cannot_create_root,
+                    (dialog, which) -> {
+                        //showDialogFinish(FINISH_EXIT_FORCE);
+                    });
+            return false;
+        }
+
+        // fileSystem created successfully
+        for (String DIR : DIRS) {
+            (new File(DIR)).mkdirs();
+        }
+        return true;
+    }
+
+    protected boolean testFreeSpace() {
+        if (DIRS.length == 0)
+            return true;
+
+        // check disk space (at least 5MB)
+        long bytesFree;
+        try {
+            StatFs stat = new StatFs(FileSystem.ROOT);
+            bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
+        } catch (Exception e) {
+            return false;
+        }
+        long megFree = bytesFree / 1048576;
+        // Logger.d(TAG, "megAvailable:" + megAvail + ", free:" + megFree);
+        if (megFree > 0 && megFree < 5) {
+            UtilsGUI.showDialogError(MainActivity.this,
+                    getString(R.string.not_enough_disk_space_x, FileSystem.ROOT, megFree + "MB"),
+                    (dialog, which) -> {
+                        //showDialogFinish(FINISH_EXIT_FORCE);
+                    });
+            return false;
+        }
+        return true;
+    }
+
+    public void finishForceSilent() {
+        finish = true;
+        finish();
+    }
+
+    /**
+     * Method that create layout for actual activity. This is called everytime, onCreate method is
+     * called
+     */
     protected void eventCreateLayout() {
         setContentView(R.layout.layout_main);
 
@@ -280,32 +512,62 @@ public class MainActivity extends CustomMainActivity {
     }
 
     @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // Logger.d(TAG, "dispatchKeyEvent(" + event.getAction() + ", " + event.getKeyCode() + ")");
+        if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+            switch (getCloseValue()) {
+                case CLOSE_DESTROY_APP_NO_DIALOG:
+                    finish = true;
+                    finish();
+                    return true;
+                case CLOSE_DESTROY_APP_DIALOG_NO_TEXT:
+                case CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT:
+                    showDialogFinish(FINISH_EXIT);
+                    return true;
+                default:
+                    // no action
+                    break;
+            }
+        }
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    /**
+     * This is called only when application really need to be destroyed, so in this method is
+     * suggested to clear all variables
+     */
     protected void eventDestroyApp() {
         NotificationManager mNotificationManager =
                 (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
     }
 
-    @Override
+    /**
+     * This is called only once after application start. It's called in onCreate method before layout
+     * is placed
+     */
     protected void eventFirstInit() {
         // call after start actions here
         VersionInfo.afterStartAction();
     }
 
-    @Override
+    /**
+     * This is called everytime except first run. It's called in onResume method
+     */
     protected void eventRegisterOnly() {
     }
 
-    @Override
+    /**
+     * This is called only once after application start. It's called in onResume method
+     */
     protected void eventSecondInit() {
     }
 
-    @Override
     protected String getCloseAdditionalText() {
         return null;
     }
 
-    @Override
     protected int getCloseValue() {
         return CLOSE_DESTROY_APP_NO_DIALOG;
     }
@@ -337,6 +599,36 @@ public class MainActivity extends CustomMainActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        A.registerMain(this);
+
+        callSecondInit = false;
+        callRegisterOnly = false;
+        if (A.getApp() == null) { // first app run
+            // Logger.w(TAG, "onCreate() - init new");
+            A.registerApp((MainApplication) getApplication());
+
+            // not test some things
+            testFileSystem();
+
+            // set last known location
+            if (Utils.isPermissionAllowed(Manifest.permission.ACCESS_FINE_LOCATION)
+                    && (Preferences.GPS || Preferences.GPS_START_AUTOMATICALLY)) {
+                LocationState.setGpsOn(this);
+            } else {
+                LocationState.setGpsOff(this);
+            }
+
+            eventFirstInit();
+            setScreenBasic(this);
+            eventCreateLayout();
+            callSecondInit = true;
+        } else {
+            // Logger.w(TAG, "onCreate() - only register");
+            setScreenBasic(this);
+            eventCreateLayout();
+            callRegisterOnly = true;
+        }
 
         if (needAskForPermission()) {
             checkPermissions(this);
@@ -399,6 +691,44 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        // Stop notification
+        Intent intent = new Intent(MainActivity.this, NotificationService.class);
+        intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
+        startService(intent);
+
+        if (finish) {
+            // stop debug if any forgotten
+            Debug.stopMethodTracing();
+            // remember value before A.getApp() exist
+            boolean clearPackageAllowed =
+                    Utils.isPermissionAllowed(Manifest.permission.KILL_BACKGROUND_PROCESSES);
+
+            // call individual app close
+            eventDestroyApp();
+
+            // disable highlight
+            PreferenceValues.disableWakeLock();
+            // save last known location
+            PreferenceValues.setLastKnownLocation();
+            // disable GPS modul
+            LocationState.destroy(MainActivity.this);
+
+            // destroy static references
+            A.destroy();
+            // call native destroy
+            super.onDestroy();
+
+            // remove app from memory
+            if (clearPackageAllowed) {
+                clearPackageFromMemory(); // XXX not work on 2.2 and higher!!!
+            }
+        } else {
+            super.onDestroy();
+        }
+    }
+
     private void openCartridge(File file) {
         try {
             CartridgeFile cart = null;
@@ -420,12 +750,38 @@ public class MainActivity extends CustomMainActivity {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        // Stop notification
-        Intent intent = new Intent(MainActivity.this, NotificationService.class);
-        intent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
-        startService(intent);
-        super.onDestroy();
+    private void clearPackageFromMemory() {
+        new Thread(() -> {
+            try {
+                ActivityManager aM =
+                        (ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE);
+
+                Thread.sleep(1250);
+                aM.killBackgroundProcesses(getPackageName());
+            } catch (Exception e) {
+                Logger.e(TAG, "clearPackageFromMemory()", e);
+            }
+        }).start();
+    }
+
+    private void clickMap() {
+        MapDataProvider mdp = MapHelper.getMapDataProvider();
+        mdp.clear();
+        mdp.addCartridges(cartridgeFiles);
+        MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
+    }
+
+    private void clickStart() {
+        // check cartridges
+        if (!isAnyCartridgeAvailable()) {
+            return;
+        }
+
+        ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
+        dialog.setParams(cartridgeFiles);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
+                .commitAllowingStateLoss();
     }
 }
