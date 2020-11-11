@@ -36,7 +36,7 @@
     <string name="filesystem_cannot_create_root">ルートフォルダを作成できません。SDカードが見つからないようです。\n\nデバイスにカードを挿入してから再実行してください</string>
     <string name="finished">完了</string>
     <string name="folder_default">デフォルト</string>
-    <string name="folder_select">選択...</string>
+    <string name="folder_select">選択…</string>
     <string name="gps">位置</string>
     <string name="gps_and_location">GPS測位と位置</string>
     <string name="gps_disabled">GPS測位オフ</string>
@@ -90,8 +90,8 @@
     <string name="save_game_before_exit">終了する前にゲームを保存しますか?</string>
     <string name="save_game_ok">ゲームを保存しました</string>
     <string name="save_game_slot">スロット</string>
-    <string name="save_game_slots">保存...</string>
-    <string name="saving">保存中...</string>
+    <string name="save_game_slots">保存…</string>
+    <string name="saving">保存中…</string>
     <string name="scanQR">QRをスキャン</string>
     <string name="settings">設定</string>
     <string name="speed">速度</string>
