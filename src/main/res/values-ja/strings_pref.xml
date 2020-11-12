@@ -106,12 +106,12 @@
     <string name="pref_units_length">距離の単位</string>
     <string name="pref_units_length_desc">\n距離の単位を選択</string>
     <string name="pref_units_length_im_f">フィート(ft)</string>
-    <string name="pref_units_length_im_fm">フィート/マイル(ft/mi)</string>
+    <string name="pref_units_length_im_fm">フィート,マイル(ft,mi)</string>
     <string name="pref_units_length_im_y">ヤード(yd)</string>
-    <string name="pref_units_length_im_ym">ヤード/マイル(yd/mi)</string>
+    <string name="pref_units_length_im_ym">ヤード,マイル(yd,mi)</string>
     <string name="pref_units_length_me_m">メートル(m)</string>
-    <string name="pref_units_length_me_mkm">メートル/キロメートル(m/km)</string>
-    <string name="pref_units_length_na_nmi">海里(m/nmi)</string>
+    <string name="pref_units_length_me_mkm">メートル,キロメートル(m,km)</string>
+    <string name="pref_units_length_na_nmi">海里(m,nmi)</string>
     <string name="pref_units_speed">速度の単位</string>
     <string name="pref_units_speed_desc">\n速度の単位を選択</string>
 </resources>
