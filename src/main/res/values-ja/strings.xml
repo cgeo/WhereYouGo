@@ -103,7 +103,7 @@
     <string name="version">バージョン</string>
     <string name="waypoints">ウェイポイント</string>
     <string name="web_page">Webページ</string>
-    <string name="working">処理中...</string>
+    <string name="working">処理中…</string>
     <string name="yes">はい</string>
     <string name="you_have_to_exit_app_force">アプリを終了して下さい</string>
     <string name="you_have_to_restart_app_force">アプリを再起動して下さい</string>
