@@ -17,7 +17,6 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
