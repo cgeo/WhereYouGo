@@ -193,8 +193,6 @@ public class PreferenceValues {
     }
 
     public static void setCurrentActivity(Activity activity) {
-        if (PreferenceValues.currentActivity == null && activity != null)
-            MainApplication.appRestored();
         PreferenceValues.currentActivity = activity;
     }
 

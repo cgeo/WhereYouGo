@@ -52,7 +52,6 @@ public class MainApplication extends Application {
     private static final String TAG = "MainApplication";
 
     private static Timer mTimer;
-    private static OnAppVisibilityChange onAppVisibilityChange;
     private static Context applicationContext;
     private Locale locale = null;
     // screen ON/OFF receiver
@@ -61,12 +60,6 @@ public class MainApplication extends Application {
 
     public static Context getContext() {
         return applicationContext;
-    }
-
-    public static void appRestored() {
-        onAppRestored();
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppRestored();
     }
 
     public static void onActivityPause() {
@@ -79,26 +72,10 @@ public class MainApplication extends Application {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!PreferenceValues.existCurrentActivity())
-                    onAppMinimized();
                 LocationState.onActivityPauseInstant(PreferenceValues.getCurrentActivity());
                 mTimer = null;
             }
         }, 2000);
-    }
-
-    private static void onAppMinimized() {
-        Logger.w(TAG, "onAppMinimized()");
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppMinimized();
-    }
-
-    private static void onAppRestored() {
-        Logger.w(TAG, "onAppRestored()");
-    }
-
-    public static void registerVisibilityHandler(OnAppVisibilityChange handler) {
-        MainApplication.onAppVisibilityChange = handler;
     }
 
     public void destroy() {
@@ -111,7 +88,6 @@ public class MainApplication extends Application {
             mTimer.cancel();
             mTimer = null;
         }
-        onAppVisibilityChange = null;
     }
 
     public boolean setRoot(String pathCustom) {
@@ -317,14 +293,6 @@ public class MainApplication extends Application {
         } catch (Exception e) {
             Logger.e(TAG, String.format("onTrimMemory(%d): savegame failed", level));
         }
-    }
-
-    public interface OnAppVisibilityChange {
-
-        void onAppMinimized();
-
-        void onAppRestored();
-
     }
 
     private class ScreenReceiver extends BroadcastReceiver {

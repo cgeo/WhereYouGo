@@ -86,25 +86,19 @@ public class CartridgeDetailsActivity extends CustomActivity {
 
         tvDistance.setText(Html.fromHtml(buff));
 
-        CustomDialog.setBottom(this, getString(R.string.start), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                CartridgeDetailsActivity.this.finish();
-                MainActivity.startSelectedCartridge(false);
-                return true;
-            }
-        }, null, null, getString(R.string.navigate), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                Location loc = new Location(TAG);
-                loc.setLatitude(MainActivity.cartridgeFile.latitude);
-                loc.setLongitude(MainActivity.cartridgeFile.longitude);
-                Guide guide = new Guide(MainActivity.cartridgeFile.name, loc);
-                A.getGuidingContent().guideStart(guide);
-                MainActivity.callGudingScreen(CartridgeDetailsActivity.this);
-                CartridgeDetailsActivity.this.finish();
-                return true;
-            }
+        CustomDialog.setBottom(this, getString(R.string.start), (dialog, v, btn) -> {
+            CartridgeDetailsActivity.this.finish();
+            MainActivity.startSelectedCartridge(false);
+            return true;
+        }, null, null, getString(R.string.navigate), (dialog, v, btn) -> {
+            Location loc1 = new Location(TAG);
+            loc1.setLatitude(MainActivity.cartridgeFile.latitude);
+            loc1.setLongitude(MainActivity.cartridgeFile.longitude);
+            Guide guide = new Guide(MainActivity.cartridgeFile.name, loc1);
+            A.getGuidingContent().guideStart(guide);
+            MainActivity.callGudingScreen(CartridgeDetailsActivity.this);
+            CartridgeDetailsActivity.this.finish();
+            return true;
         });
     }
 }

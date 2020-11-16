@@ -37,7 +37,6 @@ import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
@@ -98,18 +97,14 @@ public abstract class CustomMainActivity extends CustomActivity {
                             } else {
                                 correct = false;
                             }
-                        } else if (tagName.equalsIgnoreCase("li")) {
-                            if (correct) {
-                                versionInfo += ("<li>" + parser.nextText() + "</li>");
-                            }
+                        } else if (tagName.equalsIgnoreCase("li") && correct) {
+                            versionInfo += ("<li>" + parser.nextText() + "</li>");
                         }
                     } else if (event == XmlPullParser.END_TAG) {
                         tagName = parser.getName();
-                        if (tagName.equalsIgnoreCase("update")) {
-                            if (correct) {
-                                correct = false;
-                                versionInfo += "</ul>";
-                            }
+                        if (tagName.equalsIgnoreCase("update") && correct) {
+                            correct = false;
+                            versionInfo += "</ul>";
                         } else if (tagName.equals("document")) {
                             break;
                         }
@@ -328,6 +323,9 @@ public abstract class CustomMainActivity extends CustomActivity {
                 case FINISH_REINSTALL:
                     title = getString(R.string.info);
                     message = getString(R.string.new_version_will_be_installed);
+                    break;
+                default:
+                    // Do nothing
                     break;
             }
 
