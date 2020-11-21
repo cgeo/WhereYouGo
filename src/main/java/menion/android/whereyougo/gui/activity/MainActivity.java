@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
-import android.os.StatFs;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,8 +91,6 @@ public class MainActivity extends CustomActivity {
 
     private static Vector<CartridgeFile> cartridgeFiles;
     private static final String[] DIRS = new String[]{FileSystem.CACHE};
-    private static boolean callSecondInit;
-    private static boolean callRegisterOnly;
 
     public static final WUI wui = new WUI();
     public static final int FINISH_NONE = -1;
@@ -151,14 +148,6 @@ public class MainActivity extends CustomActivity {
             Logger.e(TAG, "getSyncFile()", e);
             return null;
         }
-    }
-
-    public static String getSelectedFile() {
-        return selectedFile;
-    }
-
-    public static void setSelectedFile(String filepath) {
-        MainActivity.selectedFile = filepath;
     }
 
     private static void loadCartridge(OutputStream log) {
@@ -331,17 +320,6 @@ public class MainActivity extends CustomActivity {
         }
     }
 
-    public void onResumeExtra() {
-        if (callSecondInit) {
-            callSecondInit = false;
-            eventSecondInit();
-        }
-        if (callRegisterOnly) {
-            callRegisterOnly = false;
-            eventRegisterOnly();
-        }
-    }
-
     public void showDialogFinish(final int typeOfFinish) {
         // Logger.d(TAG, "showFinishDialog(" + typeOfFinish + ")");
         if (typeOfFinish == FINISH_NONE)
@@ -443,36 +421,6 @@ public class MainActivity extends CustomActivity {
         return true;
     }
 
-    protected boolean testFreeSpace() {
-        if (DIRS.length == 0)
-            return true;
-
-        // check disk space (at least 5MB)
-        long bytesFree;
-        try {
-            StatFs stat = new StatFs(FileSystem.ROOT);
-            bytesFree = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
-        } catch (Exception e) {
-            return false;
-        }
-        long megFree = bytesFree / 1048576;
-        // Logger.d(TAG, "megAvailable:" + megAvail + ", free:" + megFree);
-        if (megFree > 0 && megFree < 5) {
-            UtilsGUI.showDialogError(MainActivity.this,
-                    getString(R.string.not_enough_disk_space_x, FileSystem.ROOT, megFree + "MB"),
-                    (dialog, which) -> {
-                        //showDialogFinish(FINISH_EXIT_FORCE);
-                    });
-            return false;
-        }
-        return true;
-    }
-
-    public void finishForceSilent() {
-        finish = true;
-        finish();
-    }
-
     /**
      * Method that create layout for actual activity. This is called everytime, onCreate method is
      * called
@@ -552,22 +500,6 @@ public class MainActivity extends CustomActivity {
         VersionInfo.afterStartAction();
     }
 
-    /**
-     * This is called everytime except first run. It's called in onResume method
-     */
-    protected void eventRegisterOnly() {
-    }
-
-    /**
-     * This is called only once after application start. It's called in onResume method
-     */
-    protected void eventSecondInit() {
-    }
-
-    protected String getCloseAdditionalText() {
-        return null;
-    }
-
     protected int getCloseValue() {
         return CLOSE_DESTROY_APP_NO_DIALOG;
     }
@@ -602,8 +534,6 @@ public class MainActivity extends CustomActivity {
 
         A.registerMain(this);
 
-        callSecondInit = false;
-        callRegisterOnly = false;
         if (A.getApp() == null) { // first app run
             // Logger.w(TAG, "onCreate() - init new");
             A.registerApp((MainApplication) getApplication());
@@ -622,12 +552,10 @@ public class MainActivity extends CustomActivity {
             eventFirstInit();
             setScreenBasic(this);
             eventCreateLayout();
-            callSecondInit = true;
         } else {
             // Logger.w(TAG, "onCreate() - only register");
             setScreenBasic(this);
             eventCreateLayout();
-            callRegisterOnly = true;
         }
 
         if (needAskForPermission()) {
