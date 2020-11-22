@@ -23,7 +23,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -363,33 +362,29 @@ public class MainActivity extends CustomActivity {
             b.setTitle(title);
             b.setIcon(R.drawable.ic_question_alt);
             b.setMessage(message);
-            b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
-                        finish = true;
-                        finish();
-                    } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
-                            || finishType == FINISH_RESTART_FACTORY_RESET) {
-                        // Setup one-short alarm to restart my application in 3 seconds - TODO need use
-                        // another context
-                        // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        // Intent intent = new Intent(APP_INTENT_MAIN);
-                        // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
-                        // PendingIntent.FLAG_ONE_SHOT);
-                        // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
-                        finish = true;
-                        finish();
-                    } else if (finishType == FINISH_REINSTALL) {
-                        // Intent intent = new Intent();
-                        // intent.setAction(android.content.Intent.ACTION_VIEW);
-                        // intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")),
-                        // "application/vnd.android.package-archive");
-                        //
-                        // startActivity(intent);
-                        showDialogFinish(FINISH_EXIT_FORCE);
-                    }
+            b.setPositiveButton(R.string.ok, (dialog, which) -> {
+                if (finishType == FINISH_EXIT || finishType == FINISH_EXIT_FORCE) {
+                    finish = true;
+                    finish();
+                } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
+                        || finishType == FINISH_RESTART_FACTORY_RESET) {
+                    // Setup one-short alarm to restart my application in 3 seconds - TODO need use
+                    // another context
+                    // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                    // Intent intent = new Intent(APP_INTENT_MAIN);
+                    // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
+                    // PendingIntent.FLAG_ONE_SHOT);
+                    // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
+                    finish = true;
+                    finish();
+                } else if (finishType == FINISH_REINSTALL) {
+                    // Intent intent = new Intent();
+                    // intent.setAction(android.content.Intent.ACTION_VIEW);
+                    // intent.setDataAndType(Uri.fromFile(new File(FileSystem.ROOT + "smartmaps.apk")),
+                    // "application/vnd.android.package-archive");
+                    //
+                    // startActivity(intent);
+                    showDialogFinish(FINISH_EXIT_FORCE);
                 }
             });
             if (cancelable) {
