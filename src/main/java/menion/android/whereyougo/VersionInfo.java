@@ -20,7 +20,7 @@ package menion.android.whereyougo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
@@ -73,10 +73,10 @@ public class VersionInfo {
             newsInfo +=
                     "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /></head><body>";
             newsInfo +=
-                    CustomMainActivity.loadAssetString(PreferenceValues.getLanguageCode() + "_first.html");
+                    MainActivity.loadAssetString(PreferenceValues.getLanguageCode() + "_first.html");
             newsInfo += "</body></html>";
         } else {
-            newsInfo = CustomMainActivity.getNewsFromTo(lastVersion, actualVersion);
+            newsInfo = MainActivity.getNewsFromTo(lastVersion, actualVersion);
         }
 
         return newsInfo;

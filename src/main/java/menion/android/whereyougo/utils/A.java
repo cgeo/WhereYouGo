@@ -23,7 +23,7 @@ import menion.android.whereyougo.BuildConfig;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.audio.ManagerAudio;
 import menion.android.whereyougo.geo.orientation.Orientation;
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.guide.GuideContent;
 
 /**
@@ -32,7 +32,7 @@ import menion.android.whereyougo.guide.GuideContent;
  */
 public class A {
 
-    private static CustomMainActivity main;
+    private static MainActivity main;
     private static final String TAG = "A";
     private static MainApplication app;
     private static GuideContent guidingContent;
@@ -64,7 +64,7 @@ public class A {
         return guidingContent;
     }
 
-    public static CustomMainActivity getMain() {
+    public static MainActivity getMain() {
         return main;
     }
 
@@ -95,7 +95,7 @@ public class A {
         A.app = app;
     }
 
-    public static void registerMain(CustomMainActivity main) {
+    public static void registerMain(MainActivity main) {
         A.main = main;
     }
 
