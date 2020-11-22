@@ -67,7 +67,6 @@
     <string name="no_satellites">Brak satelitów</string>
     <string name="no_target">Brak celu!</string>
     <string name="no_wherigo_cartridge_available">Brak dostępnego kartridża Wherigo (*.gwc).\nPobierz lub skopiuj je do folderu \"%1$s\". Możesz także ustawić ścieżkę do niestandardowego folderu w \"Ustawienia - Globalne - Folder Wherigo\". Upewnij się, że przyznałeś aplikacji uprawnienia do zapisu w pamięci zewnętrznej i masz uprawnienia do zapisu w wybranym folderze. Niektóre nowsze urządzenia nie pozwalają na zapis na karcie SD. Jeśli nie masz pewności, wybierz domyślny „Folder Wherigo”.</string>
-    <string name="not_enough_disk_space_x">Za mało wolnego miejsca na dysku SDCard!\n(%1$s, wolne: %2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Oczekiwanie</string>
     <string name="pitch">Pułap</string>

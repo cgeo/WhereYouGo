@@ -71,7 +71,6 @@ Můžete také nastavit cestu k jinému adresáři v \"Nastavení - Hlavní - Sl
 Ujistěte se, že jste aplikaci povolili právo na zápis a že ve zvolené složce máte právo na zápis.
 Některá novější zařízení nedovolují zápis na SD kartu.
 Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.</string>
-    <string name="not_enough_disk_space_x">Nedostatek volného místa na SD kartě!\n(%1$s, volné:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Čeká na vyřízení</string>
     <string name="pitch">Náklon</string>
