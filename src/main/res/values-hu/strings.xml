@@ -44,7 +44,6 @@
     <string name="no_location_providers_available">Helyszolgáltató nem elérhető!</string>
     <string name="no_satellites">Nincsenek műholdak</string>
     <string name="no_target">Nincs cél!</string>
-    <string name="not_enough_disk_space_x">Nincs elég szabad hely az SD-kártyán!\n(%1$s, szabad:%2$s)</string>
     <string name="pending">Függő</string>
     <string name="pitch">Hangmagasság</string>
     <string name="point">Pont</string>

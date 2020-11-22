@@ -67,7 +67,6 @@
     <string name="no_satellites">Aucun satellite</string>
     <string name="no_target">Aucune cible</string>
     <string name="no_wherigo_cartridge_available">Aucune cartouche Wherigo (*.gwc) n\'est disponible.\nTéléchargez-les ou copiez-les dans le dossier \"%1$s\". Vous pouvez également définir un dossier personnalisé depuis \"Paramètres - Global - Dossier Wherigo\". Assurez-vous d’avoir autorisé l’application à écrire sur le stockage externe et d\'avoir les autorisations pour écrire dans le dossier sélectionné. Certains appareils ne permettent pas l’écriture sur la carte SD. Dans le doute, paramétrez le \"Dossier Wherigo\" par défaut.</string>
-    <string name="not_enough_disk_space_x">Pas assez d’espace disque libre sur Carte SD.\n(%1$s, libre : %2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">En attente</string>
     <string name="pitch">Inclinaison</string>

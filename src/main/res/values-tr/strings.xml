@@ -67,7 +67,6 @@
     <string name="no_satellites">Uydu yok</string>
     <string name="no_target">Hedef yok!</string>
     <string name="no_wherigo_cartridge_available">Herhangi bir Wherigo kartuşu (*.gwc) bulunmuyor.\nKartuşları \"%1$s\" dizinine kopyalayın veya indirin. Ayrıca \"Ayarlar - Başlıca - Wherigo dosyası\" konumuna da yol oluşturabilirsiniz. Seçili dizine ve harici belleğe veri kaydı izni verdiğinizden emin olun. Bazı cihazlar SD kart üzerine veri yazılmasına izin vermez. Emin değilseniz \'\'Wherigo dosyası\'\'nı otomatik olarak ayarlayın.</string>
-    <string name="not_enough_disk_space_x">SD kartta yeterli boş disk alanı yok!\n(%1$s, boş:%2$s)</string>
     <string name="ok">Tamam</string>
     <string name="pending">Bekliyor</string>
     <string name="pitch">Aralık</string>

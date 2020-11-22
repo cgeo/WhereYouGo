@@ -67,7 +67,6 @@
     <string name="no_satellites">Inga satelliter</string>
     <string name="no_target">Inget mål!</string>
     <string name="no_wherigo_cartridge_available">Ingen Wherigo cartridge (*.gwc) är tillgänglig.\nLadda ner eller kopiera dem till katalogen \"%1$s\". Du kan också ange en sökväg till anpassad katalog i \"Inställningar - Main - Wherigo mapp\". Se till att du har behörighet att skriva till extern lagring och att du har skrivrättigheter i valda katalogen. Vissa nyare enheter tillåter inte skrivning till SD-kort. Om du är osäker kan du ställa in \"Wherigo-mapp\" automatiskt.</string>
-    <string name="not_enough_disk_space_x">Inte tillräckligt med ledigt diskutrymme på SD-kortet!\n(%1$s, free:%2$s)</string>
     <string name="ok">Ok</string>
     <string name="pending">Väntande</string>
     <string name="pitch">Stigning</string>

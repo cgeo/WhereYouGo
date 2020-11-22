@@ -38,7 +38,6 @@
     <string name="no_location_providers_available">لا يوجد مزود للمواقع !</string>
     <string name="no_satellites">لم يتم العثور على أقمار اصطناعية</string>
     <string name="no_target">لا يوجد هدف !</string>
-    <string name="not_enough_disk_space_x">لا يوجد مساحة تخزين كافية على ذاكرة الـ SDCard ! \n(%1$s, free:%2$s)</string>
     <string name="ok">جيد</string>
     <string name="pitch">انحدار</string>
     <string name="point">نقطة</string>

@@ -65,7 +65,6 @@
     <string name="no_location_providers_available">Ingen Lokasjons leverandører er tilgjengelig!</string>
     <string name="no_satellites">Ingen Satelitter er Tilgjengelig</string>
     <string name="no_target">Ingen Mål!</string>
-    <string name="not_enough_disk_space_x">Ikke nok ledig plass på SDKort!\n(%1$s, free:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Venter</string>
     <string name="pitch">Bane</string>

@@ -67,7 +67,6 @@
     <string name="no_satellites">GPS衛星なし</string>
     <string name="no_target">対象なし</string>
     <string name="no_wherigo_cartridge_available">Wherigoカートリッジ(*.gwc)が見つかりません。\n\"%1$s\"フォルダにダウンロードまたはコピーしてください。\"設定\"&gt;\"全般\"&gt;\"Wherigoフォルダ\"でWherigoカートリッジのフォルダを変更することもできます。アプリにストレージ権限を許可して選択したフォルダに書き込めることを確認してください。一部の新しいデバイスはSDカードに書き込みできません。わからない場合はデフォルトの\"Wherigoフォルダ\"を使用してください</string>
-    <string name="not_enough_disk_space_x">SDカードに充分な空スペースがない\n(%1$s, 空き:%2$s)</string>
     <string name="ok">はい</string>
     <string name="pending">保留中</string>
     <string name="pitch">ピッチ</string>

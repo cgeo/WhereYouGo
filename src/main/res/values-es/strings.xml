@@ -67,7 +67,6 @@
     <string name="no_satellites">No hay satélites</string>
     <string name="no_target">¡No hay destino!</string>
     <string name="no_wherigo_cartridge_available">No hay ningún cartucho de Wherigo (*.gwc) disponible.\nDescárgalos o cópialos en el directorio \"%1$s\". También puedes establecer una ruta al directorio personalizado en la carpeta \"Configuración - Principal - Carpeta Wherigo\". Asegúrate de que has concedido permiso a la aplicación para escribir en el almacenamiento externo, y de que tienes permiso de escritura en el directorio seleccionado. Algunos dispositivos más modernos no permiten escribir en la tarjeta SD. Si no estás seguro, establece la \"carpeta Wherigo\" automáticamente.</string>
-    <string name="not_enough_disk_space_x">¡No hay suficiente espacio en la tarjeta SD!\n(%1$s, free:%2$s)</string>
     <string name="ok">Aceptar</string>
     <string name="pending">Pendiente</string>
     <string name="pitch">Pendiente</string>
