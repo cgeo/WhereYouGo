@@ -7,5 +7,5 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="ThemeSettings" parent="android:Theme.Holo.Light" />
+    <style name="ThemeSettings" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>

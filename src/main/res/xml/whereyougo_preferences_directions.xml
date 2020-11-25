@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whereyougo="http://whereyougo">
+    android:icon="@drawable/ic_action_directions"
+    android:key=""
+    android:persistent="false"
+    android:title="@string/pref_guiding">
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_guiding_compass_sounds">
+
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_GUIDING_COMPASS_SOUNDS"
+            android:key="@string/pref_KEY_B_GUIDING_COMPASS_SOUNDS"
+            android:summary="@string/pref_guiding_compass_sounds_desc"
+            android:title="@string/pref_guiding_compass_sounds" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_GUIDING_WAYPOINT_SOUND"
+            android:dependency="@string/pref_KEY_B_GUIDING_COMPASS_SOUNDS"
+            android:entries="@array/pref_guiding_waypoint_sound_entries"
+            android:entryValues="@array/pref_guiding_waypoint_sound_entry_values"
+            android:key="@string/pref_KEY_S_GUIDING_WAYPOINT_SOUND"
+            android:summary="@string/pref_guiding_sound_type_waypoint_desc"
+            android:title="@string/pref_guiding_sound_type" />
+        <EditTextPreference
+            android:defaultValue="@string/pref_DEFAULT_GUIDING_WAYPOINT_SOUND_DISTANCE"
+            android:dependency="@string/pref_KEY_B_GUIDING_COMPASS_SOUNDS"
+            android:inputType="number"
+            android:key="@string/pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE"
+            android:summary="@string/pref_guiding_sound_distance_waypoint_desc"
+            android:title="@string/pref_guiding_sound_distance"
+            whereyougo:previewTemplate="(%1$ m)" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/waypoints">
+
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_GUIDING_ZONE_POINT"
+            android:entries="@array/pref_guiding_zone_point_entries"
+            android:entryValues="@array/pref_guiding_zone_point_entry_values"
+            android:key="@string/pref_KEY_S_GUIDING_ZONE_POINT"
+            android:summary="@string/pref_guiding_zone_point_desc"
+            android:title="@string/pref_guiding_zone_point" />
+    </PreferenceCategory>
+</PreferenceScreen>

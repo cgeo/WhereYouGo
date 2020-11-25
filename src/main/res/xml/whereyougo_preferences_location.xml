@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whereyougo="http://whereyougo">
+    android:icon="@drawable/ic_action_location_found"
+    android:key=""
+    android:persistent="false"
+    android:title="@string/gps_and_location">
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_global">
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_GPS_START_AUTOMATICALLY"
+            android:key="@string/pref_KEY_B_GPS_START_AUTOMATICALLY"
+            android:summary="@string/pref_gps_desc"
+            android:title="@string/pref_gps" />
+        <EditTextPreference
+            android:defaultValue="@string/pref_DEFAULT_GPS_ALTITUDE_MANUAL_CORRECTION"
+            android:inputType="numberDecimal"
+            android:key="@string/pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION"
+            android:summary="@string/pref_gps_altitude_manual_correction_desc"
+            android:title="@string/pref_gps_altitude_manual_correction"
+            whereyougo:previewTemplate="(%1$ m)" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_GPS_BEEP_ON_GPS_FIX"
+            android:key="@string/pref_KEY_B_GPS_BEEP_ON_GPS_FIX"
+            android:summary="@string/pref_gps_beep_on_gps_fix_desc"
+            android:title="@string/pref_gps_beep_on_gps_fix" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/disable_location">
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_GPS_DISABLE_WHEN_HIDE"
+            android:key="@string/pref_KEY_B_GPS_DISABLE_WHEN_HIDE"
+            android:summary="@string/pref_gps_disable_desc"
+            android:title="@string/pref_gps_disable" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_GUIDING_GPS_REQUIRED"
+            android:dependency="@string/pref_KEY_B_GPS_DISABLE_WHEN_HIDE"
+            android:key="@string/pref_KEY_B_GUIDING_GPS_REQUIRED"
+            android:summary="@string/pref_guiding_gps_required_desc"
+            android:title="@string/pref_guiding" />
+    </PreferenceCategory>
+</PreferenceScreen>
