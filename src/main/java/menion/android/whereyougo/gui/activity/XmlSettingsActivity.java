@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class XmlSettingsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_settings);
         setTitle(R.string.settings);
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.settings);
 
 		/* workaround: I don't really know why I cannot call CustomActivity.customOnCreate(this); - OMG! */
         switch (Preferences.APPEARANCE_FONT_SIZE) {

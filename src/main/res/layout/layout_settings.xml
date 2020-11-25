@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout style="@style/PanelTopMain">
+
+        <ImageButton
+            android:id="@+id/button_logo"
+            style="@style/PanelButton"
+            android:src="@drawable/ic_title_logo" />
+
+        <ImageView style="@style/SeparatorVertical" />
+
+        <TextView style="@style/TitleText" />
+    </LinearLayout>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/settings_fragment_root"
         android:name="menion.android.whereyougo.gui.fragments.settings.WhereYouGoSettingsFragment"
