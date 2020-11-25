@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whereyougo="http://whereyougo">
+    android:icon="@drawable/ic_action_web_site"
+    android:key=""
+    android:persistent="false"
+    android:title="@string/pref_locale">
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_language">
+
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_LANGUAGE"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_entry_values"
+            android:key="@string/pref_KEY_S_LANGUAGE"
+            android:summary="@string/pref_language_desc"
+            android:title="@string/pref_language" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_units_coo_latlon">
+
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_UNITS_COO_LATLON"
+            android:entries="@array/pref_units_coo_latlon_entries"
+            android:entryValues="@array/pref_units_coo_latlon_entry_values"
+            android:key="@string/pref_KEY_S_UNITS_COO_LATLON"
+            android:summary="@string/pref_units_coo_latlon_desc"
+            android:title="@string/pref_units_coo_latlon" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_units">
+
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_UNITS_LENGTH"
+            android:entries="@array/pref_units_length_entries"
+            android:entryValues="@array/pref_units_length_entry_values"
+            android:key="@string/pref_KEY_S_UNITS_LENGTH"
+            android:summary="@string/pref_units_length_desc"
+            android:title="@string/pref_units_length" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_UNITS_ALTITUDE"
+            android:entries="@array/pref_units_altitude_entries"
+            android:entryValues="@array/pref_units_altitude_entry_values"
+            android:key="@string/pref_KEY_S_UNITS_ALTITUDE"
+            android:summary="@string/pref_units_altitude_desc"
+            android:title="@string/pref_units_altitude" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_UNITS_SPEED"
+            android:entries="@array/pref_units_speed_entries"
+            android:entryValues="@array/pref_units_speed_entry_values"
+            android:key="@string/pref_KEY_S_UNITS_SPEED"
+            android:summary="@string/pref_units_speed_desc"
+            android:title="@string/pref_units_speed" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_UNITS_ANGLE"
+            android:entries="@array/pref_units_angle_entries"
+            android:entryValues="@array/pref_units_angle_entry_values"
+            android:key="@string/pref_KEY_S_UNITS_ANGLE"
+            android:summary="@string/pref_units_angle_desc"
+            android:title="@string/pref_units_angle" />
+    </PreferenceCategory>
+</PreferenceScreen>

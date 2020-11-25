@@ -5,5 +5,5 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="ThemeSettings" parent="@android:style/Theme.Holo.Light.DarkActionBar" />
+    <style name="ThemeSettings" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>

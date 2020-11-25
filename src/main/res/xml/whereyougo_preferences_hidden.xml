@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LATITUDE"
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE" />
+    <EditTextPreference
+        android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_LONGITUDE"
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE" />
+    <EditTextPreference
+        android:defaultValue="@string/pref_DEFAULT_LAST_KNOWN_LOCATION_ALTITUDE"
+        android:key="@string/pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE" />
+    <EditTextPreference
+        android:defaultValue="0"
+        android:key="@string/pref_KEY_S_APPLICATION_VERSION_LAST" />
+    <EditTextPreference
+        android:defaultValue="@string/pref_DEFAULT_GPS_MIN_TIME_NOTIFICATION"
+        android:key="@string/pref_KEY_S_GPS_MIN_TIME_NOTIFICATION" />
+    <CheckBoxPreference
+        android:defaultValue="@string/pref_DEFAULT_GPS_START_AUTOMATICALLY"
+        android:key="@string/pref_KEY_B_GPS"
+        android:summary="@string/pref_gps_desc"
+        android:title="@string/pref_gps" />
+</PreferenceScreen>

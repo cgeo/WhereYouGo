@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whereyougo="http://whereyougo">
+    android:icon="@drawable/ic_action_picture"
+    android:key=""
+    android:persistent="false"
+    android:title="@string/pref_appearance">
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_global">
+
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_STATUSBAR"
+            android:key="@string/pref_KEY_B_STATUSBAR"
+            android:summary="@string/pref_statusbar_desc"
+            android:title="@string/pref_statusbar" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_FULLSCREEN"
+            android:key="@string/pref_KEY_B_FULLSCREEN"
+            android:summary="@string/pref_fullscreen_desc"
+            android:title="@string/pref_fullscreen" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_HIGHLIGHT"
+            android:entries="@array/pref_highlight_entries"
+            android:entryValues="@array/pref_highlight_entry_values"
+            android:key="@string/pref_KEY_S_HIGHLIGHT"
+            android:summary="@string/pref_highlight_desc"
+            android:title="@string/pref_highlight" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_FONT_SIZE"
+            android:entries="@array/pref_font_size_entries"
+            android:entryValues="@array/pref_font_size_entry_values"
+            android:key="@string/pref_KEY_S_FONT_SIZE"
+            android:summary="@string/pref_font_size_desc"
+            android:title="@string/pref_font_size" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_IMAGE_STRETCH"
+            android:key="@string/pref_KEY_B_IMAGE_STRETCH"
+            android:summary="@string/pref_image_stretch_desc"
+            android:title="@string/pref_image_stretch" />
+    </PreferenceCategory>
+</PreferenceScreen>

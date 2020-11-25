@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:whereyougo="http://whereyougo">
+    android:icon="@android:drawable/ic_menu_compass"
+    android:key=""
+    android:persistent="false"
+    android:title="@string/pref_sensors">
+
+    <PreferenceCategory
+        android:key=""
+        android:persistent="false"
+        android:title="@string/pref_orientation">
+
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_SENSOR_HARDWARE_COMPASS"
+            android:key="@string/pref_KEY_B_SENSOR_HARDWARE_COMPASS"
+            android:summary="@string/pref_sensors_compass_hardware_desc"
+            android:title="@string/pref_sensors_compass_hardware" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE"
+            android:key="@string/pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE"
+            android:summary="@string/pref_sensors_compass_auto_change_desc"
+            android:title="@string/pref_sensors_compass_auto_change" />
+        <EditTextPreference
+            android:defaultValue="@string/pref_DEFAULT_HARDWARE_COMPASS_AUTO_CHANGE_VALUE"
+            android:dependency="@string/pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE"
+            android:inputType="number"
+            android:key="@string/pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE"
+            android:summary="@string/pref_sensors_compass_auto_change_value_desc"
+            android:title="@string/pref_sensors_compass_auto_change_value"
+            whereyougo:previewTemplate="(%1$ m/s)" />
+        <CheckBoxPreference
+            android:defaultValue="@string/pref_DEFAULT_SENSORS_BEARING_TRUE"
+            android:key="@string/pref_KEY_B_SENSORS_BEARING_TRUE"
+            android:summary="@string/pref_bearing_true_desc"
+            android:title="@string/pref_bearing_true" />
+        <ListPreference
+            android:defaultValue="@string/pref_DEFAULT_SENSORS_ORIENT_FILTER"
+            android:entries="@array/pref_sensors_orient_filter_entries"
+            android:entryValues="@array/pref_sensors_orient_filter_entry_values"
+            android:key="@string/pref_KEY_S_SENSORS_ORIENT_FILTER"
+            android:summary="@string/pref_sensors_orient_filter_desc"
+            android:title="@string/pref_sensors_orient_filter" />
+    </PreferenceCategory>
+</PreferenceScreen>
