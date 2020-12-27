@@ -18,7 +18,8 @@
 package menion.android.whereyougo.preferences;
 
 import android.content.Context;
-import android.preference.PreferenceManager;
+
+import androidx.preference.PreferenceManager;
 
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.Logger;

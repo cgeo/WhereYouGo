@@ -25,8 +25,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.preference.PreferenceManager;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -233,17 +234,28 @@ public class MainApplication extends Application {
     /* LEGECY SUPPORT -- END */
 
         // set basic settings values
-        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences, false);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_appearance, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_compass, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_credentials, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_directions, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_global, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_hidden, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_localization, true);
+        PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_location, true);
         Preferences.setContext(this);
         Preferences.init(this);
 
         // get language
         Configuration config = getBaseContext().getResources().getConfiguration();
-        String lang = Preferences.getStringPreference(R.string.pref_KEY_S_LANGUAGE);
+        Context context = getApplicationContext();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String lang = sharedPreferences.getString(
+            getString(R.string.pref_KEY_S_LANGUAGE),
+            "");
 
         // set language
         if (!lang.equals(getString(R.string.pref_language_default_value))
-                && !config.locale.getLanguage().equals(lang)) {
+            && !config.locale.getLanguage().equals(lang)) {
             ArrayList<String> loc = StringToken.parse(lang, "_");
             if (loc.size() == 1) {
                 locale = new Locale(lang);
