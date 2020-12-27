@@ -8,7 +8,7 @@
     android:title="@string/pref_global">
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_GLOBAL"
         android:persistent="false"
         android:title="@string/pref_global">
         <Preference

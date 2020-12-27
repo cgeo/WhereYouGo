@@ -8,7 +8,7 @@
     android:title="@string/pref_sensors">
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_COMPASS"
         android:persistent="false"
         android:title="@string/pref_orientation">
 

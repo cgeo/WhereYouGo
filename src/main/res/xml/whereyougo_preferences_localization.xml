@@ -7,7 +7,7 @@
     android:title="@string/pref_locale">
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_LOCALIZATION_1"
         android:persistent="false"
         android:title="@string/pref_language">
 
@@ -22,7 +22,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_LOCALIZATION_2"
         android:persistent="false"
         android:title="@string/pref_units_coo_latlon">
 
@@ -37,7 +37,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_LOCALIZATION_3"
         android:persistent="false"
         android:title="@string/pref_units">
 

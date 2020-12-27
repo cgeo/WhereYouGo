@@ -23,6 +23,17 @@
 ...
 -->
 <resources>
+    <string name="pref_CAT_APPEARENCE" translatable="false">CAT_APPEARANCE</string>
+    <string name="pref_CAT_COMPASS" translatable="false">CAT_COMPASS</string>
+    <string name="pref_CAT_CREDENTIALS" translatable="false">CAT_CREDENTIALS</string>
+    <string name="pref_CAT_DIRECTIONS_1" translatable="false">CAT_DIRECTIONS_1</string>
+    <string name="pref_CAT_DIRECTIONS_2" translatable="false">CAT_DIRECTIONS_2</string>
+    <string name="pref_CAT_GLOBAL" translatable="false">CAT_GLOBAL</string>
+    <string name="pref_CAT_LOCALIZATION_1" translatable="false">CAT_LOCALIZATION_1</string>
+    <string name="pref_CAT_LOCALIZATION_2" translatable="false">CAT_LOCALIZATION_2</string>
+    <string name="pref_CAT_LOCALIZATION_3" translatable="false">CAT_LOCALIZATION_3</string>
+    <string name="pref_CAT_LOCATION_1" translatable="false">CAT_LOCATION_1</string>
+    <string name="pref_CAT_LOCATION_2" translatable="false">CAT_LOCATION_2</string>
     <string name="pref_KEY_X_ABOUT" translatable="false">KEY_X_ABOUT</string>
     <string name="pref_KEY_X_HIDDEN_PREFERENCES" translatable="false">KEY_X_HIDDEN_PREFERENCES</string>
     <string name="pref_KEY_X_LOGIN_PREFERENCES" translatable="false">KEY_X_LOGIN_PREFERENCES</string>

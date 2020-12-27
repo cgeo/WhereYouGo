@@ -8,7 +8,7 @@
     android:title="@string/pref_guiding">
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_DIRECTIONS_1"
         android:persistent="false"
         android:title="@string/pref_guiding_compass_sounds">
 
@@ -39,7 +39,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_DIRECTIONS_2"
         android:persistent="false"
         android:title="@string/waypoints">
 
