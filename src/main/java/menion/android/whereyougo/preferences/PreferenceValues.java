@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.PowerManager;
 
-import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;

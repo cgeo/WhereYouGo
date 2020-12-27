@@ -18,7 +18,6 @@
 package menion.android.whereyougo.gui.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -117,18 +116,6 @@ public class MainActivity extends CustomActivity {
             } catch (Exception e) {
             }
         });
-    }
-
-    /**
-     * Call activity that guide onto point.
-     *
-     * @param activity
-     * @return true if internal activity was called. False if external by intent.
-     */
-    public static boolean callGudingScreen(Activity activity) {
-        Intent intent = new Intent(activity, GuidingActivity.class);
-        activity.startActivity(intent);
-        return true;
     }
 
     public static File getSaveFile() throws IOException {
@@ -427,26 +414,24 @@ public class MainActivity extends CustomActivity {
         ((TextView) findViewById(R.id.title_text)).setText(R.string.app_name);
 
         // define buttons
-        View.OnClickListener mOnClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.button_start:
-                        clickStart();
-                        break;
-                    case R.id.button_gps:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, SatelliteActivity.class));
-                        break;
-                    case R.id.button_settings:
-                        MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));
-                        break;
-                    case R.id.button_map:
-                        clickMap();
-                        break;
-                    case R.id.button_logo:
-                        getSupportFragmentManager().beginTransaction()
-                                .add(new AboutDialog(), "DIALOG_TAG_MAIN").commitAllowingStateLoss();
-                        break;
-                }
+        View.OnClickListener mOnClickListener = v -> {
+            switch (v.getId()) {
+                case R.id.button_start:
+                    clickStart();
+                    break;
+                case R.id.button_gps:
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, SatelliteActivity.class));
+                    break;
+                case R.id.button_settings:
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, XmlSettingsActivity.class));
+                    break;
+                case R.id.button_map:
+                    clickMap();
+                    break;
+                case R.id.button_logo:
+                    getSupportFragmentManager().beginTransaction()
+                            .add(new AboutDialog(), "DIALOG_TAG_MAIN").commitAllowingStateLoss();
+                    break;
             }
         };
 
@@ -687,13 +672,6 @@ public class MainActivity extends CustomActivity {
         }).start();
     }
 
-    private void clickMap() {
-        MapDataProvider mdp = MapHelper.getMapDataProvider();
-        mdp.clear();
-        mdp.addCartridges(cartridgeFiles);
-        MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-    }
-
     private void clickStart() {
         // check cartridges
         if (!isAnyCartridgeAvailable()) {
@@ -706,5 +684,12 @@ public class MainActivity extends CustomActivity {
                 .beginTransaction()
                 .add(dialog, "DIALOG_TAG_CHOOSE_CARTRIDGE")
                 .commitAllowingStateLoss();
+    }
+
+    private void clickMap() {
+        MapDataProvider mdp = MapHelper.getMapDataProvider();
+        mdp.clear();
+        mdp.addCartridges(cartridgeFiles);
+        MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
     }
 }

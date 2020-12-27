@@ -1,22 +1,23 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -87,7 +88,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
         tvDistance.setText(Html.fromHtml(buff));
 
         CustomDialog.setBottom(this, getString(R.string.start), (dialog, v, btn) -> {
-            CartridgeDetailsActivity.this.finish();
+            finish();
             MainActivity.startSelectedCartridge(false);
             return true;
         }, null, null, getString(R.string.navigate), (dialog, v, btn) -> {
@@ -96,8 +97,9 @@ public class CartridgeDetailsActivity extends CustomActivity {
             loc1.setLongitude(MainActivity.cartridgeFile.longitude);
             Guide guide = new Guide(MainActivity.cartridgeFile.name, loc1);
             A.getGuidingContent().guideStart(guide);
-            MainActivity.callGudingScreen(CartridgeDetailsActivity.this);
-            CartridgeDetailsActivity.this.finish();
+            Intent intent = new Intent(CartridgeDetailsActivity.this, GuidingActivity.class);
+            startActivity(intent);
+            finish();
             return true;
         });
     }

@@ -17,6 +17,7 @@
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.geo.location.SatellitePosition;
 import menion.android.whereyougo.gui.IRefreshable;
+import menion.android.whereyougo.gui.activity.GuidingActivity;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.activity.MediaActivity;
 import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
@@ -183,7 +185,8 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
             btn01Click = (dialog, v, btn) -> {
                 try {
                     enableGuideOnEventTable();
-                    MainActivity.callGudingScreen(DetailsActivity.this);
+                    Intent intent = new Intent(DetailsActivity.this, GuidingActivity.class);
+                    startActivity(intent);
                     // this was causing closing of another DetailsActivity, that was called in action
                     //DetailsActivity.this.finish();
                 } catch (Exception e) {
