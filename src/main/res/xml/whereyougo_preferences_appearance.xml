@@ -7,7 +7,7 @@
     android:title="@string/pref_appearance">
 
     <PreferenceCategory
-        android:key=""
+        android:key="@string/pref_CAT_APPEARENCE"
         android:persistent="false"
         android:title="@string/pref_global"
         app:iconSpaceReserved="false">
