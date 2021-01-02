@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/ic_action_web_site"
     android:key=""
-    android:persistent="false"
     android:title="@string/pref_locale">
 
     <PreferenceCategory
