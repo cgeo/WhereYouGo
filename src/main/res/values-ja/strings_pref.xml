@@ -93,11 +93,11 @@
     <string name="pref_units_altitude">標高の単位</string>
     <string name="pref_units_altitude_desc">\n標高の単位を選択</string>
     <string name="pref_units_angle">角度の単位</string>
-    <string name="pref_units_angle_angular_mil">ミル(mil)</string>
-    <string name="pref_units_angle_degree">度(°)</string>
+    <string name="pref_units_angle_angular_mil">ミル [mil]</string>
+    <string name="pref_units_angle_degree">度 [°]</string>
     <string name="pref_units_angle_desc">\n角度の単位を選択</string>
-    <string name="pref_units_angle_russian_mil">ロシアミル(mil)</string>
-    <string name="pref_units_angle_us_artillery_mil">砲兵ミル(Artillery mil)</string>
+    <string name="pref_units_angle_russian_mil">ロシアミル [mil]</string>
+    <string name="pref_units_angle_us_artillery_mil">砲兵ミル [Artillery mil]</string>
     <string name="pref_units_coo_latlon">経緯度の形式</string>
     <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">\n座標(緯度/経度)の表示形式</string>
@@ -105,13 +105,13 @@
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">距離の単位</string>
     <string name="pref_units_length_desc">\n距離の単位を選択</string>
-    <string name="pref_units_length_im_f">フィート(ft)</string>
-    <string name="pref_units_length_im_fm">フィート,マイル(ft,mi)</string>
-    <string name="pref_units_length_im_y">ヤード(yd)</string>
-    <string name="pref_units_length_im_ym">ヤード,マイル(yd,mi)</string>
-    <string name="pref_units_length_me_m">メートル(m)</string>
-    <string name="pref_units_length_me_mkm">メートル,キロメートル(m,km)</string>
-    <string name="pref_units_length_na_nmi">海里(m,nmi)</string>
+    <string name="pref_units_length_im_f">フィート [ft]</string>
+    <string name="pref_units_length_im_fm">フィート,マイル [ft,mi]</string>
+    <string name="pref_units_length_im_y">ヤード [yd]</string>
+    <string name="pref_units_length_im_ym">ヤード,マイル [yd,mi]</string>
+    <string name="pref_units_length_me_m">メートル [m]</string>
+    <string name="pref_units_length_me_mkm">メートル,キロメートル [m,km]</string>
+    <string name="pref_units_length_na_nmi">海里 [m,nmi]</string>
     <string name="pref_units_speed">速度の単位</string>
     <string name="pref_units_speed_desc">\n速度の単位を選択</string>
 </resources>
