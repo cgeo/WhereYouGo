@@ -3,6 +3,7 @@ package menion.android.whereyougo.gui.fragments.settings;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -19,7 +20,7 @@ public class SettingsCompassFragment extends PreferenceFragmentCompat {
 
         CheckBoxPreference compassUseHardware = findPreference(Preferences.getKey(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS));
         CheckBoxPreference compassAutoChange = findPreference(Preferences.getKey(R.string.pref_KEY_B_HARDWARE_COMPASS_AUTO_CHANGE));
-        ListPreference compassAutoChangeValue = findPreference(Preferences.getKey(R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE));
+        EditTextPreference compassAutoChangeValue = findPreference(Preferences.getKey(R.string.pref_KEY_S_HARDWARE_COMPASS_AUTO_CHANGE_VALUE));
         CheckBoxPreference bearingUseTrue = findPreference(Preferences.getKey(R.string.pref_KEY_B_SENSORS_BEARING_TRUE));
         ListPreference orientationFilter = findPreference(Preferences.getKey(R.string.pref_KEY_S_SENSORS_ORIENT_FILTER));
 

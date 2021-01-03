@@ -62,7 +62,6 @@ public class XmlSettingsActivity
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
-        Log.e(TAG, getBaseContext().getResources().getConfiguration().toString());
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
