@@ -19,6 +19,9 @@ package menion.android.whereyougo.gui.extension.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -28,6 +31,9 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
+
+import java.util.Locale;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
@@ -40,10 +46,16 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.NotificationService;
 
 public class CustomActivity extends FragmentActivity {
+    private static final String TAG = CustomActivity.class.getSimpleName();
 
-    protected static void customOnCreate(Activity activity) {
-        // Logger.v(activity.getLocalClassName(), "customOnCreate(), id:" +
-        // activity.hashCode());
+    protected void customOnCreate(Activity activity) {
+        Logger.v(TAG, "customOnCreate(), id:" + activity.hashCode());
+
+        // Set language
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String lang = sharedPreferences.getString(getString(R.string.pref_KEY_S_LANGUAGE), "");
+        setLocale(this, lang);
+
         // set main activity parameters
         if (!(activity instanceof MainActivity)) {
             // Settings.setLanguage(this);
@@ -78,8 +90,7 @@ public class CustomActivity extends FragmentActivity {
     }
 
     protected static void customOnPause(Activity activity) {
-        // Logger.v(activity.getLocalClassName(), "customOnPause(), id:" +
-        // activity.hashCode());
+        Logger.v(TAG, "customOnPause(), id:" + activity.hashCode());
         // activity is not in foreground
         if (PreferenceValues.getCurrentActivity() == activity) {
             PreferenceValues.setCurrentActivity(null);
@@ -89,8 +100,7 @@ public class CustomActivity extends FragmentActivity {
     }
 
     protected static void customOnResume(Activity activity) {
-        // Logger.v(activity.getLocalClassName(), "customOnResume(), id:" +
-        // activity.hashCode());
+        Logger.v(TAG, "customOnResume(), id:" + activity.hashCode());
         // set current activity
         PreferenceValues.setCurrentActivity(activity);
         // enable permanent screen on
@@ -98,8 +108,7 @@ public class CustomActivity extends FragmentActivity {
     }
 
     protected static void customOnStart(Activity activity) {
-        // Logger.v(activity.getLocalClassName(), "customOnStart(), id:" +
-        // activity.hashCode());
+        Logger.v(TAG, "customOnStart(), id:" + activity.hashCode());
         setStatusbar(activity);
         setScreenFullscreen(activity);
     }
@@ -136,7 +145,7 @@ public class CustomActivity extends FragmentActivity {
                 }
             }
         } catch (Exception e) {
-            // Logger.e(TAG, "setStatusbar(" + activity + ")", e);
+            Logger.e(TAG, "setStatusbar(" + activity + ")", e);
         }
     }
 
@@ -149,7 +158,7 @@ public class CustomActivity extends FragmentActivity {
                 activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             }
         } catch (Exception e) {
-            // Logger.e(TAG, "setFullScreen(" + activity + ")", e);
+            Logger.e(TAG, "setFullScreen(" + activity + ")", e);
         }
     }
 
@@ -165,18 +174,18 @@ public class CustomActivity extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Logger.v(getLocalClassName(), "onCreate(), id:" + hashCode());
+        Logger.v(TAG, "onCreate(), id:" + hashCode());
         try {
             super.onCreate(savedInstanceState);
             customOnCreate(this);
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onCreate()", e);
+            Logger.e(TAG, "onCreate()", e);
         }
     }
 
     @Override
     public void onDestroy() {
-        Logger.v(getLocalClassName(), "onDestroy(), id:" + hashCode());
+        Logger.v(TAG, "onDestroy(), id:" + hashCode());
         try {
             super.onDestroy();
 
@@ -185,24 +194,24 @@ public class CustomActivity extends FragmentActivity {
                 System.gc();
             }
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onDestroy()", e);
+            Logger.e(TAG, "onDestroy()", e);
         }
     }
 
     @Override
     protected void onPause() {
-        Logger.v(getLocalClassName(), "onPause(), id:" + hashCode());
+        Logger.v(TAG, "onPause(), id:" + hashCode());
         try {
             super.onPause();
             customOnPause(this);
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onPause()", e);
+            Logger.e(TAG, "onPause()", e);
         }
     }
 
     @Override
     protected void onResume() {
-        Logger.v(getLocalClassName(), "onResume(), id:" + hashCode());
+        Logger.v(TAG, "onResume(), id:" + hashCode());
         try {
             super.onResume();
             customOnResume(this);
@@ -213,18 +222,18 @@ public class CustomActivity extends FragmentActivity {
             Const.SCREEN_WIDTH = metrics.widthPixels;
             Const.SCREEN_HEIGHT = metrics.heightPixels;
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onResume()", e);
+            Logger.e(TAG, "onResume()", e);
         }
     }
 
     @Override
     public void onStart() {
-        Logger.v(getLocalClassName(), "onStart(), id:" + hashCode());
+        Logger.v(TAG, "onStart(), id:" + hashCode());
         try {
             super.onStart();
             customOnStart(this);
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onStart()", e);
+            Logger.e(TAG, "onStart()", e);
         }
     }
 
@@ -240,5 +249,14 @@ public class CustomActivity extends FragmentActivity {
             }
             ((ViewGroup) view).removeAllViews();
         }
+    }
+
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }
