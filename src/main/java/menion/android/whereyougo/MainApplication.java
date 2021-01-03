@@ -245,28 +245,6 @@ public class MainApplication extends Application {
         Preferences.setContext(this);
         Preferences.init(this);
 
-        // get language
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        Context context = getApplicationContext();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String lang = sharedPreferences.getString(
-            getString(R.string.pref_KEY_S_LANGUAGE),
-            "");
-
-        // set language
-        if (!lang.equals(getString(R.string.pref_language_default_value))
-            && !config.locale.getLanguage().equals(lang)) {
-            ArrayList<String> loc = StringToken.parse(lang, "_");
-            if (loc.size() == 1) {
-                locale = new Locale(lang);
-            } else {
-                locale = new Locale(loc.get(0), loc.get(1));
-            }
-            config.locale = locale;
-            getBaseContext().getResources().updateConfiguration(config,
-                    getBaseContext().getResources().getDisplayMetrics());
-        }
-
         // initialize core
         initCore();
     }
