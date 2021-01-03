@@ -1,22 +1,12 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import java.util.ArrayList;
-
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.StringToken;
 import menion.android.whereyougo.utils.Utils;
 
 public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
