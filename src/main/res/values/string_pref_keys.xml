@@ -20,6 +20,8 @@
 
 <string name="pref_VALUE_xxx_yyy">value</string>
 <string name="pref_VALUE_xxx_zzz">value</string>
+
+<string name="pref_DESC_xxx">value</string>
 ...
 -->
 <resources>
@@ -39,6 +41,7 @@
     <string name="pref_KEY_X_LOGIN_PREFERENCES" translatable="false">KEY_X_LOGIN_PREFERENCES</string>
     <string name="pref_KEY_S_APPLICATION_VERSION_LAST" translatable="false">KEY_S_APPLICATION_VERSION_LAST</string>
     <string name="pref_KEY_S_ROOT" translatable="false">KEY_S_ROOT</string>
+    <string name="pref_DESC_ROOT">Current Folder: %1$s</string>
     <string name="pref_KEY_S_MAP_PROVIDER" translatable="false">KEY_S_MAP_PROVIDER</string>
     <string name="pref_KEY_B_STATUSBAR" translatable="false">KEY_B_STATUSBAR</string>
     <string name="pref_KEY_B_FULLSCREEN" translatable="false">KEY_B_FULLSCREEN</string>
@@ -159,5 +162,5 @@
     <string name="pref_DEFAULT_DOUBLE_CLICK" translatable="false">true</string>
     <string name="pref_KEY_B_RUN_SCREEN_OFF" translatable="false">KEY_B_RUN_SCREEN_OFF</string>
     <string name="pref_DEFAULT_RUN_SCREEN_OFF" translatable="false">false</string>
-</resources>	
-	  
+</resources>
+

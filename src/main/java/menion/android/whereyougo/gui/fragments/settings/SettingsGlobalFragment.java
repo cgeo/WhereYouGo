@@ -2,6 +2,7 @@ package menion.android.whereyougo.gui.fragments.settings;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -72,6 +73,10 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                         }
                     });
                 return false;
+            });
+            fileroot.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                return getString(R.string.pref_DESC_ROOT, preferences.getString(preference.getKey(), ""));
             });
         }
         if (mapProvider != null) {
