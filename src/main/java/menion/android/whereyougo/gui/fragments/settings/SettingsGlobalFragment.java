@@ -25,7 +25,6 @@ import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 
 public class SettingsGlobalFragment extends PreferenceFragmentCompat {
-    private static final String TAG = SettingsGlobalFragment.class.getSimpleName();
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
