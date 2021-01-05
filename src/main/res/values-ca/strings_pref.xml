@@ -9,6 +9,10 @@
     <string name="pref_confirm_on_exit_desc">Mostra el diŕleg de confirmació abans de sortir de Locus prement dos begades el botó ENRERE</string>
     <string name="pref_double_click">Toc doble</string>
     <string name="pref_double_click_desc">Per sortir del joc feu un doble toc a ENRERE</string>
+    <string name="pref_run_screen_off">Executa l\'aplicació encara que la pantalla estigui desactivada</string>
+    <string name="pref_run_screen_off_desc">Asseguris que l\'aplicació està en funcionament encara que la pantalla estigui parada.</string>
+    <string name="pref_font_size">Mida  de la lletra</string>
+    <string name="pref_font_size_default">Per defecte</string>
     <string name="pref_font_size_desc">Mida del text</string>
     <string name="pref_font_size_large">Gran</string>
     <string name="pref_font_size_medium">Mitja</string>
@@ -19,6 +23,7 @@
     <string name="pref_gc_password_desc">Contrasenya de Geocaching.com</string>
     <string name="pref_gc_username">Nom d\'usuari</string>
     <string name="pref_gc_username_desc">Usuari de Geocaching.com</string>
+    <string name="pref_global">Global</string>
     <string name="pref_gps">Permet el GPS</string>
     <string name="pref_gps_altitude_manual_correction">Ajusta l\'altitud</string>
     <string name="pref_gps_altitude_manual_correction_desc">Correcció manual de l\'altitud</string>
@@ -45,6 +50,7 @@
     <string name="pref_guiding_zone_point_desc">Seleccioneu quina zona s\'ha d\'usar per a la navegació</string>
     <string name="pref_guiding_zone_point_nearest">Punt més aprop</string>
     <string name="pref_highlight">Pantalla sempre encesa</string>
+    <string name="pref_highlight_always_text">Pantalla sempre encesa</string>
     <string name="pref_highlight_desc">Activa/desactiva permanentment la pantalla</string>
     <string name="pref_highlight_off_text">Ajustaments del sistema</string>
     <string name="pref_highlight_only_gps_text">Només quan el GPS estŕ encés</string>
@@ -67,6 +73,7 @@
     <string name="pref_save_game_auto_desc">El joc es desarŕ automŕticament quan l\'usuari canvi a una altra aplicació.</string>
     <string name="pref_save_game_slots">Desa trams</string>
     <string name="pref_save_game_slots_desc">Nombre de trams per desar el joc, a través del botó de menú</string>
+    <string name="pref_sensors">Sensors</string>
     <string name="pref_sensors_compass_auto_change">Canvi automŕtic</string>
     <string name="pref_sensors_compass_auto_change_desc">Usa la font que s\'ha definit en els ajustaments \"Ús de direcció de maquinari\" per a velocitat lenta. Per velocitats més rŕpides usar la direcció del GPS</string>
     <string name="pref_sensors_compass_auto_change_value">Valor de velocitat</string>
@@ -92,6 +99,7 @@
     <string name="pref_units_angle_russian_mil">Mil rus</string>
     <string name="pref_units_angle_us_artillery_mil">Mil d\'artilleria d\'US</string>
     <string name="pref_units_coo_latlon">Format de coordenades</string>
+    <string name="pref_units_coo_latlon_dec">41.10858°</string>
     <string name="pref_units_coo_latlon_desc">Coordenades (latitud/longitud) format per mostrar</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
