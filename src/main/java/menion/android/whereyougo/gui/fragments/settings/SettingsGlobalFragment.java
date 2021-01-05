@@ -31,54 +31,14 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.whereyougo_preferences_global, rootKey);
 
-        Activity settingsContext = getActivity();
-        Preference fileroot = findPreference(getString(R.string.pref_KEY_S_ROOT));
+        prepareFilerootPreference();
         ListPreference mapProvider = findPreference(Preferences.getKey(R.string.pref_KEY_S_MAP_PROVIDER));
         CheckBoxPreference autosave = findPreference(Preferences.getKey(R.string.pref_KEY_B_SAVEGAME_AUTO));
         EditTextPreference savegameSlots = findPreference(Preferences.getKey(R.string.pref_KEY_S_SAVEGAME_SLOTS));
         CheckBoxPreference doubelTapExit = findPreference(Preferences.getKey(R.string.pref_KEY_B_DOUBLE_CLICK));
         CheckBoxPreference runScreenOff = findPreference(Preferences.getKey(R.string.pref_KEY_B_RUN_SCREEN_OFF));
 
-        if (fileroot != null) {
-            fileroot.setOnPreferenceClickListener(preference -> {
-                // This might crash the app but since we are using our legacy filepicker, I don't have any better idea
-                // as to accept the risk and hope for the best.
-                UtilsGUI.dialogDoItem(settingsContext, getText(R.string.pref_root), R.drawable.var_empty, getText(R.string.pref_root_desc),
-                    getString(R.string.cancel), null,
-                    getString(R.string.folder_select), (dialog, which) -> {
-                        FileChooserDialog selectDialog = new FileChooserDialog(settingsContext);
-                        selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
-                        selectDialog.setFolderMode(true);
-                        selectDialog.setCanCreateFiles(false);
-                        selectDialog.setShowCancelButton(true);
-                        selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
-                            public void onFileSelected(Dialog source, File folder) {
-                                source.dismiss();
-                                if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
-                                    MainActivity.refreshCartridges();
-                                }
-                            }
 
-                            public void onFileSelected(Dialog source, File folder, String name) {
-                                String newFolder = folder.getAbsolutePath() + "/" + name;
-                                new File(newFolder).mkdir();
-                                ((FileChooserDialog) source).loadFolder(newFolder);
-                            }
-                        });
-                        selectDialog.show();
-                    },
-                    getString(R.string.folder_default), (dialog, which) -> {
-                        if (((MainApplication) A.getApp()).setRoot(null)) {
-                            MainActivity.refreshCartridges();
-                        }
-                    });
-                return false;
-            });
-            fileroot.setSummaryProvider(preference -> {
-                SharedPreferences preferences = preference.getSharedPreferences();
-                return getString(R.string.pref_DESC_ROOT, preferences.getString(preference.getKey(), ""));
-            });
-        }
         if (mapProvider != null) {
             mapProvider.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
@@ -124,6 +84,59 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                 return true;
             });
 
+        }
+    }
+
+    private void prepareFilerootPreference() {
+        Preference fileroot = findPreference(getString(R.string.pref_KEY_S_ROOT));
+        if (fileroot != null) {
+            Activity settingsContext = getActivity();
+            if (settingsContext != null) {
+                fileroot.setOnPreferenceClickListener(preference -> {
+                    // This might crash the app but since we are using our legacy filepicker, I don't have any better
+                    // idea as to accept the risk and hope for the best.
+                    UtilsGUI.dialogDoItem(
+                        settingsContext,
+                        getText(R.string.pref_root),
+                        R.drawable.var_empty,
+                        getText(R.string.pref_root_desc),
+                        getString(R.string.cancel),
+                        null,
+                        getString(R.string.folder_select),
+                        (dialog, which) -> {
+                            FileChooserDialog selectDialog = new FileChooserDialog(settingsContext);
+                            selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
+                            selectDialog.setFolderMode(true);
+                            selectDialog.setCanCreateFiles(false);
+                            selectDialog.setShowCancelButton(true);
+                            selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                                public void onFileSelected(Dialog source, File folder) {
+                                    source.dismiss();
+                                    if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
+                                        MainActivity.refreshCartridges();
+                                    }
+                                }
+
+                                public void onFileSelected(Dialog source, File folder, String name) {
+                                    String newFolder = folder.getAbsolutePath() + "/" + name;
+                                    new File(newFolder).mkdir();
+                                    ((FileChooserDialog) source).loadFolder(newFolder);
+                                }
+                            });
+                            selectDialog.show();
+                        },
+                        getString(R.string.folder_default), (dialog, which) -> {
+                            if (((MainApplication) A.getApp()).setRoot(null)) {
+                                MainActivity.refreshCartridges();
+                            }
+                        });
+                    return false;
+                });
+                fileroot.setSummaryProvider(preference -> {
+                    SharedPreferences preferences = preference.getSharedPreferences();
+                    return getString(R.string.pref_DESC_ROOT, preferences.getString(preference.getKey(), ""));
+                });
+            }
         }
     }
 }
