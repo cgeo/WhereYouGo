@@ -9,8 +9,12 @@
     <string name="pref_confirm_on_exit_desc">Vis dialog bekreftelse før du avslutter Locus via Tilbake-knappen</string>
     <string name="pref_double_click">Dobbel trykk</string>
     <string name="pref_double_click_desc">For å lukke spillet dobbeltrykk på tilbake</string>
+    <string name="pref_run_screen_off">Hold appen aktiv selv om skjermen er avskrudd</string>
+    <string name="pref_font_size">Skriftstørrelse</string>
+    <string name="pref_font_size_default">Standard</string>
     <string name="pref_font_size_desc">Størrelse på tekst</string>
     <string name="pref_font_size_large">Stor</string>
+    <string name="pref_font_size_medium">Middels</string>
     <string name="pref_font_size_small">Liten</string>
     <string name="pref_fullscreen">FullSkjerm</string>
     <string name="pref_fullscreen_desc">Gjem system panel</string>
@@ -18,6 +22,7 @@
     <string name="pref_gc_password_desc">Geocaching.com passord</string>
     <string name="pref_gc_username">Brukernavn</string>
     <string name="pref_gc_username_desc">Geocaching.com brukernavn</string>
+    <string name="pref_global">Generelt</string>
     <string name="pref_gps">Tillat GPS</string>
     <string name="pref_gps_altitude_manual_correction">Juster Høyde</string>
     <string name="pref_gps_altitude_manual_correction_desc">Manuell korreksjon av Høyde</string>
@@ -43,6 +48,7 @@
     <string name="pref_guiding_zone_point_desc">Velg hvilket sone punkt som bør brukes til navigasjon</string>
     <string name="pref_guiding_zone_point_nearest">Nærmeste grense punkt</string>
     <string name="pref_highlight">Skjerm Alltid på</string>
+    <string name="pref_highlight_always_text">Skjerm alltid på</string>
     <string name="pref_highlight_desc">Aktivere/deaktivere permanent skjerm på</string>
     <string name="pref_highlight_off_text">System instillinger</string>
     <string name="pref_highlight_only_gps_text">Bare når GPS er PÅ</string>
@@ -90,6 +96,7 @@
     <string name="pref_units_angle_russian_mil">Russisk milliradian</string>
     <string name="pref_units_angle_us_artillery_mil">US Artilleri milliradian</string>
     <string name="pref_units_coo_latlon">Koordinat format</string>
+    <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Koordinater (bredde / lengde) format for fremvisning</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
     <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
