@@ -5,8 +5,39 @@
         <item>Imperial</item>
         <item>Mètric</item>
     </string-array>
+    <string-array name="preferences_text_scale_values">
+        <item>diminut</item>
+        <item>petit</item>
+        <item>normal</item>
+        <item>gran</item>
+        <item>enorme</item>
+        <item>Automàtic</item>
+    </string-array>
+    <string-array name="mapgenerator_values">
+        <item>blanc</item>
+        <item>fitxer de mapa [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Transport públic(\u00d6PNV) (online)</item>
+        <item>Esri World Street (en línia)</item>
+        <item>Esri World Imagery (en línia)</item>
+    </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">L\'última ubicació és desconeguda</string>
+    <string name="file_invalid">El fitxer seleccionat no és vàlid.</string>
+    <string name="file_select">Seleccioni un fitxer.</string>
+    <string name="file_size_byte">byte</string>
+    <string name="file_size_bytes">bytes</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Anar a la posició</string>
+    <string name="info_map_file_area">Àrea</string>
+    <string name="info_map_file_comment">Comentar</string>
     <string name="info_map_file_created_by">Creat per</string>
     <string name="info_map_file_date">Data</string>
+    <string name="info_map_file_debug">Informació de depuració</string>
     <string name="info_map_file_debug_no">no inclòs</string>
     <string name="info_map_file_debug_yes">inclòs</string>
     <string name="info_map_file_language_preference">Preferència d\'idioma</string>
@@ -19,11 +50,64 @@
     <string name="menu_info_map_file">Propietats del fitxer de mapa</string>
     <string name="menu_info_about">Sobre aquest programari</string>
     <string name="menu_mapfile">Fitxer del mapa</string>
+    <string name="menu_mapgenerator">Font del mapa</string>
+    <string name="menu_acquire_from_cgeo">Adquiriu el mapa de c: geo</string>
     <string name="menu_position">Posició</string>
     <string name="menu_position_enter_coordinates">Entrar coordenades</string>
     <string name="menu_position_last_known">Última ubicació coneguda</string>
+    <string name="menu_position_map_file_center">Centre del mapa</string>
     <string name="menu_position_my_location_enable">Mostra la meva ubicació</string>
     <string name="menu_position_my_location_disable">Eliminar localització</string>
+    <string name="menu_position_snap_to_location">Ajusta a la posició</string>
+    <string name="menu_position_target">Objectiu</string>
+    <string name="menu_preferences">Preferències</string>
+    <string name="menu_refresh">Actualitzar</string>
+    <string name="menu_render_theme">Mostra el tema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">Selecciona un fitxer XML…</string>
+    <string name="menu_screenshot">Captura de pantalla</string>
+    <string name="menu_screenshot_jpeg">JPEG (amb pèrdua)</string>
+    <string name="menu_screenshot_png">PNG (sense pèrdues)</string>
+    <string name="no_location_provider_available">No hi ha disponible cap font d’ubicació</string>
+    <string name="preferences_debug">Configuració de depuració</string>
+    <string name="preferences_general">Configuració general</string>
+    <string name="preferences_tileCache">Configuració de les zones del catxé al mapa</string>
+    <string name="preferences_tileCache_persistence">Persistència de les zones d\'un catxé</string>
+    <string name="preferences_tileCache_persistence_desc">Mantingueu les imatges d\'un catxé emmagatzemades al sortir</string>
+    <string name="preferences_tileCache_size">Mida de la zona d\'un catxé</string>
+    <string name="preferences_tileCache_size_desc">Ajusteu la mida de la zona d\'un catxé</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Mode de pantalla completa</string>
+    <string name="preferences_fullscreen_desc">Amaga la barra d\'estat</string>
+    <string name="preferences_map">Configuració del mapa</string>
+    <string name="preferences_move_speed">Velocitat de moviment</string>
+    <string name="preferences_move_speed_desc">Ajusteu la velocitat de moviment del mapa</string>
+    <string name="preferences_move_speed_value">%d %% velocitat de moviment</string>
+    <string name="preferences_scale_bar_unit">Unitat de barra d’escala</string>
+    <string name="preferences_scale_bar_unit_desc">Seleccioneu la unitat per a la barra d’escala del mapa</string>
+    <string name="preferences_show_fps_counter">Fotogrames per segon</string>
+    <string name="preferences_show_fps_counter_desc">Activa el comptador de fotogrames per segon</string>
+    <string name="preferences_show_scale_bar">Barra d\'escala del mapa</string>
+    <string name="preferences_show_scale_bar_desc">Mostra l’escala del mapa</string>
+    <string name="preferences_show_tile_coordinates">Coordenades de la zona</string>
+    <string name="preferences_show_tile_coordinates_desc">Mostra les coordenades a les zones</string>
+    <string name="preferences_show_tile_frames">Límits de les zones</string>
+    <string name="preferences_show_tile_frames_desc">Dibuixeu límits de les zones</string>
+    <string name="preferences_show_water_tiles">Zones d’aigua</string>
+    <string name="preferences_show_water_tiles_desc">Ressalteu les zones amb la bandera d\'aigua configurada</string>
+    <string name="preferences_text_scale">Mida  de la lletra</string>
+    <string name="preferences_text_scale_desc">Seleccioneu la mida del text de les etiquetes del mapa</string>
+    <string name="preferences_wake_lock">Mantenir actiu</string>
+    <string name="preferences_wake_lock_desc">Bloqueja la reducció de la brillantor de la pantalla</string>
+    <string name="snap_to_location_enabled">L\'ajust a la posició està activat</string>
+    <string name="snap_to_location_disabled">L\'ajust a la posició està desactivat</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Nivell de zoom</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">no s\'ha trobat l\'aplicació c:geo</string>
+    <string name="receivemapfile_success">Conjunt de fitxers mapes</string>
+    <string name="receivemapfile_error">Error en configurar el fitxer de mapa</string>
+    <string name="receivemapfile_notset">No s\'ha definit cap fitxer de mapa a c: geo</string>
 </resources>
