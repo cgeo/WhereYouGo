@@ -12,6 +12,7 @@
     <string name="cancelled">avbrutt</string>
     <string name="choose_cartridge">Velg Kassett</string>
     <string name="close">Lukk</string>
+    <string name="coauthor">Status utvikling</string>
     <string name="compass">Kompass</string>
     <string name="declination">Deklinasjon</string>
     <string name="delete_cartridge">Slette Kassett?</string>
@@ -65,6 +66,7 @@
     <string name="no_location_providers_available">Ingen Lokasjons leverandører er tilgjengelig!</string>
     <string name="no_satellites">Ingen Satelitter er Tilgjengelig</string>
     <string name="no_target">Ingen Mål!</string>
+    <string name="no_wherigo_cartridge_available">Ingen Wherigo-kassetter (*.gwc) er tilgjengelige.\nLast ned eller kopier dem inn i mappen \"%1$s\". Du kan skifte hvilken mappe som brukes i \"Inntsillinger – Generell –Wherigo-mappe\". Pass på at du har gir tillatelse til å skrive til ekstern lagring og at du har skriverettigheter til valgte mappe. Noen nyere enheter tillater ikke skriving til SD-kort. Hvis du er usikker, velg automatisk valg av \"Wherigo-mappe\".</string>
     <string name="not_enough_disk_space_x">Ikke nok ledig plass på SDKort!\n(%1$s, free:%2$s)</string>
     <string name="ok">OK</string>
     <string name="pending">Venter</string>
@@ -116,4 +118,10 @@
     <!-- permission handling -->
     <string name="close_app">Lukk app</string>
     <string name="ask_again">Spør meg igjen</string>
+    <string name="goto_app_details">Åpne app-info</string>
+    <string name="location_permission_request_explanation">WhereYouGo trenger tilgang på GPS-en på din enhet for å finne din posisjon og for å regne ut avstand og retning til Kassett-plasseringene.</string>
+    <string name="storage_permission_request_explanation">WhereYouGo skriver data til din telefons interne lagring eller SD-kort når du lagrer kassetten.</string>
+    <string name="permission_conclusion">Appen kan ikke brukes uten denne/disse tillatelsen(e).</string>
+    <string name="dialog_no_password">Du har ikke lagt inn brukernavn og/eller passord! Dette gjør du i Innstillinger i WhereYouGo-appen. Klikk OK for å åpne Innstillinger nå. Klikk Avbryt for å lukke denne dialogen og gå tilbake dit du var.</string>
+    <string name="dialog_wrong_credentials">Nedlasting av kassett feilet. Dette kan skje på grunn av feil brukernavn/passord eller tilkoblingsproblemer. Klikk OK for å åpne Innstillinger i WhereYouGo nå. Klikk Avbryt for å lukke denne dialogen.</string>
 </resources>
