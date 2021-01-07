@@ -134,7 +134,7 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                 });
                 fileroot.setSummaryProvider(preference -> {
                     SharedPreferences preferences = preference.getSharedPreferences();
-                    return getString(R.string.pref_DESC_ROOT, preferences.getString(preference.getKey(), ""));
+                    return getString(R.string.pref_root_summary, preferences.getString(preference.getKey(), ""));
                 });
             }
         }
