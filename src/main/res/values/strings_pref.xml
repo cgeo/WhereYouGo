@@ -68,6 +68,7 @@
     <string name="pref_orientation">Orientation</string>
     <string name="pref_root">Wherigo folder</string>
     <string name="pref_root_desc">Select folder for wherigo files</string>
+    <string name="pref_root_summary">Current Folder: %1$s</string>
     <string name="pref_save_game_auto">Save game automatically</string>
     <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
     <string name="pref_save_game_slots">Savegame slots</string>
