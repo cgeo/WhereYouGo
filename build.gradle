@@ -120,7 +120,7 @@ dependencies {
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
     //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
 
     // ani gif support
     // minSdk=17 from version 1.2.16
