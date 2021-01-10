@@ -4,3 +4,15 @@ updates:
   directory: "/"
   schedule:
     interval: daily
+  ignore:
+    # Ignore some updates to the 'okhttp' package
+    # Ignore only new versions for >= 3.13.x
+    - dependency-name: "okhttp"
+      versions: ["3.13.x", "3.14.x", "4.x"]
+    # Ignore all updates to the 'locus' package
+    # minSdk=21 in version 0.9.x
+    # update in work
+    - dependency-name: "locus-api-android"
+    # Ignore all updates to the 'android-gif-drawable' package
+    # minSdk=17 from version 1.2.16
+    - dependency-name: "android-gif-drawable"
