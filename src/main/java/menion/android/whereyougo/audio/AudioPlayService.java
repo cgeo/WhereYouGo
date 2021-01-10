@@ -59,17 +59,15 @@ public class AudioPlayService extends Service {
         // STREAM_NOTIFICATION causes the sound to be played in speakers even if headphones are present
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            public void onCompletion(MediaPlayer mp) {
-                mediaPlayer.release();
-                if (deleteFile)
-                    try {
-                        (new File(actualFile)).delete();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                playNextMedia();
-            }
+        mediaPlayer.setOnCompletionListener(mp -> {
+            mediaPlayer.release();
+            if (deleteFile)
+                try {
+                    (new File(actualFile)).delete();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            playNextMedia();
         });
     }
 
@@ -148,13 +146,11 @@ public class AudioPlayService extends Service {
             actualFile = filePaths.remove(0);
             mediaPlayer.setDataSource(actualFile);
             mediaPlayer.prepareAsync();
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                public void onPrepared(MediaPlayer mp) {
-                    try {
-                        mediaPlayer.start();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            mediaPlayer.setOnPreparedListener(mp -> {
+                try {
+                    mediaPlayer.start();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
         } catch (Exception e) {

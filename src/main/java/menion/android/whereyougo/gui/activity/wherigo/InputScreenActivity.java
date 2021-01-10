@@ -72,12 +72,9 @@ public class InputScreenActivity extends MediaActivity {
         final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
         editText.setVisibility(View.GONE);
         final Button scanButton = (Button) findViewById(R.id.layoutInputScanButton);
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
-                integrator.initiateScan();
-            }
+        scanButton.setOnClickListener(v -> {
+            IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
+            integrator.initiateScan();
         });
         scanButton.setVisibility(View.GONE);
         final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
@@ -106,22 +103,18 @@ public class InputScreenActivity extends MediaActivity {
             inputType = InputType.MULTI;
         }
 
-        CustomDialog.setBottom(this, Locale.getString(R.string.answer), new CustomDialog.OnClickListener() {
-
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                if (inputType == InputType.TEXT) {
-                    Engine.callEvent(input, "OnGetInput", editText.getText()
-                            .toString());
-                } else if (inputType == InputType.MULTI) {
-                    String item = String.valueOf(spinner.getSelectedItem());
-                    Engine.callEvent(input, "OnGetInput", item);
-                } else {
-                    Engine.callEvent(input, "OnGetInput", null);
-                }
-                InputScreenActivity.this.finish();
-                return true;
+        CustomDialog.setBottom(this, Locale.getString(R.string.answer), (dialog, v, btn) -> {
+            if (inputType == InputType.TEXT) {
+                Engine.callEvent(input, "OnGetInput", editText.getText()
+                        .toString());
+            } else if (inputType == InputType.MULTI) {
+                String item = String.valueOf(spinner.getSelectedItem());
+                Engine.callEvent(input, "OnGetInput", item);
+            } else {
+                Engine.callEvent(input, "OnGetInput", null);
             }
+            InputScreenActivity.this.finish();
+            return true;
         }, null, null, null, null);
     }
 

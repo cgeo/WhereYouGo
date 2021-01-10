@@ -186,10 +186,7 @@ public class Utils {
         return Utils.parseInt(Build.VERSION.SDK) >= 9;
     }
 
-    /**********************************************/
-  /* OTHERS SECTION */
-
-    /**********************************************/
+    /* OTHERS SECTION */
 
     public static boolean isAndroid30OrMore() {
         return Utils.parseInt(Build.VERSION.SDK) >= 11;
@@ -208,10 +205,7 @@ public class Utils {
         return list.size() > 0;
     }
 
-    /*********************************/
-  /* SECURITY PART */
-
-    /*********************************/
+    /* SECURITY PART */
 
     public static boolean isIntentAvailable(String action) {
         return isIntentAvailable(new Intent(action));
@@ -239,10 +233,7 @@ public class Utils {
         }
     }
 
-    /*********************************************/
-  /* PARSE SECTION */
-
-    /*********************************************/
+    /* PARSE SECTION */
 
     public static double parseDouble(Object data) {
         return parseDouble(String.valueOf(data));

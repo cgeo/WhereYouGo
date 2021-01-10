@@ -2,8 +2,8 @@
 <resources>
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
-        <item>ヤード/ポンド法</item>
-        <item>メートル法</item>
+        <item>ヤード,ポンド</item>
+        <item>メートル</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
         <item>最小</item>
@@ -11,24 +11,28 @@
         <item>通常</item>
         <item>大</item>
         <item>最大</item>
-        <item>automatic</item>
+        <item>自動</item>
     </string-array>
     <string-array name="mapgenerator_values">
         <item>空</item>
-        <item>地図ファイル [*.map] (オフライン)</item>
-        <item>OSM Mapnik (オンライン)</item>
-        <item>OSM.de (オンライン)</item>
-        <item>CyclOSM (オンライン)</item>
-        <item>Public Transport(\u00d6PNV) (オンライン)</item>
-        <item>Esri World Street (オンライン)</item>
-        <item>Esri World Imagery (オンライン)</item>
+        <item>地図ファイル[*.map](オフライン)</item>
+        <item>OSM Mapnik(オンライン)</item>
+        <item>OSM.de(オンライン)</item>
+        <item>CyclOSM(オンライン)</item>
+        <item>Public Transport(\u00d6PNV)(オンライン)</item>
+        <item>Esri World Street(オンライン)</item>
+        <item>Esri World Imagery(オンライン)</item>
     </string-array>
+    <string name="application_name">Mapsforge</string>
     <string name="error_last_location_unknown">最後の位置が不明です</string>
-    <string name="file_invalid">選択したファイルが無効です。</string>
-    <string name="file_select">ファイルを選択してください。</string>
+    <string name="file_invalid">選択したファイルが無効です</string>
+    <string name="file_select">ファイルを選択してください</string>
     <string name="file_size_byte">バイト</string>
     <string name="file_size_bytes">バイト</string>
-    <string name="go_to_position">位置に移動</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">移動</string>
     <string name="info_map_file_area">エリア</string>
     <string name="info_map_file_comment">コメント</string>
     <string name="info_map_file_created_by">作成</string>
@@ -41,54 +45,69 @@
     <string name="info_map_file_size">ファイルサイズ</string>
     <string name="info_map_file_start_position">開始位置</string>
     <string name="info_map_file_start_zoom_level">開始ズームレベル</string>
-    <string name="menu_info">情報</string>
+    <string name="info_map_file_version">バージョン</string>
+    <string name="menu_info">mapsforgeの情報</string>
     <string name="menu_info_map_file">地図ファイルプロパティ</string>
     <string name="menu_info_about">このソフトウェアについて</string>
     <string name="menu_mapfile">地図ファイル</string>
     <string name="menu_mapgenerator">地図ソース</string>
+    <string name="menu_acquire_from_cgeo">c:geoの地図を利用</string>
     <string name="menu_position">位置</string>
     <string name="menu_position_enter_coordinates">座標を入力</string>
-    <string name="menu_position_last_known">最後の既知の位置</string>
+    <string name="menu_position_last_known">最後に判明した位置</string>
     <string name="menu_position_map_file_center">地図ファイルの中心</string>
-    <string name="menu_position_my_location_enable">自分の位置を表示</string>
-    <string name="menu_position_my_location_disable">自分の位置を削除</string>
-    <string name="menu_position_snap_to_location">位置にスナップ</string>
+    <string name="menu_position_my_location_enable">現在地を表示</string>
+    <string name="menu_position_my_location_disable">現在地を非表示</string>
+    <string name="menu_position_snap_to_location">いつも現在地を中心に表示</string>
     <string name="menu_position_target">目標</string>
     <string name="menu_preferences">設定</string>
     <string name="menu_refresh">更新</string>
-    <string name="menu_render_theme">描画テーマ</string>
-    <string name="menu_render_theme_select_file">XML ファイルを選択 …</string>
+    <string name="menu_render_theme">地図テーマ</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">XMLファイルを選択…</string>
     <string name="menu_screenshot">スクリーンショット</string>
-    <string name="menu_screenshot_jpeg">JPEG (ロス有)</string>
-    <string name="menu_screenshot_png">PNG (ロスレス)</string>
+    <string name="menu_screenshot_jpeg">JPEG(非可逆圧縮)</string>
+    <string name="menu_screenshot_png">PNG(可逆圧縮)</string>
     <string name="no_location_provider_available">利用できる位置ソースがありません</string>
-    <string name="preferences_debug">デバッグ設定</string>
-    <string name="preferences_general">全般設定</string>
-    <string name="preferences_fullscreen">フルスクリーンモード</string>
-    <string name="preferences_fullscreen_desc">ステータスバーを非表示にする</string>
+    <string name="preferences_debug">デバッグ設定\n(通常時はチェックを外してください)</string>
+    <string name="preferences_general">全般</string>
+    <string name="preferences_tileCache">地図タイルのキャッシュ設定</string>
+    <string name="preferences_tileCache_persistence">キャッシュされた地図タイル保持</string>
+    <string name="preferences_tileCache_persistence_desc">終了時にキャッシュされた地図タイルを残す</string>
+    <string name="preferences_tileCache_size">地図タイルキャッシュサイズ</string>
+    <string name="preferences_tileCache_size_desc">地図タイルのキャッシュサイズを調整</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">全画面表示</string>
+    <string name="preferences_fullscreen_desc">ステータスバーを非表示</string>
     <string name="preferences_map">地図設定</string>
-    <string name="preferences_move_speed">移動速度</string>
-    <string name="preferences_move_speed_desc">地図の移動速度を調整する</string>
-    <string name="preferences_move_speed_value">%d %% 移動速度</string>
+    <string name="preferences_move_speed">スクロール速度</string>
+    <string name="preferences_move_speed_desc">地図のスクロール速度を調整</string>
+    <string name="preferences_move_speed_value">スクロール速度:%d%%</string>
     <string name="preferences_scale_bar_unit">スケールバーの単位</string>
     <string name="preferences_scale_bar_unit_desc">地図スケールバーの単位を選択</string>
     <string name="preferences_show_fps_counter">フレームレート</string>
-    <string name="preferences_show_fps_counter_desc">毎秒あたりのフレームカウンターを有効にする</string>
+    <string name="preferences_show_fps_counter_desc">フレーム数/秒を表示</string>
     <string name="preferences_show_scale_bar">地図スケールバー</string>
-    <string name="preferences_show_scale_bar_desc">地図のスケールを表示する</string>
+    <string name="preferences_show_scale_bar_desc">地図のスケールバーを表示</string>
     <string name="preferences_show_tile_coordinates">タイル座標</string>
-    <string name="preferences_show_tile_coordinates_desc">タイルに座標を表示する</string>
+    <string name="preferences_show_tile_coordinates_desc">タイルの座標を表示</string>
     <string name="preferences_show_tile_frames">タイル境界</string>
-    <string name="preferences_show_tile_frames_desc">タイルの境界を描画</string>
+    <string name="preferences_show_tile_frames_desc">タイルの境界を表示</string>
     <string name="preferences_show_water_tiles">ウォータータイル</string>
-    <string name="preferences_show_water_tiles_desc">ウォーターフラグが設定されているタイルをハイライト表示する</string>
+    <string name="preferences_show_water_tiles_desc">ウォーターフラグが設定されているタイルをハイライト表示</string>
     <string name="preferences_text_scale">フォントサイズ</string>
     <string name="preferences_text_scale_desc">地図ラベルの文字サイズを選択</string>
     <string name="preferences_wake_lock">起動したままにする</string>
-    <string name="preferences_wake_lock_desc">画面が暗くなるのを停止</string>
-    <string name="snap_to_location_enabled">位置にスナップが有効です</string>
-    <string name="snap_to_location_disabled">位置にスナップが無効です</string>
+    <string name="preferences_wake_lock_desc">画面が暗くならないようにする</string>
+    <string name="snap_to_location_enabled">\"いつも現在地を中心に表示\"が有効になりました</string>
+    <string name="snap_to_location_disabled">\"いつも現在地を中心に表示\"が無効になりました</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
     <string name="zoomLevel">ズームレベル</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
+    <string name="receivemapfile_cgeonotfound">c:geoが見つかりませんでした</string>
+    <string name="receivemapfile_success">地図ファイルセット</string>
+    <string name="receivemapfile_error">地図ファイルの設定エラー</string>
+    <string name="receivemapfile_notset">c:geoで地図ファイルが設定されていません</string>
 </resources>

@@ -52,16 +52,12 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
             final Location actLoc = LocationState.getLocation();
             final Location loc1 = new Location(TAG);
             final Location loc2 = new Location(TAG);
-            Collections.sort(cartridgeFiles, new Comparator<CartridgeFile>() {
-
-                @Override
-                public int compare(CartridgeFile object1, CartridgeFile object2) {
-                    loc1.setLatitude(object1.latitude);
-                    loc1.setLongitude(object1.longitude);
-                    loc2.setLatitude(object2.latitude);
-                    loc2.setLongitude(object2.longitude);
-                    return (int) (actLoc.distanceTo(loc1) - actLoc.distanceTo(loc2));
-                }
+            Collections.sort(cartridgeFiles, (object1, object2) -> {
+                loc1.setLatitude(object1.latitude);
+                loc1.setLongitude(object1.longitude);
+                loc2.setLatitude(object2.latitude);
+                loc2.setLongitude(object2.longitude);
+                return (int) (actLoc.distanceTo(loc1) - actLoc.distanceTo(loc2));
             });
 
             // prepare list
@@ -87,20 +83,11 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
             // create listView
             ListView listView = UtilsGUI.createListView(getActivity(), false, data);
             // set click listener
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    itemClicked(position);
-                }
-            });
+            listView.setOnItemClickListener((parent, view, position, id) -> itemClicked(position));
             // set on long click listener for file deletion
-            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-                @Override
-                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                    itemLongClicked(position);
-                    return true;
-                }
+            listView.setOnItemLongClickListener((parent, view, position, id) -> {
+                itemLongClicked(position);
+                return true;
             });
             adapter = (BaseAdapter) listView.getAdapter();
             // construct dialog
@@ -132,25 +119,19 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
                     cartridgeFile.filename.length() - 3);
 
             UtilsGUI.showDialogQuestion(getActivity(), R.string.delete_cartridge,
-                    new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int btn) {
-                            File[] files = FileSystem.getFiles2(new File(cartridgeFile.filename).getParent(), new FileFilter() {
-                                @Override
-                                public boolean accept(File pathname) {
-                                    return pathname.getAbsolutePath().startsWith(filename);
-                                }
-                            });
-                            for (File file : files) {
-                                file.delete();
-                            }
-                            MainActivity.refreshCartridges();
-                            cartridgeFiles.remove(position);
-                            data.remove(position);
-                            if (adapter != null)
-                                adapter.notifyDataSetChanged();
+                    (dialog, btn) -> {
+                        File[] files = FileSystem.getFiles2(
+                                new File(cartridgeFile.filename).getParent(),
+                                pathname -> pathname.getAbsolutePath().startsWith(filename)
+                        );
+                        for (File file : files) {
+                            file.delete();
                         }
+                        MainActivity.refreshCartridges();
+                        cartridgeFiles.remove(position);
+                        data.remove(position);
+                        if (adapter != null)
+                            adapter.notifyDataSetChanged();
                     }, null);
         } catch (Exception e) {
             Logger.e(TAG, "onCreate()", e);

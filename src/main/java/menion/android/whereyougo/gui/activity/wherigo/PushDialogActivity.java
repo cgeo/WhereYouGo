@@ -101,23 +101,15 @@ public class PushDialogActivity extends MediaActivity {
             menu02Text = null;
         }
 
-        CustomDialog.setBottom(this, menu01Text, new CustomDialog.OnClickListener() {
-
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                nextPage();
-                return true;
-            }
-        }, null, null, menu02Text, new CustomDialog.OnClickListener() {
-
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                if (callback != null)
-                    Engine.invokeCallback(callback, "Button2");
-                callback = null;
-                PushDialogActivity.this.finish();
-                return true;
-            }
+        CustomDialog.setBottom(this, menu01Text, (dialog, v, btn) -> {
+            nextPage();
+            return true;
+        }, null, null, menu02Text, (dialog, v, btn) -> {
+            if (callback != null)
+                Engine.invokeCallback(callback, "Button2");
+            callback = null;
+            PushDialogActivity.this.finish();
+            return true;
         });
 
         if (page == -1) {

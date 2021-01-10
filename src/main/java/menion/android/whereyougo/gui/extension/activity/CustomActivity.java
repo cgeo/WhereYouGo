@@ -18,10 +18,6 @@
 package menion.android.whereyougo.gui.extension.activity;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,10 +28,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.core.app.NotificationCompat;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
@@ -49,7 +45,7 @@ public class CustomActivity extends FragmentActivity {
         // Logger.v(activity.getLocalClassName(), "customOnCreate(), id:" +
         // activity.hashCode());
         // set main activity parameters
-        if (!(activity instanceof CustomMainActivity)) {
+        if (!(activity instanceof MainActivity)) {
             // Settings.setLanguage(this);
             setScreenBasic(activity);
         }

@@ -86,11 +86,7 @@ public class LocationState {
 
             // sort listeners
             if (mListeners.size() > 0)
-                Collections.sort(mListeners, new Comparator<ILocationEventListener>() {
-                    public int compare(ILocationEventListener object1, ILocationEventListener object2) {
-                        return object1.getPriority() - object2.getPriority();
-                    }
-                });
+                Collections.sort(mListeners, (object1, object2) -> object1.getPriority() - object2.getPriority());
 
             onScreenOn(true);
         }
@@ -386,11 +382,9 @@ public class LocationState {
         if (PreferenceValues.getCurrentActivity() == null)
             return;
 
-        PreferenceValues.getCurrentActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                for (int i = 0; i < mListeners.size(); i++) {
-                    mListeners.get(i).onGpsStatusChanged(GpsStatus.GPS_EVENT_SATELLITE_STATUS, pos);
-                }
+        PreferenceValues.getCurrentActivity().runOnUiThread(() -> {
+            for (int i = 0; i < mListeners.size(); i++) {
+                mListeners.get(i).onGpsStatusChanged(GpsStatus.GPS_EVENT_SATELLITE_STATUS, pos);
             }
         });
     }
@@ -463,13 +457,9 @@ public class LocationState {
                 gpsConn = new GpsConnection(context);
             } else {
                 UtilsGUI.showDialogQuestion(PreferenceValues.getCurrentActivity(), R.string.gps_not_enabled_show_system_settings,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                context.startActivity(intent);
-                            }
+                        (dialog, which) -> {
+                            Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            context.startActivity(intent);
                         },
                         null
                 );

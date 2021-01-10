@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.PowerManager;
 
-import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -149,7 +148,7 @@ public class PreferenceValues {
                 }
                 PowerManager pm = (PowerManager) A.getApp().getSystemService(Context.POWER_SERVICE);
                 if (pm != null) {
-                    wl = pm.newWakeLock(new_level, TAG);
+                    wl = pm.newWakeLock(new_level, "whereyougo:" + TAG);
                     wl.acquire();
                     wl_level = new_level;
                 }
@@ -193,8 +192,6 @@ public class PreferenceValues {
     }
 
     public static void setCurrentActivity(Activity activity) {
-        if (PreferenceValues.currentActivity == null && activity != null)
-            MainApplication.appRestored();
         PreferenceValues.currentActivity = activity;
     }
 

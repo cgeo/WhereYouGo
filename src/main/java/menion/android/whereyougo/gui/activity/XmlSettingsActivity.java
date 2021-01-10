@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import ar.com.daidalos.afiledialog.FileChooserDialog;
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.extension.activity.CustomMainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
@@ -128,7 +127,7 @@ public class XmlSettingsActivity extends PreferenceActivity
             CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
             CheckBoxPreference gps_hide = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GPS_DISABLE_WHEN_HIDE);
             CheckBoxPreference gps_guiding = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GUIDING_GPS_REQUIRED);
-            CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+            CheckBoxPreference screen_off = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_RUN_SCREEN_OFF);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
                 status_bar.setEnabled(false);
             } else {
@@ -146,10 +145,10 @@ public class XmlSettingsActivity extends PreferenceActivity
         try {
             super.onDestroy();
             if (needRestart) {
-                A.getMain().showDialogFinish(CustomMainActivity.FINISH_RESTART);
+                A.getMain().showDialogFinish(MainActivity.FINISH_RESTART);
             }
         } catch (Exception e) {
-            Logger.e(getLocalClassName(), "onDestroy()", e);
+            Logger.e(TAG, "onDestroy()", e);
         }
     }
 
@@ -158,69 +157,41 @@ public class XmlSettingsActivity extends PreferenceActivity
         boolean status = false;
         String key = preference.getKey();
 
-        if (key.equals("")) {
-            // DO NOTHING
-        } else if (key.equals(getString(R.string.pref_KEY_S_ROOT))) {
+        if (key.equals(getString(R.string.pref_KEY_S_ROOT))) {
             UtilsGUI.dialogDoItem(this, getText(R.string.pref_root), R.drawable.var_empty, getText(R.string.pref_root_desc),
                     getString(R.string.cancel), null,
-                    getString(R.string.folder_select), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            FileChooserDialog selectDialog = new FileChooserDialog(XmlSettingsActivity.this);
-                            selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
-                            selectDialog.setFolderMode(true);
-                            selectDialog.setCanCreateFiles(false);
-                            selectDialog.setShowCancelButton(true);
-                            selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
-                                public void onFileSelected(Dialog source, File folder) {
-                                    source.dismiss();
-                                    if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
-                                        PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                        preferenceRoot.setValue(FileSystem.ROOT);
-                                        MainActivity.refreshCartridges();
-                                    }
+                    getString(R.string.folder_select), (dialog, which) -> {
+                        FileChooserDialog selectDialog = new FileChooserDialog(XmlSettingsActivity.this);
+                        selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
+                        selectDialog.setFolderMode(true);
+                        selectDialog.setCanCreateFiles(false);
+                        selectDialog.setShowCancelButton(true);
+                        selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                            public void onFileSelected(Dialog source, File folder) {
+                                source.dismiss();
+                                if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
+                                    PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                                    preferenceRoot.setValue(FileSystem.ROOT);
+                                    MainActivity.refreshCartridges();
                                 }
-
-                                public void onFileSelected(Dialog source, File folder, String name) {
-                                    String newFolder = folder.getAbsolutePath() + "/" + name;
-                                    new File(newFolder).mkdir();
-                                    ((FileChooserDialog) source).loadFolder(newFolder);
-                                }
-                            });
-                            selectDialog.show();
-                        }
-                    },
-                    getString(R.string.folder_default), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (((MainApplication) A.getApp()).setRoot(null)) {
-                                PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
-                                preferenceRoot.setValue(FileSystem.ROOT);
-                                MainActivity.refreshCartridges();
                             }
+
+                            public void onFileSelected(Dialog source, File folder, String name) {
+                                String newFolder = folder.getAbsolutePath() + "/" + name;
+                                new File(newFolder).mkdir();
+                                ((FileChooserDialog) source).loadFolder(newFolder);
+                            }
+                        });
+                        selectDialog.show();
+                    },
+                    getString(R.string.folder_default), (dialog, which) -> {
+                        if (((MainApplication) A.getApp()).setRoot(null)) {
+                            PreviewPreference preferenceRoot = (PreviewPreference) findPreference(R.string.pref_KEY_S_ROOT);
+                            preferenceRoot.setValue(FileSystem.ROOT);
+                            MainActivity.refreshCartridges();
                         }
                     });
             return false;
-        } else if (key.equals(getString(R.string.pref_KEY_X_ABOUT))) {
-            /*
-	          AlertDialog.Builder b = new AlertDialog.Builder(this);
-	          b.setCancelable(false);
-	          b.setTitle(MainApplication.APP_NAME);
-	          b.setIcon(R.drawable.icon);
-	          b.setView(UtilsGUI.getFilledWebView(A.getMain(), "XXX"));
-	          b.setNeutralButton(R.string.yes, new DialogInterface.OnClickListener() {
-
-	            @Override
-	            public void onClick(DialogInterface dialog, int which) {
-	              // stage01Completed = true;
-	              // PreferenceValues.setApplicationVersionLast(actualVersion);
-	            }
-	          });
-	          b.show();
-			*/
-
-        } else {
-            return status;
         }
         return status;
     }
@@ -228,9 +199,7 @@ public class XmlSettingsActivity extends PreferenceActivity
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-        if (key.equals("X")) {
-            // DO NOTHING
-        } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_FONT_SIZE)) {
+        if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_S_FONT_SIZE)) {
             String newValue = sharedPreferences.getString(key, null);
             Preferences.APPEARANCE_FONT_SIZE = Utils.parseInt(newValue);
         } else if (Preferences.comparePreferenceKey(key, R.string.pref_KEY_B_FULLSCREEN)) {
@@ -254,16 +223,12 @@ public class XmlSettingsActivity extends PreferenceActivity
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
                 CheckBoxPreference gps_guideing = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_GUIDING_GPS_REQUIRED);
-                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_RUN_SCREEN_OFF);
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
                     status_bar.setEnabled(false);
                 } else {
                  if (newValue) {
-                    if (gps_guideing.isChecked()) {
-                        status_bar.setEnabled(false);
-                    } else {
-                        status_bar.setEnabled(true);
-                    }
+                     status_bar.setEnabled(!gps_guideing.isChecked());
                  } else {
                     status_bar.setEnabled(false);
                  }
@@ -277,7 +242,7 @@ public class XmlSettingsActivity extends PreferenceActivity
             Preferences.GUIDING_GPS_REQUIRED = Utils.parseBoolean(newValue);
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 CheckBoxPreference status_bar = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_STATUSBAR);
-                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference("KEY_B_RUN_SCREEN_OFF");
+                CheckBoxPreference screen_off = (CheckBoxPreference) findPreference(R.string.pref_KEY_B_RUN_SCREEN_OFF);
                 if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P && screen_off.isChecked()) {
                     status_bar.setEnabled(false);
                 } else {

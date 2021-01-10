@@ -67,7 +67,6 @@
     <string name="no_satellites">Uydu yok</string>
     <string name="no_target">Hedef yok!</string>
     <string name="no_wherigo_cartridge_available">Herhangi bir Wherigo kartuşu (*.gwc) bulunmuyor.\nKartuşları \"%1$s\" dizinine kopyalayın veya indirin. Ayrıca \"Ayarlar - Başlıca - Wherigo dosyası\" konumuna da yol oluşturabilirsiniz. Seçili dizine ve harici belleğe veri kaydı izni verdiğinizden emin olun. Bazı cihazlar SD kart üzerine veri yazılmasına izin vermez. Emin değilseniz \'\'Wherigo dosyası\'\'nı otomatik olarak ayarlayın.</string>
-    <string name="not_enough_disk_space_x">SD kartta yeterli boş disk alanı yok!\n(%1$s, boş:%2$s)</string>
     <string name="ok">Tamam</string>
     <string name="pending">Bekliyor</string>
     <string name="pitch">Aralık</string>
@@ -122,4 +121,6 @@
     <string name="location_permission_request_explanation">WhereYouGo konumunuzu belirlemek, kartuş konumlarına mesafe ve yön tayin etmek için aygıtınızdaki GPS\'e ulaşım sağlamalıdır.</string>
     <string name="storage_permission_request_explanation">Kartuşu kaydettiğinizde WhereYouGo telefonunuzun belleğine veya SD kartınıza veri kaydedecektir.</string>
     <string name="permission_conclusion">Bu izinler verilmeden uygulama kullanılamaz.</string>
+    <string name="dialog_no_password">Kullanıcı adınızı ve/veya şifrenizi belirlemediniz! Lütfen WhereYouGo Ayarlardan belirleyiniz. Ayarları açmak için Tamam\'a tıklayınız. Bu ekranı kapatıp önceki ekrana dönmel için İptal\'e tıklayınız.</string>
+    <string name="dialog_wrong_credentials">Kartuş indirilemedi. Buna giriş bilgilerinizin hatalı olması veya bağlantı problemleri sebep olmuş olabilir. WhereYouGo ayarlarını açmak için Tamam\'a tıklayınız. Bu ekranı kapatıp önceki ekrana dönmek için İptal\'e tıklayınız.</string>
 </resources>

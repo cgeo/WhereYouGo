@@ -52,7 +52,6 @@ public class MainApplication extends Application {
     private static final String TAG = "MainApplication";
 
     private static Timer mTimer;
-    private static OnAppVisibilityChange onAppVisibilityChange;
     private static Context applicationContext;
     private Locale locale = null;
     // screen ON/OFF receiver
@@ -61,12 +60,6 @@ public class MainApplication extends Application {
 
     public static Context getContext() {
         return applicationContext;
-    }
-
-    public static void appRestored() {
-        onAppRestored();
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppRestored();
     }
 
     public static void onActivityPause() {
@@ -79,26 +72,10 @@ public class MainApplication extends Application {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (!PreferenceValues.existCurrentActivity())
-                    onAppMinimized();
                 LocationState.onActivityPauseInstant(PreferenceValues.getCurrentActivity());
                 mTimer = null;
             }
         }, 2000);
-    }
-
-    private static void onAppMinimized() {
-        Logger.w(TAG, "onAppMinimized()");
-        if (onAppVisibilityChange != null)
-            onAppVisibilityChange.onAppMinimized();
-    }
-
-    private static void onAppRestored() {
-        Logger.w(TAG, "onAppRestored()");
-    }
-
-    public static void registerVisibilityHandler(OnAppVisibilityChange handler) {
-        MainApplication.onAppVisibilityChange = handler;
     }
 
     public void destroy() {
@@ -111,7 +88,6 @@ public class MainApplication extends Application {
             mTimer.cancel();
             mTimer = null;
         }
-        onAppVisibilityChange = null;
     }
 
     public boolean setRoot(String pathCustom) {
@@ -144,22 +120,6 @@ public class MainApplication extends Application {
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         mScreenReceiver = new ScreenReceiver();
         registerReceiver(mScreenReceiver, filter);
-
-        // try{Log.i("FS", getCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalCacheDir().getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", getFilesDir().getAbsolutePath());}catch(Exception e){Log.i("FS", "-");}
-        // try{Log.i("FS", getExternalFilesDir(null).getAbsolutePath());}catch(Exception e){Log.i("FS",
-        // "-");}
-        // try{Log.i("FS", Environment.getDataDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getDownloadCacheDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getExternalStorageDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // try{Log.i("FS", Environment.getRootDirectory().getAbsolutePath());}catch(Exception
-        // e){Log.i("FS", "-");}
-        // initialize root directory
 
         setRoot(Preferences.GLOBAL_ROOT);
 
@@ -322,12 +282,9 @@ public class MainApplication extends Application {
                 final Activity activity = PreferenceValues.getCurrentActivity();
                 if (activity != null) {
                     if (MainActivity.wui != null) {
-                        MainActivity.wui.setOnSavingFinished(new Runnable() {
-                            @Override
-                            public void run() {
-                                ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
-                                MainActivity.wui.setOnSavingFinished(null);
-                            }
+                        MainActivity.wui.setOnSavingFinished(() -> {
+                            ManagerNotify.toastShortMessage(activity, getString(R.string.save_game_auto));
+                            MainActivity.wui.setOnSavingFinished(null);
                         });
                     }
                     new SaveGame(activity).execute();
@@ -336,14 +293,6 @@ public class MainApplication extends Application {
         } catch (Exception e) {
             Logger.e(TAG, String.format("onTrimMemory(%d): savegame failed", level));
         }
-    }
-
-    public interface OnAppVisibilityChange {
-
-        void onAppMinimized();
-
-        void onAppRestored();
-
     }
 
     private class ScreenReceiver extends BroadcastReceiver {

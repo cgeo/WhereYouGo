@@ -1,0 +1,28 @@
+WhereYouGo és una App no oficial de Wherigo Geocatxing.
+
+Admet la reproducció de cartutxos Wherigo, que és un joc interactiu de geocatxing basat en la ubicació. Podeu carregar, jugar i desar l'estat actual del joc de Wherigo. Es poden utilitzar la brúixola i mapes en línia o fora de línia per navegar, o bé es pot utilitzar Locus per mostrar mapes.
+Els cartutxos per al seu ús amb WhereYouGo es poden descarregar des de https://www.wherigo.com i altres serveis.
+
+Característiques principals:
+- Descàrrega automàtica de cartutxos des de wherigo.com (es pot activar des del vostre navegador obrint una pàgina a wherigo.com o des d'altres aplicacions de geocatxing com c: geo)
+- Utilitzeu la brúixola per navegar a la següent zona o ubicació del joc
+- Veure zones i ubicacions de jocs en un mapa
+- Utilitza mapes en línia de diverses fonts
+- Admet fitxers de mapes fora de línia (només el format Mapsforge v0.3 en aquest moment)  
+- Funcionament sense interrupcions amb Locus per mostrar mapes (alternativament als mapes interns)
+- Diverses zones de joc per cartutx
+- Enmagatzament automàtic del joc en canviar a una altra aplicació
+- Lector de codis QR integrat
+
+Quant a
+WhereYouGo és codi obert i té llicència GNU General Public License v3.0.
+
+Després que el codi font es mantingués durant diversos anys, un nou equip de desenvolupament (l'equip c: geo) va poder, amb l'acord de l'autor original, fer-se càrrec del codi font i continuar el desenvolupament d'aplicacions.
+Si podeu i voleu ajudar-nos, podeu trobar informació i codi font a l’enllaç següent. Necessitem la vostra ajuda: https://github.com/cgeo/WhereYouGo
+El nucli de l'aplicació es basa en OpenWIG, utilitza la biblioteca Mapsforge per mostrar mapes, o bé es pot utilitzar Locus.
+
+Notes:
+- Quan baixeu cartutxos manualment des wherigo.com, assegureu-vos d'utilitzar la versió "Pocket PC Device". 
+- Copieu els cartutxos a la carpeta Wherigo (Configuració - Principal - Carpeta Wherigo). Assegureu-vos que heu concedit permís a l’aplicació per escriure al emmagatzematge extern i que teniu permís d’escriptura al directori seleccionat. Alguns dispositius més nous no permeten escriure a la targeta SD. Si no esteu segur, configureu la carpeta "Wherigo" automàticament.
+- Si teniu problemes per instal·lar o utilitzar WhereYouGo, poseu-vos en contacte amb nosaltres a whereyougo@cgeo.org 
+- Si voleu saber per què WhereYouGo necessita els permisos sol·licitats, consulteu https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md per obtenir una explicació.

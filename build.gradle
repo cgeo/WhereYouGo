@@ -6,13 +6,13 @@ buildscript {
     // these dependencies are used by gradle plugins, not by the project
     dependencies {
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 
 plugins {
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.29.0'
+    id 'com.github.ben-manes.versions' version '0.36.0'
 }
 
 allprojects {
@@ -26,13 +26,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
         minSdkVersion 16
         //noinspection OldTargetApi
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)

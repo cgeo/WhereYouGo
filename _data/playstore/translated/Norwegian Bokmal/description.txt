@@ -1,0 +1,28 @@
+WhereYouGo er en uoffisiell klient for Wherigo-geocacher.
+
+Appen støtter Wherigo-kassetter, som er et interaktivt og lokasjonsbasert geocachingspill. Du kan laste, spille og lagre status i Whergo-spillet. Kompass og online- eller offline-kart kan brukes for å navigere. Eventuelt kan man bruke Locus for å vise kart.
+Kassetter kan lastes ned fra https://www.wherigo.com og andre tilsvarende tjenester.
+
+Hovedegenskaper:
+- Automatisk nedlasting av kassetter fra wherigo.com (kan startes fra nettleseren ved å åpne en side på wherigo.com eller fra apper for geocaching, for eksempel c:geo)
+- Bruk kompass for å navigere til neste spillsone eller lokasjon
+- Vis spillsoner og lokasjoner på et kart
+- Bruk online-kart fra forskjellige kilder
+- Støtter offline-kart (bare Mapsforge v0.3-formatet for øyeblikket)  
+- Sømløs samkjøring med Locus for å vise kart (dette er et alternativ til interne kart)
+- Flere lagringsplasser for hver kassett
+- Automatisk lagring når man bytter til en annen app
+- Integrert QR-kodeleser
+
+Om:
+WhereYouGo er OpenSource og lisensiert under GNU General Public License v3.0.
+
+Kildekoden lå urørt i flere år og nå har et nytt utviklerteam (c:geo-teamet) tatt over stafettpinnen – etter avtale med de opprinnelige utvikleren – slik at appen kan vedlikeholdes og utvikles videre.
+Hvis du har kunnskap og lyst til å hjelpe oss kan du finne informasjon og kildekode i lenken nedenfor. Vi trenger din hjelp: https://github.com/cgeo/WhereYouGo
+Kjernen i programmet er basert på OpenWIG, det bruker Mapsforge biblioteket til å vise kart, alternativt kan Locus brukes.
+
+Notater:
+- Når du manuelt laster ned kassetter fra wherigo.com må du bruke versjonen "Pocket PC Device". 
+- Kopier kassetten inn i Wherigo-mappen (velges i Innstillinger – Generelt – Wherigo-mappe). Pass på at du gir appen tillatelse til å skrive til ekstern lagring og at du har skriverettigheter i valgt mappe. Noen nyere enheter tillater ikke skriving til SD-kort. Hvis du er usikker, sett automatisk "Wherigo-mappe".
+- Hvis du har problemer med å installere eller å bruke WhereYouGo vennligst kontakt oss på whereyougo@cgeo.org 
+- Hvis du vil vite hvorfor WhereYouGo trenger tillatelsene som forespørres, kan du lese https://github.com/cgeo/WhereYouGo/blob/master/PRIVACY.md for en forklaring.

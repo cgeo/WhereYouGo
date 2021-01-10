@@ -44,7 +44,6 @@
     <string name="no_location_providers_available">Ingen placeringsudbydere tilgængelig!</string>
     <string name="no_satellites">Ingen satellitter</string>
     <string name="no_target">Intet mål!</string>
-    <string name="not_enough_disk_space_x">Ikke nok ledig diskplads på SDKort\n(%1$s,ledig:%2$s)</string>
     <string name="pending">Afventer</string>
     <string name="point">Punkt</string>
     <string name="press_color_to_apply">Tryk på farve for at anvende</string>
