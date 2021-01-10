@@ -16,3 +16,7 @@ updates:
     # Ignore all updates to the 'android-gif-drawable' package
     # minSdk=17 from version 1.2.16
     - dependency-name: "android-gif-drawable"
+    # Ignore all updates to the com.google.zxing:core
+    # minSdk=19 from version 3.3.1
+    # used for downgrade zxing-android-embedded
+    - dependency-name: "core"
