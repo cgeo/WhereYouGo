@@ -44,7 +44,7 @@ android {
     }
 
     // define ndk version to use local the same version as on CI
-    ndkVersion '21.0.6113669'
+    ndkVersion '21.3.6528147'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -120,10 +120,11 @@ dependencies {
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
     //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
 
     // ani gif support
     // minSdk=17 from version 1.2.16
+    //noinspection GradleDependency
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
 }
 
