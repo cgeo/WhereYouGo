@@ -75,7 +75,6 @@
     <string name="provider">Location provider</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Network</string>
-    <string name="provider_passive">-</string>
     <string name="question">Question</string>
     <string name="resume_previous_cartridge">Load savegame?\n(If you choose No, the savegame will be deleted.)</string>
     <string name="roll">Roll</string>
