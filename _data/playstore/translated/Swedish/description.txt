@@ -17,7 +17,7 @@ Huvudfunktioner:
 Om:
 WhereYouGo är OpenSource och licensieras under GNU General Public License v3.0.
 
-Efter att källkoden var ounderhållen i flera år, ett nytt utvecklingsteam (c:geo teamet) var - med samtycke av ursprungsförfattaren - äntligen kunnig att ta över källkoden och fortsätta apputvecklingen.
+After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
 Om du kan och vill hjälpa oss kan du hitta information och källkod i länken nedan. Vi behöver din hjälp: https://github.com/cgeo/WhereYouGo
 Kärnan i programmet är baserad på OpenWIG, den använder Mapsforge biblioteket för att visa kartor, alternativt kan Locus användas.
 
