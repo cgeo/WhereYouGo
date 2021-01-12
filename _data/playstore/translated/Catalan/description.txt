@@ -17,7 +17,7 @@ Característiques principals:
 Quant a
 WhereYouGo és codi obert i té llicència GNU General Public License v3.0.
 
-Després que el codi font es mantingués durant diversos anys, un nou equip de desenvolupament (l'equip c: geo) va poder, amb l'acord de l'autor original, fer-se càrrec del codi font i continuar el desenvolupament d'aplicacions.
+After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
 Si podeu i voleu ajudar-nos, podeu trobar informació i codi font a l’enllaç següent. Necessitem la vostra ajuda: https://github.com/cgeo/WhereYouGo
 El nucli de l'aplicació es basa en OpenWIG, utilitza la biblioteca Mapsforge per mostrar mapes, o bé es pot utilitzar Locus.
 
