@@ -17,7 +17,7 @@ Ana özellikler:
 Hakkında:
 WhereYouGo açık kaynaklı ve GNU General Public License v3.0 üzerinden lisanslıdır.
 
-Birkaç yıldır kaynak kodlarının güncellenmemesi üzerine, uygulama sahibinin onayıyla, yeni bir geliştirme ekibi (c:geo ekibi) uygulamanın geliştirilmesi için kodlar üzerinde çalışmaya başladı.
+After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
 Eğer bize yardım etmek isterseniz, aşağıdaki bağlantıdan gerekli bilgiye ve kaynak koduna ulaşabilirsiniz. Yardımınıza ihtiyacımız var: https://github.com/cgeo/WhereYouGo
 Uygulama easen haritaları görüntülemek için Mapsforge kitaplıklaını kullanan OpenWIG ile kurulmuştur, alternatif olarak Locus da kullanılabilir.
 
