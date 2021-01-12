@@ -17,7 +17,7 @@ Belangrijkste functies:
 Over:
 WhereYouGo is OpenSource en gelicenseerd onder GNU General Public License v3.0.
 
-Nadat de broncode enkele jaren niet onderhouden was geweest kon een nieuw ontwikkelingsteam (het c:geo team) eindelijk de broncode overnemen en de ontwikkeling van de app voortzetten.
+Nadat de broncode enkele jaren niet onderhouden was kon een nieuw ontwikkelingsteam (het c:geo team) - met instemming van de oorspronkelijke auteur - eindelijk de broncode overnemen en de ontwikkeling van de app voortzetten.
 Als je ons wilt en kunt helpen, kan je via de onderstaande link informatie en broncode vinden. We hebben je hulp nodig: https://github.com/cgeo/WhereYouGo
 De kern van de applicatie is gebaseerd op OpenWIG, het gebruikt de Mapsforge bibliotheek om kaarten weer te geven, als alternatief kan Locus worden gebruikt.
 
