@@ -57,7 +57,7 @@
     <string name="menu_position_last_known">Poslední známá pozice</string>
     <string name="menu_position_map_file_center">Střed mapy</string>
     <string name="menu_position_my_location_enable">Zobrazit mou pozici</string>
-    <string name="menu_position_my_location_disable">Odstranit mou pozici</string>
+    <string name="menu_position_my_location_disable">Odebrat umístění</string>
     <string name="menu_position_snap_to_location">Přichytit k pozici</string>
     <string name="menu_position_target">Cíl</string>
     <string name="menu_preferences">Nastavení</string>
