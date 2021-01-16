@@ -17,7 +17,7 @@ Päätoiminnot:
 Tietoja:
 WhereYouGo on avoimen lähdekoodin ohjelmisto ja lisensoitu GNU-hankkeen yleisen lisenssin alle (GNU General Public License v3.0).
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
+Uusi kehitystiimi (c:geon tiimi) sai (vanhan kehittäjän suostumuksella) ottaa vastulleen lähdekoodin päivittämisen ja jatkaa sen kehittämistä sen jälkeen kun lähdekoodi unohdettiin ja jätettiin useamman vuoden ajan päivittämättä.
 Jos pystyt ja haluaisit auttaa meitä, löydät lisätietoja ja lähdekoodin allaolevasta linkistä (englanniksi). Tarvitsemme apuasi: https://github.com/cgeo/WhereYouGo
 Ohjelman ydin perustuu OpenWIGiin, joka käyttää Mapsforge-kirjastoa karttojen näyttämiseen. Vaihtoehtoisesti voidaan käyttää Locus-sovellusta.
 
