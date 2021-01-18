@@ -76,7 +76,6 @@
     <string name="provider">Platsleverantör</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Nätverk</string>
-    <string name="provider_passive">-</string>
     <string name="question">Fråga</string>
     <string name="roll">Lutning</string>
     <string name="satellites">Satelliter</string>
