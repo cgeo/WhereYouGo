@@ -40,7 +40,7 @@
     <string name="gps">GPS</string>
     <string name="gps_and_location">GPS e localização</string>
     <string name="gps_disabled">GPS desativado</string>
-    <string name="gps_enabled">GPS ativado</string>
+    <string name="gps_enabled">GPS activado</string>
     <string name="gps_fix">Último ponto GPS</string>
     <string name="gps_not_enabled_show_system_settings">GPS não está activo. Deseja mostrar as configurações do sistema?</string>
     <string name="gps_off">Location</string>
