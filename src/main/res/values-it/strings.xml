@@ -76,7 +76,6 @@
     <string name="provider">Provider geolocalizzazione</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Rete</string>
-    <string name="provider_passive">-</string>
     <string name="question">Domanda</string>
     <string name="resume_previous_cartridge">Caricare il salvataggio?\n(Se scegli No, il salvataggio verrà eliminato.)</string>
     <string name="roll">Rollio</string>
