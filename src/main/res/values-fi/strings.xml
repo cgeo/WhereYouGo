@@ -76,7 +76,6 @@
     <string name="provider">Sijaintipalvelu</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Verkko</string>
-    <string name="provider_passive">-</string>
     <string name="question">Kysymys</string>
     <string name="resume_previous_cartridge">Lataa tallennettu peli?\n(Jos valitset Ei, tallennettu peli poistetaan.)</string>
     <string name="roll">Kierrä</string>
