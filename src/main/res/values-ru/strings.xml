@@ -73,7 +73,6 @@
     <string name="provider">Поставщик местоположения</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Сеть</string>
-    <string name="provider_passive">-</string>
     <string name="question">Подтверждение</string>
     <string name="resume_previous_cartridge">Вернуться к предыдущему картриджу?</string>
     <string name="roll">Крен</string>
