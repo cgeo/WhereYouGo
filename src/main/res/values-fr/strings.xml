@@ -76,7 +76,6 @@
     <string name="provider">Fournisseur de localisation</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Réseau</string>
-    <string name="provider_passive">-</string>
     <string name="question">Question</string>
     <string name="resume_previous_cartridge">Reprendre la cartouche précédente ?</string>
     <string name="roll">Roulis</string>
