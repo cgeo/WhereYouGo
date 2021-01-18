@@ -76,7 +76,6 @@
     <string name="provider">Dostawca lokalizacji</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Sieć</string>
-    <string name="provider_passive">-</string>
     <string name="question">Pytanie</string>
     <string name="resume_previous_cartridge">Załadować zapis?\n(Jeśli wybierzesz Nie, zapis zostanie usunięty.)</string>
     <string name="roll">Odchylenie</string>
