@@ -76,7 +76,6 @@
     <string name="provider">Locatieprovider</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Netwerk</string>
-    <string name="provider_passive">-</string>
     <string name="question">Vraag</string>
     <string name="resume_previous_cartridge">Vorige cartridge hervatten?</string>
     <string name="roll">Rol</string>
