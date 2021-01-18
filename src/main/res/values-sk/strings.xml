@@ -76,7 +76,6 @@
     <string name="provider">Zdroj polohy</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Sieť</string>
-    <string name="provider_passive">-</string>
     <string name="question">Otázka</string>
     <string name="resume_previous_cartridge">Obnoviť predchádzajúcu cartridge?</string>
     <string name="roll">Náklon</string>
