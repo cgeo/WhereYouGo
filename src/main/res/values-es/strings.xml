@@ -76,7 +76,6 @@
     <string name="provider">Proveedor de ubicación</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Red</string>
-    <string name="provider_passive">-</string>
     <string name="question">Pregunta</string>
     <string name="resume_previous_cartridge">Resume previous cartridge?</string>
     <string name="roll"><i>Roll</i></string>
