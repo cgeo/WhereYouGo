@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">WhereYouGo</string>
+    <string name="provider_passive" translatable="false">-</string>
 
     <!-- link data to c:geo - must be according to c:geo configuration in their AndroidManifest.xml -->
     <string name="cgeo_package" translatable="false">cgeo.geocaching</string>
