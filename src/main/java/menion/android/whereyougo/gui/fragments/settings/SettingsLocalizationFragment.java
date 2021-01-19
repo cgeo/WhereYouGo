@@ -30,7 +30,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
             language.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String currentValue = preferences.getString(preference.getKey(), "");
-                if (currentValue.equals("default")) {
+                if (currentValue != null && currentValue.equals("default")) {
                     return getString(R.string.pref_language_desc);
                 }
                 return getString(R.string.pref_language_summary, currentValue);
@@ -49,15 +49,16 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
             coordFormat.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
-                switch (current_value) {
+                switch (current_value != null ? current_value : "") {
                     case "0":
                         return getString(R.string.pref_units_coo_latlon_summary, getString(R.string.pref_units_coo_latlon_dec));
                     case "1":
                         return getString(R.string.pref_units_coo_latlon_summary, getString(R.string.pref_units_coo_latlon_min));
                     case "2":
                         return getString(R.string.pref_units_coo_latlon_summary, getString(R.string.pref_units_coo_latlon_sec));
+                    default:
+                        return getString(R.string.pref_units_coo_latlon_desc);
                 }
-                return getString(R.string.pref_units_coo_latlon_desc);
             });
         }
     }
@@ -73,7 +74,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
             lengthUnit.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
-                switch (current_value) {
+                switch (current_value != null ? current_value : "") {
                     case "0":
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_length_me_m));
                     case "1":
@@ -88,8 +89,9 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_length_im_ym));
                     case "6":
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_length_na_nmi));
+                    default:
+                        return getString(R.string.pref_units_length_desc);
                 }
-                return getString(R.string.pref_units_length_desc);
             });
         }
     }
@@ -105,13 +107,14 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
             altitudeUnit.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
-                switch (current_value) {
+                switch (current_value != null ? current_value : "") {
                     case "0":
                         return getString(R.string.pref_units_summary, getString(R.string.metres));
                     case "1":
                         return getString(R.string.pref_units_summary, getString(R.string.feet));
+                    default:
+                        return getString(R.string.pref_units_altitude_desc);
                 }
-                return getString(R.string.pref_units_altitude_desc);
             });
         }
     }
@@ -129,7 +132,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                 String current_value = preferences.getString(preference.getKey(), "");
                 Resources res = getResources(); //assuming in an activity for example, otherwise you can provide a context.
                 String[] speedUnitLabels = res.getStringArray(R.array.pref_units_speed_entries);
-                switch (current_value) {
+                switch (current_value != null ? current_value : "") {
                     case "0":
                         return getString(R.string.pref_units_summary, speedUnitLabels[0]);
                     case "1":
@@ -138,8 +141,9 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                         return getString(R.string.pref_units_summary, speedUnitLabels[2]);
                     case "3":
                         return getString(R.string.pref_units_summary, speedUnitLabels[3]);
+                    default:
+                        return getString(R.string.pref_units_speed_desc);
                 }
-                return getString(R.string.pref_units_speed_desc);
             });
         }
     }
@@ -155,7 +159,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
             angleUnit.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
-                switch (current_value) {
+                switch (current_value != null ? current_value : "") {
                     case "0":
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_angle_degree));
                     case "1":
