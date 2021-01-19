@@ -1,5 +1,6 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -22,7 +23,7 @@ public class SettingsLocationFragment extends PreferenceFragmentCompat {
         // TODO - Preferences.GPS_MIN_TIME is used but there is no settings option - default value?
 
         CheckBoxPreference allowGps = findPreference(Preferences.getKey(R.string.pref_KEY_B_GPS));
-        EditTextPreference adjustAltitude = findPreference(Preferences.getKey(R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION));
+        prepareAdjustAltitude();
         CheckBoxPreference beepOnGpsFix = findPreference(Preferences.getKey(R.string.pref_KEY_B_GPS_BEEP_ON_GPS_FIX));
         prepareDisableWhenHidden();
         prepareGuidingGpsRequired();
@@ -34,18 +35,26 @@ public class SettingsLocationFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+        if (beepOnGpsFix != null) {
+            beepOnGpsFix.setOnPreferenceChangeListener((preference, o) -> {
+                boolean newValue = (boolean) o;
+                Preferences.GPS_BEEP_ON_GPS_FIX = Utils.parseBoolean(newValue);
+                return true;
+            });
+        }
+    }
+
+    private void prepareAdjustAltitude() {
+        EditTextPreference adjustAltitude = findPreference(Preferences.getKey(R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION));
         if (adjustAltitude != null) {
             adjustAltitude.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
                 Preferences.GPS_ALTITUDE_CORRECTION = Utils.parseDouble(newValue);
                 return true;
             });
-        }
-        if (beepOnGpsFix != null) {
-            beepOnGpsFix.setOnPreferenceChangeListener((preference, o) -> {
-                boolean newValue = (boolean) o;
-                Preferences.GPS_BEEP_ON_GPS_FIX = Utils.parseBoolean(newValue);
-                return true;
+            adjustAltitude.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                return getString(R.string.pref_gps_altitude_manual_correction_summary, preferences.getString(preference.getKey(), ""));
             });
         }
     }

@@ -26,6 +26,7 @@
     <string name="pref_gps">Allow GPS</string>
     <string name="pref_gps_altitude_manual_correction">Adjust Altitude</string>
     <string name="pref_gps_altitude_manual_correction_desc">Manual correction of Altitude</string>
+    <string name="pref_gps_altitude_manual_correction_summary">Current correction of the altitude: %1$s</string>
     <string name="pref_gps_beep_on_gps_fix">Beep on GPS fix</string>
     <string name="pref_gps_beep_on_gps_fix_desc">Beep when GPS receive first valid fixed position</string>
     <string name="pref_gps_desc">Starts GPS automatically on start</string>
@@ -58,10 +59,12 @@
     <string name="pref_language">Language</string>
     <string name="pref_language_default">Default system</string>
     <string name="pref_language_desc">Allow to set language from selection</string>
+    <string name="pref_language_summary">Current chosen language: %1$s</string>
     <string name="pref_locale">Localization</string>
     <string name="pref_login">Login credentials</string>
     <string name="pref_login_desc">You need the login credentials to download Wherigo cartridges from wherigo.com. If you don\'t have any login for wherigo.com you can use your credentials from www.geocaching.com.</string>
     <string name="pref_map_provider">Map provider</string>
+    <string name="pref_map_provider_summary">Current map provider - %1$s</string>
     <string name="pref_map_provider_desc">Select map provider</string>
     <string name="pref_map_provider_locus">Locus (Locus required)</string>
     <string name="pref_map_provider_vector">Mapsforge (offline and online maps)</string>
@@ -72,6 +75,7 @@
     <string name="pref_save_game_auto">Save game automatically</string>
     <string name="pref_save_game_auto_desc">Game will be saved automatically when user switches to another application.</string>
     <string name="pref_save_game_slots">Savegame slots</string>
+    <string name="pref_save_game_slots_summary">Current Savegame slots: %1$s</string>
     <string name="pref_save_game_slots_desc">Number of slots for saving game via menu button</string>
     <string name="pref_sensors">Sensors</string>
     <string name="pref_sensors_compass_auto_change">Auto change</string>
@@ -92,6 +96,7 @@
     <string name="pref_units">Units</string>
     <string name="pref_units_altitude">Altitude units</string>
     <string name="pref_units_altitude_desc">Distance units for height</string>
+    <string name="pref_units_summary">Current unit: %1$s</string>
     <string name="pref_units_angle">Angle units</string>
     <string name="pref_units_angle_angular_mil">Angular mil</string>
     <string name="pref_units_angle_degree">Degree</string>
@@ -99,6 +104,7 @@
     <string name="pref_units_angle_russian_mil">Russian mil</string>
     <string name="pref_units_angle_us_artillery_mil">US Artillery mil</string>
     <string name="pref_units_coo_latlon">Coordinates format</string>
+    <string name="pref_units_coo_latlon_summary">Current format: %1$s</string>
     <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Coordinates (latitude/longitude) format for display</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>

@@ -32,36 +32,16 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.whereyougo_preferences_global, rootKey);
 
         prepareFilerootPreference();
-        ListPreference mapProvider = findPreference(Preferences.getKey(R.string.pref_KEY_S_MAP_PROVIDER));
+        prepareMapProvider();
         CheckBoxPreference autosave = findPreference(Preferences.getKey(R.string.pref_KEY_B_SAVEGAME_AUTO));
-        EditTextPreference savegameSlots = findPreference(Preferences.getKey(R.string.pref_KEY_S_SAVEGAME_SLOTS));
+        prepareSavegameSlots();
         CheckBoxPreference doubelTapExit = findPreference(Preferences.getKey(R.string.pref_KEY_B_DOUBLE_CLICK));
         CheckBoxPreference runScreenOff = findPreference(Preferences.getKey(R.string.pref_KEY_B_RUN_SCREEN_OFF));
 
-
-        if (mapProvider != null) {
-            mapProvider.setOnPreferenceChangeListener((preference, o) -> {
-                String newValue = (String) o;
-                Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
-                return true;
-            });
-        }
         if (autosave != null) {
             autosave.setOnPreferenceChangeListener((preference, o) -> {
                 boolean newValue = (boolean) o;
                 Preferences.GLOBAL_SAVEGAME_AUTO = Utils.parseBoolean(newValue);
-                return true;
-            });
-        }
-        if (savegameSlots != null) {
-            savegameSlots.setOnPreferenceChangeListener((preference, o) -> {
-                String newValue = (String) o;
-                int value = Utils.parseInt(newValue);
-                if (value >= 0) {
-                    Preferences.GLOBAL_SAVEGAME_SLOTS = value;
-                } else {
-                    ManagerNotify.toastShortMessage(R.string.invalid_value);
-                }
                 return true;
             });
         }
@@ -137,6 +117,47 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                     return getString(R.string.pref_root_summary, preferences.getString(preference.getKey(), ""));
                 });
             }
+        }
+    }
+
+    private void prepareMapProvider() {
+        ListPreference mapProvider = findPreference(Preferences.getKey(R.string.pref_KEY_S_MAP_PROVIDER));
+        if (mapProvider != null) {
+            mapProvider.setOnPreferenceChangeListener((preference, o) -> {
+                String newValue = (String) o;
+                Preferences.GLOBAL_MAP_PROVIDER = Utils.parseInt(newValue);
+                return true;
+            });
+            mapProvider.setSummaryProvider((preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String pref_value = preferences.getString(preference.getKey(), "");
+                if (pref_value.equals("0")) {
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_vector) , "");
+                } else if (pref_value.equals("1")) {
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_locus) , "");
+                }
+                return getString(R.string.pref_map_provider_desc);
+            }));
+        }
+    }
+
+    private void prepareSavegameSlots() {
+        EditTextPreference savegameSlots = findPreference(Preferences.getKey(R.string.pref_KEY_S_SAVEGAME_SLOTS));
+        if (savegameSlots != null) {
+            savegameSlots.setOnPreferenceChangeListener((preference, o) -> {
+                String newValue = (String) o;
+                int value = Utils.parseInt(newValue);
+                if (value >= 0) {
+                    Preferences.GLOBAL_SAVEGAME_SLOTS = value;
+                } else {
+                    ManagerNotify.toastShortMessage(R.string.invalid_value);
+                }
+                return true;
+            });
+            savegameSlots.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                return getString(R.string.pref_save_game_slots_summary, preferences.getString(preference.getKey(), ""));
+            });
         }
     }
 }
