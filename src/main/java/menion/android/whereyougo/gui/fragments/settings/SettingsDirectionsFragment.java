@@ -10,6 +10,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.ManagerNotify;
@@ -42,7 +43,7 @@ public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
                     if (!Utils.isIntentAvailable(intent)) {
                         intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                     }
-                    startActivityForResult(intent, R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND);
+                    startActivityForResult(intent, XmlSettingsActivity.REQUEST_RINGTONE_NOTIFICATION_SOUND);
                 } else {
                     Preferences.GUIDING_WAYPOINT_SOUND = result;
                 }

@@ -30,6 +30,8 @@ public class XmlSettingsActivity
 
     private static final String TAG = "XmlSettingsActivity";
 
+    public static final int REQUEST_RINGTONE_NOTIFICATION_SOUND = 100;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +67,7 @@ public class XmlSettingsActivity
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND) {
+        if (requestCode == REQUEST_RINGTONE_NOTIFICATION_SOUND) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
                 if (uri != null) {
