@@ -168,8 +168,9 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_angle_russian_mil));
                     case "3":
                         return getString(R.string.pref_units_summary, getString(R.string.pref_units_angle_us_artillery_mil));
+                    default:
+                        return getString(R.string.pref_units_length_desc);
                 }
-                return getString(R.string.pref_units_length_desc);
             });
         }
     }
