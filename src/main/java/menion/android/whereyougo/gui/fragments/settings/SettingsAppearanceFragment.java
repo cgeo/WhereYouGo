@@ -1,5 +1,6 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
@@ -18,8 +19,8 @@ public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
 
         CheckBoxPreference statusbarIcon = findPreference(Preferences.getKey(R.string.pref_KEY_B_STATUSBAR));
         CheckBoxPreference applicationInFullscreen = findPreference(Preferences.getKey(R.string.pref_KEY_B_FULLSCREEN));
-        ListPreference alwaysOn = findPreference(Preferences.getKey(R.string.pref_KEY_S_HIGHLIGHT));
-        ListPreference fontSize = findPreference(Preferences.getKey(R.string.pref_KEY_S_FONT_SIZE));
+        prepareAlwaysOn();
+        prepareFontSize();
         CheckBoxPreference imageStretch = findPreference(Preferences.getKey(R.string.pref_KEY_B_IMAGE_STRETCH));
 
         if (statusbarIcon != null) {
@@ -40,6 +41,17 @@ public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+        if (imageStretch != null) {
+            imageStretch.setOnPreferenceChangeListener((preference, o) -> {
+                boolean newValue = (boolean) o;
+                Preferences.APPEARANCE_IMAGE_STRETCH = Utils.parseBoolean(newValue);
+                return true;
+            });
+        }
+    }
+
+    private void prepareAlwaysOn() {
+        ListPreference alwaysOn = findPreference(Preferences.getKey(R.string.pref_KEY_S_HIGHLIGHT));
         if (alwaysOn != null) {
             alwaysOn.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
@@ -47,7 +59,25 @@ public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
                 PreferenceValues.enableWakeLock();
                 return true;
             });
+            alwaysOn.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String current_value = preferences.getString(preference.getKey(), "");
+                switch (current_value != null ? current_value : "") {
+                    case "0":
+                        return getString(R.string.pref_highlight_summary, getString(R.string.pref_highlight_off_text));
+                    case "1":
+                        return getString(R.string.pref_highlight_summary, getString(R.string.pref_highlight_only_gps_text));
+                    case "2":
+                        return getString(R.string.pref_highlight_summary, getString(R.string.pref_highlight));
+                    default:
+                        return getString(R.string.pref_highlight_desc);
+                }
+            });
         }
+    }
+
+    private void prepareFontSize() {
+        ListPreference fontSize = findPreference(Preferences.getKey(R.string.pref_KEY_S_FONT_SIZE));
         if (fontSize != null) {
             fontSize.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
@@ -58,14 +88,22 @@ public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
                 startActivity(getActivity().getIntent());
                 return true;
             });
-        }
-        if (imageStretch != null) {
-            imageStretch.setOnPreferenceChangeListener((preference, o) -> {
-                boolean newValue = (boolean) o;
-                Preferences.APPEARANCE_IMAGE_STRETCH = Utils.parseBoolean(newValue);
-                return true;
+            fontSize.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String current_value = preferences.getString(preference.getKey(), "");
+                switch (current_value != null ? current_value : "") {
+                    case "0":
+                        return getString(R.string.pref_font_size_summary, getString(R.string.pref_font_size_default));
+                    case "1":
+                        return getString(R.string.pref_font_size_summary, getString(R.string.pref_font_size_small));
+                    case "2":
+                        return getString(R.string.pref_font_size_summary, getString(R.string.pref_font_size_medium));
+                    case "3":
+                        return getString(R.string.pref_font_size_summary, getString(R.string.pref_font_size_large));
+                    default:
+                        return getString(R.string.pref_font_size_desc);
+                }
             });
         }
-
     }
 }

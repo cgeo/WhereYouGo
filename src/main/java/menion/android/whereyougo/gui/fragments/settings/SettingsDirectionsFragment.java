@@ -1,6 +1,7 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 
@@ -22,9 +23,9 @@ public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.whereyougo_preferences_directions, rootKey);
 
         CheckBoxPreference guidingCompassSounds = findPreference(Preferences.getKey(R.string.pref_KEY_B_GUIDING_COMPASS_SOUNDS));
-        ListPreference notificationSoundType = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND));
-        EditTextPreference soundDistance = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE));
-        ListPreference guidingZonePoint = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_ZONE_POINT));
+        prepareNotificationSoundType();
+        prepareSoundDistance();
+        prepareGuidingZonePoint();
 
         if (guidingCompassSounds != null) {
             guidingCompassSounds.setOnPreferenceChangeListener((preference, o) -> {
@@ -33,6 +34,10 @@ public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+    }
+
+    private void prepareNotificationSoundType() {
+        ListPreference notificationSoundType = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND));
         if (notificationSoundType != null) {
             notificationSoundType.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
@@ -49,7 +54,25 @@ public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
                 }
                 return true;
             });
+            notificationSoundType.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String current_value = preferences.getString(preference.getKey(), "");
+                switch (current_value != null ? current_value : "") {
+                    case "0":
+                        return getString(R.string.pref_guiding_sound_type_summary, getString(R.string.pref_guiding_waypoint_sound_increasing));
+                    case "1":
+                        return getString(R.string.pref_guiding_sound_type_summary, getString(R.string.pref_guiding_waypoint_sound_beep_on_distance));
+                    case "2":
+                        return getString(R.string.pref_guiding_sound_type_summary, getString(R.string.pref_guiding_waypoint_sound_custom_on_distance));
+                    default:
+                        return getString(R.string.pref_guiding_sound_type_waypoint_desc);
+                }
+            });
         }
+    }
+
+    private void prepareSoundDistance() {
+        EditTextPreference soundDistance = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_WAYPOINT_SOUND_DISTANCE));
         if (soundDistance != null) {
             soundDistance.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
@@ -61,12 +84,33 @@ public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
                 }
                 return true;
             });
+            soundDistance.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String currentValue = preferences.getString(preference.getKey(), "");
+                return getString(R.string.pref_guiding_sound_distance_waypoint_summary, currentValue);
+            });
         }
+    }
+
+    private void prepareGuidingZonePoint() {
+        ListPreference guidingZonePoint = findPreference(Preferences.getKey(R.string.pref_KEY_S_GUIDING_ZONE_POINT));
         if (guidingZonePoint != null) {
             guidingZonePoint.setOnPreferenceChangeListener((preference, o) -> {
                 String newValue = (String) o;
                 Preferences.GUIDING_ZONE_NAVIGATION_POINT = Utils.parseInt(newValue);
                 return true;
+            });
+            guidingZonePoint.setSummaryProvider(preference -> {
+                SharedPreferences preferences = preference.getSharedPreferences();
+                String current_value = preferences.getString(preference.getKey(), "");
+                switch (current_value != null ? current_value : "") {
+                    case "0":
+                        return getString(R.string.pref_guiding_zone_point_summary, getString(R.string.pref_guiding_zone_point_center));
+                    case "1":
+                        return getString(R.string.pref_guiding_zone_point_summary, getString(R.string.pref_guiding_zone_point_nearest));
+                    default:
+                        return getString(R.string.pref_guiding_zone_point_desc);
+                }
             });
         }
     }
