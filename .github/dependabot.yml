@@ -8,7 +8,7 @@ updates:
     # Ignore some updates to the 'okhttp' package
     # Ignore only new versions for >= 3.13.x
     - dependency-name: "com.squareup.okhttp3:okhttp"
-      versions: ["3.13.x", "3.14.x", "4.x"]
+      versions: ">= 3.13.0"
     # Ignore all updates to the 'locus' package
     # minSdk=21 in version 0.9.x
     # update in work
