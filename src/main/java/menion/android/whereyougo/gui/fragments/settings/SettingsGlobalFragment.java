@@ -80,8 +80,6 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                         getText(R.string.pref_root),
                         R.drawable.var_empty,
                         getText(R.string.pref_root_desc),
-                        getString(R.string.cancel),
-                        null,
                         getString(R.string.folder_select),
                         (dialog, which) -> {
                             FileChooserDialog selectDialog = new FileChooserDialog(settingsContext);
@@ -105,7 +103,10 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                             });
                             selectDialog.show();
                         },
-                        getString(R.string.folder_default), (dialog, which) -> {
+                        getString(R.string.cancel),
+                        null,
+                        getString(R.string.folder_default),
+                        (dialog, which) -> {
                             if (((MainApplication) A.getApp()).setRoot(null)) {
                                 MainActivity.refreshCartridges();
                             }
