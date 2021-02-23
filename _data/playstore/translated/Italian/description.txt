@@ -17,7 +17,7 @@ Caratteristiche principali:
 Informazioni:
 WhereYouGo è OpenSource e concesso in licenza sotto GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
+Dopo che il codice non è stato mantenuto per diversi anni, un nuovo team di sviluppo (il team di c:geo) è stato finalmente in grado - con il consenso dell'autore orignale - di ottenere il codice e continuare lo sviluppo dell'app.
 Se sei in grado e desideri aiutarci, puoi trovare informazioni e il codice nel link sottostante. Abbiamo bisogno del tuo aiuto: https://github.com/cgeo/WhereYouGo
 Il nucleo dell'applicazione è basato su OpenWIG, utilizza la libreria Mapsforge per visualizzare le mappe, in alternativa Locus può essere usato.
 
