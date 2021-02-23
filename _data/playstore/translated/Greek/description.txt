@@ -17,7 +17,7 @@
 Σχετικά:
 Η WhereYouGo είναι εφαρμογή ανοικτού κώδικα και είναι αδειοδοτημένη υπό την GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
+Αφού ο κώδικας δεν υποστηρίζοταν για αρκετά χρόνια, μια νέα ομάδα ανάπτυξης (η ομάδα του c:geo) κατάφερε - σε συνεννόηση με τον αρχικό εκδότη - να αναλάβει τον κώδικα και την συνέχιση της ανάπτυξης της εφαρμογής.
 Εαν μπορείτε και είστε πρόθυμοι να μας βοηθήσετε, θα βρείτε πληροφορίες και τον κώδικα στον κάτωθι σύνδεσμο. Χρειαζόμαστε την βοήθεια σας:
 https://github.com/cgeo/WhereYouGo
 Ο πυρήνας της εφαρμογής είναι βασισμένος στο OpenWIG, για την προβολή χαρτών χρησιμοποιεί την βιβλιοθήκη εργαλείων της Mapsforge ή εναλλακτικά μπορεί να χρησιμοποιηθεί η εφαρμογή Locus.
