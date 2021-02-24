@@ -10,14 +10,14 @@ Huvudfunktioner:
 - Använder online-kartor från olika källor
 - Stöder offline-kartfiler (endast Mapsforge v0.3 format just nu)  
 - Sömlös samverkan med Locus för att visa kartor (som alternativ till interna kartor)
-- Several save game slots per cartridge
+- Flera sparade spellägen per patron
 - Automatisk sparning av spel när du byter till en annan app
 - Integrerad QR-kodsläsare
 
 Om:
 WhereYouGo är OpenSource och licensieras under GNU General Public License v3.0.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
+Efter att källkoden var ounderhållen i flera år, ett nytt utvecklingsteam (c:geo teamet) var - med samtycke av ursprungsförfattaren - äntligen kunnig att ta över källkoden och fortsätta apputvecklingen.
 Om du kan och vill hjälpa oss kan du hitta information och källkod i länken nedan. Vi behöver din hjälp: https://github.com/cgeo/WhereYouGo
 Kärnan i programmet är baserad på OpenWIG, den använder Mapsforge biblioteket för att visa kartor, alternativt kan Locus användas.
 
