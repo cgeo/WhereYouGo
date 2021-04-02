@@ -79,6 +79,7 @@
     <string name="provider_network">Nätverk</string>
     <string name="provider_passive">-</string>
     <string name="question">Fråga</string>
+    <string name="resume_previous_cartridge">Ladda sparat spel?\n(Om du väljer Nej, kommer sparat spel att tas bort.)</string>
     <string name="roll">Lutning</string>
     <string name="satellites">Satelliter</string>
     <string name="save_file_backup">Säkerhetskopiera</string>
@@ -88,6 +89,7 @@
     <string name="save_game_auto">Spel sparades automatiskt</string>
     <string name="save_game_before_exit">Spara spel innan avslut?</string>
     <string name="save_game_ok">Spel sparat</string>
+    <string name="save_game_slot">Plats</string>
     <string name="save_game_slots">Spara…</string>
     <string name="saving">Sparar…</string>
     <string name="scanQR">Scan QR</string>

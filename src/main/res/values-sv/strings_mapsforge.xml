@@ -1,17 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- MapsForge BEGIN -->
+    <string-array name="preferences_scale_bar_unit_values">
+        <item>Imperiska</item>
+        <item>Metrisk</item>
+    </string-array>
     <string-array name="preferences_text_scale_values">
-        <item>tiny</item>
-        <item>small</item>
+        <item>Mini</item>
+        <item>liten</item>
         <item>normal</item>
-        <item>large</item>
-        <item>huge</item>
+        <item>stor</item>
+        <item>enorm</item>
         <item>automatisk</item>
     </string-array>
+    <string-array name="mapgenerator_values">
+        <item>tom</item>
+        <item>mappfil [*.map] (offline)</item>
+        <item>OSM Mapnik (online)</item>
+        <item>OSM.de (online)</item>
+        <item>CyclOSM (online)</item>
+        <item>Kollektivtrafik (\u00d6PNV) (online)</item>
+        <item>Esri World Street (online)</item>
+        <item>Esri World Imagery (online)</item>
+    </string-array>
+    <string name="application_name">Mapsforge</string>
+    <string name="error_last_location_unknown">Den sista platsen är okänd</string>
+    <string name="file_invalid">Den valda filen är ogiltig.</string>
+    <string name="file_select">Välj en fil.</string>
+    <string name="file_size_byte">byte</string>
+    <string name="file_size_bytes">bytes</string>
+    <string name="file_size_kb">kB</string>
+    <string name="file_size_mb">MB</string>
+    <string name="file_size_gb">GB</string>
+    <string name="go_to_position">Gå till position</string>
+    <string name="info_map_file_area">Område</string>
+    <string name="info_map_file_comment">Kommentar</string>
+    <string name="info_map_file_created_by">Skapad av</string>
+    <string name="info_map_file_date">Datum</string>
+    <string name="info_map_file_debug">Felsökningsinformation</string>
+    <string name="info_map_file_debug_no">ingår inte</string>
+    <string name="info_map_file_debug_yes">ingår</string>
+    <string name="info_map_file_language_preference">Språkinställningar</string>
+    <string name="info_map_file_name">Fil</string>
+    <string name="info_map_file_size">Filstorlek</string>
+    <string name="info_map_file_start_position">Startposition</string>
+    <string name="info_map_file_version">Version</string>
+    <string name="menu_info">Info</string>
+    <string name="menu_info_map_file">Egenskaper för mapfil</string>
+    <string name="menu_info_about">Om denna programvara</string>
+    <string name="menu_mapfile">Kartfil</string>
+    <string name="menu_mapgenerator">Kartkälla</string>
     <string name="menu_acquire_from_cgeo">Skaffa karta från c:geo</string>
+    <string name="menu_position">Position</string>
+    <string name="menu_position_enter_coordinates">Ange koordinater</string>
+    <string name="menu_position_last_known">Senast kända plats</string>
+    <string name="menu_position_map_file_center">Mapfilens centrum</string>
+    <string name="menu_position_my_location_enable">Visa min position</string>
+    <string name="menu_position_my_location_disable">Ta bort min plats</string>
+    <string name="menu_position_target">Mål</string>
+    <string name="menu_preferences">Inställningar</string>
+    <string name="menu_refresh">Uppdatera</string>
+    <string name="menu_render_theme">Rendera tema</string>
+    <string name="menu_render_theme_osmarender">Osmarender</string>
+    <string name="menu_render_theme_select_file">Välj XML-fil …</string>
+    <string name="menu_screenshot">Skärmbild</string>
+    <string name="menu_screenshot_jpeg">JPEG (lossy)</string>
+    <string name="menu_screenshot_png">PNG (förlustfri)</string>
+    <string name="no_location_provider_available">Ingen platskälla tillgänglig</string>
+    <string name="preferences_debug">Felsökningsinställningar</string>
+    <string name="preferences_general">Allmänna inställningar</string>
     <string name="preferences_tileCache">Cache-inställningar för kartrutor</string>
+    <string name="preferences_tileCache_persistence_desc">Behåll cachade bilder vid avslut</string>
+    <string name="preferences_tileCache_size_value">%.1f MB</string>
+    <string name="preferences_fullscreen">Helskärmsläge</string>
+    <string name="preferences_fullscreen_desc">Dölj statusfältet</string>
+    <string name="preferences_map">Kartinställningar</string>
+    <string name="preferences_move_speed">Förflyttningshastighet</string>
+    <string name="preferences_move_speed_desc">Justera förflyttningshastigheten av kartan</string>
+    <string name="preferences_move_speed_value">%d %% förflyttningshastighet</string>
+    <string name="preferences_scale_bar_unit">Skala fältenhet</string>
+    <string name="preferences_show_fps_counter">Bildfrekvens</string>
+    <string name="preferences_show_fps_counter_desc">Aktivera räknare för bildrutor per sekund</string>
+    <string name="preferences_show_scale_bar_desc">Visa skalan på kartan</string>
+    <string name="preferences_text_scale">Teckenstorlek</string>
+    <string name="preferences_text_scale_desc">Välj textstorlek för karttext</string>
+    <string name="preferences_wake_lock">Håll vaken</string>
+    <string name="preferences_wake_lock_desc">Stoppa skärmen från att dimmas</string>
+    <string name="unit_symbol_kilometer">&#160;km</string>
+    <string name="unit_symbol_meter">&#160;m</string>
+    <string name="zoomLevel">Zoomnivå</string>
     <!-- MapsForge END -->
     <!-- receive mapfile -->
     <string name="receivemapfile_cgeonotfound">c:geo-programmet hittades inte</string>
+    <string name="receivemapfile_error">Fel vid inställning av kartfil</string>
+    <string name="receivemapfile_notset">Ingen kartfil angiven i c:geo</string>
 </resources>

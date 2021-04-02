@@ -10,7 +10,7 @@ Huvudfunktioner:
 - Använder online-kartor från olika källor
 - Stöder offline-kartfiler (endast Mapsforge v0.3 format just nu)  
 - Sömlös samverkan med Locus för att visa kartor (som alternativ till interna kartor)
-- Several save game slots per cartridge
+- Flera sparade spellägen per patron
 - Automatisk sparning av spel när du byter till en annan app
 - Integrerad QR-kodsläsare
 
