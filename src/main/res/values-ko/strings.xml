@@ -76,7 +76,6 @@
     <string name="provider">위치 제공자</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">네트워크</string>
-    <string name="provider_passive">-</string>
     <string name="question">질문</string>
     <string name="resume_previous_cartridge">이전 카트리지를 재개?</string>
     <string name="roll">기울기</string>

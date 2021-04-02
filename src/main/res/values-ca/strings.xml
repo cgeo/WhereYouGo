@@ -78,7 +78,6 @@ Alguns dispositiu nous no permeten escriure a les targetes SD.Si no esteu segurs
     <string name="provider">Proveďdor d\'ubicació</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Xarxa</string>
-    <string name="provider_passive">-</string>
     <string name="question">Pregunta</string>
     <string name="resume_previous_cartridge">Voleu carregar un joc desat?\n(Si escolliu que No, el joc desat s\'eliminarŕ.)</string>
     <string name="roll">Rodar</string>

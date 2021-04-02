@@ -76,7 +76,6 @@
     <string name="provider">Standortdienst</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Netzwerk</string>
-    <string name="provider_passive">-</string>
     <string name="question">Frage</string>
     <string name="resume_previous_cartridge">Spielstand laden?\n\n(Falls du Nein wählst, wird der alte Spielstand gelöscht.)</string>
     <string name="roll">Neigung</string>

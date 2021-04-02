@@ -80,7 +80,6 @@ Pokud si nejste jisti, nechte \"Složku s Wherigo\" nastavit automaticky.</strin
     <string name="provider">Zdroj polohy</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Síť</string>
-    <string name="provider_passive">-</string>
     <string name="question">Otázka</string>
     <string name="resume_previous_cartridge">Načíst uloženou hru?\n(Pokud zvolíte Ne, bude uložená hra smazána.)</string>
     <string name="roll">Náklon</string>

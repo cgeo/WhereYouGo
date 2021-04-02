@@ -71,7 +71,6 @@
     <string name="problem_with_internet_connection">Problema com conexão com a Internet!</string>
     <string name="provider">Serviço de localização</string>
     <string name="provider_network">Rede</string>
-    <string name="provider_passive">-</string>
     <string name="question">Pergunta</string>
     <string name="resume_previous_cartridge">Resume previous cartridge?</string>
     <string name="roll">Rolar</string>

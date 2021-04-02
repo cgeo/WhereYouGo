@@ -17,7 +17,7 @@ Hlavní funkce:
 Informace:
 WhereYouGo má otevřený zdrojový kód a je poskytován v rámci licence GNU General Public License v3.0.
 
-Po tom, co byl zdrojový kód několik let neudržovaný, mohl konečně nový vývojový tým (tým aplikace c: geo) se souhlasem původního autora převzít zdrojový kód a pokračovat ve vývoji aplikace.
+Po tom, co byl zdrojový kód několik let neudržovaný, mohl konečně nový vývojový tým (tým aplikace c:geo) se souhlasem původního autora převzít zdrojový kód a pokračovat ve vývoji aplikace.
 Pokud máte možnost a chcete nám pomoci, na odkazu níže najdete informace a zdrojový kód. Potřebujeme vaši pomoc: https://github.com/cgeo/WhereYouGo
 Jádro aplikace je založeno na OpenWIG, používá knihovnu Mapsforge k zobrazení map, alternativně může být použit Locus.
 

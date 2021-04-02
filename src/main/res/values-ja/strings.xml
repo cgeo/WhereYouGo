@@ -76,7 +76,6 @@
     <string name="provider">ロケーションプロバイダ</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">ネットワーク</string>
-    <string name="provider_passive">-</string>
     <string name="question">質問</string>
     <string name="resume_previous_cartridge">保存したゲームを読み込みますか?\n(\"いいえ\"を選択すると古い保存したゲームは削除されます)</string>
     <string name="roll">ロール</string>

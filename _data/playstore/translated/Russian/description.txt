@@ -17,7 +17,7 @@ WhereYouGo является неофициальным клиентом для W
 О программе:
 WhereYouGo является OpenSource и лицензируется под GNU General Public License v3.0.
 
-После того, как исходный код оставался без поддержки в течение нескольких лет, новая команда разработчиков (команда c:geo) смогла - с прямого согласия автора - приняться за исходный код и продолжить разработку приложения.
+After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
 Если Вы готовы помочь нам, то Вы можете найти контакты и исходный код по ссылке ниже. Нам нужна ваша помощь: https://github.com/cgeo/WhereYouGo
 Ядро приложения основано на OpenWIG, оно использует библиотеку Mapsforge для отображения карт, в качестве альтернативы можно использовать Locus.
 

@@ -17,7 +17,7 @@ Główne funkcje:
 O programie:
 WhereYouGo jest oprogramowaniem OpenSource na licencji GNU General Public License v3.0.
 
-Po tym, jak kod źródłowy był nieutrzymywany przez kilka lat, nowy zespół deweloperski (zespół c:geo) mógł - za zgodą oryginalnego autora - w końcu przejąć kod źródłowy i kontynuować rozwój aplikacji.
+Po tym, jak kod źródłowy był nieutrzymywany przez kilka lat, nowy zespół programistów (zespół c:geo) był - za zgodą oryginalnego autora - w końcu mógł przejąć kod źródłowy i kontynuować rozwój aplikacji.
 Jeśli jesteś w stanie i chcesz nam pomóc, możesz znaleźć informacje i kod źródłowy w poniższym linku. Potrzebujemy twojej pomocy: https://github.com/cgeo/WhereYouGo
 Podstawa aplikacji jest oparta o OpenWIG, używa biblioteki Mapsforge do wyświetlania map, alternatywnie można użyć aplikacji Locus.
 

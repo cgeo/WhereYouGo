@@ -76,7 +76,6 @@
     <string name="provider">Konum sağlayıcı</string>
     <string name="provider_gps">GPS</string>
     <string name="provider_network">Ağ</string>
-    <string name="provider_passive">-</string>
     <string name="question">Soru</string>
     <string name="resume_previous_cartridge">Kayıtlı oyunu yükle?\n(Eğer Hayır\'ı seçerseniz kayıtlı oyun silinecektir.)</string>
     <string name="roll">Rulo</string>
