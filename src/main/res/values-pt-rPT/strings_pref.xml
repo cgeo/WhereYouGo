@@ -36,7 +36,7 @@
     <string name="pref_gps_min_time_desc">Tempo (em seg) até o GPS tentar obter uma nova localização. Para conservar bateria, sugere-se valores superiores a 60s</string>
     <string name="pref_guiding">Orientadores</string>
     <string name="pref_guiding_compass_sounds">Sons orientadores</string>
-    <string name="pref_guiding_compass_sounds_desc">Ativar / desativar os sons durante a orientação</string>
+    <string name="pref_guiding_compass_sounds_desc">Activar / desactivar os sons durante a orientação</string>
     <string name="pref_guiding_gps_required_desc">Deixar o GPS ligado, quando a aplicação é ocultada durante a navegação</string>
     <string name="pref_guiding_sound_distance">Distância do som</string>
     <string name="pref_guiding_sound_distance_waypoint_desc">Distância (metros) usada em sons. Valor inicial para som que aumenta ou apenas um valor para um único toque</string>
@@ -49,9 +49,9 @@
     <string name="pref_guiding_zone_point_center">Centro da zona definido pelo autor do cartucho (cartridge)</string>
     <string name="pref_guiding_zone_point_desc">Seleccione o ponto da zona para usar na navegação</string>
     <string name="pref_guiding_zone_point_nearest">Ponto limite de zona mais próximo</string>
-    <string name="pref_highlight">Écran sempre ligado</string>
+    <string name="pref_highlight">Ecrã sempre ligado</string>
     <string name="pref_highlight_always_text">Ecrã sempre ligado</string>
-    <string name="pref_highlight_desc">Ativar / desativar écran sempre ligado</string>
+    <string name="pref_highlight_desc">Activar / desactivar ecrã sempre ligado</string>
     <string name="pref_highlight_off_text">Configurações do sistema</string>
     <string name="pref_highlight_only_gps_text">Apenas quando o GPS estiver ligado</string>
     <string name="pref_image_stretch">Esticar imagens</string>
