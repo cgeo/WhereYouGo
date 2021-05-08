@@ -12,6 +12,7 @@
     <string name="pref_run_screen_off">App auch bei ausgeschaltetem Bildschirm ausführen</string>
     <string name="pref_run_screen_off_desc">Stellt sicher, dass die App ausgeführt wird, auch wenn der Bildschirm ausgeschaltet ist.</string>
     <string name="pref_font_size">Schriftgröße</string>
+    <string name="pref_font_size_summary">Aktuelle Schriftgröße: %1$s</string>
     <string name="pref_font_size_default">Standard</string>
     <string name="pref_font_size_desc">Schriftgröße für Texte</string>
     <string name="pref_font_size_large">Groß</string>
@@ -27,6 +28,7 @@
     <string name="pref_gps">GPS erlauben</string>
     <string name="pref_gps_altitude_manual_correction">Meereshöhe anpassen</string>
     <string name="pref_gps_altitude_manual_correction_desc">Manuelle Korrektur der Meereshöhe</string>
+    <string name="pref_gps_altitude_manual_correction_summary">Aktuelle Korrektur der Höhe: %1$s</string>
     <string name="pref_gps_beep_on_gps_fix">Signalton bei GPS-Fix</string>
     <string name="pref_gps_beep_on_gps_fix_desc">Signalton, wenn das GPS die erste richtige Position erkannt hat</string>
     <string name="pref_gps_desc">Startet GPS automatisch beim App Start</string>
@@ -40,7 +42,9 @@
     <string name="pref_guiding_gps_required_desc">GPS angeschaltet lassen, wenn die Anwendung während der Routenführung minimiert ist</string>
     <string name="pref_guiding_sound_distance">Entfernung für Signaltöne</string>
     <string name="pref_guiding_sound_distance_waypoint_desc">Entfernung (Meter), die für Signaltöne benutzt werden. Startwert für die Erhöhung oder nur ein Wert für einen Piepton</string>
+    <string name="pref_guiding_sound_distance_waypoint_summary">Aktuelle Distanz: %1$s</string>
     <string name="pref_guiding_sound_type">Art des Signaltons</string>
+    <string name="pref_guiding_sound_type_summary">Aktueller Benachrichtigungstyp: %1$s</string>
     <string name="pref_guiding_sound_type_waypoint_desc">Hier kannst du einstellen, wie Signaltöne für die Wegpunktbenachrichtigungen funktionieren</string>
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Signalton nach Entfernung</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Nutzerdefinierter Signalton nach Entfernung</string>
@@ -48,8 +52,10 @@
     <string name="pref_guiding_zone_point">Zonen-Navigationspunkt</string>
     <string name="pref_guiding_zone_point_center">Vom Autor definierte Zonenmitte</string>
     <string name="pref_guiding_zone_point_desc">Wähle aus, welcher Zonenpunkt für die Navigation verwendet werden soll</string>
+    <string name="pref_guiding_zone_point_summary">Aktueller Punkt: %1$s</string>
     <string name="pref_guiding_zone_point_nearest">Nächster Grenzpunkt</string>
     <string name="pref_highlight">Bildschirm abschalten</string>
+    <string name="pref_highlight_summary">\"Immer an\"-Vorgabe: %1$s</string>
     <string name="pref_highlight_always_text">Bildschirm immer an</string>
     <string name="pref_highlight_desc">Lege fest, ob der Bildschirm immer eingeschaltet bleiben soll</string>
     <string name="pref_highlight_off_text">Systemeinstellungen</string>
@@ -59,10 +65,12 @@
     <string name="pref_language">Sprache</string>
     <string name="pref_language_default">Systemsprache</string>
     <string name="pref_language_desc">Sprache durch Auswahl festlegen</string>
+    <string name="pref_language_summary">Aktuell gewählte Sprache: %1$s</string>
     <string name="pref_locale">Lokalisierung</string>
     <string name="pref_login">Zugangsdaten</string>
     <string name="pref_login_desc">Du benötigst die Zugangsdaten für den Download von Wherigo Cartridge von wherigo.com. Hast du keine Zugangsdaten für www.wherigo.com kannst du auch deine Zugangsdaten von www.geocaching.com nutzen.</string>
     <string name="pref_map_provider">Kartengrundlage</string>
+    <string name="pref_map_provider_summary">Aktueller Kartenanbieter - %1$s</string>
     <string name="pref_map_provider_desc">Kartenanbieter wählen</string>
     <string name="pref_map_provider_locus">Locus (Locus notwendig)</string>
     <string name="pref_map_provider_vector">Mapsforge (Offline- und Online-Karten)</string>
@@ -72,6 +80,7 @@
     <string name="pref_save_game_auto">Spiel automatisch speichern</string>
     <string name="pref_save_game_auto_desc">Das Spiel wird automatisch gespeichert, wenn du die Anwendung minimierst.</string>
     <string name="pref_save_game_slots">Spielstände</string>
+    <string name="pref_save_game_slots_summary">Aktueller Speicherplatz: %1$s</string>
     <string name="pref_save_game_slots_desc">Anzahl der Slots zum Speichern des Spiels über die Menütaste</string>
     <string name="pref_sensors">Sensoren</string>
     <string name="pref_sensors_compass_auto_change">Automatisch ändern</string>
@@ -81,6 +90,7 @@
     <string name="pref_sensors_compass_hardware">Hardware Kompass verwenden</string>
     <string name="pref_sensors_compass_hardware_desc">Hardware-Kompass für das Rotieren der Karte und des Kompasses benutzen. Ausrichtung des GPS wird - falls deaktiviert - benutzt (besser für\'s Auto)</string>
     <string name="pref_sensors_orient_filter">Ausrichtungs-Filter</string>
+    <string name="pref_sensors_orient_filter_summary">Aktueller Filter: %1$s</string>
     <string name="pref_sensors_orient_filter_desc">Filter, der für die Orientierung angewendet wird. Stärkere Filter verursachen langsame Reaktionen, aber flüssigere Bewegungen</string>
     <string name="pref_sensors_orient_filter_heavy">Starker Filter</string>
     <string name="pref_sensors_orient_filter_ligth">Leichter Filter</string>
@@ -92,6 +102,7 @@
     <string name="pref_units">Einheiten</string>
     <string name="pref_units_altitude">Höheneinheit</string>
     <string name="pref_units_altitude_desc">Wähle die Einheit für Höhenangaben</string>
+    <string name="pref_units_summary">Aktuelle Einheit: %1$s</string>
     <string name="pref_units_angle">Winkeleinheiten</string>
     <string name="pref_units_angle_angular_mil">Winkel</string>
     <string name="pref_units_angle_degree">Grad</string>
@@ -99,6 +110,7 @@
     <string name="pref_units_angle_russian_mil">Russischer Strich</string>
     <string name="pref_units_angle_us_artillery_mil">Amerikanischer Strich</string>
     <string name="pref_units_coo_latlon">Koordinatenformat</string>
+    <string name="pref_units_coo_latlon_summary">Aktuelles Format: %1$s</string>
     <string name="pref_units_coo_latlon_dec">14.94323°</string>
     <string name="pref_units_coo_latlon_desc">Wähle das Koordinatenformat (Breiten-/Längengrad)</string>
     <string name="pref_units_coo_latlon_min">14° 52.123\'</string>
