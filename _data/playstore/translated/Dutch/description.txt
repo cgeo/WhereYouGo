@@ -10,7 +10,7 @@ Belangrijkste functies:
 - Gebruikt online kaarten van verschillende bronnen
 - Ondersteunt offline kaart bestanden (alleen Mapsforge v0.3 formaat op dit moment)  
 - Naadloos communiceren met Locus om kaarten weer te geven (alternatief voor interne kaarten)
-- Verschillende opslagplaatsen per cartridge
+- Verschillende opslagslots per cartridge
 - Automatisch opslaan van spel wanneer je overschakelt naar een andere app
 - Geïntegreerde QR-code lezer
 
