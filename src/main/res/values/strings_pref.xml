@@ -127,4 +127,5 @@
     <string name="pref_units_length_na_nmi">Nautical (m/nmi)</string>
     <string name="pref_units_speed">Speed units</string>
     <string name="pref_units_speed_desc">Choose default speed units</string>
+    <string name="pref_gc_check">Check login data</string>
 </resources>
