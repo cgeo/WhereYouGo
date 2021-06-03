@@ -17,7 +17,7 @@ WhereYouGo와 함께 사용하기위한 카트리지는 https://www.wherigo.com 
 소개:
 WhereYouGo는 OpenSource이며 GNU General Public License v3.0에 따라 라이센스가 부여됩니다.
 
-After the source code was unmaintained for several years, a new development team (the c:geo team) was - with agreement of the original author - finally able to take over the source code and continue app development.
+소스 코드가 몇 년 동안 유지되지 않은 후, 새로운 개발 팀 (c:geo 팀)은 최초의 저자와 동의하여 마침내 소스 코드를 인수하고 앱 개발을 계속할 수있었습니다.
 도움이되고 기꺼이 도와 줄 수 있으면 아래 링크에서 정보와 소스 코드를 찾을 수 있습니다. 우리는 당신의 도움이 필요합니다: https://github.com/cgeo/WhereYouGo
 응용 프로그램의 핵심은 OpenWIG를 기반으로하며 Mapsforge 라이브러리를 사용하여 맵을 표시하거나 Locus를 사용할 수 있습니다.
 
