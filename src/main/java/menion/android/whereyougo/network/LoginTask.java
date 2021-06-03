@@ -1,14 +1,20 @@
 package menion.android.whereyougo.network;
 
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
+import menion.android.whereyougo.R;
 import menion.android.whereyougo.utils.Logger;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -23,18 +29,82 @@ public class LoginTask extends
 
     private final String username;
     private final String password;
+    private final AlertDialog loginCheckdialog;
     private OkHttpClient httpClient;
     private String errorMessage;
 
-    public LoginTask(String username, String password) {
+    public LoginTask(View view, String username, String password) {
         super();
         this.username = username;
         this.password = password;
+
+        // Inflate Custom alert dialog view
+        View customAlertDialogView = LayoutInflater.from(view.getContext())
+            .inflate(R.layout.custom_progress_dialog, null, false);
+        loginCheckdialog = new MaterialAlertDialogBuilder(view.getContext())
+            .setView(customAlertDialogView)
+            .setTitle(R.string.pref_gc_check_dialog_default_title)
+            .setMessage(R.string.pref_gc_check_dialog_default_message)
+            .setNegativeButton(R.string.pref_gc_check_dialog_default_negative_button, (dialog, which) -> {
+                this.cancel(true);
+            })
+            .create();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        loginCheckdialog.show();
     }
 
     @Override
     protected Boolean doInBackground(Void... params) {
         return init() && ping() && login() && logout();
+    }
+
+    @Override
+    protected void onProgressUpdate(Progress... values) {
+        super.onProgressUpdate(values);
+        switch (values[0].state) {
+            case FAIL:
+                loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_unsuccessfull));
+                loginCheckdialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(R.string.pref_gc_check_dialog_negative_button_close);
+                loginCheckdialog.findViewById(R.id.dialogProgressBarLayout).setVisibility(View.GONE);
+                break;
+            case SUCCESS:
+                loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_successfull));
+                loginCheckdialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(R.string.pref_gc_check_dialog_negative_button_close);
+                loginCheckdialog.findViewById(R.id.dialogProgressBarLayout).setVisibility(View.GONE);
+                break;
+            case WORKING:
+                switch (values[0].task) {
+                    case INIT:
+                        loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_init));
+                        break;
+                    case PING:
+                        loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_pinging));
+                        break;
+                    case LOGIN:
+                        loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_login));
+                        break;
+                    case LOGOUT:
+                        loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_logout));
+                        break;
+                    default:
+                        loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_error));
+                        break;
+                }
+                break;
+            default:
+                loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_error));
+                break;
+        }
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        loginCheckdialog.dismiss();
     }
 
     private boolean init() {
@@ -96,14 +166,16 @@ public class LoginTask extends
             .url(LOGIN)
             .post(formBody)
             .build();
-        return handleRequest(request, Task.LOGOUT) != null;
+        boolean result = handleRequest(request, Task.LOGOUT) != null;
+        publishProgress(new Progress(Task.LOGOUT, (result) ? State.SUCCESS : State.FAIL));
+        return result;
     }
 
     private Response handleRequest(Request request, Task task) {
         publishProgress(new Progress(task, State.WORKING));
         Response response = handleRequest(request);
         if (response != null) {
-            publishProgress(new Progress(task, State.SUCCESS));
+            publishProgress(new Progress(task, State.WORKING));
         } else {
             publishProgress(new Progress(task, State.FAIL, errorMessage));
         }
@@ -129,7 +201,7 @@ public class LoginTask extends
     }
 
     public enum Task {
-        INIT, PING, LOGIN, DOWNLOAD, DOWNLOAD_SINGLE, LOGOUT
+        INIT, PING, LOGIN, LOGOUT
     }
 
     public enum State {
@@ -139,7 +211,6 @@ public class LoginTask extends
     public static class Progress {
         protected final Task task;
         protected final State state;
-        protected long completed;
         protected String message;
 
         public Progress(@NonNull Task task, @NonNull State state) {
@@ -163,10 +234,6 @@ public class LoginTask extends
 
         public String getMessage() {
             return message;
-        }
-
-        public long getCompleted() {
-            return completed;
         }
     }
 }
