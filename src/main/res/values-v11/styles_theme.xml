@@ -7,5 +7,5 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="ThemeSettings" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="ThemeSettings" parent="Theme.MaterialComponents.Light.NoActionBar" />
 </resources>

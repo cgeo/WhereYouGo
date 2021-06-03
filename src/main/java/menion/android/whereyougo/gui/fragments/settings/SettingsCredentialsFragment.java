@@ -34,7 +34,7 @@ public class SettingsCredentialsFragment extends PreferenceFragmentCompat {
         if (checkLogin != null) {
             checkLogin.setOnPreferenceClickListener(preference -> {
                 // TODO: Check for non empty username and password before
-                LoginTask loginTask = new LoginTask(Preferences.GC_USERNAME, Preferences.GC_PASSWORD);
+                LoginTask loginTask = new LoginTask(getView(), Preferences.GC_USERNAME, Preferences.GC_PASSWORD);
                 loginTask.execute();
                 return true;
             });

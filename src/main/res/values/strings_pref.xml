@@ -19,6 +19,18 @@
     <string name="pref_font_size_small">Small</string>
     <string name="pref_fullscreen">FullScreen</string>
     <string name="pref_fullscreen_desc">Hide system panel</string>
+    <string name="pref_gc_check">Check login data</string>
+    <string name="pref_gc_check_dialog_default_title">Testing the Login Credentials</string>
+    <string name="pref_gc_check_dialog_default_message">Working</string>
+    <string name="pref_gc_check_dialog_default_negative_button">Cancel Check</string>
+    <string name="pref_gc_check_dialog_message_successfull">Login check successful</string>
+    <string name="pref_gc_check_dialog_message_init">Init</string>
+    <string name="pref_gc_check_dialog_message_pinging">Pinging</string>
+    <string name="pref_gc_check_dialog_message_login">Logging in</string>
+    <string name="pref_gc_check_dialog_message_logout">Logging out</string>
+    <string name="pref_gc_check_dialog_message_error">Something unexpected happened. Please close the dialog!</string>
+    <string name="pref_gc_check_dialog_message_unsuccessfull">Login check not successful</string>
+    <string name="pref_gc_check_dialog_negative_button_close">Close Dialog</string>
     <string name="pref_gc_password">Password</string>
     <string name="pref_gc_password_desc">Geocaching.com password</string>
     <string name="pref_gc_username">Username</string>
@@ -127,5 +139,4 @@
     <string name="pref_units_length_na_nmi">Nautical (m/nmi)</string>
     <string name="pref_units_speed">Speed units</string>
     <string name="pref_units_speed_desc">Choose default speed units</string>
-    <string name="pref_gc_check">Check login data</string>
 </resources>
