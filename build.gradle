@@ -6,7 +6,7 @@ buildscript {
     // these dependencies are used by gradle plugins, not by the project
     dependencies {
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
