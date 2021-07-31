@@ -69,12 +69,18 @@ public class LoginTask extends
             case FAIL:
                 loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_unsuccessfull));
                 loginCheckdialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(R.string.pref_gc_check_dialog_negative_button_close);
-                loginCheckdialog.findViewById(R.id.dialogProgressBarLayout).setVisibility(View.GONE);
+                loginCheckdialog
+                    .findViewById(R.id.dialogProgressBarLayout)
+                    .setVisibility(View.GONE);
                 break;
             case SUCCESS:
-                loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_successfull));
-                loginCheckdialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(R.string.pref_gc_check_dialog_negative_button_close);
-                loginCheckdialog.findViewById(R.id.dialogProgressBarLayout).setVisibility(View.GONE);
+                if (values[0].task == Task.LOGOUT) {
+                    loginCheckdialog.setMessage(loginCheckdialog.getContext().getString(R.string.pref_gc_check_dialog_message_successfull));
+                    loginCheckdialog.getButton(AlertDialog.BUTTON_NEGATIVE).setText(R.string.pref_gc_check_dialog_negative_button_close);
+                    loginCheckdialog
+                        .findViewById(R.id.dialogProgressBarLayout)
+                        .setVisibility(View.GONE);
+                }
                 break;
             case WORKING:
                 switch (values[0].task) {
