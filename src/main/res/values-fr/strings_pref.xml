@@ -19,6 +19,13 @@
     <string name="pref_font_size_small">Petite</string>
     <string name="pref_fullscreen">Plein écran</string>
     <string name="pref_fullscreen_desc">Masquer le menu système</string>
+    <string name="pref_gc_check">Vérifier les identifiants</string>
+    <string name="pref_gc_check_dialog_default_title">Vérification des identifiants en cours</string>
+    <string name="pref_gc_check_dialog_default_negative_button">Annuler la vérification</string>
+    <string name="pref_gc_check_dialog_message_successfull">Vérification des identifiants réussie</string>
+    <string name="pref_gc_check_dialog_message_login">Connexion en cours</string>
+    <string name="pref_gc_check_dialog_message_logout">Déconnexion en cours</string>
+    <string name="pref_gc_check_dialog_message_unsuccessfull">Les identifiants sont incorrects</string>
     <string name="pref_gc_password">Mot de passe</string>
     <string name="pref_gc_password_desc">Mot de passe Geocaching.com</string>
     <string name="pref_gc_username">Utilisateur</string>
