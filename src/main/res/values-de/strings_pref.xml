@@ -20,6 +20,15 @@
     <string name="pref_font_size_small">Klein</string>
     <string name="pref_fullscreen">Vollbild</string>
     <string name="pref_fullscreen_desc">Verstecke die Benachrichtigungsleiste</string>
+    <string name="pref_gc_check">Prüfen der Anmeldedaten</string>
+    <string name="pref_gc_check_dialog_default_title">Testen der Anmeldedaten</string>
+    <string name="pref_gc_check_dialog_default_negative_button">Prüfung abbrechen</string>
+    <string name="pref_gc_check_dialog_message_successfull">Anmeldedaten erfolgreich geprüft</string>
+    <string name="pref_gc_check_dialog_message_login">Einloggen</string>
+    <string name="pref_gc_check_dialog_message_logout">Ausloggen</string>
+    <string name="pref_gc_check_dialog_message_error">Etwas Unerwartetes ist passiert. Bitte schließe den Dialog!</string>
+    <string name="pref_gc_check_dialog_message_unsuccessfull">Prüfen der Anmeldedaten nicht erfolgreich</string>
+    <string name="pref_gc_check_dialog_negative_button_close">Dialog schließen</string>
     <string name="pref_gc_password">Passwort</string>
     <string name="pref_gc_password_desc">Geocaching.com Passwort</string>
     <string name="pref_gc_username">Benutzername</string>
