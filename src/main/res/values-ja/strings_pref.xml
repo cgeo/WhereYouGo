@@ -20,6 +20,17 @@
     <string name="pref_font_size_small">小</string>
     <string name="pref_fullscreen">全画面表示</string>
     <string name="pref_fullscreen_desc">システムパネルを隠す</string>
+    <string name="pref_gc_check_dialog_default_title">ログイン情報の確認</string>
+    <string name="pref_gc_check_dialog_default_message">実行中…</string>
+    <string name="pref_gc_check_dialog_default_negative_button">キャンセル</string>
+    <string name="pref_gc_check_dialog_message_successfull">正常にログインできました</string>
+    <string name="pref_gc_check_dialog_message_init">初期化中…</string>
+    <string name="pref_gc_check_dialog_message_pinging">Ping中…</string>
+    <string name="pref_gc_check_dialog_message_login">ログイン中…</string>
+    <string name="pref_gc_check_dialog_message_logout">ログアウト中…</string>
+    <string name="pref_gc_check_dialog_message_error">予期しない問題が発生しました。ダイアログを閉じてください!</string>
+    <string name="pref_gc_check_dialog_message_unsuccessfull">ログインできませんでした</string>
+    <string name="pref_gc_check_dialog_negative_button_close">閉じる</string>
     <string name="pref_gc_password">パスワード</string>
     <string name="pref_gc_password_desc">Geocaching.comパスワード</string>
     <string name="pref_gc_username">ユーザー名</string>
