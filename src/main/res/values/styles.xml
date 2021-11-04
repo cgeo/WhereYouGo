@@ -30,7 +30,7 @@
         <item name="android:paddingLeft">12dip</item>
         <item name="android:paddingRight">12dip</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
     </style>
