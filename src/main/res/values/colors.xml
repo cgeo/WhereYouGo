@@ -15,7 +15,7 @@
 -->
 <resources>
     <!--  <color name="title_background">#aa3264c8</color> -->
-    <color name="title_background">#aa053a88</color>
+    <color name="title_background">#ff303f9f</color>
     <color name="title_separator">#40ffffff</color>
     <color name="title_separator_dark">#40000000</color>
     <color name="btn_disabled">#80aaaaaa</color>
