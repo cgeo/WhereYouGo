@@ -32,7 +32,7 @@ android {
         applicationId "menion.android.whereyougo"
         minSdkVersion 16
         //noinspection OldTargetApi
-        targetSdkVersion 29
+        targetSdkVersion 30
 
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
