@@ -499,10 +499,8 @@ public class LocationState {
             } else if (Build.VERSION.SDK_INT >= 24) {
                 LocationManager lm;
                 lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                if (lm!=null) {
-                    if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                        gpsConn = new GpsConnection(context);
-                    }
+                if (lm!=null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    gpsConn = new GpsConnection(context);
                 }
             } else {
                 UtilsGUI.showDialogQuestion(PreferenceValues.getCurrentActivity(), R.string.gps_not_enabled_show_system_settings,
