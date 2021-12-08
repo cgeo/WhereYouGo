@@ -21,9 +21,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.GnssStatus;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -73,6 +75,12 @@ public class LocationState {
     private static ArrayList<ILocationEventListener> mListeners;
     // last current mSource
     private static int lastSource;
+
+    // constants for replacement of old GpsStatus event codes
+    public static final int GNSS_EVENT_STARTED = 1;
+    public static final int GNSS_EVENT_STOPPED = 2;
+    public static final int GNSS_EVENT_SATELLITE = 3;
+    public static final int GNSS_EVENT_FIRSTFIX = 4;
 
     /**
      * Registers a listener for GPS events
@@ -283,6 +291,39 @@ public class LocationState {
         }
     }
 
+    static void onGnssStatusChanged(int event, GnssStatus gnssStatus) {
+        if (mListeners == null || mListeners.isEmpty())
+            return;
+
+        if (event == GNSS_EVENT_STARTED || event == GNSS_EVENT_STOPPED) {
+            for (int i = 0; i < mListeners.size(); i++) {
+                mListeners.get(i).onStatusChanged(LocationManager.GPS_PROVIDER,
+                    event == GNSS_EVENT_STARTED ? 2 : 1, null);
+            }
+        } else if (event == GNSS_EVENT_SATELLITE) {
+            ArrayList<SatellitePosition> pos = null;
+            if (gnssStatus != null) {
+                pos = new ArrayList<>();
+                int satellites = gnssStatus.getSatelliteCount();
+                mSatsCount.x = 0;
+                mSatsCount.y = 0;
+                for (int sat = 0; sat < satellites; sat++){
+                    SatellitePosition satPos = new SatellitePosition();
+                    satPos.azimuth = gnssStatus.getAzimuthDegrees(sat);
+                    satPos.elevation = gnssStatus.getElevationDegrees(sat);
+                    satPos.prn = gnssStatus.getSvid(sat);
+                    satPos.snr = (int) gnssStatus.getCn0DbHz(sat);
+                    satPos.fixed = gnssStatus.usedInFix(sat);
+                    if (satPos.fixed)
+                        mSatsCount.x++;
+                    mSatsCount.y++;
+                    pos.add(satPos);
+                }
+            }
+            postGpsSatelliteChange(pos);
+        }
+    }
+
     static void onLocationChanged(Location location) {
         // Logger.w(TAG, "onLocationChanged(" + location + ")");
         try {
@@ -461,6 +502,14 @@ public class LocationState {
                     .contains(LocationManager.GPS_PROVIDER))) {
                 // activity.startService(new Intent(activity, GpsConnectionService.class));
                 gpsConn = new GpsConnection(context);
+            } else if (Build.VERSION.SDK_INT >= 24) {
+                LocationManager lm;
+                lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                if (lm!=null) {
+                    if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                        gpsConn = new GpsConnection(context);
+                    }
+                }
             } else {
                 UtilsGUI.showDialogQuestion(PreferenceValues.getCurrentActivity(), R.string.gps_not_enabled_show_system_settings,
                         new DialogInterface.OnClickListener() {

@@ -18,9 +18,11 @@
 package menion.android.whereyougo.geo.location;
 
 import android.content.Context;
+import android.location.GnssStatus;
 import android.location.GpsStatus;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import java.util.List;
@@ -42,12 +44,14 @@ public class GpsConnection {
     private final MyLocationListener llGPS;
     private final MyLocationListener llNetwork;
     private final MyGpsListener gpsListener;
+    private final MyGnssListener gnssListener;
     private boolean isFixed;
     private Timer mGpsTimer;
     // temp variable for indicating whether network provider is enabled
     private boolean networkProviderEnabled;
     private boolean gpsProviderEnabled;
     private GpsStatus gpsStatus;
+    private GnssStatus gnssStatus;
 
     public GpsConnection(Context context) {
         Logger.w(TAG, "onCreate()");
@@ -56,6 +60,7 @@ public class GpsConnection {
         llGPS = new MyLocationListener();
         llNetwork = new MyLocationListener();
         gpsListener = new MyGpsListener();
+        gnssListener = new MyGnssListener();
 
         // init basic fixing values
         isFixed = false;
@@ -102,7 +107,12 @@ public class GpsConnection {
 
         // add new listener GPS
         try {
-            locationManager.addGpsStatusListener(gpsListener);
+            if (Build.VERSION.SDK_INT >= 24 ) {
+                locationManager.registerGnssStatusCallback(gnssListener);
+            }
+            else {
+                locationManager.addGpsStatusListener(gpsListener);
+            }
         } catch (Exception e) {
             Logger.w(TAG, "problem adding 'GPS status' listener, e:" + e);
         }
@@ -189,6 +199,26 @@ public class GpsConnection {
                 isFixed = false;
             }
         }, 60000);
+    }
+
+    private class MyGnssListener extends GnssStatus.Callback {
+
+        public void onFirstFix(int ttffMillis) {
+            LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_FIRSTFIX, null);
+        }
+
+        public void onSatelliteStatusChanged(GnssStatus status) {
+                LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_SATELLITE, status);
+        }
+
+        public void onStarted() {
+            LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_STARTED, null);
+        }
+
+        public void onStopped() {
+            LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_STOPPED, null);
+        }
+
     }
 
     private class MyGpsListener implements GpsStatus.Listener {
