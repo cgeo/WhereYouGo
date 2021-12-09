@@ -46,6 +46,7 @@
     <string name="gps_off">Poloha</string>
     <string name="gps_on">Poloha</string>
     <string name="info">Informace</string>
+    <string name="input">Vstup</string>
     <string name="invalid_cartridge">Neplatná cartridge\n\n %s</string>
     <string name="invalid_url">Neplatný odkaz</string>
     <string name="invalid_value">Neplatná hodnota</string>
