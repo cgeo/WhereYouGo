@@ -46,6 +46,7 @@
     <string name="gps_off">Locatie</string>
     <string name="gps_on">Locatie</string>
     <string name="info">Informatie</string>
+    <string name="input">Invoer</string>
     <string name="invalid_cartridge">Ongeldige cartridge\n\n %s</string>
     <string name="invalid_url">Ongeldige URL</string>
     <string name="invalid_value">Ongeldige waarde</string>
