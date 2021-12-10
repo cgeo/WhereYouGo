@@ -46,6 +46,7 @@
     <string name="gps_off">Location</string>
     <string name="gps_on">Location</string>
     <string name="info">Informácie</string>
+    <string name="input">Zadanie</string>
     <string name="invalid_cartridge">Neplatná cartridge\n\n %s</string>
     <string name="invalid_url">Neplatný odkaz</string>
     <string name="invalid_value">Neplatná hodnota</string>
