@@ -22,8 +22,11 @@
     <string name="pref_fullscreen_desc">Verstecke die Benachrichtigungsleiste</string>
     <string name="pref_gc_check">Prüfen der Anmeldedaten</string>
     <string name="pref_gc_check_dialog_default_title">Testen der Anmeldedaten</string>
+    <string name="pref_gc_check_dialog_default_message">Vorgang läuft</string>
     <string name="pref_gc_check_dialog_default_negative_button">Prüfung abbrechen</string>
     <string name="pref_gc_check_dialog_message_successfull">Anmeldedaten erfolgreich geprüft</string>
+    <string name="pref_gc_check_dialog_message_init">Initialisierung...</string>
+    <string name="pref_gc_check_dialog_message_pinging">Anklopfen</string>
     <string name="pref_gc_check_dialog_message_login">Einloggen</string>
     <string name="pref_gc_check_dialog_message_logout">Ausloggen</string>
     <string name="pref_gc_check_dialog_message_error">Etwas Unerwartetes ist passiert. Bitte schließe den Dialog!</string>
