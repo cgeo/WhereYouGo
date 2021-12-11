@@ -14,6 +14,11 @@
  */
 package menion.android.whereyougo.maps.mapsforge.mapgenerator;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
 
 import org.mapsforge.android.maps.mapgenerator.MapGenerator;
@@ -50,6 +55,7 @@ public final class MapGeneratorFactory {
      * @return a new MapGenerator instance.
      */
     public static MapGenerator createMapGenerator(MapGeneratorInternal mapGeneratorInternal) {
+        System.setProperty("http.agent", "WhereYouGo");
         switch (mapGeneratorInternal) {
             case BLANK:
                 return new Blank();
