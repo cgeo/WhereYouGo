@@ -46,6 +46,7 @@
     <string name="gps_off">Standort aus</string>
     <string name="gps_on">Standort ein</string>
     <string name="info">Information</string>
+    <string name="input">Eingabe</string>
     <string name="invalid_cartridge">Ungültige Cartridge\n\n %s</string>
     <string name="invalid_url">Ungültiger Link</string>
     <string name="invalid_value">Ungültiger Wert</string>

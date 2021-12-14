@@ -79,7 +79,7 @@
     <string name="question">Soru</string>
     <string name="resume_previous_cartridge">Kayıtlı oyunu yükle?\n(Eğer Hayır\'ı seçerseniz kayıtlı oyun silinecektir.)</string>
     <string name="roll">Rulo</string>
-    <string name="satellites">Uydular</string>
+    <string name="satellites">Uydu sayısı</string>
     <string name="save_file_backup">Yedek</string>
     <string name="save_file_main">Ana Kayıt</string>
     <string name="save_file_new">Yeni oyun</string>

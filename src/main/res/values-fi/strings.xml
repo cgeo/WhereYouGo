@@ -46,6 +46,7 @@
     <string name="gps_off">Sijainti pois päältä</string>
     <string name="gps_on">Sijainti</string>
     <string name="info">Tiedot</string>
+    <string name="input">Syöte</string>
     <string name="invalid_cartridge">Virheellinen kasetti\n\n %s</string>
     <string name="invalid_url">Virheellinen URL</string>
     <string name="invalid_value">Virheellinen arvo</string>
