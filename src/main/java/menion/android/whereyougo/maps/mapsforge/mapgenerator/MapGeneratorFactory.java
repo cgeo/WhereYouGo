@@ -50,6 +50,7 @@ public final class MapGeneratorFactory {
      * @return a new MapGenerator instance.
      */
     public static MapGenerator createMapGenerator(MapGeneratorInternal mapGeneratorInternal) {
+        System.setProperty("http.agent", "WhereYouGo");
         switch (mapGeneratorInternal) {
             case BLANK:
                 return new Blank();
