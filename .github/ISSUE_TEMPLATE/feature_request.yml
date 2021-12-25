@@ -1,5 +1,5 @@
 name: 2. ⭐ Feature Request
-description: Suggest an idea for a new function in c:geo directly to our GitHub tracker 
+description: Suggest an idea for a new function in WhereYouGo directly to our GitHub tracker 
 # title: ""
 labels: [Feature Request, Unverified]
 # assignees: 
@@ -12,7 +12,7 @@ body:
     id: summary
     attributes:
       label: Tell us your idea!
-      description: A clear and detailed description of the function you are missing/would like to see in c:geo.
+      description: A clear and detailed description of the function you are missing/would like to see in WhereYouGo.
       placeholder: "
         Examples:\n 
         There is no possibility to...\n
