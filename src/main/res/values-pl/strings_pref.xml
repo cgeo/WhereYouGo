@@ -12,6 +12,7 @@
     <string name="pref_run_screen_off">Uruchom aplikację, nawet jeśli ekran jest wyłączony</string>
     <string name="pref_run_screen_off_desc">Zapewnia działanie aplikacji, nawet jeśli ekran jest wyłączony.</string>
     <string name="pref_font_size">Rozmiar czcionki</string>
+    <string name="pref_font_size_summary">Obecny rozmiar czcionki: %1$s</string>
     <string name="pref_font_size_default">Domyślny</string>
     <string name="pref_font_size_desc">Rozmiar tekstu</string>
     <string name="pref_font_size_large">Duży</string>
@@ -19,6 +20,8 @@
     <string name="pref_font_size_small">Mały</string>
     <string name="pref_fullscreen">Pełny ekran</string>
     <string name="pref_fullscreen_desc">Ukryj panel systemowy</string>
+    <string name="pref_gc_check_dialog_message_pinging">Pingowanie</string>
+    <string name="pref_gc_check_dialog_negative_button_close">Zamknij okno</string>
     <string name="pref_gc_password">Hasło</string>
     <string name="pref_gc_password_desc">Hasło Geocaching.com</string>
     <string name="pref_gc_username">Nazwa użytkownika</string>
@@ -27,6 +30,7 @@
     <string name="pref_gps">Zezwól na GPS</string>
     <string name="pref_gps_altitude_manual_correction">Dopasowanie wysokości</string>
     <string name="pref_gps_altitude_manual_correction_desc">Ręczna korekcja wysokości</string>
+    <string name="pref_gps_altitude_manual_correction_summary">Obecna poprawka wysokości: %1$s</string>
     <string name="pref_gps_beep_on_gps_fix">Sygnalizuj dźwiękiem złapanie sygnału GPS</string>
     <string name="pref_gps_beep_on_gps_fix_desc">Sygnalizuje kiedy odbiornik GPS otrzyma poprawną pozycję</string>
     <string name="pref_gps_desc">Uruchamia GPS automatycznie przy starcie</string>
@@ -40,7 +44,9 @@
     <string name="pref_guiding_gps_required_desc">Podczas prowadzenia zostaw włączony GPS, nawet gdy aplikacja jest ukryta</string>
     <string name="pref_guiding_sound_distance">Dźwięk odległości</string>
     <string name="pref_guiding_sound_distance_waypoint_desc">Odległość (w metrach) stosowana w dźwiękach. Wartość startowa do zwiększania, lub po prostu wartość jednego sygnału</string>
+    <string name="pref_guiding_sound_distance_waypoint_summary">Obecny dystans: %1$s</string>
     <string name="pref_guiding_sound_type">Typ powiadomienia dźwiękowego</string>
+    <string name="pref_guiding_sound_type_summary">Obecny typ powiadomienia: %1$s</string>
     <string name="pref_guiding_sound_type_waypoint_desc">Tutaj możesz zmienić sposób, w jaki działają powiadomienia dźwiękowe dla punktu</string>
     <string name="pref_guiding_waypoint_sound_beep_on_distance">Dźwięk przy zbliżaniu się do celu</string>
     <string name="pref_guiding_waypoint_sound_custom_on_distance">Niestandardowy dźwięk odległości</string>
@@ -59,6 +65,7 @@
     <string name="pref_language">Język</string>
     <string name="pref_language_default">Domyślny systemowy</string>
     <string name="pref_language_desc">Pozwól ustawić język z zaznaczenia</string>
+    <string name="pref_language_summary">Obecny język: %1$s</string>
     <string name="pref_locale">Ustawienia regionalne</string>
     <string name="pref_login">Dane logowania</string>
     <string name="pref_login_desc">Potrzebujesz danych logowania, aby pobrać kartridże Wherigo z wherigo.com. Jeśli nie masz konta w serwisie wherigo.com możesz użyć swoich danych logowania z www.geocaching.com.</string>
