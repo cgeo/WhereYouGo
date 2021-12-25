@@ -94,6 +94,7 @@
     <string name="pref_units_coo_latlon">Koordinatformat</string>
     <string name="pref_units_coo_latlon_desc">Koordinater (bredde/længde)-format til visning</string>
     <string name="pref_units_coo_latlon_min">14° 52,123\'</string>
+    <string name="pref_units_coo_latlon_sec">14° 52\' 12.34\'\'</string>
     <string name="pref_units_length">Længde enheder</string>
     <string name="pref_units_length_desc">Vælg standard display-enheder</string>
     <string name="pref_units_length_im_f">Imperisk (ft)</string>
