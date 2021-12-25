@@ -1,5 +1,5 @@
 name: 1. 🐞 Bug Report
-description: Report a bug or problem with c:geo direclty to our GitHub tracker
+description: Report a bug or problem with WhereYouGo direclty to our GitHub tracker
 # title: ""
 labels: [Bug, Unverified]
 # assignees: 
@@ -15,7 +15,7 @@ body:
       description: Provide a summarized description of what the bug/problem is, that you found.
       placeholder: "
         Examples:\n 
-        c:geo crashes when I click on...\n
+        WhereYouGo crashes when I click on...\n
         I cannot use the function...
         "
     validations:
@@ -74,8 +74,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: c:geo Version
-      description: What version of c:geo are you using? You will find it in c:geo Menu -> About c:geo.
+      label: WhereYouGo Version
+      description: What version of c:geo are you using? You will find it by tapping on the WhereYouGo icon on the upper left in your app.
       placeholder: 2021.07.15
     validations:
       required: true
@@ -83,8 +83,8 @@ body:
     id: sysinfo
     attributes:
       label: System information
-      description: (optional) Providing your system information might be helpful in many cases.
-      placeholder: Copy and paste it from c:geo Menu -> About c:geo -> Swipe right to System
+      description: (optional) Providing some details of the device used might help us
+      placeholder: Brand, Model, Android version
       render: text
     validations:
       required: false
