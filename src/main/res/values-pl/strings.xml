@@ -46,6 +46,7 @@
     <string name="gps_off">Lokalizacja wyłączona</string>
     <string name="gps_on">Location</string>
     <string name="info">Informacja</string>
+    <string name="input">Wejściowe</string>
     <string name="invalid_cartridge">Niepoprawny kartridż\n\n %s</string>
     <string name="invalid_url">Nieprawidłowy adres URL</string>
     <string name="invalid_value">Nieprawidłowa wartość</string>

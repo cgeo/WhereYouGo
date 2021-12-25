@@ -46,6 +46,7 @@
     <string name="gps_off">Lokalisering inaktiverad</string>
     <string name="gps_on">Lokalisering aktiverad</string>
     <string name="info">Information</string>
+    <string name="input">Inmatning</string>
     <string name="invalid_cartridge">Ogiltig patron\n\n %s</string>
     <string name="invalid_url">Ogiltig URL</string>
     <string name="invalid_value">Ogiltigt värde</string>
