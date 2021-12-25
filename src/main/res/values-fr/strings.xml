@@ -46,6 +46,7 @@
     <string name="gps_off">Localisation désactivée</string>
     <string name="gps_on">Localisation activée</string>
     <string name="info">Information</string>
+    <string name="input">Entrée</string>
     <string name="invalid_cartridge">Cartouche invalide\n\n %s</string>
     <string name="invalid_url">URL invalide</string>
     <string name="invalid_value">Valeur Invalide</string>
