@@ -6,6 +6,7 @@
 # Ignore translated strings
 /src/main/res/values-*/strings.xml merge=ours
 /src/main/res/values-*/strings_mapsforge.xml merge=ours
+/src/main/res/values-*/strings_pref.xml merge=ours
 
 # Ignore translated playstore description 
 /_data/playstore/translated/* merge=ours
