@@ -9,6 +9,7 @@
         <li>Various translation updates</li>
         <li>Some small code optimizations and bug fixes</li>
         <li>Compile with a new target version to fulfill Google requirements - Please report any new issues to our support</li>
+        <li>Minimum required Android version is now 5.0. A legacy version for users of Android 4.1 to 4.4 might be released separately.</li>
     </update>
     <update name="2020.08.21" id="20200821" time="21.08.2020">
         <li>Get link to offline maps from c:geo in map menu. Note: Requires Mapsforge V3 map in c:geo as WhereYouGo still only supports this version.</li>                   
