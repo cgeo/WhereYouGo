@@ -8,7 +8,8 @@
         <li>Validation of login credentials in settings</li>
         <li>Various translation updates</li>
         <li>Some small code optimizations and bug fixes</li>
-        <li>Compile with a new target version to fulfill Google requirements - Please report any new problem</li>
+        <li>Compile with a new target version to fulfill Google requirements - Please report any new issues to our support</li>
+        <li>Minimum required Android version is now 5.0. A legacy version for users of Android 4.1 to 4.4 might be released separately.</li>
     </update>
     <update name="2020.08.21" id="20200821" time="21.08.2020">
         <li>Get link to offline maps from c:geo in map menu. Note: Requires Mapsforge V3 map in c:geo as WhereYouGo still only supports this version.</li>                   
@@ -21,32 +22,5 @@
         <li>New option for automatic text scaling on maps</li>
         <li>Optimize caching of map tiles and adjust menu entries for it</li>
         <li>Android 8 fix for getting GPS when running in background</li>
-    </update>
-    <update name="2020.04.07" id="20200407" time="07.04.2020">
-        <li>Fix crash on starting cartridge on Android 8 devices</li>                   
-        <li>Allow the app to run in landscape mode</li>                   
-        <li>Update translations for several languages</li>
-        <li>Various small code improvements and fixes</li>
-        <li>Update contact information for user support</li>
-        <li>Set default map to OSM instead of an empty map</li>
-        <li>Allow the app to run if screen is off</li>
-    </update>
-    <update name="2020.03.08" id="20200308" time="05.03.2020">
-        <li>Fixed broken download of cartridges from wherigo.com by switching to https</li>                   
-        <li>Change the permissions handling to fulfill the requirements for Google Play</li>
-        <li>Update the code to support Android targetSdk 28</li>
-        <li>Removed and updated map online providers, fixed non working online maps</li>
-        <li>Improved German, Slovak translations</li>
-        <li>Minor GUI and code improvements</li>
-    </update>
-    <update name="0.9.3" id="44" time="14.7.2017">
-        <li>Added support for animated GIF and MP4.</li>
-        <li>Added Norwegian, Catalan languages</li>
-        <li>Improved German, Japanese languages</li>
-        <li>Clickable URLs in descriptions</li>
-        <li>Task state fixed, icons improved</li>
-        <li>Fixed occasional crashing when using timer or when the app is closing</li>
-        <li>Improved error messages when downloading a cartridge</li>
-        <li>Fixed issue with compass and timer</li>
     </update>
 </document>
