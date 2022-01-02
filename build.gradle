@@ -30,13 +30,14 @@ android {
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
+        // versionCode for legacy version - placeholder needs to be set before building on CI
+        versionCode 20220101
+        // versionName for legacy version - placeholder needs to be set before building on CI
+        versionName "2022.01.01-legacy"
         minSdkVersion 16
         maxSdkVersion 19
         //noinspection OldTargetApi
         targetSdkVersion 30
-
-        versionName versionNameFromDate()
-        versionCode versionCodeFromDate(0)
 
         // include only those language resources from libraries that we actively maintain ourselves in the translation project
         // when changed here - also change in array.xml/strings_pref_languages.xml is necessary
@@ -59,36 +60,13 @@ android {
         }
         debug {
             debuggable true
+        }
 
-            // debug build name contains git commit for better reproduction of bugs
-            versionNameSuffix "-" + GitCommit.currentShort() + " developer build"
-        }
-        nightly {
-            def nightlyName = System.getenv('NB') // NB, NB1, ...
-            versionNameSuffix "-$nightlyName-" + GitCommit.currentShort()
-           // use release version of source code library dependencies
-            matchingFallbacks = ['release']
-        }
     }
 
     lintOptions {
         abortOnError false
         checkReleaseBuilds false
-    }
-
-    packagingOptions {
-        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
-        exclude "lib/armeabi/**"
-    }
-
-    // special version code for nightly and rc builds
-    applicationVariants.all { variant ->
-        if (variant.buildType.name == 'nightly') {
-            variant.outputs.all {
-                setVersionCodeOverride(versionCodeFromDate(10000000))
-            }
-        }
-        // debug and release builds have offset zero, no special handling here
     }
 }
 
@@ -126,46 +104,6 @@ dependencies {
     // ani gif support
     // minSdk=17 from version 1.2.16
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
-}
-
-/*
- * version number from the current date, plus an offset defined by the build type (to define which versions overwrite each other)
- */
-static def versionCodeFromDate(offset) {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMdd')
-    return Integer.valueOf(formattedDate) + offset
-}
-
-/*
- * version name based on current date
- */
-static def versionNameFromDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy.MM.dd')
-    return formattedDate
-}
-
-class GitCommit {
-    static String commitId
-
-    /*
-     * get the most recent git commit ID
-     */
-    static String current() {
-        if (commitId == null) {
-            Process p = ['git', 'rev-parse', 'HEAD'].execute()
-            if (p.waitFor() != 0) {
-                throw new Error("Unable to get git commit id: " + p.err.text)
-            }
-            commitId = p.text.trim()
-        }
-        return commitId
-    }
-
-    static String currentShort() {
-        return current().substring(0, 7)
-    }
 }
 
 /*
