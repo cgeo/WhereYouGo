@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -54,6 +54,7 @@ public class CustomActivity extends FragmentActivity {
         // Set language
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lang = sharedPreferences.getString(getString(R.string.pref_KEY_S_LANGUAGE), "");
+        Logger.v(TAG, "customOnCreate(), lang: " + lang);
         setLocale(this, lang);
 
         // set main activity parameters
@@ -252,11 +253,17 @@ public class CustomActivity extends FragmentActivity {
     }
 
     public static void setLocale(Activity activity, String languageCode) {
-        Locale locale = new Locale(languageCode);
+        String lang = languageCode;
+        if (languageCode.equals("default")) {
+            lang = Locale.getDefault().getLanguage();
+        }
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Resources resources = activity.getResources();
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        config.locale = locale;
+        activity.getApplicationContext().createConfigurationContext(config);
     }
 }

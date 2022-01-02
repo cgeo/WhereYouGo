@@ -35,14 +35,15 @@ public class XmlSettingsActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_settings);
-        setTitle(R.string.settings);
-        ((TextView) findViewById(R.id.title_text)).setText(R.string.settings);
-
         // Set language
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lang = sharedPreferences.getString(getString(R.string.pref_KEY_S_LANGUAGE), "");
         setLocale(this, lang);
+
+        setContentView(R.layout.layout_settings);
+        setTitle(R.string.settings);
+        ((TextView) findViewById(R.id.title_text)).setText(R.string.settings);
+
 
         /* workaround: I don't really know why I cannot call CustomActivity.customOnCreate(this); - OMG! */
         switch (Preferences.APPEARANCE_FONT_SIZE) {
