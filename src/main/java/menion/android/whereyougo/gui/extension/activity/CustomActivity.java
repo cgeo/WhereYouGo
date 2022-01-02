@@ -253,10 +253,11 @@ public class CustomActivity extends FragmentActivity {
     }
 
     public static void setLocale(Activity activity, String languageCode) {
+        String lang = languageCode;
         if (languageCode.equals("default")) {
-            languageCode = Locale.getDefault().getLanguage();
+            lang = Locale.getDefault().getLanguage();
         }
-        Locale locale = new Locale(languageCode);
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Resources resources = activity.getResources();
         Configuration config = resources.getConfiguration();
