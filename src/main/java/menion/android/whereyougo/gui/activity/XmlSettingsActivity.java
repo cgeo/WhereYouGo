@@ -16,12 +16,11 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
-
-import static menion.android.whereyougo.gui.extension.activity.CustomActivity.setLocale;
 
 
 public class XmlSettingsActivity
@@ -38,12 +37,11 @@ public class XmlSettingsActivity
         // Set language
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String lang = sharedPreferences.getString(getString(R.string.pref_KEY_S_LANGUAGE), "");
-        setLocale(this, lang);
+        CustomActivity.setLocale(this, lang);
 
         setContentView(R.layout.layout_settings);
         setTitle(R.string.settings);
         ((TextView) findViewById(R.id.title_text)).setText(R.string.settings);
-
 
         /* workaround: I don't really know why I cannot call CustomActivity.customOnCreate(this); - OMG! */
         switch (Preferences.APPEARANCE_FONT_SIZE) {
