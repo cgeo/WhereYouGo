@@ -253,14 +253,34 @@ public class CustomActivity extends FragmentActivity {
     }
 
     public static void setLocale(Activity activity, String languageCode) {
-        String lang = languageCode;
-        if (languageCode.equals("default")) {
-            lang = Locale.getDefault().getLanguage();
-        }
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
+        Locale locale;
+        String lang;
         Resources resources = activity.getResources();
         Configuration config = resources.getConfiguration();
+
+        // we need to get language and region first even for default to correctly initialize Locale
+        if (languageCode.equals("default")) {
+            lang = Locale.getDefault().toString();
+        } else {
+            lang = new Locale(languageCode).toString();
+        }
+
+        // need to parse language codes with dash and hyphen
+        String[] loc = lang.split("[-_]");
+        if (loc.length == 1) {
+            if (loc[0].equals("pt")) {
+                // nasty hotfix for Portuguese language selected without regional code
+                locale = new Locale(loc[0], loc[0]);
+            } else {
+                locale = new Locale(lang);
+            }
+        } else if (loc.length == 2) {
+            locale = new Locale(loc[0], loc[1]);
+        } else {
+            locale = config.locale;
+        }
+
+        Locale.setDefault(locale);
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
         config.locale = locale;
