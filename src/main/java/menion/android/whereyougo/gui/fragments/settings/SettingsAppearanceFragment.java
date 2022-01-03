@@ -1,6 +1,7 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
@@ -24,6 +25,9 @@ public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
         CheckBoxPreference imageStretch = findPreference(Preferences.getKey(R.string.pref_KEY_B_IMAGE_STRETCH));
 
         if (statusbarIcon != null) {
+            if (Preferences.GLOBAL_RUN_SCREEN_OFF && Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                statusbarIcon.setEnabled(false);
+            }
             statusbarIcon.setOnPreferenceChangeListener((preference, o) -> {
                 boolean newValue = (boolean) o;
                 Preferences.APPEARANCE_STATUSBAR = Utils.parseBoolean(newValue);
