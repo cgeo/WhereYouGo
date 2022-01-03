@@ -1,3 +1,5 @@
+<img align="right" src="src/main/res/mipmap-xxhdpi/ic_launcher_round.png">
+
 WhereYouGo
 ==========
 
