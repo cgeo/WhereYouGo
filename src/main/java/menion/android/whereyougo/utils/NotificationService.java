@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 
+import menion.android.whereyougo.R;
+
 public class NotificationService extends Service {
     private static final int notification_id = 10;
     private static final String NOTIFICATION_CHANNEL_ID = "menion.android.whereyougo.utils.NotificationService";
@@ -78,7 +80,7 @@ public class NotificationService extends Service {
 
         Notification.Builder builder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
         builder.setContentTitle(contentTitel);
-        builder.setSmallIcon(menion.android.whereyougo.R.drawable.ic_title_logo);
+        builder.setSmallIcon(R.drawable.ic_title_logo_transparent);
         builder.setContentIntent(pendingIntent);
         builder.setOngoing(true);
 
