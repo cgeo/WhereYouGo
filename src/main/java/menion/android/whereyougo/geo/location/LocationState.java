@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -147,7 +147,7 @@ public class LocationState {
 
     public static Location getLocation() {
         if (location == null)
-            return new Location(TAG);
+            return new Location();
         return new Location(location);
     }
 
@@ -331,7 +331,7 @@ public class LocationState {
                 // if first location from Network, and new from GPS but with worst precision, do not set
                 if (LocationState.location.getProvider().equals(LocationManager.NETWORK_PROVIDER)
                         && location.getProvider().equals(LocationManager.GPS_PROVIDER)
-                        && (LocationState.location.getAccuracy() * 3) < location.getAccuracy()) {
+                        && (LocationState.location.getAccuracyHor() * 3) < location.getAccuracyHor()) {
                     return;
                 }
 

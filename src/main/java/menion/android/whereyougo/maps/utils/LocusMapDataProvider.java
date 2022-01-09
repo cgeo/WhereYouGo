@@ -1,14 +1,14 @@
 /*
  * Copyright 2013, 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not,
  * see <http://www.gnu.org/licenses/>.
  */
@@ -24,14 +24,13 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.formats.CartridgeFile;
-import locus.api.android.objects.PackWaypoints;
-import locus.api.objects.extra.ExtraData;
-import locus.api.objects.extra.ExtraStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.ColorStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
+import locus.api.android.objects.PackPoints;
+import locus.api.objects.extra.GeoDataExtra;
+import locus.api.objects.styles.GeoDataStyle;
+import locus.api.objects.styles.LineStyle;
 import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Track;
-import locus.api.objects.extra.Waypoint;
+import locus.api.objects.geoData.Track;
+import locus.api.objects.geoData.Point;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
@@ -39,11 +38,11 @@ import menion.android.whereyougo.gui.utils.UtilsWherigo;
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
     private ArrayList<Track> tracks = null;
-    private final PackWaypoints pack;
+    private final PackPoints pack;
 
     private LocusMapDataProvider() {
         tracks = new ArrayList<>();
-        pack = new PackWaypoints("WhereYouGo");
+        pack = new PackPoints("WhereYouGo");
     }
 
     public static LocusMapDataProvider getInstance() {
@@ -74,13 +73,13 @@ public class LocusMapDataProvider implements MapDataProvider {
             }
 
             // construct waypoint
-            Location loc = new Location("WhereYouGo");
+            Location loc = new Location();
             loc.setLatitude(cartridge.latitude);
             loc.setLongitude(cartridge.longitude);
-            Waypoint wpt = new Waypoint(cartridge.name, loc);
-            wpt.addParameter(ExtraData.PAR_DESCRIPTION, cartridge.description);
-            wpt.addUrl(cartridge.url);
-            pack.addWaypoint(wpt);
+            Point wpt = new Point(cartridge.name, loc);
+            wpt.addParameter(GeoDataExtra.PAR_DESCRIPTION, cartridge.description);
+            wpt.addParameterUrl(cartridge.url);
+            pack.addPoint(wpt);
         }
     }
 
@@ -89,30 +88,34 @@ public class LocusMapDataProvider implements MapDataProvider {
             return;
 
         Location loc = UtilsWherigo.extractLocation(et);
-        pack.addWaypoint(new Waypoint(et.name, loc));
+        pack.addPoint(new Point(et.name, loc));
     }
 
     public void addZone(Zone z, boolean mark) {
         if (z == null || !z.isLocated() || !z.isVisible())
             return;
 
-        ArrayList<Location> locs = new ArrayList<>();
+        ArrayList<Location> locations = new ArrayList<>();
         for (int i = 0; i < z.points.length; i++) {
-            Location loc = new Location("");
-            loc.setLatitude(z.points[i].latitude);
-            loc.setLongitude(z.points[i].longitude);
-            locs.add(loc);
+            Location location = new Location();
+            location.setLatitude(z.points[i].latitude);
+            location.setLongitude(z.points[i].longitude);
+            locations.add(location);
         }
-        if (locs.size() >= 3)
-            locs.add(locs.get(0));
+        if (locations.size() >= 3)
+            locations.add(locations.get(0));
 
         Track track = new Track();
-        ExtraStyle style = new ExtraStyle();
-        style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f, Units.PIXELS);
-        track.styleNormal = style;
-        track.setPoints(locs);
+        LineStyle lineStyle = new LineStyle();
+        lineStyle.setColoring(LineStyle.Coloring.SIMPLE);
+        lineStyle.setColorBase(Color.MAGENTA);
+        lineStyle.setWidth(2.0f);
+        lineStyle.setUnits(LineStyle.Units.PIXELS);
+        GeoDataStyle geoDataStyle = new GeoDataStyle();
+        geoDataStyle.setLineStyle(lineStyle);
+        track.setStyleNormal(geoDataStyle);
+        track.setPoints(locations);
         track.setName(z.name);
-
         tracks.add(track);
     }
 
@@ -131,10 +134,9 @@ public class LocusMapDataProvider implements MapDataProvider {
 
     public void clear() {
         tracks.clear();
-        pack.reset();
     }
 
-    public PackWaypoints getPoints() {
+    public PackPoints getPoints() {
         return pack;
     }
 

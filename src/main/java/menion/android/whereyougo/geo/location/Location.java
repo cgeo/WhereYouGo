@@ -7,10 +7,10 @@ public class Location extends locus.api.objects.extra.Location {
     }
 
     public Location(android.location.Location loc) {
-        this(loc.getProvider(), loc.getLatitude(), loc.getLongitude());
+        this(loc.getLatitude(), loc.getLongitude());
         setTime(loc.getTime());
         if (loc.hasAccuracy()) {
-            setAccuracy(loc.getAccuracy());
+            setAccuracyHor(loc.getAccuracy());
         }
         if (loc.hasAltitude()) {
             setAltitude(loc.getAltitude());
@@ -27,12 +27,8 @@ public class Location extends locus.api.objects.extra.Location {
         super(loc);
     }
 
-    public Location(String provider) {
-        super(provider);
-    }
-
-    public Location(String provider, double lat, double lon) {
-        super(provider, lat, lon);
+    public Location(double lat, double lon) {
+        super(lat, lon);
     }
 
     @Override

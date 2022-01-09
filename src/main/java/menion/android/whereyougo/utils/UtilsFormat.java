@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -41,27 +41,27 @@ public class UtilsFormat {
     private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String formatAltitude(double altitude, boolean addUnits) {
-        return locus.api.android.utils.UtilsFormat.formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, addUnits);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, addUnits);
     }
 
     public static String formatAngle(double angle) {
-        return locus.api.android.utils.UtilsFormat.formatAngle(Preferences.FORMAT_ANGLE, (float) ((angle % 360) + 360) % 360, false, 0);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatAngle(Preferences.FORMAT_ANGLE, (float) ((angle % 360) + 360) % 360, false, 0);
     }
 
     public static String formatSpeed(double speed, boolean withoutUnits) {
-        return locus.api.android.utils.UtilsFormat.formatSpeed(Preferences.FORMAT_SPEED, speed, withoutUnits);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatSpeed(Preferences.FORMAT_SPEED, speed, withoutUnits);
     }
 
     public static String formatDistance(double dist, boolean withoutUnits) {
-        return locus.api.android.utils.UtilsFormat.formatDistance(Preferences.FORMAT_LENGTH, dist, withoutUnits);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatDistance(Preferences.FORMAT_LENGTH, dist, withoutUnits);
     }
 
     public static String formatDouble(double value, int precision) {
-        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatDouble(value, precision);
     }
 
     public static String formatDouble(double value, int precision, int minlen) {
-        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision, minlen);
+        return locus.api.android.utils.UtilsFormat.INSTANCE.formatDouble(value, precision, minlen);
     }
 
     public static String addZeros(String text, int count) {

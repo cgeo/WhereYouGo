@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -49,7 +49,8 @@ import java.util.Vector;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Waypoint;
+
+//import locus.api.objects.extra.Waypoint;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
@@ -179,9 +180,6 @@ public class MainActivity extends CustomActivity {
         File[] files = FileSystem.getFiles(FileSystem.ROOT, "gwc");
         cartridgeFiles = new Vector<>();
 
-        // add cartridges to map
-        ArrayList<Waypoint> wpts = new ArrayList<>();
-
         File actualFile = null;
         if (files != null) {
             for (File file : files) {
@@ -190,25 +188,13 @@ public class MainActivity extends CustomActivity {
                     CartridgeFile cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
                     if (cart != null) {
                         cart.filename = file.getAbsolutePath();
-
-                        Location loc = new Location(TAG);
-                        loc.setLatitude(cart.latitude);
-                        loc.setLongitude(cart.longitude);
-                        Waypoint waypoint = new Waypoint(cart.name, loc);
-
                         cartridgeFiles.add(cart);
-                        wpts.add(waypoint);
                     }
                 } catch (Exception e) {
                     Logger.w(TAG, "refreshCartridge(), file:" + actualFile + ", e:" + e.toString());
                     ManagerNotify.toastShortMessage(Locale.getString(R.string.invalid_cartridge, actualFile.getName()));
-                    // file.delete();
                 }
             }
-        }
-
-        if (wpts.size() > 0) {
-            // TODO add items on map
         }
     }
 

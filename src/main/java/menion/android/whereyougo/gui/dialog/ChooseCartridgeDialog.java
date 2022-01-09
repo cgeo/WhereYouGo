@@ -50,8 +50,8 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         try {
             // sort cartridges
             final Location actLoc = LocationState.getLocation();
-            final Location loc1 = new Location(TAG);
-            final Location loc2 = new Location(TAG);
+            final Location loc1 = new Location();
+            final Location loc2 = new Location();
             Collections.sort(cartridgeFiles, (object1, object2) -> {
                 loc1.setLatitude(object1.latitude);
                 loc1.setLongitude(object1.longitude);

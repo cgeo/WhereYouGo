@@ -74,7 +74,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
 
         TextView tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
 
-        Location loc = new Location(TAG);
+        Location loc = new Location();
         loc.setLatitude(MainActivity.cartridgeFile.latitude);
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
 
@@ -92,7 +92,7 @@ public class CartridgeDetailsActivity extends CustomActivity {
             MainActivity.startSelectedCartridge(false);
             return true;
         }, null, null, getString(R.string.navigate), (dialog, v, btn) -> {
-            Location loc1 = new Location(TAG);
+            Location loc1 = new Location();
             loc1.setLatitude(MainActivity.cartridgeFile.latitude);
             loc1.setLongitude(MainActivity.cartridgeFile.longitude);
             Guide guide = new Guide(MainActivity.cartridgeFile.name, loc1);
