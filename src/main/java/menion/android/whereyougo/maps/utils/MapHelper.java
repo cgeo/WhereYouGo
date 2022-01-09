@@ -18,7 +18,6 @@ package menion.android.whereyougo.maps.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.EventTable;
 import locus.api.android.ActionDisplayVarious.ExtraAction;
 import locus.api.android.ActionDisplayPoints;
