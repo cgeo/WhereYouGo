@@ -46,6 +46,7 @@
     <string name="gps_off">Location</string>
     <string name="gps_on">Location</string>
     <string name="info">Πληροφορία</string>
+    <string name="input">Εισαγωγή</string>
     <string name="invalid_cartridge">Λανθασμένη κασέτα\n\n%s</string>
     <string name="invalid_url">Μη έγκυρη διεύθυνση URL</string>
     <string name="invalid_value">Άκυρη τιμή</string>
