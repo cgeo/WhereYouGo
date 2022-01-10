@@ -21,8 +21,10 @@ import android.Manifest;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
@@ -355,15 +357,16 @@ public class MainActivity extends CustomActivity {
                     finish();
                 } else if (finishType == FINISH_RESTART || finishType == FINISH_RESTART_FORCE
                         || finishType == FINISH_RESTART_FACTORY_RESET) {
-                    // Setup one-short alarm to restart my application in 3 seconds - TODO need use
-                    // another context
-                    // AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                    // Intent intent = new Intent(APP_INTENT_MAIN);
-                    // PendingIntent pi = PendingIntent.getBroadcast(CustomMain.this, 0, intent,
-                    // PendingIntent.FLAG_ONE_SHOT);
-                    // alarmMgr.set(AlarmManager.ELAPSED_REALTIME, System.currentTimeMillis() + 3000, pi);
-                    finish = true;
-                    finish();
+                    Context context = getApplicationContext();
+                    Intent notifyIntent = new Intent(context, NotificationService.class);
+                    notifyIntent.putExtra(NotificationService.TITEL, A.getAppName());
+                    notifyIntent.setAction(NotificationService.STOP_NOTIFICATION_SERVICE);
+                    context.startService(notifyIntent);
+                    PackageManager packageManager = context.getPackageManager();
+                    Intent runAppIntent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+                    ComponentName componentName = runAppIntent.getComponent();
+                    Intent restartIntent = Intent.makeRestartActivityTask(componentName);
+                    context.startActivity(restartIntent);
                 } else if (finishType == FINISH_REINSTALL) {
                     // Intent intent = new Intent();
                     // intent.setAction(android.content.Intent.ACTION_VIEW);

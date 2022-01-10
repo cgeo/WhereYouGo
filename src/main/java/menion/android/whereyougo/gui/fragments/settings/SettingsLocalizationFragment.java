@@ -8,10 +8,19 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
 
 public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
+
+    private static String TAG = "SettingsLocalizationFragment";
+
+    private boolean restartRequired = false;
+    private String currentLanguage;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.whereyougo_preferences_localization, rootKey);
@@ -27,6 +36,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
     private void prepareLanguage() {
         ListPreference language = findPreference(Preferences.getKey(R.string.pref_KEY_S_LANGUAGE));
         if (language != null) {
+            currentLanguage = language.getValue();
             language.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String currentValue = preferences.getString(preference.getKey(), "");
@@ -34,6 +44,11 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                     return getString(R.string.pref_language_desc);
                 }
                 return getString(R.string.pref_language_summary, currentValue);
+            });
+            language.setOnPreferenceChangeListener((preference, o) -> {
+                String newLanguage = (String) o;
+                restartRequired = !(newLanguage.equals(currentLanguage));
+                return true;
             });
         }
     }
@@ -172,6 +187,18 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                         return getString(R.string.pref_units_length_desc);
                 }
             });
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        try {
+            super.onDestroy();
+            if (restartRequired) {
+                A.getMain().showDialogFinish(MainActivity.FINISH_RESTART);
+            }
+        } catch (Exception e) {
+            Logger.e(TAG, "onDestroy()", e);
         }
     }
 }
