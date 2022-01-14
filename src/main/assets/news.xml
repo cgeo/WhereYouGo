@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
-    <update name="2022.01.10" id="20220102" time="10.01.2022">
+    <update name="2022.01.14" id="20220114" time="14.01.2022">
         <li>Fix Android 12 GPS problem</li>
         <li>Restore functionality of OSM Mapnik online map</li>
         <li>New app icon and minor style adjustments</li>                   
@@ -11,7 +11,7 @@
         <li>Compile with a new target version to fulfill Google requirements - Please report any new issues to our support</li>
         <li>Fix: Crash on change of some global settings</li>
         <li>Fix: No app icon in status bar notification</li>
-        <li>Minimum required Android version is now 5.0. A legacy version for users of Android 4.1 to 4.4 might be released separately.</li>
+        <li>Minimum required Android version is now 5.0. A legacy version is available for Android 4.1 up to 4.4.</li>
     </update>
     <update name="2020.08.21" id="20200821" time="21.08.2020">
         <li>Get link to offline maps from c:geo in map menu. Note: Requires Mapsforge V3 map in c:geo as WhereYouGo still only supports this version.</li>                   
