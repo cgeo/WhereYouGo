@@ -30,10 +30,12 @@ android {
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
-        // versionCode for legacy version - placeholder needs to be set before building on CI
-        versionCode 20220101
-        // versionName for legacy version - placeholder needs to be set before building on CI
-        versionName "2022.01.01-legacy"
+        // versionCode for legacy version needs to be set here manually before building a new legacy version on the CI
+        // versionCode of the legacy version always needs to be smaller than the versionCode of the normal release. Ideally only increase by 1 for each legacy release.
+        versionCode 20220105
+        // versionName for legacy version needs to be set here manually before building a new legacy version on the CI
+        // versionName is not evaluated by Google. The name of the legacy version can be set identical to the corresponding normal release with suffix -legacy.
+        versionName "2022.01.14-legacy"
         minSdkVersion 16
         maxSdkVersion 20
         //noinspection OldTargetApi
