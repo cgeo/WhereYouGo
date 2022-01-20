@@ -46,6 +46,7 @@
     <string name="gps_off">Location</string>
     <string name="gps_on">Location</string>
     <string name="info">정보</string>
+    <string name="input">입력</string>
     <string name="invalid_cartridge">잘못된 카드리지\n\n %s</string>
     <string name="invalid_url">잘못된 URL</string>
     <string name="invalid_value">잘못된 값</string>
