@@ -2,7 +2,7 @@
 <resources>
     <!-- MapsForge BEGIN -->
     <string-array name="preferences_scale_bar_unit_values">
-        <item>Imperial</item>
+        <item>Sistema británico</item>
         <item>Métrico</item>
     </string-array>
     <string-array name="preferences_text_scale_values">
