@@ -50,5 +50,7 @@ An overview of released beta and production versions and their changelog can be 
 
 Releases for [Google Play](https://play.google.com/store/apps/details?id=menion.android.whereyougo) will be done from branch **release** and can be build by team members using the [CI environment](https://ci.cgeo.org). 
 
+The app is also available on [F-Droid](https://f-droid.org/packages/menion.android.whereyougo/).
+
 The version code / version name is automatically derived and included during the build process using the date, the release was built on the CI.
 Once built the APK can either be directly uploaded to Google Play as production version or as a beta version and later on be promoted to a production version (under the same version code / version name).
