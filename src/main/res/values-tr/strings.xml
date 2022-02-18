@@ -46,6 +46,7 @@
     <string name="gps_off">Konum bilgisi kapalı</string>
     <string name="gps_on">Konum bilgisi açık</string>
     <string name="info">Bilgi</string>
+    <string name="input">Girdi</string>
     <string name="invalid_cartridge">Geçersiz kartuş\n\n %s</string>
     <string name="invalid_url">Geçersiz URL</string>
     <string name="invalid_value">Geçersiz değer</string>
