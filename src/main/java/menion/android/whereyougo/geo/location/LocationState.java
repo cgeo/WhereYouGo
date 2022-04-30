@@ -39,6 +39,7 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -92,7 +93,7 @@ public class LocationState {
 
             // sort listeners
             if (mListeners.size() > 0)
-                Collections.sort(mListeners, (object1, object2) -> object1.getPriority() - object2.getPriority());
+                Collections.sort(mListeners, Comparator.comparingInt(ILocationEventListener::getPriority));
 
             onScreenOn(true);
         }
