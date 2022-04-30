@@ -38,11 +38,7 @@ public final class ValidRenderTheme implements ValidFileFilter {
             XmlRenderTheme xmlRenderTheme = new ExternalRenderTheme(file);
             RenderThemeHandler.getRenderTheme(AndroidGraphics.INSTANCE, xmlRenderTheme);
             this.fileOpenResult = FileOpenResult.SUCCESS;
-        } catch (ParserConfigurationException e) {
-            this.fileOpenResult = new FileOpenResult(e.getMessage());
-        } catch (SAXException e) {
-            this.fileOpenResult = new FileOpenResult(e.getMessage());
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | IOException | SAXException e) {
             this.fileOpenResult = new FileOpenResult(e.getMessage());
         }
 
