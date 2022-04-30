@@ -212,25 +212,9 @@ public class FileSystem {
         if (!dest.exists()) {
             dest.createNewFile();
         }
-        FileChannel sourceChannel = null;
-        FileChannel destChannel = null;
-        try {
-            sourceChannel = new FileInputStream(source).getChannel();
-            destChannel = new FileOutputStream(dest).getChannel();
+        try (FileChannel sourceChannel = new FileInputStream(source).getChannel();
+             FileChannel destChannel = new FileOutputStream(dest).getChannel()) {
             destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-        } finally {
-            if (sourceChannel != null) {
-                try {
-                    sourceChannel.close();
-                } catch (IOException e) {
-                }
-            }
-            if (destChannel != null) {
-                try {
-                    destChannel.close();
-                } catch (IOException e) {
-                }
-            }
         }
         dest.setLastModified(source.lastModified());
     }
