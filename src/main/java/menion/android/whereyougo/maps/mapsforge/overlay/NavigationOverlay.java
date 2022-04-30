@@ -78,7 +78,7 @@ public class NavigationOverlay implements Overlay {
         Location startLocation = myLocationOverlay.getLastLocation();
         GeoPoint start = new GeoPoint(startLocation.getLatitude(), startLocation.getLongitude());
 
-        List<GeoPoint> geoPoints = new ArrayList<GeoPoint>();
+        List<GeoPoint> geoPoints = new ArrayList<>();
         geoPoints.add(start);
         geoPoints.add(target);
         line.setPolygonalChain(new PolygonalChain(geoPoints));

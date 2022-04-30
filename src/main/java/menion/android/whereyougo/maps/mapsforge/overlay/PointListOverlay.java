@@ -31,7 +31,7 @@ import org.mapsforge.android.maps.overlay.OverlayItem;
 import org.mapsforge.core.model.GeoPoint;
 
 public class PointListOverlay extends ListOverlay {
-    HashMap<GeoPoint, PointOverlay> hitMap = new HashMap<GeoPoint, PointOverlay>();
+    HashMap<GeoPoint, PointOverlay> hitMap = new HashMap<>();
     TapEventListener onTapListener;
 
     public PointListOverlay() {

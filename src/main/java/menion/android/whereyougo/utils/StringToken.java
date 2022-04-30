@@ -46,7 +46,7 @@ public class StringToken implements Enumeration<Object> {
     }
 
     public static ArrayList<String> parse(String data, String delimiters) {
-        return parse(data, delimiters, new ArrayList<String>());
+        return parse(data, delimiters, new ArrayList<>());
     }
 
     public static ArrayList<String> parse(String data, String delimiters, ArrayList<String> tokens) {
