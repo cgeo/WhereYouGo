@@ -51,13 +51,10 @@ public class ListActionsActivity extends ListVariousActivity {
 
     public static Vector<Object> getValidActions(Thing thing) {
         Vector<Object> newActions = new Vector<>();
-        for (int i = 0; i < thing.actions.size(); i++)
-            newActions.add(thing.actions.get(i));
-
-        for (int i = 0; i < newActions.size(); i++) {
-            Action a = (Action) newActions.elementAt(i);
-            if (!a.isEnabled() || !a.getActor().visibleToPlayer()) {
-                newActions.removeElementAt(i--);
+        for (Object obj : thing.actions) {
+            Action a = (Action) obj;
+            if (a.isEnabled() && a.getActor().visibleToPlayer()) {
+                newActions.add(a);
             }
         }
         return newActions;
