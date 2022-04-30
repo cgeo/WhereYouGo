@@ -295,10 +295,11 @@ public class UtilsGUI {
     public static CharSequence html(String s, boolean preserveWhitespaces) {
         if (s == null)
             return null;
+        String text = s;
         if (preserveWhitespaces) {
-            s = s.replace("\n", "<br>"); // preserve newlines
-            s = s.replace("  ", "&nbsp;&nbsp;"); // preserve spaces
+            text = text.replace("\n", "<br>"); // preserve newlines
+            text = text.replace("  ", "&nbsp;&nbsp;"); // preserve spaces
         }
-        return Html.fromHtml(s).toString();
+        return Html.fromHtml(text).toString();
     }
 }
