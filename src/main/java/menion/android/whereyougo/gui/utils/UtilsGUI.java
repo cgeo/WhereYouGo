@@ -119,10 +119,10 @@ public class UtilsGUI {
         // webView.loadData(UtilsHttp.repairHtmlFile(data), "text/html", "utf-8");
         try {
             // webView.loadData(URLEncoder.encode(
-            // UtilsHttp.repairHtmlFile(data),"utf-8").replaceAll("\\+"," "),
+            // UtilsHttp.repairHtmlFile(data),"utf-8").replace("+"," "),
             // "text/html", "utf-8");
             // http://stackoverflow.com/questions/4917860/android-character-encoding-raw-resource-files
-            webView.loadDataWithBaseURL(null, data.replaceAll("\\+", " "), "text/html", "utf-8", null);
+            webView.loadDataWithBaseURL(null, data.replace("+", " "), "text/html", "utf-8", null);
         } catch (Exception e) {
         }
         webView
@@ -300,8 +300,8 @@ public class UtilsGUI {
         if (s == null)
             return null;
         if (preserveWhitespaces) {
-            s = s.replaceAll("\\n", "<br>"); // preserve newlines
-            s = s.replaceAll("  ", "&nbsp;&nbsp;"); // preserve spaces
+            s = s.replace("\n", "<br>"); // preserve newlines
+            s = s.replace("  ", "&nbsp;&nbsp;"); // preserve spaces
         }
         return Html.fromHtml(s).toString();
     }
