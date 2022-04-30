@@ -78,12 +78,14 @@ public class CartridgeDetailsActivity extends CustomActivity {
         loc.setLatitude(MainActivity.cartridgeFile.latitude);
         loc.setLongitude(MainActivity.cartridgeFile.longitude);
 
-        String buff = getString(R.string.distance) + ": " + "<b>" +
-                UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false) +
-                "</b>" + "<br />" + getString(R.string.latitude) + ": " +
-                UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude) + "<br />" +
-                getString(R.string.longitude) + ": " +
-                UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude);
+        String fmtDistance = UtilsFormat.formatDistance(LocationState.getLocation().distanceTo(loc), false);
+        String fmtLatitude = UtilsFormat.formatLatitude(MainActivity.cartridgeFile.latitude);
+        // FIXME: Use formatLongitude instead.
+        String fmtLongitude = UtilsFormat.formatLatitude(MainActivity.cartridgeFile.longitude);
+        String buff = "" +
+                getString(R.string.distance) + ": " + "<b>" + fmtDistance + "</b><br />" +
+                getString(R.string.latitude) + ": " + fmtLatitude + "<br />" +
+                getString(R.string.longitude) + ": " + fmtLongitude;
 
         tvDistance.setText(Html.fromHtml(buff));
 
