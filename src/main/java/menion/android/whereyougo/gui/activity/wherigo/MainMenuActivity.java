@@ -238,17 +238,24 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
                 return true;
             };
         }
-        CustomDialog.setBottom(this, getString(R.string.gps), (dialog, v, btn) -> {
-            Intent intent = new Intent(MainMenuActivity.this, SatelliteActivity.class);
-            startActivity(intent);
-            return true;
-        }, getString(R.string.map), (dialog, v, btn) -> {
-            MapDataProvider mdp = MapHelper.getMapDataProvider();
-            mdp.clear();
-            mdp.addAll();
-            MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
-            return true;
-        }, saveGameText, saveGameListener);
+        CustomDialog.setBottom(
+                this,
+                getString(R.string.gps),
+                (dialog, v, btn) -> {
+                    Intent intent = new Intent(MainMenuActivity.this, SatelliteActivity.class);
+                    startActivity(intent);
+                    return true;
+                },
+                getString(R.string.map),
+                (dialog, v, btn) -> {
+                    MapDataProvider mdp = MapHelper.getMapDataProvider();
+                    mdp.clear();
+                    mdp.addAll();
+                    MainActivity.wui.showScreen(WUI.SCREEN_MAP, null);
+                    return true;
+                },
+                saveGameText,
+                saveGameListener);
     }
 
     @Override

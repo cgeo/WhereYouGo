@@ -89,20 +89,27 @@ public class CartridgeDetailsActivity extends CustomActivity {
 
         tvDistance.setText(Html.fromHtml(buff));
 
-        CustomDialog.setBottom(this, getString(R.string.start), (dialog, v, btn) -> {
-            finish();
-            MainActivity.startSelectedCartridge(false);
-            return true;
-        }, null, null, getString(R.string.navigate), (dialog, v, btn) -> {
-            Location loc1 = new Location(TAG);
-            loc1.setLatitude(MainActivity.cartridgeFile.latitude);
-            loc1.setLongitude(MainActivity.cartridgeFile.longitude);
-            Guide guide = new Guide(MainActivity.cartridgeFile.name, loc1);
-            A.getGuidingContent().guideStart(guide);
-            Intent intent = new Intent(CartridgeDetailsActivity.this, GuidingActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        });
+        CustomDialog.setBottom(
+                this,
+                getString(R.string.start),
+                (dialog, v, btn) -> {
+                    finish();
+                    MainActivity.startSelectedCartridge(false);
+                    return true;
+                },
+                null,
+                null,
+                getString(R.string.navigate),
+                (dialog, v, btn) -> {
+                    Location loc1 = new Location(TAG);
+                    loc1.setLatitude(MainActivity.cartridgeFile.latitude);
+                    loc1.setLongitude(MainActivity.cartridgeFile.longitude);
+                    Guide guide = new Guide(MainActivity.cartridgeFile.name, loc1);
+                    A.getGuidingContent().guideStart(guide);
+                    Intent intent = new Intent(CartridgeDetailsActivity.this, GuidingActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                });
     }
 }

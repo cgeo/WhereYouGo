@@ -106,19 +106,26 @@ public class InputScreenActivity extends MediaActivity {
             inputType = InputType.MULTI;
         }
 
-        CustomDialog.setBottom(this, Locale.getString(R.string.answer), (dialog, v, btn) -> {
-            if (inputType == InputType.TEXT) {
-                Engine.callEvent(input, "OnGetInput", editText.getText()
-                        .toString());
-            } else if (inputType == InputType.MULTI) {
-                String item = String.valueOf(spinner.getSelectedItem());
-                Engine.callEvent(input, "OnGetInput", item);
-            } else {
-                Engine.callEvent(input, "OnGetInput", null);
-            }
-            InputScreenActivity.this.finish();
-            return true;
-        }, null, null, null, null);
+        CustomDialog.setBottom(
+                this,
+                Locale.getString(R.string.answer),
+                (dialog, v, btn) -> {
+                    if (inputType == InputType.TEXT) {
+                        Engine.callEvent(input, "OnGetInput", editText.getText()
+                                .toString());
+                    } else if (inputType == InputType.MULTI) {
+                        String item = String.valueOf(spinner.getSelectedItem());
+                        Engine.callEvent(input, "OnGetInput", item);
+                    } else {
+                        Engine.callEvent(input, "OnGetInput", null);
+                    }
+                    InputScreenActivity.this.finish();
+                    return true;
+                },
+                null,
+                null,
+                null,
+                null);
     }
 
     @Override
