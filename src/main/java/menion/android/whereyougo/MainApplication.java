@@ -230,7 +230,7 @@ public class MainApplication extends Application {
             Log.e(TAG, "onCreate() - PANIC! Wipe out preferences", e);
             PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
         }
-        /* LEGECY SUPPORT -- END */
+        /* LEGACY SUPPORT -- END */
 
         // set basic settings values
         PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_appearance, true);
