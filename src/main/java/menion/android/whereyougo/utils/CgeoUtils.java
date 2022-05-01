@@ -14,8 +14,7 @@ public class CgeoUtils {
     public static boolean isInstalled(Context context) {
         try {
             return context.getPackageManager().getApplicationInfo(context.getString(R.string.cgeo_package), 0).enabled;
-        }
-        catch (PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
     }

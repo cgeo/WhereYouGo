@@ -117,7 +117,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
 
   public int getPriority() {
     return ILocationEventListener.PRIORITY_MEDIUM;
-    }
+  }
 
   @Override
   public boolean isRequired() {
@@ -156,10 +156,10 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         mLastAziGps = 0.0f;
       }
     }
-    }
+  }
 
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
+  }
 
   public void onGpsStatusChanged(int event, ArrayList<SatellitePosition> sats) {
   }
@@ -171,7 +171,7 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
       this.mLastAziGps = location.getBearing();
       sendOrientation(mLastPitch, mLastRoll);
     }
-    }
+  }
 
   public void onSensorChanged(SensorEvent event) {
     switch (event.sensor.getType()) {
@@ -226,22 +226,22 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         sendOrientation(pitch, rollDef);
         break;
     }
-    }
+  }
 
   public void onStatusChanged(String provider, int state, Bundle extras) {
-    }
+  }
 
   public void removeAllListeners() {
     listeners.clear();
     manageSensors();
-    }
+  }
 
   public void removeListener(IOrientationEventListener listener) {
     if (listeners.contains(listener)) {
       this.listeners.remove(listener);
       Logger.i(TAG, "removeListener(" + listener + "), listeners.size():" + listeners.size());
       manageSensors();
-        }
+    }
   }
 
   private void sendOrientation(float pitch, float roll) {
@@ -252,9 +252,9 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
         usedOrient = mLastAziGps;
       else
         usedOrient = mLastAziSensor;
-        } else {
+    } else {
       usedOrient = mLastAziGps;
-        }
+    }
 
     this.mLastPitch = pitch;
     this.mLastRoll = roll;
@@ -262,5 +262,5 @@ public class Orientation implements SensorEventListener, ILocationEventListener 
     for (IOrientationEventListener listener : listeners) {
       listener.onOrientationChanged(usedOrient, mLastPitch, mLastRoll);
     }
-    }
+  }
 }

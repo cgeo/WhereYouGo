@@ -91,8 +91,7 @@ public class Utils {
                 out.append(buffer, 0, rsz);
             }
         } catch (IOException ex) {
-        }
-        finally {
+        } finally {
             closeStream(is);
         }
         return out.toString();

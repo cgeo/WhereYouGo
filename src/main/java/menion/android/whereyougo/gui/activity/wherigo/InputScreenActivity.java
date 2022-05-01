@@ -27,6 +27,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
@@ -37,14 +40,14 @@ import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import se.krka.kahlua.vm.LuaTable;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class InputScreenActivity extends MediaActivity {
 
     private static final String TAG = "InputScreen";
     private static EventTable input;
-    private enum InputType { NONE, TEXT, MULTI }
+
+    private enum InputType {NONE, TEXT, MULTI}
+
     private InputType inputType = InputType.NONE;
 
     public static void setInput(EventTable input) {
@@ -132,7 +135,7 @@ public class InputScreenActivity extends MediaActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null && result.getContents() != null) {
+        if (result != null && result.getContents() != null) {
             final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
             editText.setText(result.getContents());
         } else {

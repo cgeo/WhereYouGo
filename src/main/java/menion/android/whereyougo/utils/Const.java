@@ -40,7 +40,7 @@ public class Const {
     public static final int SCREEN_SIZE_LARGE = 2;
 
     /***********************************/
-   /* BUILDS VERSION TYPES */
+    /* BUILDS VERSION TYPES */
     public static final int SCREEN_SIZE_XLARGE = 3;
     public static final int TEXT_SIZE_SMALL = 0;
     public static final int TEXT_SIZE_MEDIUM = 1;

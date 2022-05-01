@@ -171,7 +171,7 @@ public class Preferences {
      * run if screen is turned off
      */
     public static boolean GLOBAL_RUN_SCREEN_OFF;
-  /* ------------ */
+    /* ------------ */
 
     private static Context prefContext;
 
@@ -179,7 +179,7 @@ public class Preferences {
         prefContext = c;
     }
 
-  /* ------------ */
+    /* ------------ */
 
     public static boolean comparePreferenceKey(final String prefString, final int prefId) {
         return prefString.equals(prefContext.getString(prefId));
@@ -205,7 +205,7 @@ public class Preferences {
         return /*Utils.parseBoolean(*/ PreferenceManager.getDefaultSharedPreferences(prefContext).getBoolean(key, false) /* ) */;
     }
 
-  /* ------------ */
+    /* ------------ */
 
     public static void setStringPreference(final int PreferenceId, final Object value) {
         String key = prefContext.getString(PreferenceId);

@@ -142,7 +142,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                 Preferences.FORMAT_SPEED = Utils.parseInt(newValue);
                 return true;
             });
-            speedUnit.setSummaryProvider(preference ->  {
+            speedUnit.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
                 Resources res = getResources(); //assuming in an activity for example, otherwise you can provide a context.

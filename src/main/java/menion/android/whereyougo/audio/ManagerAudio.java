@@ -89,7 +89,7 @@ public class ManagerAudio {
 
     public void playSound(int sound) {
         if (volume == 0.0f || (System.currentTimeMillis() - lastVolumeCheck) > 1000) {
-      /* The next 4 lines calculate the current volume in a scale of 0.0 to 1.0 */
+            /* The next 4 lines calculate the current volume in a scale of 0.0 to 1.0 */
             AudioManager mgr = (AudioManager) A.getMain().getSystemService(Context.AUDIO_SERVICE);
             float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
             float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -97,7 +97,7 @@ public class ManagerAudio {
             lastVolumeCheck = System.currentTimeMillis();
         }
 
-    /* Play the sound with the correct volume */
+        /* Play the sound with the correct volume */
         soundPool.play(soundPoolMap.get(sound), volume, volume, 1, 0, 1f);
     }
 

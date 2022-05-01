@@ -167,7 +167,7 @@ public class DownloadCartridgeActivity extends CustomActivity
         startActivity(loginPreferenceIntent);
     }
 
-    private void adjustDownloadButtonToUsernamePasswordState(){
+    private void adjustDownloadButtonToUsernamePasswordState() {
         Button buttonDownload = (Button) findViewById(R.id.button_positive);
         // If one of the variables is empty the inner condition is true which get's negated because
         // the button get's enabled on true and disabled on false.
@@ -272,4 +272,3 @@ public class DownloadCartridgeActivity extends CustomActivity
 
     }
 }
-

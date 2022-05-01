@@ -84,13 +84,13 @@ public class NavigationOverlay implements Overlay {
         line.setPolygonalChain(new PolygonalChain(geoPoints));
         line.draw(boundingBox, zoomLevel, canvas, canvasPosition);
 
-    /*
-     * double canvasPixelLeft = MercatorProjection.longitudeToPixelX( boundingBox.minLongitude,
-     * zoomLevel); double canvasPixelTop = MercatorProjection.latitudeToPixelY(
-     * boundingBox.maxLatitude, zoomLevel); Point canvasPosition = new Point(canvasPixelLeft,
-     * canvasPixelTop); Point a = getPoint(start, canvasPosition, zoomLevel); Point b =
-     * getPoint(target, canvasPosition, zoomLevel); canvas.drawLine(a.x, a.y, b.x, b.y, paint);
-     */
+        /*
+         * double canvasPixelLeft = MercatorProjection.longitudeToPixelX( boundingBox.minLongitude,
+         * zoomLevel); double canvasPixelTop = MercatorProjection.latitudeToPixelY(
+         * boundingBox.maxLatitude, zoomLevel); Point canvasPosition = new Point(canvasPixelLeft,
+         * canvasPixelTop); Point a = getPoint(start, canvasPosition, zoomLevel); Point b =
+         * getPoint(target, canvasPosition, zoomLevel); canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+         */
     }
 
     public synchronized GeoPoint getTarget() {

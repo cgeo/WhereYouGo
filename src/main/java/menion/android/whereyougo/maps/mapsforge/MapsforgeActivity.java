@@ -378,7 +378,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         this.listOverlay = new PointListOverlay();
         this.listOverlay.registerOnTapEvent(tapListener);
 
-    /* what is shown */
+        /* what is shown */
         if (savedInstanceState != null) {
             this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
             this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);

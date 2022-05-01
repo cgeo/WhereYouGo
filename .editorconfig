@@ -9,3 +9,12 @@ trim_trailing_whitespace = true
 [*.{gradle,java}]
 indent_size = 4
 indent_style = space
+
+[*.java]
+ij_continuation_indent_size = 8
+
+[Orientation.java]
+indent_size = 2
+
+[{LoginTask.java,SettingsGlobalFragment.java,SettingsLocationFragment.java,XmlSettingsActivity.java}]
+ij_continuation_indent_size = 4

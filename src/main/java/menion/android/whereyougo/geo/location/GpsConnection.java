@@ -104,11 +104,10 @@ public class GpsConnection {
 
         // add new listener GPS
         try {
-            if (Build.VERSION.SDK_INT >= 24 ) {
+            if (Build.VERSION.SDK_INT >= 24) {
                 MyGnssListener gnssListener = new MyGnssListener();
                 locationManager.registerGnssStatusCallback(gnssListener);
-            }
-            else {
+            } else {
                 locationManager.addGpsStatusListener(gpsListener);
             }
         } catch (Exception e) {
@@ -206,7 +205,7 @@ public class GpsConnection {
         }
 
         public void onSatelliteStatusChanged(GnssStatus status) {
-                LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_SATELLITE, status);
+            LocationState.onGnssStatusChanged(LocationState.GNSS_EVENT_SATELLITE, status);
         }
 
         public void onStarted() {

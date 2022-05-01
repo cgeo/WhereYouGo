@@ -3,7 +3,6 @@ package menion.android.whereyougo.gui.fragments.settings;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
@@ -129,9 +128,9 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String pref_value = preferences.getString(preference.getKey(), "");
                 if (pref_value.equals("0")) {
-                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_vector) , "");
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_vector), "");
                 } else if (pref_value.equals("1")) {
-                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_locus) , "");
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_locus), "");
                 }
                 return getString(R.string.pref_map_provider_desc);
             }));

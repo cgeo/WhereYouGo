@@ -29,7 +29,6 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,7 +44,6 @@ import menion.android.whereyougo.utils.ExceptionHandler;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.StringToken;
 import menion.android.whereyougo.utils.Utils;
 
 public class MainApplication extends Application {
@@ -217,10 +215,10 @@ public class MainApplication extends Application {
         Log.d(TAG, "onCreate()");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
-    /* LEGACY SUPPORT - less v0.8.14
-     * Converts preference - comes from a former version (less 0.8.14)
-     * which are not stored as string into string.
-     */
+        /* LEGACY SUPPORT - less v0.8.14
+         * Converts preference - comes from a former version (less 0.8.14)
+         * which are not stored as string into string.
+         */
         try {
             // legacySupport4PreferencesFloat( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
             legacySupport4PreferencesFloat(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE);
@@ -231,7 +229,7 @@ public class MainApplication extends Application {
             Log.e(TAG, "onCreate() - PANIC! Wipe out preferences", e);
             PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
         }
-    /* LEGECY SUPPORT -- END */
+        /* LEGECY SUPPORT -- END */
 
         // set basic settings values
         PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_appearance, true);
@@ -253,7 +251,7 @@ public class MainApplication extends Application {
         super.onLowMemory();
         Log.d(TAG, "onLowMemory()");
     }
-  /* LEGACY SUPPORT -- END */
+    /* LEGACY SUPPORT -- END */
 
     public void onTerminate() {
         super.onTerminate();

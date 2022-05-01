@@ -25,7 +25,6 @@ package menion.android.whereyougo.geo.location;
 public abstract class Point2D {
     /**
      * The default constructor.
-     *
      */
     Point2D() {
     }
@@ -40,7 +39,7 @@ public abstract class Point2D {
      * @return the distance from (x1,y1) to (x2,y2)
      */
     public static double distance(double x1, double y1, double x2, double y2) {
-      return Math.sqrt(distanceSq(x1, y1, x2, y2));
+        return Math.sqrt(distanceSq(x1, y1, x2, y2));
     }
 
     /**
@@ -53,9 +52,9 @@ public abstract class Point2D {
      * @return (x2 - x1)^2 + (y2 - y1)^2
      */
     public static double distanceSq(double x1, double y1, double x2, double y2) {
-      x2 -= x1;
-      y2 -= y1;
-      return x2 * x2 + y2 * y2;
+        x2 -= x1;
+        y2 -= y1;
+        return x2 * x2 + y2 * y2;
     }
 
     /**
@@ -66,7 +65,7 @@ public abstract class Point2D {
      * @return the distance
      */
     public double distance(double x, double y) {
-      return distance(getX(), getY(), x, y);
+        return distance(getX(), getY(), x, y);
     }
 
     /**
@@ -77,7 +76,7 @@ public abstract class Point2D {
      * @throws NullPointerException if p is null
      */
     public double distance(Point2D p) {
-      return distance(getX(), getY(), p.getX(), p.getY());
+        return distance(getX(), getY(), p.getX(), p.getY());
     }
 
     /**
@@ -88,7 +87,7 @@ public abstract class Point2D {
      * @return the square of the distance
      */
     public double distanceSq(double x, double y) {
-      return distanceSq(getX(), getY(), x, y);
+        return distanceSq(getX(), getY(), x, y);
     }
 
     /**
@@ -99,7 +98,7 @@ public abstract class Point2D {
      * @throws NullPointerException if p is null
      */
     public double distanceSq(Point2D p) {
-      return distanceSq(getX(), getY(), p.getX(), p.getY());
+        return distanceSq(getX(), getY(), p.getX(), p.getY());
     }
 
     /**
@@ -109,10 +108,10 @@ public abstract class Point2D {
      * @return true if it is equal
      */
     public boolean equals(Object o) {
-      if (!(o instanceof Point2D))
-        return false;
-      Point2D p = (Point2D) o;
-      return getX() == p.getX() && getY() == p.getY();
+        if (!(o instanceof Point2D))
+            return false;
+        Point2D p = (Point2D) o;
+        return getX() == p.getX() && getY() == p.getY();
     }
 
     /**
@@ -122,136 +121,136 @@ public abstract class Point2D {
      */
     public abstract double getX();
 
-  /**
-   * Get the Y coordinate, in double precision.
-   *
-   * @return the y coordinate
-   */
-  public abstract double getY();
-
-  /**
-   * Return the hashcode for this point. The formula is not documented, but appears to be the same
-   * as:
-   * <p/>
-   * <pre>
-   * long l = Double.doubleToLongBits(getY());
-   * l = l * 31 &circ; Double.doubleToLongBits(getX());
-   * return (int) ((l &gt;&gt; 32) &circ; l);
-   * </pre>
-   *
-   * @return the hashcode
-   */
-  public int hashCode() {
-    // Talk about a fun time reverse engineering this one!
-    long l = java.lang.Double.doubleToLongBits(getY());
-    l = l * 31 ^ java.lang.Double.doubleToLongBits(getX());
-    return (int) ((l >> 32) ^ l);
-  }
-
-  /**
-   * Set the location of this point to the new coordinates. There may be a loss of precision.
-   *
-   * @param x the new x coordinate
-   * @param y the new y coordinate
-   */
-  public abstract void setLocation(double x, double y);
-
-  /**
-   * Set the location of this point to the new coordinates. There may be a loss of precision.
-   *
-   * @param p the point to copy
-   * @throws NullPointerException if p is null
-   */
-  public void setLocation(Point2D p) {
-    setLocation(p.getX(), p.getY());
-  }
-
-  public String toString() {
-    return "[ X: " + getX() + " Y: " + getY() + " ]";
-  }
-
-  /**
-   * This class defines a point in <code>int</code> precision.
-   *
-   * @author Eric Blake (ebb9@email.byu.edu)
-   * @since 1.2
-   */
-  public static class Int extends Point2D {
     /**
-     * The X coordinate.
-     */
-    public int x;
-
-    /**
-     * The Y coordinate.
-     */
-    public int y;
-
-    /**
-     * Create a new point at (0,0).
-     */
-    public Int() {
-    }
-
-    /**
-     * Create a new point at (x,y).
-     *
-     * @param x the x coordinate
-     * @param y the y coordinate
-     */
-    public Int(int x, int y) {
-      this.x = x;
-      this.y = y;
-    }
-
-    /**
-     * Return the x coordinate.
-     *
-     * @return the x coordinate
-     */
-    public double getX() {
-      return x;
-    }
-
-    /**
-     * Return the y coordinate.
+     * Get the Y coordinate, in double precision.
      *
      * @return the y coordinate
      */
-    public double getY() {
-      return y;
+    public abstract double getY();
+
+    /**
+     * Return the hashcode for this point. The formula is not documented, but appears to be the same
+     * as:
+     * <p/>
+     * <pre>
+     * long l = Double.doubleToLongBits(getY());
+     * l = l * 31 &circ; Double.doubleToLongBits(getX());
+     * return (int) ((l &gt;&gt; 32) &circ; l);
+     * </pre>
+     *
+     * @return the hashcode
+     */
+    public int hashCode() {
+        // Talk about a fun time reverse engineering this one!
+        long l = java.lang.Double.doubleToLongBits(getY());
+        l = l * 31 ^ java.lang.Double.doubleToLongBits(getX());
+        return (int) ((l >> 32) ^ l);
     }
 
     /**
-     * Sets the location of this point.
+     * Set the location of this point to the new coordinates. There may be a loss of precision.
      *
      * @param x the new x coordinate
      * @param y the new y coordinate
      */
-    public void setLocation(double x, double y) {
-      this.x = (int) x;
-      this.y = (int) y;
-    }
+    public abstract void setLocation(double x, double y);
 
     /**
-     * Sets the location of this point.
+     * Set the location of this point to the new coordinates. There may be a loss of precision.
      *
-     * @param x the new x coordinate
-     * @param y the new y coordinate
+     * @param p the point to copy
+     * @throws NullPointerException if p is null
      */
-    public void setLocation(int x, int y) {
-      this.x = x;
-      this.y = y;
+    public void setLocation(Point2D p) {
+        setLocation(p.getX(), p.getY());
     }
 
-    /**
-     * Returns a string representation of this object. The format is:
-     * <code>"Point2D.int[" + x + ", " + y + ']'</code>.
-     *
-     * @return a string representation of this object
-     */
     public String toString() {
-      return "Point2D.int[" + x + ", " + y + ']';
+        return "[ X: " + getX() + " Y: " + getY() + " ]";
     }
-  } // class int
+
+    /**
+     * This class defines a point in <code>int</code> precision.
+     *
+     * @author Eric Blake (ebb9@email.byu.edu)
+     * @since 1.2
+     */
+    public static class Int extends Point2D {
+        /**
+         * The X coordinate.
+         */
+        public int x;
+
+        /**
+         * The Y coordinate.
+         */
+        public int y;
+
+        /**
+         * Create a new point at (0,0).
+         */
+        public Int() {
+        }
+
+        /**
+         * Create a new point at (x,y).
+         *
+         * @param x the x coordinate
+         * @param y the y coordinate
+         */
+        public Int(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        /**
+         * Return the x coordinate.
+         *
+         * @return the x coordinate
+         */
+        public double getX() {
+            return x;
+        }
+
+        /**
+         * Return the y coordinate.
+         *
+         * @return the y coordinate
+         */
+        public double getY() {
+            return y;
+        }
+
+        /**
+         * Sets the location of this point.
+         *
+         * @param x the new x coordinate
+         * @param y the new y coordinate
+         */
+        public void setLocation(double x, double y) {
+            this.x = (int) x;
+            this.y = (int) y;
+        }
+
+        /**
+         * Sets the location of this point.
+         *
+         * @param x the new x coordinate
+         * @param y the new y coordinate
+         */
+        public void setLocation(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        /**
+         * Returns a string representation of this object. The format is:
+         * <code>"Point2D.int[" + x + ", " + y + ']'</code>.
+         *
+         * @return a string representation of this object
+         */
+        public String toString() {
+            return "Point2D.int[" + x + ", " + y + ']';
+        }
+    } // class int
 } // class Point2D

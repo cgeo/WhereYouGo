@@ -50,10 +50,10 @@ public class MediaActivity extends CustomActivity {
         switch (media.type.toLowerCase()) {
             case "mp4":
                 view = findViewById(R.id.mediaVideoView);
-            break;
+                break;
             case "gif":
                 view = findViewById(R.id.mediaGifView);
-            break;
+                break;
             case "jpeg":
             case "jpg":
             case "png":

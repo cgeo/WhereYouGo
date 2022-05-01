@@ -2,9 +2,9 @@ package menion.android.whereyougo.utils;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -37,7 +37,7 @@ public class NotificationService extends Service {
     public void onCreate() {
         super.onCreate();
         Logger.v(TAG, "onCreate()");
-        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
             mNM.createNotificationChannel(channel);
@@ -87,12 +87,12 @@ public class NotificationService extends Service {
         Notification notification = builder.build();
 
         if (running && background == foreground) {
-           if (foreground) {
-              stopForeground(true);
-           } else {
-              mNM.cancel(notification_id);
-           }
-           running = false;
+            if (foreground) {
+                stopForeground(true);
+            } else {
+                mNM.cancel(notification_id);
+            }
+            running = false;
         }
 
         if (!running) {

@@ -101,6 +101,3 @@ public class XmlSettingsActivity
         return true;
     }
 }
-
-
-

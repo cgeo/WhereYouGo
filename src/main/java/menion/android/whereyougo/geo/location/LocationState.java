@@ -19,7 +19,6 @@ package menion.android.whereyougo.geo.location;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.GnssStatus;
 import android.location.GpsSatellite;
@@ -30,7 +29,6 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -200,7 +198,7 @@ public class LocationState {
 
             // also disable wake-lock here
             if (!PreferenceValues.existCurrentActivity() || screenOff) {
-                if (Preferences.GLOBAL_RUN_SCREEN_OFF){
+                if (Preferences.GLOBAL_RUN_SCREEN_OFF) {
                     PreferenceValues.enableWakeLock();
                 } else {
                     PreferenceValues.disableWakeLock();
@@ -294,7 +292,7 @@ public class LocationState {
         if (event == GNSS_EVENT_STARTED || event == GNSS_EVENT_STOPPED) {
             for (int i = 0; i < mListeners.size(); i++) {
                 mListeners.get(i).onStatusChanged(LocationManager.GPS_PROVIDER,
-                    event == GNSS_EVENT_STARTED ? 2 : 1, null);
+                        event == GNSS_EVENT_STARTED ? 2 : 1, null);
             }
         } else if (event == GNSS_EVENT_SATELLITE) {
             ArrayList<SatellitePosition> pos = null;
@@ -303,7 +301,7 @@ public class LocationState {
                 int satellites = gnssStatus.getSatelliteCount();
                 mSatsCount.x = 0;
                 mSatsCount.y = 0;
-                for (int sat = 0; sat < satellites; sat++){
+                for (int sat = 0; sat < satellites; sat++) {
                     SatellitePosition satPos = new SatellitePosition();
                     satPos.azimuth = gnssStatus.getAzimuthDegrees(sat);
                     satPos.elevation = gnssStatus.getElevationDegrees(sat);
@@ -499,7 +497,7 @@ public class LocationState {
             } else if (Build.VERSION.SDK_INT >= 24) {
                 LocationManager lm;
                 lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                if (lm!=null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                if (lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     gpsConn = new GpsConnection(context);
                 }
             } else {
