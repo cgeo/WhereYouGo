@@ -1,21 +1,33 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo;
+
+import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.gui.SaveGame;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.ExceptionHandler;
+import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.Utils;
 
 import android.app.Activity;
 import android.app.Application;
@@ -29,24 +41,11 @@ import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cz.matejcik.openwig.Engine;
-import menion.android.whereyougo.geo.location.LocationState;
-import menion.android.whereyougo.gui.SaveGame;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.ExceptionHandler;
-import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.StringToken;
-import menion.android.whereyougo.utils.Utils;
 
 public class MainApplication extends Application {
 
@@ -217,10 +216,10 @@ public class MainApplication extends Application {
         Log.d(TAG, "onCreate()");
         Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());
 
-    /* LEGACY SUPPORT - less v0.8.14
-     * Converts preference - comes from a former version (less 0.8.14)
-     * which are not stored as string into string.
-     */
+        /* LEGACY SUPPORT - less v0.8.14
+         * Converts preference - comes from a former version (less 0.8.14)
+         * which are not stored as string into string.
+         */
         try {
             // legacySupport4PreferencesFloat( R.string.pref_KEY_S_GPS_ALTITUDE_MANUAL_CORRECTION );
             legacySupport4PreferencesFloat(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE);
@@ -231,7 +230,7 @@ public class MainApplication extends Application {
             Log.e(TAG, "onCreate() - PANIC! Wipe out preferences", e);
             PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
         }
-    /* LEGECY SUPPORT -- END */
+        /* LEGECY SUPPORT -- END */
 
         // set basic settings values
         PreferenceManager.setDefaultValues(this, R.xml.whereyougo_preferences_appearance, true);
@@ -253,7 +252,7 @@ public class MainApplication extends Application {
         super.onLowMemory();
         Log.d(TAG, "onLowMemory()");
     }
-  /* LEGACY SUPPORT -- END */
+    /* LEGACY SUPPORT -- END */
 
     public void onTerminate() {
         super.onTerminate();

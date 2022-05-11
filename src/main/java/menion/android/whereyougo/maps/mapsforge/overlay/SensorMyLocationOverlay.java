@@ -1,15 +1,15 @@
 /*
  * Copyright 2010, 2011, 2012 mapsforge.org
  * Copyright 2013, 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,9 +47,9 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
      * Constructs a new {@code MyLocationOverlay} with the given drawable and the default circle
      * paints.
      *
-     * @param context  a reference to the application context.
-     * @param mapView  the {@code MapView} on which the location will be displayed.
-     * @param marker   a drawable to display at the current location (might be null).
+     * @param context a reference to the application context.
+     * @param mapView the {@code MapView} on which the location will be displayed.
+     * @param marker  a drawable to display at the current location (might be null).
      */
     public SensorMyLocationOverlay(Context context, MapView mapView, RotationMarker marker) {
         super(context, mapView, marker);
@@ -79,16 +79,16 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
         this.mapView = mapView;
     }
 
-  /*
-   * @Override public synchronized void draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas)
-   * { if (!isMyLocationEnabled()) { return; }
-   * 
-   * super.draw(boundingBox, zoomLevel, canvas); double canvasPixelLeft =
-   * MercatorProjection.longitudeToPixelX( boundingBox.minLongitude, zoomLevel); double
-   * canvasPixelTop = MercatorProjection.latitudeToPixelY( boundingBox.maxLatitude, zoomLevel);
-   * Point canvasPosition = new Point(canvasPixelLeft, canvasPixelTop);
-   * this.marker.draw(boundingBox, zoomLevel, canvas, canvasPosition); }
-   */
+    /*
+     * @Override public synchronized void draw(BoundingBox boundingBox, byte zoomLevel, Canvas canvas)
+     * { if (!isMyLocationEnabled()) { return; }
+     *
+     * super.draw(boundingBox, zoomLevel, canvas); double canvasPixelLeft =
+     * MercatorProjection.longitudeToPixelX( boundingBox.minLongitude, zoomLevel); double
+     * canvasPixelTop = MercatorProjection.latitudeToPixelY( boundingBox.maxLatitude, zoomLevel);
+     * Point canvasPosition = new Point(canvasPixelLeft, canvasPixelTop);
+     * this.marker.draw(boundingBox, zoomLevel, canvas, canvasPosition); }
+     */
 
     /**
      * Stops the receiving of location updates. Has no effect if location updates are already
@@ -145,16 +145,16 @@ public class SensorMyLocationOverlay extends MyLocationOverlay implements Sensor
         }
     }
 
-  /*
-   * @Override public void onLocationChanged(Location location) { boolean redraw = false;
-   * synchronized(this){ if(location.getBearing() != 0.0f){ long timestamp = location.getTime();
-   * float azimuth = (location.getBearing() + getRotationOffset() + 360) % 360; azimuth =
-   * filterValue(azimuth, this.lastGPSTimestamp); this.marker.setRotation(azimuth);
-   * if(Math.abs(timestamp-this.lastGPSTimestamp) >= UPDATE_INTERVAL &&
-   * Math.abs(azimuth-this.lastGPSAzimuth) >= UPDATE_AZIMUTH){ this.lastGPSTimestamp = timestamp;
-   * this.lastGPSAzimuth = azimuth; redraw = true; } } } super.onLocationChanged(location);
-   * if(redraw) this.mapView.getOverlayController().redrawOverlays(); }
-   */
+    /*
+     * @Override public void onLocationChanged(Location location) { boolean redraw = false;
+     * synchronized(this){ if(location.getBearing() != 0.0f){ long timestamp = location.getTime();
+     * float azimuth = (location.getBearing() + getRotationOffset() + 360) % 360; azimuth =
+     * filterValue(azimuth, this.lastGPSTimestamp); this.marker.setRotation(azimuth);
+     * if(Math.abs(timestamp-this.lastGPSTimestamp) >= UPDATE_INTERVAL &&
+     * Math.abs(azimuth-this.lastGPSAzimuth) >= UPDATE_AZIMUTH){ this.lastGPSTimestamp = timestamp;
+     * this.lastGPSAzimuth = azimuth; redraw = true; } } } super.onLocationChanged(location);
+     * if(redraw) this.mapView.getOverlayController().redrawOverlays(); }
+     */
 
     @Override
     public void onProviderEnabled(String provider) {

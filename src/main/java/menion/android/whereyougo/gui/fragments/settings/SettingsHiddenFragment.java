@@ -1,10 +1,10 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.R;
+
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
-
-import menion.android.whereyougo.R;
 
 public class SettingsHiddenFragment extends PreferenceFragmentCompat {
     @Override

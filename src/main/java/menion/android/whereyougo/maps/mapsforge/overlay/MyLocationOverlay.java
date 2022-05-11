@@ -1,15 +1,15 @@
 /*
  * Copyright 2010, 2011, 2012 mapsforge.org
  * Copyright 2013, 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,9 +54,9 @@ public class MyLocationOverlay implements LocationListener, Overlay {
      * Constructs a new {@code MyLocationOverlay} with the given drawable and the default circle
      * paints.
      *
-     * @param context  a reference to the application context.
-     * @param mapView  the {@code MapView} on which the location will be displayed.
-     * @param marker   a drawable to display at the current location (might be null).
+     * @param context a reference to the application context.
+     * @param mapView the {@code MapView} on which the location will be displayed.
+     * @param marker  a drawable to display at the current location (might be null).
      */
     public MyLocationOverlay(Context context, MapView mapView, Marker marker) {
         this(context, mapView, marker, getDefaultCircleFill(), getDefaultCircleStroke());

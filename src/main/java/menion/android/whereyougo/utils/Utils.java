@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -50,7 +50,7 @@ public class Utils {
     private static MessageDigest md;
 
     private static final char[] hexDigit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b',
-            'c', 'd', 'e', 'f'};
+                                            'c', 'd', 'e', 'f'};
 
     /**
      * Adds '0' chars at the beginning of string of specified length Menion: this is one of most
@@ -91,8 +91,7 @@ public class Utils {
                 out.append(buffer, 0, rsz);
             }
         } catch (IOException ex) {
-        }
-        finally {
+        } finally {
             closeStream(is);
         }
         return out.toString();

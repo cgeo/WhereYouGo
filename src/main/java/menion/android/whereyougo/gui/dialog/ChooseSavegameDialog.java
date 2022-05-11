@@ -15,19 +15,6 @@
 
 package menion.android.whereyougo.gui.dialog;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.extension.DataInfo;
@@ -38,6 +25,16 @@ import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.UtilsFormat;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ChooseSavegameDialog extends CustomDialogFragment {
 

@@ -1,9 +1,18 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.Utils;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
@@ -15,15 +24,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.io.File;
 
 import ar.com.daidalos.afiledialog.FileChooserDialog;
-import menion.android.whereyougo.MainApplication;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.Utils;
 
 public class SettingsGlobalFragment extends PreferenceFragmentCompat {
 
@@ -72,41 +72,41 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                     // This might crash the app but since we are using our legacy filepicker, I don't have any better
                     // idea as to accept the risk and hope for the best.
                     UtilsGUI.dialogDoItem(
-                        settingsContext,
-                        getText(R.string.pref_root),
-                        R.drawable.var_empty,
-                        getText(R.string.pref_root_desc),
-                        getString(R.string.folder_select),
-                        (dialog, which) -> {
-                            FileChooserDialog selectDialog = new FileChooserDialog(settingsContext);
-                            selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
-                            selectDialog.setFolderMode(true);
-                            selectDialog.setCanCreateFiles(false);
-                            selectDialog.setShowCancelButton(true);
-                            selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
-                                public void onFileSelected(Dialog source, File folder) {
-                                    source.dismiss();
-                                    if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
-                                        MainActivity.refreshCartridges();
+                            settingsContext,
+                            getText(R.string.pref_root),
+                            R.drawable.var_empty,
+                            getText(R.string.pref_root_desc),
+                            getString(R.string.folder_select),
+                            (dialog, which) -> {
+                                FileChooserDialog selectDialog = new FileChooserDialog(settingsContext);
+                                selectDialog.loadFolder(Preferences.GLOBAL_ROOT);
+                                selectDialog.setFolderMode(true);
+                                selectDialog.setCanCreateFiles(false);
+                                selectDialog.setShowCancelButton(true);
+                                selectDialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                                    public void onFileSelected(Dialog source, File folder) {
+                                        source.dismiss();
+                                        if (((MainApplication) A.getApp()).setRoot(folder.getAbsolutePath())) {
+                                            MainActivity.refreshCartridges();
+                                        }
                                     }
-                                }
 
-                                public void onFileSelected(Dialog source, File folder, String name) {
-                                    String newFolder = folder.getAbsolutePath() + "/" + name;
-                                    new File(newFolder).mkdir();
-                                    ((FileChooserDialog) source).loadFolder(newFolder);
+                                    public void onFileSelected(Dialog source, File folder, String name) {
+                                        String newFolder = folder.getAbsolutePath() + "/" + name;
+                                        new File(newFolder).mkdir();
+                                        ((FileChooserDialog) source).loadFolder(newFolder);
+                                    }
+                                });
+                                selectDialog.show();
+                            },
+                            getString(R.string.cancel),
+                            null,
+                            getString(R.string.folder_default),
+                            (dialog, which) -> {
+                                if (((MainApplication) A.getApp()).setRoot(null)) {
+                                    MainActivity.refreshCartridges();
                                 }
                             });
-                            selectDialog.show();
-                        },
-                        getString(R.string.cancel),
-                        null,
-                        getString(R.string.folder_default),
-                        (dialog, which) -> {
-                            if (((MainApplication) A.getApp()).setRoot(null)) {
-                                MainActivity.refreshCartridges();
-                            }
-                        });
                     return false;
                 });
                 fileroot.setSummaryProvider(preference -> {
@@ -129,9 +129,9 @@ public class SettingsGlobalFragment extends PreferenceFragmentCompat {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String pref_value = preferences.getString(preference.getKey(), "");
                 if (pref_value.equals("0")) {
-                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_vector) , "");
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_vector), "");
                 } else if (pref_value.equals("1")) {
-                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_locus) , "");
+                    return getString(R.string.pref_map_provider_summary, getString(R.string.pref_map_provider_locus), "");
                 }
                 return getString(R.string.pref_map_provider_desc);
             }));

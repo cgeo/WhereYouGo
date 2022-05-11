@@ -1,18 +1,18 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.os.Bundle;
-
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceFragmentCompat;
-
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.Utils;
+
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.os.Bundle;
+
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
 
@@ -142,7 +142,7 @@ public class SettingsLocalizationFragment extends PreferenceFragmentCompat {
                 Preferences.FORMAT_SPEED = Utils.parseInt(newValue);
                 return true;
             });
-            speedUnit.setSummaryProvider(preference ->  {
+            speedUnit.setSummaryProvider(preference -> {
                 SharedPreferences preferences = preference.getSharedPreferences();
                 String current_value = preferences.getString(preference.getKey(), "");
                 Resources res = getResources(); //assuming in an activity for example, otherwise you can provide a context.

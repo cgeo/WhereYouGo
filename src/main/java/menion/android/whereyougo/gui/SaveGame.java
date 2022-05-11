@@ -13,14 +13,15 @@
 
 package menion.android.whereyougo.gui;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.openwig.WUI;
+import menion.android.whereyougo.utils.Logger;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
 import cz.matejcik.openwig.Engine;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.openwig.WUI;
-import menion.android.whereyougo.utils.Logger;
 
 public class SaveGame extends AsyncTask<Void, Void, Void> {
 

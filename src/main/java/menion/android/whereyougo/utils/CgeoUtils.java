@@ -1,9 +1,9 @@
 package menion.android.whereyougo.utils;
 
+import menion.android.whereyougo.R;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
-
-import menion.android.whereyougo.R;
 
 public class CgeoUtils {
 
@@ -14,8 +14,7 @@ public class CgeoUtils {
     public static boolean isInstalled(Context context) {
         try {
             return context.getPackageManager().getApplicationInfo(context.getString(R.string.cgeo_package), 0).enabled;
-        }
-        catch (PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
     }

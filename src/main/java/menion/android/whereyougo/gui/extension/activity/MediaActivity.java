@@ -16,6 +16,11 @@
 package menion.android.whereyougo.gui.extension.activity;
 
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Images;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,10 +33,6 @@ import java.io.File;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Images;
 import pl.droidsonroids.gif.GifImageView;
 
 public class MediaActivity extends CustomActivity {
@@ -50,10 +51,10 @@ public class MediaActivity extends CustomActivity {
         switch (media.type.toLowerCase()) {
             case "mp4":
                 view = findViewById(R.id.mediaVideoView);
-            break;
+                break;
             case "gif":
                 view = findViewById(R.id.mediaGifView);
-            break;
+                break;
             case "jpeg":
             case "jpg":
             case "png":

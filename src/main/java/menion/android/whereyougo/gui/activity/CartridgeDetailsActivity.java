@@ -17,15 +17,6 @@
 
 package menion.android.whereyougo.gui.activity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.text.Html;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
@@ -36,6 +27,15 @@ import menion.android.whereyougo.guide.Guide;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Images;
 import menion.android.whereyougo.utils.UtilsFormat;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CartridgeDetailsActivity extends CustomActivity {
 

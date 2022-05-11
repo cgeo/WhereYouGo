@@ -1,5 +1,12 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.Utils;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
@@ -9,13 +16,6 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.Utils;
 
 public class SettingsDirectionsFragment extends PreferenceFragmentCompat {
     @Override

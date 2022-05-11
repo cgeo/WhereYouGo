@@ -1,15 +1,15 @@
 /*
  * Copyright 2010, 2011, 2012 mapsforge.org
  * Copyright 2013, 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,6 +21,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.location.Location;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.android.maps.overlay.PolygonalChain;
@@ -29,9 +32,6 @@ import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.GeoPoint;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.util.MercatorProjection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class NavigationOverlay implements Overlay {
@@ -84,13 +84,13 @@ public class NavigationOverlay implements Overlay {
         line.setPolygonalChain(new PolygonalChain(geoPoints));
         line.draw(boundingBox, zoomLevel, canvas, canvasPosition);
 
-    /*
-     * double canvasPixelLeft = MercatorProjection.longitudeToPixelX( boundingBox.minLongitude,
-     * zoomLevel); double canvasPixelTop = MercatorProjection.latitudeToPixelY(
-     * boundingBox.maxLatitude, zoomLevel); Point canvasPosition = new Point(canvasPixelLeft,
-     * canvasPixelTop); Point a = getPoint(start, canvasPosition, zoomLevel); Point b =
-     * getPoint(target, canvasPosition, zoomLevel); canvas.drawLine(a.x, a.y, b.x, b.y, paint);
-     */
+        /*
+         * double canvasPixelLeft = MercatorProjection.longitudeToPixelX( boundingBox.minLongitude,
+         * zoomLevel); double canvasPixelTop = MercatorProjection.latitudeToPixelY(
+         * boundingBox.maxLatitude, zoomLevel); Point canvasPosition = new Point(canvasPixelLeft,
+         * canvasPixelTop); Point a = getPoint(start, canvasPosition, zoomLevel); Point b =
+         * getPoint(target, canvasPosition, zoomLevel); canvas.drawLine(a.x, a.y, b.x, b.y, paint);
+         */
     }
 
     public synchronized GeoPoint getTarget() {

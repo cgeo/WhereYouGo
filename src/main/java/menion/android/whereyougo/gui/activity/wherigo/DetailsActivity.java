@@ -1,36 +1,22 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Vector;
-
-import cz.matejcik.openwig.Action;
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Media;
-import cz.matejcik.openwig.Task;
-import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
@@ -51,6 +37,21 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.UtilsFormat;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Vector;
+
+import cz.matejcik.openwig.Action;
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.EventTable;
+import cz.matejcik.openwig.Media;
+import cz.matejcik.openwig.Task;
+import cz.matejcik.openwig.Thing;
+import cz.matejcik.openwig.Zone;
 
 // ADD locationListener to update UpdateNavi
 public class DetailsActivity extends MediaActivity implements IRefreshable, ILocationEventListener {

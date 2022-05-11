@@ -1,40 +1,22 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity.wherigo;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Vector;
-
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.Player;
-import cz.matejcik.openwig.Task;
-import cz.matejcik.openwig.Thing;
-import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.IRefreshable;
 import menion.android.whereyougo.gui.activity.MainActivity;
@@ -54,6 +36,25 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.Utils;
 import menion.android.whereyougo.utils.UtilsFormat;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.Player;
+import cz.matejcik.openwig.Task;
+import cz.matejcik.openwig.Thing;
+import cz.matejcik.openwig.Zone;
 
 public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
@@ -357,7 +358,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         Logger.d(TAG, "onKeyDown(" + keyCode + ", " + event + ")");
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
             if (!Preferences.GLOBAL_DOUBLE_CLICK || event.getDownTime() - lastPressedTime < DOUBLE_PRESS_HK_BACK_PERIOD) {
-        /* exit game */
+                /* exit game */
                 UtilsGUI.showDialogQuestion(this, R.string.save_game_before_exit,
                         (dialog, which) -> {
                             new SaveGameOnExit().execute();
@@ -372,7 +373,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
 
                 return true;
             } else {
-        /* back is tapped once */
+                /* back is tapped once */
                 lastPressedTime = event.getDownTime();
                 ManagerNotify.toastShortMessage(R.string.msg_exit_game);
                 return true;
