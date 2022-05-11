@@ -1,25 +1,21 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.guide;
-
-import android.os.Bundle;
-
-import java.util.ArrayList;
 
 import menion.android.whereyougo.geo.location.ILocationEventListener;
 import menion.android.whereyougo.geo.location.Location;
@@ -27,6 +23,10 @@ import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.geo.location.SatellitePosition;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.Logger;
+
+import android.os.Bundle;
+
+import java.util.ArrayList;
 
 /**
  * @author menion

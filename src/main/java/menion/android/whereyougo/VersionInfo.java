@@ -17,13 +17,13 @@
 
 package menion.android.whereyougo;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 /**
  * @author menion

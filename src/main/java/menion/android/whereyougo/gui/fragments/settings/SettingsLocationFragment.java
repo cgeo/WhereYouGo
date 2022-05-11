@@ -1,5 +1,10 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.Utils;
+
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,11 +12,6 @@ import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
 
 public class SettingsLocationFragment extends PreferenceFragmentCompat {
     private static final String TAG = SettingsGlobalFragment.class.getSimpleName();
@@ -71,7 +71,7 @@ public class SettingsLocationFragment extends PreferenceFragmentCompat {
                     CheckBoxPreference screen_off = findPreference(Preferences.getKey(R.string.pref_KEY_B_RUN_SCREEN_OFF));
                     if (status_bar != null && gps_guideing != null && screen_off != null) {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P
-                            && screen_off.isChecked()) {
+                                && screen_off.isChecked()) {
                             status_bar.setEnabled(false);
                         } else {
                             if (newValue) {
@@ -82,7 +82,7 @@ public class SettingsLocationFragment extends PreferenceFragmentCompat {
                         }
                     } else {
                         Logger.e(TAG, "One of the required settings was missing. (KEY_B_STATUSBAR," +
-                            " KEY_B_GUIDING_GPS_REQUIRED, KEY_B_RUN_SCREEN_OFF)");
+                                " KEY_B_GUIDING_GPS_REQUIRED, KEY_B_RUN_SCREEN_OFF)");
                     }
                 }
                 return true;
@@ -107,7 +107,7 @@ public class SettingsLocationFragment extends PreferenceFragmentCompat {
                         }
                     } else {
                         Logger.e(TAG, "One of the required settings was missing. (KEY_B_STATUSBAR," +
-                            " KEY_B_RUN_SCREEN_OFF)");
+                                " KEY_B_RUN_SCREEN_OFF)");
                     }
                 }
                 return true;

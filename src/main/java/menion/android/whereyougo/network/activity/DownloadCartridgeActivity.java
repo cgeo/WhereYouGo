@@ -15,6 +15,19 @@
 
 package menion.android.whereyougo.network.activity;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
+import menion.android.whereyougo.gui.dialog.PositiveButtonActionCustomizableDialogFragment;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.network.DownloadCartridgeTask;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.ManagerNotify;
+import menion.android.whereyougo.utils.UtilsFormat;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -33,19 +46,6 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import java.io.File;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.gui.activity.XmlSettingsActivity;
-import menion.android.whereyougo.gui.dialog.PositiveButtonActionCustomizableDialogFragment;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
-import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
-import menion.android.whereyougo.network.DownloadCartridgeTask;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Images;
-import menion.android.whereyougo.utils.ManagerNotify;
-import menion.android.whereyougo.utils.UtilsFormat;
 
 public class DownloadCartridgeActivity extends CustomActivity
         implements PositiveButtonActionCustomizableDialogFragment.PositiveButtonActionCustomizableDialogListener {
@@ -167,7 +167,7 @@ public class DownloadCartridgeActivity extends CustomActivity
         startActivity(loginPreferenceIntent);
     }
 
-    private void adjustDownloadButtonToUsernamePasswordState(){
+    private void adjustDownloadButtonToUsernamePasswordState() {
         Button buttonDownload = (Button) findViewById(R.id.button_positive);
         // If one of the variables is empty the inner condition is true which get's negated because
         // the button get's enabled on true and disabled on false.

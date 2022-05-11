@@ -1,39 +1,21 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.geo.location;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.GnssStatus;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
-import android.location.LocationManager;
-import android.os.Build;
-import android.os.Bundle;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
@@ -44,6 +26,22 @@ import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
 import menion.android.whereyougo.utils.Const;
 import menion.android.whereyougo.utils.Logger;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.location.GnssStatus;
+import android.location.GpsSatellite;
+import android.location.GpsStatus;
+import android.location.LocationManager;
+import android.os.Build;
+import android.os.Bundle;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 /**
  * @author menion
@@ -200,7 +198,7 @@ public class LocationState {
 
             // also disable wake-lock here
             if (!PreferenceValues.existCurrentActivity() || screenOff) {
-                if (Preferences.GLOBAL_RUN_SCREEN_OFF){
+                if (Preferences.GLOBAL_RUN_SCREEN_OFF) {
                     PreferenceValues.enableWakeLock();
                 } else {
                     PreferenceValues.disableWakeLock();
@@ -294,7 +292,7 @@ public class LocationState {
         if (event == GNSS_EVENT_STARTED || event == GNSS_EVENT_STOPPED) {
             for (int i = 0; i < mListeners.size(); i++) {
                 mListeners.get(i).onStatusChanged(LocationManager.GPS_PROVIDER,
-                    event == GNSS_EVENT_STARTED ? 2 : 1, null);
+                        event == GNSS_EVENT_STARTED ? 2 : 1, null);
             }
         } else if (event == GNSS_EVENT_SATELLITE) {
             ArrayList<SatellitePosition> pos = null;
@@ -303,7 +301,7 @@ public class LocationState {
                 int satellites = gnssStatus.getSatelliteCount();
                 mSatsCount.x = 0;
                 mSatsCount.y = 0;
-                for (int sat = 0; sat < satellites; sat++){
+                for (int sat = 0; sat < satellites; sat++) {
                     SatellitePosition satPos = new SatellitePosition();
                     satPos.azimuth = gnssStatus.getAzimuthDegrees(sat);
                     satPos.elevation = gnssStatus.getElevationDegrees(sat);
@@ -499,7 +497,7 @@ public class LocationState {
             } else if (Build.VERSION.SDK_INT >= 24) {
                 LocationManager lm;
                 lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                if (lm!=null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                if (lm != null && lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     gpsConn = new GpsConnection(context);
                 }
             } else {

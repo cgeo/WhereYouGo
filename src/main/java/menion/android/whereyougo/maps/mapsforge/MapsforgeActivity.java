@@ -1,19 +1,45 @@
 /*
  * Copyright 2010, 2011, 2012 mapsforge.org
  * Copyright 2013, 2014 biylda <biylda@gmail.com>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU Lesser General Public License as published by the Free Software Foundation, either version 3
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
 package menion.android.whereyougo.maps.mapsforge;
+
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.IRefreshable;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.maps.container.MapPoint;
+import menion.android.whereyougo.maps.container.MapPointPack;
+import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
+import menion.android.whereyougo.maps.mapsforge.filefilter.ValidMapFile;
+import menion.android.whereyougo.maps.mapsforge.filefilter.ValidRenderTheme;
+import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
+import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorFactory;
+import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorInternal;
+import menion.android.whereyougo.maps.mapsforge.overlay.LabelMarker;
+import menion.android.whereyougo.maps.mapsforge.overlay.MyLocationOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.NavigationOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.PointListOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.PointOverlay;
+import menion.android.whereyougo.maps.mapsforge.overlay.RotationMarker;
+import menion.android.whereyougo.maps.mapsforge.overlay.SensorMyLocationOverlay;
+import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
+import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.CgeoUtils;
+import menion.android.whereyougo.utils.UtilsFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -51,6 +77,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.mapsforge.android.AndroidUtils;
 import org.mapsforge.android.maps.DebugSettings;
 import org.mapsforge.android.maps.MapActivity;
@@ -71,40 +105,6 @@ import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.map.reader.header.FileOpenResult;
 import org.mapsforge.map.reader.header.MapFileInfo;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import menion.android.whereyougo.MainApplication;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.IRefreshable;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.maps.container.MapPoint;
-import menion.android.whereyougo.maps.container.MapPointPack;
-import menion.android.whereyougo.maps.mapsforge.filefilter.FilterByFileExtension;
-import menion.android.whereyougo.maps.mapsforge.filefilter.ValidMapFile;
-import menion.android.whereyougo.maps.mapsforge.filefilter.ValidRenderTheme;
-import menion.android.whereyougo.maps.mapsforge.filepicker.FilePicker;
-import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorFactory;
-import menion.android.whereyougo.maps.mapsforge.mapgenerator.MapGeneratorInternal;
-import menion.android.whereyougo.maps.mapsforge.overlay.LabelMarker;
-import menion.android.whereyougo.maps.mapsforge.overlay.MyLocationOverlay;
-import menion.android.whereyougo.maps.mapsforge.overlay.NavigationOverlay;
-import menion.android.whereyougo.maps.mapsforge.overlay.PointListOverlay;
-import menion.android.whereyougo.maps.mapsforge.overlay.PointOverlay;
-import menion.android.whereyougo.maps.mapsforge.overlay.RotationMarker;
-import menion.android.whereyougo.maps.mapsforge.overlay.SensorMyLocationOverlay;
-import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
-import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.CgeoUtils;
-import menion.android.whereyougo.utils.UtilsFormat;
 
 /**
  * A map application which uses the features from the mapsforge map library. The map can be centered
@@ -378,7 +378,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         this.listOverlay = new PointListOverlay();
         this.listOverlay.registerOnTapEvent(tapListener);
 
-    /* what is shown */
+        /* what is shown */
         if (savedInstanceState != null) {
             this.showPins = savedInstanceState.getBoolean(BUNDLE_SHOW_PINS, true);
             this.showLabels = savedInstanceState.getBoolean(BUNDLE_SHOW_LABELS, true);

@@ -1,21 +1,24 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.utils;
+
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
 
 import android.os.Environment;
 
@@ -27,9 +30,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Locale;
 
-import menion.android.whereyougo.MainApplication;
-import menion.android.whereyougo.R;
-
 /**
  * @author menion
  * @since 25.1.2010 2010
@@ -39,10 +39,10 @@ public class FileSystem {
     private static final String TAG = "FileSystem";
     private static final String CARD_ROOT = "{CARD_ROOT}";
     private static final String[] EXTERNAL_DIRECTORIES = new String[]{CARD_ROOT + "external_sd",
-            CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
-            CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
-            "/mnt/emms", // CM7 + SGS2
-            "/mnt/external1" // Xoom
+                                                                      CARD_ROOT + "_externalsd", CARD_ROOT + "sd", CARD_ROOT + "emmc", // CM7 + SGS
+                                                                      CARD_ROOT + "ext_sd", "/Removable/MicroSD", // Asus Transformer
+                                                                      "/mnt/emms", // CM7 + SGS2
+                                                                      "/mnt/external1" // Xoom
     };
     public static String ROOT = null;
     public static String CACHE = "cache/";

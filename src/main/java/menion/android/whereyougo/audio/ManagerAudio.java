@@ -1,21 +1,27 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.audio;
+
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.Utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,12 +32,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Hashtable;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
 
 /**
  * @author menion
@@ -89,7 +89,7 @@ public class ManagerAudio {
 
     public void playSound(int sound) {
         if (volume == 0.0f || (System.currentTimeMillis() - lastVolumeCheck) > 1000) {
-      /* The next 4 lines calculate the current volume in a scale of 0.0 to 1.0 */
+            /* The next 4 lines calculate the current volume in a scale of 0.0 to 1.0 */
             AudioManager mgr = (AudioManager) A.getMain().getSystemService(Context.AUDIO_SERVICE);
             float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
             float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -97,7 +97,7 @@ public class ManagerAudio {
             lastVolumeCheck = System.currentTimeMillis();
         }
 
-    /* Play the sound with the correct volume */
+        /* Play the sound with the correct volume */
         soundPool.play(soundPoolMap.get(sound), volume, volume, 1, 0, 1f);
     }
 

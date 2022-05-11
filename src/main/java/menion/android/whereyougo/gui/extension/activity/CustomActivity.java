@@ -17,6 +17,16 @@
 
 package menion.android.whereyougo.gui.extension.activity;
 
+import menion.android.whereyougo.MainApplication;
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.activity.MainActivity;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.Const;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.NotificationService;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,16 +44,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceManager;
 
 import java.util.Locale;
-
-import menion.android.whereyougo.MainApplication;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.activity.MainActivity;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.NotificationService;
 
 public class CustomActivity extends FragmentActivity {
     private static final String TAG = CustomActivity.class.getSimpleName();

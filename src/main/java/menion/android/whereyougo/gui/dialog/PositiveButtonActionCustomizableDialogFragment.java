@@ -1,5 +1,7 @@
 package menion.android.whereyougo.gui.dialog;
 
+import menion.android.whereyougo.R;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -7,8 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
-import menion.android.whereyougo.R;
 
 public class PositiveButtonActionCustomizableDialogFragment extends DialogFragment {
 

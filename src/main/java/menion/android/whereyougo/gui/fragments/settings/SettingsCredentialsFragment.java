@@ -1,14 +1,14 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.network.LoginTask;
+import menion.android.whereyougo.preferences.Preferences;
+
 import android.os.Bundle;
 
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.network.LoginTask;
-import menion.android.whereyougo.preferences.Preferences;
 
 public class SettingsCredentialsFragment extends PreferenceFragmentCompat {
     @Override

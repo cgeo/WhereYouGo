@@ -1,21 +1,28 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity.wherigo;
+
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.gui.extension.activity.MediaActivity;
+import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsGUI;
+import menion.android.whereyougo.preferences.Locale;
+import menion.android.whereyougo.utils.A;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,24 +34,20 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.gui.extension.activity.MediaActivity;
-import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
-import menion.android.whereyougo.gui.utils.UtilsGUI;
-import menion.android.whereyougo.preferences.Locale;
-import menion.android.whereyougo.utils.A;
 import se.krka.kahlua.vm.LuaTable;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 public class InputScreenActivity extends MediaActivity {
 
     private static final String TAG = "InputScreen";
     private static EventTable input;
+
     private enum InputType { NONE, TEXT, MULTI }
+
     private InputType inputType = InputType.NONE;
 
     public static void setInput(EventTable input) {
@@ -132,7 +135,7 @@ public class InputScreenActivity extends MediaActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null && result.getContents() != null) {
+        if (result != null && result.getContents() != null) {
             final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
             editText.setText(result.getContents());
         } else {

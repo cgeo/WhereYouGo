@@ -17,11 +17,12 @@
 
 package menion.android.whereyougo.gui.utils;
 
-import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Zone;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
+
+import cz.matejcik.openwig.EventTable;
+import cz.matejcik.openwig.Zone;
 
 public class UtilsWherigo {
 

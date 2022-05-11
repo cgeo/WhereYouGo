@@ -1,5 +1,9 @@
 package menion.android.whereyougo.permission;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.utils.Logger;
+import static menion.android.whereyougo.preferences.Locale.getString;
+
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,16 +15,11 @@ import android.os.Build;
 import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.utils.Logger;
-
-import static androidx.core.content.ContextCompat.checkSelfPermission;
-import static menion.android.whereyougo.preferences.Locale.getString;
 
 public class PermissionHandler {
 
@@ -33,12 +32,12 @@ public class PermissionHandler {
     @TargetApi(Build.VERSION_CODES.M)
     public static void checkPermissions(final Activity activity) {
 
-        final String[] permissions = new String[] {
+        final String[] permissions = new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        };
+                };
 
         String[] koPermissions = checkKoPermissions(activity, permissions);
         if (koPermissions.length > 0) {
@@ -47,8 +46,8 @@ public class PermissionHandler {
     }
 
     public static String[] checkKoPermissions(final Activity activity, final String[] permissions) {
-    List<String> listKoPermissions = new ArrayList<>();
-        for (String permission: permissions) {
+        List<String> listKoPermissions = new ArrayList<>();
+        for (String permission : permissions) {
             if (checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                 listKoPermissions.add(permission);
             }
@@ -67,7 +66,7 @@ public class PermissionHandler {
     public static void askAgainFor(final Activity activity, String[] permissions) {
         int permissionsDenied = 0;
         HashMap<String, Integer> permissionClasses = new HashMap<>();
-        for (String permission:permissions) {
+        for (String permission : permissions) {
             permissionClasses.put(getPermissionClass(permission), 1);
             final boolean currShouldShowStatus = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
             if (!currShouldShowStatus) {
@@ -76,7 +75,7 @@ public class PermissionHandler {
         }
 
         String permissionsMessage = "";
-        for (String permissionClass: permissionClasses.keySet()) {
+        for (String permissionClass : permissionClasses.keySet()) {
             permissionsMessage = permissionsMessage.concat((permissionsMessage.isEmpty() ? "" : "\n\n")).concat(getPermissionMessage(permissionClass));
         }
         permissionsMessage = permissionsMessage.concat("\n\n").concat(getString(R.string.permission_conclusion));

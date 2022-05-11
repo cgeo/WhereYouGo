@@ -1,21 +1,37 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity.wherigo;
+
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.geo.location.Location;
+import menion.android.whereyougo.geo.location.LocationState;
+import menion.android.whereyougo.gui.IRefreshable;
+import menion.android.whereyougo.gui.extension.DataInfo;
+import menion.android.whereyougo.gui.extension.IconedListAdapter;
+import menion.android.whereyougo.gui.extension.activity.CustomActivity;
+import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
+import menion.android.whereyougo.gui.utils.UtilsWherigo;
+import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.Const;
+import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.Utils;
+import menion.android.whereyougo.utils.UtilsFormat;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,21 +54,6 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Thing;
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.geo.location.Location;
-import menion.android.whereyougo.geo.location.LocationState;
-import menion.android.whereyougo.gui.IRefreshable;
-import menion.android.whereyougo.gui.extension.DataInfo;
-import menion.android.whereyougo.gui.extension.IconedListAdapter;
-import menion.android.whereyougo.gui.extension.activity.CustomActivity;
-import menion.android.whereyougo.gui.extension.dialog.CustomDialog;
-import menion.android.whereyougo.gui.utils.UtilsWherigo;
-import menion.android.whereyougo.utils.A;
-import menion.android.whereyougo.utils.Const;
-import menion.android.whereyougo.utils.Images;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
-import menion.android.whereyougo.utils.UtilsFormat;
 
 public abstract class ListVariousActivity extends CustomActivity implements IRefreshable {
 

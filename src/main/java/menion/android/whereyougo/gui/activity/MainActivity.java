@@ -1,57 +1,21 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
 package menion.android.whereyougo.gui.activity;
-
-import android.Manifest;
-import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.app.NotificationManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Debug;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Vector;
-
-import cz.matejcik.openwig.Engine;
-import cz.matejcik.openwig.formats.CartridgeFile;
-import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Waypoint;
 
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
@@ -78,11 +42,45 @@ import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
 import menion.android.whereyougo.utils.NotificationService;
 import menion.android.whereyougo.utils.Utils;
-
 import static menion.android.whereyougo.permission.PermissionHandler.askAgainFor;
 import static menion.android.whereyougo.permission.PermissionHandler.checkKoPermissions;
 import static menion.android.whereyougo.permission.PermissionHandler.checkPermissions;
 import static menion.android.whereyougo.permission.PermissionHandler.needAskForPermission;
+
+import android.Manifest;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Debug;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.Vector;
+
+import cz.matejcik.openwig.Engine;
+import cz.matejcik.openwig.formats.CartridgeFile;
+import locus.api.objects.extra.Location;
+import locus.api.objects.extra.Waypoint;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MainActivity extends CustomActivity {
 
@@ -439,7 +437,7 @@ public class MainActivity extends CustomActivity {
         };
 
         UtilsGUI.setButtons(this, new int[]{R.id.button_start, R.id.button_map, R.id.button_gps,
-                R.id.button_settings, R.id.button_logo}, mOnClickListener, null);
+                                            R.id.button_settings, R.id.button_logo}, mOnClickListener, null);
     }
 
     @Override

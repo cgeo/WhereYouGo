@@ -1,5 +1,10 @@
 package menion.android.whereyougo.gui.fragments.settings;
 
+import menion.android.whereyougo.R;
+import menion.android.whereyougo.preferences.PreferenceValues;
+import menion.android.whereyougo.preferences.Preferences;
+import menion.android.whereyougo.utils.Utils;
+
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,11 +12,6 @@ import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
-
-import menion.android.whereyougo.R;
-import menion.android.whereyougo.preferences.PreferenceValues;
-import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.Utils;
 
 public class SettingsAppearanceFragment extends PreferenceFragmentCompat {
     @Override

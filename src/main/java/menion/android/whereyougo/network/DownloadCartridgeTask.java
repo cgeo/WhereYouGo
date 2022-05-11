@@ -15,6 +15,10 @@
 
 package menion.android.whereyougo.network;
 
+import menion.android.whereyougo.utils.FileSystem;
+import menion.android.whereyougo.utils.Logger;
+import menion.android.whereyougo.utils.Utils;
+
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -28,9 +32,6 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
-import menion.android.whereyougo.utils.FileSystem;
-import menion.android.whereyougo.utils.Logger;
-import menion.android.whereyougo.utils.Utils;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
