@@ -18,7 +18,6 @@
 package menion.android.whereyougo.gui.activity;
 
 import menion.android.whereyougo.R;
-import menion.android.whereyougo.R.id;
 import menion.android.whereyougo.geo.location.Location;
 import menion.android.whereyougo.geo.location.LocationState;
 import menion.android.whereyougo.geo.orientation.IOrientationEventListener;
@@ -98,7 +97,7 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
                 LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
         viewName = (TextView) findViewById(R.id.textViewName);
-        viewProvider = (TextView) findViewById(id.textViewProvider);
+        viewProvider = (TextView) findViewById(R.id.textViewProvider);
         viewAlt = (TextView) findViewById(R.id.textViewAltitude);
         viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
         viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
