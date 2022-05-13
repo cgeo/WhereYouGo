@@ -181,7 +181,7 @@ public class DownloadCartridgeActivity extends CustomActivity
     class DownloadTask extends DownloadCartridgeTask {
         final ProgressDialog progressDialog;
 
-        public DownloadTask(final Context context, String username, String password) {
+        public DownloadTask(Context context, String username, String password) {
             super(context, username, password);
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("");

@@ -58,10 +58,10 @@ public class UtilsGUI {
 
     /* DIALOG CONSTRUCTION */
 
-    public static void dialogDoItem(final Activity activity, final CharSequence title,
-                                    final int icon, final CharSequence msg, final String posText,
-                                    final DialogInterface.OnClickListener posLis, final String negText,
-                                    final DialogInterface.OnClickListener negLis) {
+    public static void dialogDoItem(Activity activity,
+                                    CharSequence title, int icon, CharSequence msg,
+                                    String posText, DialogInterface.OnClickListener posLis,
+                                    String negText, DialogInterface.OnClickListener negLis) {
         activity.runOnUiThread(new Runnable() {
             public void run() {
                 if (activity.isFinishing())
@@ -83,11 +83,11 @@ public class UtilsGUI {
         });
     }
 
-    public static void dialogDoItem(final Activity activity, final CharSequence title,
-                                    final int icon, final CharSequence msg, final String posText,
-                                    final DialogInterface.OnClickListener posLis, final String negText,
-                                    final DialogInterface.OnClickListener negLis, final String cancelText,
-                                    final DialogInterface.OnClickListener cancelLis) {
+    public static void dialogDoItem(Activity activity,
+                                    CharSequence title, int icon, CharSequence msg,
+                                    String posText, DialogInterface.OnClickListener posLis,
+                                    String negText, DialogInterface.OnClickListener negLis,
+                                    String cancelText, DialogInterface.OnClickListener cancelLis) {
         activity.runOnUiThread(() -> {
             if (activity.isFinishing())
                 return;
@@ -276,7 +276,7 @@ public class UtilsGUI {
         showDialogWebView(activity, activity.getString(title), msg);
     }
 
-    public static void showDialogWebView(final Activity activity, final String title, final String msg) {
+    public static void showDialogWebView(Activity activity, String title, String msg) {
         activity.runOnUiThread(new Runnable() {
             public void run() {
                 if (activity.isFinishing())

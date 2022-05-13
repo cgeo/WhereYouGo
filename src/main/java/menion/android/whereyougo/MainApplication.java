@@ -268,7 +268,7 @@ public class MainApplication extends Application {
             if (Preferences.GLOBAL_SAVEGAME_AUTO
                     && level == android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN
                     && MainActivity.selectedFile != null && Engine.instance != null) {
-                final Activity activity = PreferenceValues.getCurrentActivity();
+                Activity activity = PreferenceValues.getCurrentActivity();
                 if (activity != null) {
                     if (MainActivity.wui != null) {
                         MainActivity.wui.setOnSavingFinished(() -> {

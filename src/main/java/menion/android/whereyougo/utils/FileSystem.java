@@ -103,7 +103,7 @@ public class FileSystem {
         return cardRoot;
     }
 
-    public static File[] getFiles(String folder, final String filter) {
+    public static File[] getFiles(String folder, String filter) {
         FileFilter fileFilter = pathname -> pathname.getName().toLowerCase(Locale.getDefault()).endsWith(filter);
         return getFiles2(folder, fileFilter);
     }

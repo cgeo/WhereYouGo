@@ -417,7 +417,7 @@ public class LocationState {
         // }
     }
 
-    private static void postGpsSatelliteChange(final ArrayList<SatellitePosition> pos) {
+    private static void postGpsSatelliteChange(ArrayList<SatellitePosition> pos) {
         if (PreferenceValues.getCurrentActivity() == null)
             return;
 
@@ -462,7 +462,7 @@ public class LocationState {
         onLocationChanged(location);
     }
 
-    private static void setState(final Context context, int source, boolean writeToSettings) {
+    private static void setState(Context context, int source, boolean writeToSettings) {
         // Logger.w(TAG, "setLocation(" + context + ", " + source + ", " + writeToSettings +
         // "), actual:" + LocationState.mSource);
         if (LocationState.mSource == source) {

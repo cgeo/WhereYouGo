@@ -296,7 +296,7 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
     }
 
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getGroupId() != 0)
             return false;
         if (item.getItemId() == 0) {

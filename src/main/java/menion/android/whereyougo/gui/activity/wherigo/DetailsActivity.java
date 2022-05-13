@@ -222,7 +222,7 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
                 // all three buttons free
                 if (actions <= 3) {
                     if (actions > 0) {
-                        final Action action = (Action) validActions.get(0);
+                        Action action = (Action) validActions.get(0);
                         btn01 = action.text;
                         btn01Click = (dialog, v, btn) -> {
                             ListActionsActivity.reset((Thing) et);
@@ -233,7 +233,7 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
                         };
                     }
                     if (actions > 1) {
-                        final Action action = (Action) validActions.get(1);
+                        Action action = (Action) validActions.get(1);
                         btn02 = action.text;
                         btn02Click = (dialog, v, btn) -> {
                             ListActionsActivity.reset((Thing) et);
@@ -244,7 +244,7 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
                         };
                     }
                     if (actions > 2) {
-                        final Action action = (Action) validActions.get(2);
+                        Action action = (Action) validActions.get(2);
                         btn03 = action.text;
                         btn03Click = (dialog, v, btn) -> {
                             ListActionsActivity.reset((Thing) et);

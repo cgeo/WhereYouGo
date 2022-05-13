@@ -189,7 +189,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                             dialog.dismiss();
                         }
                     });
-            final String cguid = pointOverlay.getPoint().getData();
+            String cguid = pointOverlay.getPoint().getData();
             if (allowStartCartridge && cguid != null)
                 builder.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
                     @Override
@@ -471,7 +471,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             LayoutInflater factory = LayoutInflater.from(this);
             switch (Preferences.FORMAT_COO_LATLON) {
                 case PreferenceValues.VALUE_UNITS_COO_LATLON_SEC: {
-                    final View view = factory.inflate(R.layout.dialog_enter_coordinates_dms, null);
+                    View view = factory.inflate(R.layout.dialog_enter_coordinates_dms, null);
                     builder.setView(view);
                     builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
                         @Override
@@ -497,7 +497,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 }
                 break;
                 case PreferenceValues.VALUE_UNITS_COO_LATLON_MIN: {
-                    final View view = factory.inflate(R.layout.dialog_enter_coordinates_dm, null);
+                    View view = factory.inflate(R.layout.dialog_enter_coordinates_dm, null);
                     builder.setView(view);
                     builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
                         @Override
@@ -524,7 +524,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 }
                 break;
                 default: {
-                    final View view = factory.inflate(R.layout.dialog_enter_coordinates, null);
+                    View view = factory.inflate(R.layout.dialog_enter_coordinates, null);
                     builder.setView(view);
                     builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
                         @Override
@@ -573,7 +573,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         String[] keys = getResources().getStringArray(R.array.mapgenerator_keys);
         String[] values = getResources().getStringArray(R.array.mapgenerator_values);
         for (int i = 0; i < keys.length; i++) {
-            final MapGeneratorInternal generator = MapGeneratorInternal.valueOf(keys[i]);
+            MapGeneratorInternal generator = MapGeneratorInternal.valueOf(keys[i]);
             MenuItem item =
                     mapgeneratorMenu.add(R.id.menu_mapgenerator_group, Menu.NONE, Menu.NONE, values[i]);
             item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1107,7 +1107,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
      *
      * @param text the text message to display
      */
-    void showToastOnUiThread(final String text) {
+    void showToastOnUiThread(String text) {
         if (AndroidUtils.currentThreadIsUiThread()) {
             Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
             toast.show();

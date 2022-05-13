@@ -45,9 +45,9 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         }
         try {
             // sort cartridges
-            final Location actLoc = LocationState.getLocation();
-            final Location loc1 = new Location(TAG);
-            final Location loc2 = new Location(TAG);
+            Location actLoc = LocationState.getLocation();
+            Location loc1 = new Location(TAG);
+            Location loc2 = new Location(TAG);
             Collections.sort(cartridgeFiles, (object1, object2) -> {
                 loc1.setLatitude(object1.latitude);
                 loc1.setLongitude(object1.longitude);
@@ -108,10 +108,10 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
         dismiss();
     }
 
-    private void itemLongClicked(final int position) {
+    private void itemLongClicked(int position) {
         try {
-            final CartridgeFile cartridgeFile = cartridgeFiles.get(position);
-            final String filename = cartridgeFile.filename.substring(0,
+            CartridgeFile cartridgeFile = cartridgeFiles.get(position);
+            String filename = cartridgeFile.filename.substring(0,
                     cartridgeFile.filename.length() - 3);
 
             UtilsGUI.showDialogQuestion(getActivity(), R.string.delete_cartridge,

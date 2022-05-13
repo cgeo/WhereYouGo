@@ -127,7 +127,7 @@ public class ChooseSavegameDialog extends CustomDialogFragment {
         }
     }
 
-    private void itemLongClicked(final int position) {
+    private void itemLongClicked(int position) {
         if (position == 0)
             return;
         UtilsGUI.showDialogQuestion(getActivity(), R.string.delete_save_game,

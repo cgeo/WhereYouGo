@@ -38,7 +38,7 @@ public class VersionInfo {
     public static void afterStartAction() {
         if (!stage01Completed) {
             int lastVersion = PreferenceValues.getApplicationVersionLast();
-            final int actualVersion = PreferenceValues.getApplicationVersionActual();
+            int actualVersion = PreferenceValues.getApplicationVersionActual();
             if (lastVersion == 0 || actualVersion != lastVersion) {
                 String news = getNews(lastVersion, actualVersion);
                 if (news != null && news.length() > 0) {

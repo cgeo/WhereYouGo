@@ -72,7 +72,7 @@ public class InputScreenActivity extends MediaActivity {
         tvQuestion.setText(UtilsGUI.simpleHtml(text));
 
         // set answer
-        final EditText editText = findViewById(R.id.layoutInputEditText);
+        EditText editText = findViewById(R.id.layoutInputEditText);
         editText.setVisibility(View.GONE);
         final Button scanButton = findViewById(R.id.layoutInputScanButton);
         scanButton.setOnClickListener(v -> {
@@ -80,7 +80,7 @@ public class InputScreenActivity extends MediaActivity {
             integrator.initiateScan();
         });
         scanButton.setVisibility(View.GONE);
-        final Spinner spinner = findViewById(R.id.layoutInputSpinner);
+        Spinner spinner = findViewById(R.id.layoutInputSpinner);
         spinner.setVisibility(View.GONE);
         String type = (String) input.table.rawget("InputType");
 

@@ -138,7 +138,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
         }
     }
 
-    public void onLocationChanged(final Location location) {
+    public void onLocationChanged(Location location) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

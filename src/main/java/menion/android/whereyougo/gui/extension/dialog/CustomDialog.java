@@ -60,8 +60,8 @@ public class CustomDialog {
                 negativeButtonText, negativeButtonClickListener);
     }
 
-    private static boolean setButton(View layout, int btnId, final int btnType, String text,
-                                     final OnClickListener click) {
+    private static boolean setButton(View layout, int btnId, int btnType, String text,
+                                     OnClickListener click) {
         if (text != null && click != null) {
             // set button
             Button btn = layout.findViewById(btnId);
