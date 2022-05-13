@@ -82,7 +82,7 @@ public class WUI implements UI {
         return (CustomActivity) activity;
     }
 
-    public static void showTextProgress(final String text) {
+    public static void showTextProgress(String text) {
         Logger.i(TAG, "showTextProgress(" + text + ")");
     }
 
@@ -169,7 +169,7 @@ public class WUI implements UI {
         }
     }
 
-    public void setStatusText(final String text) {
+    public void setStatusText(String text) {
         Logger.w(TAG, "setStatus(" + text + ")");
         if (text == null || text.length() == 0)
             return;

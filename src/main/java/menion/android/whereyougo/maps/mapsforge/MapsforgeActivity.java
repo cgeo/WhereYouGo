@@ -171,7 +171,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     private boolean allowStartCartridge = false;
     private final TapEventListener tapListener = new TapEventListener() {
         @Override
-        public void onTap(final PointOverlay pointOverlay) {
+        public void onTap(PointOverlay pointOverlay) {
             if (pointOverlay.getPoint() == null)
                 return;
             // final MapPoint p = pointOverlay.getPoint();
@@ -445,11 +445,11 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         refreshItems();
     }
 
-    private void checkOfflineMapFile(final boolean forceAndFeedback) {
+    private void checkOfflineMapFile(boolean forceAndFeedback) {
         // if no local mapFile is set: query c:geo for current mapFile
         if (forceAndFeedback || this.mapView.getMapFile() == null) {
             try {
-                final Intent intent = new Intent(Intent.ACTION_SENDTO);
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
                 intent.setComponent(new ComponentName(getString(R.string.cgeo_package), getString(R.string.cgeo_action_queryMapFile)));
                 intent.putExtra(getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
                 startActivity(intent);
@@ -733,7 +733,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
     @Deprecated
     @Override
-    protected void onPrepareDialog(int id, final Dialog dialog) {
+    protected void onPrepareDialog(int id, Dialog dialog) {
         if (id == DIALOG_ENTER_COORDINATES) {
             MapViewPosition mapViewPosition = this.mapView.getMapViewPosition();
             GeoPoint mapCenter = mapViewPosition.getCenter();
@@ -779,7 +779,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             zoomlevel.setProgress(mapViewPosition.getZoomLevel());
 
             // zoom level value
-            final TextView textView = dialog.findViewById(R.id.zoomlevelValue);
+            TextView textView = dialog.findViewById(R.id.zoomlevelValue);
             textView.setText(String.valueOf(zoomlevel.getProgress()));
             zoomlevel.setOnSeekBarChangeListener(new SeekBarChangeListener(textView));
         } else if (id == DIALOG_INFO_MAP_FILE
@@ -979,11 +979,11 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
         // received mapfile from c:geo? (triggered by checkOfflineMapFile() above)
         if (null != bundle) {
-            final String newMapfile = bundle.getString(getString(R.string.cgeo_queryMapFile_resultParam), "");
+            String newMapfile = bundle.getString(getString(R.string.cgeo_queryMapFile_resultParam), "");
             boolean forceAndFeedback = bundle.getBoolean(getString(R.string.cgeo_queryMapFile_actionParam), false);
             if (!"".equals(newMapfile)) {
-                final File backupMapFile = mapView.getMapFile();
-                final MapGenerator backupMapGenerator = mapView.getMapGenerator();
+                File backupMapFile = mapView.getMapFile();
+                MapGenerator backupMapGenerator = mapView.getMapGenerator();
                 // try to set the map acquired from c:geo
                 FileOpenResult result = mapView.setMapFile(new File(newMapfile));
                 if (result == FileOpenResult.SUCCESS) {

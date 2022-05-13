@@ -272,7 +272,7 @@ public class UtilsGUI {
 
     /* WEBVIEW CONSTRUCTION */
 
-    public static void showDialogWebView(final Activity activity, final int title, final String msg) {
+    public static void showDialogWebView(Activity activity, int title, String msg) {
         showDialogWebView(activity, activity.getString(title), msg);
     }
 

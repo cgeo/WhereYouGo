@@ -78,9 +78,9 @@ public class Utils {
         return buf.toString();
     }
 
-    public static String streamToString(final InputStream is) {
-        final char[] buffer = new char[1024];
-        final StringBuilder out = new StringBuilder();
+    public static String streamToString(InputStream is) {
+        char[] buffer = new char[1024];
+        StringBuilder out = new StringBuilder();
         Reader in;
         try {
             in = new InputStreamReader(is, "UTF-8");
@@ -197,7 +197,7 @@ public class Utils {
     }
 
     public static boolean isIntentAvailable(Intent intent) {
-        final PackageManager packageManager = A.getApp().getPackageManager();
+        PackageManager packageManager = A.getApp().getPackageManager();
         List<ResolveInfo> list =
                 packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         // Logger.d(TAG, "isIntentAvailable(" + intent + "), res:" + list.size());

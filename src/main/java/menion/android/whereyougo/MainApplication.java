@@ -102,7 +102,7 @@ public class MainApplication extends Application {
         } catch (Exception e2) {
         }
 
-        final boolean set = FileSystem.setRootDirectory(pathCustom)
+        boolean set = FileSystem.setRootDirectory(pathCustom)
                 || FileSystem.setRootDirectory(pathExternal)
                 || FileSystem.setRootDirectory(pathInternal);
 

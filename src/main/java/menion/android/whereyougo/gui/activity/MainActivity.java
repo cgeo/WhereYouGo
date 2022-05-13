@@ -212,8 +212,8 @@ public class MainActivity extends CustomActivity {
         }
     }
 
-    public static void openCartridge(final CartridgeFile cartridgeFile) {
-        final CustomActivity activity = A.getMain();
+    public static void openCartridge(CartridgeFile cartridgeFile) {
+        CustomActivity activity = A.getMain();
         if (activity == null) {
             return;
         }
@@ -306,7 +306,7 @@ public class MainActivity extends CustomActivity {
         }
     }
 
-    public void showDialogFinish(final int typeOfFinish) {
+    public void showDialogFinish(int typeOfFinish) {
         // Logger.d(TAG, "showFinishDialog(" + typeOfFinish + ")");
         if (typeOfFinish == FINISH_NONE)
             return;

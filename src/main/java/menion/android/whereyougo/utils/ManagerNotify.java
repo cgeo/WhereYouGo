@@ -37,19 +37,19 @@ public class ManagerNotify {
         toastLongMessage(Locale.getString(R.string.problem_with_internet_connection));
     }
 
-    public static void toastLongMessage(final Context context, final String msg) {
+    public static void toastLongMessage(Context context, String msg) {
         toastMessage(context, msg, Toast.LENGTH_LONG);
     }
 
-    public static void toastLongMessage(final int msg) {
+    public static void toastLongMessage(int msg) {
         toastLongMessage(Locale.getString(msg));
     }
 
-    public static void toastLongMessage(final String msg) {
+    public static void toastLongMessage(String msg) {
         toastLongMessage(PreferenceValues.getCurrentActivity(), msg);
     }
 
-    private static void toastMessage(final Context context, final String msg, final int time) {
+    private static void toastMessage(Context context, String msg, int time) {
         Logger.d(TAG, "toastMessage(" + context + ", " + msg + ", " + time + ")");
         if (context == null || msg == null || msg.length() == 0)
             return;
@@ -69,15 +69,15 @@ public class ManagerNotify {
         }
     }
 
-    public static void toastShortMessage(final Context context, final String msg) {
+    public static void toastShortMessage(Context context, String msg) {
         toastMessage(context, msg, Toast.LENGTH_SHORT);
     }
 
-    public static void toastShortMessage(final int msg) {
+    public static void toastShortMessage(int msg) {
         toastShortMessage(Locale.getString(msg));
     }
 
-    public static void toastShortMessage(final String msg) {
+    public static void toastShortMessage(String msg) {
         toastShortMessage(PreferenceValues.getCurrentActivity(), msg);
     }
 

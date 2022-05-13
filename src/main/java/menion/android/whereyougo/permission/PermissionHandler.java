@@ -30,9 +30,9 @@ public class PermissionHandler {
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    public static void checkPermissions(final Activity activity) {
+    public static void checkPermissions(Activity activity) {
 
-        final String[] permissions = new String[]{
+        String[] permissions = new String[]{
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -45,7 +45,7 @@ public class PermissionHandler {
         }
     }
 
-    public static String[] checkKoPermissions(final Activity activity, final String[] permissions) {
+    public static String[] checkKoPermissions(Activity activity, String[] permissions) {
         List<String> listKoPermissions = new ArrayList<>();
         for (String permission : permissions) {
             if (checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -63,12 +63,12 @@ public class PermissionHandler {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
-    public static void askAgainFor(final Activity activity, String[] permissions) {
+    public static void askAgainFor(Activity activity, String[] permissions) {
         int permissionsDenied = 0;
         HashMap<String, Integer> permissionClasses = new HashMap<>();
         for (String permission : permissions) {
             permissionClasses.put(getPermissionClass(permission), 1);
-            final boolean currShouldShowStatus = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
+            boolean currShouldShowStatus = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
             if (!currShouldShowStatus) {
                 permissionsDenied++;
             }
@@ -96,7 +96,7 @@ public class PermissionHandler {
                     .setCancelable(false)
                     .setNegativeButton(R.string.close_app, (dialog, which) -> activity.finish())
                     .setPositiveButton(R.string.goto_app_details, (dialog, which) -> {
-                                final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                                         Uri.fromParts("package", activity.getPackageName(), null));
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 activity.startActivity(intent);
@@ -108,11 +108,11 @@ public class PermissionHandler {
         }
     }
 
-    private static void askFor(final Activity activity, final String[] permissions) {
+    private static void askFor(Activity activity, String[] permissions) {
         ActivityCompat.requestPermissions(activity, permissions, 0);
     }
 
-    private static String getPermissionClass(final String permission) {
+    private static String getPermissionClass(String permission) {
         if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION) || permission.equals(Manifest.permission.ACCESS_COARSE_LOCATION)) {
             return "LOCATION";
         } else if (permission.equals(Manifest.permission.READ_EXTERNAL_STORAGE) || permission.equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
@@ -123,7 +123,7 @@ public class PermissionHandler {
         return "";
     }
 
-    private static String getPermissionMessage(final String permissionClass) {
+    private static String getPermissionMessage(String permissionClass) {
         if (permissionClass.equals("LOCATION")) {
             return getString(R.string.location_permission_request_explanation);
         } else if (permissionClass.equals("STORAGE")) {

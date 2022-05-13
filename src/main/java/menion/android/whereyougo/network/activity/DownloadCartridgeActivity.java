@@ -208,7 +208,7 @@ public class DownloadCartridgeActivity extends CustomActivity
         }
 
         @Override
-        protected void onPostExecute(final Boolean result) {
+        protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
             if (result) {
                 progressDialog.dismiss();

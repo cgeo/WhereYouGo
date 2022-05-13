@@ -181,53 +181,53 @@ public class Preferences {
 
     /* ------------ */
 
-    public static boolean comparePreferenceKey(final String prefString, final int prefId) {
+    public static boolean comparePreferenceKey(String prefString, int prefId) {
         return prefString.equals(prefContext.getString(prefId));
     }
 
-    public static String getStringPreference(final int PreferenceId) {
+    public static String getStringPreference(int PreferenceId) {
         String key = prefContext.getString(PreferenceId);
         return PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "");
     }
 
-    public static double getDecimalPreference(final int PreferenceId) {
+    public static double getDecimalPreference(int PreferenceId) {
         String key = prefContext.getString(PreferenceId);
         return Utils.parseDouble(PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "0.0"));
     }
 
-    public static int getNumericalPreference(final int PreferenceId) {
+    public static int getNumericalPreference(int PreferenceId) {
         String key = prefContext.getString(PreferenceId);
         return Utils.parseInt(PreferenceManager.getDefaultSharedPreferences(prefContext).getString(key, "0"));
     }
 
-    public static boolean getBooleanPreference(final int PreferenceId) {
+    public static boolean getBooleanPreference(int PreferenceId) {
         String key = prefContext.getString(PreferenceId);
         return /*Utils.parseBoolean(*/ PreferenceManager.getDefaultSharedPreferences(prefContext).getBoolean(key, false) /* ) */;
     }
 
     /* ------------ */
 
-    public static void setStringPreference(final int PreferenceId, final Object value) {
+    public static void setStringPreference(int PreferenceId, Object value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, String.valueOf(value)).commit();
     }
 
-    public static void setPreference(final int PreferenceId, final String value) {
+    public static void setPreference(int PreferenceId, String value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putString(key, value).commit();
     }
 
-    public static void setPreference(final int PreferenceId, final int value) {
+    public static void setPreference(int PreferenceId, int value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putInt(key, value).commit();
     }
 
-    public static void setPreference(final int PreferenceId, final float value) {
+    public static void setPreference(int PreferenceId, float value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putFloat(key, value).commit();
     }
 
-    public static void setPreference(final int PreferenceId, final boolean value) {
+    public static void setPreference(int PreferenceId, boolean value) {
         String key = prefContext.getString(PreferenceId);
         PreferenceManager.getDefaultSharedPreferences(prefContext).edit().putBoolean(key, value).commit();
     }
@@ -283,7 +283,7 @@ public class Preferences {
         }
     }
 
-    public static String getKey(final int prefKeyId) {
+    public static String getKey(int prefKeyId) {
         return Locale.getString(prefKeyId);
     }
 }

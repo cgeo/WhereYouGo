@@ -74,7 +74,7 @@ public class InputScreenActivity extends MediaActivity {
         // set answer
         EditText editText = findViewById(R.id.layoutInputEditText);
         editText.setVisibility(View.GONE);
-        final Button scanButton = findViewById(R.id.layoutInputScanButton);
+        Button scanButton = findViewById(R.id.layoutInputScanButton);
         scanButton.setOnClickListener(v -> {
             IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
             integrator.initiateScan();
@@ -136,7 +136,7 @@ public class InputScreenActivity extends MediaActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null && result.getContents() != null) {
-            final EditText editText = findViewById(R.id.layoutInputEditText);
+            EditText editText = findViewById(R.id.layoutInputEditText);
             editText.setText(result.getContents());
         } else {
             super.onActivityResult(requestCode, resultCode, data);

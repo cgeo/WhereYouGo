@@ -132,7 +132,7 @@ public class IconedListAdapter extends BaseAdapter {
 
     private View getViewItem(int position, View convertView, boolean dropDown) {
         try {
-            final DataInfo di = mData.get(position);
+            DataInfo di = mData.get(position);
 
             LinearLayout llMain = convertView.findViewById(R.id.linear_layout_main);
             llMain.setPadding(PADDING, PADDING, PADDING, PADDING);

@@ -133,8 +133,8 @@ public class CustomDialog {
     }
 
     private static void setCustomDialogTitle(View view, CharSequence titleText, Bitmap titleImage,
-                                             int titleExtraImg1, final OnClickListener titleExtraClick1, int titleExtraImg2,
-                                             final OnClickListener titleExtraClick2) {
+                                             int titleExtraImg1, OnClickListener titleExtraClick1,
+                                             int titleExtraImg2, OnClickListener titleExtraClick2) {
         // set the dialog title
         if (titleImage == null && titleText == null && titleExtraImg1 == NO_IMAGE
                 && titleExtraImg2 == NO_IMAGE) {
@@ -158,7 +158,7 @@ public class CustomDialog {
     }
 
     private static void setCustomDialogTitleButton(View view, int button, int titleExtraImg,
-                                                   final OnClickListener titleExtraClick) {
+                                                   OnClickListener titleExtraClick) {
         // set title extra
         if (titleExtraImg != NO_IMAGE && titleExtraClick != null) {
             ImageView iv;
@@ -188,7 +188,7 @@ public class CustomDialog {
     // }
 
     public static void setTitle(Activity activity, CharSequence titleText, Bitmap titleImage,
-                                int titleExtraImg, final OnClickListener titleExtraClick) {
+                                int titleExtraImg, OnClickListener titleExtraClick) {
         setCustomDialogTitle(activity.findViewById(R.id.linear_layout_main), titleText, titleImage,
                 titleExtraImg, titleExtraClick, NO_IMAGE, null);
     }
