@@ -158,7 +158,7 @@ public class FilePicker extends Activity implements AdapterView.OnItemClickListe
         setContentView(R.layout.activity_file_picker);
 
         this.filePickerIconAdapter = new FilePickerIconAdapter(this);
-        GridView gridView = (GridView) findViewById(R.id.filePickerView);
+        GridView gridView = findViewById(R.id.filePickerView);
         gridView.setOnItemClickListener(this);
         gridView.setAdapter(this.filePickerIconAdapter);
 

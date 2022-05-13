@@ -96,14 +96,14 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
         ((LinearLayout) findViewById(R.id.linearLayoutCompass)).addView(viewCompass,
                 LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
-        viewName = (TextView) findViewById(R.id.textViewName);
-        viewProvider = (TextView) findViewById(R.id.textViewProvider);
-        viewAlt = (TextView) findViewById(R.id.textViewAltitude);
-        viewSpeed = (TextView) findViewById(R.id.textViewSpeed);
-        viewAcc = (TextView) findViewById(R.id.textViewAccuracy);
-        viewLat = (TextView) findViewById(R.id.textViewLatitude);
-        viewLon = (TextView) findViewById(R.id.textViewLongitude);
-        viewTimeToTarget = (TextView) findViewById(R.id.text_view_time_to_target);
+        viewName = findViewById(R.id.textViewName);
+        viewProvider = findViewById(R.id.textViewProvider);
+        viewAlt = findViewById(R.id.textViewAltitude);
+        viewSpeed = findViewById(R.id.textViewSpeed);
+        viewAcc = findViewById(R.id.textViewAccuracy);
+        viewLat = findViewById(R.id.textViewLatitude);
+        viewLon = findViewById(R.id.textViewLongitude);
+        viewTimeToTarget = findViewById(R.id.text_view_time_to_target);
 
         onOrientationChanged(mAzimuth, mPitch, mRoll);
     }

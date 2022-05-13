@@ -72,13 +72,13 @@ public class DownloadCartridgeActivity extends CustomActivity
 
         setContentView(R.layout.layout_details);
 
-        TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
+        TextView tvName = findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(R.string.download_cartridge);
-        Button buttonStart = (Button) findViewById(R.id.button_negative);
+        Button buttonStart = findViewById(R.id.button_negative);
         adjustDownloadButtonToUsernamePasswordState();
 
-        TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-        TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+        TextView tvDescription = findViewById(R.id.layoutDetailsTextViewDescription);
+        TextView tvState = findViewById(R.id.layoutDetailsTextViewState);
 
         File cartridgeFile = FileSystem.findFile(cguid);
         if (cartridgeFile != null) {
@@ -96,7 +96,7 @@ public class DownloadCartridgeActivity extends CustomActivity
             tvDescription.setText(String.format("CGUID:\n%s", cguid));
         }
 
-        ImageView ivImage = (ImageView) findViewById(R.id.mediaImageView);
+        ImageView ivImage = findViewById(R.id.mediaImageView);
         ivImage.getLayoutParams().width = LayoutParams.WRAP_CONTENT;
         try {
             Bitmap icon = Images.getImageB(R.drawable.icon_gc_wherigo);
@@ -168,7 +168,7 @@ public class DownloadCartridgeActivity extends CustomActivity
     }
 
     private void adjustDownloadButtonToUsernamePasswordState() {
-        Button buttonDownload = (Button) findViewById(R.id.button_positive);
+        Button buttonDownload = findViewById(R.id.button_positive);
         // If one of the variables is empty the inner condition is true which get's negated because
         // the button get's enabled on true and disabled on false.
         buttonDownload.setEnabled(!checkEmptyUsernamePassword());
@@ -272,4 +272,3 @@ public class DownloadCartridgeActivity extends CustomActivity
 
     }
 }
-

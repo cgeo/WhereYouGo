@@ -113,10 +113,10 @@ public class DetailsActivity extends MediaActivity implements IRefreshable, ILoc
         if (et != null) {
             setTitle(et.name);
 
-            tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
-            tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
-            tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
-            tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
+            tvName = findViewById(R.id.layoutDetailsTextViewName);
+            tvState = findViewById(R.id.layoutDetailsTextViewState);
+            tvDescription = findViewById(R.id.layoutDetailsTextViewDescription);
+            tvDistance = findViewById(R.id.layoutDetailsTextViewDistance);
         } else {
             Logger.i(TAG, "onCreate(), et == null, end!");
             DetailsActivity.this.finish();

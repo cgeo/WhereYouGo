@@ -43,7 +43,7 @@ public class MediaActivity extends CustomActivity {
             return;
         if (media.id == cachedMediaId)
             return;
-        TextView textView = (TextView) findViewById(R.id.mediaTextView);
+        TextView textView = findViewById(R.id.mediaTextView);
         textView.setText(UtilsGUI.simpleHtml(media.altText));
         if (media.type == null)
             return;

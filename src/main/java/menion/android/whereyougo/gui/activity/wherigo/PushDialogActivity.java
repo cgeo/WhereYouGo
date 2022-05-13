@@ -96,7 +96,7 @@ public class PushDialogActivity extends MediaActivity {
         findViewById(R.id.layoutDetailsTextViewName).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewState).setVisibility(View.GONE);
         findViewById(R.id.layoutDetailsTextViewDistance).setVisibility(View.GONE);
-        tvText = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+        tvText = findViewById(R.id.layoutDetailsTextViewDescription);
 
         if (menu02Text == null || menu02Text.length() == 0) {
             menu02Text = null;

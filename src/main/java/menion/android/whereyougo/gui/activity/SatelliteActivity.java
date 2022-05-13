@@ -57,7 +57,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
     private ToggleButton buttonGps;
 
     private void createLayout() {
-        LinearLayout llSkyplot = (LinearLayout) findViewById(R.id.linear_layout_skyplot);
+        LinearLayout llSkyplot = findViewById(R.id.linear_layout_skyplot);
         llSkyplot.removeAllViews();
 
         // return and add view to first linearLayout
@@ -70,7 +70,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
         }
 
         // and final bottom buttons
-        buttonGps = (ToggleButton) findViewById(R.id.btn_gps_on_off);
+        buttonGps = findViewById(R.id.btn_gps_on_off);
         buttonGps.setChecked(LocationState.isActuallyHardwareGpsOn());
         buttonGps.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (!isChecked) {
@@ -87,7 +87,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
             PreferenceValues.enableWakeLock();
         });
 
-        ToggleButton buttonCompass = (ToggleButton) findViewById(R.id.btn_compass_on_off);
+        ToggleButton buttonCompass = findViewById(R.id.btn_compass_on_off);
         buttonCompass.setChecked(Preferences.SENSOR_HARDWARE_COMPASS);
         buttonCompass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

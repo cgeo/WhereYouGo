@@ -67,20 +67,20 @@ public class InputScreenActivity extends MediaActivity {
         setMedia(media);
 
         // set question TextView
-        TextView tvQuestion = (TextView) findViewById(R.id.layoutInputTextView);
+        TextView tvQuestion = findViewById(R.id.layoutInputTextView);
         String text = (String) input.table.rawget("Text");
         tvQuestion.setText(UtilsGUI.simpleHtml(text));
 
         // set answer
-        final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+        final EditText editText = findViewById(R.id.layoutInputEditText);
         editText.setVisibility(View.GONE);
-        final Button scanButton = (Button) findViewById(R.id.layoutInputScanButton);
+        final Button scanButton = findViewById(R.id.layoutInputScanButton);
         scanButton.setOnClickListener(v -> {
             IntentIntegrator integrator = new IntentIntegrator(InputScreenActivity.this);
             integrator.initiateScan();
         });
         scanButton.setVisibility(View.GONE);
-        final Spinner spinner = (Spinner) findViewById(R.id.layoutInputSpinner);
+        final Spinner spinner = findViewById(R.id.layoutInputSpinner);
         spinner.setVisibility(View.GONE);
         String type = (String) input.table.rawget("InputType");
 
@@ -136,7 +136,7 @@ public class InputScreenActivity extends MediaActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null && result.getContents() != null) {
-            final EditText editText = (EditText) findViewById(R.id.layoutInputEditText);
+            final EditText editText = findViewById(R.id.layoutInputEditText);
             editText.setText(result.getContents());
         } else {
             super.onActivityResult(requestCode, resultCode, data);

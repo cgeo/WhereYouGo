@@ -64,7 +64,7 @@ public class CustomDialog {
                                      final OnClickListener click) {
         if (text != null && click != null) {
             // set button
-            Button btn = (Button) layout.findViewById(btnId);
+            Button btn = layout.findViewById(btnId);
             btn.setText(text);
             btn.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -92,7 +92,7 @@ public class CustomDialog {
         if (margins > 0)
             lp.setMargins(margins, activity.getResources().getDimensionPixelSize(R.dimen.shadow_height)
                     + margins, margins, margins);
-        LinearLayout llCon = (LinearLayout) activity.findViewById(R.id.linear_layout_content);
+        LinearLayout llCon = activity.findViewById(R.id.linear_layout_content);
         llCon.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 fillHeight ? LayoutParams.MATCH_PARENT : LayoutParams.WRAP_CONTENT));
         addViewToContent(llCon, lp, view);
@@ -164,11 +164,11 @@ public class CustomDialog {
             ImageView iv;
             ImageButton ib;
             if (button == TITLE_BUTTON_RIGHT) {
-                iv = (ImageView) view.findViewById(R.id.image_view_separator1);
-                ib = (ImageButton) view.findViewById(R.id.image_button_title1);
+                iv = view.findViewById(R.id.image_view_separator1);
+                ib = view.findViewById(R.id.image_button_title1);
             } else {
-                iv = (ImageView) view.findViewById(R.id.image_view_separator2);
-                ib = (ImageButton) view.findViewById(R.id.image_button_title2);
+                iv = view.findViewById(R.id.image_view_separator2);
+                ib = view.findViewById(R.id.image_button_title2);
             }
 
             iv.setVisibility(View.VISIBLE);

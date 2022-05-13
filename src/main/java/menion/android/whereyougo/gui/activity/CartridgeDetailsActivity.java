@@ -50,16 +50,16 @@ public class CartridgeDetailsActivity extends CustomActivity {
         }
         setContentView(R.layout.layout_details);
 
-        TextView tvName = (TextView) findViewById(R.id.layoutDetailsTextViewName);
+        TextView tvName = findViewById(R.id.layoutDetailsTextViewName);
         tvName.setText(MainActivity.cartridgeFile.name);
 
-        TextView tvState = (TextView) findViewById(R.id.layoutDetailsTextViewState);
+        TextView tvState = findViewById(R.id.layoutDetailsTextViewState);
         tvState.setText(getString(R.string.author) + ": " + MainActivity.cartridgeFile.author);
 
-        TextView tvDescription = (TextView) findViewById(R.id.layoutDetailsTextViewDescription);
+        TextView tvDescription = findViewById(R.id.layoutDetailsTextViewDescription);
         tvDescription.setText(UtilsGUI.simpleHtml(MainActivity.cartridgeFile.description));
 
-        ImageView ivImage = (ImageView) findViewById(R.id.mediaImageView);
+        ImageView ivImage = findViewById(R.id.mediaImageView);
         try {
             byte[] data = MainActivity.cartridgeFile.getFile(MainActivity.cartridgeFile.splashId);
             Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
@@ -69,10 +69,10 @@ public class CartridgeDetailsActivity extends CustomActivity {
         } catch (Exception e) {
         }
 
-        TextView tvText = (TextView) findViewById(R.id.mediaTextView);
+        TextView tvText = findViewById(R.id.mediaTextView);
         tvText.setVisibility(View.GONE);
 
-        TextView tvDistance = (TextView) findViewById(R.id.layoutDetailsTextViewDistance);
+        TextView tvDistance = findViewById(R.id.layoutDetailsTextViewDistance);
 
         Location loc = new Location(TAG);
         loc.setLatitude(MainActivity.cartridgeFile.latitude);

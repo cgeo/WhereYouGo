@@ -359,10 +359,10 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         this.screenshotCapturer.start();
 
         setContentView(R.layout.activity_mapsforge);
-        this.mapView = (MyMapView) findViewById(R.id.mapView);
+        this.mapView = findViewById(R.id.mapView);
         configureMapView();
 
-        this.snapToLocationView = (ToggleButton) findViewById(R.id.snapToLocationView);
+        this.snapToLocationView = findViewById(R.id.snapToLocationView);
         this.snapToLocationView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -408,7 +408,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             }
         }
 
-        ToggleButton showPinsButton = ((ToggleButton) findViewById(R.id.showPinsView));
+        ToggleButton showPinsButton = findViewById(R.id.showPinsView);
         showPinsButton.setChecked(this.showPins);
         showPinsButton.setOnClickListener(new OnClickListener() {
 
@@ -418,7 +418,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 visibilityChanged();
             }
         });
-        ToggleButton showLabelsButton = ((ToggleButton) findViewById(R.id.showLabelsView));
+        ToggleButton showLabelsButton = findViewById(R.id.showLabelsView);
         showLabelsButton.setChecked(this.showLabels);
         showLabelsButton.setOnClickListener(new OnClickListener() {
 
@@ -488,7 +488,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                             double longitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_s)).getText().toString());
                             double longitude = longitude_d + longitude_m / 60 + longitude_s / 3600;
                             GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                            SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
                             MapPosition newMapPosition =
                                     new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
                             MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
@@ -513,7 +513,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                             double longitude = longitude_d + longitude_m / 60;
                             try {
                                 GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                                SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                                SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
                                 MapPosition newMapPosition =
                                         new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
                                 MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
@@ -535,7 +535,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                             double latitude = Double.parseDouble(((EditText) view.findViewById(R.id.latitude)).getText().toString());
                             double longitude = Double.parseDouble(((EditText) view.findViewById(R.id.longitude)).getText().toString());
                             GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                            SeekBar zoomLevelView = (SeekBar) view.findViewById(R.id.zoomLevel);
+                            SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
                             MapPosition newMapPosition =
                                     new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
                             MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
@@ -774,12 +774,12 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             }
 
             // zoom level
-            SeekBar zoomlevel = (SeekBar) dialog.findViewById(R.id.zoomLevel);
+            SeekBar zoomlevel = dialog.findViewById(R.id.zoomLevel);
             zoomlevel.setMax(this.mapView.getDatabaseRenderer().getZoomLevelMax());
             zoomlevel.setProgress(mapViewPosition.getZoomLevel());
 
             // zoom level value
-            final TextView textView = (TextView) dialog.findViewById(R.id.zoomlevelValue);
+            final TextView textView = dialog.findViewById(R.id.zoomlevelValue);
             textView.setText(String.valueOf(zoomlevel.getProgress()));
             zoomlevel.setOnSeekBarChangeListener(new SeekBarChangeListener(textView));
         } else if (id == DIALOG_INFO_MAP_FILE
@@ -787,19 +787,19 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             MapFileInfo mapFileInfo = this.mapView.getMapDatabase().getMapFileInfo();
 
             // map file name
-            TextView textView = (TextView) dialog.findViewById(R.id.infoMapFileViewName);
+            TextView textView = dialog.findViewById(R.id.infoMapFileViewName);
             textView.setText(this.mapView.getMapFile().getAbsolutePath());
 
             // map file size
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewSize);
+            textView = dialog.findViewById(R.id.infoMapFileViewSize);
             textView.setText(FileUtils.formatFileSize(mapFileInfo.fileSize, getResources()));
 
             // map file version
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewVersion);
+            textView = dialog.findViewById(R.id.infoMapFileViewVersion);
             textView.setText(String.valueOf(mapFileInfo.fileVersion));
 
             // map file debug
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewDebug);
+            textView = dialog.findViewById(R.id.infoMapFileViewDebug);
             if (mapFileInfo.debugFile) {
                 textView.setText(R.string.info_map_file_debug_yes);
             } else {
@@ -807,18 +807,18 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             }
 
             // map file date
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewDate);
+            textView = dialog.findViewById(R.id.infoMapFileViewDate);
             Date date = new Date(mapFileInfo.mapDate);
             textView.setText(DateFormat.getDateTimeInstance().format(date));
 
             // map file area
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewArea);
+            textView = dialog.findViewById(R.id.infoMapFileViewArea);
             BoundingBox boundingBox = mapFileInfo.boundingBox;
             textView.setText(boundingBox.minLatitude + ", " + boundingBox.minLongitude + " – \n"
                     + boundingBox.maxLatitude + ", " + boundingBox.maxLongitude);
 
             // map file start position
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewStartPosition);
+            textView = dialog.findViewById(R.id.infoMapFileViewStartPosition);
             GeoPoint startPosition = mapFileInfo.startPosition;
             if (startPosition == null) {
                 textView.setText(null);
@@ -827,7 +827,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             }
 
             // map file start zoom level
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewStartZoomLevel);
+            textView = dialog.findViewById(R.id.infoMapFileViewStartZoomLevel);
             Byte startZoomLevel = mapFileInfo.startZoomLevel;
             if (startZoomLevel == null) {
                 textView.setText(null);
@@ -836,15 +836,15 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             }
 
             // map file language preference
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewLanguagePreference);
+            textView = dialog.findViewById(R.id.infoMapFileViewLanguagePreference);
             textView.setText(mapFileInfo.languagePreference);
 
             // map file comment text
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewComment);
+            textView = dialog.findViewById(R.id.infoMapFileViewComment);
             textView.setText(mapFileInfo.comment);
 
             // map file created by text
-            textView = (TextView) dialog.findViewById(R.id.infoMapFileViewCreatedBy);
+            textView = dialog.findViewById(R.id.infoMapFileViewCreatedBy);
             textView.setText(mapFileInfo.createdBy);
         } else {
             super.onPrepareDialog(id, dialog);
@@ -1031,7 +1031,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             this.mapGeneratorInternal = type;
             MapGenerator generator = MapGeneratorFactory.createMapGenerator(type);
             this.mapView.setMapGenerator(generator, type.ordinal());
-            TextView attributionView = (TextView) findViewById(R.id.attribution);
+            TextView attributionView = findViewById(R.id.attribution);
             if (generator instanceof TileDownloader) {
                 String attribution = ((TileDownloader) generator).getAttribution();
                 attributionView.setText(attribution == null ? "" : Html.fromHtml(attribution, null, null));

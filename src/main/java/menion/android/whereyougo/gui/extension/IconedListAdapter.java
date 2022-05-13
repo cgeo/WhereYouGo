@@ -134,18 +134,16 @@ public class IconedListAdapter extends BaseAdapter {
         try {
             final DataInfo di = mData.get(position);
 
-            LinearLayout llMain = (LinearLayout) convertView.findViewById(R.id.linear_layout_main);
+            LinearLayout llMain = convertView.findViewById(R.id.linear_layout_main);
             llMain.setPadding(PADDING, PADDING, PADDING, PADDING);
             if (minHeight != Integer.MIN_VALUE) {
                 llMain.setMinimumHeight(minHeight);
             }
 
-            TextView tv01 = (TextView) convertView.findViewById(R.id.layoutIconedListAdapterTextView01);
-            TextView tv02 = (TextView) convertView.findViewById(R.id.layoutIconedListAdapterTextView02);
-            ImageView iv01 =
-                    (ImageView) convertView.findViewById(R.id.layoutIconedListAdapterImageView01);
-            ImageView iv02 =
-                    (ImageView) convertView.findViewById(R.id.layoutIconedListAdapterImageView02);
+            TextView tv01 = convertView.findViewById(R.id.layoutIconedListAdapterTextView01);
+            TextView tv02 = convertView.findViewById(R.id.layoutIconedListAdapterTextView02);
+            ImageView iv01 = convertView.findViewById(R.id.layoutIconedListAdapterImageView01);
+            ImageView iv02 = convertView.findViewById(R.id.layoutIconedListAdapterImageView02);
 
             // set TextView top
             tv01.setBackgroundColor(Color.TRANSPARENT);
