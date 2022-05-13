@@ -167,20 +167,15 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
 
     @Override
     public void refresh() {
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                // refresh target position
-                EventTable et = DetailsActivity.et;
-                if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
-                    return;
-                Location currentTarget = A.getGuidingContent().getTargetLocation();
-                Location newTarget = UtilsWherigo.extractLocation(et);
-                if (newTarget != null && !newTarget.equals(currentTarget)) {
-                    A.getGuidingContent().guideStart(new Guide(et.name, newTarget));
-                }
-
+        runOnUiThread(() -> {
+            // refresh target position
+            EventTable et = DetailsActivity.et;
+            if (et == null || !et.isLocated() || !et.isVisible() || A.getGuidingContent() == null)
+                return;
+            Location currentTarget = A.getGuidingContent().getTargetLocation();
+            Location newTarget = UtilsWherigo.extractLocation(et);
+            if (newTarget != null && !newTarget.equals(currentTarget)) {
+                A.getGuidingContent().guideStart(new Guide(et.name, newTarget));
             }
         });
     }

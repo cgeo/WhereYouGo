@@ -56,11 +56,7 @@ public class ManagerNotify {
 
         try {
             if (context instanceof Activity) {
-                ((Activity) context).runOnUiThread(new Runnable() {
-                    public void run() {
-                        Toast.makeText(context, msg, time).show();
-                    }
-                });
+                ((Activity) context).runOnUiThread(() -> Toast.makeText(context, msg, time).show());
             } else {
                 Toast.makeText(context, msg, time).show();
             }

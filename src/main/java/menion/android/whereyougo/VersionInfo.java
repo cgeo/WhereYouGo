@@ -23,7 +23,6 @@ import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.utils.A;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 
 /**
  * @author menion
@@ -48,13 +47,9 @@ public class VersionInfo {
                     b.setTitle(R.string.app_name);
                     b.setIcon(R.drawable.ic_title_logo);
                     b.setView(UtilsGUI.getFilledWebView(A.getMain(), news));
-                    b.setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
-
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            stage01Completed = true;
-                            PreferenceValues.setApplicationVersionLast(actualVersion);
-                        }
+                    b.setNeutralButton(R.string.close, (dialog, which) -> {
+                        stage01Completed = true;
+                        PreferenceValues.setApplicationVersionLast(actualVersion);
                     });
                     b.show();
                 } else {

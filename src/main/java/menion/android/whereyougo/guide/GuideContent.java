@@ -103,18 +103,16 @@ public class GuideContent implements ILocationEventListener {
         // call one onLocationChange, to update actual values immediately
         onLocationChanged(LocationState.getLocation());
         // Logger.d(TAG, "X");
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    while (mGuide != null) {
-                        if (Preferences.GUIDING_SOUNDS) {
-                            mGuide.manageDistanceSoundsBeeping(mDistanceToTarget);
-                        }
-                        Thread.sleep(100);
+        Thread thread = new Thread(() -> {
+            try {
+                while (mGuide != null) {
+                    if (Preferences.GUIDING_SOUNDS) {
+                        mGuide.manageDistanceSoundsBeeping(mDistanceToTarget);
                     }
-                } catch (Exception e) {
-                    Logger.e(TAG, "guideStart(" + mGuide + ")", e);
+                    Thread.sleep(100);
                 }
+            } catch (Exception e) {
+                Logger.e(TAG, "guideStart(" + mGuide + ")", e);
             }
         });
         thread.start();

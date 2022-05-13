@@ -300,53 +300,47 @@ public class MainMenuActivity extends CustomActivity implements IRefreshable {
         if (item.getGroupId() != 0)
             return false;
         if (item.getItemId() == 0) {
-            MainActivity.wui.setOnSavingFinished(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        File saveFile = MainActivity.getSaveFile();
-                        String title = String.format("%s: %s",
-                                getString(R.string.save_file_main),
-                                UtilsFormat.formatDatetime(saveFile.lastModified())
-                        );
-                        item.setTitle(title);
-                        ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    MainActivity.wui.setOnSavingFinished(null);
+            MainActivity.wui.setOnSavingFinished(() -> {
+                try {
+                    File saveFile = MainActivity.getSaveFile();
+                    String title = String.format("%s: %s",
+                            getString(R.string.save_file_main),
+                            UtilsFormat.formatDatetime(saveFile.lastModified())
+                    );
+                    item.setTitle(title);
+                    ManagerNotify.toastShortMessage(MainMenuActivity.this, getString(R.string.save_game_ok));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                MainActivity.wui.setOnSavingFinished(null);
             });
         } else {
-            MainActivity.wui.setOnSavingFinished(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        File saveFile = MainActivity.getSaveFile();
-                        File slotFile = new File(saveFile.getAbsolutePath() + "." + item.getItemId());
-                        FileSystem.copyFile(saveFile, slotFile);
-                        String mainTitle = String.format("%s: %s",
-                                getString(R.string.save_file_main),
-                                UtilsFormat.formatDatetime(saveFile.lastModified())
-                        );
-                        saveGameMainMenuItem.setTitle(mainTitle);
-                        String title = String.format("%s %d: %s",
-                                getString(R.string.save_game_slot),
-                                item.getItemId(),
-                                UtilsFormat.formatDatetime(slotFile.lastModified())
-                        );
-                        item.setTitle(title);
-                        String message = String.format("%s %d\n%s",
-                                getString(R.string.save_game_slot),
-                                item.getItemId(),
-                                getText(R.string.save_game_ok)
-                        );
-                        ManagerNotify.toastShortMessage(MainMenuActivity.this, message);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    MainActivity.wui.setOnSavingFinished(null);
+            MainActivity.wui.setOnSavingFinished(() -> {
+                try {
+                    File saveFile = MainActivity.getSaveFile();
+                    File slotFile = new File(saveFile.getAbsolutePath() + "." + item.getItemId());
+                    FileSystem.copyFile(saveFile, slotFile);
+                    String mainTitle = String.format("%s: %s",
+                            getString(R.string.save_file_main),
+                            UtilsFormat.formatDatetime(saveFile.lastModified())
+                    );
+                    saveGameMainMenuItem.setTitle(mainTitle);
+                    String title = String.format("%s %d: %s",
+                            getString(R.string.save_game_slot),
+                            item.getItemId(),
+                            UtilsFormat.formatDatetime(slotFile.lastModified())
+                    );
+                    item.setTitle(title);
+                    String message = String.format("%s %d\n%s",
+                            getString(R.string.save_game_slot),
+                            item.getItemId(),
+                            getText(R.string.save_game_ok)
+                    );
+                    ManagerNotify.toastShortMessage(MainMenuActivity.this, message);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                MainActivity.wui.setOnSavingFinished(null);
             });
         }
         new SaveGame().execute();

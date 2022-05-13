@@ -37,7 +37,6 @@ import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -104,30 +103,31 @@ public class DownloadCartridgeActivity extends CustomActivity
         } catch (Exception e) {
         }
 
-        CustomDialog.setBottom(this, getString(R.string.download), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
-                    downloadTask.cancel(true);
-                    downloadTask = null;
-                } else {
-                    downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
-                    downloadTask.execute(cguid);
-                }
-                return true;
+        CustomDialog.setBottom(
+                this,
+                getString(R.string.download),
+                (dialog, v, btn) -> {
+                    if (downloadTask != null && downloadTask.getStatus() != Status.FINISHED) {
+                        downloadTask.cancel(true);
+                        downloadTask = null;
+                    } else {
+                        downloadTask = new DownloadTask(DownloadCartridgeActivity.this, username, password);
+                        downloadTask.execute(cguid);
+                    }
+                    return true;
 
-            }
-        }, null, null, getString(R.string.start), new CustomDialog.OnClickListener() {
-            @Override
-            public boolean onClick(CustomDialog dialog, View v, int btn) {
-                Intent intent = new Intent(DownloadCartridgeActivity.this, MainActivity.class);
-                intent.putExtra("cguid", cguid);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                DownloadCartridgeActivity.this.finish();
-                return true;
-            }
-        });
+                },
+                null,
+                null,
+                getString(R.string.start),
+                (dialog, v, btn) -> {
+                    Intent intent = new Intent(DownloadCartridgeActivity.this, MainActivity.class);
+                    intent.putExtra("cguid", cguid);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    DownloadCartridgeActivity.this.finish();
+                    return true;
+                });
         buttonStart.setEnabled(cartridgeFile != null);
 
         if (checkEmptyUsernamePassword()) {

@@ -38,7 +38,6 @@ import menion.android.whereyougo.utils.UtilsFormat;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -89,13 +88,11 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
 
         ToggleButton buttonCompass = findViewById(R.id.btn_compass_on_off);
         buttonCompass.setChecked(Preferences.SENSOR_HARDWARE_COMPASS);
-        buttonCompass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
-                Preferences.SENSOR_HARDWARE_COMPASS = isChecked;
-                Preferences.setPreference(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS, Preferences.SENSOR_HARDWARE_COMPASS);
-                A.getRotator().manageSensors();
-            }
+        buttonCompass.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            ManagerNotify.toastLongMessage(R.string.pref_sensors_compass_hardware_desc);
+            Preferences.SENSOR_HARDWARE_COMPASS = isChecked;
+            Preferences.setPreference(R.string.pref_KEY_B_SENSOR_HARDWARE_COMPASS, Preferences.SENSOR_HARDWARE_COMPASS);
+            A.getRotator().manageSensors();
         });
     }
 
@@ -139,41 +136,38 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
     }
 
     public void onLocationChanged(Location location) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                String provider = location.getProvider();
-                switch (provider) {
-                    case LocationManager.GPS_PROVIDER:
-                        provider = getString(R.string.provider_gps);
-                        break;
-                    case LocationManager.NETWORK_PROVIDER:
-                        provider = getString(R.string.provider_network);
-                        break;
-                    default:
-                        provider = getString(R.string.provider_passive);
-                        break;
-                }
-                ((TextView) findViewById(R.id.text_view_provider)).setText(provider);
-                ((TextView) findViewById(R.id.text_view_latitude)).setText(UtilsFormat
-                        .formatLatitude(location.getLatitude()));
-                ((TextView) findViewById(R.id.text_view_longitude)).setText(UtilsFormat
-                        .formatLongitude(location.getLongitude()));
-                ((TextView) findViewById(R.id.text_view_altitude)).setText(UtilsFormat.formatAltitude(
-                        location.getAltitude(), true));
-                ((TextView) findViewById(R.id.text_view_accuracy)).setText(UtilsFormat.formatDistance(
-                        location.getAccuracy(), false));
-                ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
-                        location.getSpeed(), false));
-                ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
-                        .formatAngle(Orientation.getDeclination()));
-                long lastFix = LocationState.getLastFixTime();
-                if (lastFix > 0) {
-                    ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
-                            .formatTime(lastFix));
-                } else {
-                    ((TextView) findViewById(R.id.text_view_time_gps)).setText("~");
-                }
+        runOnUiThread(() -> {
+            String provider = location.getProvider();
+            switch (provider) {
+                case LocationManager.GPS_PROVIDER:
+                    provider = getString(R.string.provider_gps);
+                    break;
+                case LocationManager.NETWORK_PROVIDER:
+                    provider = getString(R.string.provider_network);
+                    break;
+                default:
+                    provider = getString(R.string.provider_passive);
+                    break;
+            }
+            ((TextView) findViewById(R.id.text_view_provider)).setText(provider);
+            ((TextView) findViewById(R.id.text_view_latitude)).setText(UtilsFormat
+                    .formatLatitude(location.getLatitude()));
+            ((TextView) findViewById(R.id.text_view_longitude)).setText(UtilsFormat
+                    .formatLongitude(location.getLongitude()));
+            ((TextView) findViewById(R.id.text_view_altitude)).setText(UtilsFormat.formatAltitude(
+                    location.getAltitude(), true));
+            ((TextView) findViewById(R.id.text_view_accuracy)).setText(UtilsFormat.formatDistance(
+                    location.getAccuracy(), false));
+            ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
+                    location.getSpeed(), false));
+            ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
+                    .formatAngle(Orientation.getDeclination()));
+            long lastFix = LocationState.getLastFixTime();
+            if (lastFix > 0) {
+                ((TextView) findViewById(R.id.text_view_time_gps)).setText(UtilsFormat
+                        .formatTime(lastFix));
+            } else {
+                ((TextView) findViewById(R.id.text_view_time_gps)).setText("~");
             }
         });
 

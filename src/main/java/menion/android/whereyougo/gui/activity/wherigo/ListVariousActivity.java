@@ -188,13 +188,9 @@ public abstract class ListVariousActivity extends CustomActivity implements IRef
             title = getIntent().getStringExtra("title");
         }
         CustomDialog.setTitle(this, title, null, R.drawable.ic_cancel,
-                new CustomDialog.OnClickListener() {
-
-                    @Override
-                    public boolean onClick(CustomDialog dialog, View v, int btn) {
-                        ListVariousActivity.this.finish();
-                        return true;
-                    }
+                (dialog, v, btn) -> {
+                    ListVariousActivity.this.finish();
+                    return true;
                 });
 
         // center linearLayout

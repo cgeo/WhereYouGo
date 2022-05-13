@@ -62,24 +62,22 @@ public class UtilsGUI {
                                     CharSequence title, int icon, CharSequence msg,
                                     String posText, DialogInterface.OnClickListener posLis,
                                     String negText, DialogInterface.OnClickListener negLis) {
-        activity.runOnUiThread(new Runnable() {
-            public void run() {
-                if (activity.isFinishing())
-                    return;
-                AlertDialog.Builder b = new AlertDialog.Builder(activity);
-                b.setCancelable(false);
-                b.setTitle(title);
-                b.setIcon(icon);
-                b.setMessage(msg);
-                if (!TextUtils.isEmpty(posText)) {
-                    b.setPositiveButton(posText, posLis);
-                }
-                if (!TextUtils.isEmpty(negText)) {
-                    b.setNegativeButton(negText, negLis);
-                }
-                if (!activity.isFinishing())
-                    b.show();
+        activity.runOnUiThread(() -> {
+            if (activity.isFinishing())
+                return;
+            AlertDialog.Builder b = new AlertDialog.Builder(activity);
+            b.setCancelable(false);
+            b.setTitle(title);
+            b.setIcon(icon);
+            b.setMessage(msg);
+            if (!TextUtils.isEmpty(posText)) {
+                b.setPositiveButton(posText, posLis);
             }
+            if (!TextUtils.isEmpty(negText)) {
+                b.setNegativeButton(negText, negLis);
+            }
+            if (!activity.isFinishing())
+                b.show();
         });
     }
 
@@ -277,18 +275,16 @@ public class UtilsGUI {
     }
 
     public static void showDialogWebView(Activity activity, String title, String msg) {
-        activity.runOnUiThread(new Runnable() {
-            public void run() {
-                if (activity.isFinishing())
-                    return;
-                AlertDialog.Builder b = new AlertDialog.Builder(activity);
-                b.setCancelable(false);
-                b.setTitle(title);
-                b.setView(getFilledWebView(activity, msg));
-                b.setPositiveButton(R.string.close, null);
-                if (!activity.isFinishing())
-                    b.show();
-            }
+        activity.runOnUiThread(() -> {
+            if (activity.isFinishing())
+                return;
+            AlertDialog.Builder b = new AlertDialog.Builder(activity);
+            b.setCancelable(false);
+            b.setTitle(title);
+            b.setView(getFilledWebView(activity, msg));
+            b.setPositiveButton(R.string.close, null);
+            if (!activity.isFinishing())
+                b.show();
         });
     }
 

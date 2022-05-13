@@ -46,7 +46,6 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -69,7 +68,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -169,41 +167,30 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
     private boolean showPins = true;
     private boolean showLabels = true;
     private boolean allowStartCartridge = false;
-    private final TapEventListener tapListener = new TapEventListener() {
-        @Override
-        public void onTap(PointOverlay pointOverlay) {
-            if (pointOverlay.getPoint() == null)
-                return;
-            // final MapPoint p = pointOverlay.getPoint();
-            //MapsforgeActivity.this.navigationOverlay.setTarget(pointOverlay.getGeoPoint());
-            TextView textView = (TextView) View.inflate(MapsforgeActivity.this, R.layout.point_detail_view, null);
-            textView.setText(UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
-                    + Html.fromHtml(pointOverlay.getDescription()));
+    private final TapEventListener tapListener = pointOverlay -> {
+        if (pointOverlay.getPoint() == null)
+            return;
+        // final MapPoint p = pointOverlay.getPoint();
+        //MapsforgeActivity.this.navigationOverlay.setTarget(pointOverlay.getGeoPoint());
+        TextView textView = (TextView) View.inflate(MapsforgeActivity.this, R.layout.point_detail_view, null);
+        textView.setText(UtilsFormat.formatGeoPoint(pointOverlay.getGeoPoint()) + "\n\n"
+                + Html.fromHtml(pointOverlay.getDescription()));
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MapsforgeActivity.this)
-                    .setTitle(pointOverlay.getLabel())
-                    .setView(textView)
-                    .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
-            String cguid = pointOverlay.getPoint().getData();
-            if (allowStartCartridge && cguid != null)
-                builder.setPositiveButton(R.string.start, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(MapsforgeActivity.this, MainActivity.class);
-                        intent.putExtra("cguid", cguid);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        dialog.dismiss();
-                        MapsforgeActivity.this.finish();
-                    }
-                });
-            builder.show();
-        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(MapsforgeActivity.this)
+                .setTitle(pointOverlay.getLabel())
+                .setView(textView)
+                .setNegativeButton(R.string.close, (dialog, id) -> dialog.dismiss());
+        String cguid = pointOverlay.getPoint().getData();
+        if (allowStartCartridge && cguid != null)
+            builder.setPositiveButton(R.string.start, (dialog, which) -> {
+                Intent intent = new Intent(MapsforgeActivity.this, MainActivity.class);
+                intent.putExtra("cguid", cguid);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                dialog.dismiss();
+                MapsforgeActivity.this.finish();
+            });
+        builder.show();
     };
 
     private static Polyline createPolyline(List<GeoPoint> geoPoints) {
@@ -363,12 +350,7 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         configureMapView();
 
         this.snapToLocationView = findViewById(R.id.snapToLocationView);
-        this.snapToLocationView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                invertSnapToLocation();
-            }
-        });
+        this.snapToLocationView.setOnClickListener(view -> invertSnapToLocation());
 
         Drawable drawable = getResources().getDrawable(R.drawable.my_location_chevron);
         drawable = Marker.boundCenter(drawable);
@@ -410,23 +392,15 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
         ToggleButton showPinsButton = findViewById(R.id.showPinsView);
         showPinsButton.setChecked(this.showPins);
-        showPinsButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                showPins = ((ToggleButton) v).isChecked();
-                visibilityChanged();
-            }
+        showPinsButton.setOnClickListener(v -> {
+            showPins = ((ToggleButton) v).isChecked();
+            visibilityChanged();
         });
         ToggleButton showLabelsButton = findViewById(R.id.showLabelsView);
         showLabelsButton.setChecked(this.showLabels);
-        showLabelsButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                showLabels = ((ToggleButton) v).isChecked();
-                visibilityChanged();
-            }
+        showLabelsButton.setOnClickListener(v -> {
+            showLabels = ((ToggleButton) v).isChecked();
+            visibilityChanged();
         });
 
         // restore map generator
@@ -473,52 +447,46 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 case PreferenceValues.VALUE_UNITS_COO_LATLON_SEC: {
                     View view = factory.inflate(R.layout.dialog_enter_coordinates_dms, null);
                     builder.setView(view);
-                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // disable GPS follow mode if it is enabled
-                            disableSnapToLocation(true);
-                            // set the map center and zoom level
-                            double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
-                            double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
-                            double latitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_s)).getText().toString());
-                            double latitude = latitude_d + latitude_m / 60 + latitude_s / 3600;
-                            double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
-                            double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
-                            double longitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_s)).getText().toString());
-                            double longitude = longitude_d + longitude_m / 60 + longitude_s / 3600;
-                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                            SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
-                            MapPosition newMapPosition =
-                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
-                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
-                        }
+                    builder.setPositiveButton(R.string.go_to_position, (dialog, which) -> {
+                        // disable GPS follow mode if it is enabled
+                        disableSnapToLocation(true);
+                        // set the map center and zoom level
+                        double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
+                        double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
+                        double latitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_s)).getText().toString());
+                        double latitude = latitude_d + latitude_m / 60 + latitude_s / 3600;
+                        double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
+                        double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
+                        double longitude_s = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_s)).getText().toString());
+                        double longitude = longitude_d + longitude_m / 60 + longitude_s / 3600;
+                        GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                        SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
+                        MapPosition newMapPosition =
+                                new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                        MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
                     });
                 }
                 break;
                 case PreferenceValues.VALUE_UNITS_COO_LATLON_MIN: {
                     View view = factory.inflate(R.layout.dialog_enter_coordinates_dm, null);
                     builder.setView(view);
-                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // disable GPS follow mode if it is enabled
-                            disableSnapToLocation(true);
-                            // set the map center and zoom level
-                            double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
-                            double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
-                            double latitude = latitude_d + latitude_m / 60;
-                            double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
-                            double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
-                            double longitude = longitude_d + longitude_m / 60;
-                            try {
-                                GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                                SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
-                                MapPosition newMapPosition =
-                                        new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
-                                MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
-                            } catch (IllegalArgumentException e) {
-                            }
+                    builder.setPositiveButton(R.string.go_to_position, (dialog, which) -> {
+                        // disable GPS follow mode if it is enabled
+                        disableSnapToLocation(true);
+                        // set the map center and zoom level
+                        double latitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_d)).getText().toString());
+                        double latitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.latitude_m)).getText().toString());
+                        double latitude = latitude_d + latitude_m / 60;
+                        double longitude_d = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_d)).getText().toString());
+                        double longitude_m = Double.parseDouble(((EditText) view.findViewById(R.id.longitude_m)).getText().toString());
+                        double longitude = longitude_d + longitude_m / 60;
+                        try {
+                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                            SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
+                            MapPosition newMapPosition =
+                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
+                        } catch (IllegalArgumentException e) {
                         }
                     });
                 }
@@ -526,20 +494,17 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 default: {
                     View view = factory.inflate(R.layout.dialog_enter_coordinates, null);
                     builder.setView(view);
-                    builder.setPositiveButton(R.string.go_to_position, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // disable GPS follow mode if it is enabled
-                            disableSnapToLocation(true);
-                            // set the map center and zoom level
-                            double latitude = Double.parseDouble(((EditText) view.findViewById(R.id.latitude)).getText().toString());
-                            double longitude = Double.parseDouble(((EditText) view.findViewById(R.id.longitude)).getText().toString());
-                            GeoPoint geoPoint = new GeoPoint(latitude, longitude);
-                            SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
-                            MapPosition newMapPosition =
-                                    new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
-                            MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
-                        }
+                    builder.setPositiveButton(R.string.go_to_position, (dialog, which) -> {
+                        // disable GPS follow mode if it is enabled
+                        disableSnapToLocation(true);
+                        // set the map center and zoom level
+                        double latitude = Double.parseDouble(((EditText) view.findViewById(R.id.latitude)).getText().toString());
+                        double longitude = Double.parseDouble(((EditText) view.findViewById(R.id.longitude)).getText().toString());
+                        GeoPoint geoPoint = new GeoPoint(latitude, longitude);
+                        SeekBar zoomLevelView = view.findViewById(R.id.zoomLevel);
+                        MapPosition newMapPosition =
+                                new MapPosition(geoPoint, (byte) zoomLevelView.getProgress());
+                        MapsforgeActivity.this.mapView.getMapViewPosition().setMapPosition(newMapPosition);
                     });
                 }
                 break;
@@ -576,19 +541,15 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             MapGeneratorInternal generator = MapGeneratorInternal.valueOf(keys[i]);
             MenuItem item =
                     mapgeneratorMenu.add(R.id.menu_mapgenerator_group, Menu.NONE, Menu.NONE, values[i]);
-            item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    if (generator == MapGeneratorInternal.DATABASE_RENDERER
-                            && MapsforgeActivity.this.mapView.getMapFile() == null) {
-                        startMapFilePicker();
-                    } else {
-                        setMapGenerator(generator);
-                        item.setChecked(true);
-                    }
-                    return true;
+            item.setOnMenuItemClickListener(item1 -> {
+                if (generator == MapGeneratorInternal.DATABASE_RENDERER
+                        && MapsforgeActivity.this.mapView.getMapFile() == null) {
+                    startMapFilePicker();
+                } else {
+                    setMapGenerator(generator);
+                    item1.setChecked(true);
                 }
+                return true;
             });
             if (mapGeneratorInternal != null && mapGeneratorInternal.name().equals(generator.name())) {
                 item.setChecked(true);
@@ -962,15 +923,11 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
 
     @Override
     public void refresh() {
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
-                mdp.addAll();
-                showMapPack(mdp.getItems());
-                mapView.getOverlayController().redrawOverlays();
-            }
+        runOnUiThread(() -> {
+            VectorMapDataProvider mdp = VectorMapDataProvider.getInstance();
+            mdp.addAll();
+            showMapPack(mdp.getItems());
+            mapView.getOverlayController().redrawOverlays();
         });
     }
 
@@ -1112,12 +1069,9 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
             toast.show();
         } else {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast toast = Toast.makeText(MapsforgeActivity.this, text, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+            runOnUiThread(() -> {
+                Toast toast = Toast.makeText(MapsforgeActivity.this, text, Toast.LENGTH_SHORT);
+                toast.show();
             });
         }
     }

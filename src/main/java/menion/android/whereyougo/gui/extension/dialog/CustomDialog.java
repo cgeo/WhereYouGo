@@ -66,11 +66,7 @@ public class CustomDialog {
             // set button
             Button btn = layout.findViewById(btnId);
             btn.setText(text);
-            btn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    click.onClick(null, v, btnType);
-                }
-            });
+            btn.setOnClickListener(v -> click.onClick(null, v, btnType));
             btn.setVisibility(View.VISIBLE);
             return true;
         } else {
@@ -174,12 +170,7 @@ public class CustomDialog {
             iv.setVisibility(View.VISIBLE);
             ib.setVisibility(View.VISIBLE);
             ib.setImageResource(titleExtraImg);
-            ib.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    titleExtraClick.onClick(null, v, 0);
-                }
-            });
+            ib.setOnClickListener(v -> titleExtraClick.onClick(null, v, 0));
         }
     }
 
