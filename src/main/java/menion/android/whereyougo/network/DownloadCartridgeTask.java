@@ -29,12 +29,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class DownloadCartridgeTask extends
         AsyncTask<String, DownloadCartridgeTask.Progress, Boolean> {
@@ -46,6 +49,7 @@ public class DownloadCartridgeTask extends
     private final String password;
     private OkHttpClient httpClient;
     private String errorMessage;
+    private String verificationToken = "";
 
     public DownloadCartridgeTask(Context context, String username, String password) {
         super();
@@ -93,11 +97,33 @@ public class DownloadCartridgeTask extends
         Response response = handleRequest(request);
         if (response != null && !LOGIN.equals(response.request().url().toString())) {
             publishProgress(new Progress(Task.LOGIN, State.SUCCESS));
+            try (ResponseBody body = response.body()) {
+                if (body != null) {
+                    final String page = body.string();
+                    verificationToken = findValue(page, Pattern.compile("<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([-0-9\\w]*)\""));
+                }
+            } catch (IOException ignore) {
+                publishProgress(new Progress(Task.LOGIN, State.FAIL, errorMessage));
+                return false;
+            }
             return true;
         } else {
             publishProgress(new Progress(Task.LOGIN, State.FAIL, errorMessage));
             return false;
         }
+    }
+
+    private String findValue(final String page, final Pattern pattern) {
+        Matcher matcher = pattern.matcher(page);
+        while(matcher.find()) {
+            if (matcher.groupCount() > 0) {
+                final String hit = matcher.group(1);
+                if (hit != null && !hit.equals("")) {
+                    return hit;
+                }
+            }
+        }
+        return null;
     }
 
     private boolean logout() {
@@ -131,12 +157,14 @@ public class DownloadCartridgeTask extends
                 .add("__EVENTARGUMENT", "")
                 .add("ctl00$ContentPlaceHolder1$uxDeviceList", "4")
                 .add("ctl00$ContentPlaceHolder1$btnDownload", "Download Now")
+                .add("__RequestVerificationToken", verificationToken)
                 .build();
         Request request = new Request.Builder()
                 .url(DOWNLOAD + "?CGUID=" + cguid)
                 .post(formBody)
                 .build();
         Response response = handleRequest(request);
+        StringBuilder content = new StringBuilder();
         if (response != null) {
             String type = response.body().contentType().toString();
             if ("application/octet-stream".equals(type)) {
@@ -150,6 +178,20 @@ public class DownloadCartridgeTask extends
                 }
                 long length = Long.parseLong(response.header("Content-Length", "0"));
                 return download(filename, response.body().byteStream(), length);
+            } else {
+                try(BufferedInputStream bis = new BufferedInputStream(response.body().byteStream())) {
+                    long completed = 0;
+                    int length;
+                    byte[] buffer = new byte[1024];
+                    while ((length = bis.read(buffer)) > 0 && !isCancelled()) {
+                        for (int i = 0; i < length; i++) {
+                            content.append((char) buffer[i]);
+                        }
+                        completed += length;
+                    }
+                } catch (IOException e) {
+                    errorMessage = e.getMessage();
+                }
             }
         }
         return false;
@@ -189,8 +231,9 @@ public class DownloadCartridgeTask extends
         Response response = handleRequest(request);
         if (response != null)
             publishProgress(new Progress(task, State.SUCCESS));
-        else
+        else {
             publishProgress(new Progress(task, State.FAIL, errorMessage));
+        }
         return response;
     }
 
