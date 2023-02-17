@@ -28,8 +28,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
@@ -61,22 +59,15 @@ public class DownloadCartridgeTask extends
     }
 
     private boolean init() {
-        try {
-            System.setProperty("http.keepAlive", "false");
-            httpClient = new OkHttpClient.Builder()
-                    .sslSocketFactory(new TLSSocketFactory())
-                    .cookieJar(new NonPersistentCookieJar())
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .build();
-        } catch (KeyManagementException | NoSuchAlgorithmException e) {
-            Logger.e(TAG, "init()", e);
-            errorMessage = e.getMessage();
-        }
-        if (httpClient == null)
-            publishProgress(new Progress(Task.INIT, State.FAIL, errorMessage));
-        return httpClient != null;
+        System.setProperty("http.keepAlive", "false");
+        httpClient = new OkHttpClient.Builder()
+                .cookieJar(new NonPersistentCookieJar())
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .build();
+        publishProgress(new Progress(Task.INIT, State.FAIL, errorMessage));
+        return true;
     }
 
     private boolean ping() {
