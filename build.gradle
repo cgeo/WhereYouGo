@@ -123,8 +123,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
 
     // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
-    //noinspection GradleDependency
-    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
     // ani gif support
     // minSdk=17 from version 1.2.16
