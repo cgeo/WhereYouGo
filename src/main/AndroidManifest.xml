@@ -36,7 +36,8 @@
         android:preserveLegacyExternalStorage="true">
         <activity
             android:name="menion.android.whereyougo.gui.activity.MainActivity"
-            android:label="WhereYouGo">
+            android:label="WhereYouGo"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
