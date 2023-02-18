@@ -91,10 +91,6 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menu_acquire_from_cgeo"
-        android:title="@string/menu_acquire_from_cgeo"
-        android:visible="false" />
-    <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
         android:showAsAction="always"

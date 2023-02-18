@@ -38,13 +38,10 @@ import menion.android.whereyougo.maps.mapsforge.preferences.EditPreferences;
 import menion.android.whereyougo.maps.utils.VectorMapDataProvider;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
-import menion.android.whereyougo.utils.CgeoUtils;
 import menion.android.whereyougo.utils.UtilsFormat;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -438,27 +435,8 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
             setMapGenerator(MapGeneratorInternal.valueOf(getString(R.string.mapgenerator_default)));
         }
 
-        // check if offline map file is set
-        checkOfflineMapFile(false);
-
         // add items received via Intent or from provider
         refreshItems();
-    }
-
-    private void checkOfflineMapFile(final boolean forceAndFeedback) {
-        // if no local mapFile is set: query c:geo for current mapFile
-        if (forceAndFeedback || this.mapView.getMapFile() == null) {
-            try {
-                final Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setComponent(new ComponentName(getString(R.string.cgeo_package), getString(R.string.cgeo_action_queryMapFile)));
-                intent.putExtra(getString(R.string.cgeo_queryMapFile_actionParam), forceAndFeedback);
-                startActivity(intent);
-            } catch (ActivityNotFoundException e) {
-                if (forceAndFeedback) {
-                    Toast.makeText(this, R.string.receivemapfile_cgeonotfound, Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
     }
 
     @Deprecated
@@ -705,10 +683,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
                 startMapFilePicker();
                 return true;
 
-            case R.id.menu_acquire_from_cgeo:
-                checkOfflineMapFile(true);
-                return true;
-
             case R.id.menu_mapgenerator:
                 return true;
 
@@ -881,8 +855,6 @@ public class MapsforgeActivity extends MapActivity implements IRefreshable {
         if (navigationOverlay.getTarget() == null) {
             menu.findItem(R.id.menu_position_target).setEnabled(false);
         }
-
-        menu.findItem(R.id.menu_acquire_from_cgeo).setVisible(CgeoUtils.isInstalled(this));
 
         return true;
     }
