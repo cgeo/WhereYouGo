@@ -30,9 +30,9 @@ android {
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
-        minSdkVersion 21
+        minSdk 21
         //noinspection OldTargetApi
-        targetSdkVersion 30
+        targetSdk 31
 
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
