@@ -54,7 +54,6 @@
     <string name="menu_info_about">About this software</string>
     <string name="menu_mapfile">Map file</string>
     <string name="menu_mapgenerator">Map source</string>
-    <string name="menu_acquire_from_cgeo">Acquire map from c:geo</string>
     <string name="menu_position">Position</string>
     <string name="menu_position_enter_coordinates">Enter coordinates</string>
     <string name="menu_position_last_known">Last known location</string>
