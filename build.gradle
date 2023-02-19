@@ -1,12 +1,11 @@
 buildscript {
     repositories {
-        jcenter()
         google()
     }
     // these dependencies are used by gradle plugins, not by the project
     dependencies {
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.1'
     }
 }
 
@@ -18,6 +17,8 @@ plugins {
 allprojects {
     repositories {
         maven { url "https://jitpack.io" }
+        mavenCentral()
+        // jcenter only for old locus-api-android
         jcenter()
         google()
     }
@@ -26,10 +27,13 @@ allprojects {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    namespace 'menion.android.whereyougo'
+
+    compileSdk 31
 
     defaultConfig {
         applicationId "menion.android.whereyougo"
+
         minSdk 21
         //noinspection OldTargetApi
         targetSdk 31
@@ -40,7 +44,7 @@ android {
         // include only those language resources from libraries that we actively maintain ourselves in the translation project
         // when changed here - also change in array.xml/strings_pref_languages.xml is necessary
         // not yet enough strings translated (>40%): "sl","sv"
-        resConfigs "en","ar","ca","cs","da","de", "el","es","fi","fr","hu","it","ja","ko","nb","nl","pl","pt-rBR","pt-rPT","ru","sk","tr"
+        resConfigs 'en', 'ar', 'ca', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fr', 'hu', 'it', 'ja', 'ko', 'nb', 'nl', 'pl', 'pt-rBR', 'pt-rPT', 'ru', 'sk', 'tr'
     }
 
     // define ndk version to use local the same version as on CI
@@ -70,14 +74,18 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         abortOnError false
         checkReleaseBuilds false
     }
 
     packagingOptions {
-        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
-        exclude "lib/armeabi/**"
+        jniLibs {
+            excludes += ['lib/armeabi/**']
+        }
+        resources {
+            excludes += ['lib/armeabi/**']
+        }
     }
 
     // special version code for nightly and rc builds
@@ -87,7 +95,6 @@ android {
                 setVersionCodeOverride(versionCodeFromDate(10000000))
             }
         }
-        // debug and release builds have offset zero, no special handling here
     }
 }
 
@@ -122,7 +129,7 @@ dependencies {
     //noinspection GradleDependency
     implementation 'com.google.zxing:core:3.3.0'
 
-    // Okhttp network access. 3.12.x is API level < 21, 3.13 or better requires API 21
+    // Okhttp network access
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
     // ani gif support
