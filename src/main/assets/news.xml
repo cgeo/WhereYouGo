@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="windows-1250"?>
 <document>
     <update name="2023.02.19" id="20230219" time="19.02.2023">
-        <li>Fix 'download failed' error (caused by website workflow change)</li>
+        <li>Fix 'download failed' error (caused by recent website workflow changes)</li>
         <li>Fix crashes on Systems running Android 7 or below when statusbar icon is activated</li>
-        <li>Change: 'acquire map from c:geo' removed due to map incompatibilities</li>
+        <li>Fix longitude formatting</li>
+        <li>Removed 'Acquire map from c:geo' due to map version incompatibilities</li>
+        <li>Updated targetSDK to Android 11</li>
     </update>
     <update name="2022.01.14" id="20220114" time="14.01.2022">
         <li>Fix Android 12 GPS problem</li>
