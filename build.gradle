@@ -80,6 +80,7 @@ android {
     }
 
     packagingOptions {
+        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17
         jniLibs {
             excludes += ['lib/armeabi/**']
         }
