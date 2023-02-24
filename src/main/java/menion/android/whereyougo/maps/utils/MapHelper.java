@@ -15,6 +15,10 @@
 
 package menion.android.whereyougo.maps.utils;
 
+import locus.api.android.ActionBasics;
+import locus.api.android.ActionDisplayVarious;
+import locus.api.objects.geoData.Point;
+
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import menion.android.whereyougo.maps.mapsforge.MapsforgeActivity;
@@ -26,10 +30,8 @@ import android.app.Activity;
 import android.content.Intent;
 
 import cz.matejcik.openwig.EventTable;
-import locus.api.android.ActionDisplay.ExtraAction;
 import locus.api.android.ActionDisplayPoints;
 import locus.api.android.ActionDisplayTracks;
-import locus.api.android.ActionTools;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 
@@ -74,16 +76,16 @@ public class MapHelper {
     public static void locusMap(Activity activity, EventTable et) {
         LocusMapDataProvider mdp = LocusMapDataProvider.getInstance();
         try {
-            ActionDisplayPoints.sendPack(activity, mdp.getPoints(), ExtraAction.NONE);
-            ActionDisplayTracks.sendTracks(activity, mdp.getTracks(), ExtraAction.CENTER);
+            ActionDisplayPoints.INSTANCE.sendPack(activity, mdp.getPoints(), ActionDisplayVarious.ExtraAction.NONE);
+            ActionDisplayTracks.INSTANCE.sendTracks(activity, mdp.getTracks(), ActionDisplayVarious.ExtraAction.CENTER);
             if (et != null && et.isLocated()) {
                 locus.api.objects.extra.Location loc = UtilsWherigo.extractLocation(et);
-                locus.api.objects.extra.Waypoint wpt = new locus.api.objects.extra.Waypoint(et.name, loc);
-                ActionTools.actionStartGuiding(activity, wpt);
+                Point wpt = new Point(et.name, loc);
+                ActionBasics.INSTANCE.actionStartGuiding(activity, wpt);
             }
         } catch (RequiredVersionMissingException e) {
             Logger.e(activity.toString(), "MapHelper.showMap() - missing locus version", e);
-            LocusUtils.callInstallLocus(activity);
+            LocusUtils.INSTANCE.callInstallLocus(activity);
         } catch (Exception e) {
             Logger.e(activity.toString(), "MapHelper.showMap() - unknown locus problem", e);
         }

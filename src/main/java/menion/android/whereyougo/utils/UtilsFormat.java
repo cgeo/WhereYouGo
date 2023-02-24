@@ -40,28 +40,32 @@ public class UtilsFormat {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    public static locus.api.android.utils.UtilsFormat getInstanceUtilsFormat() {
+        return locus.api.android.utils.UtilsFormat.INSTANCE;
+    }
+
     public static String formatAltitude(double altitude, boolean addUnits) {
-        return locus.api.android.utils.UtilsFormat.formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, addUnits);
+        return getInstanceUtilsFormat().formatAltitude(Preferences.FORMAT_ALTITUDE, altitude, 4, addUnits);
     }
 
     public static String formatAngle(double angle) {
-        return locus.api.android.utils.UtilsFormat.formatAngle(Preferences.FORMAT_ANGLE, (float) ((angle % 360) + 360) % 360, false, 0);
+        return getInstanceUtilsFormat().formatAngle(Preferences.FORMAT_ANGLE, (float) ((angle % 360) + 360) % 360, false, 0);
     }
 
     public static String formatSpeed(double speed, boolean withoutUnits) {
-        return locus.api.android.utils.UtilsFormat.formatSpeed(Preferences.FORMAT_SPEED, speed, withoutUnits);
+        return getInstanceUtilsFormat().formatSpeed(Preferences.FORMAT_SPEED, speed, withoutUnits);
     }
 
     public static String formatDistance(double dist, boolean withoutUnits) {
-        return locus.api.android.utils.UtilsFormat.formatDistance(Preferences.FORMAT_LENGTH, dist, withoutUnits);
+        return getInstanceUtilsFormat().formatDistance(Preferences.FORMAT_LENGTH, dist, withoutUnits);
     }
 
     public static String formatDouble(double value, int precision) {
-        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision);
+        return getInstanceUtilsFormat().formatDouble(value, precision);
     }
 
     public static String formatDouble(double value, int precision, int minlen) {
-        return locus.api.android.utils.UtilsFormat.formatDouble(value, precision, minlen);
+        return getInstanceUtilsFormat().formatDouble(value, precision, minlen);
     }
 
     public static String addZeros(String text, int count) {

@@ -13,8 +13,7 @@ public class ZoneGuide extends Guide {
     private boolean mAlreadyEntered = false;
 
     public ZoneGuide(Zone zone) {
-        super(zone.name, new Location("Guidance: " + zone.name, zone.bbCenter.latitude,
-                zone.bbCenter.longitude));
+        super(zone.name, new Location(zone.bbCenter.latitude, zone.bbCenter.longitude));
         mZone = zone;
         mAlreadyEntered = false;
     }

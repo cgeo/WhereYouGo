@@ -175,9 +175,7 @@ public class DataInfo implements Comparable<DataInfo> {
     }
 
     public Location getLocation() {
-        Location loc = new Location(TAG);
-        loc.setLatitude(value01);
-        loc.setLongitude(value02);
+        Location loc = new Location(value01, value02);
         return loc;
     }
 

@@ -162,7 +162,7 @@ public class SatelliteActivity extends CustomActivity implements ILocationEventL
                 ((TextView) findViewById(R.id.text_view_altitude)).setText(UtilsFormat.formatAltitude(
                         location.getAltitude(), true));
                 ((TextView) findViewById(R.id.text_view_accuracy)).setText(UtilsFormat.formatDistance(
-                        location.getAccuracy(), false));
+                        location.getAccuracyHor(), false));
                 ((TextView) findViewById(R.id.text_view_speed)).setText(UtilsFormat.formatSpeed(
                         location.getSpeed(), false));
                 ((TextView) findViewById(R.id.text_view_declination)).setText(UtilsFormat
