@@ -15,6 +15,13 @@
 
 package menion.android.whereyougo.maps.utils;
 
+import locus.api.android.objects.PackPoints;
+import locus.api.objects.extra.GeoDataExtra;
+import locus.api.objects.geoData.Point;
+import locus.api.objects.geoData.Track;
+
+import locus.api.objects.styles.GeoDataStyle;
+
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
@@ -28,23 +35,16 @@ import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.formats.CartridgeFile;
-import locus.api.android.objects.PackWaypoints;
-import locus.api.objects.extra.ExtraData;
-import locus.api.objects.extra.ExtraStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.ColorStyle;
-import locus.api.objects.extra.ExtraStyle.LineStyle.Units;
 import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Track;
-import locus.api.objects.extra.Waypoint;
 
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
     private ArrayList<Track> tracks = null;
-    private final PackWaypoints pack;
+    private final PackPoints pack;
 
     private LocusMapDataProvider() {
         tracks = new ArrayList<>();
-        pack = new PackWaypoints("WhereYouGo");
+        pack = new PackPoints("WhereYouGo");
     }
 
     public static LocusMapDataProvider getInstance() {
@@ -75,13 +75,12 @@ public class LocusMapDataProvider implements MapDataProvider {
             }
 
             // construct waypoint
-            Location loc = new Location("WhereYouGo");
-            loc.setLatitude(cartridge.latitude);
-            loc.setLongitude(cartridge.longitude);
-            Waypoint wpt = new Waypoint(cartridge.name, loc);
-            wpt.addParameter(ExtraData.PAR_DESCRIPTION, cartridge.description);
-            wpt.addUrl(cartridge.url);
-            pack.addWaypoint(wpt);
+            Location loc = new Location(cartridge.latitude,cartridge.longitude);
+            Point wpt = new Point(cartridge.name, loc);
+            wpt.addParameter(GeoDataExtra.PAR_DESCRIPTION, cartridge.description);
+            wpt.addParameter(GeoDataExtra.PAR_SOURCE, cartridge.url);
+            //TODO wpt.addUrl(cartridge.url);
+            pack.addPoint(wpt);
         }
     }
 
@@ -90,7 +89,7 @@ public class LocusMapDataProvider implements MapDataProvider {
             return;
 
         Location loc = UtilsWherigo.extractLocation(et);
-        pack.addWaypoint(new Waypoint(et.name, loc));
+        pack.addPoint(new Point(et.name, loc));
     }
 
     public void addZone(Zone z, boolean mark) {
@@ -99,18 +98,16 @@ public class LocusMapDataProvider implements MapDataProvider {
 
         ArrayList<Location> locs = new ArrayList<>();
         for (int i = 0; i < z.points.length; i++) {
-            Location loc = new Location("");
-            loc.setLatitude(z.points[i].latitude);
-            loc.setLongitude(z.points[i].longitude);
+            Location loc = new Location(z.points[i].latitude,z.points[i].longitude);
             locs.add(loc);
         }
         if (locs.size() >= 3)
             locs.add(locs.get(0));
 
         Track track = new Track();
-        ExtraStyle style = new ExtraStyle();
-        style.setLineStyle(ColorStyle.SIMPLE, Color.MAGENTA, 2.0f, Units.PIXELS);
-        track.styleNormal = style;
+        GeoDataStyle style = new GeoDataStyle();
+        style.setLineStyle(Color.MAGENTA, 2.0f);
+        track.setStyleNormal(style);
         track.setPoints(locs);
         track.setName(z.name);
 
@@ -132,10 +129,10 @@ public class LocusMapDataProvider implements MapDataProvider {
 
     public void clear() {
         tracks.clear();
-        pack.reset();
+        //TODO pack.reset();
     }
 
-    public PackWaypoints getPoints() {
+    public PackPoints getPoints() {
         return pack;
     }
 

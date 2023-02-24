@@ -203,9 +203,7 @@ public class PreferenceValues {
     }
 
     public static Location getLastKnownLocation() {
-        Location lastKnownLocation = new Location(TAG);
-        lastKnownLocation.setLatitude(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE));
-        lastKnownLocation.setLongitude(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE));
+        Location lastKnownLocation = new Location(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LATITUDE), Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_LONGITUDE));
         lastKnownLocation.setAltitude(Preferences.getDecimalPreference(R.string.pref_KEY_F_LAST_KNOWN_LOCATION_ALTITUDE));
         return lastKnownLocation;
     }

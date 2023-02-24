@@ -51,7 +51,7 @@ public class WLocationService implements LocationService {
     }
 
     public double getPrecision() {
-        return LocationState.getLocation().getAccuracy();
+        return LocationState.getLocation().getAccuracyHor();
     }
 
     public int getState() {

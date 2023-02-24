@@ -133,7 +133,7 @@ public class GuidingActivity extends CustomActivity implements IGuideEventListen
         viewLat.setText(UtilsFormat.formatLatitude(loc.getLatitude()));
         viewLon.setText(UtilsFormat.formatLongitude(loc.getLongitude()));
         viewAlt.setText(UtilsFormat.formatAltitude(loc.getAltitude(), true));
-        viewAcc.setText(UtilsFormat.formatDistance((double) loc.getAccuracy(), false));
+        viewAcc.setText(UtilsFormat.formatDistance((double) loc.getAccuracyHor(), false));
         viewSpeed.setText(UtilsFormat.formatSpeed(loc.getSpeed(), false));
 
         repaint();

@@ -144,8 +144,9 @@ public class LocationState {
     }
 
     public static Location getLocation() {
-        if (location == null)
-            return new Location(TAG);
+        if (location == null) {
+            return new Location();
+        }
         return new Location(location);
     }
 
@@ -329,7 +330,7 @@ public class LocationState {
                 // if first location from Network, and new from GPS but with worst precision, do not set
                 if (LocationState.location.getProvider().equals(LocationManager.NETWORK_PROVIDER)
                         && location.getProvider().equals(LocationManager.GPS_PROVIDER)
-                        && (LocationState.location.getAccuracy() * 3) < location.getAccuracy()) {
+                        && (LocationState.location.getAccuracyHor() * 3) < location.getAccuracyHor()) {
                     return;
                 }
 

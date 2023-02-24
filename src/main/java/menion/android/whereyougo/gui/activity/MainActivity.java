@@ -17,6 +17,8 @@
 
 package menion.android.whereyougo.gui.activity;
 
+import locus.api.objects.geoData.Point;
+
 import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 import menion.android.whereyougo.VersionInfo;
@@ -78,7 +80,6 @@ import java.util.Vector;
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import locus.api.objects.extra.Location;
-import locus.api.objects.extra.Waypoint;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -180,7 +181,7 @@ public class MainActivity extends CustomActivity {
         cartridgeFiles = new Vector<>();
 
         // add cartridges to map
-        ArrayList<Waypoint> wpts = new ArrayList<>();
+        ArrayList<Point> wpts = new ArrayList<>();
 
         File actualFile = null;
         if (files != null) {
@@ -191,10 +192,8 @@ public class MainActivity extends CustomActivity {
                     if (cart != null) {
                         cart.filename = file.getAbsolutePath();
 
-                        Location loc = new Location(TAG);
-                        loc.setLatitude(cart.latitude);
-                        loc.setLongitude(cart.longitude);
-                        Waypoint waypoint = new Waypoint(cart.name, loc);
+                        Location loc = new Location(cart.latitude, cart.longitude);
+                        Point waypoint = new Point(cart.name, loc);
 
                         cartridgeFiles.add(cart);
                         wpts.add(waypoint);
