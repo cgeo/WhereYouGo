@@ -15,9 +15,12 @@
 
 package menion.android.whereyougo.maps.utils;
 
+import menion.android.whereyougo.R;
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
+import menion.android.whereyougo.utils.Images;
+import menion.android.whereyougo.utils.Utils;
 
 import android.graphics.Color;
 
@@ -35,6 +38,7 @@ import locus.api.objects.extra.Location;
 import locus.api.objects.geoData.Point;
 import locus.api.objects.geoData.Track;
 import locus.api.objects.styles.GeoDataStyle;
+import locus.api.objects.styles.LineStyle;
 
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
@@ -64,8 +68,9 @@ public class LocusMapDataProvider implements MapDataProvider {
     public void addCartridges(Vector<CartridgeFile> cartridges) {
         if (cartridges == null)
             return;
-        // Bitmap b = Images.getImageB(R.drawable.wherigo, (int) Utils.getDpPixels(32.0f));
-        // pack.setBitmap(b);
+
+        pack.setBitmap(Images.getImageB(R.drawable.icon_gc_wherigo, (int) Utils.getDpPixels(32.0f)));
+
         for (CartridgeFile cartridge : cartridges) {
             // do not show waypoints that are "Play anywhere" (with zero
             // coordinates)
@@ -76,9 +81,15 @@ public class LocusMapDataProvider implements MapDataProvider {
             // construct waypoint
             Location loc = new Location(cartridge.latitude, cartridge.longitude);
             Point wpt = new Point(cartridge.name, loc);
-            wpt.addParameter(GeoDataExtra.PAR_DESCRIPTION, cartridge.description);
-            wpt.addParameter(GeoDataExtra.PAR_SOURCE, cartridge.url);
-            //TODO wpt.addUrl(cartridge.url);
+
+            final GeoDataExtra gde = new GeoDataExtra();
+            gde.addParameter(GeoDataExtra.PAR_DESCRIPTION, cartridge.description);
+            gde.addParameter(GeoDataExtra.PAR_COMMENT, cartridge.author);
+            if (cartridge.url != null && cartridge.url.length() > 0) {
+                gde.addAttachment(GeoDataExtra.AttachType.URL, null, cartridge.url);
+            }
+            wpt.setExtraData(gde);
+
             pack.addPoint(wpt);
         }
     }
@@ -103,10 +114,17 @@ public class LocusMapDataProvider implements MapDataProvider {
         if (locs.size() >= 3)
             locs.add(locs.get(0));
 
+        LineStyle lineStyle = new LineStyle();
+        lineStyle.setColoring(LineStyle.Coloring.SIMPLE);
+        lineStyle.setColorBase(Color.MAGENTA);
+        lineStyle.setWidth(2.0f);
+        lineStyle.setUnits(LineStyle.Units.PIXELS);
+
+        GeoDataStyle geoDataStyle = new GeoDataStyle();
+        geoDataStyle.setLineStyle(lineStyle);
+
         Track track = new Track();
-        GeoDataStyle style = new GeoDataStyle();
-        style.setLineStyle(Color.MAGENTA, 2.0f);
-        track.setStyleNormal(style);
+        track.setStyleHighlight(geoDataStyle);
         track.setPoints(locs);
         track.setName(z.name);
 
@@ -128,7 +146,6 @@ public class LocusMapDataProvider implements MapDataProvider {
 
     public void clear() {
         tracks.clear();
-        //TODO pack.reset();
     }
 
     public PackPoints getPoints() {
