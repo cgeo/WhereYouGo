@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
  */
 public class DataInfo implements Comparable<DataInfo> {
 
-    private static final String TAG = "DataInfo";
     public double value01;
     public double value02;
     /*
