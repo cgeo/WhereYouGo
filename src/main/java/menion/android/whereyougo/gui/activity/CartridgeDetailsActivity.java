@@ -39,8 +39,6 @@ import android.widget.TextView;
 
 public class CartridgeDetailsActivity extends CustomActivity {
 
-    private static final String TAG = "CartridgeDetails";
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (A.getMain() == null || MainActivity.selectedFile == null

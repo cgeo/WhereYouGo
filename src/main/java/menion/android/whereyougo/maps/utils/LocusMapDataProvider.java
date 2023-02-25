@@ -15,13 +15,6 @@
 
 package menion.android.whereyougo.maps.utils;
 
-import locus.api.android.objects.PackPoints;
-import locus.api.objects.extra.GeoDataExtra;
-import locus.api.objects.geoData.Point;
-import locus.api.objects.geoData.Track;
-
-import locus.api.objects.styles.GeoDataStyle;
-
 import menion.android.whereyougo.gui.activity.MainActivity;
 import menion.android.whereyougo.gui.activity.wherigo.DetailsActivity;
 import menion.android.whereyougo.gui.utils.UtilsWherigo;
@@ -29,13 +22,19 @@ import menion.android.whereyougo.gui.utils.UtilsWherigo;
 import android.graphics.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.formats.CartridgeFile;
+import locus.api.android.objects.PackPoints;
+import locus.api.objects.extra.GeoDataExtra;
 import locus.api.objects.extra.Location;
+import locus.api.objects.geoData.Point;
+import locus.api.objects.geoData.Track;
+import locus.api.objects.styles.GeoDataStyle;
 
 public class LocusMapDataProvider implements MapDataProvider {
     private static LocusMapDataProvider instance = null;
@@ -75,7 +74,7 @@ public class LocusMapDataProvider implements MapDataProvider {
             }
 
             // construct waypoint
-            Location loc = new Location(cartridge.latitude,cartridge.longitude);
+            Location loc = new Location(cartridge.latitude, cartridge.longitude);
             Point wpt = new Point(cartridge.name, loc);
             wpt.addParameter(GeoDataExtra.PAR_DESCRIPTION, cartridge.description);
             wpt.addParameter(GeoDataExtra.PAR_SOURCE, cartridge.url);
@@ -96,9 +95,9 @@ public class LocusMapDataProvider implements MapDataProvider {
         if (z == null || !z.isLocated() || !z.isVisible())
             return;
 
-        ArrayList<Location> locs = new ArrayList<>();
+        List<Location> locs = new ArrayList<>();
         for (int i = 0; i < z.points.length; i++) {
-            Location loc = new Location(z.points[i].latitude,z.points[i].longitude);
+            Location loc = new Location(z.points[i].latitude, z.points[i].longitude);
             locs.add(loc);
         }
         if (locs.size() >= 3)
