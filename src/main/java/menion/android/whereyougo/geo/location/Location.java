@@ -12,9 +12,6 @@ public class Location extends locus.api.objects.extra.Location {
         if (loc.hasAccuracy()) {
             setAccuracyHor(loc.getAccuracy());
         }
-        if(loc.hasVerticalAccuracy()) {
-            setAccuracyVer(loc.getAccuracy());
-        }
         if (loc.hasAltitude()) {
             setAltitude(loc.getAltitude());
         }
