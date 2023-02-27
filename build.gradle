@@ -18,8 +18,6 @@ allprojects {
     repositories {
         maven { url "https://jitpack.io" }
         mavenCentral()
-        // jcenter only for old locus-api-android
-        jcenter()
         google()
     }
 }
@@ -110,7 +108,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.1'
 
     // Locus Maps integration
-    //noinspection GradleDependency
     implementation 'com.asamm:locus-api-android:0.9.50'
 
     // openwig@cgeo
