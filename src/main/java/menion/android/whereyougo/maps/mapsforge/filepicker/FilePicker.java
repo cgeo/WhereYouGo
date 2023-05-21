@@ -55,11 +55,11 @@ public class FilePicker extends Activity implements AdapterView.OnItemClickListe
      */
     public static final String SELECTED_FILE = "selectedFile";
 
-    private static final String CURRENT_DIRECTORY = "currentDirectory";
+    public static final String CURRENT_DIRECTORY = "currentDirectory";
     private static final String DEFAULT_DIRECTORY = "/";
     private static final int DIALOG_FILE_INVALID = 0;
     private static final int DIALOG_FILE_SELECT = 1;
-    private static final String PREFERENCES_FILE = "FilePicker";
+    public static final String PREFERENCES_FILE = "FilePicker";
     private static Comparator<File> fileComparator = getDefaultFileComparator();
     private static FileFilter fileDisplayFilter;
     private static ValidFileFilter fileSelectFilter;
