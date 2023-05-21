@@ -67,5 +67,14 @@
             android:key="highlightWaterTiles"
             android:summary="@string/preferences_show_water_tiles_desc"
             android:title="@string/preferences_show_water_tiles" />
+        <Preference
+            android:key="resetCurrentDirectoryPrivate"
+            android:summary="@string/reset_current_directory_private_summary"
+            android:title="@string/reset_current_directory_private_title" />
+        <Preference
+            android:key="resetCurrentDirectoryRoot"
+            android:summary="@string/reset_current_directory_root_summary"
+            android:title="@string/reset_current_directory_root_title" />
+
     </PreferenceCategory>
 </PreferenceScreen>
