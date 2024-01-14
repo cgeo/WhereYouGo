@@ -113,4 +113,14 @@
     <string name="receivemapfile_success">Mapfile set</string>
     <string name="receivemapfile_error">Error setting mapfile</string>
     <string name="receivemapfile_notset">No mapfile set in c:geo</string>
+
+    <!-- Reset map source (and default folder) settings -->
+    <string name="reset_current_directory_private_title">Reset to private</string>
+    <string name="reset_current_directory_private_summary">Reset current directory to private directory (use this on Android 11 or newer)</string>
+    <string name="reset_current_directory_root_title">Reset to root</string>
+    <string name="reset_current_directory_root_summary">Reset current directory to root directory (use this on Android 10 or older</string>
+    <string name="reset_current_directory_info">Current directory reset</string>
+
+    <string name="reset_map_settings_confirmation_title">Reset map source settings</string>
+    <string name="reset_map_settings_confirmation_message">This will reset your map source setting and your current map base folder.\n\nYou will need to restart WhereYouGo and select a new map source.</string>
 </resources>
