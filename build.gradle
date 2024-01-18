@@ -105,7 +105,7 @@ dependencies {
 
     // Settings Library + Appcompat for AndroidX
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference:1.2.1'
 
     // Locus Maps integration
     implementation 'com.asamm:locus-api-android:0.9.50'
