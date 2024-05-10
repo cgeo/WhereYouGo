@@ -44,12 +44,14 @@ public class GpsConnection {
     private final MyLocationListener llGPS;
     private final MyLocationListener llNetwork;
     private final MyGpsListener gpsListener;
+    private final MyGnssListener gnssListener;
     private boolean isFixed;
     private Timer mGpsTimer;
     // temp variable for indicating whether network provider is enabled
     private boolean networkProviderEnabled;
     private boolean gpsProviderEnabled;
     private GpsStatus gpsStatus;
+    private GnssStatus gnssStatus;
 
     public GpsConnection(Context context) {
         Logger.w(TAG, "onCreate()");
@@ -58,6 +60,7 @@ public class GpsConnection {
         llGPS = new MyLocationListener();
         llNetwork = new MyLocationListener();
         gpsListener = new MyGpsListener();
+        gnssListener = new MyGnssListener();
 
         // init basic fixing values
         isFixed = false;
@@ -105,7 +108,6 @@ public class GpsConnection {
         // add new listener GPS
         try {
             if (Build.VERSION.SDK_INT >= 24) {
-                MyGnssListener gnssListener = new MyGnssListener();
                 locationManager.registerGnssStatusCallback(gnssListener);
             } else {
                 locationManager.addGpsStatusListener(gpsListener);
@@ -131,7 +133,11 @@ public class GpsConnection {
         if (locationManager != null) {
             disableNetwork();
             locationManager.removeUpdates(llGPS);
-            locationManager.removeGpsStatusListener(gpsListener);
+            if (Build.VERSION.SDK_INT >= 24) {
+                locationManager.unregisterGnssStatusCallback(gnssListener);
+            } else {
+                locationManager.removeGpsStatusListener(gpsListener);
+            }
             locationManager = null;
             // XXX missing context to notify by widget
             ManagerNotify.toastShortMessage(R.string.gps_disabled);
