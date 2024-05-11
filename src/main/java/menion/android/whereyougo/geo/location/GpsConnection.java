@@ -51,7 +51,6 @@ public class GpsConnection {
     private boolean networkProviderEnabled;
     private boolean gpsProviderEnabled;
     private GpsStatus gpsStatus;
-    private GnssStatus gnssStatus;
 
     public GpsConnection(Context context) {
         Logger.w(TAG, "onCreate()");
