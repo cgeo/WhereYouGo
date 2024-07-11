@@ -33,6 +33,7 @@
     <string name="failed">Failed</string>
     <string name="feet">Feet</string>
     <string name="filesystem_cannot_create_root">Cannot create Root directory, SDCard probably missing.\n\nInsert it into device and run again!</string>
+    <string name="file_already_imported">Starting previously imported cartridge</string>
     <string name="finished">Finished</string>
     <string name="folder_default">Default</string>
     <string name="folder_select">Select…</string>
