@@ -1,5 +1,6 @@
 package menion.android.whereyougo.utils;
 
+import menion.android.whereyougo.MainApplication;
 import menion.android.whereyougo.R;
 
 import android.app.Notification;
@@ -73,7 +74,7 @@ public class NotificationService extends Service {
     private void startNotificationService(boolean background) {
         Logger.v(TAG, "Start notification service.");
 
-        Context context = A.getMain().getApplicationContext();
+        Context context = MainApplication.getContext();
         Intent intent = new Intent(context, menion.android.whereyougo.gui.activity.MainActivity.class);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setAction(Intent.ACTION_MAIN);
