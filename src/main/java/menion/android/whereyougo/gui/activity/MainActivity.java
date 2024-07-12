@@ -514,17 +514,6 @@ public class MainActivity extends CustomActivity {
         return CLOSE_DESTROY_APP_NO_DIALOG;
     }
 
-    private boolean isAnyCartridgeAvailable() {
-        if (cartridgeFiles == null || cartridgeFiles.size() == 0) {
-            UtilsGUI.showDialogInfo(
-                    MainActivity.this,
-                    getString(R.string.no_wherigo_cartridge_available, FileSystem.ROOT));
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         String[] koPermissions = checkKoPermissions(this, permissions);
@@ -713,11 +702,6 @@ public class MainActivity extends CustomActivity {
     }
 
     private void clickStart() {
-        // check cartridges
-        if (!isAnyCartridgeAvailable()) {
-            return;
-        }
-
         ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
         dialog.setParams(cartridgeFiles);
         getSupportFragmentManager()

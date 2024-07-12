@@ -16,9 +16,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -81,12 +85,22 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
                 itemLongClicked(position);
                 return true;
             });
+
+            TextView textView = new TextView(getActivity());
+            textView.setTextColor(Color.GRAY);
+            textView.setText(R.string.no_wherigo_cartridge_available);
+            textView.setPadding(15, 15, 15, 15);
+            listView.setEmptyView(textView);
+
+            LinearLayout layout = new LinearLayout(getContext());
+            layout.addView(listView);
+            layout.addView(textView);
             adapter = (BaseAdapter) listView.getAdapter();
             // construct dialog
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.choose_cartridge)
                     .setIcon(R.drawable.ic_title_logo)
-                    .setView(listView)
+                    .setView(layout)
                     .setNeutralButton(R.string.close, null)
                     .setPositiveButton(getString(R.string.select_file), (dialogInterface, i) -> ((MainActivity)getActivity()).openFilePicker())
                     .create();
