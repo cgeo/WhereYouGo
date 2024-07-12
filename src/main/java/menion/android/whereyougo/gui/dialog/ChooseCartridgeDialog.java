@@ -88,6 +88,7 @@ public class ChooseCartridgeDialog extends CustomDialogFragment {
                     .setIcon(R.drawable.ic_title_logo)
                     .setView(listView)
                     .setNeutralButton(R.string.close, null)
+                    .setPositiveButton(getString(R.string.select_file), (dialogInterface, i) -> ((MainActivity)getActivity()).openFilePicker())
                     .create();
         } catch (Exception e) {
             Logger.e(TAG, "createDialog()", e);

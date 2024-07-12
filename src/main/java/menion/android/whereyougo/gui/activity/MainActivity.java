@@ -50,6 +50,7 @@ import static menion.android.whereyougo.permission.PermissionHandler.checkPermis
 import static menion.android.whereyougo.permission.PermissionHandler.needAskForPermission;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -60,6 +61,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -105,6 +107,9 @@ public class MainActivity extends CustomActivity {
     public static final int CLOSE_DESTROY_APP_DIALOG_NO_TEXT = 1;
     public static final int CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT = 2;
     public static final int CLOSE_HIDE_APP = 3;
+
+    // Activity result request codes
+    private final int PICK_FILE_TO_IMPORT = 1;
 
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
@@ -211,6 +216,29 @@ public class MainActivity extends CustomActivity {
         if (wpts.size() > 0) {
             // TODO add items on map
         }
+    }
+
+    private void openCartridge(Uri uri) {
+        String originalFilename = ContentUtils.getFileName(getContentResolver(), uri);
+        File openedFile = new File(FileSystem.ROOT + "/" + originalFilename);
+
+        if (openedFile.exists()) {
+            ManagerNotify.toastShortMessage(this, getString(R.string.file_already_imported));
+        } else {
+            try (
+                InputStream stream = getContentResolver().openInputStream(uri);
+                OutputStream outStream = Files.newOutputStream(openedFile.toPath())
+            ) {
+                byte[] buffer = new byte[8 * 1024];
+                int bytesRead;
+                while ((bytesRead = stream.read(buffer)) != -1) {
+                    outStream.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        openCartridge(openedFile);
     }
 
     public static void openCartridge(final CartridgeFile cartridgeFile) {
@@ -544,23 +572,11 @@ public class MainActivity extends CustomActivity {
         if (Intent.ACTION_VIEW.equals(callingIntent.getAction())) {
             Uri fileUri = callingIntent.getData();
             if (fileUri != null) {
-                try (InputStream stream = getContentResolver().openInputStream(fileUri)) {
-                    String originalFilename = ContentUtils.getFileName(getContentResolver(), fileUri);
-                    File openedFile = new File(FileSystem.ROOT + "/" + originalFilename);
-                    if (openedFile.exists()) {
-                        ManagerNotify.toastShortMessage(this, getString(R.string.file_already_imported));
-                    } else {
-                        try (OutputStream outStream = Files.newOutputStream(openedFile.toPath())) {
-                            byte[] buffer = new byte[8 * 1024];
-                            int bytesRead;
-                            while ((bytesRead = stream.read(buffer)) != -1) {
-                                outStream.write(buffer, 0, bytesRead);
-                            }
-                        }
-                    }
-                    openCartridge(openedFile);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                String originalFilename = ContentUtils.getFileName(getContentResolver(), fileUri);
+                if (!originalFilename.endsWith(".gwc")) {
+                    ManagerNotify.toastShortMessage(this, getString(R.string.invalid_file_selected));
+                } else {
+                    openCartridge(fileUri);
                 }
             } else {
                 finish();
@@ -578,6 +594,36 @@ public class MainActivity extends CustomActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    public void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+
+        startActivityForResult(intent, PICK_FILE_TO_IMPORT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        Log.d("Main", "Called here");
+        if (requestCode == PICK_FILE_TO_IMPORT && resultCode == Activity.RESULT_OK) {
+            Log.d("Main", "Result ok");
+            if (intent != null) {
+                Uri uri = intent.getData();
+                if (uri != null) {
+                    String fileName = ContentUtils.getFileName(getContentResolver(), uri);
+                    Log.d("Main", fileName);
+                    if (!fileName.endsWith(".gwc")) {
+                        ManagerNotify.toastShortMessage(this, getString(R.string.invalid_file_selected));
+                    } else {
+                        openCartridge(uri);
+//                    dismiss();
+                    }
+                }
+            }
+        }
     }
 
     @Override
