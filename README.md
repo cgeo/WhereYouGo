@@ -5,6 +5,12 @@ WhereYouGo
 
 WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online and offline vector maps using Mapsforge library, alternatively Locus can be used to display maps.
 
+## Last state
+
+The code with a very old mapsforge library implementation was not easy to update, a major rewrite was necessary.
+Therefore, we integrated the functionality into the c:geo application instead.
+This repository is now in archive status.
+
 ## About
 
 This is a clone of this [WhereYouGo repository](https://github.com/biylda/WhereYouGo/) as it was found unmaintained and was (after confirmation of original author) transferred to here.
