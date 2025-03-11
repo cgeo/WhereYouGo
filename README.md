@@ -7,9 +7,9 @@ WhereYouGo is an unofficial client for Wherigo Geocaching. It displays online an
 
 ## Last state
 
-The code with a very old mapsforge library implementation was not easy to update, a major rewrite was necessary.
+**The code with a very old mapsforge library implementation was not easy to update, a major rewrite was necessary.
 Therefore, we integrated the functionality into the c:geo application instead.
-This repository is now in archive status.
+This repository is now in archive status.**
 
 ## About
 
