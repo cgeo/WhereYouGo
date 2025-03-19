@@ -30,7 +30,6 @@ import menion.android.whereyougo.gui.extension.activity.CustomActivity;
 import menion.android.whereyougo.gui.utils.UtilsGUI;
 import menion.android.whereyougo.maps.utils.MapDataProvider;
 import menion.android.whereyougo.maps.utils.MapHelper;
-import menion.android.whereyougo.network.activity.DownloadCartridgeActivity;
 import menion.android.whereyougo.openwig.WLocationService;
 import menion.android.whereyougo.openwig.WSaveFile;
 import menion.android.whereyougo.openwig.WSeekableFile;
@@ -39,6 +38,7 @@ import menion.android.whereyougo.preferences.Locale;
 import menion.android.whereyougo.preferences.PreferenceValues;
 import menion.android.whereyougo.preferences.Preferences;
 import menion.android.whereyougo.utils.A;
+import menion.android.whereyougo.utils.ContentUtils;
 import menion.android.whereyougo.utils.FileSystem;
 import menion.android.whereyougo.utils.Logger;
 import menion.android.whereyougo.utils.ManagerNotify;
@@ -50,6 +50,7 @@ import static menion.android.whereyougo.permission.PermissionHandler.checkPermis
 import static menion.android.whereyougo.permission.PermissionHandler.needAskForPermission;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -60,6 +61,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +76,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Vector;
 
 import cz.matejcik.openwig.Engine;
@@ -103,6 +107,9 @@ public class MainActivity extends CustomActivity {
     public static final int CLOSE_DESTROY_APP_DIALOG_NO_TEXT = 1;
     public static final int CLOSE_DESTROY_APP_DIALOG_ADDITIONAL_TEXT = 2;
     public static final int CLOSE_HIDE_APP = 3;
+
+    // Activity result request codes
+    private final int PICK_FILE_TO_IMPORT = 1;
 
     public static CartridgeFile cartridgeFile;
     public static String selectedFile;
@@ -209,6 +216,29 @@ public class MainActivity extends CustomActivity {
         if (wpts.size() > 0) {
             // TODO add items on map
         }
+    }
+
+    private void openCartridge(Uri uri) {
+        String originalFilename = ContentUtils.getFileName(getContentResolver(), uri);
+        File openedFile = new File(FileSystem.ROOT + "/" + originalFilename);
+
+        if (openedFile.exists()) {
+            ManagerNotify.toastShortMessage(this, getString(R.string.file_already_imported));
+        } else {
+            try (
+                InputStream stream = getContentResolver().openInputStream(uri);
+                OutputStream outStream = Files.newOutputStream(openedFile.toPath())
+            ) {
+                byte[] buffer = new byte[8 * 1024];
+                int bytesRead;
+                while ((bytesRead = stream.read(buffer)) != -1) {
+                    outStream.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        openCartridge(openedFile);
     }
 
     public static void openCartridge(final CartridgeFile cartridgeFile) {
@@ -484,17 +514,6 @@ public class MainActivity extends CustomActivity {
         return CLOSE_DESTROY_APP_NO_DIALOG;
     }
 
-    private boolean isAnyCartridgeAvailable() {
-        if (cartridgeFiles == null || cartridgeFiles.size() == 0) {
-            UtilsGUI.showDialogInfo(
-                    MainActivity.this,
-                    getString(R.string.no_wherigo_cartridge_available, FileSystem.ROOT));
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         String[] koPermissions = checkKoPermissions(this, permissions);
@@ -530,42 +549,26 @@ public class MainActivity extends CustomActivity {
             }
 
             eventFirstInit();
-            setScreenBasic(this);
-            eventCreateLayout();
-        } else {
-            // Logger.w(TAG, "onCreate() - only register");
-            setScreenBasic(this);
-            eventCreateLayout();
         }
+        setScreenBasic(this);
+        eventCreateLayout();
 
         if (needAskForPermission()) {
             checkPermissions(this);
         }
 
-        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
-            Intent intent = new Intent(getIntent());
-            intent.setClass(this, DownloadCartridgeActivity.class);
-            startActivity(intent);
-            finish();
-        } else if (Intent.ACTION_SEND.equals(getIntent().getAction())) {
-            try {
-                Uri uri = Uri.parse(getIntent().getStringExtra(Intent.EXTRA_TEXT));
-                if (uri.getQueryParameter("CGUID") == null)
-                    throw new Exception("Invalid URL");
-                Intent intent = new Intent(this, DownloadCartridgeActivity.class);
-                intent.setData(uri);
-                startActivity(intent);
-            } catch (Exception e) {
-                ManagerNotify.toastShortMessage(this, getString(R.string.invalid_url));
-            }
-            finish();
-        } else {
-            String cguid = getIntent() == null ? null : getIntent().getStringExtra("cguid");
-            if (cguid != null) {
-                File file = FileSystem.findFile(cguid);
-                if (file != null) {
-                    openCartridge(file);
+        Intent callingIntent = getIntent();
+        if (Intent.ACTION_VIEW.equals(callingIntent.getAction())) {
+            Uri fileUri = callingIntent.getData();
+            if (fileUri != null) {
+                String originalFilename = ContentUtils.getFileName(getContentResolver(), fileUri);
+                if (!originalFilename.endsWith(".gwc")) {
+                    ManagerNotify.toastShortMessage(this, getString(R.string.invalid_file_selected));
+                } else {
+                    openCartridge(fileUri);
                 }
+            } else {
+                finish();
             }
         }
     }
@@ -580,6 +583,36 @@ public class MainActivity extends CustomActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    public void openFilePicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("*/*");
+
+        startActivityForResult(intent, PICK_FILE_TO_IMPORT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        Log.d("Main", "Called here");
+        if (requestCode == PICK_FILE_TO_IMPORT && resultCode == Activity.RESULT_OK) {
+            Log.d("Main", "Result ok");
+            if (intent != null) {
+                Uri uri = intent.getData();
+                if (uri != null) {
+                    String fileName = ContentUtils.getFileName(getContentResolver(), uri);
+                    Log.d("Main", fileName);
+                    if (!fileName.endsWith(".gwc")) {
+                        ManagerNotify.toastShortMessage(this, getString(R.string.invalid_file_selected));
+                    } else {
+                        openCartridge(uri);
+//                    dismiss();
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -642,13 +675,9 @@ public class MainActivity extends CustomActivity {
             CartridgeFile cart = null;
             try {
                 cart = CartridgeFile.read(new WSeekableFile(file), new WSaveFile(file));
-                if (cart != null) {
-                    cart.filename = file.getAbsolutePath();
-                } else {
-                    return;
-                }
+                cart.filename = file.getAbsolutePath();
             } catch (Exception e) {
-                Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e.toString());
+                Logger.w(TAG, "openCartridge(), file:" + file + ", e:" + e);
                 ManagerNotify.toastShortMessage(getString(R.string.invalid_cartridge, file.getName()));
                 // file.delete();
             }
@@ -673,11 +702,6 @@ public class MainActivity extends CustomActivity {
     }
 
     private void clickStart() {
-        // check cartridges
-        if (!isAnyCartridgeAvailable()) {
-            return;
-        }
-
         ChooseCartridgeDialog dialog = new ChooseCartridgeDialog();
         dialog.setParams(cartridgeFiles);
         getSupportFragmentManager()
